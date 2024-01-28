@@ -18,7 +18,8 @@ export default {
       colors:{
         current:'currentColor',
         bgWhite:'#FEFEFE',
-        brandOrange:'#B48D11',
+        //brandOrange:'#B48D11',
+        brandOrange:'#F04623',
         primary:'#3787FF',
         secondary:'#939393',
         cta:'#B48D11',

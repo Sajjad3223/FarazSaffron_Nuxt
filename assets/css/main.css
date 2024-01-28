@@ -7,13 +7,7 @@
         @apply font-vazir;
     }
 
-    body{
-        width: 100%;
-        /*background-image:
-        !* Background Gradient *!     linear-gradient(to bottom,rgba(0,0,0,0.9) ,rgba(0,0,0,0)),
-        !* Background Image    *!     url("assets/images/bg.jpg");
-        background-size:  100%;
-        background-repeat: no-repeat; */
-        @apply pt-8;
+    html{
+        scroll-behavior: smooth;
     }
 }

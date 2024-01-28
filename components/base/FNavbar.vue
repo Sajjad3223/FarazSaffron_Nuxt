@@ -1,11 +1,12 @@
 
 <template >
   <div>
-    <div class="flex items-center">
+    <div class="flex items-center p-4 px-8 rounded-xl sticky top-0">
+      <div class="absolute right-0 left-0 top-0 -z-10 h-24 bg-[#FFF1DA]"></div>
       <div class="logo flex items-center space-x-2 space-x-reverse">
         <img src="~/assets/images/logo.png" alt="faraz saffron logo" class="w-52">
       </div>
-      <ul class="links text-white flex items-center space-x-4 space-x-reverse mr-8">
+      <ul class="links text-black flex items-center space-x-4 space-x-reverse mr-8">
         <li>
           <NuxtLink to="/" >خانه</NuxtLink>
         </li>
@@ -22,8 +23,8 @@
           <NuxtLink to="/contactus" >تماس با ما</NuxtLink>
         </li>
       </ul>
-      <div class="mr-auto flex flex-row-reverse items-center space-x-4">
-        <div class="user flex items-center flex-col space-y-2 text-white">
+      <div class="mr-auto flex flex-row-reverse items-center space-x-4 text black">
+        <div class="user flex items-center flex-col space-y-2">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.18 20.295C18.15 20.295 18.105 20.295 18.075 20.295C18.03 20.295 17.97 20.295 17.925 20.295C14.52 20.19 11.97 17.535 11.97 14.265C11.97 10.935 14.685 8.22 18.015 8.22C21.345 8.22 24.06 10.935 24.06 14.265C24.045 17.55 21.48 20.19 18.225 20.295C18.195 20.295 18.195 20.295 18.18 20.295ZM18 10.455C15.9 10.455 14.205 12.165 14.205 14.25C14.205 16.305 15.81 17.97 17.85 18.045C17.895 18.03 18.045 18.03 18.195 18.045C20.205 17.94 21.78 16.29 21.795 14.25C21.795 12.165 20.1 10.455 18 10.455Z" fill="currentColor"/>
             <path d="M18 34.125C13.965 34.125 10.11 32.625 7.125 29.895C6.855 29.655 6.735 29.295 6.765 28.95C6.96 27.165 8.07 25.5 9.915 24.27C14.385 21.3 21.63 21.3 26.085 24.27C27.93 25.515 29.04 27.165 29.235 28.95C29.28 29.31 29.145 29.655 28.875 29.895C25.89 32.625 22.035 34.125 18 34.125ZM9.12 28.65C11.61 30.735 14.745 31.875 18 31.875C21.255 31.875 24.39 30.735 26.88 28.65C26.61 27.735 25.89 26.85 24.825 26.13C21.135 23.67 14.88 23.67 11.16 26.13C10.095 26.85 9.39 27.735 9.12 28.65Z" fill="currentColor"/>
@@ -34,7 +35,7 @@
             ورود / ثبت نام
         </nuxt-link>
         </div>
-        <div class="user flex items-center flex-col space-y-2 text-white">
+        <div class="user flex items-center flex-col space-y-2 text-black">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 3H5.61001C7.23001 3 8.505 4.395 8.37 6L7.125 20.94C6.915 23.385 8.84999 25.485 11.31 25.485H27.285C29.445 25.485 31.335 23.715 31.5 21.57L32.31 10.32C32.49 7.83001 30.6 5.80499 28.095 5.80499H8.73001" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M24.375 33C25.4105 33 26.25 32.1605 26.25 31.125C26.25 30.0895 25.4105 29.25 24.375 29.25C23.3395 29.25 22.5 30.0895 22.5 31.125C22.5 32.1605 23.3395 33 24.375 33Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
