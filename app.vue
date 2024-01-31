@@ -1,8 +1,19 @@
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+
+    <ClientOnly>
+      <base-f-modal v-model="authStore.isLoginModalOpen">
+        <auth-login />
+      </base-f-modal>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
+import {useAuthStore} from "~/stores/auth.store";
+
+const authStore = useAuthStore();
 </script>

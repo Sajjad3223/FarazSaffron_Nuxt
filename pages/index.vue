@@ -1,6 +1,11 @@
 <template>
   <div class="relative mt-4">
 
+
+    <Head>
+      <Title>جی پی زعفران | GP Saffron</Title>
+    </Head>
+
     <!-- <div id="overlay"></div>
     -->
 

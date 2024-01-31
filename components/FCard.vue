@@ -28,7 +28,7 @@
     </div>
     <hr class="my-4">
     <div class="px-8 flex items-center justify-between">
-      <button type="button" class="bg-brandOrange py-2 px-8 text-white rounded-xl">
+      <button type="button" class="bg-brandOrange py-2 px-8 text-white rounded-xl" @click="cartStore.addToCart">
         افزودن به سبد خرید
       </button>
       <strong class="text-2xl">
@@ -40,5 +40,8 @@
 </template>
 
 <script setup lang="ts">
+import {useCartStore} from "~/stores/cart.store";
+
+const cartStore = useCartStore();
 
 </script>

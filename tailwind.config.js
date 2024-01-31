@@ -20,6 +20,7 @@ export default {
         bgWhite:'#FEFEFE',
         //brandOrange:'#B48D11',
         brandOrange:'#F04623',
+        dgKala:'#ef4056',
         primary:'#3787FF',
         secondary:'#939393',
         cta:'#B48D11',

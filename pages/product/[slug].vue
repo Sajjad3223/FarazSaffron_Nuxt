@@ -144,7 +144,7 @@
             <small>ريال</small>
           </div>
         </div>
-        <button class="bg-brandOrange rounded-2xl p-3 shadow-lg w-full text-white mt-2 text-xl">
+        <button class="bg-brandOrange rounded-2xl p-3 shadow-lg w-full text-white mt-2 text-xl" @click="cartStore.addToCart">
           افزودن به سبد خرید
         </button>
       </div>
@@ -294,5 +294,9 @@
 </template>
 
 <script setup lang="ts">
+
+import {useCartStore} from "~/stores/cart.store";
+
+const cartStore = useCartStore();
 
 </script>
