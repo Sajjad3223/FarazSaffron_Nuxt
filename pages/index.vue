@@ -9,9 +9,11 @@
     <!-- <div id="overlay"></div>
     -->
 
-    <video autoplay muted loop class="rounded-lg h-[40vh] w-full object-cover origin-center scale-x-125" style="max-width: unset !important;">
+    <video autoplay muted loop class="rounded-2xl h-[40vh] w-full object-cover origin-center scale-x-125" style="max-width: unset !important;">
       <source src="~/assets/videos/bg2.mp4" type="video/mp4">
     </video>
+
+    <img src="~/assets/images/Present.jpg" alt="present" class="hidden rounded-2xl mt-24 h-[40vh] w-full object-cover origin-center ">
 
     <div class="w-max flex items-center text-white text-5xl font-bold absolute top-8 left-1/2 -translate-x-1/2 space-x-4 space-x-reverse drop-shadow-lg animate-pulse">
       <strong>

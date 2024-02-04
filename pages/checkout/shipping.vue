@@ -3,7 +3,7 @@
   <div class="w-full flex flex-col">
     <div class="w-full mt-8">
       <div>
-        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
+        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
           <NuxtLink to="/checkout/cart">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -13,7 +13,7 @@
           <strong>آدرس و زمان ارسال</strong>
         </div>
       </div>
-      <hr class="mt-2 border-brandOrange/50">
+      <hr class="mt-3 border-brandOrange/50">
     </div>
     <div class="flex items-start space-x-4 space-x-reverse mt-8">
       <div class="flex-1 flex flex-col space-y-4">
@@ -24,7 +24,7 @@
           <hr>
           <ul class="grid grid-cols-4 gap-4">
             <li class="flex flex-col space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
-              <input type="radio" name="activeAddress" >
+              <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
               <strong>جاده بایگ، شرکت فراز زعفران</strong>
               <span class="font-light text-sm opacity-70">خراسان رضوی</span>
               <span class="font-light text-sm opacity-70">تربت حیدریه</span>
@@ -58,7 +58,7 @@
           <span class="font-light">سبد خرید <small>(4 کالا)</small></span>
           <hr class="my-4">
           <ul class="grid grid-cols-5 mt-2">
-            <li class="w-full flex flex-col items-center px-4 border-l " v-for="i in 4" :key="i">
+            <li class="w-full flex flex-col items-center px-4 border-l last:border-none" v-for="i in 4" :key="i">
               <img src="~/assets/images/saffron-bar.png" alt="jar">
               <div class=" space-x-2 space-x-reverse -mt-4 border rounded-lg p-2 flex items-center justify-between">
                 <button>
@@ -161,9 +161,9 @@
           </div>
           <hr>
           <div class="flex items-center justify-between">
-            <span class="text-sm">قابل پرداخت</span>
-            <strong>
-              1,950,000<small class="font-light">ریال</small>
+            <span class="text-lg">قابل پرداخت</span>
+            <strong class="text-2xl">
+              1,950,000<small class="font-light mr-1">ریال</small>
             </strong>
           </div>
           <button class="bg-brandOrange rounded-lg w-full text-white font-bold text-xl p-4 flex items-center space-x-reverse space-x-2 justify-center">

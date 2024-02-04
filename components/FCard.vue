@@ -1,7 +1,10 @@
 
 
 <template>
-  <div class="card bg-bgWhite rounded-xl shadow-md pb-4">
+  <div :class="['card bg-bgWhite pb-4',
+                {'shadow-md':shadow},
+                {'rounded-xl':rounded},
+                {'border':border}]">
     <nuxt-link to="/product/thing">
       <img src="~/assets/images/saffron-bar.png" alt="saffron bar" class="w-full object-contain rounded-lg h-80">
     </nuxt-link>
@@ -16,25 +19,31 @@
             <path d="M8.80506 4.58L8.06506 4.975L3.31006 2.3L4.09506 1.875L8.68506 4.465C8.73506 4.495 8.77506 4.535 8.80506 4.58Z" fill="currentColor"/>
             <path d="M8.875 5.48499V6.61999C8.875 6.82499 8.705 6.99499 8.5 6.99499C8.295 6.99499 8.125 6.82499 8.125 6.61999V5.85999L8.875 5.48499Z" fill="currentColor"/>
           </svg>
-          <span>شیشه ای</span>
+          <span class="text-xs">شیشه ای</span>
         </div>
         <div class="flex items-center space-x-2 space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 1H4C2.5 1 1.5 2 1.5 3.5V8.5C1.5 10 2.5 11 4 11H8C9.5 11 10.5 10 10.5 8.5V3.5C10.5 2 9.5 1 8 1ZM8.785 4.24L7.695 5.99C7.665 6.035 7.615 6.07 7.565 6.075C7.555 6.075 7.545 6.075 7.54 6.075C7.495 6.075 7.45 6.06 7.415 6.03C6.61 5.315 5.4 5.315 4.595 6.03C4.555 6.065 4.5 6.085 4.445 6.075C4.39 6.065 4.34 6.035 4.315 5.99L3.225 4.24C3.165 4.165 3.18 4.065 3.25 4C4.815 2.605 7.18 2.605 8.75 4C8.82 4.065 8.835 4.165 8.785 4.24Z" fill="currentColor"/>
           </svg>
-          <span>نیم مثقال</span>
+          <span class="text-xs">نیم مثقال</span>
         </div>
       </div>
     </div>
     <hr class="my-4">
-    <div class="px-8 flex items-center justify-between">
-      <button type="button" class="bg-brandOrange py-2 px-8 text-white rounded-xl" @click="cartStore.addToCart">
+    <div class="px-8 flex flex-col space-y-2 items-end justify-between flex-wrap">
+      <div class="flex items-center space-x-reverse space-x-2">
+<!--        <strong class="text-2xl opacity-40 line-through scale-75">
+          2,206,000
+          <small class="text-xs">ریال</small>
+        </strong>-->
+        <strong class="text-2xl">
+          2,206,000
+          <small class="text-xs">ریال</small>
+        </strong>
+      </div>
+      <button type="button" class="w-full bg-brandOrange py-2 px-8 text-white rounded-lg" @click="cartStore.addToCart">
         افزودن به سبد خرید
       </button>
-      <strong class="text-2xl">
-        2,206,000
-        <small class="text-xs">ریال</small>
-      </strong>
     </div>
   </div>
 </template>
@@ -43,5 +52,20 @@
 import {useCartStore} from "~/stores/cart.store";
 
 const cartStore = useCartStore();
+
+const props = defineProps({
+  shadow:{
+    type:Boolean,
+    default:true
+  },
+  rounded:{
+    type:Boolean,
+    default:true
+  },
+  border:{
+    type:Boolean,
+    default:true
+  },
+})
 
 </script>

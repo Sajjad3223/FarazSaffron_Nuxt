@@ -4,12 +4,12 @@
   <div class="w-full flex flex-col">
     <div class="w-full mt-8">
       <div>
-        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
+        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
           <strong>سبد خرید</strong>
           <span class="grid place-items-center text-sm font-thin rounded-md bg-brandOrange text-white w-4 h-4">2</span>
         </div>
       </div>
-      <hr class="mt-2 border-brandOrange/50">
+      <hr class="mt-3 border-brandOrange/50">
     </div>
     <div class="flex items-start space-x-4 space-x-reverse mt-8">
       <div class="flex-1 flex flex-col p-4 bg-bgWhite border rounded-xl border-black/20">
@@ -28,7 +28,7 @@
           </button>
         </div>
         <ul class="w-full mt-8 flex flex-col">
-          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse" v-for="i in 2" :key="i">
+          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none" v-for="i in 2" :key="i">
             <div class="w-1/5 flex flex-col items-center">
               <NuxtLink to="/product/thing" class="w-full">
                 <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full">
@@ -139,7 +139,7 @@
                 <path d="M12.3195 7.7587C12.7595 7.59203 13.1462 7.3187 13.4529 7.01203C14.0729 6.32536 14.4795 5.50536 14.4795 4.54536C14.4795 3.58536 13.7262 2.83203 12.7662 2.83203H12.3929C11.9595 1.94536 11.0529 1.33203 9.99953 1.33203H5.99953C4.9462 1.33203 4.03953 1.94536 3.6062 2.83203H3.23286C2.27286 2.83203 1.51953 3.58536 1.51953 4.54536C1.51953 5.50536 1.9262 6.32536 2.5462 7.01203C2.85286 7.3187 3.23953 7.59203 3.67953 7.7587C4.37286 9.46536 6.03953 10.6654 7.99953 10.6654C9.95953 10.6654 11.6262 9.46536 12.3195 7.7587ZM9.89287 5.63203L9.47953 6.1387C9.41287 6.21203 9.3662 6.3587 9.37287 6.4587L9.41286 7.11203C9.43953 7.51203 9.15287 7.7187 8.77953 7.57203L8.17287 7.33203C8.07953 7.2987 7.91953 7.2987 7.8262 7.33203L7.21953 7.57203C6.8462 7.7187 6.55953 7.51203 6.5862 7.11203L6.6262 6.4587C6.63286 6.3587 6.5862 6.21203 6.51953 6.1387L6.1062 5.63203C5.8462 5.32536 5.95953 4.98536 6.3462 4.88536L6.97953 4.72536C7.07953 4.6987 7.19953 4.60536 7.25287 4.5187L7.6062 3.97203C7.8262 3.63203 8.17287 3.63203 8.39287 3.97203L8.7462 4.5187C8.79953 4.60536 8.91953 4.6987 9.01953 4.72536L9.65286 4.88536C10.0395 4.98536 10.1529 5.32536 9.89287 5.63203Z" fill="currentColor"/>
               </svg>
 
-              <span>فراز کلاب</span>
+              <span>جی پی کلاب</span>
             </div>
             <strong>150 <small class="font-light"> امتیاز</small></strong>
           </div>
@@ -166,8 +166,8 @@
         </div>
       </div>
     </div>
-    <hr class="my-4">
-    <div class="rounded-xl border p-4">
+
+    <div class="rounded-xl border p-4 mt-8">
       <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
           <path d="M14.6667 8.00004C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00004C1.33337 4.32004 4.32004 1.33337 8.00004 1.33337C11.68 1.33337 14.6667 4.32004 14.6667 8.00004Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

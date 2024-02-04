@@ -57,20 +57,20 @@
         </div>
         <div class="w-full flex justify-between">
           <ul class="links text-black flex items-center space-x-12 space-x-reverse text-sm font-light">
-            <li class="active">
-              <NuxtLink to="/" >خانه</NuxtLink>
+            <li>
+              <NuxtLink to="/" active-class="active">خانه</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/market" >محصولات</NuxtLink>
+              <NuxtLink to="/market" active-class="active">محصولات</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/blogs" >مقالات</NuxtLink>
+              <NuxtLink to="/gpblog" active-class="active">مقالات</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/aboutUs" >درباره ما</NuxtLink>
+              <NuxtLink to="/aboutUs" active-class="active">درباره ما</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/contactus" >تماس با ما</NuxtLink>
+              <NuxtLink to="/contactus" active-class="active">تماس با ما</NuxtLink>
             </li>
           </ul>
           <div>

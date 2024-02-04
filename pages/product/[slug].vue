@@ -46,8 +46,8 @@
           <div class="flex flex-col items-center space-y-2">
             <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.7">
-                <path d="M17.8076 25.5L22.9289 30.6425L33.1926 20.3575" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22.8439 5.20625C24.3101 3.9525 26.7114 3.9525 28.1989 5.20625L31.5564 8.09625C32.1939 8.64875 33.3839 9.095 34.2339 9.095H37.8464C40.0989 9.095 41.9476 10.9438 41.9476 13.1963V16.8087C41.9476 17.6375 42.3939 18.8488 42.9464 19.4863L45.8364 22.8438C47.0901 24.31 47.0901 26.7113 45.8364 28.1988L42.9464 31.5563C42.3939 32.1938 41.9476 33.3838 41.9476 34.2338V37.8462C41.9476 40.0987 40.0989 41.9475 37.8464 41.9475H34.2339C33.4051 41.9475 32.1939 42.3937 31.5564 42.9462L28.1989 45.8363C26.7326 47.09 24.3314 47.09 22.8439 45.8363L19.4864 42.9462C18.8489 42.3937 17.6589 41.9475 16.8089 41.9475H13.1326C10.8801 41.9475 9.03137 40.0987 9.03137 37.8462V34.2125C9.03137 33.3838 8.58512 32.1938 8.05387 31.5563L5.18512 28.1775C3.95262 26.7113 3.95262 24.3313 5.18512 22.865L8.05387 19.4863C8.58512 18.8488 9.03137 17.6588 9.03137 16.83V13.175C9.03137 10.9225 10.8801 9.07375 13.1326 9.07375H16.8089C17.6376 9.07375 18.8489 8.6275 19.4864 8.075L22.8439 5.20625Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17.8076 25.5L22.9289 30.6425L33.1926 20.3575" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22.8439 5.20625C24.3101 3.9525 26.7114 3.9525 28.1989 5.20625L31.5564 8.09625C32.1939 8.64875 33.3839 9.095 34.2339 9.095H37.8464C40.0989 9.095 41.9476 10.9438 41.9476 13.1963V16.8087C41.9476 17.6375 42.3939 18.8488 42.9464 19.4863L45.8364 22.8438C47.0901 24.31 47.0901 26.7113 45.8364 28.1988L42.9464 31.5563C42.3939 32.1938 41.9476 33.3838 41.9476 34.2338V37.8462C41.9476 40.0987 40.0989 41.9475 37.8464 41.9475H34.2339C33.4051 41.9475 32.1939 42.3937 31.5564 42.9462L28.1989 45.8363C26.7326 47.09 24.3314 47.09 22.8439 45.8363L19.4864 42.9462C18.8489 42.3937 17.6589 41.9475 16.8089 41.9475H13.1326C10.8801 41.9475 9.03137 40.0987 9.03137 37.8462V34.2125C9.03137 33.3838 8.58512 32.1938 8.05387 31.5563L5.18512 28.1775C3.95262 26.7113 3.95262 24.3313 5.18512 22.865L8.05387 19.4863C8.58512 18.8488 9.03137 17.6588 9.03137 16.83V13.175C9.03137 10.9225 10.8801 9.07375 13.1326 9.07375H16.8089C17.6376 9.07375 18.8489 8.6275 19.4864 8.075L22.8439 5.20625Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </svg>
             <span>تضمین اصالت کالا</span>
@@ -55,14 +55,14 @@
           <div class="flex flex-col items-center space-y-2">
             <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.7">
-                <path d="M25.5 29.75H27.625C29.9625 29.75 31.875 27.8375 31.875 25.5V4.25H12.75C9.56247 4.25 6.77874 6.01372 5.33374 8.60622" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4.25 36.125C4.25 39.6525 7.0975 42.5 10.625 42.5H12.75C12.75 40.1625 14.6625 38.25 17 38.25C19.3375 38.25 21.25 40.1625 21.25 42.5H29.75C29.75 40.1625 31.6625 38.25 34 38.25C36.3375 38.25 38.25 40.1625 38.25 42.5H40.375C43.9025 42.5 46.75 39.6525 46.75 36.125V29.75H40.375C39.2062 29.75 38.25 28.7938 38.25 27.625V21.25C38.25 20.0812 39.2062 19.125 40.375 19.125H43.1162L39.4825 12.7713C38.7175 11.4538 37.3151 10.625 35.7851 10.625H31.875V25.5C31.875 27.8375 29.9625 29.75 27.625 29.75H25.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M17 46.75C19.3472 46.75 21.25 44.8472 21.25 42.5C21.25 40.1528 19.3472 38.25 17 38.25C14.6528 38.25 12.75 40.1528 12.75 42.5C12.75 44.8472 14.6528 46.75 17 46.75Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M34 46.75C36.3472 46.75 38.25 44.8472 38.25 42.5C38.25 40.1528 36.3472 38.25 34 38.25C31.6528 38.25 29.75 40.1528 29.75 42.5C29.75 44.8472 31.6528 46.75 34 46.75Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M46.75 25.5V29.75H40.375C39.2062 29.75 38.25 28.7938 38.25 27.625V21.25C38.25 20.0812 39.2062 19.125 40.375 19.125H43.1162L46.75 25.5Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4.25 17H17" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4.25 23.375H12.75" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4.25 29.75H8.5" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M25.5 29.75H27.625C29.9625 29.75 31.875 27.8375 31.875 25.5V4.25H12.75C9.56247 4.25 6.77874 6.01372 5.33374 8.60622" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.25 36.125C4.25 39.6525 7.0975 42.5 10.625 42.5H12.75C12.75 40.1625 14.6625 38.25 17 38.25C19.3375 38.25 21.25 40.1625 21.25 42.5H29.75C29.75 40.1625 31.6625 38.25 34 38.25C36.3375 38.25 38.25 40.1625 38.25 42.5H40.375C43.9025 42.5 46.75 39.6525 46.75 36.125V29.75H40.375C39.2062 29.75 38.25 28.7938 38.25 27.625V21.25C38.25 20.0812 39.2062 19.125 40.375 19.125H43.1162L39.4825 12.7713C38.7175 11.4538 37.3151 10.625 35.7851 10.625H31.875V25.5C31.875 27.8375 29.9625 29.75 27.625 29.75H25.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 46.75C19.3472 46.75 21.25 44.8472 21.25 42.5C21.25 40.1528 19.3472 38.25 17 38.25C14.6528 38.25 12.75 40.1528 12.75 42.5C12.75 44.8472 14.6528 46.75 17 46.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M34 46.75C36.3472 46.75 38.25 44.8472 38.25 42.5C38.25 40.1528 36.3472 38.25 34 38.25C31.6528 38.25 29.75 40.1528 29.75 42.5C29.75 44.8472 31.6528 46.75 34 46.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M46.75 25.5V29.75H40.375C39.2062 29.75 38.25 28.7938 38.25 27.625V21.25C38.25 20.0812 39.2062 19.125 40.375 19.125H43.1162L46.75 25.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.25 17H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.25 23.375H12.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.25 29.75H8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </svg>
             <span>تحویل به موقع و درب منزل</span>
@@ -70,7 +70,7 @@
           <div class="flex flex-col items-center space-y-2">
             <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.7">
-                <path d="M11.6026 39.2912V33.0862C11.6026 31.025 13.2176 29.1762 15.5126 29.1762C17.5739 29.1762 19.4226 30.7912 19.4226 33.0862V39.0575C19.4226 43.2012 15.9801 46.6438 11.8364 46.6438C7.6926 46.6438 4.2501 43.18 4.2501 39.0575V25.9675C4.01635 14.025 13.4514 4.35625 25.3939 4.35625C37.3364 4.35625 46.7501 14.025 46.7501 25.7337V38.8237C46.7501 42.9675 43.3076 46.41 39.1639 46.41C35.0201 46.41 31.5776 42.9675 31.5776 38.8237V32.8525C31.5776 30.7912 33.1926 28.9425 35.4876 28.9425C37.5489 28.9425 39.3976 30.5575 39.3976 32.8525V39.2912" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.6026 39.2912V33.0862C11.6026 31.025 13.2176 29.1762 15.5126 29.1762C17.5739 29.1762 19.4226 30.7912 19.4226 33.0862V39.0575C19.4226 43.2012 15.9801 46.6438 11.8364 46.6438C7.6926 46.6438 4.2501 43.18 4.2501 39.0575V25.9675C4.01635 14.025 13.4514 4.35625 25.3939 4.35625C37.3364 4.35625 46.7501 14.025 46.7501 25.7337V38.8237C46.7501 42.9675 43.3076 46.41 39.1639 46.41C35.0201 46.41 31.5776 42.9675 31.5776 38.8237V32.8525C31.5776 30.7912 33.1926 28.9425 35.4876 28.9425C37.5489 28.9425 39.3976 30.5575 39.3976 32.8525V39.2912" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </svg>
 
@@ -79,10 +79,51 @@
         </div>
       </div>
 
+      <div class="fixed inset-0 bg-black/50 grid place-items-center z-20" v-if="showBanner" @click.self="showBanner = false">
+        <div class="w-1/2 h-2/3 relative m-auto grid place-items-center">
+          <img src="~/assets/images/productImage.png" alt="product Image" class="h-full rounded-3xl">
+          <button class="absolute top-4 right-4 w-8 h-8 bg-danger rounded-lg grid place-items-center text-white drop-shadow" @click.prevent="showBanner = false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-45">
+              <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 18V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -right-6 grid place-items-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -left-6 grid place-items-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+              <path d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
       <div class="lg:w-1/3 flex flex-col lg:order-1 mx-4 lg:mx-0 flex-shrink space-y-4">
-        <img src="~/assets/images/productImage.png" alt="productImage" class="rounded-2xl w-full">
+        <div class="rounded-2xl relative w-full overflow-hidden">
+          <img src="~/assets/images/productImage.png" alt="productImage" class="w-full rounded-2xl">
+          <div class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.3999 23.4H28.3999" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M23.3999 28.4V18.4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M23 42C33.4934 42 42 33.4934 42 23C42 12.5066 33.4934 4 23 4C12.5066 4 4 12.5066 4 23C4 33.4934 12.5066 42 23 42Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M44 44L40 40" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
         <div class="flex items-stretch space-x-4 space-x-reverse">
-          <img src="~/assets/images/saffron-bar.png" alt="saffron jar" class="rounded-2xl border-2 border-brandOrange max-w-32 aspect-square object-cover" v-for="i in 3" :key="i">
+          <div class="rounded-2xl relative overflow-hidden" v-for="i in 3" :key="i">
+            <img src="~/assets/images/saffron-bar.png" alt="saffron jar" class="rounded-2xl border-2 border-brandOrange max-w-32 aspect-square object-cover">
+            <div class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.3999 23.4H28.3999" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.3999 28.4V18.4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23 42C33.4934 42 42 33.4934 42 23C42 12.5066 33.4934 4 23 4C12.5066 4 4 12.5066 4 23C4 33.4934 12.5066 42 23 42Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M44 44L40 40" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -137,7 +178,27 @@
           </div>
         </div>
         <hr class="my-4">
-        <div class="w-full flex justify-between items-center">
+        <div  class="bg-dgKala p-2 px-4 w-full rounded-lg flex flex-col items-end text-white text-sm opacity-50 space-y-2">
+          <a href="https://www.digikala.com/product/dkp-9083576" class="w-full flex items-center justify-between" target="_blank">
+          <span class="underline-offset-4 underline">
+            قیمت محصول در دیجی کالا
+          </span>
+            <div class="flex items-end space-x-1 space-x-reverse">
+              <strong class="text-base">2,235,000</strong>
+              <small>ريال</small>
+            </div>
+          </a>
+          <div class="w-full flex items-center justify-between text-xs">
+          <span>
+            تفاوت قیمت
+          </span>
+            <div class="flex items-end space-x-1 space-x-reverse">
+              <strong>260,000 +</strong>
+              <small>ريال</small>
+            </div>
+          </div>
+        </div>
+        <div class="w-full flex justify-between items-center mt-4">
           <span class="font-light">قیمت:</span>
           <div class="flex items-end space-x-1 space-x-reverse">
             <strong class="text-2xl">2,209,000</strong>
@@ -162,7 +223,7 @@
       <div id="info" class="mt-8">
         <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.00008 14.6667C11.6734 14.6667 14.6667 11.6733 14.6667 7.99999C14.6667 4.32666 11.6734 1.33332 8.00008 1.33332C4.32675 1.33332 1.33342 4.32666 1.33342 7.99999C1.33342 11.6733 4.32675 14.6667 8.00008 14.6667ZM8.50008 10.6667C8.50008 10.94 8.27342 11.1667 8.00008 11.1667C7.72675 11.1667 7.50008 10.94 7.50008 10.6667V7.33332C7.50008 7.05999 7.72675 6.83332 8.00008 6.83332C8.27342 6.83332 8.50008 7.05999 8.50008 7.33332V10.6667ZM7.38675 5.07999C7.42008 4.99332 7.46675 4.92666 7.52675 4.85999C7.59342 4.79999 7.66675 4.75332 7.74675 4.71999C7.82675 4.68666 7.91342 4.66666 8.00008 4.66666C8.08675 4.66666 8.17342 4.68666 8.25342 4.71999C8.33342 4.75332 8.40675 4.79999 8.47342 4.85999C8.53342 4.92666 8.58008 4.99332 8.61342 5.07999C8.64675 5.15999 8.66675 5.24666 8.66675 5.33332C8.66675 5.41999 8.64675 5.50666 8.61342 5.58666C8.58008 5.66666 8.53342 5.73999 8.47342 5.80666C8.40675 5.86666 8.33342 5.91332 8.25342 5.94666C8.09342 6.01332 7.90675 6.01332 7.74675 5.94666C7.66675 5.91332 7.59342 5.86666 7.52675 5.80666C7.46675 5.73999 7.42008 5.66666 7.38675 5.58666C7.35342 5.50666 7.33342 5.41999 7.33342 5.33332C7.33342 5.24666 7.35342 5.15999 7.38675 5.07999Z" fill="#292D32"/>
+            <path d="M8.00008 14.6667C11.6734 14.6667 14.6667 11.6733 14.6667 7.99999C14.6667 4.32666 11.6734 1.33332 8.00008 1.33332C4.32675 1.33332 1.33342 4.32666 1.33342 7.99999C1.33342 11.6733 4.32675 14.6667 8.00008 14.6667ZM8.50008 10.6667C8.50008 10.94 8.27342 11.1667 8.00008 11.1667C7.72675 11.1667 7.50008 10.94 7.50008 10.6667V7.33332C7.50008 7.05999 7.72675 6.83332 8.00008 6.83332C8.27342 6.83332 8.50008 7.05999 8.50008 7.33332V10.6667ZM7.38675 5.07999C7.42008 4.99332 7.46675 4.92666 7.52675 4.85999C7.59342 4.79999 7.66675 4.75332 7.74675 4.71999C7.82675 4.68666 7.91342 4.66666 8.00008 4.66666C8.08675 4.66666 8.17342 4.68666 8.25342 4.71999C8.33342 4.75332 8.40675 4.79999 8.47342 4.85999C8.53342 4.92666 8.58008 4.99332 8.61342 5.07999C8.64675 5.15999 8.66675 5.24666 8.66675 5.33332C8.66675 5.41999 8.64675 5.50666 8.61342 5.58666C8.58008 5.66666 8.53342 5.73999 8.47342 5.80666C8.40675 5.86666 8.33342 5.91332 8.25342 5.94666C8.09342 6.01332 7.90675 6.01332 7.74675 5.94666C7.66675 5.91332 7.59342 5.86666 7.52675 5.80666C7.46675 5.73999 7.42008 5.66666 7.38675 5.58666C7.35342 5.50666 7.33342 5.41999 7.33342 5.33332C7.33342 5.24666 7.35342 5.15999 7.38675 5.07999Z" fill="currentColor"/>
           </svg>
           <h5 class="text-xl font-bold">مشخصات</h5>
         </div>
@@ -172,20 +233,62 @@
             <strong>مشخصات</strong>
           </div>
           <div class="flex-1">
-            <div class="flex">
-              <div class="flex flex-col w-1/3 space-y-4">
-                <strong class="opacity-60 pb-2">وزن بسته بندی</strong>
-                <strong class="opacity-60 pb-2">ابعاد بسته بندی</strong>
-                <strong class="opacity-60 pb-2">شماره پروانه بهداشت</strong>
-                <strong class="opacity-60 pb-2">شکل ماده غذایی</strong>
-                <strong class="opacity-60 pb-2">سایر توضیحات</strong>
+            <div class="flex flex-col">
+              <ul class="flex flex-col">
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50" >
+                  <div class="w-1/4 opacity-70 font-light">
+                    وزن بسته بندی
+                  </div>
+                  <div class="flex-1 border-r pr-2">
+                    75 گرم
+                  </div>
+                </li>
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50" >
+                  <div class="w-1/4 opacity-70 font-light">
+                    ابعاد بسته بندی
+                  </div>
+                  <div class="flex-1 border-r pr-2">
+                    ۶x۴x۴x سانتی‌متر
+                  </div>
+                </li>
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50" >
+                  <div class="w-1/4 opacity-70 font-light">
+                    شماره پروانه بهداشت
+                  </div>
+                  <div class="flex-1 border-r pr-2">
+                    ۵۷/۱۰۱۸-۱
+                  </div>
+                </li>
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50" >
+                  <div class="w-1/4 opacity-70 font-light">
+                    شکل ماده غذایی
+                  </div>
+                  <div class="flex-1 border-r pr-2">
+                    نگین
+                  </div>
+                </li>
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50" >
+                  <div class="w-1/4 opacity-70 font-light">
+                    سایر توضیحات
+                  </div>
+                  <div class="flex-1 border-r pr-2">
+                    <p>زعفران نگین یک مثقال ۴/۶۰۸ گرمی بسته بندی شیشه ای ماندگار -زعفرانی با عطر و رنگی بیشتر و متمایز - مقرون به صرفه و اقتصادی - دارای نشان استاندارد و سیب سلامت -دوست دار طبیعت با قابلیت بازیافت بسته بندی</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="hidden  flex-col w-1/3 space-y-4">
+                <strong class="opacity-60 py-1 pr-2 odd:bg-gray-100">وزن بسته بندی</strong>
+                <strong class="opacity-60 py-1 pr-2 odd:bg-gray-100">ابعاد بسته بندی</strong>
+                <strong class="opacity-60 py-1 pr-2 odd:bg-gray-100">شماره پروانه بهداشت</strong>
+                <strong class="opacity-60 py-1 pr-2 odd:bg-gray-100">شکل ماده غذایی</strong>
+                <strong class="opacity-60 py-1 pr-2 odd:bg-gray-100">سایر توضیحات</strong>
               </div>
-              <div class="flex flex-col space-y-4">
-                <span class="font-bold border-b pb-2 pt-0">75 گرم</span>
-                <span class="font-bold border-b pb-2 pt-0">۶x۴x۴x سانتی‌متر</span>
-                <span class="font-bold border-b pb-2 pt-0">۵۷/۱۰۱۸-۱</span>
-                <span class="font-bold border-b pb-2 pt-0">نگین</span>
-                <p class="font-bold border-b pb-2 pt-0">زعفران نگین یک مثقال ۴/۶۰۸ گرمی بسته بندی شیشه ای ماندگار -زعفرانی با عطر و رنگی بیشتر و متمایز - مقرون به صرفه و اقتصادی - دارای نشان استاندارد و سیب سلامت -دوست دار طبیعت با قابلیت بازیافت بسته بندی</p>
+              <div class="hidden  flex-col space-y-4">
+                <span class="font-bold py-1 pr-2 odd:bg-gray-100 ">75 گرم</span>
+                <span class="font-bold py-1 pr-2 odd:bg-gray-100 ">۶x۴x۴x سانتی‌متر</span>
+                <span class="font-bold py-1 pr-2 odd:bg-gray-100 ">۵۷/۱۰۱۸-۱</span>
+                <span class="font-bold py-1 pr-2 odd:bg-gray-100 ">نگین</span>
+                <p class="font-bold py-1 pr-2 odd:bg-gray-100">زعفران نگین یک مثقال ۴/۶۰۸ گرمی بسته بندی شیشه ای ماندگار -زعفرانی با عطر و رنگی بیشتر و متمایز - مقرون به صرفه و اقتصادی - دارای نشان استاندارد و سیب سلامت -دوست دار طبیعت با قابلیت بازیافت بسته بندی</p>
               </div>
             </div>
           </div>
@@ -197,8 +300,8 @@
       <div id="comments">
         <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.79325 4H4.52659C4.35325 4 4.18659 4.00667 4.02659 4.02667C2.23325 4.18 1.33325 5.24 1.33325 7.19333V9.86C1.33325 12.5267 2.39992 13.0533 4.52659 13.0533H4.79325C4.93992 13.0533 5.13325 13.1533 5.21992 13.2667L6.01992 14.3333C6.37325 14.8067 6.94658 14.8067 7.29992 14.3333L8.09992 13.2667C8.19992 13.1333 8.35992 13.0533 8.52658 13.0533H8.79325C10.7466 13.0533 11.8066 12.16 11.9599 10.36C11.9799 10.2 11.9866 10.0333 11.9866 9.86V7.19333C11.9866 5.06667 10.9199 4 8.79325 4ZM4.33325 9.33333C3.95992 9.33333 3.66659 9.03333 3.66659 8.66667C3.66659 8.3 3.96659 8 4.33325 8C4.69992 8 4.99992 8.3 4.99992 8.66667C4.99992 9.03333 4.69992 9.33333 4.33325 9.33333ZM6.65992 9.33333C6.28658 9.33333 5.99325 9.03333 5.99325 8.66667C5.99325 8.3 6.29325 8 6.65992 8C7.02658 8 7.32658 8.3 7.32658 8.66667C7.32658 9.03333 7.03325 9.33333 6.65992 9.33333ZM8.99325 9.33333C8.61992 9.33333 8.32658 9.03333 8.32658 8.66667C8.32658 8.3 8.62658 8 8.99325 8C9.35992 8 9.65992 8.3 9.65992 8.66667C9.65992 9.03333 9.35992 9.33333 8.99325 9.33333Z" fill="#292D32"/>
-            <path d="M14.6534 4.52665V7.19331C14.6534 8.52665 14.2401 9.43331 13.4134 9.93331C13.2134 10.0533 12.9801 9.89331 12.9801 9.65998L12.9867 7.19331C12.9867 4.52665 11.4601 2.99998 8.79342 2.99998L4.73342 3.00665C4.50008 3.00665 4.34008 2.77331 4.46008 2.57331C4.96008 1.74665 5.86675 1.33331 7.19342 1.33331H11.4601C13.5867 1.33331 14.6534 2.39998 14.6534 4.52665Z" fill="#292D32"/>
+            <path d="M8.79325 4H4.52659C4.35325 4 4.18659 4.00667 4.02659 4.02667C2.23325 4.18 1.33325 5.24 1.33325 7.19333V9.86C1.33325 12.5267 2.39992 13.0533 4.52659 13.0533H4.79325C4.93992 13.0533 5.13325 13.1533 5.21992 13.2667L6.01992 14.3333C6.37325 14.8067 6.94658 14.8067 7.29992 14.3333L8.09992 13.2667C8.19992 13.1333 8.35992 13.0533 8.52658 13.0533H8.79325C10.7466 13.0533 11.8066 12.16 11.9599 10.36C11.9799 10.2 11.9866 10.0333 11.9866 9.86V7.19333C11.9866 5.06667 10.9199 4 8.79325 4ZM4.33325 9.33333C3.95992 9.33333 3.66659 9.03333 3.66659 8.66667C3.66659 8.3 3.96659 8 4.33325 8C4.69992 8 4.99992 8.3 4.99992 8.66667C4.99992 9.03333 4.69992 9.33333 4.33325 9.33333ZM6.65992 9.33333C6.28658 9.33333 5.99325 9.03333 5.99325 8.66667C5.99325 8.3 6.29325 8 6.65992 8C7.02658 8 7.32658 8.3 7.32658 8.66667C7.32658 9.03333 7.03325 9.33333 6.65992 9.33333ZM8.99325 9.33333C8.61992 9.33333 8.32658 9.03333 8.32658 8.66667C8.32658 8.3 8.62658 8 8.99325 8C9.35992 8 9.65992 8.3 9.65992 8.66667C9.65992 9.03333 9.35992 9.33333 8.99325 9.33333Z" fill="currentColor"/>
+            <path d="M14.6534 4.52665V7.19331C14.6534 8.52665 14.2401 9.43331 13.4134 9.93331C13.2134 10.0533 12.9801 9.89331 12.9801 9.65998L12.9867 7.19331C12.9867 4.52665 11.4601 2.99998 8.79342 2.99998L4.73342 3.00665C4.50008 3.00665 4.34008 2.77331 4.46008 2.57331C4.96008 1.74665 5.86675 1.33331 7.19342 1.33331H11.4601C13.5867 1.33331 14.6534 2.39998 14.6534 4.52665Z" fill="currentColor"/>
           </svg>
           <h5 class="text-xl font-bold">نظرات کاربران</h5>
         </div>
@@ -221,11 +324,14 @@
               <span class="text-sm font-light"> از مجموع 160 امتیاز</span>
             </div>
             <small>شما هم درباره این محصول نظری ثبت کنید.</small>
-            <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300">ثبت دیدگاه</a>
+            <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300" @click.prevent="showAddCommentModal = true">ثبت دیدگاه</a>
           </div>
+          <base-f-modal title="افزودن دیدگاه جدید" v-model="showAddCommentModal">
+            <product-add-comment />
+          </base-f-modal>
           <div class="flex-1 pr-10 border-r-4 border-brandOrange/50">
             <ul class="flex-flex-col space-y-6">
-              <li class="w-full flex flex-col pb-6 border-b-2" v-for="i in 5" :key="i">
+              <li class="w-full flex flex-col pb-6 border-b-2 last:border-none" v-for="i in 5" :key="i">
                 <div class="flex justify-between items-start">
                   <div class="flex flex-col space-y-3">
                     <div class="flex items-center">
@@ -249,14 +355,24 @@
                       </span>
                     </div>
                   </div>
-                  <div>
-                    <button>
+                  <div class="relative">
+                    <button @click="showOptions = !showOptions">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11 18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18C13 17.4477 12.5523 17 12 17C11.4477 17 11 17.4477 11 18Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </button>
+                    <div class="flex flex-col absolute w-max min-w-32 max-w-48 bg-bgWhite drop-shadow rounded-lg p-2 space-y-2 left-4 top-4" v-if="showOptions">
+                      <ul class="space-y-2 w-full">
+                        <li class="hover:bg-gray-100 transition cursor-pointer p-1 rounded-lg px-2">ویرایش</li>
+                        <li class="hover:bg-gray-100 transition cursor-pointer p-1 rounded-lg px-2">حذف</li>
+                      </ul>
+                      <hr>
+                      <ul class="space-y-2 w-full">
+                        <li class="hover:bg-gray-100 transition cursor-pointer p-1 rounded-lg px-2">گزارش نظر</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <p class="mt-4 font-estedad font-normal leading-relaxed">
@@ -274,8 +390,8 @@
       <div id="related">
         <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.79325 4H4.52659C4.35325 4 4.18659 4.00667 4.02659 4.02667C2.23325 4.18 1.33325 5.24 1.33325 7.19333V9.86C1.33325 12.5267 2.39992 13.0533 4.52659 13.0533H4.79325C4.93992 13.0533 5.13325 13.1533 5.21992 13.2667L6.01992 14.3333C6.37325 14.8067 6.94658 14.8067 7.29992 14.3333L8.09992 13.2667C8.19992 13.1333 8.35992 13.0533 8.52658 13.0533H8.79325C10.7466 13.0533 11.8066 12.16 11.9599 10.36C11.9799 10.2 11.9866 10.0333 11.9866 9.86V7.19333C11.9866 5.06667 10.9199 4 8.79325 4ZM4.33325 9.33333C3.95992 9.33333 3.66659 9.03333 3.66659 8.66667C3.66659 8.3 3.96659 8 4.33325 8C4.69992 8 4.99992 8.3 4.99992 8.66667C4.99992 9.03333 4.69992 9.33333 4.33325 9.33333ZM6.65992 9.33333C6.28658 9.33333 5.99325 9.03333 5.99325 8.66667C5.99325 8.3 6.29325 8 6.65992 8C7.02658 8 7.32658 8.3 7.32658 8.66667C7.32658 9.03333 7.03325 9.33333 6.65992 9.33333ZM8.99325 9.33333C8.61992 9.33333 8.32658 9.03333 8.32658 8.66667C8.32658 8.3 8.62658 8 8.99325 8C9.35992 8 9.65992 8.3 9.65992 8.66667C9.65992 9.03333 9.35992 9.33333 8.99325 9.33333Z" fill="#292D32"/>
-            <path d="M14.6534 4.52665V7.19331C14.6534 8.52665 14.2401 9.43331 13.4134 9.93331C13.2134 10.0533 12.9801 9.89331 12.9801 9.65998L12.9867 7.19331C12.9867 4.52665 11.4601 2.99998 8.79342 2.99998L4.73342 3.00665C4.50008 3.00665 4.34008 2.77331 4.46008 2.57331C4.96008 1.74665 5.86675 1.33331 7.19342 1.33331H11.4601C13.5867 1.33331 14.6534 2.39998 14.6534 4.52665Z" fill="#292D32"/>
+            <path d="M8.79325 4H4.52659C4.35325 4 4.18659 4.00667 4.02659 4.02667C2.23325 4.18 1.33325 5.24 1.33325 7.19333V9.86C1.33325 12.5267 2.39992 13.0533 4.52659 13.0533H4.79325C4.93992 13.0533 5.13325 13.1533 5.21992 13.2667L6.01992 14.3333C6.37325 14.8067 6.94658 14.8067 7.29992 14.3333L8.09992 13.2667C8.19992 13.1333 8.35992 13.0533 8.52658 13.0533H8.79325C10.7466 13.0533 11.8066 12.16 11.9599 10.36C11.9799 10.2 11.9866 10.0333 11.9866 9.86V7.19333C11.9866 5.06667 10.9199 4 8.79325 4ZM4.33325 9.33333C3.95992 9.33333 3.66659 9.03333 3.66659 8.66667C3.66659 8.3 3.96659 8 4.33325 8C4.69992 8 4.99992 8.3 4.99992 8.66667C4.99992 9.03333 4.69992 9.33333 4.33325 9.33333ZM6.65992 9.33333C6.28658 9.33333 5.99325 9.03333 5.99325 8.66667C5.99325 8.3 6.29325 8 6.65992 8C7.02658 8 7.32658 8.3 7.32658 8.66667C7.32658 9.03333 7.03325 9.33333 6.65992 9.33333ZM8.99325 9.33333C8.61992 9.33333 8.32658 9.03333 8.32658 8.66667C8.32658 8.3 8.62658 8 8.99325 8C9.35992 8 9.65992 8.3 9.65992 8.66667C9.65992 9.03333 9.35992 9.33333 8.99325 9.33333Z" fill="currentColor"/>
+            <path d="M14.6534 4.52665V7.19331C14.6534 8.52665 14.2401 9.43331 13.4134 9.93331C13.2134 10.0533 12.9801 9.89331 12.9801 9.65998L12.9867 7.19331C12.9867 4.52665 11.4601 2.99998 8.79342 2.99998L4.73342 3.00665C4.50008 3.00665 4.34008 2.77331 4.46008 2.57331C4.96008 1.74665 5.86675 1.33331 7.19342 1.33331H11.4601C13.5867 1.33331 14.6534 2.39998 14.6534 4.52665Z" fill="currentColor"/>
           </svg>
           <h5 class="text-xl font-bold">کالاهای مرتبط</h5>
         </div>
@@ -298,5 +414,9 @@
 import {useCartStore} from "~/stores/cart.store";
 
 const cartStore = useCartStore();
+
+const showBanner = ref(false);
+const showOptions = ref(false);
+const showAddCommentModal = ref(false);
 
 </script>
