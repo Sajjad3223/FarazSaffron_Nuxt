@@ -6,7 +6,7 @@
 
     <ClientOnly>
       <base-f-modal v-model="authStore.isLoginModalOpen">
-        <auth-login />
+        <auth-login  @loggedIn="authStore.isLoginModalOpen = false"/>
       </base-f-modal>
     </ClientOnly>
   </div>
@@ -17,3 +17,4 @@ import {useAuthStore} from "~/stores/auth.store";
 
 const authStore = useAuthStore();
 </script>
+

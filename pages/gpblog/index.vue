@@ -24,7 +24,7 @@
         <hr class="my-4">
         <ul class="grid grid-cols-3 gap-4">
           <li class="flex flex-col bg-bgWhite rounded-xl drop-shadow overflow-hidden" v-for="i in 10" :key="i">
-            <NuxtLink to="/blog/post">
+            <NuxtLink to="/gpblog/post">
               <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full object-cover rounded-xl">
             </NuxtLink>
             <div class="p-4 flex flex-col">
@@ -48,7 +48,7 @@
                 </div>
                 <time class="text-sm opacity-70">1402/08/01</time>
               </div>
-              <NuxtLink to="/blog/post" class="text-xl text-brandOrange hover:underline underline-offset-4 my-4">
+              <NuxtLink to="/gpblog/post" class="text-xl text-brandOrange hover:underline underline-offset-4 my-4">
                 زعفران در چه محیطی به عمل می‌آید؟
               </NuxtLink>
               <p class="text-sm font-light text-justify truncate ">
@@ -65,20 +65,36 @@
           </h4>
           <hr class="my-3">
           <ul class="space-y-4">
-            <li class="flex rounded-xl drop-shadow overflow-hidden" v-for="i in 3" :key="i">
-              <NuxtLink to="/blog/post" class="w-1/4">
+            <li class="flex flex-col items-center pb-4 border-b">
+              <NuxtLink to="/gpblog/post" class="w-1/2">
+                <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full aspect-square object-cover rounded-xl">
+              </NuxtLink>
+              <div class="flex items-center space-x-1 space-x-reverse opacity-50 mt-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2498 12C21.2498 17.108 17.1088 21.25 11.9998 21.25C6.8918 21.25 2.7498 17.108 2.7498 12C2.7498 6.891 6.8918 2.75 11.9998 2.75C17.1088 2.75 21.2498 6.891 21.2498 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.1907 12.7672L11.6607 12.6932V7.84619" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <time class="text-sm">1402/08/01</time>
+              </div>
+              <NuxtLink to="/gpblog/post" class=" font-bold text-brandOrange hover:underline underline-offset-4">
+                زعفران در چه محیطی به عمل می‌آید؟
+              </NuxtLink>
+            </li>
+            <li class="flex items-center overflow-hidden " v-for="i in 3" :key="i">
+              <NuxtLink to="/gpblog/post" class="w-1/5">
                 <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full aspect-square object-cover rounded-xl">
               </NuxtLink>
               <div class="flex-1 p-1 px-2 flex flex-col space-y-1 overflow-hidden">
-                <NuxtLink to="/blog/post" class="text-sm font-bold text-brandOrange hover:underline underline-offset-4">
+                <NuxtLink to="/gpblog/post" class="text-sm font-bold text-brandOrange hover:underline underline-offset-4">
                   زعفران در چه محیطی به عمل می‌آید؟
                 </NuxtLink>
-                <div class="flex justify-between items-center">
-                  <time class="text-xs opacity-70">1402/08/01</time>
+                <div class="flex items-center space-x-1 space-x-reverse opacity-50">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2498 12C21.2498 17.108 17.1088 21.25 11.9998 21.25C6.8918 21.25 2.7498 17.108 2.7498 12C2.7498 6.891 6.8918 2.75 11.9998 2.75C17.1088 2.75 21.2498 6.891 21.2498 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.1907 12.7672L11.6607 12.6932V7.84619" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <time class="text-xs">1402/08/01</time>
                 </div>
-                <p class="text-sm font-light text-justify truncate ">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود.
-                </p>
               </div>
             </li>
           </ul>

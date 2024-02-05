@@ -1,13 +1,15 @@
 <template>
-  <div class="container mx-auto">
-    <base-f-navbar />
-    <div id="overlay2"></div>
+  <transition>
+    <div class="container mx-auto">
+      <base-f-navbar />
+      <div id="overlay2"></div>
 
-    <slot />
+      <slot />
 
-    <base-f-footer class="mt-48" />
+      <base-f-footer class="mt-48" />
 
-  </div>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
