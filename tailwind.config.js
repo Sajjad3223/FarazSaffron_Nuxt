@@ -25,7 +25,7 @@ export default {
         secondary:'#939393',
         cta:'#B48D11',
         danger:'#FF6161',
-        warning:'#33E545',
+        warning:'#6bb927',
       },
     },
   },
