@@ -6,7 +6,7 @@
 
     <ClientOnly>
       <base-f-modal v-model="authStore.isLoginModalOpen">
-        <auth-login  @loggedIn="authStore.isLoginModalOpen = false"/>
+        <auth-login  @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true"/>
       </base-f-modal>
     </ClientOnly>
   </div>
