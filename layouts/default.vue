@@ -12,6 +12,15 @@
   </transition>
 </template>
 
+<script setup lang="ts">
+useHead({
+  link:[
+    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/VazirFD"},
+    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/Estedad"},
+  ]
+})
+</script>
+
 <style scoped>
 #overlay2{
   position: fixed;

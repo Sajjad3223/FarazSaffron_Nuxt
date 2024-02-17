@@ -1,9 +1,15 @@
 <template>
   <div>
     <div>
-      <h3 class="text-2xl font-bold ">
-        نظرات من
-      </h3>
+      <div class="text-2xl font-bold flex items-center gap-2">
+        <NuxtLink to="/profile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
+        <strong>نظرات من</strong>
+      </div>
       <hr class="my-3 border-2">
     </div>
     <ul class="flex-flex-col space-y-4 mt-8 p-4">
@@ -34,7 +40,7 @@
 
         </div>
         <hr class="my-2">
-        <p class="mt-2 font-estedad font-light text-sm leading-relaxed text-justify">
+        <p class="mt-2 font-estedad font-light text-xs lg:text-sm leading-relaxed text-justify">
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارها.
         </p>
       </li>

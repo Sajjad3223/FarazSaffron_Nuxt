@@ -3,16 +3,18 @@
     <Title>محصولات جی پی</Title>
   </Head>
 
-  <div class="flex flex-col mt-12">
+  <div class="flex flex-col mt-12 mx-6 lg:mx-0">
     <h2 class="font-black text-3xl">
       محصولات جی پی زعفران
     </h2>
-    <div class="flex space-x-4 space-x-reverse mt-12">
-      <div class="w-1/5 flex flex-col space-y-4">
+    <div class="flex flex-col lg:flex-row space-x-4 space-x-reverse mt-12">
+      <div class="w-full lg:w-1/5 flex flex-col space-y-4">
         <div class="bg-bgWhite drop-shadow lg rounded-xl p-4 w-full space-y-4 sticky top-16">
           <div class="flex justify-between items-center">
             <h4 class="text-xl font-bold">فیلتر ها</h4>
-            <small class="text-primary font-light">حذف فلیتر ها</small>
+            <button>
+              <small class="text-primary font-light">حذف فلیتر ها</small>
+            </button>
           </div>
           <hr>
           <div class="flex flex-col space-y-4 mt-8" id="testParent">
@@ -60,28 +62,28 @@
           </div>
         </div>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 mt-12 lg:mt-0">
         <div class="w-full flex flex-col space-y-4">
-          <div class="border-b pb-2 flex items-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="text-xs lg:text-sm xl:text-base border-b pb-2 flex items-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75 lg:scale-100">
               <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
               <path d="M6 12H18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
               <path d="M10 17H14" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <span class="mr-1 ml-4">مرتب سازی:</span>
+            <span class="hidden lg:block mr-1 ml-4">مرتب سازی:</span>
 
-            <ul class="flex items-center space-x-4 space-x-reverse text-sm font-light">
-              <li class="font-bold">محبوب ترین ها</li>
-              <li>جدید ترین ها</li>
-              <li>گران ترین ها</li>
-              <li>ارزان ترین ها</li>
-              <li>بیشترین امتیاز</li>
+            <ul class="flex items-center space-x-4 space-x-reverse text-xs lg:text-sm xl:text-base font-light">
+              <li class="font-bold">محبوب ترین</li>
+              <li>جدید ترین</li>
+              <li>گران ترین</li>
+              <li>ارزان ترین</li>
+              <li>امتیاز</li>
             </ul>
 
-            <span class="mr-auto text-sm opacity-70">2,345 کالا</span>
+            <span class="hidden lg:block mr-auto text-sm opacity-70">2,345 کالا</span>
           </div>
           <div class="p-4 bg-bgWhite drop-shadow rounded-xl">
-            <ul class="grid grid-cols-3">
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               <li v-for="i in 16" :key="i">
                 <f-card :shadow="false" :rounded="false"/>
               </li>

@@ -6,10 +6,10 @@
                 {'rounded-xl':rounded},
                 {'border':border}]">
     <nuxt-link to="/product/thing">
-      <img src="~/assets/images/saffron-bar.png" alt="saffron bar" class="w-full object-contain rounded-lg h-80">
+      <img src="~/assets/images/saffron-bar.png" alt="saffron bar" class="w-full object-contain rounded-lg h-52 lg:h-80">
     </nuxt-link>
     <div class="w-full px-8">
-      <nuxt-link to="/product/thing" class="text-2xl font-bold">زعفران نگین</nuxt-link>
+      <nuxt-link to="/product/thing" class="text-xl lg:text-2xl font-bold">زعفران نگین</nuxt-link>
       <div class="flex items-center space-x-reverse space-x-2 mt-2">
         <div class="flex items-center space-x-2 space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@
           2,206,000
           <small class="text-xs">ریال</small>
         </strong>-->
-        <strong class="text-2xl">
+        <strong class="text-xl lg:text-2xl">
           2,206,000
           <small class="text-xs">ریال</small>
         </strong>

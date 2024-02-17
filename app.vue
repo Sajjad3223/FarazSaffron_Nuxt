@@ -5,8 +5,8 @@
     </NuxtLayout>
 
     <ClientOnly>
-      <base-f-modal v-model="authStore.isLoginModalOpen">
-        <auth-login  @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true"/>
+      <base-f-modal v-model="authStore.isLoginModalOpen" title="ورود، ثبت نام">
+        <auth-login  @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true" />
       </base-f-modal>
     </ClientOnly>
   </div>
@@ -16,5 +16,6 @@
 import {useAuthStore} from "~/stores/auth.store";
 
 const authStore = useAuthStore();
+
 </script>
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-start mt-12 space-x-4 space-x-reverse">
+  <div class="flex flex-col lg:flex-row items-start mt-12 lg:space-x-4 lg:space-x-reverse">
     <div class="flex-1 flex flex-col rounded-xl bg-bgWhite drop-shadow-lg border-b-brandOrange border-b-2 p-6">
       <div>
-        <ul class="flex items-center space-x-2 space-x-reverse">
+        <ul class="flex items-center space-x-2 space-x-reverse text-sm lg:text-base">
           <li class="opacity-50 font-light">
             <NuxtLink to="/">خانه</NuxtLink>
           </li>
@@ -20,15 +20,17 @@
           </li>
         </ul>
       </div>
-      <hr class="my-8">
-      <h2 class="text-3xl font-estedad">
+      <base-f-divider color="black" vertical-margin="8"/>
+      <h1 class="text-xl lg:text-3xl font-estedad">
         چگونه زعفران مرغوب را تشخیص دهیم؟
-      </h2>
-      <div class="flex justify-between items-center mt-4">
+      </h1>
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-4">
         <div class="flex items-center">
-          <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full max-w-16">
-          <span class="mx-4">سجاد میرشبی</span>
-          <div class="flex items-center font-light space-x-1 space-x-reverse opacity-50 mr-8">
+          <div class="flex items-center">
+            <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full max-w-16">
+            <span class="mx-4">سجاد میرشبی</span>
+          </div>
+          <div class="flex items-center font-light text-sm lg:text-base space-x-1 space-x-reverse opacity-50 mr-8">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                  class="scale-75">
               <g id="Iconly/Curved/Time Circle">
@@ -44,7 +46,7 @@
             <time>15 بهمن 1402 | 10:00</time>
           </div>
         </div>
-        <div class="w-max text-xs font-light opacity-70 flex items-center space-x-1 space-x-reverse">
+        <div class="w-max text-xs font-light opacity-70 flex items-center space-x-1 space-x-reverse mt-2 lg:mt-0">
           <span>زمان مورد نیاز برای مطالعه: 8 دقیقه</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
             <path d="M20.75 13.25C20.75 18.08 16.83 22 12 22C7.17 22 3.25 18.08 3.25 13.25C3.25 8.42 7.17 4.5 12 4.5C16.83 4.5 20.75 8.42 20.75 13.25Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -187,22 +189,22 @@
           </li>
         </ul>
       </div>
-      <hr class="my-4">
+      <base-f-divider color="black" vertical-margin="8"/>
 
-      <div class="flex space-x-2 space-x-reverse">
+      <div class="flex flex-wrap gap-2">
         <span>برچسب ها:</span>
-        <ul class="flex flex-wrap space-x-2 space-x-reverse">
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">زعفران</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">جی پی</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">زعفران نگین</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">فراز</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">پسته</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">مرغوب</li>
-          <li class="bg-secondary/30 text-xs font-light px-2 rounded-md grid place-items-center">زعفران مرغوب</li>
+        <ul class="flex flex-wrap gap-2">
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">زعفران</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">جی پی</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">زعفران نگین</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">فراز</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">پسته</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">مرغوب</li>
+          <li class="bg-secondary/30 text-xs font-light px-2 py-1 rounded-md grid place-items-center">زعفران مرغوب</li>
         </ul>
       </div>
 
-      <hr class="my-4">
+      <base-f-divider color="black" vertical-margin="8"/>
 
       <strong class="text-xl border-b-2 border-b-brandOrange w-max pb-2 pl-6 mt-6">نظرات کاربران</strong>
       <div class="w-full flex mt-8">
@@ -256,7 +258,7 @@
       </form>
     </div>
 
-    <div class="w-1/4 flex flex-col space-y-4">
+    <div class="w-full lg:w-1/4 mt-8 lg:mt-0 flex flex-col space-y-4">
       <div class="w-full p-4 border rounded-xl flex flex-col">
         <h4 class="text-lg font-bold">
           مقالات اخیر

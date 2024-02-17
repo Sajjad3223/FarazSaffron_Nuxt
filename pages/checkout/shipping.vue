@@ -1,6 +1,6 @@
 
 <template>
-  <div class="w-full flex flex-col">
+  <div class="flex flex-col mx-4 lg:mx-0">
     <div class="w-full mt-8">
       <div>
         <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
@@ -15,14 +15,14 @@
       </div>
       <hr class="mt-3 border-brandOrange/50">
     </div>
-    <div class="flex items-start space-x-4 space-x-reverse mt-8">
+    <div class="flex flex-col lg:flex-row lg:items-start gap-4 mt-8">
       <div class="flex-1 flex flex-col space-y-4">
 
         <!--   Addresses    -->
         <div class="flex flex-col space-y-2 p-4 bg-bgWhite border rounded-xl">
           <span class="font-light">آدرس تحویل سفارش</span>
           <hr>
-          <ul class="grid grid-cols-4 gap-4">
+          <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <li class="flex flex-col space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
               <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
               <strong>جاده بایگ، شرکت فراز زعفران</strong>
@@ -39,7 +39,7 @@
                 </svg>
               </button>
             </li>
-            <li class="grid place-items-center rounded-lg border relative">
+            <li class="grid place-items-center rounded-lg border relative min-h-36">
               <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,9 +57,9 @@
         <div class="flex flex-col p-4 bg-bgWhite border rounded-xl">
           <span class="font-light">سبد خرید <small>(4 کالا)</small></span>
           <hr class="my-4">
-          <ul class="grid grid-cols-5 mt-2">
+          <ul class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 mt-2">
             <li class="w-full flex flex-col items-center px-4 border-l last:border-none" v-for="i in 4" :key="i">
-              <img src="~/assets/images/saffron-bar.png" alt="jar">
+              <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-2/3 lg:w-auto">
               <div class=" space-x-2 space-x-reverse -mt-4 border rounded-lg p-2 flex items-center justify-between">
                 <button>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">

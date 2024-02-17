@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="w-full flex flex-col">
+  <div class="flex flex-col mx-4 lg:mx-0">
     <div class="w-full mt-8">
       <div>
         <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
@@ -11,7 +11,7 @@
       </div>
       <hr class="mt-3 border-brandOrange/50">
     </div>
-    <div class="flex items-start space-x-4 space-x-reverse mt-8">
+    <div class="flex flex-col lg:flex-row items-start gap-4 mt-8">
       <div class="flex-1 flex flex-col p-4 bg-bgWhite border rounded-xl border-black/20">
         <div class="w-full flex items-start justify-between">
           <div class="flex flex-col items-start">

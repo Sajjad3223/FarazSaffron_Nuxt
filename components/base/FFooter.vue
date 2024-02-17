@@ -1,21 +1,24 @@
 <template>
-<div class="flex flex-col items-end">
+<div class="flex flex-col items-end mx-6 lg:mx-0">
   <hr class="absolute left-0 right-0">
   <div class="w-full flex flex-col py-4 bg-bgWhite space-y-12">
-    <div class=" w-full flex justify-between items-center pt-12">
+    <div class="w-full flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center pt-12">
       <div class="flex flex-col space-y-6">
         <img src="~/assets/images/GP-filled.png" alt="gp" class="w-36">
-        <div class="font-thin text-sm flex items-stretch space-x-4 space-x-reverse">
+        <div class="font-thin text-sm flex flex-col lg:flex-row items-stretch space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse">
           <span>تلفن پشتیبانی: 051-52223456</span>
-          <div class="w-px bg-black/30"></div>
+          <div class="hidden lg:block w-px bg-black/30"></div>
           <span> ۷ روز هفته، ۲۴ ساعته پاسخگوی شما هستیم</span>
         </div>
       </div>
-      <button class="text-sm border-2 rounded-lg opacity-60 h-max p-4 px-8">
-        برگشت به بالا ▲
+      <button class="text-sm border-2 rounded-lg opacity-60 h-max p-4 px-8 w-max mx-auto lg:mx-0 mb-4 lg:mb-0 flex items-center space-x-2 space-x-reverse">
+        <span>برگشت به بالا</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.9201 15.05L13.4001 8.53C12.6301 7.76 11.3701 7.76 10.6001 8.53L4.08008 15.05" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
     </div>
-    <div class="w-full flex items-end justify-around">
+    <div class="grid grid-cols-3 gap-6 lg:grid-cols-4 xl:grid-cols-5">
       <div class="flex flex-col items-center text-xs font-thin space-y-6">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-[200%]">
           <path d="M11.9998 14H12.9998C14.0998 14 14.9998 13.1 14.9998 12V2H5.99976C4.49976 2 3.18977 2.82999 2.50977 4.04999" stroke="#F04623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -73,7 +76,7 @@
         <span>ضمانت اصل بودن کالا</span>
       </div>
     </div>
-    <div class="w-full grid grid-cols-4">
+    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="flex flex-col space-y-4">
         <h4 class="text-brandOrange font-bold text-lg ">با فراز زعفران</h4>
         <ul class="flex flex-col font-light opacity-70 space-y-2">
@@ -98,7 +101,7 @@
         </ul>
       </div>
       <div class="flex flex-col space-y-4">
-        <h4 class="text-brandOrange font-bold text-lg ">راهنمای خرید از فراز زعفران</h4>
+        <h4 class="text-brandOrange font-bold lg:text-lg ">راهنمای خرید از جی پی زعفران</h4>
         <ul class="flex flex-col font-light opacity-70 space-y-2">
 
             <li><NuxtLink to="/" >نحوه ثبت سفارش</NuxtLink></li>
@@ -109,7 +112,7 @@
       </div>
       <div class="flex flex-col space-y-4">
         <h4 class="text-brandOrange font-bold text-lg">همراه ما باشید!</h4>
-        <ul class="flex justify-around">
+        <ul class="flex justify-around flex-wrap">
           <li>
             <NuxtLink >
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,33 +172,50 @@
           </li>
         </ul>
         <h5 class="text-brandOrange font-bold">با ثبت ایمیل از جدیدترین تخفیف ها باخبر شوید!</h5>
-        <div class="w-full flex space-x-2 space-x-reverse opacity-50 hover:opacity-100 transition-opacity duration-300">
-          <input type="text" class="border rounded-lg flex-1 p-2" placeholder="example@test.com">
-          <button class="px-3 rounded-md bg-brandOrange/20">
+        <div class="w-full flex flex-col lg:flex-row lg:space-x-2 lg:space-x-reverse opacity-50 hover:opacity-100 transition-opacity duration-300">
+          <base-f-input type="email" :rtl="false" place-holder="example@test.com" class="text-xs">
+            <template #inputIcon>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </template>
+          </base-f-input>
+          <button class="py-2 lg:py-0 lg:px-3 rounded-md bg-brandOrange/20">
             ثبت
           </button>
         </div>
       </div>
     </div>
-    <hr>
-    <div class="w-full flex">
-      <div class="w-2/3 flex flex-col space-y-2">
-        <h3 class="text-2xl font-bold flex items-center">فروشگاه اینترنتی <img src="~/assets/images/GP-filled.png" alt="gp" class="w-24">، بررسی، انتخاب و خرید آنلاین زعفران</h3>
-        <p class="font-light text-justify opacity-80">
+    <div class="h-px bg-black/50 w-full flex items-center justify-center opacity-50">
+      <img src="~/assets/images/en-GP-filled.png" alt="gp" class="w-9 bg-bgWhite px-2">
+    </div>
+    <div class="w-full flex flex-col lg:flex-row">
+      <div class="w-full lg:w-2/3 flex flex-col space-y-2">
+        <h3 class="text-sm lg:text-2xl font-bold flex items-center space-x-1 space-x-reverse">
+          <span>فروشگاه اینترنتی</span>
+          <img src="~/assets/images/GP-filled.png" alt="gp" class="w-10 lg:w-24">
+          <span>، بررسی، انتخاب و خرید آنلاین زعفران</span>
+        </h3>
+        <p class="font-light text-xs lg:text-base text-justify opacity-80">
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
         </p>
       </div>
-      <div class="w-1/3 flex items-center justify-between">
-        <img src="https://media.eclubgroup.ir/Namad/enamad.png" alt="enamad" class="rounded-lg w-2/3">
-        <img src="https://media.eclubgroup.ir/Namad/Sib_Salamat.png" alt="salamat" class="rounded-lg w-2/3">
-        <img src="https://media.eclubgroup.ir/Namad/standard.jpg" alt="estandard" class="rounded-lg w-2/3">
+      <div class="w-full lg:w-1/3 flex items-center justify-between">
+        <img src="https://media.eclubgroup.ir/Namad/enamad.png" alt="enamad" class="rounded-lg w-auto max-w-24">
+        <img src="https://media.eclubgroup.ir/Namad/Sib_Salamat.png" alt="salamat" class="rounded-lg w-auto max-w-24">
+        <img src="https://media.eclubgroup.ir/Namad/standard.jpg" alt="estandard" class="rounded-lg w-auto max-w-24">
       </div>
     </div>
-    <hr>
-    <span class="text-center font-light font-estedad">
+    <div class="h-px bg-black/50 w-full flex items-center justify-center opacity-50">
+      <img src="~/assets/images/en-GP-filled.png" alt="gp" class="w-9 bg-bgWhite px-2">
+    </div>
+    <span class="text-center text-xs lg:text-sm xl:text-base font-light font-estedad">
       برای استفاده از مطالب جی پی، داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست. تمام حقوق اين وب‌سايت نیز برای شرکت فراز زعفران تربت حیدریه (فروشگاه آنلاین جی پی) است.
     </span>
-    <hr>
+    <div class="h-px bg-black/50 w-full flex items-center justify-center opacity-50">
+      <img src="~/assets/images/en-GP-filled.png" alt="gp" class="w-9 bg-bgWhite px-2">
+    </div>
   </div>
 </div>
 </template>

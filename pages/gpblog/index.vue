@@ -5,11 +5,11 @@
     <Title>مقالات جی پی</Title>
   </Head>
 
-  <div class="flex flex-col mt-12">
+  <div class="flex flex-col mt-12 mx-6 lg:mx-0">
     <h2 class="font-black text-3xl">
       مقالات جی پی
     </h2>
-    <div class="flex space-x-4 space-x-reverse mt-12">
+    <div class="flex flex-col lg:flex-row lg:space-x-4 lg:space-x-reverse mt-12">
       <div class="flex-1">
         <form class="flex items-stretch space-x-2 space-x-reverse">
           <base-f-input name="search" id="search" place-holder="به دنبال چه مقاله ای هستید؟" :py="3">
@@ -32,7 +32,7 @@
           </div>
         </form>
         <hr class="my-4">
-        <ul class="grid grid-cols-3 gap-4">
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <li class="flex flex-col bg-bgWhite rounded-xl drop-shadow overflow-hidden" v-for="i in 10" :key="i">
             <NuxtLink to="/gpblog/post">
               <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full object-cover rounded-xl">
@@ -68,7 +68,7 @@
           </li>
         </ul>
       </div>
-      <div class="w-1/4 flex flex-col space-y-4">
+      <div class="w-full lg:w-1/4 mt-8 lg:mt-0 flex flex-col space-y-4">
         <div class="w-full p-4 border rounded-xl flex flex-col">
           <h4 class="text-lg font-bold">
             مقالات اخیر

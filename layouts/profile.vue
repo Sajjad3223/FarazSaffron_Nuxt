@@ -4,8 +4,8 @@
     <base-f-navbar />
     <div id="overlay2"></div>
 
-    <div class="flex items-start space-x-4 space-x-reverse mt-12">
-      <div class="w-1/4 p-4 bg-bgWhite border sticky top-12 rounded-xl flex flex-col space-y-6">
+    <div class="flex flex-col-reverse lg:flex-row lg:items-start gap-4 mt-12 mx-4 lg:mx-0">
+      <div class="w-full lg:w-1/4 p-4 bg-bgWhite border sticky top-12 rounded-xl flex flex-col space-y-6">
         <div class="flex w-full justify-between items-end ">
           <div class="flex flex-col items-start">
             <strong class="text-lg">سجاد میرشبی</strong>

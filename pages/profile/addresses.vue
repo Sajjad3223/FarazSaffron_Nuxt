@@ -1,12 +1,18 @@
 <template>
   <div>
     <div>
-      <h3 class="text-2xl font-bold ">
-        آدرس ها
-      </h3>
+      <div class="text-2xl font-bold flex items-center gap-2">
+        <NuxtLink to="/profile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
+        <strong>آدرس ها</strong>
+      </div>
       <hr class="my-3 border-2">
     </div>
-    <ul class="grid grid-cols-4 gap-4">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <li class="flex flex-col bg-bgWhite drop-shadow space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
         <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
         <strong>جاده بایگ، شرکت فراز زعفران</strong>
@@ -23,7 +29,7 @@
           </svg>
         </button>
       </li>
-      <li class="grid place-items-center bg-bgWhite drop-shadow rounded-lg border relative">
+      <li class="grid place-items-center bg-bgWhite drop-shadow rounded-lg border relative min-h-36">
         <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0" @click="showAddressModal = true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

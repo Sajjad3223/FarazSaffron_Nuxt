@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mt-4">
+  <div class="relative mt-4 mx-2 lg:mx-0">
 
 
     <Head>
@@ -9,27 +9,27 @@
     <!-- <div id="overlay"></div>
     -->
 
-    <video autoplay muted loop class="rounded-2xl h-[40vh] w-full object-cover origin-center scale-x-125" style="max-width: unset !important;">
+    <video autoplay muted loop class="rounded-2xl h-[20vh] lg:h-[40vh] w-full object-cover origin-center lg:scale-x-125" style="max-width: unset !important;">
       <source src="~/assets/videos/bg2.mp4" type="video/mp4">
     </video>
 
     <img src="~/assets/images/Present.jpg" alt="present" class="hidden rounded-2xl mt-24 h-[40vh] w-full object-cover origin-center ">
 
-    <div class="w-max flex items-center text-white text-5xl font-bold absolute top-8 left-1/2 -translate-x-1/2 space-x-4 space-x-reverse drop-shadow-lg animate-pulse">
+    <div class="w-max flex items-center text-white text-xl lg:text-5xl font-bold absolute top-8 left-1/2 -translate-x-1/2 space-x-4 space-x-reverse drop-shadow-lg animate-pulse">
       <strong>
         به
       </strong>
-      <img src="~/assets/images/GP-filled.png" alt="gp filled logo" class="w-40">
+      <img src="~/assets/images/GP-filled.png" alt="gp filled logo" class="w-20 lg:w-40">
       <strong>خوش آمدید</strong>
     </div>
 
 
-    <div class="absolute flex flex-col items-end text-white  space-y-6 bg-brandOrange shadow-lg rounded-2xl p-8 translate-x-1/2 scale-75 bottom-8 right-0">
-      <div class="flex items-center space-x-2 space-x-reverse font-fedra text-4xl 2xl:text-6xl font-bold mx-auto drop-shadow-md">
+    <div class="absolute flex flex-col items-end text-white w-max max-w-[20rem] lg:max-w-max space-y-3 lg:space-y-6 bg-brandOrange shadow-lg rounded-2xl p-4 lg:p-8 translate-x-1/2 lg:scale-75 bottom-0 translate-y-1/2 lg:translate-y-0 lg:bottom-8 right-1/2 lg:right-0">
+      <div class="flex items-center space-x-2 space-x-reverse text-sm lg:text-4xl 2xl:text-6xl font-bold mx-auto drop-shadow-md">
         <span>زعفرانِ</span>
-        <img src="~/assets/images/gp-filled-white.png" alt="gp filled white" class="w-36">
+        <img src="~/assets/images/gp-filled-white.png" alt="gp filled white" class="w-12 lg:w-36">
       </div>
-      <p class="text-wrap text-justify text-base font-estedad">
+      <p class="text-wrap text-justify text-xs lg:text-base font-estedad font-thin lg:font-normal">
         با جی پی همراه شوید و دنیای خاص و شگفت انگیز زعفران را لمس کنید، محصولی از مزارع حاصلخیز تا سفره های شما!
         <br>
         اینجا کیفیت و خلوص زعفران با اصالت همگام شده و تضمینی بر طعم این نماد با اصالت و گران بها خواهد بود.
@@ -39,7 +39,7 @@
       </NuxtLink>
     </div>
 
-    <div class="absolute mx-auto bottom-0 right-1/2 translate-x-1/2 text-brandOrange animate-bounce">
+    <div class="hidden lg:block absolute mx-auto bottom-0 right-1/2 translate-x-1/2 text-brandOrange animate-bounce">
       <a href="#products">
         <svg width="50" height="97" viewBox="0 0 50 97" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M25 59C33.8107 59 41 49.7325 41 38.375V24.625C41 13.2675 33.8107 4 25 4C16.1893 4 9 13.2675 9 24.625V38.375C9 49.7325 16.1893 59 25 59Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -54,10 +54,10 @@
 
   </div>
 
-  <div class="mt-12">
+  <div class="mt-28 lg:mt-12 mx-4 lg:mx-0">
     <div class="flex items-center justify-between">
       <h3 class="text-4xl font-fedra" id="products">محصولات ما</h3>
-      <NuxtLink to="/products" class="text-brandOrange underline underline-offset-4">مشاهده همه محصولات ></NuxtLink>
+      <NuxtLink to="/market" class="text-brandOrange underline underline-offset-4">مشاهده همه محصولات ></NuxtLink>
     </div>
     <hr class="mt-2 border-2 rounded-lg ">
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
@@ -71,7 +71,7 @@
     <div class="flex items-center justify-between">
       <h3 class="text-4xl mb-6 font-fedra" id="products">نظرات شما</h3>
     </div>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-24 lg:gap-y-8 mt-12">
       <li class="card bg-bgWhite rounded-xl shadow-md pb-4" v-for="i in 3" :key="i">
         <div class="w-full">
           <img src="~/assets/images/avatar.png" alt="saffron bar" class="rounded-full w-32 h-32 mx-auto -translate-y-1/2 border-brandOrange border-4">

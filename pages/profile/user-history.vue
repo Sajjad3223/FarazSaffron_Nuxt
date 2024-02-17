@@ -1,21 +1,27 @@
 <template>
   <div>
     <div>
-      <h3 class="text-2xl font-bold ">
-        بازدید های اخیر
-      </h3>
+      <div class="text-2xl font-bold flex items-center gap-2">
+        <NuxtLink to="/profile">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
+        <strong>بازدید های اخیر</strong>
+      </div>
       <hr class="my-3 border-2">
     </div>
-    <ul class="grid grid-cols-2 mt-12">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
       <li class="flex flex-col items-center space-y-4 odd:border-l border-b p-4" v-for="i in 3" :key="i">
-        <NuxtLink to="/product/thing">
-          <img src="~/assets/images/saffron-bar.png" alt="jar">
+        <NuxtLink to="/product/thing" class="w-1/3 lg:w-auto">
+          <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-full">
         </NuxtLink>
-        <NuxtLink to="/product/thing" class="text-xl font-bold">
+        <NuxtLink to="/product/thing" class="text-lg lg:text-xl font-bold">
           زعفران شیشه ای نگین صد در صد خالص
         </NuxtLink>
         <span>2,206,000 <small>ریال</small></span>
-        <div class="flex space-x-2 space-x-reverse w-1/2">
+        <div class="flex space-x-2 space-x-reverse w-full lg:w-1/2">
           <button class="flex items-center space-x-2 space-x-reverse opacity-60 p-2 border-danger border rounded-lg text-danger hover:bg-danger hover:text-white transition duration-200">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M21 5.97998C17.67 5.64998 14.32 5.47998 10.98 5.47998C9 5.47998 7.02 5.57998 5.04 5.77998L3 5.97998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,7 +32,7 @@
             </svg>
             <span>حذف</span>
           </button>
-          <button class="flex space-x-2 flex-row-reverse rounded-lg border-brandOrange border p-2 text-brandOrange flex-1 justify-center hover:bg-brandOrange hover:text-white transition duration-200">
+          <button class="flex gap-2 flex-row-reverse rounded-lg border-brandOrange border p-2 text-brandOrange flex-1 justify-center hover:bg-brandOrange hover:text-white transition duration-200">
             <span>اضافه به سبد خرید</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
