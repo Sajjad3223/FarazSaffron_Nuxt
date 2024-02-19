@@ -35,7 +35,6 @@
     <base-f-modal v-model="showNotifModal" title="نمایش پیغام">
       <div class="flex flex-col p-2 space-y-3">
         <strong class="text-lg">عنوان پیغام</strong>
-        <hr>
         <p class="mt-4 font-estedad font-light text-sm text-justify">
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارها.
         </p>
@@ -43,7 +42,7 @@
         <p class="mt-4 font-estedad font-light text-sm text-justify">
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارها.
         </p>
-        <base-f-button bordered color="primary" custom-class="w-2/3 lg:w-1/3 mr-auto">
+        <base-f-button bordered color="primary" custom-class="w-full md:w-2/3 lg:w-1/3 mr-auto">
           <div class="flex items-center space-x-2 space-x-reverse text-primary">
             <span>تغییر به خوانده شده</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

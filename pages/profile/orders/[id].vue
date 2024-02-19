@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="flex items-center justify-between px-2">
-        <h3 class="text-lg lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
+        <h3 class="text-sm lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
           <NuxtLink to="/profile/orders">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="2"
@@ -13,8 +13,8 @@
           </NuxtLink>
           <span>جزئیات سفارش #123456</span>
         </h3>
-        <button class="flex items-center space-x-2 space-x-reverse text-primary text-sm lg:text-base">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <button class="flex items-center space-x-2 space-x-reverse text-primary text-xs lg:text-base">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
             <path
                 d="M22 6V8.42C22 10 21 11 19.42 11H16V4.01C16 2.9 16.91 2 18.02 2C19.11 2.01 20.11 2.45 20.83 3.17C21.55 3.9 22 4.9 22 6Z"
                 stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
@@ -138,11 +138,11 @@
            class="text-primary text-sm font-light">
           ورود به سامانه رهگیری >
         </a>
-        <div class="flex items-center">
+        <div class="flex items-center flex-wrap lg:w-1/3">
           <span class="text-sm font-light opacity-70">کد رهگیری:</span>
-          <div class="flex items-center space-x-3 space-x-reverse mr-12">
-            <strong>۱۹۱۴۸۹۷۱۷۷۰۱۶۵۵۱۲۹۵۳۹۱۱۱</strong>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="flex items-center gap-3 mr-auto">
+            <strong class="text-xs lg:text-base">۱۹۱۴۸۹۷۱۷۷۰۱۶۵۵۱۲۹۵۳۹۱۱۱</strong>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
               <path d="M17 13.4V16.4C17 20.4 15.4 22 11.4 22H7.6C3.6 22 2 20.4 2 16.4V12.6C2 8.6 3.6 7 7.6 7H10.6"
                     stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M17 13.4H13.8C11.4 13.4 10.6 12.6 10.6 10.2V7L17 13.4Z" stroke="#292D32" stroke-width="1.5"
@@ -169,7 +169,7 @@
             </NuxtLink>
           </div>
           <div class="flex-1 flex flex-col items-start">
-            <strong class="lg:text-xl mb-6 lg:mt-8">
+            <strong class="text-sm lg:text-xl mb-6 lg:mt-8">
               زعفران شیشه ای نگین صد در صد خالص - 4 گرمی
             </strong>
 

@@ -17,5 +17,11 @@ import {useAuthStore} from "~/stores/auth.store";
 
 const authStore = useAuthStore();
 
+useHead({
+  link:[
+    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/VazirFD"},
+    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/Estedad"},
+  ]
+})
 </script>
 

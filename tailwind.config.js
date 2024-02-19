@@ -12,7 +12,6 @@ export default {
     fontFamily:{
       'vazir':['"Vazir FD"'],
       'estedad': ['Estedad'],
-      'fedra':['"Fedra Arabic Display AR+LT Black"'],
     },
     extend: {
       colors:{

@@ -12,7 +12,7 @@
       </div>
       <hr class="my-3 border-2">
     </div>
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <li class="flex flex-col bg-bgWhite drop-shadow space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
         <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
         <strong>جاده بایگ، شرکت فراز زعفران</strong>

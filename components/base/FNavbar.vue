@@ -3,7 +3,7 @@
   <div>
     <div class="hidden lg:flex absolute right-0 left-0 top-0 -z-10 h-[60px] bg-brandOrange items-center justify-center text-white text-4xl space-x-8 space-x-reverse">
       <img src="~/assets/images/en-GP-filled-white.png" alt="logo" class="h-1/2">
-      <strong class="font-estedad text-sm">
+      <strong class="font-estedad text-2xl">
         بخرید، تست کنید، اگه دوست نداشتید مرجوع کنید
       </strong>
       <img src="~/assets/images/en-GP-filled-white.png" alt="logo" class="h-1/2">
@@ -151,10 +151,10 @@
                 <path d="M11.9485 5.45312H7.79512H4.05512C3.41512 5.45312 3.09512 6.22646 3.54845 6.67979L7.00179 10.1331C7.55512 10.6865 8.45512 10.6865 9.00845 10.1331L10.3218 8.81979L12.4618 6.67979C12.9085 6.22646 12.5885 5.45312 11.9485 5.45312Z" fill="#292D32"/>
               </svg>
             </button>
-            <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full" v-if="showOptions">
+            <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full z-50" v-if="showOptions">
               <ul class="text-sm font-light text-right flex flex-col space-y-2">
                 <li>
-                  <base-f-button color="transparent">
+                  <base-f-button color="transparent" :is-link="true" to="/profile">
                     حساب کاربری
                   </base-f-button>
                 </li>
@@ -200,7 +200,7 @@
         <div class="h-px bg-white/50 w-full flex items-center justify-center opacity-50">
           <img src="~/assets/images/en-GP-filled-white.png" alt="gp" class="w-9 bg-brandOrange px-2">
         </div>
-        <ul class="w-full flex flex-col items-center text-white font-fedra text-xl space-y-4">
+        <ul class="w-full flex flex-col items-center text-white text-xl space-y-4">
           <li class="hidden">
             <img src="~/assets/images/gp-flower-cuted.png" alt="LOGO" class="w-1/3 mx-auto">
           </li>

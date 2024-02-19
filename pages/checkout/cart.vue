@@ -35,7 +35,7 @@
               </NuxtLink>
             </div>
             <div class="flex-1 flex flex-col items-start">
-              <strong class="text-xl mb-6 mt-8">
+              <strong class="text-xl mb-6 lg:mt-8">
                 زعفران شیشه ای نگین صد در صد خالص - 4 گرمی
               </strong>
 

@@ -16,25 +16,25 @@
     <div class="flex flex-col w-full mt-8">
       <div>
         <ul class="flex items-center border-b pb-4">
-          <li :class="['flex flex-wrap gap-1 items-center justify-center text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='going'}]" @click="tab = 'going'">
+          <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='going'}]" @click="tab = 'going'">
             <span>
               جاری
             </span>
             <f-badge color="brandOrange" size="xs" fore-color="white">0</f-badge>
           </li>
-          <li :class="['flex flex-wrap gap-1 items-center justify-center text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='delivered'}]" @click="tab = 'delivered'">
+          <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='delivered'}]" @click="tab = 'delivered'">
             <span>
               تحویل شده
             </span>
             <f-badge color="brandOrange" size="xs" fore-color="white">3</f-badge>
           </li>
-          <li :class="['flex flex-wrap gap-1 items-center justify-center text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='returned'}]" @click="tab = 'returned'">
+          <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='returned'}]" @click="tab = 'returned'">
             <span>
               مرجوع شده
             </span>
             <f-badge color="brandOrange" size="xs" fore-color="white">0</f-badge>
           </li>
-          <li :class="['flex flex-wrap gap-1 items-center justify-center text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='canceled'}]" @click="tab = 'canceled'">
+          <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab=='canceled'}]" @click="tab = 'canceled'">
             <span>
               لغو شده
             </span>
@@ -48,7 +48,7 @@
       <ul v-if="tab == 'delivered'" class="flex flex-col w-full">
         <li class="flex flex-col p-4 py-6 rounded-xl border bg-bgWhite">
           <div class="flex items-start justify-between">
-            <div class="flex flex-col space-y-2">
+            <div class="flex flex-col space-y-4 w-full lg:w-max">
               <div class="flex space-x-2 space-x-reverse items-center">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-warning">
                   <path d="M17.6005 5.31125L11.9505 2.27125C11.3505 1.95125 10.6405 1.95125 10.0405 2.27125L4.40047 5.31125C3.99047 5.54125 3.73047 5.98125 3.73047 6.46125C3.73047 6.95125 3.98047 7.39125 4.40047 7.61125L10.0505 10.6512C10.3505 10.8112 10.6805 10.8913 11.0005 10.8913C11.3205 10.8913 11.6605 10.8112 11.9505 10.6512L17.6005 7.61125C18.0105 7.39125 18.2705 6.95125 18.2705 6.46125C18.2705 5.98125 18.0105 5.54125 17.6005 5.31125Z" fill="currentColor"/>
@@ -58,14 +58,17 @@
                 </svg>
                 <strong>تحویل شده</strong>
               </div>
-              <div class="flex items-center space-x-2 space-x-reverse">
-                <span class="text-xs lg:text-sm  font-light opacity-70">15 بهمن 1402</span>
-                <span class="opacity-40 text-2xl">•</span>
-                <span class="text-xs lg:text-sm  font-light opacity-70">کد سفارش <b class="text-sm lg:text-base font-bold">123456</b></span>
-                <span class="opacity-40 text-2xl">•</span>
-                <span class="text-xs lg:text-sm  font-light opacity-70">مبلغ <b class="text-sm lg:text-base font-bold">356,000 ریال</b></span>
+              <div class="flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:items-center lg:space-x-2 lg:space-x-reverse">
+                <div class="flex items-center justify-between w-full lg:w-max">
+                  <span class="text-xs lg:text-sm font-light opacity-70 lg:hidden">تاریخ تحویل</span>
+                  <span class="text-xs lg:text-sm opacity-70 font-bold lg:font-light">15 بهمن 1402</span>
+                </div>
+                <span class="opacity-40 text-2xl hidden lg:block">•</span>
+                <span class="text-xs lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">کد سفارش <b class="text-sm lg:text-base font-bold">123456</b></span>
+                <span class="opacity-40 text-2xl hidden lg:block">•</span>
+                <span class="text-xs lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">مبلغ <b class="text-sm lg:text-base font-bold">356,000 ریال</b></span>
                 <span class="hidden lg:block opacity-40 text-2xl">•</span>
-                <span class="hidden lg:block text-sm font-light opacity-70">تخفیف <b class="text-sm lg:text-base font-bold">46,000 ریال</b></span>
+                <span class="text-sm lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">تخفیف <b class="text-sm lg:text-base font-bold">46,000 ریال</b></span>
               </div>
               <div class="flex items-center space-x-2 space-x-reverse">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-amber-500">

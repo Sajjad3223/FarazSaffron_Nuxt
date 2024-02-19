@@ -2,7 +2,7 @@
   <div class="flex flex-col lg:flex-row items-start mt-12 lg:space-x-4 lg:space-x-reverse">
     <div class="flex-1 flex flex-col rounded-xl bg-bgWhite drop-shadow-lg border-b-brandOrange border-b-2 p-6">
       <div>
-        <ul class="flex items-center space-x-2 space-x-reverse text-sm lg:text-base">
+        <ul class="flex items-center space-x-2 space-x-reverse text-xs lg:text-base">
           <li class="opacity-50 font-light">
             <NuxtLink to="/">خانه</NuxtLink>
           </li>
@@ -28,11 +28,11 @@
         <div class="flex items-center">
           <div class="flex items-center">
             <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full max-w-16">
-            <span class="mx-4">سجاد میرشبی</span>
+            <span class="mx-4 text-xs lg:text-base">سجاد میرشبی</span>
           </div>
-          <div class="flex items-center font-light text-sm lg:text-base space-x-1 space-x-reverse opacity-50 mr-8">
+          <div class="flex items-center font-light text-xs lg:text-base space-x-1 space-x-reverse opacity-50 mr-4 lg:mr-8">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                 class="scale-75">
+                 class="w-3 h-3 lg:w-5 lg:h-5">
               <g id="Iconly/Curved/Time Circle">
                 <g id="Time Circle">
                   <path id="Stroke 1" fill-rule="evenodd" clip-rule="evenodd"
@@ -208,12 +208,12 @@
 
       <strong class="text-xl border-b-2 border-b-brandOrange w-max pb-2 pl-6 mt-6">نظرات کاربران</strong>
       <div class="w-full flex mt-8">
-        <div class="flex-1 pr-10 border-r-4 border-brandOrange/50">
+        <div class="flex-1 lg:pr-10 lg:border-r-4 border-brandOrange/50">
           <ul class="flex-flex-col space-y-6">
             <li class="w-full flex flex-col pb-6 border-b-2 last:border-none" v-for="i in 5" :key="i">
               <div class="flex justify-between items-start">
                 <div class="flex items-center">
-                  <strong class="text-xl">سجاد میرشبی</strong>
+                  <strong class="lg:text-xl">سجاد میرشبی</strong>
                   <div class="bg-black w-px h-6 mx-6 opacity-30"></div>
                   <small class="opacity-70">8 بهمن 1402</small>
                 </div>
@@ -225,7 +225,7 @@
                       <path d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </button>
-                  <div class="flex flex-col absolute w-max min-w-32 max-w-48 bg-bgWhite drop-shadow rounded-lg p-2 space-y-2 left-4 top-4" v-if="showOptions">
+                  <div class="flex flex-col absolute w-max min-w-32 max-w-48 bg-bgWhite drop-shadow rounded-lg p-2 space-y-2 left-5 top-5" v-if="showOptions">
                     <ul class="space-y-2 w-full">
                       <li class="hover:bg-gray-100 transition cursor-pointer p-1 rounded-lg px-2">ویرایش</li>
                       <li class="hover:bg-gray-100 transition cursor-pointer p-1 rounded-lg px-2">حذف</li>
@@ -237,7 +237,7 @@
                   </div>
                 </div>
               </div>
-              <p class="mt-4 font-estedad font-normal leading-relaxed">
+              <p class="mt-4 font-estedad font-normal leading-relaxed text-justify text-sm lg:text-base">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارها.
               </p>
             </li>

@@ -2,7 +2,7 @@
   <button v-if="!isLink" :type="type" :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},customClass]">
     <slot></slot>
   </button>
-  <NuxtLink v-else :to="to">
+  <NuxtLink v-else :to="to" :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},customClass]">
     <slot></slot>
   </NuxtLink>
 </template>

@@ -22,7 +22,7 @@
         <div class="flex flex-col space-y-2 p-4 bg-bgWhite border rounded-xl">
           <span class="font-light">آدرس تحویل سفارش</span>
           <hr>
-          <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <li class="flex flex-col space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
               <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
               <strong>جاده بایگ، شرکت فراز زعفران</strong>
@@ -57,7 +57,7 @@
         <div class="flex flex-col p-4 bg-bgWhite border rounded-xl">
           <span class="font-light">سبد خرید <small>(4 کالا)</small></span>
           <hr class="my-4">
-          <ul class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 mt-2">
+          <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 mt-2 gap-4">
             <li class="w-full flex flex-col items-center px-4 border-l last:border-none" v-for="i in 4" :key="i">
               <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-2/3 lg:w-auto">
               <div class=" space-x-2 space-x-reverse -mt-4 border rounded-lg p-2 flex items-center justify-between">

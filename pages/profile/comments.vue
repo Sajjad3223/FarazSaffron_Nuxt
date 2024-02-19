@@ -16,17 +16,17 @@
       <li class="w-full flex flex-col bg-bgWhite p-4 drop-shadow rounded-lg last:border-none" v-for="i in 5" :key="i">
         <div class="flex justify-between items-start">
 
-            <div class="flex items-center space-x-4 space-x-reverse">
+            <div class="flex items-center flex-wrap gap-2 lg:gap-4">
               <NuxtLink to="/product/thing#comments">
-                <strong >زعفران نگین شیشه ای</strong>
+                <strong class="text-sm lg:text-base">زعفران نگین شیشه ای</strong>
               </NuxtLink>
 
-              <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden lg:block">
                 <rect opacity="0.4" width="5" height="5" rx="3" fill="black"/>
               </svg>
-              <div class="flex items-center space-x-4 space-x-reverse">
-                <small class="opacity-70">8 بهمن 1402</small>
-                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div class="flex items-center gap-2 lg:gap-4">
+                <small class="opacity-70 text-xs lg:text-sm">8 بهمن 1402</small>
+                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden lg:block">
                   <rect opacity="0.4" width="5" height="5" rx="3" fill="black"/>
                 </svg>
                 <div class="rounded-lg border-2 border-brandOrange flex space-x-2 space-x-reverse px-2 py-1 items-center opacity-80 scale-75">
