@@ -14,7 +14,7 @@
     <div class="flex lg:hidden items-center flex-col">
       <div class="flex items-center flex-row-reverse mx-4 mt-2">
         <div class="w-1/2 ">
-          <img src="~/assets/images/gp-flower-cuted.png" alt="GP" class="h-full object-cover mx-auto contrast-150 ">
+          <img src="~/assets/images/gp-flower-cuted.png" alt="GP" class="max-h-36 object-cover mx-auto contrast-150 animate-pulse">
         </div>
         <div class="flex flex-col items-start space-y-3 p-4 lg:hidden w-1/2">
           <div class="w-max flex items-center justify-center mx-auto font-bold gap-2 drop-shadow-lg animate-pulse">

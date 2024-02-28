@@ -12,7 +12,7 @@
       </div>
       <hr class="my-3 border-2">
     </div>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
+    <ul class="grid grid-cols-1 md:grid-cols-2 mt-12">
       <li class="flex flex-col items-center space-y-4 lg:odd:border-l border-b p-4" v-for="i in 3" :key="i">
         <NuxtLink to="/product/thing" class="w-1/3 lg:w-auto">
           <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-full">

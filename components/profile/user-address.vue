@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <form action="" class="space-y-4 lg:p-4">
+    <form action="" class="space-y-4 lg:p-4 overflow-y-auto max-h-[80vh]">
       <base-f-input multi-line name="address" id="address" label="نشانی پستی*"/>
       <hr>
       <div class="grid grid-cols-2 gap-2 lg:gap-4">

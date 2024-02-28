@@ -56,7 +56,7 @@
         </div>
       </div>
       <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="rounded-lg mt-6 w-full object-cover">
-      <div class="my-4 space-y-2">
+      <div class="my-4 space-y-2 text-justify">
         <strong>لورم لورم لورم لورم:</strong>
         <p>
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون

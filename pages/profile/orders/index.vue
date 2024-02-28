@@ -47,7 +47,7 @@
     <div class="mt-6">
       <ul v-if="tab == 'delivered'" class="flex flex-col w-full">
         <li class="flex flex-col p-4 py-6 rounded-xl border bg-bgWhite">
-          <div class="flex items-start justify-between">
+          <div class="flex flex-col-reverse lg:flex-row items-end lg:items-start justify-between">
             <div class="flex flex-col space-y-4 w-full lg:w-max">
               <div class="flex space-x-2 space-x-reverse items-center">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-warning">

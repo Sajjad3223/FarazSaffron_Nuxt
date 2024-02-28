@@ -114,7 +114,7 @@
         </div>
         <div class="flex items-stretch space-x-4 space-x-reverse">
           <div class="rounded-2xl relative overflow-hidden flex items-center justify-center" v-for="i in 3" :key="i">
-            <div class="rounded-2xl border-2 border-brandOrange max-w-32 aspect-square object-cover">
+            <div class="rounded-2xl border-2 border-brandOrange min-w-24 max-w-32 aspect-square object-cover">
               <img src="~/assets/images/saffron-bar.png" alt="saffron jar" class="rounded-2xl h-full mx-auto object-cover">
             </div>
             <button class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
@@ -211,7 +211,7 @@
           افزودن به سبد خرید
         </button>
       </div>
-      <div class="lg:hidden fixed bottom-0 right-0 left-0 h-18 bg-bgWhite shadow-[0_10px_15px_5px_rgba(0,0,0,0.5)] z-20">
+      <div class="lg:hidden fixed bottom-0 right-0 left-0 h-18 bg-bgWhite shadow-[0_10px_15px_5px_rgba(0,0,0,0.5)] z-10">
         <div class="flex w-full p-4 px-8 items-center">
           <div class="w-1/2">
             <button class="bg-brandOrange rounded-2xl p-3 shadow-lg w-full text-white text-sm mt-2" @click="cartStore.addToCart">

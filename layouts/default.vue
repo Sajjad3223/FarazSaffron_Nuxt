@@ -16,15 +16,21 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #overlay2{
   position: fixed;
   inset: 0;
   z-index: -2;
-  background: url("../assets/images/bgPattern.png") repeat;
-  height: 400%;
+  background: url("../assets/images/bgPattern.png") 0 0 / auto repeat;
   background-size: 900px;
-  mix-blend-mode: overlay;
-  opacity: 0.35;
+  @media screen and (max-width: 450px) {
+    background-size:600px;
+  }
+  opacity: 0.5;
+  background-blend-mode: overlay;
+  @media screen and (min-width: 500px) {
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+  }
 }
 </style>

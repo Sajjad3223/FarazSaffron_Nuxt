@@ -1,6 +1,6 @@
 
 <template >
-  <div>
+  <header>
     <div class="hidden lg:flex absolute right-0 left-0 top-0 -z-10 h-[60px] bg-brandOrange items-center justify-center text-white text-4xl space-x-8 space-x-reverse">
       <img src="~/assets/images/en-GP-filled-white.png" alt="logo" class="h-1/2">
       <strong class="font-estedad text-2xl">
@@ -21,7 +21,9 @@
       <div class="hidden w-full lg:flex flex-col items-stretch space-x-2 space-x-reverse space-y-6">
         <div class="w-full flex items-center">
           <div class="flex items-center flex-1">
-            <img src="~/assets/images/gp-flower-cuted.png" alt="faraz saffron logo" class="h-[30px] rounded-full ml-8">
+            <NuxtLink to="/">
+              <img src="~/assets/images/gp-flower-cuted.png" alt="faraz saffron logo" class="h-[30px] rounded-full ml-8">
+            </NuxtLink>
             <form class="search relative flex items-center w-1/2">
               <base-f-input type="search" place-holder="دنبال چه محصولی هستید؟" id="search" name="search" v-model="searchValue">
                 <template v-slot:inputIcon>
@@ -190,7 +192,7 @@
       </div>
     </div>
     <transition>
-      <div class="fixed bg-brandOrange inset-0 z-10 flex flex-col space-y-8 items-start p-4 m-0" v-if="showResponsiveNavbar">
+      <div class="fixed bg-brandOrange inset-0 z-20 flex flex-col space-y-8 items-start p-4 m-0" v-if="showResponsiveNavbar">
         <button @click="showResponsiveNavbar = false">
           <svg width="52" height="51" viewBox="0 0 52 51" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-125">
             <path d="M19.636 19.1213L32.364 31.8492" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -235,7 +237,7 @@
         </form>
       </div>
     </transition>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
