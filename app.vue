@@ -6,7 +6,7 @@
 
     <ClientOnly>
       <base-f-modal v-model="authStore.isLoginModalOpen" title="ورود، ثبت نام">
-        <auth-login  @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true" />
+        <auth-container @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true" />
       </base-f-modal>
     </ClientOnly>
   </div>

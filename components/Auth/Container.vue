@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Transition>
+    <Transition name="layout" mode="out-in">
       <auth-login v-if="authStore.currentStep == 'login'" />
       <auth-register v-else-if="authStore.currentStep == 'register'"/>
     </Transition>

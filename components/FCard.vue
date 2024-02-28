@@ -41,9 +41,9 @@
           <small class="text-xs">ریال</small>
         </strong>
       </div>
-      <button type="button" class="w-full bg-brandOrange py-2 px-8 text-white rounded-lg" @click="cartStore.addToCart">
+      <base-f-button type="button" w-full color="brand" @click="cartStore.addToCart">
         افزودن به سبد خرید
-      </button>
+      </base-f-button>
     </div>
   </div>
 </template>

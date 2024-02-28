@@ -31,10 +31,27 @@
       <span :class="['absolute opacity-50',{'right-3':rtl},{'left-3':!rtl}]">
         <slot name="inputIcon" />
       </span>
+      <button class="absolute right-4 text-black scale-90 opacity-50" v-if="type === 'password' && showEye && !showPassword" @click.prevent="showPassword = true,type = 'text'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.41998 12 8.41998C13.98 8.41998 15.58 10.02 15.58 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="absolute right-4 text-black scale-90 opacity-50" v-if="showPassword && showEye" @click.prevent="showPassword = false , type = 'password'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.53 9.46998L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.41998 12 8.41998C12.99 8.41998 13.88 8.81998 14.53 9.46998Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17.82 5.76998C16.07 4.44998 14.07 3.72998 12 3.72998C8.46997 3.72998 5.17997 5.80998 2.88997 9.40998C1.98997 10.82 1.98997 13.19 2.88997 14.6C3.67997 15.84 4.59997 16.91 5.59997 17.77" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.42004 19.53C9.56004 20.01 10.77 20.27 12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39999C20.78 8.87999 20.42 8.38999 20.05 7.92999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15.5099 12.7C15.2499 14.11 14.0999 15.26 12.6899 15.52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.47 14.53L2 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 2L14.53 9.47" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+      </button>
     </div>
-    <span v-if="errorMessage && !ignoreErrors" class="text-sm font-bold text-danger">
+    <small v-if="errorMessage && !ignoreErrors" class="font-light text-danger">
       {{errorMessage}}
-    </span>
+    </small>
   </div>
 </template>
 
@@ -97,6 +114,9 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue']);
 
+const showPassword = ref(false);
+const showEye = ref(false);
+
 const {
   errorMessage,
   handleChange,
@@ -114,6 +134,9 @@ watch(
 );
 
 const handleInputChange = (e: any) => {
+  if(props.type == 'password') {
+    showEye.value = e.target.value != '';
+  }
   handleChange(e, true);
   emits('update:modelValue', e.target.value);
 }

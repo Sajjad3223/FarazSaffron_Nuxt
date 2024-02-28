@@ -1,8 +1,19 @@
 <template>
-  <button v-if="!isLink" :type="type" :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},customClass]">
-    <slot></slot>
+  <button v-if="!isLink" :type="type"
+          :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,`px-${px} py-${py}`,customClass]">
+    <slot v-if="!loading"></slot>
+    <span v-else class="animate-spin">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px"
+           viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+           style="display:block;background-color:transparent;"><circle
+          cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+          stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+          style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+      </svg>
+    </span>
   </button>
-  <NuxtLink v-else :to="to" :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},customClass]">
+  <NuxtLink v-else :to="to"
+            :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,customClass]">
     <slot></slot>
   </NuxtLink>
 </template>
@@ -10,88 +21,148 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  isLink:{
-    type:Boolean,
-    default:false
+  isLink: {
+    type: Boolean,
+    default: false
   },
-  to:{
+  to: {
+    type: String,
+    required: false
+  },
+  type: {
+    type: String,
+    default: 'button'
+  },
+  color: {
+    type: String,
+    required: true
+  },
+  textColor:{
     type:String,
     required:false
   },
-  type:{
+  wFull: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  hFull: {
+    type: Boolean,
+    default: false,
+  },
+  bordered: {
+    type: Boolean,
+    default: false,
+  },
+  customClass: {
+    type: String,
+    required: false,
+  },
+  px:{
     type:String,
-    default:'button'
+    default:'4'
   },
-  color:{
+  py:{
     type:String,
-    required:true
+    default:'2'
   },
-  wFull:{
-    type:Boolean,
-    default:false,
-  },
-  hFull:{
-    type:Boolean,
-    default:false,
-  },
-  bordered:{
-    type:Boolean,
-    default:false,
-  },
-  customClass:{
-    type:String,
-    required:false,
-  }
 })
 </script>
 
 <style>
-.button{
-  @apply px-4 py-2 flex items-center space-x-2 space-x-reverse text-white rounded-lg justify-center hover:drop-shadow transition duration-75 active:scale-90;
+.button {
+  @apply flex items-center space-x-2 space-x-reverse text-white rounded-lg justify-center hover:drop-shadow transition duration-75 active:scale-90;
 }
-.button-primary{
+
+.button-primary {
   @apply bg-primary;
 }
-.button-brand{
+
+.button-brand {
   @apply bg-brandOrange;
 }
-.button-warning{
-  @apply bg-warning text-black;
+
+.button-warning {
+  @apply bg-warning;
 }
-.button-secondary{
+
+.button-secondary {
   @apply bg-secondary;
 }
-.button-danger{
+
+.button-danger {
   @apply bg-danger;
 }
-.button-white{
+
+.button-white {
   @apply bg-bgWhite text-black;
 }
-.button-transparent{
-  @apply bg-transparent text-black;
+
+.button-transparent {
+  @apply bg-transparent;
 }
-.button-outline{
+
+.button-outline {
   @apply border text-black;
 }
-.button-primary-outline{
+
+.button-primary-outline {
   @apply border-primary;
 }
-.button-brand-outline{
+
+.button-brand-outline {
   @apply border-brandOrange;
 }
-.button-warning-outline{
+
+.button-warning-outline {
   @apply border-warning;
 }
-.button-secondary-outline{
+
+.button-secondary-outline {
   @apply border-secondary;
 }
-.button-danger-outline{
+
+.button-danger-outline {
   @apply border-danger;
 }
-.button-white-outline{
+
+.button-white-outline {
   @apply border-bgWhite;
 }
-.button-transparent-outline{
+
+.button-transparent-outline {
   @apply border-transparent text-black;
 }
+
+.textColor-black {
+  @apply text-black;
+}
+
+.textColor-primary {
+  @apply text-indigo-600;
+}
+
+.textColor-brand {
+  @apply text-brandOrange;
+}
+
+.textColor-warning {
+  @apply text-warning;
+}
+
+.textColor-secondary {
+  @apply text-secondary;
+}
+
+.textColor-danger {
+  @apply text-danger;
+}
+
+.textColor-white {
+  @apply text-bgWhite;
+}
+
 </style>
