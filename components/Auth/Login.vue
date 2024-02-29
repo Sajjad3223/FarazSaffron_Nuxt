@@ -55,6 +55,7 @@ const login = async ()=>{
       icon:'success',
       timerProgressBar:true,
     });
+    await router.push('/profile');
   }
   else{
     errorMessage.value = result.metaData.message;

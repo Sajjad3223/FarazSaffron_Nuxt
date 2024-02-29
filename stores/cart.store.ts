@@ -4,9 +4,9 @@ export const useCartStore = defineStore("cart",()=>{
     const cartItems = ref([]);
     const cartItemsCount = ref(0);
 
-    const addToCart = (id)=>{
+    const addToCart = async (id:number)=>{
         cartItemsCount.value++;
-        Swal.fire({
+        await Swal.fire({
             title:"محصول به سبد خرید اضافه شد.",
             icon:'success',
             timerProgressBar:true,

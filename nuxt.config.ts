@@ -13,6 +13,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [
+    '~/plugins/clickOutsideDirective.ts',
+  ],
   modules: [
     "@pinia/nuxt",
   ],
