@@ -639,7 +639,7 @@
                 <template v-if="isNotificationsMenuOpen">
                   <ul
                       @keydown.esc="closeNotificationsMenu"
-                      class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-currentColor border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
+                      class="absolute left-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-currentColor border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
                       aria-label="submenu"
                   >
                     <li class="flex">
@@ -703,7 +703,7 @@
                 <template v-if="isProfileMenuOpen">
                   <ul
                       @keydown.esc="closeProfileMenu"
-                      class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-currentColor  border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
+                      class="absolute left-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-currentColor  border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                       aria-label="submenu"
                   >
                     <li class="flex">

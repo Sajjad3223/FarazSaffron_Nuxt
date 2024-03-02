@@ -5,14 +5,14 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <div class="w-full overflow-hidden">
     <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
     >
       Table with actions
     </h4>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
-      <div class="w-full overflow-x-auto">
+      <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
@@ -47,14 +47,14 @@ definePageMeta({
                   ></div>
                 </div>
                 <div>
-                  <p class="font-semibold">زعفران نگین 20 گرم</p>
-                  <p class="text-xs font-light text-gray-600 dark:text-gray-400">
+                  <p class="font-semibold text-nowrap">زعفران نگین 20 گرم</p>
+                  <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
                     ( <NuxtLink to="/product/slug" class="text-primary hover:underline">مشاهده کالا در فروشگاه</NuxtLink> )
                   </p>
                 </div>
               </div>
             </td>
-            <td class="px-4 py-3 text-sm">
+            <td class="px-4 py-3 text-sm text-nowrap">
               2,209,000 <small class="text-xs">ریال</small>
             </td>
             <td class="px-4 py-3 text-xs">
@@ -107,9 +107,9 @@ definePageMeta({
       <div
           class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
       >
-                <span class="flex items-center col-span-3">
-                  نمایش 21-30 از 100
-                </span>
+        <span class="flex items-center col-span-3">
+          نمایش 21-30 از 100
+        </span>
         <span class="col-span-2"></span>
         <!-- Pagination -->
         <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
@@ -205,5 +205,23 @@ definePageMeta({
 </template>
 
 <style scoped>
+#style-2::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
 
+#style-2::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #D62929;
+}
 </style>
