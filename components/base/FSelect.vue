@@ -5,16 +5,16 @@
       <span>{{label}}</span>
     </label>
     <div class="p-2 bg-bgWhite dark:bg-gray-800 h-max rounded-lg relative border dark:border-gray-700">
-      <div @click.self="showOptions = !showOptions" class="cursor-pointer flex items-center">
+      <div @click.self="showOptions = !showOptions" class="cursor-pointer flex flex-col items-start">
         <span v-if="multiSelect" class="pointer-events-none dark:text-gray-300">{{placeHolder}}</span>
         <span v-else class="pointer-events-none dark:text-gray-300">{{selectedItem}}</span>
         <ul v-if="multiSelect && selectedItems.length > 0" class=" mt-2 flex items-center gap-2 flex-wrap" >
           <li class="px-1 bg-danger text-white flex items-center w-max rounded-md flex-row-reverse" v-for="i in selectedItems">
-        <span class="text-xs flex-1 font-thin">
-          {{i}}
-        </span>
+            <span class="text-xs flex-1 font-thin">
+              {{i}}
+            </span>
             <div class="mx-1 h-4 w-px bg-bgWhite"></div>
-            <button class="text-xs font-thin" @click="addToSelectedItems(i)">
+            <button class="text-xs font-thin" @click.prevent="addToSelectedItems(i)">
               x
             </button>
           </li>

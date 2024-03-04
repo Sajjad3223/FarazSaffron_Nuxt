@@ -32,5 +32,6 @@
     mix-blend-mode: overlay;
     opacity: 0.3;
   }
+
 }
 </style>

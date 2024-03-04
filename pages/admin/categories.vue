@@ -9,7 +9,9 @@
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
         <strong class="text-xl dark:text-white">فیلتر محصولات</strong>
         <span class="dark:text-white">
-          ↕
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </span>
       </button>
       <Transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-70" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-70" leave-to-class="opacity-0">
@@ -50,7 +52,7 @@
             <th class="px-4 py-3">عنوان</th>
             <th class="px-4 py-3">اسلاگ</th>
             <th class="px-4 py-3">تاریخ ثبت</th>
-            <th class="px-4 py-3">عملیات</th>
+            <th class="px-4 py-3" width="10%">عملیات</th>
           </tr>
           </thead>
           <tbody

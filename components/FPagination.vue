@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="paginationData"
       class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
   >
         <span class="flex items-center col-span-3">
@@ -70,36 +70,13 @@
 <script setup lang="ts">
 import type {PaginationData} from "~/models/baseFilterResult";
 
-/*const props = defineProps<{ TODO enable after implementing Data grabbing
+const emit = defineEmits(['update:modelValue']);
+const props = defineProps<{
+  pageId:Number,
   paginationData:PaginationData,
-  loadDataFn:Function | null
-}>();*/
+}>();
 
-const props = withDefaults(defineProps<{
-  paginationData:PaginationData,
-  loadDataFn:Function | null
-}>(),{
-  paginationData:{
-    pageCount: 6,
-    currentPage:2,
-    take:10,
-    entityCount:60,
-    endPage:6,
-    startPage:1
-  } as PaginationData,
-  loadDataFn:null
-})
-const route = useRoute();
-const router = useRouter();
 const changePageId = (pageId:number)=>{
-  if(pageId == props.paginationData.currentPage) return;
-  const currentPath = route.path;
-  const queryParams = route.query;
-  router.push({
-    path: currentPath,
-    query: { ...queryParams, pageId:pageId },
-  });
-  if(props.loadDataFn != null)
-    props.loadDataFn();
+  emit('update:modelValue',pageId)
 }
 </script>

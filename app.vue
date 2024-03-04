@@ -25,3 +25,8 @@ useHead({
 })
 </script>
 
+<style>
+body{
+  @apply bg-bgWhite dark:bg-gray-900;
+}
+</style>
