@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!isLink" :type="type"
+  <button v-if="!isLink" :type="type" @click="emits('clicked')"
           :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,`px-${px} py-${py}`,customClass]">
     <slot v-if="!loading"></slot>
     <span v-else class="animate-spin">
@@ -13,7 +13,7 @@
     </span>
   </button>
   <NuxtLink v-else :to="to"
-            :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,customClass]">
+            :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,`px-${px} py-${py}`,customClass]">
     <slot></slot>
   </NuxtLink>
 </template>
@@ -70,6 +70,9 @@ const props = defineProps({
     default:'2'
   },
 })
+
+const emits = defineEmits(['clicked']);
+
 </script>
 
 <style>

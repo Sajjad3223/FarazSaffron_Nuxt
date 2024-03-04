@@ -1,13 +1,13 @@
 import type {DimensionDto} from "~/models/product/dimensionDto";
 import type {SeoData} from "~/models/seoData";
-import type {SpecificationDto} from "~/models/product/specificationDto";
+import type {EPackingType} from "~/models/product/EPackingType";
 
 export interface CreateProductCommand {
     title: string;
     slug: string;
     price: number;
     discount: number;
-    packingType: number;
+    packingType: EPackingType;
     mainImage: Blob;
     mainImageAlt: string;
     serialNumber: string;

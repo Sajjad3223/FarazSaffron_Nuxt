@@ -1,17 +1,121 @@
-<script setup lang="ts">
-definePageMeta({
-  layout: 'admin'
-})
-</script>
-
 <template>
   <div class="w-full overflow-hidden">
     <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
     >
-      Table with actions
+      محصولات
     </h4>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
+      <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
+        <strong class="text-xl dark:text-white">فیلتر محصولات</strong>
+        <span class="dark:text-white">
+          ↕
+        </span>
+      </button>
+      <Transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-70" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-70" leave-to-class="opacity-0">
+        <hr class="my-4" v-if="showFilters">
+      </Transition>
+      <Transition enter-active-class="transition-all duration-300" enter-from-class="max-h-0" enter-to-class="max-h-96" leave-active-class="transition-all duration-300" leave-from-class="max-h-96" leave-to-class="max-h-0">
+        <Form class="grid grid-cols-4 mb-4 gap-4 items-end" v-if="showFilters">
+          <base-f-input class="col-span-2" name="search" type="text" label="جستجو" place-holder="جستجو در نام، توضیحات و ..." id="search" />
+          <div class="flex flex-col space-y-2 w-full col-span-2">
+            <label for="" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">انتخاب دسته بندی ها</label>
+            <select name="categories" id="categories" class="px-4 py-2 rounded-lg">
+              <option selected>دسته بندی ها</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-3 col-span-full gap-4 items-end">
+            <div class="flex flex-col space-y-4">
+              <span class="dark:text-white text-sm font-light">محدوده قیمت</span>
+              <div class="range-input">
+                <input type="range"
+                       class="min-range"
+                       min="0"
+                       max="10000"
+                       v-model="filterParams.minPrice"
+                       step="1">
+                <input type="range"
+                       class="max-range"
+                       min="0"
+                       max="10000"
+                       v-model="filterParams.maxPrice"
+                       step="1">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minPrice"/>
+                <base-f-input type="number" place-holder="حداکثر: 999,999,999" v-model="filterParams.maxPrice" />
+              </div>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <span class="dark:text-white text-sm font-light">موجودی انبار</span>
+              <div class="range-input">
+                <input type="range"
+                       class="min-range"
+                       min="0"
+                       max="1000"
+                       v-model="filterParams.minQuantity"
+                       step="1">
+                <input type="range"
+                       class="max-range"
+                       min="0"
+                       max="1000"
+                       v-model="filterParams.maxQuantity"
+                       step="1">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minQuantity"/>
+                <base-f-input type="number" place-holder="حداکثر: 999" v-model="filterParams.maxQuantity" />
+              </div>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <span class="dark:text-white text-sm font-light">محدوده تخفیف</span>
+              <div class="range-input">
+                <input type="range"
+                       class="min-range"
+                       min="0"
+                       max="100"
+                       v-model="filterParams.minDiscount"
+                       step="1">
+                <input type="range"
+                       class="max-range"
+                       min="0"
+                       max="100"
+                       v-model="filterParams.maxDiscount"
+                       step="1">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minDiscount"/>
+                <base-f-input type="number" place-holder="حداکثر: 999,999,999" v-model="filterParams.maxDiscount" />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <base-f-input label="از تاریخ" />
+              <base-f-input label="تا تاریخ" />
+            </div>
+            <base-f-input label="سریال نامبر" place-holder="1234-5678-9123"/>
+            <div class="flex items-center gap-2">
+              <input type="checkbox" name="" id="" class="w-11 h-11 opacity-50 checked:opacity-90">
+              <label for="" class="dark:text-white">فقط تخفیف دار ها</label>
+            </div>
+          </div>
+          <base-f-button class="col-span-3" color="primary">
+            اعمال فیلتر
+          </base-f-button>
+          <base-f-button color="secondary" bordered text-color="white">
+            حذف فیلتر
+          </base-f-button>
+        </Form>
+      </Transition>
+    </div>
+
+    <base-f-divider :logo-divider="false" title="محصولات فروشگاه">
+      <template #left>
+        <base-f-button color="primary" is-link to="/admin/products/add">
+          افزودن محصول جدید
+        </base-f-button>
+      </template>
+    </base-f-divider>
+    <div class=" w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
@@ -104,124 +208,36 @@ definePageMeta({
           </tbody>
         </table>
       </div>
-      <div
-          class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-      >
-        <span class="flex items-center col-span-3">
-          نمایش 21-30 از 100
-        </span>
-        <span class="col-span-2"></span>
-        <!-- Pagination -->
-        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                  <nav aria-label="Table navigation">
-                    <ul class="inline-flex items-center">
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Previous"
-                        >
-                          <svg
-                              class="w-4 h-4 fill-current"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                          >
-                            <path
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                            ></path>
-                          </svg>
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          1
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          2
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          3
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          4
-                        </button>
-                      </li>
-                      <li>
-                        <span class="px-3 py-1">...</span>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          8
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          9
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Next"
-                        >
-                          <svg
-                              class="w-4 h-4 fill-current"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                          >
-                            <path
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"
-                                fill-rule="evenodd"
-                            ></path>
-                          </svg>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                </span>
-      </div>
+      <FPagination />
     </div>
   </div>
 </template>
 
-<style scoped>
-#style-2::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
+<script setup lang="ts">
+import type {ProductFilterParams} from "~/models/product/productQueries";
 
-#style-2::-webkit-scrollbar
-{
-  width: 12px;
-  background-color: #F5F5F5;
-}
+definePageMeta({
+  layout: 'admin'
+})
 
-#style-2::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #D62929;
-}
-</style>
+const filterParams:ProductFilterParams = reactive({
+  search: null,
+  categoriesIncluded: null,
+  minQuantity: 0,
+  maxQuantity: null,
+  fromDate: null,
+  toDate: null,
+  minPrice: 0,
+  maxPrice: null,
+  orderBy: null,
+  justWithDiscount: null,
+  minDiscount: 0,
+  maxDiscount: null,
+  serialNumber: null,
+  dgkalaLink: null,
+  pageId:1,
+  take:10
+});
+
+const showFilters = ref(false);
+</script>

@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col space-y-2 w-full">
-    <label :for="id" v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm">
+    <label :for="id" v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">
       <slot name="labelIcon" />
       <span>{{label}}</span>
     </label>
-    <div class="w-full relative flex items-center">
-      <input :type="type" v-if="!multiLine" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
+    <div v-if="type !== 'file'" class="w-full relative flex items-center ">
+      <input :type="type" v-if="!multiLine" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
              :id="id"
              :name="name"
              :value="inputValue"
@@ -14,7 +14,7 @@
              @input="handleInputChange"
              :maxlength="maxLength"
       >
-      <textarea v-else rows="3" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none',`py-${py} px-${px}`]"
+      <textarea v-else rows="4" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none',`py-${py} px-${px}`]"
                 :id="id"
                 :name="name"
                 :dir="rtl ? 'rtl' : 'ltr'"
@@ -22,7 +22,7 @@
                 @input="handleInputChange"
                 :maxlength="maxLength"
       >{{inputValue}}</textarea>
-      <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300',
+      <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 dark:text-gray-400',
       {'peer-focus:-translate-x-2':rtl},{'peer-focus:translate-x-2':!rtl},
       {'right-4':!$slots.inputIcon && rtl},{'left-4':!$slots.inputIcon && !rtl},
       {'r-12':$slots.inputIcon && rtl},{'l-12':$slots.inputIcon && !rtl}]">
@@ -49,6 +49,23 @@
 
       </button>
     </div>
+    <div v-else class="h-full">
+      <!-- Photo File Input -->
+      <input type="file" class="hidden" ref="photo" @change="previewImage">
+
+      <div class="text-center h-full border hover:border-primary rounded-xl border-transparent grid place-items-center" @click="$refs.photo.click()">
+        <!-- Current Profile Photo -->
+        <div class="bg-gray-100/10 h-full w-full  rounded-xl flex items-center justify-center flex-col space-y-2" v-show="!photoData.photoPreview">
+          <span class="dark:text-white font-thin opacity-70 text-xl">هنوز تصویر ثبت نشده است</span>
+          <small class="dark:text-white font-thin opacity-70">برای افزودن تصویر جدید کلیک کنید</small>
+        </div>
+        <!-- New Profile Photo Preview -->
+        <div class="w-full mx-auto overflow-hidden" v-show="photoData.photoPreview">
+          <img :src="photoData.photoPreview" alt="" class="max-w-72 mx-auto object-contain rounded-xl">
+        </div>
+      </div>
+    </div>
+
     <small v-if="errorMessage && !ignoreErrors" class="font-light text-danger">
       {{errorMessage}}
     </small>
@@ -139,6 +156,24 @@ const handleInputChange = (e: any) => {
   }
   handleChange(e, true);
   emits('update:modelValue', e.target.value);
+}
+
+const photoData=reactive({
+  photoName: '',
+  photoPreview: null
+});
+
+const photo = ref();
+
+const previewImage = (e)=>{
+  photoData.photoName = photo.value.files[0].name;
+  console.log(photoData.photoName);
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    photoData.photoPreview = e.target.result;
+    console.log(photoData.photoPreview)
+  };
+  reader.readAsDataURL(photo.value.files[0]);
 }
 
 </script>
