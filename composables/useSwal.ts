@@ -22,12 +22,15 @@ export const useToast = () => {
     const showToast = (
         message: string="عملیات با موفقیت انجام شد",
         type: ToastType = ToastType.success,
-        duration: number = 3000
+        duration: number = 3000,
+        toast:boolean = false
     ) => {
         switch (type) {
             case ToastType.success: {
                 return Swal.fire({
                     title:message,
+                    toast:toast,
+                    position:toast ? "top-start" : "center",
                     icon:'success',
                     timerProgressBar:true,
                     timer:duration,
@@ -36,6 +39,8 @@ export const useToast = () => {
             case ToastType.error: {
                 return Swal.fire({
                     title:message,
+                    toast:toast,
+                    position:toast ? "top-start" : "center",
                     icon:'error',
                     timerProgressBar:true,
                     timer:duration,
@@ -44,6 +49,8 @@ export const useToast = () => {
             case ToastType.warning: {
                 return Swal.fire({
                     title:message,
+                    toast:toast,
+                    position:toast ? "top-start" : "center",
                     icon:'warning',
                     timerProgressBar:true,
                     timer:duration,
@@ -52,6 +59,8 @@ export const useToast = () => {
             case ToastType.info: {
                 return Swal.fire({
                     title:message,
+                    toast:toast,
+                    position:toast ? "top-start" : "center",
                     icon:'info',
                     timerProgressBar:true,
                     timer:duration,

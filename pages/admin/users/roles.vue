@@ -41,6 +41,9 @@
     <base-f-modal v-model="showAddRoleModal" title="افزودن لقب جدید">
       <admin-users-add-role />
     </base-f-modal>
+    <base-f-modal v-model="showSetPermissionsModal" title="ثبت دسترسی ها">
+      <admin-users-role-permissions />
+    </base-f-modal>
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto" >
@@ -62,7 +65,7 @@
                 <div>
                   <p class="font-semibold text-nowrap">ادمینی</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
-                    ( <NuxtLink to="/product/slug" class="text-primary hover:underline">مدیریت دسترسی ها</NuxtLink> )
+                    ( <span class="text-primary cursor-pointer hover:underline" @click="showSetPermissionsModal = true">مدیریت دسترسی ها</span> )
                   </p>
                 </div>
               </div>
@@ -101,7 +104,7 @@
                     ></path>
                   </svg>
                 </button>
-                <button title="مدیریت دسترسی ها"
+                <button title="مدیریت دسترسی ها" @click.prevent="showSetPermissionsModal = true"
                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                         aria-label="Set Permissions"
                 >
@@ -136,6 +139,7 @@ definePageMeta({
 const isLoading = ref(false);
 const showFilters = ref(false);
 const showAddRoleModal = ref(false);
+const showSetPermissionsModal = ref(false);
 const pageId = ref(1);
 const roles:Ref<RoleFilterData[] | undefined> = ref([]);
 const paginationData:Ref<PaginationData | null | undefined> = ref(null);
