@@ -7,7 +7,7 @@
     <div class="p-2 bg-bgWhite dark:bg-gray-800 h-max rounded-lg relative border dark:border-gray-700">
       <div @click.self="showOptions = !showOptions" class="cursor-pointer flex flex-col items-start">
         <span v-if="multiSelect" class="pointer-events-none dark:text-gray-300">{{placeHolder}}</span>
-        <span v-else class="pointer-events-none dark:text-gray-300">{{selectedItem}}</span>
+        <span v-else class="pointer-events-none dark:text-gray-300">{{selectedItem.title}}</span>
         <ul v-if="multiSelect && selectedItems.length > 0" class=" mt-2 flex items-center gap-2 flex-wrap" >
           <li class="px-1 bg-danger text-white flex items-center w-max rounded-md flex-row-reverse" v-for="i in selectedItems">
             <span class="text-xs flex-1 font-thin">
@@ -39,10 +39,10 @@
           leave-active-class="transition-all duration-200" leave-to-class="max-h-0 opacity-0 -translate-y-6" leave-from-class="opacity-100 translate-y-0">
         <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96 dark:bg-gray-700 dark:text-gray-200 " v-show="showOptions" >
           <ul class="space-y-4">
-            <li v-for="c in categories">
+            <li v-for="c in data">
               <base-f-checkbox :isChecked="selectedItems.includes(c)" v-if="multiSelect" @click="addToSelectedItems(c)" :label="c"/>
-              <div v-else class="w-full text-sm hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false">
-                {{ c.replaceAll('_',' ') }}
+              <div v-else class="w-full text-sm hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false,emits('update:modelValue',c.id)">
+                {{ c.title }}
               </div>
             </li>
           </ul>
@@ -72,6 +72,8 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits(['update:modelValue']);
+
 const categories = props.data ?? [ // TODO remove this property
     'دسته بندی اول',
     'دسته بندی دوم',
@@ -80,7 +82,7 @@ const categories = props.data ?? [ // TODO remove this property
 ];
 
 const showOptions = ref(false);
-const selectedItem = ref(categories[props.modelValue] ?? props.placeHolder);
+const selectedItem = ref(props.modelValue ? props.data[props.modelValue] ?? props.placeHolder : {title:props.placeHolder,id:0});
 const selectedItems = ref([]);
 
 const addToSelectedItems=(item)=>{
@@ -90,5 +92,10 @@ const addToSelectedItems=(item)=>{
     selectedItems.value.push(item);
 }
 
+const getSelectedItem = () => selectedItem;
+
+defineExpose({
+  getSelectedItem
+})
 
 </script>

@@ -4,13 +4,13 @@ import type {CategoryDto, CategoryFilterParams, CategoryFilterResult} from "~/mo
 import type {CreateCategoryCommand, EditCategoryCommand} from "~/models/categories/categoryCommands";
 
 export const GetCategories = (params:CategoryFilterParams):Promise<ApiResponse<CategoryFilterResult>> => {
-    return FetchApi("/auth/category",{
+    return FetchApi("/category",{
         method:'GET',
         params
     });
 }
 export const GetCategory = (categoryId:number):Promise<ApiResponse<CategoryDto>> => {
-    return FetchApi(`/auth/category/${categoryId}`,{
+    return FetchApi(`/category/${categoryId}`,{
         method:'GET'
     });
 }
@@ -18,32 +18,32 @@ export const GetCategory = (categoryId:number):Promise<ApiResponse<CategoryDto>>
 //TODO move to admin service
 
 export const GetCategoriesByAdmin = (params:CategoryFilterParams):Promise<ApiResponse<CategoryFilterResult>> => {
-    return FetchApi("/auth/admin/category",{
+    return FetchApi("/admin/category",{
         method:'GET',
         params
     });
 }
 export const GetCategoryByAdmin = (categoryId:number):Promise<ApiResponse<CategoryDto>> => {
-    return FetchApi(`/auth/admin/category/${categoryId}`,{
+    return FetchApi(`/admin/category/${categoryId}`,{
         method:'GET'
     });
 }
 
 
 export const CreateCategory = (command:CreateCategoryCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi("/auth/admin/category",{
+    return FetchApi("/admin/category",{
         method:'POST',
         body:command
     });
 }
 export const EditCategory = (command:EditCategoryCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi("/auth/admin/category",{
+    return FetchApi("/admin/category",{
         method:'PUT',
         body:command
     });
 }
 export const DeleteCategory = (categoryId:number):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/auth/admin/category/${categoryId}`,{
+    return FetchApi(`/admin/category/${categoryId}`,{
         method:'DELETE'
     });
 }

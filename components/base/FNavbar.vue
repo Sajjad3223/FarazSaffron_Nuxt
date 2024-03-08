@@ -16,10 +16,10 @@
       <img src="~/assets/images/en-GP-filled-white.png" alt="logo" class="h-1/2">
     </div>
     <div class="flex items-start py-4 mt-[40px] lg:mt-[60px] h-[70px] lg:h-[110px]">
-      <div class="hidden lg:block absolute top-[60px] h-[110px] left-0 right-0 bg-[#FFF1DA] -z-[1] border-b"></div>
-      <div class="lg:hidden absolute top-[40px] h-[70px] left-0 right-0 bg-[#FFF1DA] -z-[1] border-b"></div>
+      <div class="hidden lg:block absolute top-[60px] h-[110px] left-0 right-0 bg-[#FFF1DA] dark:bg-gray-800 -z-[1] border-b dark:border-gray-600"></div>
+      <div class="lg:hidden absolute top-[40px] h-[70px] left-0 right-0 bg-[#FFF1DA] dark:bg-gray-800 -z-[1] border-b dark:border-gray-600"></div>
       <div class="hidden w-full lg:flex flex-col items-stretch space-x-2 space-x-reverse space-y-6">
-        <div class="w-full flex items-center">
+        <div class="w-full flex items-center dark:text-white">
           <div class="flex items-center flex-1">
             <NuxtLink to="/">
               <img src="~/assets/images/gp-flower-cuted.png" alt="faraz saffron logo" class="h-[30px] rounded-full ml-8">
@@ -48,25 +48,25 @@
             <div class="relative" v-else>
               <button class="flex items-end space-x-1 space-x-reverse relative" @click="showOptions = !showOptions">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 12.75C8.83 12.75 6.25 10.17 6.25 7C6.25 3.83 8.83 1.25 12 1.25C15.17 1.25 17.75 3.83 17.75 7C17.75 10.17 15.17 12.75 12 12.75ZM12 2.75C9.66 2.75 7.75 4.66 7.75 7C7.75 9.34 9.66 11.25 12 11.25C14.34 11.25 16.25 9.34 16.25 7C16.25 4.66 14.34 2.75 12 2.75Z" fill="#292D32"/>
-                  <path d="M20.5901 22.75C20.1801 22.75 19.8401 22.41 19.8401 22C19.8401 18.55 16.3202 15.75 12.0002 15.75C7.68015 15.75 4.16016 18.55 4.16016 22C4.16016 22.41 3.82016 22.75 3.41016 22.75C3.00016 22.75 2.66016 22.41 2.66016 22C2.66016 17.73 6.85015 14.25 12.0002 14.25C17.1502 14.25 21.3401 17.73 21.3401 22C21.3401 22.41 21.0001 22.75 20.5901 22.75Z" fill="#292D32"/>
+                  <path d="M12 12.75C8.83 12.75 6.25 10.17 6.25 7C6.25 3.83 8.83 1.25 12 1.25C15.17 1.25 17.75 3.83 17.75 7C17.75 10.17 15.17 12.75 12 12.75ZM12 2.75C9.66 2.75 7.75 4.66 7.75 7C7.75 9.34 9.66 11.25 12 11.25C14.34 11.25 16.25 9.34 16.25 7C16.25 4.66 14.34 2.75 12 2.75Z" fill="currentColor"/>
+                  <path d="M20.5901 22.75C20.1801 22.75 19.8401 22.41 19.8401 22C19.8401 18.55 16.3202 15.75 12.0002 15.75C7.68015 15.75 4.16016 18.55 4.16016 22C4.16016 22.41 3.82016 22.75 3.41016 22.75C3.00016 22.75 2.66016 22.41 2.66016 22C2.66016 17.73 6.85015 14.25 12.0002 14.25C17.1502 14.25 21.3401 17.73 21.3401 22C21.3401 22.41 21.0001 22.75 20.5901 22.75Z" fill="currentColor"/>
                 </svg>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.7">
-                  <path d="M11.9485 5.45312H7.79512H4.05512C3.41512 5.45312 3.09512 6.22646 3.54845 6.67979L7.00179 10.1331C7.55512 10.6865 8.45512 10.6865 9.00845 10.1331L10.3218 8.81979L12.4618 6.67979C12.9085 6.22646 12.5885 5.45312 11.9485 5.45312Z" fill="#292D32"/>
+                  <path d="M11.9485 5.45312H7.79512H4.05512C3.41512 5.45312 3.09512 6.22646 3.54845 6.67979L7.00179 10.1331C7.55512 10.6865 8.45512 10.6865 9.00845 10.1331L10.3218 8.81979L12.4618 6.67979C12.9085 6.22646 12.5885 5.45312 11.9485 5.45312Z" fill="currentColor"/>
                 </svg>
               </button>
-              <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full" v-if="showOptions">
+              <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite dark:bg-gray-700 dark:border-gray-600 drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full" v-if="showOptions" >
                 <ul class="text-sm font-light text-right flex flex-col space-y-2">
                   <li>
-                    <base-f-button color="transparent">
+                    <base-f-button is-link color="transparent" to="/profile">
                       حساب کاربری
                     </base-f-button>
                   </li>
                   <li>
-                    <base-f-button color="transparent">سفارشات من</base-f-button>
+                    <base-f-button is-link color="transparent" to="/profile/orders">سفارشات من</base-f-button>
                   </li>
                   <li>
-                    <base-f-button color="transparent">
+                    <base-f-button is-link color="transparent" to="/profile/notification">
                       <span>پیام ها</span>
                       <base-f-badge color="danger" size="xs" >2</base-f-badge>
                     </base-f-button>
@@ -78,13 +78,13 @@
               </div>
             </div>
 
-            <div class="w-px h-10 bg-black opacity-30"></div>
+            <div class="w-px h-10 bg-black opacity-30 dark:bg-white"></div>
 
-            <NuxtLink class="flex items-center flex-col space-y-2 text-black relative" to="/checkout/cart">
+            <NuxtLink class="flex items-center flex-col space-y-2 text-black relative dark:text-white" to="/checkout/cart">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="9.26315" cy="20.1804" rx="1.81955" ry="1.81955" fill="#212135"/>
-                <ellipse cx="15.3283" cy="20.1804" rx="1.81955" ry="1.81955" fill="#212135"/>
-                <path d="M1.04761 1.04761C2.89111 1.96936 3.8045 2.77516 3.8045 5.01754M3.8045 5.01754C3.8045 14.1153 6.23057 15.9348 12.2957 15.9348C18.3609 15.9348 20.787 14.1153 20.787 6.83708C20.787 5.81565 20.1804 5.01754 18.9674 5.01754C17.7544 5.01754 7.845 5.01754 3.8045 5.01754Z" stroke="#212135" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse cx="9.26315" cy="20.1804" rx="1.81955" ry="1.81955" fill="currentColor"/>
+                <ellipse cx="15.3283" cy="20.1804" rx="1.81955" ry="1.81955" fill="currentColor"/>
+                <path d="M1.04761 1.04761C2.89111 1.96936 3.8045 2.77516 3.8045 5.01754M3.8045 5.01754C3.8045 14.1153 6.23057 15.9348 12.2957 15.9348C18.3609 15.9348 20.787 14.1153 20.787 6.83708C20.787 5.81565 20.1804 5.01754 18.9674 5.01754C17.7544 5.01754 7.845 5.01754 3.8045 5.01754Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="text-xs bg-danger text-white rounded-full absolute -right-2 -top-4 w-4 h-4 grid place-items-center" v-if="cartStore.cartItemsCount !== 0">
                 {{cartStore.cartItemsCount}}
@@ -92,8 +92,8 @@
             </NuxtLink>
           </div>
         </div>
-        <div class="w-full flex justify-between">
-          <ul class="links text-black flex items-center space-x-12 space-x-reverse text-sm font-light">
+        <div class="w-full flex justify-between dark:text-white">
+          <ul class="links text-black dark:text-white flex items-center space-x-12 space-x-reverse text-sm font-light">
             <li>
               <NuxtLink to="/" active-class="active">خانه</NuxtLink>
             </li>

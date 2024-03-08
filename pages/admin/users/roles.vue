@@ -59,11 +59,11 @@
           <tbody
               class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="i in 10">
+          <tr class="text-gray-700 dark:text-gray-400" v-for="r in roles">
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
-                  <p class="font-semibold text-nowrap">ادمینی</p>
+                  <p class="font-semibold text-nowrap">{{ r.title }}</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
                     ( <span class="text-primary cursor-pointer hover:underline" @click="showSetPermissionsModal = true">مدیریت دسترسی ها</span> )
                   </p>

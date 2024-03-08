@@ -4,11 +4,13 @@ import type {LoginResultDto} from "~/models/users/loginResultDto";
 
 export const useAuthStore = defineStore("auth",()=>{
     const isLoginModalOpen = ref(false);
-    const isLoggedIn = ref(false);
-    const loginResult = ref();
     const callBackFunctionAfterLogin: Ref<Function | null> = ref(null);
     const currentStep = ref('login');
 
+    const isLoggedIn = computed(() => {
+        const cookie = getAccessToken();
+        return cookie != null && cookie != "";
+    });
     const getAccessToken = () => {
         const cookie = useCookie("c-access-token", {
             watch: false,
@@ -50,7 +52,6 @@ export const useAuthStore = defineStore("auth",()=>{
     return {
         isLoginModalOpen,
         isLoggedIn,
-        loginResult,
         getAccessToken,
         setToken,
         logOut,

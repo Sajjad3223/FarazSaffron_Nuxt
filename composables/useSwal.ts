@@ -52,8 +52,12 @@ export const useToast = () => {
                     toast:toast,
                     position:toast ? "top-start" : "center",
                     icon:'warning',
-                    timerProgressBar:true,
+                    timerProgressBar: duration > 0,
                     timer:duration,
+                    showConfirmButton:true,
+                    confirmButtonText:'بله',
+                    showCancelButton:true,
+                    cancelButtonText:'انصراف'
                 })
             }
             case ToastType.info: {

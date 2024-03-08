@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="text-2xl font-bold flex items-center gap-2">
+      <div class="text-2xl font-bold flex items-center gap-2 dark:text-white">
         <NuxtLink to="/profile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -10,12 +10,12 @@
         </NuxtLink>
         <strong>علاقه مندی های من</strong>
       </div>
-      <hr class="my-3 border-2">
+      <hr class="my-3 border-2 dark:border-gray-600">
     </div>
     <ul class="grid grid-cols-1 md:grid-cols-2 mt-12">
-      <li class="flex flex-col items-center space-y-4 lg:odd:border-l border-b p-4" v-for="i in 3" :key="i">
+      <li class="flex flex-col items-center space-y-4 lg:odd:border-l border-b dark:text-white dark:border-gray-700 p-4" v-for="i in 3" :key="i">
         <NuxtLink to="/product/thing" class="w-1/3 lg:w-auto">
-          <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-full">
+          <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-full rounded-lg">
         </NuxtLink>
         <NuxtLink to="/product/thing" class="text-lg lg:text-xl font-bold">
           زعفران شیشه ای نگین صد در صد خالص

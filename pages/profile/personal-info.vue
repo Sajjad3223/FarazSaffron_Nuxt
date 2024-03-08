@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="text-2xl font-bold flex items-center gap-2">
+      <div class="text-2xl font-bold flex items-center gap-2 dark:text-white">
         <NuxtLink to="/profile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -10,7 +10,7 @@
         </NuxtLink>
         <strong>اطلاعات حساب کاربری</strong>
       </div>
-      <hr class="my-3 border-2 rounded-full">
+      <hr class="my-3 border-2 rounded-full dark:border-gray-600">
     </div>
 
     <base-f-modal v-model="editPersonalModal">
@@ -144,8 +144,8 @@
       </template>
     </base-f-modal>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite border rounded-xl lg:m-4">
-      <div class="flex justify-between p-4 border-b lg:odd:border-l ">
+    <div class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 border rounded-xl lg:m-4">
+      <div class="flex justify-between p-4 border-b lg:odd:border-l dark:border-gray-600">
         <div class="flex flex-col space-y-4">
           <span class="font-light text-sm opacity-70">نام و نام خانوادگی</span>
           <strong>سجاد میرشبی</strong>
@@ -158,7 +158,7 @@
           </svg>
         </base-f-button>
       </div>
-      <div class="flex justify-between p-4 border-b lg:odd:border-l ">
+      <div class="flex justify-between p-4 border-b lg:odd:border-l dark:border-gray-600">
         <div class="flex flex-col space-y-4">
           <span class="font-light text-sm opacity-70">کد ملی</span>
           <strong>0691234567</strong>
@@ -171,7 +171,7 @@
           </svg>
         </base-f-button>
       </div>
-      <div class="flex justify-between p-4 border-b lg:odd:border-l ">
+      <div class="flex justify-between p-4 border-b lg:odd:border-l dark:border-gray-600">
         <div class="flex flex-col space-y-4">
           <div class="flex items-center space-x-2 space-x-reverse">
             <span class="font-light text-sm opacity-70">شماره موبایل</span>
@@ -189,7 +189,7 @@
           </svg>
         </base-f-button>
       </div>
-      <div class="flex justify-between p-4 border-b lg:odd:border-l ">
+      <div class="flex justify-between p-4 border-b lg:odd:border-l dark:border-gray-600">
         <div class="flex flex-col space-y-4">
           <span class="font-light text-sm opacity-70">ایمیل</span>
           <strong>m.sajjad1378@gmail.com</strong>
@@ -202,7 +202,7 @@
           </svg>
         </base-f-button>
       </div>
-      <div class="flex justify-between p-4 border-b lg:border-b-transparent lg:odd:border-l ">
+      <div class="flex justify-between p-4 border-b lg:odd:border-l dark:border-gray-600 lg:border-b-transparent dark:lg:border-b-transparent">
         <div class="flex flex-col space-y-4">
           <span class="font-light text-sm opacity-70">رمز عبور</span>
           <strong>•••••••</strong>

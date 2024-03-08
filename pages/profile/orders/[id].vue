@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="flex items-center justify-between px-2">
+      <div class="flex items-center justify-between px-2 dark:text-white">
         <h3 class="text-sm lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
           <NuxtLink to="/profile/orders">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +13,7 @@
           </NuxtLink>
           <span>جزئیات سفارش #123456</span>
         </h3>
-        <button class="flex items-center space-x-2 space-x-reverse text-primary text-xs lg:text-base">
+        <button class="flex items-center space-x-2 space-x-reverse text-primary text-xs lg:text-base ">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
             <path
                 d="M22 6V8.42C22 10 21 11 19.42 11H16V4.01C16 2.9 16.91 2 18.02 2C19.11 2.01 20.11 2.45 20.83 3.17C21.55 3.9 22 4.9 22 6Z"
@@ -37,10 +37,10 @@
               </span>
         </button>
       </div>
-      <hr class="my-3 border-2">
+      <hr class="my-3 border-2 dark:border-gray-600">
     </div>
 
-    <div class="flex flex-col space-y-4 p-4">
+    <div class="flex flex-col space-y-4 p-4 dark:text-white">
       <div class="flex flex-col lg:flex-row lg:items-center gap-3">
         <div class="flex justify-between items-center lg:justify-center font-light text-xs lg:text-sm opacity-70">
           <span>کد پیگیری سفارش </span>
@@ -52,7 +52,7 @@
           <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">15 بهمن 1402</b>
         </div>
       </div>
-      <hr>
+      <hr class="dark:opacity-50">
       <div class="flex flex-col lg:flex-row lg:items-center gap-3">
         <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">
           <span>تحویل گیرنده </span>
@@ -71,8 +71,8 @@
         </b>
       </div>
     </div>
-    <hr class="border-black/50">
-    <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4">
+    <hr class="border-white dark:opacity-40">
+    <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4 dark:text-white">
       <div class="flex flex-col gap-4 mt-4 lg:mt-0">
         <div class="flex flex-col lg:flex-row lg:items-center gap-3">
           <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">مبلغ <b
@@ -112,8 +112,8 @@
         </svg>
       </button>
     </div>
-    <hr class="border-black/50 my-3">
-    <div class="p-6 border rounded-lg bg-bgWhite flex flex-col space-y-4">
+    <hr class="border-white dark:opacity-40 my-3">
+    <div class="p-6 border rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 flex flex-col space-y-4">
       <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end">
         <span class="hidden lg:block text-sm font-light">وضعیت تحویل</span>
         <div class="flex flex-col space-y-2 w-full lg:w-2/5">
@@ -132,7 +132,7 @@
         </div>
         <span class="flex justify-between items-center font-light opacity-70">کد پیگیری مرسوله: <b class="text-base font-bold opacity-100 mr-2">268475216841</b></span>
       </div>
-      <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100">
+      <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-500">
         <span class="text-sm font-light">با استفاده از سامانه رهگیری پست می‌توانید از وضعیت مرسوله باخبر شوید.</span>
         <a href="https://tracking.post.ir/search.aspx?id=191489717701655129539111"
            class="text-primary text-sm font-light">
@@ -144,16 +144,16 @@
             <strong class="text-xs lg:text-base">۱۹۱۴۸۹۷۱۷۷۰۱۶۵۵۱۲۹۵۳۹۱۱۱</strong>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
               <path d="M17 13.4V16.4C17 20.4 15.4 22 11.4 22H7.6C3.6 22 2 20.4 2 16.4V12.6C2 8.6 3.6 7 7.6 7H10.6"
-                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 13.4H13.8C11.4 13.4 10.6 12.6 10.6 10.2V7L17 13.4Z" stroke="#292D32" stroke-width="1.5"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 13.4H13.8C11.4 13.4 10.6 12.6 10.6 10.2V7L17 13.4Z" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M11.6 2H15.6" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+              <path d="M11.6 2H15.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round"/>
-              <path d="M7 5C7 3.34 8.34 2 10 2H12.62" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+              <path d="M7 5C7 3.34 8.34 2 10 2H12.62" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round"/>
-              <path d="M21.9999 8V14.19C21.9999 15.74 20.7399 17 19.1899 17" stroke="#292D32" stroke-width="1.5"
+              <path d="M21.9999 8V14.19C21.9999 15.74 20.7399 17 19.1899 17" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 8H19C16.75 8 16 7.25 16 5V2L22 8Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+              <path d="M22 8H19C16.75 8 16 7.25 16 5V2L22 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                     stroke-linejoin="round"/>
             </svg>
           </div>
@@ -165,7 +165,7 @@
             v-for="i in 2" :key="i">
           <div class="w-1/6 flex flex-col items-center">
             <NuxtLink to="/product/thing" class="w-full">
-              <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full">
+              <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full rounded-lg">
             </NuxtLink>
           </div>
           <div class="flex-1 flex flex-col items-start">

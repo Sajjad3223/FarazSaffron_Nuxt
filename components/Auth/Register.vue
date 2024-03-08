@@ -55,6 +55,7 @@ const register = async ()=>{
       icon:'success',
       timerProgressBar:true,
     });
+    authStore.isLoginModalOpen = false;
     await router.push('/profile');
   }
   else{

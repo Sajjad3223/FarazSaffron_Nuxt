@@ -22,9 +22,9 @@ export async function FetchApi<T>(
     }
     if(authStore && authStore.isLoggedIn)
     {
-        const loginData = authStore.loginResult;
+        const token = authStore.getAccessToken();
         //@ts-ignore
-        config.headers['Authorization'] = `Bearer ${loginData?.token}`;
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
 
     //@ts-ignore

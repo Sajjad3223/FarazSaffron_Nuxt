@@ -63,11 +63,11 @@
           <tbody
               class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="i in 10">
+          <tr class="text-gray-700 dark:text-gray-400" v-for="u in users" :key="u">
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
-                  <p class="font-semibold text-nowrap">سجاد میرشبی</p>
+                  <p class="font-semibold text-nowrap">{{u.fullName}}</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
                     ( <NuxtLink to="/product/slug" class="text-primary hover:underline">مدیریت دسترسی ها</NuxtLink> )
                   </p>
@@ -75,16 +75,16 @@
               </div>
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              09154222478
+              {{ u.phoneNumber }}
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              m.sajjad1378@gmail.com
+              {{u.email ?? "-----"}}
             </td>
             <td class="px-4 py-3 text-xs">
-              ------
+              {{ u.nationalId ?? "------" }}
             </td>
             <td class="px-4 py-3 text-sm">
-              1402/12/12
+              {{u.persianDate}}
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
