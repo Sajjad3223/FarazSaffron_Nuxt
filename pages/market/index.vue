@@ -4,12 +4,12 @@
   </Head>
 
   <div class="flex flex-col mt-12 mx-6 lg:mx-0">
-    <h2 class="font-black text-3xl">
+    <h2 class="font-black dark:text-white text-3xl">
       محصولات جی پی زعفران
     </h2>
     <div class="flex flex-col lg:flex-row space-x-4 space-x-reverse mt-12">
       <div class="w-full lg:w-1/5 flex flex-col space-y-4">
-        <div class="bg-bgWhite drop-shadow lg rounded-xl p-4 w-full space-y-4 sticky top-16">
+        <div class="bg-bgWhite dark:bg-gray-800 dark:text-white drop-shadow lg rounded-xl p-4 w-full space-y-4 sticky top-16">
           <div class="flex justify-between items-center">
             <h4 class="text-xl font-bold">فیلتر ها</h4>
             <button>
@@ -64,11 +64,11 @@
       </div>
       <div class="flex-1 mt-12 lg:mt-0">
         <div class="w-full flex flex-col space-y-4">
-          <div class="text-xs lg:text-sm xl:text-base border-b pb-2 flex items-center">
+          <div class="text-xs lg:text-sm xl:text-base dark:text-white border-b pb-2 flex items-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75 lg:scale-100">
-              <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M6 12H18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M10 17H14" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3 7H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 17H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
             <span class="hidden lg:block mr-1 ml-4">مرتب سازی:</span>
 
@@ -82,9 +82,9 @@
 
             <span class="hidden lg:block mr-auto text-sm opacity-70">2,345 کالا</span>
           </div>
-          <div class="p-4 bg-bgWhite drop-shadow rounded-xl">
+          <div class="p-4 bg-bgWhite dark:bg-gray-800 drop-shadow rounded-xl">
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <li v-for="i in 16" :key="i">
+              <li v-for="i in 15" :key="i">
                 <f-card :shadow="false" :rounded="false"/>
               </li>
             </ul>

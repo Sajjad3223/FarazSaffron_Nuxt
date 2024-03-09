@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col lg:flex-row items-start mt-12 lg:space-x-4 lg:space-x-reverse">
-    <div class="flex-1 flex flex-col rounded-xl bg-bgWhite drop-shadow-lg border-b-brandOrange border-b-2 p-6">
+    <div class="flex-1 flex flex-col rounded-xl bg-bgWhite dark:bg-gray-800 dark:text-white drop-shadow-lg border-b-brandOrange border-b-2 p-6">
       <div>
         <ul class="flex items-center space-x-2 space-x-reverse text-xs lg:text-base">
           <li class="opacity-50 font-light">

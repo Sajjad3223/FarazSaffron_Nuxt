@@ -1,7 +1,7 @@
 <template>
-  <div class=" space-x-2 space-x-reverse mt-4 border rounded-lg p-2 flex items-center justify-between">
+  <div class=" space-x-2 space-x-reverse mt-4 border rounded-lg p-2 flex items-center justify-between ">
     <button @click="increaseCount">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white">
         <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M12 18V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>

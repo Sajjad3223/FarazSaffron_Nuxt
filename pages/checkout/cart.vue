@@ -4,7 +4,7 @@
   <div class="flex flex-col mx-4 lg:mx-0">
     <div class="w-full mt-8">
       <div>
-        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2">
+        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2 dark:text-white">
           <strong>سبد خرید</strong>
           <span class="grid place-items-center text-sm font-thin rounded-md bg-brandOrange text-white w-4 h-4">2</span>
         </div>
@@ -12,7 +12,7 @@
       <hr class="mt-3 border-brandOrange/50">
     </div>
     <div class="flex flex-col lg:flex-row items-start gap-4 mt-8">
-      <div class="flex-1 flex flex-col p-4 bg-bgWhite border rounded-xl border-black/20">
+      <div class="flex-1 flex flex-col p-4 bg-bgWhite dark:bg-gray-800 dark:text-white border rounded-xl border-black/20">
         <div class="w-full flex items-start justify-between">
           <div class="flex flex-col items-start">
             <strong>سبد خرید شما</strong>
@@ -20,7 +20,6 @@
           </div>
           <button>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90 opacity-50">
-              <rect width="24" height="24" fill="white"/>
               <path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
               <path d="M19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
               <path d="M12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
@@ -28,10 +27,10 @@
           </button>
         </div>
         <ul class="w-full mt-8 flex flex-col">
-          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none" v-for="i in 2" :key="i">
+          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none dark:border-gray-600" v-for="i in 2" :key="i">
             <div class="w-1/5 flex flex-col items-center">
               <NuxtLink to="/product/thing" class="w-full">
-                <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full">
+                <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full rounded-lg">
               </NuxtLink>
             </div>
             <div class="flex-1 flex flex-col items-start">
@@ -81,7 +80,7 @@
         </ul>
       </div>
       <div class="w-full lg:w-1/4 flex flex-col space-y-4">
-        <div class="p-6 bg-bgWhite rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
+        <div class="p-6 bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-700 rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
           <div class="flex items-center justify-between opacity-70">
             <span class="text-sm">قیمت کالاها (2)</span>
             <strong>
@@ -112,8 +111,8 @@
           <NuxtLink class="bg-brandOrange rounded-lg w-full text-white font-bold text-xl p-4 text-center" to="/checkout/shipping">
             تایید و تکمیل سفارش
           </NuxtLink>
-          <hr>
-          <div class="bg-slate-100 p-3 px-6 rounded-lg flex items-center justify-between">
+          <hr class="dark:border-gray-600">
+          <div class="bg-slate-100 dark:bg-gray-700 p-3 px-6 rounded-lg flex items-center justify-between">
             <div class="flex items-center space-x-1 space-x-reverse">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-amber-500">
                 <path d="M7.5 12.1673H6C5.26667 12.1673 4.66667 12.7673 4.66667 13.5006V13.6673H4C3.72667 13.6673 3.5 13.894 3.5 14.1673C3.5 14.4406 3.72667 14.6673 4 14.6673H12C12.2733 14.6673 12.5 14.4406 12.5 14.1673C12.5 13.894 12.2733 13.6673 12 13.6673H11.3333V13.5006C11.3333 12.7673 10.7333 12.1673 10 12.1673H8.5V10.6406C8.33333 10.6606 8.16667 10.6673 8 10.6673C7.83333 10.6673 7.66667 10.6606 7.5 10.6406V12.1673Z" fill="currentColor"/>
@@ -125,9 +124,9 @@
             <strong>150 <small class="font-light"> امتیاز</small></strong>
           </div>
         </div>
-        <p class="font-light text-sm mx-4 opacity-70">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از سبد حذف می‌شوند
+        <p class="font-light text-sm mx-4 opacity-70 dark:text-white">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از سبد حذف می‌شوند
         </p>
-        <div class="p-4 border rounded-xl px-6 bg-bgWhite/70">
+        <div class="p-4 border rounded-xl px-6 bg-bgWhite/70 dark:bg-gray-700 dark:border-gray-600">
           <div class="flex space-x-2 items-center space-x-reverse">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
               <path d="M12 14H13C14.1 14 15 13.1 15 12V2H6C4.5 2 3.19001 2.82999 2.51001 4.04999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -143,13 +142,13 @@
               ارسال <b class="text-base">رایگان</b> برای خرید های بالاتر از 500 هزار تومان
             </span>
           </div>
-          <p class="text-sm mt-2 font-light">با خرید بیشتر از 500 هزار تومان از فروشگاه ما هزینه ارسال به هر کجای کشور عزیزمان را مهمان ما باشید</p>
+          <p class="text-sm mt-2 font-light dark:text-white">با خرید بیشتر از 500 هزار تومان از فروشگاه ما هزینه ارسال به هر کجای کشور عزیزمان را مهمان ما باشید</p>
         </div>
       </div>
     </div>
 
     <div class="rounded-xl border p-4 mt-8">
-      <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12">
+      <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12 dark:text-white">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
           <path d="M14.6667 8.00004C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00004C1.33337 4.32004 4.32004 1.33337 8.00004 1.33337C11.68 1.33337 14.6667 4.32004 14.6667 8.00004Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M10.4733 10.12L8.40663 8.88671C8.04663 8.67338 7.7533 8.16005 7.7533 7.74005V5.00671" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

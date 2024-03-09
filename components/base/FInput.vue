@@ -22,6 +22,10 @@
                 @input="handleInputChange"
                 :maxlength="maxLength"
       >{{inputValue}}</textarea>
+
+      <span v-if="isPrice" class="dark:text-white absolute left-16 text-right w-1/2">
+        {{price}}
+      </span>
       <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 dark:text-gray-400',
       {'peer-focus:-translate-x-2':rtl},{'peer-focus:translate-x-2':!rtl},
       {'right-4':!$slots.inputIcon && rtl},{'left-4':!$slots.inputIcon && !rtl},
@@ -51,7 +55,7 @@
     </div>
     <div v-else class="h-full">
       <!-- Photo File Input -->
-      <input type="file" class="hidden" ref="photo" @change="previewImage">
+      <input type="file" class="hidden" ref="photo" @input="previewImage">
 
       <div class="text-center h-full border hover:border-primary rounded-xl border-transparent grid place-items-center" @click="$refs.photo.click()">
         <!-- Current Profile Photo -->
@@ -81,6 +85,7 @@ const props = defineProps({
     default: false
   },
   modelValue: {
+    type:String || Object || null,
     default: ''
   },
   name: {
@@ -127,12 +132,17 @@ const props = defineProps({
     type:Number,
     default:2
   },
+  isPrice:{
+    type:Boolean,
+    default:false
+  }
 })
 
 const emits = defineEmits(['update:modelValue']);
 
 const showPassword = ref(false);
 const showEye = ref(false);
+const price = ref('');
 
 const {
   errorMessage,
@@ -154,6 +164,9 @@ const handleInputChange = (e: any) => {
   if(props.type == 'password') {
     showEye.value = e.target.value != '';
   }
+  if(props.isPrice){
+    // TODO generate separated numbers
+  }
   handleChange(e, true);
   emits('update:modelValue', e.target.value);
 }
@@ -165,15 +178,16 @@ const photoData=reactive({
 
 const photo = ref();
 
-const previewImage = (e)=>{
+const previewImage = (e:any)=>{
   photoData.photoName = photo.value.files[0].name;
-  console.log(photoData.photoName);
   const reader = new FileReader();
   reader.onload = (e) => {
+    //@ts-ignore
     photoData.photoPreview = e.target.result;
-    console.log(photoData.photoPreview)
   };
   reader.readAsDataURL(photo.value.files[0]);
+  emits("update:modelValue", e.target.files[0])
+  handleChange(e);
 }
 
 </script>

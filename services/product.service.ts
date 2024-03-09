@@ -31,7 +31,7 @@ export const GetProductById = (id:number):Promise<ApiResponse<ProductDto>> => {
         method:'GET'
     });
 }
-export const CreateProduct = (command:CreateProductCommand):Promise<ApiResponse<number>> => {
+export const CreateProduct = (command:FormData):Promise<ApiResponse<number>> => {
     return FetchApi(`/admin/Product`,{
         method:'POST',
         body:command

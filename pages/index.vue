@@ -75,11 +75,11 @@
   </div>
 
   <div class="mt-12 lg:mt-12 mx-4 lg:mx-0">
-    <div class="flex items-center justify-between">
-      <h3 class="text-xl lg:text-4xl font-black" id="products">محصولات ما</h3>
-      <NuxtLink to="/market" class="text-xs lg:text-base text-brandOrange underline underline-offset-4">مشاهده همه محصولات ></NuxtLink>
-    </div>
-    <hr class="mt-2 border-2 rounded-lg ">
+    <base-f-divider :logo-divider="false" title="محصولات ما">
+      <template #left>
+        <NuxtLink to="/market" class="text-xs lg:text-sm text-brandOrange underline underline-offset-4">مشاهده همه محصولات ></NuxtLink>
+      </template>
+    </base-f-divider>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
       <li v-for="i in 6" :key="i">
         <f-card />
@@ -88,12 +88,9 @@
   </div>
 
   <div class="mt-12 mx-4 lg:mx-0">
-    <div class="flex items-center justify-between">
-      <h3 class="text-xl lg:text-4xl font-black" id="comments">نظرات شما</h3>
-    </div>
-    <hr class="mt-2 border-2 rounded-lg ">
+    <base-f-divider :logo-divider="false" title="نظرات شما" />
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-24 lg:gap-y-8 mt-20">
-      <li class="card bg-bgWhite rounded-xl shadow-md pb-4" v-for="i in 3" :key="i">
+      <li class="card bg-bgWhite dark:bg-gray-800 dark:text-white rounded-xl shadow-md pb-4" v-for="i in 3" :key="i">
         <div class="w-full">
           <img src="~/assets/images/avatar.png" alt="saffron bar" class="rounded-full w-32 h-32 mx-auto -translate-y-1/2 border-brandOrange border-4">
         </div>

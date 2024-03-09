@@ -25,7 +25,6 @@ export interface EditUserCommand {
     nationalId: string;
     phoneNumber: string;
     email: string;
-    password: string;
 }
 
 export interface ChangePasswordCommand {

@@ -1,17 +1,17 @@
 
 
 <template>
-  <div :class="['card bg-bgWhite pb-4',
+  <div :class="['card bg-bgWhite dark:bg-gray-800 pb-4 dark:text-white',
                 {'shadow-md':shadow},
                 {'rounded-xl':rounded},
-                {'border':border}]">
+                {'border dark:border-gray-700':border}]">
     <nuxt-link to="/product/thing">
       <img src="~/assets/images/saffron-bar.png" alt="saffron bar" class="w-full object-contain rounded-lg h-52 lg:h-80">
     </nuxt-link>
     <div class="w-full px-8">
       <nuxt-link to="/product/thing" class="text-xl lg:text-2xl font-bold">زعفران نگین</nuxt-link>
       <div class="flex items-center space-x-reverse space-x-2 mt-2">
-        <div class="flex items-center space-x-2 space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
+        <div class="flex items-center space-x-2 text-black space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.05 3.47C10.05 3.74 9.90495 3.985 9.67495 4.11L8.80495 4.58L8.06495 4.975L6.52995 5.805C6.36495 5.895 6.18495 5.94 5.99995 5.94C5.81495 5.94 5.63495 5.895 5.46995 5.805L2.32495 4.11C2.09495 3.985 1.94995 3.74 1.94995 3.47C1.94995 3.2 2.09495 2.955 2.32495 2.83L3.30995 2.3L4.09495 1.875L5.46995 1.135C5.79995 0.955 6.19995 0.955 6.52995 1.135L9.67495 2.83C9.90495 2.955 10.05 3.2 10.05 3.47Z" fill="currentColor"/>
             <path d="M4.94999 6.39501L2.02499 4.93501C1.79999 4.82001 1.53999 4.83501 1.32499 4.96501C1.10999 5.09501 0.984985 5.32501 0.984985 5.57501V8.34001C0.984985 8.82001 1.24999 9.25001 1.67999 9.46501L4.60499 10.925C4.70499 10.975 4.81499 11 4.92499 11C5.05499 11 5.18499 10.965 5.29999 10.89C5.51499 10.76 5.63999 10.53 5.63999 10.28V7.51501C5.64499 7.04001 5.37998 6.61001 4.94999 6.39501Z" fill="currentColor"/>
@@ -21,7 +21,7 @@
           </svg>
           <span class="text-xs">شیشه ای</span>
         </div>
-        <div class="flex items-center space-x-2 space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
+        <div class="flex items-center space-x-2 text-black space-x-reverse bg-[#E6D9C6] px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 1H4C2.5 1 1.5 2 1.5 3.5V8.5C1.5 10 2.5 11 4 11H8C9.5 11 10.5 10 10.5 8.5V3.5C10.5 2 9.5 1 8 1ZM8.785 4.24L7.695 5.99C7.665 6.035 7.615 6.07 7.565 6.075C7.555 6.075 7.545 6.075 7.54 6.075C7.495 6.075 7.45 6.06 7.415 6.03C6.61 5.315 5.4 5.315 4.595 6.03C4.555 6.065 4.5 6.085 4.445 6.075C4.39 6.065 4.34 6.035 4.315 5.99L3.225 4.24C3.165 4.165 3.18 4.065 3.25 4C4.815 2.605 7.18 2.605 8.75 4C8.82 4.065 8.835 4.165 8.785 4.24Z" fill="currentColor"/>
           </svg>

@@ -32,7 +32,7 @@ export const useToast = () => {
                     toast:toast,
                     position:toast ? "top-start" : "center",
                     icon:'success',
-                    timerProgressBar:true,
+                    timerProgressBar: duration > 0,
                     timer:duration,
                 })
             }
@@ -42,7 +42,7 @@ export const useToast = () => {
                     toast:toast,
                     position:toast ? "top-start" : "center",
                     icon:'error',
-                    timerProgressBar:true,
+                    timerProgressBar: duration > 0,
                     timer:duration,
                 })
             }
@@ -66,7 +66,7 @@ export const useToast = () => {
                     toast:toast,
                     position:toast ? "top-start" : "center",
                     icon:'info',
-                    timerProgressBar:true,
+                    timerProgressBar: duration > 0,
                     timer:duration,
                 })
             }

@@ -110,17 +110,17 @@
       <Form class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0">
         <base-f-input label="عنوان محصول" place-holder="عنوان محصول را وارد کنید" v-model="addProductData.title" @update:modelValue="generateSlug"/>
         <base-f-input label="لینک یکتای محصول" place-holder="لینک یکتا" v-model="addProductData.slug"/>
-        <base-f-input type="number" label="قیمت محصول" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price"/>
+        <base-f-input type="number" label="قیمت محصول" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" is-price/>
         <base-f-input type="number" label="تخفیف محصول" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount"/>
         <base-f-input type="file" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
         <base-f-input label="متن تصویر" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
         <base-f-input type="number" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
-        <base-f-select label="دسته بندی اصلی" place-holder="دسته بندی ها را انتخاب کنید" />
-        <base-f-select label="دسته بندی فرعی" place-holder="دسته بندی ها را انتخاب کنید" />
-        <base-f-dimension />
-        <base-f-select label="نوع بسته بندی" place-holder="نوع بسته بندی را انتخاب کنید" :data="Object.keys(EPackingType).filter(k=>isNaN(Number(k)))" v-model="addProductData.packingType" />
+        <base-f-select label="دسته بندی اصلی" place-holder="دسته بندی ها را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
+        <base-f-select label="دسته بندی فرعی" place-holder="دسته بندی ها را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
+        <base-f-dimension v-model="addProductData.dimensions" />
+        <base-f-select label="نوع بسته بندی" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
         <base-f-input label="شماره سریال" place-holder="شماره سریال درج شده زیر محصول" v-model="addProductData.serialNumber"/>
-        <base-f-input label="لینک دیجی کالا" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink"/>
+        <base-f-input label="لینک دیجی کالا" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
       </Form>
     </Transition>
     <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
@@ -141,7 +141,7 @@
     <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                 leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
       <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3">
-        <FSeoData />
+        <FSeoData v-model="addProductData.seoData" />
       </Form>
     </Transition>
 
@@ -161,6 +161,10 @@ import type {CreateProductCommand, CreateSpecificationViewModel} from "~/models/
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
 import FSeoData from "~/components/base/FSeoData.vue";
+import {CreateProduct} from "~/services/product.service";
+import {ToastType, useToast} from "~/composables/useSwal";
+import type {CategoryDto} from "~/models/categories/categoryQueries";
+import {GetCategories} from "~/services/category.service";
 
 definePageMeta({
   layout:'admin'
@@ -168,6 +172,9 @@ definePageMeta({
 
 const step = ref(0);
 const customSlug = ref(false);
+const isLoading = ref(false);
+
+const toast = useToast();
 
 const addProductData:CreateProductCommand = reactive({
   title: '',
@@ -180,11 +187,66 @@ const addProductData:CreateProductCommand = reactive({
   serialNumber: '',
   categoryId: null,
   subCategoryId: null,
-  dimensions: '',
+  dimensions: null,
   digiKalaLink: null,
   seoData: null,
   quantity: 0,
 })
+
+const packingTypes = Object.entries(EPackingType).map(t=>{
+  return{
+    id:t[1],
+    title:t[0].replaceAll('_',' ')
+  }
+});
+const packingTypeOptions = packingTypes.splice(packingTypes.length / 2 , packingTypes.length);
+
+const categories:Ref<CategoryDto[]> = ref([]);
+const subCategories:Ref<CategoryDto[]> = ref([]);
+const categorySelected = (id:Number) => {
+  const selectedCategory = categories.value.find(c=>c.id == id);
+  subCategories.value = selectedCategory?.children ?? [];
+}
+
+onMounted(async ()=>{
+  const result = await GetCategories({pageId:1,take:100,search:''});
+  if(result.isSuccess){
+    categories.value = result.data?.data!;
+  }
+})
+
+const AddProduct = async ()=>{
+  isLoading.value = true;
+
+  const productData = new FormData();
+  productData.append('title',addProductData.title);
+  productData.append('slug',addProductData.slug);
+  productData.append('price',addProductData.price.toString());
+  productData.append('discount',addProductData.discount.toString());
+  productData.append('packingType',addProductData.packingType.toString());
+  if(addProductData.mainImage)
+    productData.append('mainImage',addProductData.mainImage);
+  productData.append('mainImageAlt',addProductData.mainImageAlt);
+  productData.append('serialNumber',addProductData.serialNumber);
+  productData.append('categoryId',addProductData.categoryId.toString());
+  productData.append('subCategoryId',addProductData.subCategoryId?.toString() ?? '');
+  productData.append('dimensions',addProductData.dimensions);
+  productData.append('digiKalaLink',addProductData.digiKalaLink ?? '');
+  productData.append('seoData',addProductData.seoData);
+  productData.append('quantity',addProductData.quantity.toString());
+
+  console.log(productData);
+  return;
+
+  const productResult = await CreateProduct(productData);
+  if(productResult.isSuccess){
+
+  }else{
+    await toast.showToast(productResult.metaData.message,ToastType.error,0);
+  }
+
+  isLoading.value = false;
+}
 
 const generateSlug = (value:string)=>{
   if(customSlug.value) return;

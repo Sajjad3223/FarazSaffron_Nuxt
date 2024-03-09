@@ -8,7 +8,7 @@ export interface CreateProductCommand {
     price: number;
     discount: number;
     packingType: EPackingType;
-    mainImage: Blob;
+    mainImage: File;
     mainImageAlt: string;
     serialNumber: string;
     categoryId: number;
