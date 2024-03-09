@@ -21,7 +21,7 @@ const accountStore = useAccountStore();
 
 useHead({
   link:[
-    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/VazirFD"},
+    //{rel:"stylesheet",href:"https://v1.fontapi.ir/css/VazirFD"},
     {rel:"stylesheet",href:"https://v1.fontapi.ir/css/Estedad"},
   ]
 })
