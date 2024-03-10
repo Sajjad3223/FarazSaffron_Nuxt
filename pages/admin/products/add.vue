@@ -107,20 +107,23 @@
 
     <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                 leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-      <Form class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0">
-        <base-f-input label="عنوان محصول" place-holder="عنوان محصول را وارد کنید" v-model="addProductData.title" @update:modelValue="generateSlug"/>
-        <base-f-input label="لینک یکتای محصول" place-holder="لینک یکتا" v-model="addProductData.slug"/>
-        <base-f-input type="number" label="قیمت محصول" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" is-price/>
-        <base-f-input type="number" label="تخفیف محصول" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount"/>
-        <base-f-input type="file" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
-        <base-f-input label="متن تصویر" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
-        <base-f-input type="number" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
-        <base-f-select label="دسته بندی اصلی" place-holder="دسته بندی ها را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
-        <base-f-select label="دسته بندی فرعی" place-holder="دسته بندی ها را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
+      <Form ref="mainDataForm" :validation-schema="addProductSchema" :on-submit="AddProduct" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" >
+        <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="addProductData.title" @update:modelValue="generateSlug"/>
+        <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="addProductData.slug"/>
+        <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" is-price/>
+        <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount"/>
+        <base-f-input type="file" name="mainImage" id="mainImage" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
+        <base-f-input label="متن تصویر" name="altImage" id="altImage" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
+        <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
+        <base-f-select label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
+        <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
         <base-f-dimension v-model="addProductData.dimensions" />
-        <base-f-select label="نوع بسته بندی" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
-        <base-f-input label="شماره سریال" place-holder="شماره سریال درج شده زیر محصول" v-model="addProductData.serialNumber"/>
-        <base-f-input label="لینک دیجی کالا" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
+        <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
+        <base-f-input label="شماره سریال" name="serialNumber" id="serialNumber" place-holder="شماره سریال درج شده زیر محصول" v-model="addProductData.serialNumber"/>
+        <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
+        <base-f-button type="submit" color="primary" text-color="white">
+          ثبت اولیه کالا
+        </base-f-button>
       </Form>
     </Transition>
     <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
@@ -146,17 +149,21 @@
     </Transition>
 
     <div class="flex items-center gap-4 mt-12">
-      <base-f-button w-full type="button" color="secondary" text-color="white" class="col-span-2" bordered @clicked="step--" v-if="step > 0">
+      <base-f-button w-full type="button" color="secondary" text-color="responsive" class="col-span-2" bordered @clicked="step--" v-if="step > 0">
         قبلی
       </base-f-button>
-      <base-f-button w-full type="button" color="primary" class="col-span-2" @clicked="step++" >
+      <base-f-button w-full type="button" color="primary" text-color="white" class="col-span-2" @clicked="nextStep" v-if="step < 3">
         بعدی
+      </base-f-button>
+      <base-f-button w-full type="button" color="primary" text-color="white" class="col-span-2" @clicked="AddProduct" v-if="step == 3" >
+        ثبت
       </base-f-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {Form} from "vee-validate";
 import type {CreateProductCommand, CreateSpecificationViewModel} from "~/models/product/productCommands";
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
@@ -165,6 +172,7 @@ import {CreateProduct} from "~/services/product.service";
 import {ToastType, useToast} from "~/composables/useSwal";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
+import * as Yup from 'yup';
 
 definePageMeta({
   layout:'admin'
@@ -173,24 +181,46 @@ definePageMeta({
 const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
+const mainDataForm = ref();
 
 const toast = useToast();
 
+//@ts-ignore
 const addProductData:CreateProductCommand = reactive({
   title: '',
   slug: '',
   price: null,
-  discount: null,
+  discount: 0,
   packingType: EPackingType.کیفی,
   mainImage: null,
   mainImageAlt: '',
   serialNumber: '',
   categoryId: null,
   subCategoryId: null,
-  dimensions: null,
+  dimensions: {
+    width:0,
+    height:0,
+    length:0
+  },
   digiKalaLink: null,
-  seoData: null,
+  seoData: {
+    metaTitle:'',
+    metaDescription:'',
+    canonical:'',
+    indexPage:false,
+    metaKeyWords:'',
+    schema:''
+  },
   quantity: 0,
+})
+
+const addProductSchema = Yup.object().shape({
+  title:Yup.string().required('وارد کردن عنوان ضروری است'),
+  slug:Yup.string().required('وارد کردن لینک یکتا ضروری است'),
+  price:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 باشد').required('وارد کردن مبلغ ضروری است'),
+  discount:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد').max(100,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد'),
+  serialNumber: Yup.string().required('وارد کردن شماره سریال ضروری است'),
+  quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
 })
 
 const packingTypes = Object.entries(EPackingType).map(t=>{
@@ -215,6 +245,10 @@ onMounted(async ()=>{
   }
 })
 
+const nextStep = ()=>{
+  mainDataForm.value.submit();
+}
+
 const AddProduct = async ()=>{
   isLoading.value = true;
 
@@ -230,17 +264,25 @@ const AddProduct = async ()=>{
   productData.append('serialNumber',addProductData.serialNumber);
   productData.append('categoryId',addProductData.categoryId.toString());
   productData.append('subCategoryId',addProductData.subCategoryId?.toString() ?? '');
-  productData.append('dimensions',addProductData.dimensions);
+  productData.append('dimensions.Width',addProductData.dimensions.width.toString());
+  productData.append('dimensions.Length',addProductData.dimensions.length.toString());
+  productData.append('dimensions.Height',addProductData.dimensions.height.toString());
   productData.append('digiKalaLink',addProductData.digiKalaLink ?? '');
-  productData.append('seoData',addProductData.seoData);
   productData.append('quantity',addProductData.quantity.toString());
 
-  console.log(productData);
-  return;
+  if(addProductData.seoData){
+    productData.append('seoData.MetaTitle',addProductData.seoData?.metaTitle ?? '');
+    productData.append('seoData.MetaDescription',addProductData.seoData?.metaDescription ?? '');
+    productData.append('seoData.MetaKeyWords',addProductData.seoData?.metaKeyWords ?? '');
+    productData.append('seoData.Canonical',addProductData.seoData?.canonical ?? '');
+    productData.append('seoData.Schema',addProductData.seoData?.schema ?? '');
+    productData.append('seoData.IndexPage',addProductData.seoData?.indexPage?.toString() ?? 'false');
+  }
+
 
   const productResult = await CreateProduct(productData);
   if(productResult.isSuccess){
-
+    await toast.showToast(productResult.metaData.message,ToastType.success);
   }else{
     await toast.showToast(productResult.metaData.message,ToastType.error,0);
   }
@@ -262,6 +304,6 @@ const specifications:CreateSpecificationViewModel[] = reactive([
 
 <style scoped>
 .active-step{
-  @apply relative bg-gray-50 text-brandOrange;
+  @apply relative bg-brandOrange/20 dark:bg-gray-50 text-brandOrange;
 }
 </style>

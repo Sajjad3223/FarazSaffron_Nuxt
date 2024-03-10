@@ -42,7 +42,7 @@
       <admin-users-add />
     </base-f-modal>
     <base-f-modal v-model="showSetRolesModal" title="ثبت لقب های کاربر">
-      <admin-users-user-roles />
+      <admin-users-user-roles :user-id="selectedUserId" />
     </base-f-modal>
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">
@@ -120,7 +120,7 @@
                     ></path>
                   </svg>
                 </button>
-                <button title="مدیریت دسترسی ها" @click.prevent="showSetRolesModal = true"
+                <button title="مدیریت دسترسی ها" @click.prevent="selectedUserId = u.id, showSetRolesModal = true"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Set Permissions"
                 >
@@ -157,6 +157,7 @@ const isLoading = ref(false);
 const showFilters = ref(false);
 const showAddUserModal = ref(false);
 const showSetRolesModal = ref(false);
+const selectedUserId = ref(0);
 const pageId = ref(1);
 const users:Ref<UserFilterData[] | undefined> = ref([]);
 const paginationData:Ref<PaginationData | null | undefined> = ref(null);

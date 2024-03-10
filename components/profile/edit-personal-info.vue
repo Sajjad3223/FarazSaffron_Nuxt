@@ -32,8 +32,8 @@ const editUserCommand:EditUserCommand = reactive({
   firstName:accountStore.currentUser?.firstName ?? '',
   lastName:accountStore.currentUser?.lastName ?? '',
   nationalId:accountStore.currentUser?.nationalId ?? '',
-  phoneNumber:'09154222478',
-  email:'m.sajjad1378@gmail.com'
+  phoneNumber:'',
+  email:''
 })
 
 const EditInfo = async ()=>{

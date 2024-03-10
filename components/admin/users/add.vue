@@ -6,7 +6,7 @@
     <base-f-input label="رمز عبور" place-holder="رمز عبور را وارد کنید" v-model="addUserCommand.password" name="password" id="password"/>
     <base-f-input label="ایمیل" place-holder="ایمیل را وارد کنید" v-model="addUserCommand.email" name="email" id="email"/>
     <base-f-input label="کد ملی" place-holder="کد ملی را وارد کنید" v-model="addUserCommand.nationalId" name="nationalId" id="nationalId"/>
-    <base-f-button color="brand" :loading="isLoading" class="col-span-2">
+    <base-f-button color="brand" :loading="isLoading" class="col-span-2" type="submit">
       ثبت کاربر
     </base-f-button>
   </Form>

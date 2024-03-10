@@ -64,7 +64,7 @@
                         leave-to-class="opacity-0 max-h-0">
               <template v-if="isProductMenuOpen">
                 <ul
-                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100 dark:text-gray-400 dark:bg-gray-900"
                     aria-label="submenu"
                 >
                   <li
@@ -138,7 +138,7 @@
                         leave-to-class="opacity-0 max-h-0">
               <template v-if="isUsersMenuOpen">
                 <ul
-                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100 dark:text-gray-400 dark:bg-gray-900"
                     aria-label="submenu"
                 >
                   <li
@@ -212,7 +212,7 @@
                         leave-to-class="opacity-0 max-h-0">
               <template v-if="isOrdersMenuOpen">
                 <ul
-                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100 dark:text-gray-400 dark:bg-gray-900"
                     aria-label="submenu"
                 >
                   <li
@@ -269,7 +269,7 @@
                         leave-to-class="opacity-0 max-h-0">
               <template v-if="isBlogMenuOpen">
                 <ul
-                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100 dark:text-gray-400 dark:bg-gray-900"
                     aria-label="submenu"
                 >
                   <li

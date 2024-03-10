@@ -20,10 +20,10 @@
       <Transition enter-active-class="transition-all duration-300" enter-from-class="max-h-0" enter-to-class="max-h-96" leave-active-class="transition-all duration-300" leave-from-class="max-h-96" leave-to-class="max-h-0">
         <Form class="grid grid-cols-3 mb-4 gap-4 items-end" v-if="showFilters">
           <base-f-input class="col-span-3" name="search" type="text" label="جستجو" place-holder="جستجو در عنوان یا اسلاگ" id="search" />
-          <base-f-button class="col-span-2" color="primary">
+          <base-f-button class="col-span-2" color="primary" text-color="white">
             اعمال فیلتر
           </base-f-button>
-          <base-f-button color="secondary" bordered text-color="white">
+          <base-f-button color="secondary" bordered text-color="responsive">
             حذف فیلتر
           </base-f-button>
         </Form>
@@ -32,7 +32,7 @@
 
     <base-f-divider :logo-divider="false" title="دسته بندی ها">
       <template #left>
-        <base-f-button color="primary" @clicked="showAddModal = true">
+        <base-f-button color="primary" @clicked="showAddModal = true" text-color="white">
           افزودن دسته بندی جدید
         </base-f-button>
       </template>
@@ -113,7 +113,7 @@
             <tr class="text-gray-700 dark:text-gray-400" v-for="ch in c.children">
             <td class="-translate-x-8 px-4 py-3">
               <div class="flex items-center text-sm">
-                <div class="relative before:absolute before:-right-5 before:opacity-60 before:w-2 before:h-2 before:bg-white before:rounded-full flex items-center">
+                <div class="relative before:absolute before:-right-5 before:opacity-60 before:w-2 before:h-2 before:bg-black before:dark:bg-white before:rounded-full flex items-center">
                   <p class="font-semibold text-nowrap">{{ch.title}}</p>
                 </div>
               </div>

@@ -11,7 +11,7 @@
         <ul v-if="multiSelect && selectedItems.length > 0" class=" mt-2 flex items-center gap-2 flex-wrap" >
           <li class="px-1 bg-danger text-white flex items-center w-max rounded-md flex-row-reverse" v-for="i in selectedItems">
             <span class="text-xs flex-1 font-thin">
-              {{i}}
+              {{i.title}}
             </span>
             <div class="mx-1 h-4 w-px bg-bgWhite"></div>
             <button class="text-xs font-thin" @click.prevent="addToSelectedItems(i)">
@@ -40,7 +40,7 @@
         <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96 dark:bg-gray-700 dark:text-gray-200 " v-show="showOptions" >
           <ul class="space-y-4">
             <li v-for="c in data">
-              <base-f-checkbox :isChecked="selectedItems.includes(c)" v-if="multiSelect" @click="addToSelectedItems(c)" :label="c"/>
+              <base-f-checkbox v-if="multiSelect" @click="addToSelectedItems(c)" :label="c.title" :value="c.id" :isChecked="selectedData?.includes(c)"/>
               <div v-else class="w-full text-sm hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false,emits('update:modelValue',c.id)">
                 {{ c.title }}
               </div>
@@ -53,49 +53,36 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  multiSelect:{
-    type:Boolean,
-    default:false
-  },
-  modelValue:{
-    type:Number,
-  },
-  label:{
-    type:String
-  },
-  data:{
-    type:Array
-  },
-  placeHolder:{
-    type:String
-  }
-})
+import type {SelectOption} from "~/models/selectOption";
+
+const props = defineProps<{
+  multiSelect:boolean,
+  modelValue:number,
+  label:string,
+  data:SelectOption[],
+  selectedData:SelectOption[],
+  placeHolder:string
+}>();
 
 const emits = defineEmits(['update:modelValue']);
 
-const categories = props.data ?? [ // TODO remove this property
-    'دسته بندی اول',
-    'دسته بندی دوم',
-    'دسته بندی سوم',
-    'دسته بندی چهارم'
-];
-
 const showOptions = ref(false);
-const selectedItem = ref(props.modelValue ? props.data[props.modelValue] ?? props.placeHolder : {title:props.placeHolder,id:0});
-const selectedItems = ref([]);
+const selectedItem:Ref<SelectOption> = ref(props.modelValue ? props.data![props.modelValue] ?? props.placeHolder : {title:props.placeHolder,id:0});
+const selectedItems:Ref<SelectOption[]> = ref(props.selectedData ?? []);
 
-const addToSelectedItems=(item)=>{
-  if(selectedItems.value.includes(item))
-    selectedItems.value = selectedItems.value.filter(i=>i !== item);
+const addToSelectedItems=(item:SelectOption)=>{
+  if(selectedItems.value.map(s=>s.id).includes(item.id))
+    selectedItems.value = selectedItems.value.filter(i=>i.id !== item.id);
   else
     selectedItems.value.push(item);
 }
 
 const getSelectedItem = () => selectedItem;
+const getSelectedItems = () => selectedItems;
 
 defineExpose({
-  getSelectedItem
+  getSelectedItem,
+  getSelectedItems
 })
 
 </script>

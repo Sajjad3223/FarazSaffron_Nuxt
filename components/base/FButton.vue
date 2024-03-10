@@ -39,7 +39,8 @@ const props = defineProps({
   },
   textColor:{
     type:String,
-    required:false
+    required:false,
+    default:'inherit'
   },
   wFull: {
     type: Boolean,
@@ -166,6 +167,12 @@ const emits = defineEmits(['clicked']);
 
 .textColor-white {
   @apply text-bgWhite;
+}
+.textColor-inherit {
+  @apply text-inherit;
+}
+.textColor-responsive {
+  @apply text-black dark:text-white;
 }
 
 </style>

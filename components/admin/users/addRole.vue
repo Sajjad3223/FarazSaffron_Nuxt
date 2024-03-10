@@ -1,7 +1,7 @@
 <template>
   <Form class="grid grid-cols-1 gap-4" @submit.prevent="AddRole">
     <base-f-input label="عنوان لقب" place-holder="عنوان را وارد کنید" v-model="title" name="role" id="role"/>
-    <base-f-button color="brand" :loading="isLoading" >
+    <base-f-button color="brand" :loading="isLoading" type="submit">
       ثبت لقب
     </base-f-button>
   </Form>

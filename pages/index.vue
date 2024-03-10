@@ -4,7 +4,7 @@
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
 
-    <video autoplay muted loop class="hidden md:block rounded-2xl h-[40vh] w-full object-cover origin-center lg:scale-x-125" style="max-width: unset !important;">
+    <video autoplay muted loop class="hidden md:block rounded-2xl h-[40vh] w-full object-cover origin-center " style="max-width: unset !important;">
       <source src="~/assets/videos/bg2.mp4" type="video/mp4">
     </video>
 
@@ -44,7 +44,7 @@
     </div>
 
 
-    <div class="absolute hidden flex-col text-white w-max max-w-max space-y-3 lg:space-y-6 rounded-2xl p-4 lg:p-8 lg:flex -right-48 -bottom-0">
+    <div class="absolute hidden flex-col text-white w-max max-w-max space-y-3 lg:space-y-6 rounded-2xl p-4 lg:p-8 lg:flex -right-0 -bottom-0">
       <div class="flex items-center space-x-2 space-x-reverse text-sm lg:text-4xl font-bold drop-shadow-md">
         <span>زعفرانِ</span>
         <img src="~/assets/images/gp-filled.png" alt="gp filled" class="w-10 lg:w-20">

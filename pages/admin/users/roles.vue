@@ -42,7 +42,7 @@
       <admin-users-add-role />
     </base-f-modal>
     <base-f-modal v-model="showSetPermissionsModal" title="ثبت دسترسی ها">
-      <admin-users-role-permissions />
+      <admin-users-role-permissions :role-id="selectedRoleId" />
     </base-f-modal>
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">
@@ -65,7 +65,7 @@
                 <div>
                   <p class="font-semibold text-nowrap">{{ r.title }}</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
-                    ( <span class="text-primary cursor-pointer hover:underline" @click="showSetPermissionsModal = true">مدیریت دسترسی ها</span> )
+                    ( <span class="text-primary cursor-pointer hover:underline" @click="selectedRoleId=r.id , showSetPermissionsModal = true">مدیریت دسترسی ها</span> )
                   </p>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                     ></path>
                   </svg>
                 </button>
-                <button title="مدیریت دسترسی ها" @click.prevent="showSetPermissionsModal = true"
+                <button title="مدیریت دسترسی ها" @click.prevent="selectedRoleId=r.id,showSetPermissionsModal = true"
                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                         aria-label="Set Permissions"
                 >
@@ -143,6 +143,7 @@ const showSetPermissionsModal = ref(false);
 const pageId = ref(1);
 const roles:Ref<RoleFilterData[] | undefined> = ref([]);
 const paginationData:Ref<PaginationData | null | undefined> = ref(null);
+const selectedRoleId = ref(0);
 
 watch(pageId,async () => await getData());
 

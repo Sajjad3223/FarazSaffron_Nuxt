@@ -56,7 +56,7 @@
                 </svg>
               </button>
               <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite dark:bg-gray-700 dark:border-gray-600 drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full" v-if="showOptions" >
-                <ul class="text-sm font-light text-right flex flex-col space-y-2">
+                <ul class="text-sm font-light text-right text-black dark:text-white flex flex-col space-y-2">
                   <li>
                     <base-f-button is-link color="transparent" to="/profile">
                       حساب کاربری

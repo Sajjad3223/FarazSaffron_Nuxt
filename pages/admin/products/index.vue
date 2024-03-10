@@ -27,69 +27,9 @@
             </select>
           </div>
           <div class="grid grid-cols-3 col-span-full gap-4 items-end">
-            <div class="flex flex-col space-y-4">
-              <span class="dark:text-white text-sm font-light">محدوده قیمت</span>
-              <div class="range-input">
-                <input type="range"
-                       class="min-range"
-                       min="0"
-                       max="10000"
-                       v-model="filterParams.minPrice"
-                       step="1">
-                <input type="range"
-                       class="max-range"
-                       min="0"
-                       max="10000"
-                       v-model="filterParams.maxPrice"
-                       step="1">
-              </div>
-              <div class="grid grid-cols-2 gap-2">
-                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minPrice"/>
-                <base-f-input type="number" place-holder="حداکثر: 999,999,999" v-model="filterParams.maxPrice" />
-              </div>
-            </div>
-            <div class="flex flex-col space-y-4">
-              <span class="dark:text-white text-sm font-light">موجودی انبار</span>
-              <div class="range-input">
-                <input type="range"
-                       class="min-range"
-                       min="0"
-                       max="1000"
-                       v-model="filterParams.minQuantity"
-                       step="1">
-                <input type="range"
-                       class="max-range"
-                       min="0"
-                       max="1000"
-                       v-model="filterParams.maxQuantity"
-                       step="1">
-              </div>
-              <div class="grid grid-cols-2 gap-2">
-                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minQuantity"/>
-                <base-f-input type="number" place-holder="حداکثر: 999" v-model="filterParams.maxQuantity" />
-              </div>
-            </div>
-            <div class="flex flex-col space-y-4">
-              <span class="dark:text-white text-sm font-light">محدوده تخفیف</span>
-              <div class="range-input">
-                <input type="range"
-                       class="min-range"
-                       min="0"
-                       max="100"
-                       v-model="filterParams.minDiscount"
-                       step="1">
-                <input type="range"
-                       class="max-range"
-                       min="0"
-                       max="100"
-                       v-model="filterParams.maxDiscount"
-                       step="1">
-              </div>
-              <div class="grid grid-cols-2 gap-2">
-                <base-f-input type="number" place-holder="حداقل: 0" v-model="filterParams.minDiscount"/>
-                <base-f-input type="number" place-holder="حداکثر: 999,999,999" v-model="filterParams.maxDiscount" />
-              </div>
-            </div>
+            <base-f-range />
+            <base-f-range />
+            <base-f-range />
             <div class="grid grid-cols-2 gap-2">
               <base-f-input label="از تاریخ" />
               <base-f-input label="تا تاریخ" />
@@ -100,10 +40,10 @@
               <label for="" class="dark:text-white">فقط تخفیف دار ها</label>
             </div>
           </div>
-          <base-f-button class="col-span-3" color="primary">
+          <base-f-button class="col-span-3" color="primary" text-color="white">
             اعمال فیلتر
           </base-f-button>
-          <base-f-button color="secondary" bordered text-color="white">
+          <base-f-button color="secondary" bordered text-color="responsive">
             حذف فیلتر
           </base-f-button>
         </Form>
@@ -112,7 +52,7 @@
 
     <base-f-divider :logo-divider="false" title="محصولات فروشگاه">
       <template #left>
-        <base-f-button color="primary" is-link to="/admin/products/add">
+        <base-f-button color="primary" is-link to="/admin/products/add" text-color="white">
           افزودن محصول جدید
         </base-f-button>
       </template>
