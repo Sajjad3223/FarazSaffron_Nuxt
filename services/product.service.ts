@@ -4,7 +4,7 @@ import type {ProductDto, ProductFilterParams, ProductFilterResult} from "~/model
 import type {
     CreateProductCommand,
     EditProductCommand, SetMainImageCommand, SetMainImageFromImagesCommand,
-    SetProductDiscountCommand, SetProductImagesCommand, SetSpecificationsCommand
+    SetProductDiscountCommand, SetProductImagesCommand, SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import type {SetActivityCommand} from "~/models/setActivityCommand";
 
@@ -60,10 +60,10 @@ export const RemoveDiscount = (productId:number):Promise<ApiResponse<undefined>>
         method:'DELETE',
     });
 }
-export const SetImages = (command:SetProductImagesCommand):Promise<ApiResponse<undefined>> => {
+export const SetImages = (command:FormData):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/Product/images`,{
         method:'PUT',
-        body:command
+        body:command,
     });
 }
 export const SetMainImage = (command:SetMainImageCommand):Promise<ApiResponse<undefined>> => {
@@ -80,6 +80,12 @@ export const SetMainImageFromImages = (command:SetMainImageFromImagesCommand):Pr
 }
 export const SetSpecifications = (command:SetSpecificationsCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/Product/specification`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const SetSeoData = (command:SetSeoDataCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/seoData`,{
         method:'PUT',
         body:command
     });

@@ -57,7 +57,7 @@
       <!-- Photo File Input -->
       <input type="file" class="hidden" ref="photo" @input="previewImage">
 
-      <div class="text-center h-full border hover:border-primary rounded-xl border-transparent grid place-items-center" @click="$refs.photo.click()">
+      <div class="text-center h-full border hover:border-primary cursor-pointer rounded-xl border-transparent grid place-items-center" @click="$refs.photo.click()">
         <!-- Current Profile Photo -->
         <div class="bg-gray-200 dark:bg-gray-100/10 h-full w-full  rounded-xl flex items-center justify-center flex-col space-y-2" v-show="!photoData.photoPreview">
           <span class="dark:text-white font-thin opacity-70 text-xl">هنوز تصویر ثبت نشده است</span>

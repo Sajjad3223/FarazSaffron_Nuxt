@@ -1,67 +1,3 @@
-<script setup lang="ts">
-import createFileList from "create-file-list/dist/create-file-list.mjs";
-
-const dnd = ref();
-
-const files = ref([]);
-const fileDragging = ref(null);
-const fileDropping = ref(null);
-const humanFileSize = (size) => {
-      const i = Math.floor(Math.log(size) / Math.log(1024));
-      return (
-          (size / Math.pow(1024, i)).toFixed(2) * 1 +
-          " " +
-          ["B", "kB", "MB", "GB", "TB"][i]
-      );
-    }
-const remove = (index) => {
-  let localFiles = [...files.value];
-  localFiles.splice(index, 1);
-
-  files.value = createFileList(localFiles);
-}
-const drop = (e) => {
-      let removed, add;
-      let localFiles = [...files.value];
-
-      removed = localFiles.splice(fileDropping.value, 1);
-      localFiles.splice(fileDropping.value, 0, ...removed);
-
-      files.value = createFileList(localFiles);
-
-      fileDropping.value = null;
-      fileDragging.value = null;
-    }
-const dragenter = (e) => {
-  let targetElem = e.target.closest("[draggable]");
-
-  fileDropping.value = targetElem.getAttribute("data-index");
-}
-const dragstart = (e) => {
-      fileDragging.value = e.target
-          .closest("[draggable]")
-          .getAttribute("data-index");
-      e.dataTransfer.effectAllowed = "move";
-    }
-const loadFile = (file) => {
-  const preview = document.querySelectorAll(".preview");
-  const blobUrl = URL.createObjectURL(file);
-
-  preview.forEach(elem => {
-    elem.onload = () => {
-      URL.revokeObjectURL(elem.src); // free memory
-    };
-  });
-
-  return blobUrl;
-}
-const addFiles = (e) => {
-  const localFiles = createFileList([...files.value], [...e.target.files]);
-  files.value = localFiles;
-  //form.formData.files = [...localFiles];
-}
-</script>
-
 <template>
   <div class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
     <div ref="dnd"
@@ -142,6 +78,76 @@ const addFiles = (e) => {
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import createFileList from "create-file-list/dist/create-file-list.mjs";
 
-</style>
+const props = defineProps({
+  modelValue:{
+    type:Array,
+  }
+})
+
+const emit = defineEmits(['update:modelValue']);
+
+const files = ref([]);
+const fileDragging = ref(null);
+const fileDropping = ref(null);
+const humanFileSize = (size:number) => {
+  const i = Math.floor(Math.log(size) / Math.log(1024));
+  return (
+      Number((size / Math.pow(1024, i)).toFixed(2)) +
+      " " +
+      ["B", "kB", "MB", "GB", "TB"][i]
+  );
+}
+const remove = (index:number) => {
+  let localFiles = [...files.value];
+  localFiles.splice(index, 1);
+
+  files.value = createFileList(localFiles)
+  emit('update:modelValue',files.value);
+}
+const drop = (e:any) => {
+  let removed, add;
+  let localFiles = [...files.value];
+
+  removed = localFiles.splice(fileDropping.value, 1);
+  localFiles.splice(fileDropping.value, 0, ...removed);
+
+  files.value = createFileList(localFiles);
+  emit('update:modelValue',files.value);
+
+  fileDropping.value = null;
+  fileDragging.value = null;
+}
+const dragenter = (e) => {
+  let targetElem = e.target.closest("[draggable]");
+
+  fileDropping.value = targetElem.getAttribute("data-index");
+}
+const dragstart = (e) => {
+  fileDragging.value = e.target
+      .closest("[draggable]")
+      .getAttribute("data-index");
+  e.dataTransfer.effectAllowed = "move";
+}
+const loadFile = (file) => {
+  const preview = document.querySelectorAll(".preview");
+  const blobUrl = URL.createObjectURL(file);
+
+  preview.forEach(elem => {
+    elem.onload = () => {
+      URL.revokeObjectURL(elem.src); // free memory
+    };
+  });
+
+  return blobUrl;
+}
+const addFiles = (e) => {
+  const localFiles = createFileList([...files.value], [...e.target.files]);
+  files.value = localFiles;
+  //form.formData.files = [...localFiles];
+
+  emit('update:modelValue',files.value);
+}
+</script>

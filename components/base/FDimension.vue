@@ -8,9 +8,9 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue']);
 
 const dimension:DimensionDto = reactive({
-  width:0,
-  length:0,
-  height:0
+  width:props.modelValue.width,
+  length:props.modelValue.length,
+  height:props.modelValue.height
 });
 
 const updateData = ()=>{

@@ -63,6 +63,10 @@ export interface SetSpecificationsCommand{
     productId:number;
     specifications:CreateSpecificationViewModel[];
 }
+export interface SetSeoDataCommand{
+    productId:number;
+    seoData:SeoData;
+}
 
 export interface CreateSpecificationViewModel{
     key:string;

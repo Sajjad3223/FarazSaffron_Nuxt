@@ -15,10 +15,18 @@
 <script setup lang="ts">
 import type {CreateSpecificationViewModel} from "~/models/product/productCommands";
 
+const props = defineProps<{
+  modelValue:CreateSpecificationViewModel
+}>();
+
 const specification:CreateSpecificationViewModel = reactive({
   key:'',
   value:''
 })
+
+watch(specification,()=>emit('update:modelValue',specification.value))
+
+const emit = defineEmits(['update:modelValue'])
 
 const row = ref();
 

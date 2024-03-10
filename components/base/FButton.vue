@@ -82,11 +82,11 @@ const emits = defineEmits(['clicked']);
 }
 
 .button-primary {
-  @apply bg-primary;
+  @apply bg-primary text-white;
 }
 
 .button-brand {
-  @apply bg-brandOrange;
+  @apply bg-brandOrange text-white;
 }
 
 .button-warning {

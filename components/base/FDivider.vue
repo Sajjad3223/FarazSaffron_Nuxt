@@ -5,7 +5,7 @@
   </div>
   <div class="flex items-center w-full my-4" v-else>
     <span class="dark:text-white font-thin">{{ title }}</span>
-    <div class="h-px bg-black/50 flex-1 darK:bg-white mx-4"></div>
+    <div class="h-px bg-black flex-1 dark:bg-white opacity-50 mx-4"></div>
     <slot name="left"></slot>
   </div>
 </template>

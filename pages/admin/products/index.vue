@@ -57,7 +57,7 @@
         </base-f-button>
       </template>
     </base-f-divider>
-    <div class=" w-full overflow-hidden rounded-lg shadow-xs">
+    <div class=" w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
@@ -74,7 +74,7 @@
           <tbody
               class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="i in 10">
+          <tr class="text-gray-700 dark:text-gray-400" v-for="(i) in products">
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <!-- Avatar with inset shadow -->
@@ -83,8 +83,8 @@
                 >
                   <img
                       class="object-contain w-full h-full rounded-full"
-                      src="~/assets/images/saffron-bar.png"
-                      alt=""
+                      :src="`${SITE_URL}/product/images/${i.mainImage.src}`"
+                      :alt="i.mainImage.alt"
                       loading="lazy"
                   />
                   <div
@@ -93,25 +93,25 @@
                   ></div>
                 </div>
                 <div>
-                  <p class="font-semibold text-nowrap">زعفران نگین 20 گرم</p>
+                  <p class="font-semibold text-nowrap">{{i.title}}</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
-                    ( <NuxtLink to="/product/slug" class="text-primary hover:underline">مشاهده کالا در فروشگاه</NuxtLink> )
+                    ( <NuxtLink :to="`/product/${i.slug}`" class="text-primary hover:underline">مشاهده کالا در فروشگاه</NuxtLink> )
                   </p>
                 </div>
               </div>
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              2,209,000 <small class="text-xs">ریال</small>
+              {{ i.price.toLocaleString() }} <small class="text-xs">ریال</small>
             </td>
             <td class="px-4 py-3 text-xs">
-              240
+              {{ i.quantity }}
             </td>
             <td class="px-4 py-3 text-sm">
-              1402/12/12
+              {{ i.persianDate }}
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <button
+                <NuxtLink :to="`/admin/products/edit/${i.id}`"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
@@ -125,7 +125,7 @@
                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
                     ></path>
                   </svg>
-                </button>
+                </NuxtLink>
                 <button
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete"
@@ -150,17 +150,38 @@
           </tbody>
         </table>
       </div>
-      <FPagination />
+      <FPagination :pagination-data="paginationData" :page-id="pageId" />
+    </div>
+    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+      <span class="animate-spin">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
+               viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+               style="display:block;background-color:transparent;"><circle
+              cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+              stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+              style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+          </svg>
+        </span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type {ProductFilterParams} from "~/models/product/productQueries";
+import type {ProductFilterData, ProductFilterParams} from "~/models/product/productQueries";
+import type {PaginationData} from "~/models/baseFilterResult";
+import {GetProductsByAdmin} from "~/services/product.service";
+import {FillPaginationData} from "~/utilities/fillPaginationData";
+import {SITE_URL} from "~/utilities/api.config";
 
 definePageMeta({
   layout: 'admin'
 })
+
+const isLoading = ref(false);
+const showFilters = ref(false);
+const pageId = ref(1);
+const products:Ref<ProductFilterData[]> = ref([]);
+const paginationData:Ref<PaginationData> = ref(null);
 
 const filterParams:ProductFilterParams = reactive({
   search: null,
@@ -177,9 +198,23 @@ const filterParams:ProductFilterParams = reactive({
   maxDiscount: null,
   serialNumber: null,
   dgkalaLink: null,
-  pageId:1,
+  pageId:pageId.value,
   take:10
 });
 
-const showFilters = ref(false);
+onMounted(async ()=>{
+  await getData();
+})
+
+const getData = async ()=>{
+  isLoading.value = true;
+
+  const result = await GetProductsByAdmin(filterParams);
+  if(result.isSuccess){
+    products.value = result.data?.data!;
+    paginationData.value = FillPaginationData(result.data!);
+  }
+
+  isLoading.value = false;
+}
 </script>
