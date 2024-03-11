@@ -137,10 +137,10 @@
               <path d="M12.4667 9.64C12.2267 9.88 12.0934 10.34 12.1734 10.6667L12.6334 12.6733C12.8267 13.5067 12.7067 14.1333 12.2934 14.4333C12.1267 14.5533 11.9267 14.6133 11.6934 14.6133C11.3534 14.6133 10.9534 14.4867 10.5134 14.2267L8.56003 13.0667C8.25337 12.8867 7.7467 12.8867 7.44003 13.0667L5.4867 14.2267C4.7467 14.66 4.11337 14.7333 3.7067 14.4333C3.55337 14.32 3.44003 14.1667 3.3667 13.9667L11.4734 5.86C11.78 5.55333 12.2134 5.41333 12.6334 5.48666L13.3067 5.6C14.0134 5.72 14.4867 6.04 14.64 6.50666C14.7867 6.97333 14.5867 7.51333 14.08 8.02L12.4667 9.64Z" fill="#A1C53C"/>
             </svg>
 
-            <strong>4.4</strong>
+            <strong>{{ totalScore / productComments.length }}</strong>
             <small class="self-end font-light">امتیاز خریداران</small>
             <div class="w-px bg-black/30 dark:bg-white/30"></div>
-            <a href="#comments" class="text-sm text-primary self-end hover:underline underline-offset-4 font-light">34 دیدگاه</a>
+            <a href="#comments" class="text-sm text-primary self-end hover:underline underline-offset-4 font-light">{{productComments.length}} دیدگاه</a>
           </div>
           <div class="flex flex-row-reverse space-x-2">
             <button class="w-10 h-10 bg-secondary/30 dark:bg-gray-900 rounded-xl grid place-items-center">
@@ -429,6 +429,12 @@ const loadComments = async ()=>{
     productComments.value = commentsResult.data?.data!;
   }
 }
+
+const totalScore = computed(()=>{
+  let scoreSum = 0;
+  productComments.value.forEach(c=>scoreSum += c.score);
+  return scoreSum
+})
 
 const info = ref();
 const comments = ref();

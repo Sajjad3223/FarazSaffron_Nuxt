@@ -15,9 +15,11 @@
 <script setup lang="ts">
 import {useAuthStore} from "~/stores/auth.store";
 import {useAccountStore} from "~/stores/account.store";
+import {useCartStore} from "~/stores/cart.store";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
+const cartStore = useCartStore();
 
 useHead({
   link:[
@@ -29,7 +31,7 @@ useHead({
 onMounted(async ()=>{
   if (authStore.isLoggedIn) {
     await accountStore.initData();
-    console.log(accountStore.currentUser);
+    await cartStore.refreshCart();
   }
 })
 </script>

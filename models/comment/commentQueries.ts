@@ -17,6 +17,7 @@ export interface CommentFilterParams extends BaseFilterParams{
 export interface CommentDto extends BaseDto{
     parentId:      number;
     postId:        number;
+    score:        number;
     postType:      EPostType;
     text:          string;
     sender:        Sender;
@@ -24,6 +25,7 @@ export interface CommentDto extends BaseDto{
     likesCount:    number;
     dislikesCount: number;
     userReaction:  string;
+    isConsumer:  boolean;
     answers:       CommentDto[];
 }
 

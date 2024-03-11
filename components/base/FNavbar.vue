@@ -80,13 +80,13 @@
 
             <div class="w-px h-10 bg-black opacity-30 dark:bg-white"></div>
 
-            <NuxtLink class="flex items-center flex-col space-y-2 text-black relative dark:text-white" to="/checkout/cart">
+            <NuxtLink class="flex items-center flex-col space-y-2 text-black relative dark:text-white" to="/checkout/cart" v-if="!cartStore.cartLoading">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="9.26315" cy="20.1804" rx="1.81955" ry="1.81955" fill="currentColor"/>
                 <ellipse cx="15.3283" cy="20.1804" rx="1.81955" ry="1.81955" fill="currentColor"/>
                 <path d="M1.04761 1.04761C2.89111 1.96936 3.8045 2.77516 3.8045 5.01754M3.8045 5.01754C3.8045 14.1153 6.23057 15.9348 12.2957 15.9348C18.3609 15.9348 20.787 14.1153 20.787 6.83708C20.787 5.81565 20.1804 5.01754 18.9674 5.01754C17.7544 5.01754 7.845 5.01754 3.8045 5.01754Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span class="text-xs bg-danger text-white rounded-full absolute -right-2 -top-4 w-4 h-4 grid place-items-center" v-if="cartStore.cartItemsCount !== 0">
+              <span class="text-xs bg-danger text-white rounded-full absolute -right-2 -top-4 w-4 h-4 grid place-items-center" v-if="cartStore.cartItemsCount > 0">
                 {{cartStore.cartItemsCount}}
               </span>
             </NuxtLink>

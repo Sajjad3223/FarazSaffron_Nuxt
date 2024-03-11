@@ -45,7 +45,7 @@
       <admin-users-user-roles :user-id="selectedUserId" @operation-finished="showSetRolesModal = false" />
     </base-f-modal>
 
-    <div class=" w-full overflow-hidden rounded-lg shadow-xs">
+    <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
@@ -138,6 +138,17 @@
         </table>
       </div>
       <FPagination v-model="pageId" :pagination-data="paginationData" />
+    </div >
+    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+      <span class="animate-spin">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
+               viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+               style="display:block;background-color:transparent;"><circle
+              cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+              stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+              style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+          </svg>
+        </span>
     </div>
   </div>
 </template>
@@ -153,7 +164,7 @@ definePageMeta({
   layout:'admin'
 })
 
-const isLoading = ref(false);
+const isLoading = ref(true);
 const showFilters = ref(false);
 const showAddUserModal = ref(false);
 const showSetRolesModal = ref(false);

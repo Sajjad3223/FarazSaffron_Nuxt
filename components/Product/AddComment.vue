@@ -14,7 +14,7 @@
       </div>
     </div>
     <hr>
-    <base-f-input multi-line name="comment" id="comment" v-model="sendCommentData.content" label="نظر شما" class="border rounded-xl p-3" place-holder="نظر خود را وارد کنید ..." is-required />
+    <base-f-input multi-line name="comment" id="comment" v-model="sendCommentData.content" label="نظر شما" place-holder="نظر خود را وارد کنید ..." is-required />
     <hr>
     <base-f-button class="bg-brandOrange w-full p-2 text-xl text-white text-center rounded-lg" @clicked="AddComment" :loading="isLoading" color="brand" text-color="white">
       ثبت نظر
