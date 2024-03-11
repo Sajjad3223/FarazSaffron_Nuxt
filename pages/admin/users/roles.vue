@@ -39,10 +39,10 @@
     </base-f-divider>
 
     <base-f-modal v-model="showAddRoleModal" title="افزودن لقب جدید">
-      <admin-users-add-role />
+      <admin-users-add-role @operation-finished="showAddRoleModal = false" />
     </base-f-modal>
     <base-f-modal v-model="showSetPermissionsModal" title="ثبت دسترسی ها">
-      <admin-users-role-permissions :role-id="selectedRoleId" />
+      <admin-users-role-permissions :role-id="selectedRoleId" @operation-finished="showSetPermissionsModal = false" />
     </base-f-modal>
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">

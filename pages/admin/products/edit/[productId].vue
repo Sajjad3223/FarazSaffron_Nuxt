@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-f-divider title="افزودن محصول جدید" :logo-divider="false"/>
+    <base-f-divider title="ویرایش محصول" :logo-divider="false"/>
 
 
     <div class="mt-4 mb-8">
@@ -105,22 +105,31 @@
     </div>
 
 
-    <div class="w-full relative" v-if="product != undefined">
+    <div class="w-full relative" v-if="product">
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" >
+        <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" :on-submit="UpdateProduct">
           <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="editProductData.title" @update:modelValue="generateSlug"/>
           <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="editProductData.slug"/>
           <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="editProductData.price" is-price/>
           <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount"/>
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="editProductData.quantity"/>
-          <base-f-select label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="editProductData.categoryId" />
-          <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="editProductData.subCategoryId" />
+          <div class="flex items-end">
+            <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="editProductData.categoryId" v-if="!loadingCategories" />
+            <button :class="['grid place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L12.76 7.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="editProductData.subCategoryId" v-if="!loadingCategories" />
           <base-f-dimension v-model="editProductData.dimensions" />
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="editProductData.packingType" />
           <base-f-input label="شماره سریال" name="serialNumber" id="serialNumber" place-holder="شماره سریال درج شده زیر محصول" v-model="editProductData.serialNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaLink" :rtl="false"/>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" @clicked="AddProduct">
+          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت کالا و رفتن به صفحه بعد
           </base-f-button>
         </Form>
@@ -193,7 +202,14 @@ import type {
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
 import FSeoData from "~/components/base/FSeoData.vue";
-import {CreateProduct, GetProductById, SetImages, SetSeoData, SetSpecifications} from "~/services/product.service";
+import {
+  CreateProduct,
+  EditProduct,
+  GetProductById,
+  SetImages,
+  SetSeoData,
+  SetSpecifications
+} from "~/services/product.service";
 import {ToastType, useToast} from "~/composables/useSwal";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
@@ -211,11 +227,13 @@ const toast = useToast();
 const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
+const loadingCategories = ref(false);
 const product:Ref<ProductDto | undefined> = ref(undefined);
-const createdProductId = Number(route.params.productId);
+const productId = Number(route.params.productId);
 
 //@ts-ignore
 const editProductData:EditProductCommand = reactive({
+  productId:productId,
   title: '',
   slug: '',
   price: null,
@@ -275,11 +293,7 @@ const specifications:CreateSpecificationViewModel[] = reactive([
 onMounted(async ()=>{
   isLoading.value = true;
 
-  const result = await GetCategories({pageId:1,take:100,search:''});
-  if(result.isSuccess){
-    categories.value = result.data?.data!;
-  }
-  const productResult = await GetProductById(createdProductId);
+  const productResult = await GetProductById(productId);
   if(productResult.isSuccess){
     product.value = productResult.data!;
     editProductData.title = product.value.title;
@@ -289,7 +303,6 @@ onMounted(async ()=>{
     editProductData.packingType = product.value.packingType;
     editProductData.serialNumber = product.value.serialNumber;
     editProductData.categoryId = product.value.category?.id;
-    categorySelected(product.value.category.id);
     editProductData.subCategoryId = product.value.subCategory?.id;
     editProductData.dimensions.width = product.value.dimensions.width;
     editProductData.dimensions.height = product.value.dimensions.height;
@@ -304,28 +317,28 @@ onMounted(async ()=>{
     editProductData.quantity = product.value.quantity;
   }
 
+  await refreshCategories();
+
   isLoading.value = false;
 })
 
-const AddProduct = async ()=>{
+const refreshCategories = async ()=>{
+  loadingCategories.value = true;
+
+  const result = await GetCategories({pageId:1,take:100,search:''});
+  if(result.isSuccess){
+    categories.value = result.data?.data!;
+  }
+  if(editProductData.categoryId != null)
+    categorySelected(editProductData.categoryId);
+
+  loadingCategories.value = false;
+}
+
+const UpdateProduct = async ()=>{
   isLoading.value = true;
 
-  const productData = new FormData();
-  productData.append('title',editProductData.title);
-  productData.append('slug',editProductData.slug);
-  productData.append('price',editProductData.price.toString());
-  productData.append('discount',editProductData.discount.toString());
-  productData.append('packingType',editProductData.packingType.toString());
-  productData.append('serialNumber',editProductData.serialNumber);
-  productData.append('categoryId',editProductData.categoryId.toString());
-  productData.append('subCategoryId',editProductData.subCategoryId?.toString() ?? '');
-  productData.append('dimensions.Width',editProductData.dimensions.width.toString());
-  productData.append('dimensions.Length',editProductData.dimensions.length.toString());
-  productData.append('dimensions.Height',editProductData.dimensions.height.toString());
-  productData.append('digiKalaLink',editProductData.digiKalaLink ?? '');
-  productData.append('quantity',editProductData.quantity.toString());
-
-  const productResult = await CreateProduct(productData);
+  const productResult = await EditProduct(editProductData);
   if(productResult.isSuccess){
     await toast.showToast(productResult.metaData.message,ToastType.success);
     step.value++;
@@ -339,7 +352,7 @@ const AddImages = async ()=>{
   isLoading.value = true;
 
   const images = new FormData();
-  images.append('productId',createdProductId.toString());
+  images.append('productId',productId.toString());
   for(const image in imageFiles.value){
     images.append('images',image);
   }
@@ -359,7 +372,7 @@ const AddSpecifications = async ()=>{
   isLoading.value = true;
 
   const result:ApiResponse<undefined> = await SetSpecifications({
-    productId:createdProductId,
+    productId:productId,
     specifications:specifications
   });
 
@@ -375,7 +388,7 @@ const AddSeoData = async ()=>{
   isLoading.value = true;
 
   const result:ApiResponse<undefined> = await SetSeoData({
-    productId:createdProductId,
+    productId:productId,
     seoData:editProductData.seoData
   } as SetSeoDataCommand);
 

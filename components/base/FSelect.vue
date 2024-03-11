@@ -40,7 +40,7 @@
         <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96 dark:bg-gray-700 dark:text-gray-200 " v-show="showOptions" >
           <ul class="space-y-4">
             <li v-for="c in data">
-              <base-f-checkbox v-if="multiSelect" @click="addToSelectedItems(c)" :label="c.title" :value="c.id" :isChecked="selectedData?.includes(c)"/>
+              <base-f-checkbox v-if="multiSelect" @click="addToSelectedItems(c)" :label="c.title" :value="c.id" :isChecked="selectedData?.find(o=>o.id == c.id) != null"/>
               <div v-else class="w-full text-sm hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false,emits('update:modelValue',c.id)">
                 {{ c.title }}
               </div>
@@ -67,7 +67,7 @@ const props = defineProps<{
 const emits = defineEmits(['update:modelValue']);
 
 const showOptions = ref(false);
-const selectedItem:Ref<SelectOption> = ref(props.modelValue ? props.data![props.modelValue] ?? props.placeHolder : {title:props.placeHolder,id:0});
+const selectedItem:Ref<SelectOption> = ref(props.modelValue ? props.data!.find(o=>o.id == props.modelValue) ?? props.placeHolder : {title:props.placeHolder,id:0});
 const selectedItems:Ref<SelectOption[]> = ref(props.selectedData ?? []);
 
 const addToSelectedItems=(item:SelectOption)=>{
@@ -76,6 +76,10 @@ const addToSelectedItems=(item:SelectOption)=>{
   else
     selectedItems.value.push(item);
 }
+
+onMounted(()=>{
+  console.log(props.modelValue)
+})
 
 const getSelectedItem = () => selectedItem;
 const getSelectedItems = () => selectedItems;

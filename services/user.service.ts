@@ -47,13 +47,13 @@ export const CreateUserByAdmin = (command:CreateUserCommand):Promise<ApiResponse
 }
 export const EditUserByAdmin = (command:AdminEditUserCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/user`,{
-        method:'POST',
+        method:'PUT',
         body:command
     });
 }
 export const SetUserRoles = (command:AdminSetUserRolesCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/user/setRoles`,{
-        method:'POST',
+        method:'PUT',
         body:command
     });
 }

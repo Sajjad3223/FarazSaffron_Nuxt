@@ -61,7 +61,7 @@ export interface SetMainImageFromImagesCommand{
 }
 export interface SetSpecificationsCommand{
     productId:number;
-    specifications:CreateSpecificationViewModel[];
+    specifications:[];
 }
 export interface SetSeoDataCommand{
     productId:number;

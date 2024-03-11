@@ -39,10 +39,10 @@
     </base-f-divider>
 
     <base-f-modal v-model="showAddUserModal" title="افزودن کاربر جدید">
-      <admin-users-add />
+      <admin-users-add @operation-finished="showAddUserModal = false" />
     </base-f-modal>
     <base-f-modal v-model="showSetRolesModal" title="ثبت لقب های کاربر">
-      <admin-users-user-roles :user-id="selectedUserId" />
+      <admin-users-user-roles :user-id="selectedUserId" @operation-finished="showSetRolesModal = false" />
     </base-f-modal>
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">
@@ -69,7 +69,7 @@
                 <div>
                   <p class="font-semibold text-nowrap">{{u.fullName}}</p>
                   <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
-                    ( <NuxtLink to="/product/slug" class="text-primary hover:underline">مدیریت دسترسی ها</NuxtLink> )
+                    ( <span class="text-primary hover:underline cursor-pointer" @click.prevent="selectedUserId = u.id, showSetRolesModal = true">مدیریت دسترسی ها</span> )
                   </p>
                 </div>
               </div>

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import {CreateUserByAdmin} from "~/services/user.service";
-import {useToast,ToastType} from "~/composables/useSwal";
+import {ToastType, useToast} from "~/composables/useSwal";
 import type {CreateUserCommand} from "~/models/users/userCommands";
 
 const addUserCommand:CreateUserCommand = reactive({
@@ -27,12 +27,17 @@ const addUserCommand:CreateUserCommand = reactive({
 });
 
 const isLoading = ref(false);
+const emits = defineEmits(['operationFinished']);
 
 const CreateUser = async ()=>{
   const result = await CreateUserByAdmin(addUserCommand);
   if(result.isSuccess){
     await useToast().showToast('کاربر با موفقیت ایجاد شد',ToastType.success);
+  }else{
+    await useToast().showToast(result.metaData.message,ToastType.error,0);
   }
+
+  emits('operationFinished');
 }
 </script>
 

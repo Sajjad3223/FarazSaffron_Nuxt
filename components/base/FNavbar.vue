@@ -55,7 +55,7 @@
                   <path d="M11.9485 5.45312H7.79512H4.05512C3.41512 5.45312 3.09512 6.22646 3.54845 6.67979L7.00179 10.1331C7.55512 10.6865 8.45512 10.6865 9.00845 10.1331L10.3218 8.81979L12.4618 6.67979C12.9085 6.22646 12.5885 5.45312 11.9485 5.45312Z" fill="currentColor"/>
                 </svg>
               </button>
-              <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite dark:bg-gray-700 dark:border-gray-600 drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full" v-if="showOptions" >
+              <div class="absolute -bottom-4 right-0 border rounded-lg bg-bgWhite dark:bg-gray-700 dark:border-gray-600 drop-shadow p-2 px-4 w-max translate-x-1/2 translate-y-full z-20" v-if="showOptions" >
                 <ul class="text-sm font-light text-right text-black dark:text-white flex flex-col space-y-2">
                   <li>
                     <base-f-button is-link color="transparent" to="/profile">

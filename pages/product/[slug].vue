@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-12 flex flex-col space-y-8 mx-4 lg:mx-0">
+  <div class="mt-12 flex flex-col space-y-8 mx-4 lg:mx-0" v-if="!isLoading && product">
     <div>
       <ul class="flex items-center gap-2 text-xs lg:text-base">
         <li class="text-primary font-medium">
@@ -11,21 +11,21 @@
         </li>
         <li class="opacity-40 pointer-events-none select-none dark:text-white">/</li>
         <li class="text-primary font-medium">
-          <NuxtLink to="/">زعفران</NuxtLink>
+          <NuxtLink to="/">{{ product.category.title }}</NuxtLink>
         </li>
         <li class="opacity-40 pointer-events-none select-none  dark:text-white">/</li>
-        <li class="font-light dark:text-white">زعفران نگین</li>
+        <li class="font-light dark:text-white">{{product.subCategory?.title}}</li>
       </ul>
     </div>
     <section class="flex flex-col items-center space-y-8 lg:space-y-0 lg:items-start lg:flex-row">
 
       <div class="flex-1 flex flex-col lg:order-2 mx-4 dark:text-white">
-        <h1 class="text-lg lg:text-2xl font-bold">زعفران نگین جی پی زعفران - 4.608 گرم</h1>
+        <h1 class="text-lg lg:text-2xl font-bold">{{ product.title }}</h1>
         <hr class="my-2">
         <ul class="flex flex-col space-y-3 list-disc pr-6 mt-4">
           <li>
             <span class="text-sm font-light">شکل ماده غذایی:</span>
-            <strong class="text-sm mr-2">نگین</strong>
+            <strong class="text-sm mr-2">{{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}</strong>
           </li>
           <li>
             <span class="text-sm font-light">پروانه بهداشت:</span>
@@ -81,7 +81,7 @@
 
       <div class="fixed inset-0 bg-black/50 grid place-items-center z-40 m-0 p-0" v-if="showBanner" @click.self="showBanner = false" style="margin: 0 !important">
         <div class="w-4/5 h-auto relative m-auto grid place-items-center">
-          <img src="~/assets/images/productImage.png" alt="product Image" class="w-full rounded-2xl">
+          <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-full rounded-2xl">
           <button class="absolute top-2 right-2 w-8 h-8 bg-danger rounded-lg grid place-items-center text-white drop-shadow" @click.prevent="showBanner = false">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-45">
               <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -102,7 +102,7 @@
       </div>
       <div class="w-full lg:w-1/3 flex flex-col lg:order-1 mx-4 lg:mx-0 flex-shrink space-y-4">
         <div class="rounded-2xl relative w-full overflow-hidden">
-          <img src="~/assets/images/productImage.png" alt="productImage" class="w-full rounded-2xl">
+          <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-full rounded-2xl">
           <div class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.3999 23.4H28.3999" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -113,9 +113,9 @@
           </div>
         </div>
         <div class="flex items-stretch space-x-4 space-x-reverse">
-          <div class="rounded-2xl relative overflow-hidden flex items-center justify-center" v-for="i in 3" :key="i">
+          <div class="rounded-2xl relative overflow-hidden flex items-center justify-center" v-for="i in product.images" :key="i">
             <div class="rounded-2xl border-2 border-brandOrange min-w-24 max-w-32 aspect-square object-cover">
-              <img src="~/assets/images/saffron-bar.png" alt="saffron jar" class="rounded-2xl h-full mx-auto object-cover">
+              <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="rounded-2xl h-full mx-auto object-cover">
             </div>
             <button class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +180,7 @@
           </div>
         </div>
         <hr class="my-4 dark:border-gray-600">
-        <div  class="border-2 border-dgKala p-2 px-4 w-full rounded-lg flex flex-col items-end text-sm text-dgKala space-y-2 dark:text-white animate-pulse">
+        <div  class="border-2 border-dgKala p-2 px-4 w-full rounded-lg flex flex-col items-end text-sm text-dgKala space-y-2 dark:text-white animate-pulse" v-if="product.digiKalaLink != null">
           <a href="https://www.digikala.com/product/dkp-9083576" class="w-full flex items-center justify-between " target="_blank">
           <span class="underline-offset-4 underline ">
             قیمت محصول در دیجی کالا
@@ -203,7 +203,7 @@
         <div class="w-full flex justify-between items-center mt-4">
           <span class="font-light">قیمت:</span>
           <div class="flex items-end space-x-1 space-x-reverse">
-            <strong class="text-2xl">2,209,000</strong>
+            <strong class="text-2xl">{{ product.price.toLocaleString() }}</strong>
             <small>ريال</small>
           </div>
         </div>
@@ -257,44 +257,12 @@
           <div class="flex-1">
             <div class="flex flex-col">
               <ul class="flex flex-col">
-                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" >
+                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" v-for="s in product.specifications">
                   <div class="w-2/6 lg:w-1/4 opacity-70 font-light text-xs lg:text-base">
-                    وزن بسته بندی
+                    {{s.title}}
                   </div>
                   <div class="flex-1 border-r pr-2 text-sm lg:text-base">
-                    75 گرم
-                  </div>
-                </li>
-                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" >
-                  <div class="w-2/6 lg:w-1/4 opacity-70 font-light text-xs lg:text-base">
-                    ابعاد بسته بندی
-                  </div>
-                  <div class="flex-1 border-r pr-2 text-sm lg:text-base">
-                    ۶x۴x۴x سانتی‌متر
-                  </div>
-                </li>
-                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" >
-                  <div class="w-2/6 lg:w-1/4 opacity-70 font-light text-xs lg:text-base">
-                    شماره پروانه بهداشت
-                  </div>
-                  <div class="flex-1 border-r pr-2 text-sm lg:text-base">
-                    ۵۷/۱۰۱۸-۱
-                  </div>
-                </li>
-                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" >
-                  <div class="w-2/6 lg:w-1/4 opacity-70 font-light text-xs lg:text-base">
-                    شکل ماده غذایی
-                  </div>
-                  <div class="flex-1 border-r pr-2 text-sm lg:text-base">
-                    نگین
-                  </div>
-                </li>
-                <li class="flex w-full py-2 px-2 odd:bg-slate-50 dark:odd:bg-gray-800" >
-                  <div class="w-2/6 lg:w-1/4 opacity-70 font-light text-xs lg:text-base">
-                    سایر توضیحات
-                  </div>
-                  <div class="flex-1 border-r pr-2 text-sm lg:text-base">
-                    <p>زعفران نگین یک مثقال ۴/۶۰۸ گرمی بسته بندی شیشه ای ماندگار -زعفرانی با عطر و رنگی بیشتر و متمایز - مقرون به صرفه و اقتصادی - دارای نشان استاندارد و سیب سلامت -دوست دار طبیعت با قابلیت بازیافت بسته بندی</p>
+                    {{s.value}}
                   </div>
                 </li>
               </ul>
@@ -314,7 +282,7 @@
           <h5 class="text-xl  font-bold">نظرات کاربران</h5>
         </div>
 
-        <div class="w-full flex flex-col lg:flex-row mt-8">
+        <div class="w-full flex flex-col lg:flex-row mt-8" v-if="product">
           <div class="flex flex-col items-start space-y-3 w-full lg:w-1/5 ml-10">
             <div class="flex items-end space-x-2 space-x-reverse">
               <strong class="text-xl ">4.4</strong>
@@ -335,12 +303,12 @@
             <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300" @click.prevent="showAddCommentModal = true">ثبت دیدگاه</a>
           </div>
           <base-f-modal title="افزودن دیدگاه جدید" v-model="showAddCommentModal">
-            <product-add-comment />
+            <product-add-comment :postType="EPostType.Product" :postId="product.id" @comment-submitted="showAddCommentModal = false,loadComments"/>
           </base-f-modal>
           <div class="flex-1 lg:pr-10 lg:border-r-4 border-brandOrange/50 mt-8 lg:mt-0">
             <ul class="flex-flex-col space-y-6">
-              <li class="w-full flex flex-col pb-6 border-b-2 last:border-none" v-for="i in 5" :key="i">
-                <comments-f-comment />
+              <li class="w-full flex flex-col pb-6 border-b-2 last:border-none" v-for="c in productComments" :key="c">
+                <comments-f-comment :comment="c" />
               </li>
             </ul>
           </div>
@@ -392,9 +360,9 @@
 
         <div class="w-full flex mt-8">
           <ul class="w-full flex space-x-8 space-x-reverse flex-shrink-0 overflow-x-auto p-4">
-            <li v-for="i in 4" :key="i" class="flex-shrink-0">
+<!--            <li v-for="i in 4" :key="i" class="flex-shrink-0">
               <f-card />
-            </li>
+            </li>-->
           </ul>
         </div>
       </div>
@@ -406,17 +374,61 @@
 <script setup lang="ts">
 
 import {useCartStore} from "~/stores/cart.store";
+import {GetProduct} from "~/services/product.service";
+import type {ProductDto} from "~/models/product/productQueries";
+import {EPackingType} from "~/models/product/EPackingType";
+import {SITE_URL} from "~/utilities/api.config";
+import {type CommentDto, type CommentFilterParams} from "~/models/comment/commentQueries";
+import {GetComments} from "~/services/comment.service";
+import {EPostType} from "~/models/EPostType";
+
+const route = useRoute();
+const slug:string = route.params.slug.toString()!;
 
 const cartStore = useCartStore();
 
 const showBanner = ref(false);
+const isLoading = ref(false);
 const showAddCommentModal = ref(false);
+const pageId = ref(1);
+
+const product:Ref<ProductDto | undefined> = ref(undefined);
+const productComments:Ref<CommentDto[]> = ref([]);
+const commentsFilterParams:CommentFilterParams = reactive({
+  postId:5,
+  postType:EPostType.Product,
+  take:10,
+  pageId:pageId,
+  search:null,
+  commentStatus:null,
+  endDate:null,
+  startDate:null,
+  userRequested:null
+})
 
 const visitingTab = ref('info');
 
-onMounted(()=>{
+onMounted(async ()=>{
   window.addEventListener('scroll',onScroll)
+
+  isLoading.value = true;
+
+  const result = await GetProduct(slug);
+  if(result.isSuccess){
+    product.value = result.data!;
+  }
+
+  await loadComments();
+
+  isLoading.value = false;
 })
+
+const loadComments = async ()=>{
+  const commentsResult = await GetComments(commentsFilterParams);
+  if(commentsResult.isSuccess){
+    productComments.value = commentsResult.data?.data!;
+  }
+}
 
 const info = ref();
 const comments = ref();

@@ -1,8 +1,8 @@
 <template>
-  <label for="myCheckbox02" class="checkbox">
-    <input class="checkbox__input" type="checkbox" id="myCheckbox02" v-model="checked" :checked="isChecked">
+  <label :for="`myCheckbox02${id}`" class="checkbox " >
+    <input :class="['checkbox__input']" type="checkbox" :id="`myCheckbox02${id}`" v-model="checked" :checked="isChecked">
 
-    <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+    <svg class="checkbox__icon " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
       <rect width="21" height="21" x=".5" y=".5" fill="#ccc" stroke="#006F94" rx="3" />
       <path class="tick" stroke="#F04623" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
     </svg>
@@ -17,7 +17,6 @@ const props = defineProps({
   },
   isChecked:{
     type:Boolean,
-    default:false
   },
   label:{
     type:String
@@ -27,6 +26,8 @@ const props = defineProps({
   }
 })
 
+const id = "id" + Math.random().toString(16).slice(2)
+
 const emits = defineEmits(['valueChanged'])
 
 const checked = ref(props.isChecked);
@@ -35,6 +36,10 @@ watch(
     ()=>checked,
     ()=> emits('valueChanged',checked,props.value)
 )
+
+onMounted(()=>{
+  console.log(props.isChecked)
+})
 
 </script>
 

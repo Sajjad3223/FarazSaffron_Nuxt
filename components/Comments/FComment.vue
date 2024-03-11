@@ -50,6 +50,11 @@
 </template>
 
 <script setup lang="ts">
+import type {CommentDto} from "~/models/comment/commentQueries";
+
+const props = defineProps<{
+  comment:CommentDto
+}>()
 
 const showOptions = ref(false);
 </script>

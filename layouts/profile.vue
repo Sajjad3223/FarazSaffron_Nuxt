@@ -6,10 +6,10 @@
 
     <div class="flex flex-col-reverse lg:flex-row lg:items-start gap-4 mt-12 mx-4 lg:mx-0">
       <div class="w-full lg:w-1/4 p-4 bg-bgWhite dark:bg-gray-800 border dark:border-gray-700 dark:text-white sticky top-12 rounded-xl flex flex-col space-y-6">
-        <div class="flex w-full justify-between items-end ">
+        <div class="flex w-full justify-between items-end " v-if="!accountStore.initLoading">
           <div class="flex flex-col items-start">
-            <strong class="text-lg">سجاد میرشبی</strong>
-            <span class="font-light opacity-70">09154222478</span>
+            <strong class="text-lg">{{accountStore.currentUser.fullName}}</strong>
+            <span class="font-light opacity-70">{{accountStore.currentUser.phoneNumber}}</span>
           </div>
           <NuxtLink class="text-gray-600 dark:text-gray-300" to="/profile/personal-info">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,6 +19,7 @@
             </svg>
           </NuxtLink>
         </div>
+        <div class="animate-pulse w-full bg-gray-200 rounded-xl p-4" v-else></div>
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
@@ -240,6 +241,7 @@ import {useAuthStore} from "~/stores/auth.store";
 import {ToastType, useToast} from "~/composables/useSwal";
 
 const authStore = useAuthStore();
+const accountStore = useAccountStore();
 const toast = useToast();
 
 const LogOut = async () => {

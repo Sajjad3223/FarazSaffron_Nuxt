@@ -8,12 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import {useToast,ToastType} from "~/composables/useSwal";
+import {ToastType, useToast} from "~/composables/useSwal";
 import {CreateRole} from "~/services/role.service";
 
 const title = ref('');
 
 const isLoading = ref(false);
+const emits = defineEmits(['operationFinished']);
 
 const AddRole = async ()=>{
   isLoading.value = true;
@@ -21,7 +22,11 @@ const AddRole = async ()=>{
   const result = await CreateRole(title.value);
   if(result.isSuccess){
     await useToast().showToast('کاربر با موفقیت ایجاد شد',ToastType.success);
+  }else{
+    await useToast().showToast(result.metaData.message,ToastType.error,0);
   }
+
+  emits('operationFinished');
 
   isLoading.value = false;
 }

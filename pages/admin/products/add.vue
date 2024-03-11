@@ -108,7 +108,7 @@
     <div class="w-full relative">
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" >
+        <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" :on-submit="AddProduct">
           <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="addProductData.title" @update:modelValue="generateSlug"/>
           <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="addProductData.slug"/>
           <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" is-price/>
@@ -116,13 +116,22 @@
           <base-f-input type="file" name="mainImage" id="mainImage" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
           <base-f-input label="متن تصویر" name="altImage" id="altImage" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
-          <base-f-select label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
+          <div class="flex items-end">
+            <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
+            <button :class="['grid place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L12.76 7.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
           <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
           <base-f-dimension v-model="addProductData.dimensions" />
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
           <base-f-input label="شماره سریال" name="serialNumber" id="serialNumber" place-holder="شماره سریال درج شده زیر محصول" v-model="addProductData.serialNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" @clicked="AddProduct">
+          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت کالا و رفتن به صفحه بعد
           </base-f-button>
         </Form>
@@ -139,27 +148,27 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2">
-          <product-specification-add v-for="(s,i) in specifications" v-model="s" :key="i"/>
-          <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2"  :on-submit="AddSpecifications">
+          <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
+          <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="responsive">
             افزودن ویژگی جدید
           </base-f-button>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" @clicked="AddSpecifications">
+          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت ویژگی ها و رفتن به صفحه بعد
           </base-f-button>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" :on-submit="AddSeoData">
           <FSeoData v-model="addProductData.seoData" />
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" @clicked="AddSeoData">
+          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت نهایی
           </base-f-button>
         </Form>
       </Transition>
 
-      <div class="absolute -inset-4 rounded-lg bg-white/20 grid place-items-center dark:text-white backdrop-blur-[2px]" v-if="isLoading">
+      <div class="absolute -inset-4 rounded-lg bg-dark/20 dark:bg-white/20 grid place-items-center dark:text-white backdrop-blur-[2px]" v-if="isLoading">
         <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
@@ -191,7 +200,7 @@ import {Form} from "vee-validate";
 import type {
   CreateProductCommand,
   CreateSpecificationViewModel,
-  SetSeoDataCommand
+  SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
@@ -207,12 +216,14 @@ definePageMeta({
   layout:'admin'
 })
 
-const step = ref(1);
+const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
-const createdProductId = ref(1);
+const loadingCategories = ref(false);
+const createdProductId = ref(0);
 
 const toast = useToast();
+const router = useRouter();
 
 //@ts-ignore
 const addProductData:CreateProductCommand = reactive({
@@ -270,16 +281,26 @@ const categorySelected = (id:Number) => {
 const imageFiles = ref([]);
 const imagesAlt = ref('');
 
-const specifications:CreateSpecificationViewModel[] = reactive([
-  {key:'',value:''}
+const specifications:Ref<CreateSpecificationViewModel[]> = ref([
+  {key:'',value:''} as CreateSpecificationViewModel
 ]);
 
 onMounted(async ()=>{
+  await refreshCategories();
+})
+
+const refreshCategories = async ()=>{
+  loadingCategories.value = true;
+
   const result = await GetCategories({pageId:1,take:100,search:''});
   if(result.isSuccess){
     categories.value = result.data?.data!;
   }
-})
+  if(addProductData.categoryId != null)
+    categorySelected(addProductData.categoryId);
+
+  loadingCategories.value = false;
+}
 
 const AddProduct = async ()=>{
   isLoading.value = true;
@@ -339,11 +360,12 @@ const AddSpecifications = async ()=>{
 
   const result:ApiResponse<undefined> = await SetSpecifications({
     productId:createdProductId.value,
-    specifications:specifications
-  });
+    specifications:specifications.value
+  } as SetSpecificationsCommand);
 
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);
+    step.value++;
   }else{
     await toast.showToast(result.metaData.message,ToastType.error,0);
   }
@@ -360,6 +382,7 @@ const AddSeoData = async ()=>{
 
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);
+    await router.push('/admin/products');
   }else{
     await toast.showToast(result.metaData.message,ToastType.error,0);
   }

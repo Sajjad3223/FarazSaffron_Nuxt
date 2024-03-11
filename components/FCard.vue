@@ -5,11 +5,11 @@
                 {'shadow-md':shadow},
                 {'rounded-xl':rounded},
                 {'border dark:border-gray-700':border}]">
-    <nuxt-link to="/product/thing">
-      <img src="~/assets/images/saffron-bar.png" alt="saffron bar" class="w-full object-contain rounded-lg h-52 lg:h-80">
+    <nuxt-link :to="`/product/${product.slug}`">
+      <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-full object-contain rounded-lg h-52 lg:h-80">
     </nuxt-link>
     <div class="w-full px-8">
-      <nuxt-link to="/product/thing" class="text-xl lg:text-2xl font-bold">زعفران نگین</nuxt-link>
+      <nuxt-link :to="`/product/${product.slug}`" class="text-xl lg:text-2xl font-bold">{{ product.title }}</nuxt-link>
       <div class="flex items-center space-x-reverse space-x-2 mt-2">
         <div class="flex items-center space-x-2 text-black space-x-reverse bg-[#E6D9C6] dark:bg-gray-900 dark:text-white px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
             <path d="M8.80506 4.58L8.06506 4.975L3.31006 2.3L4.09506 1.875L8.68506 4.465C8.73506 4.495 8.77506 4.535 8.80506 4.58Z" fill="currentColor"/>
             <path d="M8.875 5.48499V6.61999C8.875 6.82499 8.705 6.99499 8.5 6.99499C8.295 6.99499 8.125 6.82499 8.125 6.61999V5.85999L8.875 5.48499Z" fill="currentColor"/>
           </svg>
-          <span class="text-xs">شیشه ای</span>
+          <span class="text-xs">{{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}</span>
         </div>
         <div class="flex items-center space-x-2 text-black space-x-reverse bg-[#E6D9C6] dark:bg-gray-900 dark:text-white px-4 py-1 rounded-full">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,11 +37,11 @@
           <small class="text-xs">ریال</small>
         </strong>-->
         <strong class="text-xl lg:text-2xl">
-          2,206,000
+          {{product.price.toLocaleString()}}
           <small class="text-xs">ریال</small>
         </strong>
       </div>
-      <base-f-button type="button" w-full color="brand" @click="cartStore.addToCart">
+      <base-f-button type="button" w-full color="brand" text-color="white" @click="cartStore.addToCart(product.id)">
         افزودن به سبد خرید
       </base-f-button>
     </div>
@@ -50,6 +50,8 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart.store";
+import {SITE_URL} from "~/utilities/api.config";
+import {EPackingType} from "~/models/product/EPackingType";
 
 const cartStore = useCartStore();
 
@@ -66,6 +68,10 @@ const props = defineProps({
     type:Boolean,
     default:true
   },
+  product:{
+    type:Object,
+    required:true
+  }
 })
 
 </script>

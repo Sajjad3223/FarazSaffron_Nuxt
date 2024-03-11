@@ -27,7 +27,7 @@ const props = defineProps<{
 <style scoped>
 
 .badge{
-  @apply px-3 rounded-full;
+  @apply px-3 rounded-full w-max;
 }
 
 .badge-warning{
