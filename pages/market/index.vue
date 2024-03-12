@@ -80,12 +80,12 @@
               <li>امتیاز</li>
             </ul>
 
-            <span class="hidden lg:block mr-auto text-sm opacity-70">2,345 کالا</span>
+            <span class="hidden lg:block mr-auto text-sm opacity-70">{{ products.length }} کالا</span>
           </div>
           <div class="p-4 bg-bgWhite dark:bg-gray-800 drop-shadow rounded-xl">
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <li v-for="i in 15" :key="i">
-                <f-card :shadow="false" :rounded="false"/>
+              <li v-for="p in products" :key="p.id">
+                <f-card :shadow="false" :rounded="false" :product="p"/>
               </li>
             </ul>
           </div>
@@ -96,7 +96,27 @@
 </template>
 
 <script setup lang="ts">
+import type {ProductFilterData} from "~/models/product/productQueries";
+import {GetProducts} from "~/services/product.service";
+import {EOrderBy} from "~/models/product/EOrderBy";
 
+const loading = ref(false);
+const products:Ref<ProductFilterData[]> = ref([]);
+
+onMounted(async ()=>{
+  loading.value = true;
+
+  const productsResult = await GetProducts({
+    pageId:1,
+    orderBy:EOrderBy.Newest,
+    take:9,
+  });
+  if(productsResult.isSuccess){
+    products.value = productsResult.data?.data!;
+  }
+
+  loading.value = false;
+})
 </script>
 
 <style scoped>

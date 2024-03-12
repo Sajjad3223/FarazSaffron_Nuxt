@@ -280,9 +280,12 @@ import type {ProductFilterData} from "~/models/product/productQueries";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 
+const loading = ref(false);
 const lastProducts:Ref<ProductFilterData[]> = ref([]);
 
 onMounted(async ()=>{
+  loading.value = true;
+
   const lastProductsResult = await GetProducts({
     pageId:1,
     orderBy:EOrderBy.Newest,
@@ -291,6 +294,8 @@ onMounted(async ()=>{
   if(lastProductsResult.isSuccess){
     lastProducts.value = lastProductsResult.data?.data!;
   }
+
+  loading.value = false;
 })
 
 </script>

@@ -27,24 +27,38 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    itemId:Number,
-  })
+  import type {OrderItem} from "~/models/cart/cartQueries";
 
-  const emits = defineEmits(['removeItem']);
+  const props = defineProps<{
+    item:OrderItem,
+  }>()
 
-  const count = ref(1);
+  const count = ref(props.item.count);
+
+  const cartStore = useCartStore();
 
   const increaseCount = () =>{
-    // TODO Check Quantity in Store
-    count.value ++;
+    cartStore.increaseCount(props.item.id);
   }
   const decreaseCount = () =>{
     if(count.value <= 1) {
-      // TODO Remove From Cart
-      emits('removeItem',props.itemId);
-      return;
+      cartStore.decreaseCount(props.item.id);
+    }else{
+      cartStore.decreaseCount(props.item.id);
     }
-    count.value --;
   }
 </script>
+
+<style lang="css" scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>

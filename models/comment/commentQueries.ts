@@ -12,6 +12,7 @@ export interface CommentFilterParams extends BaseFilterParams{
     startDate?:     Date | null;
     endDate?:       Date | null;
     userRequested?: number | null;
+    userId?: number | null;
 }
 
 export interface CommentDto extends BaseDto{

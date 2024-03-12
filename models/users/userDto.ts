@@ -26,6 +26,7 @@ export interface AddressDto extends BaseDto {
     postCode: string;
     plaque: number;
     unit: number;
+    isActiveAddress: boolean;
 }
 
 export interface WalletDto extends BaseDto {

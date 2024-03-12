@@ -33,6 +33,18 @@ export interface ChangePasswordCommand {
     newPassword: string;
 }
 
+export interface AddUserAddressCommand {
+    receiverFirstName: string
+    receiverLastName: string
+    receiverPhoneNumber: string
+    state: string
+    city: string
+    street: string
+    postCode: string
+    plaque: number
+    unit: number
+}
+
 export interface AdminEditUserCommand {
     userId: number;
     firstName: string;

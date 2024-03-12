@@ -11,12 +11,12 @@
       </div>
       <hr class="mt-3 border-brandOrange/50">
     </div>
-    <div class="flex flex-col lg:flex-row items-start gap-4 mt-8">
+    <div class="flex flex-col lg:flex-row items-start gap-4 mt-8" v-if="cartStore.PendingOrder != null">
       <div class="flex-1 flex flex-col p-4 bg-bgWhite dark:bg-gray-800 dark:text-white border rounded-xl border-black/20">
         <div class="w-full flex items-start justify-between">
           <div class="flex flex-col items-start">
             <strong>سبد خرید شما</strong>
-            <small class="font-light opacity-70">2 کالا</small>
+            <small class="font-light opacity-70"> {{ cartStore.cartItemsCount }} کالا </small>
           </div>
           <button>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90 opacity-50">
@@ -26,16 +26,16 @@
             </svg>
           </button>
         </div>
-        <ul class="w-full mt-8 flex flex-col">
-          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none dark:border-gray-600" v-for="i in 2" :key="i">
+        <ul class="w-full mt-8 flex flex-col" >
+          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none dark:border-gray-600" v-for="i in cartStore.PendingOrder.orderItems" :key="i.id">
             <div class="w-1/5 flex flex-col items-center">
-              <NuxtLink to="/product/thing" class="w-full">
-                <img src="~/assets/images/saffron-bar.png" alt="saffron" class="w-full rounded-lg">
+              <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="w-full">
+                <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg">
               </NuxtLink>
             </div>
             <div class="flex-1 flex flex-col items-start">
               <strong class="text-xl mb-6 lg:mt-8">
-                زعفران شیشه ای نگین صد در صد خالص - 4 گرمی
+                {{ i.itemInfo.productName }}
               </strong>
 
               <ul class="flex flex-col space-y-1">
@@ -66,32 +66,32 @@
               </ul>
 
               <div class="mt-4">
-                <span class="text-danger text-sm font-light">350,000 ريال تخفیف</span>
+<!--            <span class="text-danger text-sm font-light"> ريال تخفیف</span>-->
                 <div class="flex items-center space-x-1 space-x-reverse">
-                  <strong class="text-2xl">2,209,000</strong>
+                  <strong class="text-2xl">{{ i.totalPrice.toLocaleString() }}</strong>
                   <small>ريال</small>
                 </div>
               </div>
 
-              <cart-counter :item-id="i" />
+              <cart-counter :item="i" />
 
             </div>
           </li>
         </ul>
       </div>
-      <div class="w-full lg:w-1/4 flex flex-col space-y-4">
+      <div class="w-full lg:w-1/4 flex flex-col space-y-4" >
         <div class="p-6 bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-700 rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
           <div class="flex items-center justify-between opacity-70">
-            <span class="text-sm">قیمت کالاها (2)</span>
+            <span class="text-sm" title="بدون اعمال تخفیف ها">قیمت کالاها ({{ cartStore.cartItemsCount }})</span>
             <strong>
-              4,253,000
+              {{cartStore.PendingOrder.getFinalPrice.toLocaleString()}}
               <small class="font-light">ریال</small>
             </strong>
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-sm">جمع سبد خرید</span>
+            <span class="text-sm" title="با اعمال تخفیف ها">جمع سبد خرید</span>
             <strong>
-              3,780,000
+              {{cartStore.PendingOrder.getFinalPrice.toLocaleString()}}
               <small class="font-light">ریال</small>
             </strong>
           </div>
@@ -157,9 +157,9 @@
       </div>
       <div class="w-full flex mt-8">
         <ul class="w-full flex space-x-8 space-x-reverse flex-shrink-0 overflow-x-auto p-4">
-          <li v-for="i in 4" :key="i" class="flex-shrink-0">
+<!--          <li v-for="i in 4" :key="i" class="flex-shrink-0">
             <f-card />
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
@@ -168,19 +168,9 @@
 </template>
 
 <script setup lang="ts">
+import {SITE_URL} from "~/utilities/api.config";
+import {useCartStore} from "~/stores/cart.store";
+
+const cartStore = useCartStore();
 
 </script>
-
-<style scoped>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-</style>

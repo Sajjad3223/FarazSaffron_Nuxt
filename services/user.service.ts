@@ -2,6 +2,7 @@ import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {UserDto} from "~/models/users/userDto";
 import type {
+    AddUserAddressCommand,
     AdminChargeWalletCommand,
     AdminEditUserCommand, AdminFinalizeWalletCommand,
     AdminSetUserRolesCommand,
@@ -23,6 +24,17 @@ export const EditUser = (command:EditUserCommand):Promise<ApiResponse<undefined>
 }
 export const ChargeWallet = (amount:number):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/user/charge-wallet?price=${amount}`,{
+        method:'PUT',
+    });
+}
+export const AddUserAddress = (command:AddUserAddressCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/address`,{
+        method:'POST',
+        body:command
+    });
+}
+export const SetAddressAsActive = (addressId:number):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/address/${addressId}`,{
         method:'PUT',
     });
 }

@@ -12,16 +12,16 @@
       </div>
       <hr class="my-3 border-2 dark:border-gray-600">
     </div>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 drop-shadow space-y-3 p-4 rounded-lg border" v-for="i in 2" :key="i">
-        <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto">
-        <strong>جاده بایگ، شرکت فراز زعفران</strong>
-        <span class="font-light text-sm opacity-70">خراسان رضوی</span>
-        <span class="font-light text-sm opacity-70">تربت حیدریه</span>
-        <span class="font-light text-sm opacity-70">کد پستی: 1234567890</span>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" v-if="!accountStore.initLoading">
+      <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 drop-shadow space-y-3 p-4 rounded-lg border" v-for="a in accountStore.currentUser?.addresses" :key="a.id">
+        <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
+        <strong>{{ a.street }}</strong>
+        <span class="font-light text-sm opacity-70">{{ a.state }}</span>
+        <span class="font-light text-sm opacity-70">{{ a.city }}</span>
+        <span class="font-light text-sm opacity-70">کد پستی: {{ a.postCode }}</span>
         <div></div>
-        <span class="font-light text-sm opacity-70">تحویل گیرنده: سجاد میرشبی</span>
-        <span class="font-light text-sm opacity-70">شماره تماس: 09123456789</span>
+        <span class="font-light text-sm opacity-70">تحویل گیرنده: {{ a.receiverFirstName + a.receiverLastName }}</span>
+        <span class="font-light text-sm opacity-70">شماره تماس: {{ a.receiverPhoneNumber }}</span>
         <hr class="dark:opacity-30">
         <button class="w-full grid place-items-center text-danger">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,15 +42,28 @@
       </li>
     </ul>
     <base-f-modal v-model="showAddressModal" title="افزودن آدرس جدید">
-      <profile-user-address />
+      <profile-user-address @address-created="showAddressModal = false,accountStore.initData()" />
     </base-f-modal>
   </div>
 </template>
 
 <script setup lang="ts">
+import {SetAddressAsActive} from "~/services/user.service";
+import {ToastType} from "~/composables/useSwal";
+
 definePageMeta({
   layout:'profile'
 })
 
 const showAddressModal = ref(false);
+
+const accountStore = useAccountStore();
+const toast = useToast();
+
+const setAsActive = async (addressId:number) => {
+  const result = await SetAddressAsActive(addressId);
+  if(result.isSuccess){
+    await toast.showToast('آدرس به عنوان آدرس اصلی ثبت شد',ToastType.success,3000,true);
+  }
+}
 </script>

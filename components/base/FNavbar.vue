@@ -24,7 +24,7 @@
             <NuxtLink to="/">
               <img src="~/assets/images/gp-flower-cuted.png" alt="faraz saffron logo" class="h-[30px] rounded-full ml-8">
             </NuxtLink>
-            <form class="search relative flex items-center w-1/2">
+            <Form class="search relative flex items-center w-1/2">
               <base-f-input type="search" place-holder="دنبال چه محصولی هستید؟" id="search" name="search" v-model="searchValue">
                 <template v-slot:inputIcon>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
                   </svg>
                 </template>
               </base-f-input>
-            </form>
+            </Form>
           </div>
           <div class="flex items-center space-x-4 space-x-reverse">
             <div class="user flex items-center space-x-reverse space-x-3 border-2 border-black/50 dark:border-white/50 dark:text-white rounded-lg p-1 px-2" v-if="!authStore.isLoggedIn">
@@ -243,6 +243,7 @@
 <script setup lang="ts">
 import {useAuthStore} from "~/stores/auth.store";
 import {useCartStore} from "~/stores/cart.store";
+import {Form} from "vee-validate";
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
