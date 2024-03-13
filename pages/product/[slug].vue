@@ -1,5 +1,10 @@
 <template>
   <div class="mt-12 flex flex-col space-y-8 mx-4 lg:mx-0" v-if="!isLoading && product">
+    <Head>
+      <Title>
+        {{product.title}}
+      </Title>
+    </Head>
     <div>
       <ul class="flex items-center gap-2 text-xs lg:text-base">
         <li class="text-primary font-medium">
@@ -79,21 +84,21 @@
         </div>
       </div>
 
-      <div class="fixed inset-0 bg-black/50 grid place-items-center z-40 m-0 p-0" v-if="showBanner" @click.self="showBanner = false" style="margin: 0 !important">
-        <div class="w-4/5 h-auto relative m-auto grid place-items-center">
-          <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-full rounded-2xl">
-          <button class="absolute top-2 right-2 w-8 h-8 bg-danger rounded-lg grid place-items-center text-white drop-shadow" @click.prevent="showBanner = false">
+      <div class="fixed inset-0 bg-black/50 grid place-items-center z-40 m-0 p-0" v-if="showBannerModal" @click.self="showBannerModal = false" style="margin: 0 !important">
+        <div class="w-4/5 h-auto max-w-[1000px] relative m-auto flex items-center ">
+          <img :src="bannerImage" :alt="product.mainImage.alt" class="w-full h-full object-cover rounded-2xl">
+          <button class="absolute top-2 right-2 w-8 h-8 bg-danger rounded-lg grid place-items-center text-white drop-shadow" @click.prevent="showBannerModal = false">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-45">
               <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M12 18V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -right-6 grid place-items-center">
+          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -right-6 grid place-items-center hidden">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -left-6 grid place-items-center">
+          <button class="w-12 h-12 rounded-full bg-bgWhite drop-shadow absolute -left-6 grid place-items-center hidden">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
               <path d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -103,7 +108,7 @@
       <div class="w-full lg:w-1/3 flex flex-col lg:order-1 mx-4 lg:mx-0 flex-shrink space-y-4">
         <div class="rounded-2xl relative w-full overflow-hidden">
           <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-full rounded-2xl">
-          <div class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
+          <div class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`)">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.3999 23.4H28.3999" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M23.3999 28.4V18.4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -117,7 +122,7 @@
             <div class="rounded-2xl border-2 border-brandOrange min-w-24 max-w-32 aspect-square object-cover">
               <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="rounded-2xl h-full mx-auto object-cover">
             </div>
-            <button class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner = true">
+            <button class="absolute inset-0 opacity-0 hover:opacity-70 bg-black/40 rounded-2xl text-white grid place-items-center cursor-pointer transition duration-100" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`)">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.3999 23.4H28.3999" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M23.3999 28.4V18.4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -137,8 +142,9 @@
               <path d="M12.4667 9.64C12.2267 9.88 12.0934 10.34 12.1734 10.6667L12.6334 12.6733C12.8267 13.5067 12.7067 14.1333 12.2934 14.4333C12.1267 14.5533 11.9267 14.6133 11.6934 14.6133C11.3534 14.6133 10.9534 14.4867 10.5134 14.2267L8.56003 13.0667C8.25337 12.8867 7.7467 12.8867 7.44003 13.0667L5.4867 14.2267C4.7467 14.66 4.11337 14.7333 3.7067 14.4333C3.55337 14.32 3.44003 14.1667 3.3667 13.9667L11.4734 5.86C11.78 5.55333 12.2134 5.41333 12.6334 5.48666L13.3067 5.6C14.0134 5.72 14.4867 6.04 14.64 6.50666C14.7867 6.97333 14.5867 7.51333 14.08 8.02L12.4667 9.64Z" fill="#A1C53C"/>
             </svg>
 
-            <strong>{{ totalScore / productComments.length }}</strong>
-            <small class="self-end font-light">امتیاز خریداران</small>
+            <strong v-if="totalScore > 0">{{ totalScore / productComments.length }}</strong>
+            <span class="font-light text-xs" v-else>هنوز امتیازی ثبت نشده است</span>
+            <small class="self-end font-light" v-if="totalScore > 0">امتیاز خریداران</small>
             <div class="w-px bg-black/30 dark:bg-white/30"></div>
             <a href="#comments" class="text-sm text-primary self-end hover:underline underline-offset-4 font-light">{{productComments.length}} دیدگاه</a>
           </div>
@@ -148,7 +154,7 @@
                 <path d="M9 13.5L15 16.5M15 7.5L9 10.5M18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18C21 19.6569 19.6569 21 18 21ZM6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12C9 13.6569 7.65685 15 6 15ZM18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6C21 7.65685 19.6569 9 18 9Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <button class="w-10 h-10 bg-secondary/30 dark:bg-gray-900 rounded-xl grid place-items-center">
+            <button class="w-10 h-10 bg-secondary/30 dark:bg-gray-900 rounded-xl grid place-items-center hidden">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.1963 14.1963L19.5498 13.8427L19.1963 14.1963ZM19.5858 14.5858L19.2323 14.9394L19.5858 14.5858ZM19.9478 16.3197L20.4215 16.4795L19.9478 16.3197ZM19.3198 16.9475L19.4796 17.4213L19.3198 16.9475ZM19.8124 14.831L20.2186 14.5394L19.8124 14.831ZM19.9868 15.2523L19.4934 15.3333L19.9868 15.2523ZM12 3L12 2.5L12 3ZM4.0132 15.2523L4.5066 15.3333L4.0132 15.2523ZM4.1875 14.831L3.78136 14.5394L4.1875 14.831ZM4.05245 16.3196L4.52623 16.1598L4.05245 16.3196ZM4.68018 16.9475L4.83998 16.4737L4.68018 16.9475ZM15 17H15.5C15.5 16.7239 15.2761 16.5 15 16.5V17ZM9 17V16.5C8.72386 16.5 8.5 16.7239 8.5 17H9ZM18.3195 1.61435C18.0989 1.44817 17.7854 1.49223 17.6192 1.71276C17.4531 1.9333 17.4971 2.2468 17.7176 2.41299L18.3195 1.61435ZM20.7138 6.21495C20.8238 6.46823 21.1183 6.58436 21.3716 6.47434C21.6249 6.36431 21.741 6.0698 21.631 5.81652L20.7138 6.21495ZM6.28287 2.41299C6.50341 2.2468 6.54747 1.9333 6.38128 1.71276C6.2151 1.49223 5.9016 1.44817 5.68106 1.61435L6.28287 2.41299ZM2.36953 5.81652C2.2595 6.0698 2.37563 6.36431 2.62891 6.47434C2.88219 6.58436 3.1767 6.46823 3.28672 6.21495L2.36953 5.81652ZM4.76762 14.9393L5.15712 14.5498L4.45001 13.8427L4.06051 14.2322L4.76762 14.9393ZM5.5 13.7224V10H4.5V13.7224H5.5ZM18.5 10V13.7224H19.5V10H18.5ZM18.8427 14.5498L19.2323 14.9394L19.9394 14.2323L19.5498 13.8427L18.8427 14.5498ZM18.5856 16.5H5.41406V17.5H18.5856V16.5ZM19.5002 15.5858C19.5002 16.0117 19.4936 16.1017 19.474 16.1599L20.4215 16.4795C20.5068 16.2266 20.5002 15.931 20.5002 15.5858H19.5002ZM18.5856 17.5C18.9309 17.5 19.2267 17.5066 19.4796 17.4213L19.16 16.4737C19.1018 16.4934 19.0115 16.5 18.5856 16.5V17.5ZM19.474 16.1599C19.4241 16.3077 19.308 16.4238 19.16 16.4737L19.4796 17.4213C19.9233 17.2716 20.2718 16.9234 20.4215 16.4795L19.474 16.1599ZM19.2323 14.9394C19.3634 15.0706 19.3881 15.0973 19.4063 15.1226L20.2186 14.5394C20.1417 14.4323 20.0468 14.3397 19.9394 14.2323L19.2323 14.9394ZM20.5002 15.5858C20.5002 15.4324 20.5015 15.3011 20.4802 15.1713L19.4934 15.3333C19.4985 15.3644 19.5002 15.4018 19.5002 15.5858H20.5002ZM19.4063 15.1226C19.451 15.1849 19.4809 15.257 19.4934 15.3333L20.4802 15.1713C20.4428 14.9436 20.3535 14.7273 20.2186 14.5394L19.4063 15.1226ZM18.5 13.7224C18.5 14.0327 18.6233 14.3304 18.8427 14.5498L19.5498 13.8427C19.5179 13.8108 19.5 13.7675 19.5 13.7224H18.5ZM12 3.5C15.5899 3.49999 18.5 6.41014 18.5 10H19.5C19.5 5.85786 16.1421 2.49999 12 2.5L12 3.5ZM5.5 10C5.5 6.41016 8.41016 3.50001 12 3.5L12 2.5C7.85787 2.50001 4.5 5.85787 4.5 10H5.5ZM5.15712 14.5498C5.37635 14.3306 5.5 14.0331 5.5 13.7224H4.5C4.5 13.7673 4.48213 13.8106 4.45001 13.8427L5.15712 14.5498ZM4.5 15.5858C4.5 15.4008 4.50154 15.3642 4.5066 15.3333L3.5198 15.1713C3.49846 15.3014 3.5 15.4334 3.5 15.5858H4.5ZM4.06051 14.2322C3.95284 14.3399 3.85822 14.4323 3.78136 14.5394L4.59364 15.1226C4.61186 15.0972 4.63668 15.0703 4.76762 14.9393L4.06051 14.2322ZM4.5066 15.3333C4.51915 15.2568 4.54899 15.1848 4.59364 15.1226L3.78136 14.5394C3.64632 14.7274 3.55714 14.9438 3.5198 15.1713L4.5066 15.3333ZM3.5 15.5858C3.5 15.931 3.49339 16.2266 3.57868 16.4795L4.52623 16.1598C4.50661 16.1017 4.5 16.0118 4.5 15.5858H3.5ZM5.41406 16.5C4.98823 16.5 4.89815 16.4934 4.83998 16.4737L4.52037 17.4213C4.77321 17.5066 5.0688 17.5 5.41406 17.5V16.5ZM3.57868 16.4795C3.72834 16.9231 4.07645 17.2715 4.52037 17.4213L4.83998 16.4737C4.69217 16.4239 4.57616 16.3079 4.52623 16.1598L3.57868 16.4795ZM14.5 17V18H15.5V17H14.5ZM9.5 18V17H8.5V18H9.5ZM9 17.5H15V16.5H9V17.5ZM12 20.5C10.6193 20.5 9.5 19.3807 9.5 18H8.5C8.5 19.933 10.067 21.5 12 21.5V20.5ZM14.5 18C14.5 19.3807 13.3807 20.5 12 20.5V21.5C13.933 21.5 15.5 19.933 15.5 18H14.5ZM17.7176 2.41299C19.0279 3.40034 20.0601 4.71018 20.7138 6.21495L21.631 5.81652C20.9085 4.15335 19.7676 2.70563 18.3195 1.61435L17.7176 2.41299ZM5.68106 1.61435C4.23288 2.70563 3.092 4.15335 2.36953 5.81652L3.28672 6.21495C3.94039 4.71018 4.97262 3.40034 6.28287 2.41299L5.68106 1.61435Z" fill="currentColor"/>
               </svg>
@@ -300,10 +306,11 @@
               <span class="text-sm font-light"> از مجموع 160 امتیاز</span>
             </div>
             <small>شما هم درباره این محصول نظری ثبت کنید.</small>
-            <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300" @click.prevent="showAddCommentModal = true">ثبت دیدگاه</a>
+            <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300" v-if="authStore.isLoggedIn" @click.prevent="showAddCommentModal = true">ثبت دیدگاه</a>
+            <a href="" class="w-full rounded-xl border-2 opacity-70 py-2 text-center hover:opacity-100 transition-opacity duration-300" v-else @click.prevent="authStore.isLoginModalOpen = true">برای ثبت دیدگاه ابتدا وارد شوید</a>
           </div>
           <base-f-modal title="افزودن دیدگاه جدید" v-model="showAddCommentModal">
-            <product-add-comment :postType="EPostType.Product" :postId="product.id" @comment-submitted="showAddCommentModal = false,loadComments"/>
+            <product-add-comment :postType="EPostType.Product" :postId="product.id" @comment-submitted="showAddCommentModal = false,loadComments" :post-title="product.title" :post-slug="product.slug" :parent-id="selectedComment"/>
           </base-f-modal>
           <div class="flex-1 lg:pr-10 lg:border-r-4 border-brandOrange/50 mt-8 lg:mt-0">
             <ul class="flex-flex-col space-y-6">
@@ -387,15 +394,23 @@ const slug:string = route.params.slug.toString()!;
 
 const cartStore = useCartStore();
 
-const showBanner = ref(false);
+const bannerImage = ref('');
+const showBannerModal = ref(false);
+const showBanner = (src:string) => {
+  bannerImage.value = src;
+  showBannerModal.value = true;
+}
+
+const authStore = useAuthStore();
 const isLoading = ref(false);
 const showAddCommentModal = ref(false);
 const pageId = ref(1);
+const selectedComment:Ref<Number | null> = ref(null);
 
 const product:Ref<ProductDto | undefined> = ref(undefined);
 const productComments:Ref<CommentDto[]> = ref([]);
 const commentsFilterParams:CommentFilterParams = reactive({
-  postId:5,
+  postId:null,
   postType:EPostType.Product,
   take:10,
   pageId:pageId,
@@ -416,14 +431,14 @@ onMounted(async ()=>{
   const result = await GetProduct(slug);
   if(result.isSuccess){
     product.value = result.data!;
+    await loadComments();
   }
-
-  await loadComments();
 
   isLoading.value = false;
 })
 
 const loadComments = async ()=>{
+  commentsFilterParams.postId = product.value?.id;
   const commentsResult = await GetComments(commentsFilterParams);
   if(commentsResult.isSuccess){
     productComments.value = commentsResult.data?.data!;
@@ -431,9 +446,11 @@ const loadComments = async ()=>{
 }
 
 const totalScore = computed(()=>{
-  let scoreSum = 0;
-  productComments.value.forEach(c=>scoreSum += c.score);
-  return scoreSum
+  let scoreSum:number = 0;
+  if(productComments.value.length > 0){
+    productComments.value.forEach(c=>scoreSum += c.score);
+  }
+  return scoreSum;
 })
 
 const info = ref();

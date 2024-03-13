@@ -9,6 +9,12 @@ export const GetComments = (params:CommentFilterParams):Promise<ApiResponse<Comm
         params
     });
 }
+export const GetUserComments = (params:CommentFilterParams):Promise<ApiResponse<CommentFilterResult>> => {
+    return FetchApi("/comment/user",{
+        method:'GET',
+        params
+    });
+}
 export const GetPostScore = (params:GetPostScoreParams):Promise<ApiResponse<number>> => {
     return FetchApi("/comment/score",{
         method:'GET',

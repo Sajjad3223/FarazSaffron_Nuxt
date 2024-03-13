@@ -34,6 +34,7 @@ export const useToast = () => {
                     icon:'success',
                     timerProgressBar: duration > 0,
                     timer:duration,
+                    confirmButtonText:'باشه'
                 })
             }
             case ToastType.error: {
@@ -44,6 +45,7 @@ export const useToast = () => {
                     icon:'error',
                     timerProgressBar: duration > 0,
                     timer:duration,
+                    confirmButtonText:'باشه'
                 })
             }
             case ToastType.warning: {
@@ -57,7 +59,7 @@ export const useToast = () => {
                     showConfirmButton:true,
                     confirmButtonText:'بله',
                     showCancelButton:true,
-                    cancelButtonText:'انصراف'
+                    cancelButtonText:'انصراف',
                 })
             }
             case ToastType.info: {
@@ -68,6 +70,7 @@ export const useToast = () => {
                     icon:'info',
                     timerProgressBar: duration > 0,
                     timer:duration,
+                    confirmButtonText:'باشه'
                 })
             }
         }

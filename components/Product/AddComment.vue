@@ -1,5 +1,5 @@
 <template>
-  <Form action="" class="flex flex-col space-y-4">
+  <Form class="flex flex-col space-y-4">
     <div class="flex flex-col w-full space-y-2">
       <span class="font-bold mr-4">به این محصول امتیاز دهید</span>
       <div class="flex flex-col px-6 items-center">
@@ -32,6 +32,8 @@ const props = defineProps<{
   postId:number,
   postType:EPostType,
   parentId?:number,
+  postTitle:string,
+  postSlug:string
 }>();
 
 const sendCommentData:SendCommentCommand = reactive({
@@ -39,7 +41,9 @@ const sendCommentData:SendCommentCommand = reactive({
   postId:props.postId,
   parentId:props.parentId,
   content:'',
-  score:2
+  score:2,
+  postSlug:props.postSlug,
+  postTitle:props.postTitle
 })
 
 const emits = defineEmits(['commentSubmitted']);

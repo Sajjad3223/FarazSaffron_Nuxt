@@ -2,15 +2,15 @@ import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {ProductDto, ProductFilterParams, ProductFilterResult} from "~/models/product/productQueries";
 import type {
-    CreateProductCommand,
     EditProductCommand, SetMainImageCommand, SetMainImageFromImagesCommand,
-    SetProductDiscountCommand, SetProductImagesCommand, SetSeoDataCommand, SetSpecificationsCommand
+    SetProductDiscountCommand, SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import type {SetActivityCommand} from "~/models/setActivityCommand";
 
 export const GetProducts = (params:ProductFilterParams):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi("/product",{
         method:'GET',
+        params
     });
 }
 export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
@@ -24,6 +24,7 @@ export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
 export const GetProductsByAdmin = (params:ProductFilterParams):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi("/admin/product",{
         method:'GET',
+        params
     });
 }
 export const GetProductById = (id:number):Promise<ApiResponse<ProductDto>> => {

@@ -4,22 +4,22 @@
   <div class="flex flex-col mx-4 lg:mx-0">
     <div class="w-full mt-8">
       <div>
-        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2 dark:text-white">
+        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2 dark:text-currentColor">
           <strong>سبد خرید</strong>
-          <span class="grid place-items-center text-sm font-thin rounded-md bg-brandOrange text-white w-4 h-4">2</span>
+          <span class="grid place-items-center text-sm font-thin rounded-md bg-brandOrange text-currentColor w-4 h-4" v-if="cartStore.cartItemsCount > 0">{{cartStore.cartItemsCount}}</span>
         </div>
       </div>
       <hr class="mt-3 border-brandOrange/50">
     </div>
     <div class="flex flex-col lg:flex-row items-start gap-4 mt-8" v-if="cartStore.PendingOrder != null">
-      <div class="flex-1 flex flex-col p-4 bg-bgWhite dark:bg-gray-800 dark:text-white border rounded-xl border-black/20">
+      <div class="flex-1 flex flex-col p-4 bg-bgWhite dark:bg-gray-800 dark:text-currentColor border rounded-xl border-black/20">
         <div class="w-full flex items-start justify-between">
           <div class="flex flex-col items-start">
             <strong>سبد خرید شما</strong>
             <small class="font-light opacity-70"> {{ cartStore.cartItemsCount }} کالا </small>
           </div>
           <button>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90 opacity-50">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90 opacity-50" >
               <path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
               <path d="M19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
               <path d="M12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
@@ -68,7 +68,7 @@
               <div class="mt-4">
 <!--            <span class="text-danger text-sm font-light"> ريال تخفیف</span>-->
                 <div class="flex items-center space-x-1 space-x-reverse">
-                  <strong class="text-2xl">{{ i.totalPrice.toLocaleString() }}</strong>
+                  <strong class="text-2xl">{{ i.price.toLocaleString() }}</strong>
                   <small>ريال</small>
                 </div>
               </div>
@@ -80,7 +80,7 @@
         </ul>
       </div>
       <div class="w-full lg:w-1/4 flex flex-col space-y-4" >
-        <div class="p-6 bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-700 rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
+        <div class="p-6 bg-bgWhite dark:bg-gray-800 dark:text-currentColor dark:border-gray-700 rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
           <div class="flex items-center justify-between opacity-70">
             <span class="text-sm" title="بدون اعمال تخفیف ها">قیمت کالاها ({{ cartStore.cartItemsCount }})</span>
             <strong>
@@ -108,7 +108,7 @@
               (30%) 1,753,000<small class="font-light">ریال</small>
             </strong>
           </div>
-          <NuxtLink class="bg-brandOrange rounded-lg w-full text-white font-bold text-xl p-4 text-center" to="/checkout/shipping">
+          <NuxtLink class="bg-brandOrange rounded-lg w-full text-currentColor font-bold text-xl p-4 text-center" to="/checkout/shipping">
             تایید و تکمیل سفارش
           </NuxtLink>
           <hr class="dark:border-gray-600">
@@ -124,7 +124,7 @@
             <strong>150 <small class="font-light"> امتیاز</small></strong>
           </div>
         </div>
-        <p class="font-light text-sm mx-4 opacity-70 dark:text-white">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از سبد حذف می‌شوند
+        <p class="font-light text-sm mx-4 opacity-70 dark:text-currentColor">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از سبد حذف می‌شوند
         </p>
         <div class="p-4 border rounded-xl px-6 bg-bgWhite/70 dark:bg-gray-700 dark:border-gray-600">
           <div class="flex space-x-2 items-center space-x-reverse">
@@ -142,13 +142,26 @@
               ارسال <b class="text-base">رایگان</b> برای خرید های بالاتر از 500 هزار تومان
             </span>
           </div>
-          <p class="text-sm mt-2 font-light dark:text-white">با خرید بیشتر از 500 هزار تومان از فروشگاه ما هزینه ارسال به هر کجای کشور عزیزمان را مهمان ما باشید</p>
+          <p class="text-sm mt-2 font-light dark:text-currentColor">با خرید بیشتر از 500 هزار تومان از فروشگاه ما هزینه ارسال به هر کجای کشور عزیزمان را مهمان ما باشید</p>
         </div>
       </div>
     </div>
+    <div v-else class="p-8 border rounded-lg mt-8 flex flex-col items-center space-y-4">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-[400%] my-12 opacity-50">
+        <path d="M8.5 14.25C8.5 16.17 10.08 17.75 12 17.75C13.92 17.75 15.5 16.17 15.5 14.25" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8.81 2L5.19 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15.19 2L18.81 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 7.85001C2 6.00001 2.99 5.85001 4.22 5.85001H19.78C21.01 5.85001 22 6.00001 22 7.85001C22 10 21.01 9.85001 19.78 9.85001H4.22C2.99 9.85001 2 10 2 7.85001Z" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <strong>هنوز کالایی به سبد خرید اضافه نکرده اید.</strong>
+      <base-f-button is-link to="/market" bordered color="brand">
+        رفتن به فروشگاه
+      </base-f-button>
+    </div>
 
     <div class="rounded-xl border p-4 mt-8">
-      <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12 dark:text-white">
+      <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12 dark:text-currentColor">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
           <path d="M14.6667 8.00004C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00004C1.33337 4.32004 4.32004 1.33337 8.00004 1.33337C11.68 1.33337 14.6667 4.32004 14.6667 8.00004Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M10.4733 10.12L8.40663 8.88671C8.04663 8.67338 7.7533 8.16005 7.7533 7.74005V5.00671" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

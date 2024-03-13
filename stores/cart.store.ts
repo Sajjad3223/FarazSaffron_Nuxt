@@ -2,6 +2,7 @@ import {AddToCart, DecreaseCount, GetPendingOrder, IncreaseCount, RemoveItem} fr
 import type {OrderDto} from "~/models/cart/cartQueries";
 import {ToastType} from "~/composables/useSwal";
 import {awaitExpression} from "@babel/types";
+import type {ApiResponse} from "~/models/apiResponse";
 
 export const useCartStore = defineStore("cart",()=>{
     const PendingOrder:Ref<OrderDto | null> = ref(null);
@@ -31,44 +32,42 @@ export const useCartStore = defineStore("cart",()=>{
         cartLoading.value = false;
     }
 
-    const increaseCount = async (itemId:number)=>{
+    const increaseCount = async (itemId:number):Promise<boolean> => {
         cartLoading.value = true;
 
         const result = await IncreaseCount(itemId);
-        if(result.isSuccess){
-            await toast.showToast(result.metaData.message,ToastType.success,3000,true);
-        }else{
-            await toast.showToast(result.metaData.message,ToastType.error,3000,true);
-        }
 
         cartLoading.value = false;
-        await refreshCart();
+        return handleResult(result);
     }
-    const decreaseCount = async (itemId:number)=>{
+    const decreaseCount = async (itemId:number):Promise<boolean>=>{
         cartLoading.value = true;
 
         const result = await DecreaseCount(itemId);
+
+        cartLoading.value = false;
+        return handleResult(result);
+    }
+
+    const handleResult = async (result:ApiResponse<any>):Promise<boolean> => {
         if(result.isSuccess){
             await toast.showToast(result.metaData.message,ToastType.success,3000,true);
         }else{
             await toast.showToast(result.metaData.message,ToastType.error,3000,true);
+            return false;
         }
 
-        cartLoading.value = false;
         await refreshCart();
+        return true;
     }
-    const removeItem = async (itemId:number)=>{
+
+    const removeItem = async (itemId:number):Promise<boolean>=>{
         cartLoading.value = true;
 
         const result = await RemoveItem(itemId);
-        if(result.isSuccess){
-            await toast.showToast(result.metaData.message,ToastType.success,3000,true);
-        }else{
-            await toast.showToast(result.metaData.message,ToastType.error,3000,true);
-        }
 
         cartLoading.value = false;
-        await refreshCart();
+        return handleResult(result);
     }
 
     return {

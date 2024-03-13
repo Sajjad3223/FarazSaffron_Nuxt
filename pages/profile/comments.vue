@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import type {CommentDto, CommentFilterParams} from "~/models/comment/commentQueries";
-import {GetComments} from "~/services/comment.service";
+import {GetUserComments} from "~/services/comment.service";
 import type {Ref} from "vue";
 
 definePageMeta({
@@ -63,8 +63,7 @@ const comments:Ref<CommentDto[]> = ref([]);
 onMounted(async ()=>{
   await accountStore.initData();
 
-  const result = await GetComments({
-    userId: accountStore.currentUser?.id
+  const result = await GetUserComments({
   } as CommentFilterParams);
   if(result.isSuccess){
     comments.value = result.data?.data!;

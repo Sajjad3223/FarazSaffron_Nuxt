@@ -37,14 +37,16 @@
 
   const cartStore = useCartStore();
 
-  const increaseCount = () =>{
-    cartStore.increaseCount(props.item.id);
+  const increaseCount = async () =>{
+    count.value++;
+    await cartStore.increaseCount(props.item.id)
   }
-  const decreaseCount = () =>{
+  const decreaseCount = async () =>{
     if(count.value <= 1) {
-      cartStore.decreaseCount(props.item.id);
+      await cartStore.removeItem(props.item.id);
     }else{
-      cartStore.decreaseCount(props.item.id);
+      count.value--;
+      await cartStore.decreaseCount(props.item.id)
     }
   }
 </script>

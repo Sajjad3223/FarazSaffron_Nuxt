@@ -23,11 +23,13 @@
 import {Form} from 'vee-validate';
 import type {LoginCommand} from "~/models/users/userCommands";
 import {Login} from "~/services/auth.service";
-import Swal from "sweetalert2";
 import * as Yup from 'yup'
+import {ToastType} from "~/composables/useSwal";
 
 const router = useRouter();
 const authStore = useAuthStore();
+const accountStore = useAccountStore();
+const toast = useToast();
 
 const loginData:LoginCommand = reactive({
   phoneNumber:"",
@@ -49,14 +51,16 @@ const login = async ()=>{
   const result = await Login(loginData);
   if(result.isSuccess){
     authStore.setToken(result.data!);
-    await Swal.fire({
-      title:"ورود با موفقیت انجام شد",
-      text:'در حال انتقال به پنل کاربری',
-      icon:'success',
-      timerProgressBar:true,
-    });
+    await toast.showToast('با موفقیت وارد شدید');
     authStore.isLoginModalOpen = false;
-    await router.push('/profile');
+    await accountStore.initData();
+
+    toast.showToast('آیا مایلید به پنل کاربری منتقل شوید؟',ToastType.warning,0).then(async (result) => {
+      if(result.isConfirmed){
+        await router.push('/profile');
+      }
+    })
+
   }
   else{
     errorMessage.value = result.metaData.message;

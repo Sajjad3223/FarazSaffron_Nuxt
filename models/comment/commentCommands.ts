@@ -6,6 +6,8 @@ export interface SendCommentCommand{
     postType: EPostType;
     score: number;
     content: string;
+    postTitle: string;
+    postSlug: string;
 }
 export interface EditCommentCommand{
     commentId: number;

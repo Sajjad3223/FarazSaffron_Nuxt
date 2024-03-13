@@ -33,11 +33,11 @@
         </svg>
       </button>
       <div class="flex flex-col absolute w-max min-w-32 max-w-48 bg-bgWhite drop-shadow rounded-lg p-2 space-y-2 left-4 top-4" v-if="showOptions">
-        <ul class="space-y-2 w-full">
+        <ul class="space-y-2 w-full" v-if="authStore.isLoggedIn && accountStore.currentUser?.id === comment.sender.userId">
           <li class="hover:bg-gray-100 dark:text-black transition cursor-pointer p-1 rounded-lg px-2">ویرایش</li>
           <li class="hover:bg-gray-100 dark:text-black transition cursor-pointer p-1 rounded-lg px-2">حذف</li>
         </ul>
-        <hr>
+        <hr v-if="authStore.isLoggedIn">
         <ul class="space-y-2 w-full">
           <li class="hover:bg-gray-100 dark:text-black transition cursor-pointer p-1 rounded-lg px-2">گزارش نظر</li>
         </ul>
@@ -57,4 +57,8 @@ const props = defineProps<{
 }>()
 
 const showOptions = ref(false);
+
+const authStore = useAuthStore();
+const accountStore = useAccountStore();
+
 </script>

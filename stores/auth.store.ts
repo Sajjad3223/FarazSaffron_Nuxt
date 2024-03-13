@@ -32,9 +32,11 @@ export const useAuthStore = defineStore("auth",()=>{
             }
         }, 300);
     };
+    const router = useRouter();
     const logOut = async () => {
         const cookie = useCookie("c-access-token");
         cookie.value = null;
+        await router.push('/');
         location.reload();
     };
 

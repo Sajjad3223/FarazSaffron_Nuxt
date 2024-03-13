@@ -170,7 +170,7 @@
                   </base-f-button>
                 </li>
                 <li>
-                  <base-f-button color="transparent">خروج</base-f-button>
+                  <base-f-button color="transparent" @clicked="authStore.logOut">خروج</base-f-button>
                 </li>
               </ul>
             </div>
