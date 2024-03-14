@@ -24,7 +24,7 @@
             <NuxtLink to="/">
               <img src="~/assets/images/gp-flower-cuted.png" alt="faraz saffron logo" class="h-[30px] rounded-full ml-8">
             </NuxtLink>
-            <Form class="search relative flex items-center w-1/2">
+            <Form class="search relative flex items-center w-1/2" @submit="router.push(`/market?search=${searchValue}`)">
               <base-f-input type="search" place-holder="دنبال چه محصولی هستید؟" id="search" name="search" v-model="searchValue">
                 <template v-slot:inputIcon>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -252,6 +252,7 @@ const showOptions = ref(false);
 const showResponsiveNavbar = ref(false);
 
 const route = useRoute();
+const router = useRouter();
 
 watch(() => route.fullPath, () => {
   showResponsiveNavbar.value = false;

@@ -160,7 +160,7 @@
       </base-f-button>
     </div>
 
-    <div class="rounded-xl border p-4 mt-8">
+<!--    <div class="rounded-xl border p-4 mt-8"> TODO Implement
       <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12 dark:text-currentColor">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
           <path d="M14.6667 8.00004C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00004C1.33337 4.32004 4.32004 1.33337 8.00004 1.33337C11.68 1.33337 14.6667 4.32004 14.6667 8.00004Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -170,12 +170,12 @@
       </div>
       <div class="w-full flex mt-8">
         <ul class="w-full flex space-x-8 space-x-reverse flex-shrink-0 overflow-x-auto p-4">
-<!--          <li v-for="i in 4" :key="i" class="flex-shrink-0">
+&lt;!&ndash;      <li v-for="i in 4" :key="i" class="flex-shrink-0">
             <f-card />
-          </li>-->
+          </li>&ndash;&gt;
         </ul>
       </div>
-    </div>
+    </div>-->
   </div>
 
 </template>

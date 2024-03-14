@@ -19,4 +19,10 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
   ],
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
 })

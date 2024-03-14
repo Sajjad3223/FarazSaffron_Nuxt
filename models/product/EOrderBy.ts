@@ -1,7 +1,7 @@
 export enum EOrderBy {
-    Popularity,
-    Newest,
-    Expensive,
-    Cheap,
-    Score
+    محبوبیت,
+    جدیدترین,
+    گران_ترین,
+    ارزان_ترین,
+    امتیاز
 }

@@ -87,7 +87,7 @@
     </ul>
   </div>
 
-  <div class="mt-12 mx-4 lg:mx-0">
+<!--  <div class="mt-12 mx-4 lg:mx-0"> TODO Implement
     <base-f-divider :logo-divider="false" title="نظرات شما" />
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-24 lg:gap-y-8 mt-20">
       <li class="card bg-bgWhite dark:bg-gray-800 dark:text-white rounded-xl shadow-md pb-4" >
@@ -271,7 +271,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div>-->
 </template>
 
 <script setup lang="ts">
