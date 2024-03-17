@@ -4,7 +4,7 @@
   <div class="w-full flex flex-col py-4 bg-bgWhite dark:bg-gray-900 dark:text-white space-y-12">
     <div class="w-full flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center pt-12">
       <div class="flex flex-col space-y-6">
-        <img src="~/assets/images/GP-filled.png" alt="gp" class="w-36">
+        <img src="~/assets/images/gp-filled.png" alt="gp" class="w-36">
         <div class="font-thin text-sm flex flex-col lg:flex-row items-stretch space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse">
           <span>تلفن پشتیبانی: 051-52223456</span>
           <div class="hidden lg:block w-px bg-black/30 dark:bg-white/30"></div>
@@ -194,7 +194,7 @@
       <div class="w-full lg:w-2/3 flex flex-col space-y-2">
         <h3 class="text-sm lg:text-2xl font-bold flex items-center space-x-1 space-x-reverse">
           <span>فروشگاه اینترنتی</span>
-          <img src="~/assets/images/GP-filled.png" alt="gp" class="w-10 lg:w-24">
+          <img src="~/assets/images/gp-filled.png" alt="gp" class="w-10 lg:w-24">
           <span>، بررسی، انتخاب و خرید آنلاین زعفران</span>
         </h3>
         <p class="font-light text-xs lg:text-base text-justify opacity-80">

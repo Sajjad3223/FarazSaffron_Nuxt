@@ -1,6 +1,6 @@
 <template>
   <Form class="flex flex-col items-start gap-2 m-4" :validation-schema="loginSchema">
-    <img src="~/assets/images/GP-filled.png" alt="GP" class=" max-h-16 self-center">
+    <img src="~/assets/images/gp-filled.png" alt="GP" class=" max-h-16 self-center">
     <base-f-input name="phoneNumber" id="phoneNumber" label="شماره تلفن" is-required place-holder="09121111111" class="text-sm lg:text-base" :rtl="false" v-model="loginData.phoneNumber" />
     <base-f-input name="password" id="password" type="password" label="رمز عبور" is-required place-holder="••••••••" class="text-sm lg:text-base" :rtl="false" v-model="loginData.password" />
     <base-f-button color="brand" w-full @click.prevent="login" :loading="isLoading">ورود</base-f-button>

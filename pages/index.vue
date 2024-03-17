@@ -21,7 +21,7 @@
             <strong>
               به
             </strong>
-            <img src="~/assets/images/GP-filled.png" alt="gp filled logo" class="w-10 lg:w-40">
+            <img src="~/assets/images/gp-filled.png" alt="gp filled logo" class="w-10 lg:w-40">
             <strong>خوش آمدید</strong>
           </div>
           <div class="flex items-center justify-center mx-auto">
@@ -39,7 +39,7 @@
       <strong>
         به
       </strong>
-      <img src="~/assets/images/GP-filled.png" alt="gp filled logo" class="w-20 lg:w-40">
+      <img src="~/assets/images/gp-filled.png" alt="gp filled logo" class="w-20 lg:w-40">
       <strong>خوش آمدید</strong>
     </div>
 

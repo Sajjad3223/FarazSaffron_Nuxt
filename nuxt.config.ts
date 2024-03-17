@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   app:{
     head:{
       htmlAttrs:{dir:'rtl',lang:'fa'}
-    }
+    },
   },
   css: ['~/assets/css/main.css'],
   postcss: {
@@ -12,6 +12,9 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+  devServer:{
+    port:3000
   },
   plugins: [
     '~/plugins/clickOutsideDirective.ts',

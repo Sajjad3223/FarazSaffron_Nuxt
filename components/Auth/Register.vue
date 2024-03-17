@@ -1,6 +1,6 @@
 <template>
   <Form class="flex flex-col items-start gap-2 m-4" :validation-schema="registerSchema">
-    <img src="~/assets/images/GP-filled.png" alt="GP" class=" max-h-16 self-center">
+    <img src="~/assets/images/gp-filled.png" alt="GP" class=" max-h-16 self-center">
     <base-f-input name="phoneNumber" id="phoneNumber" label="شماره تلفن" is-required place-holder="09121111111" class="text-sm lg:text-base" :rtl="false" v-model="registerData.phoneNumber" />
     <base-f-input name="password" id="password" type="password" label="رمز عبور" is-required place-holder="••••••••" class="text-sm lg:text-base" :rtl="false" v-model="registerData.password" />
     <base-f-button color="brand" w-full @click.prevent="register" :loading="isLoading">ثبت نام</base-f-button>
