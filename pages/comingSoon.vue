@@ -1,5 +1,5 @@
 <template>
-  <main class="h-screen container flex flex-col items-center justify-center m-auto space-y-24 -translate-y-8">
+  <main class="h-screen container flex flex-col items-center justify-center m-auto space-y-16 -translate-y-16">
     <Head>
       <Title>به زودی ...</Title>
     </Head>
@@ -15,12 +15,12 @@
           <span class="relative after:w-full after:h-1.5 after:rounded-full after:absolute after:inset-x-0 after:-bottom-6 after:bg-brandOrange " style="font-family: 'Epic Ravi Black' !important;" >زودی</span>
           <span class="pb-2 border-b-transparent border-b-4" style="font-family: 'Epic Ravi Black' !important;" >...</span>
         </strong>
-        <p class="text-4xl mt-12 font-normal opacity-70 tracking-wide leading-relaxed" style="font-family: 'Epic Ravi Regular' !important;">
+        <p class="text-3xl mt-16 font-normal opacity-70 leading-relaxed font-bold" style="font-family: 'Epic Ravi' !important;">
           تیم جی پی در حال توسعه این سایت می باشد <br> و در طی چند روز آینده در دسترس خواهد بود.
         </p>
-        <a href="https://farazsaffron.com" target="_blank" class="bg-brandOrange px-6 py-4 rounded-2xl flex items-center space-x-4 space-x-reverse text-white mt-16 justify-center text-xl" >
-          <span style="font-family: 'Epic Ravi Regular' !important;">بازدید از سایت فراز زعفران</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="https://farazsaffron.com" target="_blank" class="bg-brandOrange p-6 rounded-2xl flex items-center space-x-4 space-x-reverse text-white mt-24 justify-center text-2xl tracking-wider w-1/2" >
+          <span style="font-family: 'Epic Ravi medium' !important;">بازدید از سایت فراز زعفران</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-150">
             <path d="M11.1667 16.375L7 12M7 12L11.1667 7.625M7 12H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
