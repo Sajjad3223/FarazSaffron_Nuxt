@@ -4,7 +4,7 @@
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
 
-    <video autoplay muted loop class="hidden md:block rounded-2xl h-[40vh] w-full object-cover origin-center " style="max-width: unset !important;">
+    <video autoplay muted loop class="hidden md:block rounded-2xl h-[40vh] w-full object-cover origin-center " >
       <source src="~/assets/videos/bg2.mp4" type="video/mp4">
     </video>
 

@@ -1,7 +1,20 @@
 <template>
-  <main class="h-screen container flex flex-col items-center justify-center m-auto space-y-16 -translate-y-16">
+  <main class="w-screen h-screen overflow-hidden relative grid place-items-center">
     <Head>
-      <Title>به زودی ...</Title>
+      <Title>به زودی برمیگردیم ...</Title>
+    </Head>
+    <img src="~/assets/images/orange.jpg" alt="orange" class="absolute h-screen w-full object-cover lg:inset-0 aspect-video  md:-top-1/4">
+    <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/70 to-black-10"></div>
+    
+    <div class="relative z-20 text-white flex flex-col items-center -mt-72 xl:-mt-96 lg:-translate-y-16" style="font-family: 'Epic Ravi'">
+      <img src="~/assets/images/gp-white.png" alt="" class="max-w-16 lg:max-w-24 mb-24 lg:mb-24">
+      <strong class="text-2xl lg:text-5xl" style="font-family: 'Epic Ravi Medium','Vazir FD' !important;">به زودی برمیگردیم</strong>
+      <span class="text-xs lg:text-2xl font-light opacity-70 mt-2 lg:mt-8" style="font-family: 'Epic Ravi Regular','Vazir FD' !important;">در دست ساخت توسط تیم جــی پــی</span>
+    </div>
+  </main>
+<!--  <main class="h-screen container flex flex-col items-center justify-center m-auto space-y-16 -translate-y-16">
+    <Head>
+      <Title>به زودی برمیگردیم ...</Title>
     </Head>
     <div class="w-full overflow-visible flex items-center">
       <div class="h-px bg-[#D8D8D8] w-full flex items-center justify-center"></div>
@@ -27,7 +40,7 @@
       </div>
       <img src="~/assets/images/Maintenance.svg" alt="Maintenance" class="w-full">
     </div>
-  </main>
+  </main>-->
 </template>
 
 <script setup lang="ts">

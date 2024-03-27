@@ -1,5 +1,5 @@
 <template>
-  <div v-if="false">
+  <div>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -10,7 +10,7 @@
       </base-f-modal>
     </ClientOnly>
   </div>
-  <coming-soon v-else />
+<!--  <coming-soon />-->
 </template>
 
 <script setup lang="ts">
