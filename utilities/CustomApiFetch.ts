@@ -12,6 +12,7 @@ export async function FetchApi<T>(
     config = {
         baseURL:BASE_URL,
         retry:0,
+        credentials:'include',
         ...config
     };
 
