@@ -21,7 +21,7 @@ export interface OrderFilterData extends BaseDto {
     userId: number;
     fullName: string;
     totalPrice: number;
-    discount: DiscountData;
+    discount?: DiscountData | null;
     finallyPrice: number;
     finallyDate?: Date | null;
     isFinally: boolean;

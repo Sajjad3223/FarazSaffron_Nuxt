@@ -67,12 +67,12 @@
                   </li>
                   <li>
                     <base-f-button is-link color="transparent" to="/profile/notification">
-                      <span>پیام ها</span>
-                      <base-f-badge color="danger" size="xs" >2</base-f-badge>
+                      <span class="ml-auto">پیام ها</span>
+                      <base-f-badge color="danger" size="xs" v-if="!loading && unseenNotifs > 0">{{unseenNotifs}}</base-f-badge>
                     </base-f-button>
                   </li>
                   <li>
-                    <base-f-button color="transparent">خروج</base-f-button>
+                    <base-f-button color="transparent" @clicked="LogOut">خروج</base-f-button>
                   </li>
                 </ul>
               </div>
@@ -161,16 +161,16 @@
                   </base-f-button>
                 </li>
                 <li>
-                  <base-f-button color="transparent">سفارشات من</base-f-button>
+                  <base-f-button is-link color="transparent" to="/profile/orders">سفارشات من</base-f-button>
                 </li>
                 <li>
-                  <base-f-button color="transparent">
+                  <base-f-button  is-link color="transparent" to="/profile/notification">
                     <span>پیام ها</span>
-                    <base-f-badge color="danger" size="xs" >2</base-f-badge>
+                    <base-f-badge color="danger" size="xs" v-if="!loading && unseenNotifs > 0">{{ unseenNotifs }}</base-f-badge>
                   </base-f-button>
                 </li>
                 <li>
-                  <base-f-button color="transparent" @clicked="authStore.logOut">خروج</base-f-button>
+                  <base-f-button type="button" color="transparent" @clicked="LogOut">خروج</base-f-button>
                 </li>
               </ul>
             </div>
@@ -244,12 +244,16 @@
 import {useAuthStore} from "~/stores/auth.store";
 import {useCartStore} from "~/stores/cart.store";
 import {Form} from "vee-validate";
+import {ToastType, useToast} from "~/composables/useSwal";
+import {GetUnseenNotificationsCount} from "~/services/notification.service";
 
+const loading = ref(false);
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const searchValue = ref('');
 const showOptions = ref(false);
 const showResponsiveNavbar = ref(false);
+const unseenNotifs = ref(0);
 
 const route = useRoute();
 const router = useRouter();
@@ -258,6 +262,28 @@ watch(() => route.fullPath, () => {
   showResponsiveNavbar.value = false;
 });
 
+onMounted(async()=>{
+  loading.value = true;
+
+  const result = await GetUnseenNotificationsCount();
+  if(result.isSuccess){
+    unseenNotifs.value = result.data;
+  }
+
+  loading.value = false;
+})
+
+const toast = useToast();
+const LogOut = async () => {
+  toast.showToast(
+      'آیا مایلید از حساب کاربری خود خارج شوید؟',
+      ToastType.warning,
+      0).then( async result=>{
+    if(result.isConfirmed){
+      await authStore.logOut();
+    }
+  })
+}
 </script>
 
 <style scoped>

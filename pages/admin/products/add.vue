@@ -118,7 +118,7 @@
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
           <div class="flex items-end">
             <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
-            <button :class="['grid place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+            <button :class="['grid place-items-center h-10 w-10 origin-center dark:text-white',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -138,33 +138,51 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4" v-show="step === 1">
+        <Form class="grid grid-cols-1 my-4" v-show="step === 1" @submit.prevent="AddImages">
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
-          <base-f-button color="primary" text-color="white" class="col-span-full" @clicked="AddImages">
-            ثبت تصاویر و رفتن به صفحه بعد
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button color="primary" text-color="white" type="submit">
+              ثبت تصاویر و رفتن به صفحه بعد
+            </base-f-button>
+            <base-f-button bordered color="primary" text-color="white" @clicked="step++">
+              رفتن به صفحه بعد
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2"  :on-submit="AddSpecifications">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2"  @submit.prevent="AddSpecifications">
           <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="responsive">
             افزودن ویژگی جدید
           </base-f-button>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
-            ثبت ویژگی ها و رفتن به صفحه بعد
-          </base-f-button>
+          <div class="grid grid-cols-3 gap-4 col-span-full">
+            <base-f-button bordered color="secondary" text-color="white" @clicked="step--">
+              رفتن به صفحه قبل
+            </base-f-button>
+            <base-f-button type="submit" color="primary" text-color="white" >
+              ثبت ویژگی ها و رفتن به صفحه بعد
+            </base-f-button>
+            <base-f-button bordered color="primary" text-color="white" @clicked="step++">
+              رفتن به صفحه بعد
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" :on-submit="AddSeoData">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" @submit.prevent="AddSeoData">
           <FSeoData v-model="addProductData.seoData" />
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
-            ثبت نهایی
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button bordered color="secondary" text-color="white" @clicked="step--">
+              رفتن به صفحه قبل
+            </base-f-button>
+            <base-f-button type="submit" color="primary" text-color="white" >
+              ثبت نهایی
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
 

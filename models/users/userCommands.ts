@@ -26,7 +26,6 @@ export interface EditUserCommand {
 }
 
 export interface ChangePasswordCommand {
-    userId?: number;
     oldPassword: string;
     newPassword: string;
 }

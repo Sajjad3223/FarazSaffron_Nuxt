@@ -24,14 +24,14 @@
       <template #header>تغییر تلفن همراه</template>
       <template #default>
         <div class="flex flex-col space-y-2">
-          <base-f-input type="text" name="phone" id="phone" is-required place-holder="09121111111" :rtl="false">
+          <base-f-input type="text" name="phone" id="phone" is-required place-holder="09121111111" :rtl="false" v-model="phoneNumber">
             <template #inputIcon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21.97 18.33C21.97 18.69 21.89 19.06 21.72 19.42C21.55 19.78 21.33 20.12 21.04 20.44C20.55 20.98 20.01 21.37 19.4 21.62C18.8 21.87 18.15 22 17.45 22C16.43 22 15.34 21.76 14.19 21.27C13.04 20.78 11.89 20.12 10.75 19.29C9.6 18.45 8.51 17.52 7.47 16.49C6.44 15.45 5.51 14.36 4.68 13.22C3.86 12.08 3.2 10.94 2.72 9.81C2.24 8.67 2 7.58 2 6.54C2 5.86 2.12 5.21 2.36 4.61C2.6 4 2.98 3.44 3.51 2.94C4.15 2.31 4.85 2 5.59 2C5.87 2 6.15 2.06 6.4 2.18C6.66 2.3 6.89 2.48 7.07 2.74L9.39 6.01C9.57 6.26 9.7 6.49 9.79 6.71C9.88 6.92 9.93 7.13 9.93 7.32C9.93 7.56 9.86 7.8 9.72 8.03C9.59 8.26 9.4 8.5 9.16 8.74L8.4 9.53C8.29 9.64 8.24 9.77 8.24 9.93C8.24 10.01 8.25 10.08 8.27 10.16C8.3 10.24 8.33 10.3 8.35 10.36C8.53 10.69 8.84 11.12 9.28 11.64C9.73 12.16 10.21 12.69 10.73 13.22C11.27 13.75 11.79 14.24 12.32 14.69C12.84 15.13 13.27 15.43 13.61 15.61C13.66 15.63 13.72 15.66 13.79 15.69C13.87 15.72 13.95 15.73 14.04 15.73C14.21 15.73 14.34 15.67 14.45 15.56L15.21 14.81C15.46 14.56 15.7 14.37 15.93 14.25C16.16 14.11 16.39 14.04 16.64 14.04C16.83 14.04 17.03 14.08 17.25 14.17C17.47 14.26 17.7 14.39 17.95 14.56L21.26 16.91C21.52 17.09 21.7 17.3 21.81 17.55C21.91 17.8 21.97 18.05 21.97 18.33Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"/>
               </svg>
             </template>
           </base-f-input>
-          <base-f-alert color="warning">
+<!--          <base-f-alert color="warning">
             <template #icon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -44,8 +44,8 @@
           <base-f-button color="primary" bordered>
             ارسال کد فعال سازی
           </base-f-button>
-          <base-f-input type="text" name="verify" id="verify" is-required place-holder="کد فعال سازی" label="کد فعالسازی"/>
-          <base-f-button color="primary">
+          <base-f-input type="text" name="verify" id="verify" is-required place-holder="کد فعال سازی" label="کد فعالسازی"/>-->
+          <base-f-button color="primary" @clicked="EditPhoneNumber" :loading="loading">
             ثبت تغییرات
           </base-f-button>
         </div>
@@ -56,7 +56,7 @@
       <template #header>تغییر پست الکترونیکی</template>
       <template #default>
         <div class="flex flex-col space-y-2">
-          <base-f-input type="email" name="email" id="email" is-required place-holder="test@example.com" :rtl="false">
+          <base-f-input type="email" name="email" id="email" is-required place-holder="test@example.com" :rtl="false" v-model="email">
             <template #inputIcon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -64,7 +64,7 @@
               </svg>
             </template>
           </base-f-input>
-          <base-f-button color="primary">
+          <base-f-button color="primary" @clicked="ChangeEmail" :loading="loading">
             ثبت تغییرات
           </base-f-button>
         </div>
@@ -74,8 +74,8 @@
     <base-f-modal v-model="editPasswordModal">
       <template #header>تغییر رمز عبور</template>
       <template #default>
-        <div class="flex flex-col space-y-4">
-          <base-f-input type="password" name="current" id="current" is-required label="رمز عبور فعلی" place-holder="••••••••••">
+        <Form class="flex flex-col space-y-4" :validation-schema="changePasswordSchema" @submit.prevent="ChangeUserPassword">
+          <base-f-input type="password" name="oldPassword" id="oldPassword" is-required label="رمز عبور فعلی" :rtl="false" place-holder="••••••••••" v-model="changePasswordCommand.oldPassword">
             <template #inputIcon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -85,7 +85,7 @@
             </template>
           </base-f-input>
           <hr />
-          <base-f-input type="password" name="current" id="current" is-required label="رمز عبور جدید" place-holder="••••••••••">
+          <base-f-input type="password" name="newPassword" id="newPassword" is-required label="رمز عبور جدید" :rtl="false" place-holder="••••••••••" v-model="changePasswordCommand.newPassword">
             <template #inputIcon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -94,7 +94,7 @@
               </svg>
             </template>
           </base-f-input>
-          <base-f-input type="password" name="current" id="current" is-required label="تکرار رمز عبور جدید" place-holder="••••••••••">
+          <base-f-input type="password" name="newPasswordConfirm" id="newPasswordConfirm" is-required label="تکرار رمز عبور جدید" :rtl="false" place-holder="••••••••••" v-model="newPasswordConfirm">
             <template #inputIcon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -103,10 +103,10 @@
               </svg>
             </template>
           </base-f-input>
-          <base-f-button color="primary">
+          <base-f-button type="submit" color="primary" :loading="loading">
             ثبت تغییرات
           </base-f-button>
-        </div>
+        </Form>
       </template>
     </base-f-modal>
 
@@ -175,9 +175,9 @@
         <div class="flex flex-col space-y-4">
           <div class="flex items-center space-x-2 space-x-reverse">
             <span class="font-light text-sm opacity-70">شماره موبایل</span>
-            <base-f-badge color="warning" fore-color="black" size="sm">
+<!--            <base-f-badge color="warning" fore-color="black" size="sm"> TODO Implement
               تایید نشده
-            </base-f-badge>
+            </base-f-badge>-->
           </div>
           <strong>{{ accountStore.currentUser.phoneNumber }}</strong>
         </div>
@@ -226,6 +226,12 @@
 </template>
 
 <script setup lang="ts">
+import {Form} from 'vee-validate';
+import {EditUserEmail, EditUserPhoneNumber} from "~/services/user.service";
+import {ToastType} from "~/composables/useSwal";
+import {ChangePassword} from "~/services/auth.service";
+import type {ChangePasswordCommand} from "~/models/users/userCommands";
+import * as Yup from "yup";
 
 definePageMeta({
   layout:'profile'
@@ -233,14 +239,72 @@ definePageMeta({
 
 const accountStore = useAccountStore();
 
+const loading = ref(false);
 const editPersonalModal = ref(false);
 const editPhoneModal = ref(false);
 const editEmailModal = ref(false);
 const editPasswordModal = ref(false);
 const editBirthModal = ref(false);
+const toast = useToast();
+
+const email = ref(accountStore?.currentUser?.email);
+const phoneNumber = ref(accountStore?.currentUser?.phoneNumber);
+
+const changePasswordSchema = Yup.object().shape({
+  oldPassword:Yup.string().required('پسورد فعلی الزامی است'),
+  newPassword:Yup.string().required('پسورد جدید الزامی است').min(6,'پسورد باید حداقل 6 حرف باشد!'),
+  newPasswordConfirm:Yup.string().oneOf([Yup.ref('newPassword'), null], 'پسورد جدید و تکرار آن مطابقت ندارند')
+});
+const changePasswordCommand:ChangePasswordCommand = reactive({
+  oldPassword:'',
+  newPassword:''
+});
+const newPasswordConfirm = ref('');
 
 onMounted(async ()=>{
   await accountStore.initData();
 })
+
+const ChangeEmail = async ()=>{
+  loading.value = true;
+  const res = await EditUserEmail(email.value);
+  if(res.isSuccess){
+    editEmailModal.value = false;
+    await toast.showToast();
+  }else{
+    await toast.showToast(res.metaData.message,ToastType.error,0);
+  }
+ loading.value = false;
+}
+const EditPhoneNumber = async ()=>{
+  loading.value = true;
+  const res = await EditUserPhoneNumber(phoneNumber.value);
+  if(res.isSuccess){
+    editPhoneModal.value = false;
+    await toast.showToast();
+  }else{
+    await toast.showToast(res.metaData.message,ToastType.error,0);
+  }
+ loading.value = false;
+}
+
+const ChangeUserPassword = async ()=>{
+  loading.value = true;
+
+  if(changePasswordCommand.newPassword != newPasswordConfirm.value) {
+    await toast.showToast('پسورد جدید و تکرار آن مطابقت ندارند', ToastType.error, 3000);
+    loading.value = false;
+    return;
+  }
+
+  const res = await ChangePassword(changePasswordCommand);
+  if(res.isSuccess){
+    editPasswordModal.value = false;
+    await toast.showToast();
+  }else{
+    await toast.showToast(res.metaData.message,ToastType.error,0);
+  }
+ loading.value = false;
+}
 
 </script>

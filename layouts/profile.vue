@@ -162,7 +162,7 @@
                 <span>
                   پیغام ها
                 </span>
-                <base-f-badge color="brandOrange" fore-color="white" size="xs" v-if="!loading">
+                <base-f-badge color="brandOrange" fore-color="white" size="xs" v-if="!loading && unseenNotifs > 0">
                   {{unseenNotifs}} پیام
                 </base-f-badge>
               </div>
@@ -200,6 +200,24 @@
 
                 <span>
                   اطلاعات حساب کاربری
+                </span>
+              </div>
+            </NuxtLink>
+          </li>
+          <li class="border-b py-3" v-if="accountStore.isAdmin">
+            <NuxtLink active-class="activeLink" to="/admin">
+              <div class="flex items-center space-x-4 space-x-reverse py-1">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="Iconly/Curved/Profile">
+                    <g id="Profile">
+                      <path id="Stroke 1" fill-rule="evenodd" clip-rule="evenodd" d="M11.8445 21.6618C8.15273 21.6618 5 21.0873 5 18.7865C5 16.4858 8.13273 14.3618 11.8445 14.3618C15.5364 14.3618 18.6891 16.4652 18.6891 18.766C18.6891 21.0658 15.5564 21.6618 11.8445 21.6618Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path id="Stroke 3" fill-rule="evenodd" clip-rule="evenodd" d="M11.8373 11.1735C14.26 11.1735 16.2237 9.2099 16.2237 6.78718C16.2237 4.36445 14.26 2.3999 11.8373 2.3999C9.41458 2.3999 7.45004 4.36445 7.45004 6.78718C7.44186 9.20172 9.39186 11.1654 11.8064 11.1735C11.8173 11.1735 11.8273 11.1735 11.8373 11.1735Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                  </g>
+                </svg>
+
+                <span>
+                  ورود به پنل ادمین
                 </span>
               </div>
             </NuxtLink>

@@ -6,6 +6,9 @@ export const useAccountStore = defineStore('account',()=> {
     const currentUser: Ref<UserDto | null> = ref(null);
     const initLoading = ref(true);
 
+    const isAdmin = ()=>{
+        return currentUser.value?.roles.some(r=>r.title === 'ادمین');
+    }
     const initData = async () => {
         initLoading.value = true;
 
@@ -24,6 +27,7 @@ export const useAccountStore = defineStore('account',()=> {
     return{
         initData,
         currentUser,
-        initLoading
+        initLoading,
+        isAdmin
     }
 })

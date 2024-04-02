@@ -22,6 +22,22 @@ export const EditUser = (command:EditUserCommand):Promise<ApiResponse<undefined>
         body:command
     });
 }
+export const EditUserEmail = (email:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi("/user/change-email",{
+        method:'PUT',
+        body:{
+            email
+        }
+    });
+}
+export const EditUserPhoneNumber = (phoneNumber:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi("/user/change-phoneNumber",{
+        method:'PUT',
+        body:{
+            phoneNumber
+        }
+    });
+}
 export const ChargeWallet = (amount:number):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/user/charge-wallet?price=${amount}`,{
         method:'PUT',

@@ -9,13 +9,13 @@
               <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </NuxtLink>
-          <strong>پیفام ها</strong>
+          <strong>پیغام ها</strong>
         </div>
-        <base-f-button color="primary" bordered >
+        <base-f-button color="primary" bordered  v-if="!isLoading && notifications.length > 0">
           <svg class="dark:text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.70711 11.2929C7.31658 10.9024 6.68342 10.9024 6.29289 11.2929C5.90237 11.6834 5.90237 12.3166 6.29289 12.7071L7.70711 11.2929ZM11.9497 16.9497L11.2426 17.6569C11.6332 18.0474 12.2663 18.0474 12.6568 17.6569L11.9497 16.9497ZM23.2639 7.05026C23.6544 6.65975 23.6544 6.02658 23.2639 5.63605C22.8734 5.24552 22.2402 5.2455 21.8497 5.63602L23.2639 7.05026ZM2.75691 11.3432C2.36639 10.9527 1.73322 10.9527 1.3427 11.3432C0.952174 11.7337 0.952174 12.3669 1.3427 12.7574L2.75691 11.3432ZM6.29245 17.7071C6.68297 18.0977 7.31613 18.0977 7.70666 17.7071C8.09718 17.3166 8.09718 16.6835 7.70666 16.2929L6.29245 17.7071ZM18.3131 7.10054C18.7037 6.71002 18.7037 6.07685 18.3131 5.68633C17.9226 5.2958 17.2895 5.2958 16.8989 5.68633L18.3131 7.10054ZM11.5956 10.9896C11.2051 11.3802 11.2051 12.0133 11.5956 12.4038C11.9862 12.7944 12.6193 12.7944 13.0098 12.4038L11.5956 10.9896ZM6.29289 12.7071L11.2426 17.6569L12.6569 16.2426L7.70711 11.2929L6.29289 12.7071ZM12.6568 17.6569L23.2639 7.05026L21.8497 5.63602L11.2427 16.2426L12.6568 17.6569ZM1.3427 12.7574L6.29245 17.7071L7.70666 16.2929L2.75691 11.3432L1.3427 12.7574ZM16.8989 5.68633L11.5956 10.9896L13.0098 12.4038L18.3131 7.10054L16.8989 5.68633Z" fill="currentColor"/>
           </svg>
-          <span class="dark:text-white">
+          <span class="dark:text-white" >
                 همه را خواندم
           </span>
         </base-f-button>
@@ -23,15 +23,17 @@
 
       <hr class="my-3 border-2 dark:border-gray-600">
     </div>
-    <ul class="flex flex-col space-y-4">
-      <li class="flex flex-col space-y-3 p-4 rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 drop-shadow border-r-primary opacity-60 hover:opacity-100 transition duration-200 first:opacity-100 first:border-r-4 cursor-pointer" v-for="i in 3" :key="i" @click="showNotifModal = true">
-        <strong>عنوان پیغام</strong>
+    <ul class="flex flex-col space-y-4" v-if="notifications.length > 0">
+      <li :class="['flex flex-col space-y-3 p-4 rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 drop-shadow border-r-primary opacity-60 hover:opacity-100 transition duration-200 cursor-pointer',{'opacity-100 border-r-4':!notif.isSeen}]"
+          v-for="notif in notifications" :key="notif.id" @click="showNotifModal = true">
+        <strong>{{ notif.title }}</strong>
         <hr>
         <p class="mt-4 font-estedad font-light text-xs lg:text-sm text-justify">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارها.
+          {{ notif.content.substring(0,150) }}
         </p>
       </li>
     </ul>
+    <base-f-alert class="dark:text-white" v-else>هیچ پیغامی برای نمایش وجود ندارد</base-f-alert>
     <base-f-modal v-model="showNotifModal" title="نمایش پیغام">
       <div class="flex flex-col p-2 space-y-3 dark:text-white">
         <strong class="text-lg">عنوان پیغام</strong>
@@ -56,9 +58,34 @@
 </template>
 
 <script setup lang="ts">
+import type {NotificationDto, NotificationFilterParams} from "~/models/notification/notificationQueries";
+import {GetNotifications} from "~/services/notification.service";
+
 definePageMeta({
   layout:'profile'
 })
 
+const isLoading = ref(false);
+const pageId = ref(1);
 const showNotifModal = ref(false);
+const filterParams:NotificationFilterParams = reactive({
+  userId:null,
+  take:10,
+  search:'',
+  pageId:pageId,
+  justAvailable:null,
+  subjectType:null
+})
+const notifications:Ref<NotificationDto[]> = ref([]);
+
+onMounted(async ()=>{
+  isLoading.value = true;
+
+  const result = await GetNotifications(filterParams);
+  if(result.isSuccess){
+    notifications.value = result.data?.data ?? [];
+  }
+
+  isLoading.value = false;
+})
 </script>

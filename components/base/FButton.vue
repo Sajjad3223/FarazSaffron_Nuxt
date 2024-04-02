@@ -1,6 +1,6 @@
 <template>
   <button v-if="!isLink" :type="type" @click="emits('clicked')"
-          :class="['button',{'button-outline':bordered},!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`textColor-${textColor}`,`px-${px} py-${py}`,customClass]">
+          :class="['button',{'button-outline':bordered}, `textColor-${textColor}`,!bordered ? `button-${color}` : `button-${color}-outline`,{'w-full':wFull},{'h-full':hFull},`px-${px} py-${py}`,customClass]">
     <slot v-if="!loading"></slot>
     <span v-else class="animate-spin">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px"
@@ -83,10 +83,12 @@ const emits = defineEmits(['clicked']);
 
 .button-primary {
   @apply bg-primary text-white;
+  color:white !important;
 }
 
 .button-brand {
   @apply bg-brandOrange text-white;
+  color:white !important;
 }
 
 .button-warning {
