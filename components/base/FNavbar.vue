@@ -36,7 +36,7 @@
             </Form>
           </div>
           <div class="flex items-center space-x-4 space-x-reverse">
-            <div class="user flex items-center space-x-reverse space-x-3 border-2 border-black/50 dark:border-white/50 dark:text-white rounded-lg p-1 px-2" v-if="!authStore.isLoggedIn">
+            <div class="relative flex items-center space-x-reverse space-x-3 border-2 border-black/50 dark:border-white/50 dark:text-white rounded-lg p-1 px-2" v-if="!authStore.isLoggedIn">
               <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
                 <path d="M12 17L7 12M7 12L12 7M7 12L21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.704 5C17.3713 5 17.869 4.36871 17.6223 3.74865C16.4518 0.806956 14.0185 -1.60332e-07 9.29426 -3.66838e-07C1.6405 -7.01394e-07 8.19234e-05 2.118 8.14915e-05 12C8.10595e-05 21.882 1.6405 24 9.29426 24C14.0185 24 16.4518 23.193 17.6223 20.2514C17.869 19.6313 17.3713 19 16.704 19C16.2515 19 15.8634 19.3009 15.6788 19.714C15.5388 20.0273 15.3879 20.2776 15.2303 20.4811C14.5039 21.4189 13.1179 22 9.29426 22C5.47057 22 4.08458 21.4189 3.35821 20.4811C2.95275 19.9576 2.59127 19.1238 2.347 17.7047C2.10283 16.2861 2.00008 14.436 2.00008 12C2.00008 9.56404 2.10283 7.71385 2.347 6.2953C2.59127 4.87622 2.95275 4.04241 3.35821 3.51891C4.08459 2.58107 5.47057 2 9.29426 2C13.1179 2 14.5039 2.58107 15.2303 3.51891C15.3879 3.72237 15.5388 3.97269 15.6788 4.28602C15.8634 4.69912 16.2515 5 16.704 5Z" fill="currentColor"/>

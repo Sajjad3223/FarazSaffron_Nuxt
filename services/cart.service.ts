@@ -1,6 +1,6 @@
 import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
-import type {OrderDto, OrderFilterParams, OrderFilterResult} from "~/models/cart/cartQueries";
+import type {OrderDto, OrderFilterParams, OrderFilterResult, OrderGist} from "~/models/cart/cartQueries";
 import type {
     AdminSetOrderDiscountCommand,
     FinalizeOrderCommand,
@@ -21,6 +21,11 @@ export const GetOrderById = (orderId:number):Promise<ApiResponse<OrderDto>> => {
 }
 export const GetPendingOrder = ():Promise<ApiResponse<OrderDto>> => {
     return FetchApi(`/cart/pending`,{
+        method:'GET',
+    });
+}
+export const GetOrdersGist = ():Promise<ApiResponse<OrderGist>> => {
+    return FetchApi(`/cart/gist`,{
         method:'GET',
     });
 }

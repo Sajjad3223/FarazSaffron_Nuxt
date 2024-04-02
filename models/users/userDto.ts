@@ -7,13 +7,13 @@ export interface UserDto extends BaseDto {
     fullName: string;
     nationalId: string;
     phoneNumber: string;
-    confirmCode: string;
     email: string;
-    password: string;
     avatar: string;
     addresses: AddressDto[];
     roles: RoleDto[];
     wallets: WalletDto[];
+    walletCash:number;
+    GPClubScore:number;
 }
 
 export interface AddressDto extends BaseDto {

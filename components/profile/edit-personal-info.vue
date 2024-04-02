@@ -31,9 +31,7 @@ const toast = useToast();
 const editUserCommand:EditUserCommand = reactive({
   firstName:accountStore.currentUser?.firstName ?? '',
   lastName:accountStore.currentUser?.lastName ?? '',
-  nationalId:accountStore.currentUser?.nationalId ?? '',
-  phoneNumber:'',
-  email:''
+  nationalId:accountStore.currentUser?.nationalId ?? null,
 })
 
 const EditInfo = async ()=>{

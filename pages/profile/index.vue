@@ -14,7 +14,7 @@
           مشاهده همه >
         </NuxtLink>
       </div>
-      <ul class="flex justify-between lg:justify-around">
+      <ul class="flex justify-between lg:justify-around" v-if="!loading">
         <li class="flex flex-col lg:flex-row items-center lg:space-x-2 lg:space-x-reverse">
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M52.0502 23.8007C51.3658 19.7823 49.3522 16.115 46.2727 13.332C42.8509 10.2369 38.4026 8.53334 33.7701 8.53334C30.1904 8.53334 26.7029 9.54769 23.7154 11.4594C21.228 13.0459 19.1618 15.1917 17.701 17.7145C17.0693 17.5975 16.4113 17.5325 15.7532 17.5325C10.16 17.5325 5.60642 22.032 5.60642 27.559C5.60642 28.2742 5.68538 28.9635 5.81699 29.6397C2.19782 32.2406 0 36.428 0 40.8886C0 44.4909 1.35554 47.9891 3.82973 50.759C6.36973 53.594 9.72568 55.2716 13.3054 55.4667C13.3448 55.4667 13.3712 55.4667 13.4107 55.4667L49.0232 55.4537C49.0627 55.4537 49.1022 55.4537 49.1548 55.4537C53.1688 55.1676 56.9196 53.3469 59.7096 50.3039C62.4865 47.2868 64 43.4115 64 39.3801C63.9868 32.0845 58.9463 25.5953 52.0502 23.8007Z" fill="url(#paint0_linear)"/>
@@ -52,7 +52,7 @@
             </defs>
           </svg>
           <div class="flex flex-col items-center">
-            <strong>0 سفارش</strong>
+            <strong>{{ ordersGist.pending }} سفارش</strong>
             <small>جاری</small>
           </div>
         </li>
@@ -89,8 +89,8 @@
             </defs>
           </svg>
           <div class="flex flex-col items-center">
-            <strong>3 سفارش</strong>
-            <small>تحویل شده</small>
+            <strong>{{ ordersGist.paid }} سفارش</strong>
+            <small>پرداخت شده</small>
           </div>
         </li>
         <li class="flex flex-col lg:flex-row items-center lg:space-x-2 lg:space-x-reverse">
@@ -122,7 +122,7 @@
             </defs>
           </svg>
           <div class="flex flex-col items-center">
-            <strong>0 سفارش</strong>
+            <strong>{{ ordersGist.returned }} سفارش</strong>
             <small>مرجوع شده</small>
           </div>
         </li>
@@ -133,7 +133,30 @@
 </template>
 
 <script setup lang="ts">
+import type {OrderGist} from "~/models/cart/cartQueries";
+import {GetOrdersGist} from "~/services/cart.service";
+
 definePageMeta({
   layout:'profile',
 })
+
+const loading = ref(false);
+const ordersGist:Ref<OrderGist> = ref({
+  pending: 0,
+  paid: 0,
+  returned: 0,
+  canceled: 0
+});
+
+onMounted(async ()=>{
+  loading.value = true;
+
+  const result = await GetOrdersGist();
+  if(result.isSuccess){
+    ordersGist.value = result.data;
+  }
+
+  loading.value = false;
+})
+
 </script>

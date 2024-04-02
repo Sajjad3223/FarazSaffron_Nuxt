@@ -36,7 +36,7 @@
               کیف پول
             </span>
           </div>
-          <span class="text-sm font-light"><strong class="font-bold text-lg ml-2">3,259,000</strong> ریــال</span>
+          <span class="text-sm font-light"><strong class="font-bold text-lg ml-2">{{accountStore.currentUser?.walletCash?.toLocaleString() ?? 0}}</strong> ریــال</span>
         </div>
         <div class="flex justify-between items-center">
           <div class="flex items-center">
@@ -51,7 +51,7 @@
               جی پی کلاب
             </span>
           </div>
-          <span class="text-sm font-light"><strong class="font-bold text-lg ml-2">1,286</strong> امتیاز</span>
+          <span class="text-sm font-light"><strong class="font-bold text-lg ml-2">{{accountStore.currentUser?.GPClubScore?.toLocaleString() ?? 0}}</strong> امتیاز</span>
         </div>
         <hr class="border-2 rounded-full">
         <ul>
@@ -162,8 +162,8 @@
                 <span>
                   پیغام ها
                 </span>
-                <base-f-badge color="brandOrange" fore-color="white" size="xs">
-                  2 پیام
+                <base-f-badge color="brandOrange" fore-color="white" size="xs" v-if="!loading">
+                  {{unseenNotifs}} پیام
                 </base-f-badge>
               </div>
             </NuxtLink>
@@ -239,10 +239,24 @@
 
 import {useAuthStore} from "~/stores/auth.store";
 import {ToastType, useToast} from "~/composables/useSwal";
+import {GetUnseenNotificationsCount} from "~/services/notification.service";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
 const toast = useToast();
+const loading = ref(false);
+const unseenNotifs = ref(0);
+
+onMounted(async()=>{
+  loading.value = true;
+
+  const result = await GetUnseenNotificationsCount();
+  if(result.isSuccess){
+    unseenNotifs.value = result.data;
+  }
+
+  loading.value = false;
+})
 
 const LogOut = async () => {
   toast.showToast(

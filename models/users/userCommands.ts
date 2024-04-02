@@ -22,9 +22,7 @@ export interface CreateUserCommand {
 export interface EditUserCommand {
     firstName: string;
     lastName: string;
-    nationalId: string;
-    phoneNumber: string;
-    email: string;
+    nationalId?: string | null;
 }
 
 export interface ChangePasswordCommand {
