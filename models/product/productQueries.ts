@@ -27,11 +27,15 @@ export interface ProductFilterParams extends BaseFilterParams{
     dgkalaLink?:         string | null;
 }
 
+export interface CatalogFilterParams extends BaseFilterParams{
+    search? : string | null | undefined;
+}
 export interface CatalogDto extends BaseDto{
     title: string;
     description?: string;
     fileName: string;
 }
+export interface CatalogFilterResult extends BaseFilterResult<CatalogDto>{}
 export interface ProductFilterData extends BaseDto{
     title:        string;
     slug:         string;

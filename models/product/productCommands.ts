@@ -78,3 +78,7 @@ export interface CreateSpecificationViewModel{
     value:string;
 }
 
+export interface EditCatalogCommand{
+    title:string;
+    description?:string | null;
+}

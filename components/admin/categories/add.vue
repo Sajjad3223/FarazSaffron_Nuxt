@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import type {Form} from "vee-validate";
 import type {CreateCategoryCommand} from "~/models/categories/categoryCommands";
 import {CreateCategory, GetCategoriesByAdmin} from "~/services/category.service";
 import {ToastType, useToast} from "~/composables/useSwal";

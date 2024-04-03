@@ -127,9 +127,20 @@
             </button>
           </div>
           <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
+          <div class="flex items-end">
+            <base-f-select class="flex-1" label="کاتالوگ" name="catalogId" id="catalogId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="catalogs" v-model="addProductData.catalogId" />
+            <button :class="['grid place-items-center h-10 w-10 origin-center dark:text-white',{'animate-spin':loadingCatalogs}]" @click.prevent="refreshCatalogs">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L12.76 7.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
           <base-f-dimension v-model="addProductData.dimensions" />
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
-          <base-f-input label="شماره سریال" name="serialNumber" id="serialNumber" place-holder="شماره سریال درج شده زیر محصول" v-model="addProductData.serialNumber"/>
+          <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثال: SN0000" v-model="addProductData.productCode"/>
+          <base-f-input label="شماره بارکد" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="addProductData.barcodeNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
           <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت کالا و رفتن به صفحه بعد
@@ -229,6 +240,8 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
+import type {CatalogDto} from "~/models/product/productQueries";
+import {GetCatalogs} from "~/services/catalog.service";
 
 definePageMeta({
   layout:'admin'
@@ -238,6 +251,7 @@ const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
 const loadingCategories = ref(false);
+const loadingCatalogs = ref(false);
 const createdProductId = ref(0);
 
 const toast = useToast();
@@ -252,9 +266,11 @@ const addProductData:CreateProductCommand = reactive({
   packingType: EPackingType.کیفی,
   mainImage: null,
   mainImageAlt: '',
-  serialNumber: '',
+  productCode: '',
+  barcodeNumber: '',
   categoryId: null,
   subCategoryId: null,
+  catalogId: null,
   dimensions: {
     width:0,
     height:0,
@@ -290,6 +306,7 @@ const packingTypes = Object.entries(EPackingType).map(t=>{
 const packingTypeOptions = packingTypes.splice(packingTypes.length / 2 , packingTypes.length);
 
 const categories:Ref<CategoryDto[]> = ref([]);
+const catalogs:Ref<CatalogDto[]> = ref([]);
 const subCategories:Ref<CategoryDto[]> = ref([]);
 const categorySelected = (id:Number) => {
   const selectedCategory = categories.value.find(c=>c.id == id);
@@ -319,6 +336,16 @@ const refreshCategories = async ()=>{
 
   loadingCategories.value = false;
 }
+const refreshCatalogs = async ()=>{
+  loadingCatalogs.value = true;
+
+  const result = await GetCatalogs({pageId:1,take:100,search:''});
+  if(result.isSuccess){
+    catalogs.value = result.data?.data!;
+  }
+
+  loadingCatalogs.value = false;
+}
 
 const AddProduct = async ()=>{
   isLoading.value = true;
@@ -332,9 +359,11 @@ const AddProduct = async ()=>{
   if(addProductData.mainImage)
     productData.append('mainImage',addProductData.mainImage);
   productData.append('mainImageAlt',addProductData.mainImageAlt);
-  productData.append('serialNumber',addProductData.serialNumber);
+  productData.append('productCode',addProductData.productCode);
+  productData.append('barcodeNumber',addProductData.barcodeNumber);
   productData.append('categoryId',addProductData.categoryId.toString());
   productData.append('subCategoryId',addProductData.subCategoryId?.toString() ?? '');
+  productData.append('catalogId',addProductData.catalogId?.toString() ?? '');
   productData.append('dimensions.Width',addProductData.dimensions.width.toString());
   productData.append('dimensions.Length',addProductData.dimensions.length.toString());
   productData.append('dimensions.Height',addProductData.dimensions.height.toString());
