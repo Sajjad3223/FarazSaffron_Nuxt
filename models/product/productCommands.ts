@@ -1,6 +1,7 @@
 import type {DimensionDto} from "~/models/product/dimensionDto";
 import type {SeoData} from "~/models/seoData";
 import type {EPackingType} from "~/models/product/EPackingType";
+import type {BaseDto} from "~/models/baseDto";
 
 export interface CreateProductCommand {
     title: string;
@@ -10,13 +11,15 @@ export interface CreateProductCommand {
     packingType: EPackingType;
     mainImage: File;
     mainImageAlt: string;
-    serialNumber: string;
+    productCode: string;
+    barcodeNumber: string;
     categoryId: number;
     subCategoryId?: number | null;
     dimensions: DimensionDto;
     digiKalaLink?: string | null;
     seoData: SeoData;
     quantity: number;
+    catalogId?:number | null;
 }
 
 export interface EditProductCommand {
@@ -26,13 +29,15 @@ export interface EditProductCommand {
     price: number;
     discount: number;
     packingType: number;
-    serialNumber: string;
+    productCode: string;
+    barcodeNumber: string;
     categoryId: number;
     subCategoryId?: number | null;
     dimensions: DimensionDto;
     digiKalaLink?: string | null;
     seoData: SeoData;
     quantity: number;
+    catalogId?:number | null;
 }
 
 export interface SetProductDiscountCommand{
@@ -72,3 +77,4 @@ export interface CreateSpecificationViewModel{
     key:string;
     value:string;
 }
+
