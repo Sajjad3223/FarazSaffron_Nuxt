@@ -108,7 +108,7 @@
     <div class="w-full relative" v-if="product">
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" :on-submit="UpdateProduct">
+        <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" @submit="UpdateProduct">
           <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="editProductData.title" @update:modelValue="generateSlug"/>
           <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="editProductData.slug"/>
           <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="editProductData.price" is-price/>
@@ -116,7 +116,17 @@
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="editProductData.quantity"/>
           <div class="flex items-end">
             <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="editProductData.categoryId" v-if="!loadingCategories" />
-            <button :class="['grid place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+            <button :class="['grid dark:text-white place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.13 5.32L12.76 7.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="flex items-end">
+            <base-f-select class="flex-1" label="کاتالوگ (اختیاری)" name="catalogId" id="catalogId" place-holder="کاتالوگ را انتخاب کنید" :data="catalogs" v-model="editProductData.catalogId" v-if="!loadingCatalogs" />
+            <button :class="['grid dark:text-white place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCatalogs">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -127,7 +137,8 @@
           <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="editProductData.subCategoryId" v-if="!loadingCategories" />
           <base-f-dimension v-model="editProductData.dimensions" />
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="editProductData.packingType" />
-          <base-f-input label="شماره سریال" name="serialNumber" id="serialNumber" place-holder="شماره سریال درج شده زیر محصول" v-model="editProductData.serialNumber"/>
+          <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثل: SN00AA0" v-model="editProductData.productCode"/>
+          <base-f-input label="بارکد محصول" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="editProductData.barcodeNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaLink" :rtl="false"/>
           <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت کالا و رفتن به صفحه بعد
@@ -139,7 +150,7 @@
         <Form class="grid grid-cols-1 my-4" v-show="step === 1">
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" :loading="isLoading" @clicked="AddImages">
+          <base-f-button color="primary" text-color="white" class="col-span-full" :loading="isLoading" @clicked="AddImages">
             ثبت تصاویر و رفتن به صفحه بعد
           </base-f-button>
         </Form>
@@ -147,7 +158,7 @@
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2">
-          <product-specification-add v-for="(s,i) in specifications" />
+          <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
             افزودن ویژگی جدید
           </base-f-button>
@@ -197,7 +208,7 @@
 import {Form} from "vee-validate";
 import type {
   CreateSpecificationViewModel, EditProductCommand,
-  SetSeoDataCommand
+  SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
@@ -215,7 +226,8 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
-import type {ProductDto} from "~/models/product/productQueries";
+import type {CatalogDto, ProductDto} from "~/models/product/productQueries";
+import {GetCatalogs} from "~/services/catalog.service";
 
 definePageMeta({
   layout:'admin'
@@ -228,6 +240,7 @@ const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
 const loadingCategories = ref(false);
+const loadingCatalogs = ref(false);
 const product:Ref<ProductDto | undefined> = ref(undefined);
 const productId = Number(route.params.productId);
 
@@ -239,9 +252,11 @@ const editProductData:EditProductCommand = reactive({
   price: null,
   discount: 0,
   packingType: EPackingType.کیفی,
-  serialNumber: '',
+  productCode: '',
+  barcodeNumber: '',
   categoryId: null,
   subCategoryId: null,
+  catalogId: null,
   dimensions: {
     width:0,
     height:0,
@@ -263,7 +278,8 @@ const editProductSchema = Yup.object().shape({
   slug:Yup.string().required('وارد کردن لینک یکتا ضروری است'),
   price:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 باشد').required('وارد کردن مبلغ ضروری است'),
   discount:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد').max(100,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد'),
-  serialNumber: Yup.string().required('وارد کردن شماره سریال ضروری است'),
+  productCode: Yup.string().required('وارد کردن کد محصول ضروری است'),
+  barcodeNumber: Yup.string().required('وارد کردن بارکد محصول ضروری است'),
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
 })
 
@@ -278,6 +294,7 @@ const packingTypeOptions = packingTypes.splice(packingTypes.length / 2 , packing
 
 const categories:Ref<CategoryDto[]> = ref([]);
 const subCategories:Ref<CategoryDto[]> = ref([]);
+const catalogs:Ref<CatalogDto[]> = ref([]);
 const categorySelected = (id:Number) => {
   const selectedCategory = categories.value.find(c=>c.id == id);
   subCategories.value = selectedCategory?.children ?? [];
@@ -286,7 +303,7 @@ const categorySelected = (id:Number) => {
 const imageFiles = ref([]);
 const imagesAlt = ref('');
 
-const specifications:CreateSpecificationViewModel[] = reactive([
+const specifications:Ref<CreateSpecificationViewModel[]> = ref([
   {key:'',value:''}
 ]);
 
@@ -301,7 +318,8 @@ onMounted(async ()=>{
     editProductData.price = product.value.price;
     editProductData.discount = product.value.discount;
     editProductData.packingType = product.value.packingType;
-    editProductData.serialNumber = product.value.serialNumber;
+    editProductData.productCode = product.value.productCode;
+    editProductData.barcodeNumber = product.value.barcodeNumber;
     editProductData.categoryId = product.value.category?.id;
     editProductData.subCategoryId = product.value.subCategory?.id;
     editProductData.dimensions.width = product.value.dimensions.width;
@@ -315,9 +333,18 @@ onMounted(async ()=>{
     editProductData.seoData.metaKeyWords = product.value.seoData.metaKeyWords;
     editProductData.seoData.schema = product.value.seoData.schema;
     editProductData.quantity = product.value.quantity;
+    editProductData.catalogId = product.value.catalog?.id ?? null;
+
+    specifications.value = productResult.data!.specifications.map(s=>{
+      return {
+        key:s.title,
+        value:s.value
+      } as CreateSpecificationViewModel
+    })
   }
 
   await refreshCategories();
+  await refreshCatalogs();
 
   isLoading.value = false;
 })
@@ -333,6 +360,16 @@ const refreshCategories = async ()=>{
     categorySelected(editProductData.categoryId);
 
   loadingCategories.value = false;
+}
+const refreshCatalogs = async ()=>{
+  loadingCatalogs.value = true;
+
+  const result = await GetCatalogs({pageId:1,take:100,search:''});
+  if(result.isSuccess){
+    catalogs.value = result.data?.data!;
+  }
+
+  loadingCatalogs.value = false;
 }
 
 const UpdateProduct = async ()=>{
@@ -351,14 +388,15 @@ const UpdateProduct = async ()=>{
 const AddImages = async ()=>{
   isLoading.value = true;
 
-  const images = new FormData();
-  images.append('productId',productId.toString());
-  for(const image in imageFiles.value){
-    images.append('images',image);
+  const imagesData = new FormData();
+  imagesData.append('productId',productId.toString());
+  for(let i = 0; i < imageFiles.value.length; i++){
+    const file:File = imageFiles.value[i];
+    imagesData.append('images',file);
   }
-  images.append('alt',imagesAlt.value);
+  imagesData.append('alt',imagesAlt.value);
 
-  const result:ApiResponse<undefined> = await SetImages(images);
+  const result:ApiResponse<undefined> = await SetImages(imagesData);
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);
     step.value++;
@@ -373,11 +411,12 @@ const AddSpecifications = async ()=>{
 
   const result:ApiResponse<undefined> = await SetSpecifications({
     productId:productId,
-    specifications:specifications
-  });
+    specifications:specifications.value
+  } as SetSpecificationsCommand);
 
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);
+    step.value++;
   }else{
     await toast.showToast(result.metaData.message,ToastType.error,0);
   }

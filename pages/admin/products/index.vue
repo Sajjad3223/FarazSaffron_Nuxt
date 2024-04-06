@@ -74,7 +74,7 @@
           <tbody
               class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="(i) in products">
+          <tr :class="['text-gray-700 dark:text-gray-400',{'opacity-30':!i.isActive}]" v-for="(i) in products">
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <!-- Avatar with inset shadow -->
@@ -128,7 +128,7 @@
                 </NuxtLink>
                 <button
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                    aria-label="Delete"
+                    aria-label="Delete" @click="ToggleActivity(i.id,i.isActive)"
                 >
                   <svg
                       class="w-5 h-5"
@@ -169,19 +169,22 @@
 <script setup lang="ts">
 import type {ProductFilterData, ProductFilterParams} from "~/models/product/productQueries";
 import type {PaginationData} from "~/models/baseFilterResult";
-import {GetProductsByAdmin} from "~/services/product.service";
+import {GetProductsByAdmin, SetProductActivity} from "~/services/product.service";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {SITE_URL} from "~/utilities/api.config";
+import type {SetActivityCommand} from "~/models/setActivityCommand";
+import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
   layout: 'admin'
 })
 
+const toast = useToast();
 const isLoading = ref(false);
 const showFilters = ref(false);
 const pageId = ref(1);
 const products:Ref<ProductFilterData[]> = ref([]);
-const paginationData:Ref<PaginationData> = ref(null);
+const paginationData:Ref<PaginationData | null> = ref(null);
 
 const filterParams:ProductFilterParams = reactive({
   search: undefined,
@@ -213,6 +216,25 @@ const getData = async ()=>{
   if(result.isSuccess){
     products.value = result.data?.data!;
     paginationData.value = FillPaginationData(result.data!);
+  }
+
+  isLoading.value = false;
+}
+
+const ToggleActivity = async (productId:number,isActive:boolean)=>{
+  if(isActive){
+    await toast.showToast("آیا از غیرفعال کردن این کالا اطمینان دارید؟",ToastType.warning,0)
+        .then( async result => {
+          if(!result.isConfirmed) return;
+        });
+  }
+
+  isLoading.value = true;
+
+  const result = await SetProductActivity({id:productId,newActivity:!isActive} as SetActivityCommand);
+  if(result.isSuccess){
+    await toast.showToast();
+    await getData();
   }
 
   isLoading.value = false;

@@ -13,6 +13,7 @@
              :required="isRequired"
              @input="handleInputChange"
              :maxlength="maxLength"
+             ref="input"
       >
       <textarea v-else rows="4" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none',`py-${py} px-${px}`]"
                 :id="id"
@@ -23,9 +24,10 @@
                 :maxlength="maxLength"
       >{{inputValue}}</textarea>
 
-      <span v-if="isPrice" class="dark:text-white absolute left-16 text-right w-1/2">
-        {{price}}
-      </span>
+      <div v-if="type === 'number' && isPrice" class="dark:text-white absolute left-12 text-left w-1/2 opacity-50 flex gap-2 items-center pointer-events-none" dir="ltr">
+        <small class="font-light">ریال</small>
+        <span>{{price}}</span>
+      </div>
       <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 dark:text-gray-400',
       {'peer-focus:-translate-x-2':rtl},{'peer-focus:translate-x-2':!rtl},
       {'right-4':!$slots.inputIcon && rtl},{'left-4':!$slots.inputIcon && !rtl},
@@ -142,7 +144,20 @@ const emits = defineEmits(['update:modelValue']);
 
 const showPassword = ref(false);
 const showEye = ref(false);
-const price = ref('');
+const input = ref();
+
+const price = computed(()=>{
+  let nStr = props.modelValue + '';
+  nStr = nStr.replace( /\,/g, "");
+  let x = nStr.split( '.' );
+  let x1 = x[0];
+  let x2 = x.length > 1 ? '.' + x[1] : '';
+  let rgx = /(\d+)(\d{3})/;
+  while ( rgx.test(x1) ) {
+    x1 = x1.replace( rgx, '$1' + ',' + '$2' );
+  }
+  return x1 + x2;
+});
 
 const {
   errorMessage,
@@ -163,9 +178,6 @@ watch(
 const handleInputChange = (e: any) => {
   if(props.type == 'password') {
     showEye.value = e.target.value != '';
-  }
-  if(props.isPrice){
-    // TODO generate separated numbers
   }
   handleChange(e, true);
   emits('update:modelValue', e.target.value);
