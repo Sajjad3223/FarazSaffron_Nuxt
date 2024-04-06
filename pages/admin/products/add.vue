@@ -149,14 +149,14 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4" v-show="step === 1" @submit.prevent="AddImages">
+        <Form class="grid grid-cols-1 my-4" v-show="step === 1">
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
           <div class="grid grid-cols-2 gap-4 col-span-full">
-            <base-f-button color="primary" text-color="white" type="submit">
+            <base-f-button color="primary" text-color="white" type="button" @clicked="AddImages">
               ثبت تصاویر و رفتن به صفحه بعد
             </base-f-button>
-            <base-f-button bordered color="primary" text-color="white" @clicked="step++">
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step++">
               رفتن به صفحه بعد
             </base-f-button>
           </div>
@@ -164,19 +164,19 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2"  @submit.prevent="AddSpecifications">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2" >
           <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="responsive">
             افزودن ویژگی جدید
           </base-f-button>
           <div class="grid grid-cols-3 gap-4 col-span-full">
-            <base-f-button bordered color="secondary" text-color="white" @clicked="step--">
+            <base-f-button bordered color="secondary" text-color="responsive" @clicked="step--">
               رفتن به صفحه قبل
             </base-f-button>
-            <base-f-button type="submit" color="primary" text-color="white" >
+            <base-f-button type="button" color="primary" text-color="white" @clicked="AddSpecifications">
               ثبت ویژگی ها و رفتن به صفحه بعد
             </base-f-button>
-            <base-f-button bordered color="primary" text-color="white" @clicked="step++">
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step++">
               رفتن به صفحه بعد
             </base-f-button>
           </div>
@@ -184,13 +184,13 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" @submit.prevent="AddSeoData">
+        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" >
           <FSeoData v-model="addProductData.seoData" />
           <div class="grid grid-cols-2 gap-4 col-span-full">
-            <base-f-button bordered color="secondary" text-color="white" @clicked="step--">
+            <base-f-button bordered color="secondary" text-color="responsive" @clicked="step--">
               رفتن به صفحه قبل
             </base-f-button>
-            <base-f-button type="submit" color="primary" text-color="white" >
+            <base-f-button type="button" color="primary" text-color="white" @clicked="AddSeoData">
               ثبت نهایی
             </base-f-button>
           </div>
@@ -292,7 +292,8 @@ const addProductSchema = Yup.object().shape({
   slug:Yup.string().required('وارد کردن لینک یکتا ضروری است'),
   price:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 باشد').required('وارد کردن مبلغ ضروری است'),
   discount:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد').max(100,'مبلغ وارد شده باید بیشتر از 0 و کمتر از 100 باشد'),
-  serialNumber: Yup.string().required('وارد کردن شماره سریال ضروری است'),
+  productCode: Yup.string().required('وارد کردن کد محصول ضروری است'),
+  barcodeNumber: Yup.string().required('وارد کردن بارکد ضروری است'),
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
 })
 
@@ -349,6 +350,8 @@ const refreshCatalogs = async ()=>{
 
 const AddProduct = async ()=>{
   isLoading.value = true;
+
+
 
   const productData = new FormData();
   productData.append('title',addProductData.title);

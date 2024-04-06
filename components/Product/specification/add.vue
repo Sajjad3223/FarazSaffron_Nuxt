@@ -29,8 +29,8 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 
 const specification:CreateSpecificationViewModel = reactive({
-  key:'',
-  value:''
+  key:props.modelValue.key,
+  value:props.modelValue.value
 })
 
 watch(specification,()=>emit('update:modelValue', {key:specification.key,value:specification.value} as CreateSpecificationViewModel))

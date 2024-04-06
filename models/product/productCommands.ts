@@ -1,7 +1,6 @@
 import type {DimensionDto} from "~/models/product/dimensionDto";
 import type {SeoData} from "~/models/seoData";
 import type {EPackingType} from "~/models/product/EPackingType";
-import type {BaseDto} from "~/models/baseDto";
 
 export interface CreateProductCommand {
     title: string;
@@ -77,7 +76,6 @@ export interface CreateSpecificationViewModel{
     key:string;
     value:string;
 }
-
 export interface EditCatalogCommand{
     title:string;
     description?:string | null;
