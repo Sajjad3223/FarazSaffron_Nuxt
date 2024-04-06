@@ -32,7 +32,7 @@
                         </button>
                       </li>
                       <li v-for="p in paginationData.pageCount" :key="p">
-                        <button v-if="paginationData.currentPage === p" disabled
+                        <button v-if="modelValue === p" disabled
                             class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
                         >
                           {{p}}
@@ -72,7 +72,7 @@ import type {PaginationData} from "~/models/baseFilterResult";
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps<{
-  pageId:Number,
+  modelValue:number,
   paginationData:PaginationData,
 }>();
 

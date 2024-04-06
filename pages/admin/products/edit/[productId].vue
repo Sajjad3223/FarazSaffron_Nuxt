@@ -1,7 +1,9 @@
 <template>
   <div>
+    <base-f-button is-link to="/admin/products" bordered text-color="responsive" color="secondary">
+      بازگشت به صفحه محصولات
+    </base-f-button>
     <base-f-divider title="ویرایش محصول" :logo-divider="false"/>
-
 
     <div class="mt-4 mb-8">
       <h2 class="sr-only">Steps</h2>
@@ -140,9 +142,14 @@
           <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثل: SN00AA0" v-model="editProductData.productCode"/>
           <base-f-input label="بارکد محصول" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="editProductData.barcodeNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaLink" :rtl="false"/>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
-            ثبت کالا و رفتن به صفحه بعد
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button type="submit" color="primary" text-color="white" >
+              ثبت کالا و رفتن به صفحه بعد
+            </base-f-button>
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step++">
+              رفتن به صفحه بعد
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
@@ -150,9 +157,17 @@
         <Form class="grid grid-cols-1 my-4" v-show="step === 1">
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
-          <base-f-button color="primary" text-color="white" class="col-span-full" :loading="isLoading" @clicked="AddImages">
-            ثبت تصاویر و رفتن به صفحه بعد
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step--">
+              رفتن به صفحه قبل
+            </base-f-button>
+            <base-f-button color="primary" text-color="white" type="button" @clicked="AddImages">
+              ثبت تصاویر و رفتن به صفحه بعد
+            </base-f-button>
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step++">
+              رفتن به صفحه بعد
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
@@ -162,18 +177,32 @@
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
             افزودن ویژگی جدید
           </base-f-button>
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" :loading="isLoading">
-            ثبت ویژگی ها و رفتن به صفحه بعد
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step--">
+              رفتن به صفحه قبل
+            </base-f-button>
+            <base-f-button color="primary" text-color="white" :loading="isLoading" @clicked="AddSpecifications">
+              ثبت ویژگی ها و رفتن به صفحه بعد
+            </base-f-button>
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step++">
+              رفتن به صفحه بعد
+            </base-f-button>
+          </div>
         </Form>
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3">
           <FSeoData v-model="editProductData.seoData" />
-          <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" :loading="isLoading">
-            ثبت نهایی
-          </base-f-button>
+          <div class="grid grid-cols-2 gap-4 col-span-full">
+            <base-f-button bordered color="primary" text-color="responsive" @clicked="step--">
+              رفتن به صفحه قبل
+            </base-f-button>
+            <base-f-button color="primary" @clicked="AddSeoData" text-color="white" :loading="isLoading">
+              ثبت نهایی
+            </base-f-button>
+          </div>
+
         </Form>
       </Transition>
 
@@ -234,6 +263,7 @@ definePageMeta({
 })
 
 const route = useRoute();
+const router = useRouter();
 const toast = useToast();
 
 const step = ref(0);
@@ -433,6 +463,7 @@ const AddSeoData = async ()=>{
 
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);
+    await router.push('/admin/products')
   }else{
     await toast.showToast(result.metaData.message,ToastType.error,0);
   }

@@ -85,7 +85,7 @@
               </li>
             </ul>
 
-            <span class="hidden lg:block mr-auto text-sm opacity-70">{{ products.length }} کالا</span>
+            <span class="hidden lg:block mr-auto text-sm opacity-70" v-if="!loading && paginationData != null">{{ paginationData.entityCount.toLocaleString() }} کالا</span>
           </div>
           <div class="p-4 bg-bgWhite dark:bg-gray-800 drop-shadow rounded-xl">
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" v-if="!loading">
@@ -104,6 +104,7 @@
                   </svg>
                 </span>
             </div>
+            <f-pagination :pagination-data="paginationData" v-model="pageId" v-if="paginationData != null" />
           </div>
         </div>
       </div>
@@ -118,12 +119,15 @@ import {EOrderBy} from "~/models/product/EOrderBy";
 import {EPackingType} from "~/models/product/EPackingType";
 import {GetCategories} from "~/services/category.service";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
+import type {PaginationData} from "~/models/baseFilterResult";
+import {FillPaginationData} from "~/utilities/fillPaginationData";
 
 const loading = ref(false);
 const products: Ref<ProductFilterData[]> = ref([]);
-const pageId = ref(1);
 const orderBy = ref(1);
 const route = useRoute();
+const pageId = ref(1);
+const paginationData:Ref<PaginationData | null> = ref(null);
 
 
 const orderBys = Object.entries(EOrderBy).map(t => {
@@ -137,14 +141,24 @@ const orderByOptions = orderBys.splice(orderBys.length / 2, orderBys.length);
 const filterParams: ProductFilterParams = reactive({
   pageId: pageId.value,
   take: 9,
-  search: route.query.search,
+  search: route.query?.search?.toString() ?? undefined,
   orderBy: orderBy.value,
-  categoriesIncluded:[]
+  categoriesIncluded:undefined,
+  dgkalaLink:undefined,
+  maxPrice:undefined,
+  minPrice:undefined,
+  fromDate:undefined,
+  justWithDiscount:undefined,
+  maxDiscount:undefined,
+  maxQuantity:undefined,
+  minDiscount:undefined,
+  minQuantity:undefined,
+  serialNumber:undefined,
+  toDate:undefined
 });
 
 watch(pageId, async () => await getData())
 watch(orderBy, async () => {
-  console.log(orderBy.value);
   await getData();
 })
 
@@ -165,9 +179,11 @@ const getData = async () => {
   loading.value = true;
 
   filterParams.orderBy = orderBy.value;
+  filterParams.pageId = pageId.value;
   const productsResult = await GetProducts(filterParams);
   if (productsResult.isSuccess) {
     products.value = productsResult.data?.data!;
+    paginationData.value = FillPaginationData(productsResult.data!);
   }
 
   loading.value = false;

@@ -11,20 +11,20 @@ import type {SpecificationDto} from "~/models/product/specificationDto";
 import type {DimensionDto} from "~/models/product/dimensionDto";
 
 export interface ProductFilterParams extends BaseFilterParams{
-    search?:             string | null;
-    categoriesIncluded?: number[] | null;
-    minQuantity?:        number | null;
-    maxQuantity?:        number | null;
-    fromDate?:           Date | null;
-    toDate?:             Date | null;
-    minPrice?:           number | null;
-    maxPrice?:           number | null;
-    orderBy?:            EOrderBy | null;
-    justWithDiscount?:   boolean | null;
-    minDiscount?:        number | null;
-    maxDiscount?:        number | null;
-    serialNumber?:       string | null;
-    dgkalaLink?:         string | null;
+    search?:             string | null | undefined;
+    categoriesIncluded?: number[] | null | undefined;
+    minQuantity?:        number | null | undefined;
+    maxQuantity?:        number | null | undefined;
+    fromDate?:           Date | null | undefined;
+    toDate?:             Date | null | undefined;
+    minPrice?:           number | null | undefined;
+    maxPrice?:           number | null | undefined;
+    orderBy?:            EOrderBy | null | undefined;
+    justWithDiscount?:   boolean | null | undefined;
+    minDiscount?:        number | null | undefined;
+    maxDiscount?:        number | null | undefined;
+    serialNumber?:       string | null | undefined;
+    dgkalaLink?:         string | null | undefined;
 }
 
 export interface CatalogFilterParams extends BaseFilterParams{
