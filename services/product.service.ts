@@ -44,7 +44,7 @@ export const EditProduct = (command:EditProductCommand):Promise<ApiResponse<unde
         body:command
     });
 }
-export const SetActivity = (command:SetActivityCommand):Promise<ApiResponse<undefined>> => {
+export const SetProductActivity = (command:SetActivityCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/Product/setActivity`,{
         method:'PUT',
         body:command
