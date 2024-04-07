@@ -4,7 +4,7 @@
   >
         <span class="flex items-center col-span-3">
           نمایش
-          {{ (paginationData.currentPage - 1) * paginationData.take + 1 }}-{{ (paginationData.currentPage) * paginationData.take }}
+          {{ (paginationData.currentPage - 1) * paginationData.take + 1 }}-{{ Math.min(((paginationData.currentPage) * paginationData.take),paginationData.entityCount) }}
           از
           {{paginationData.entityCount}}
         </span>
