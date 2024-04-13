@@ -202,8 +202,8 @@
         </p>
       </div>
       <div class="w-full lg:w-1/3 flex items-center justify-between">
-        <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
-          <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ' alt='Enamad' style='cursor:pointer' Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
+        <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn'>
+          <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn' alt='' style='cursor:pointer' Code='cCu16exHbafArcoXSU1XBlvGhdU7Fkzn'>
         </a>
         <img src="https://media.eclubgroup.ir/Namad/Sib_Salamat.png" alt="salamat" class="rounded-lg w-auto max-w-24">
         <img src="https://media.eclubgroup.ir/Namad/standard.jpg" alt="estandard" class="rounded-lg w-auto max-w-24">
