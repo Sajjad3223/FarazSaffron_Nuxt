@@ -48,10 +48,10 @@
           </div>
           <div class="flex items-stretch gap-2">
             <div class="flex items-end flex-col">
-              <a href="tel:05152329059" dir="ltr" class="text-brandOrange font-bold text-sm" style="text-shadow: 0px 0px 10px rgba(240, 70, 35, 0.5); font-family: 'Vazir FD';">051 - 52329059</a>
+              <a href="tel:05152329059" dir="ltr" class="text-brandOrange font-bold text-sm" style="text-shadow: 0 0 10px rgba(240, 70, 35, 0.5); font-family: 'Vazir FD',serif;">051 - 52329059</a>
               <div class="flex items-center gap-1.5">
                 <strong class="text-sm">پشتیبانــی</strong>
-                <span class="text-xs" style="font-family: 'Vazir FD'">24 ساعته</span>
+                <span class="text-xs" style="font-family: 'Vazir FD',serif">24 ساعته</span>
               </div>
             </div>
             <a href="tel:05152329059" class="h-[37px] bg-[#FFF3F0] rounded-lg rounded-b-xl grid place-items-center">
@@ -95,7 +95,7 @@
                   </svg>
                 </button>
                 <Transition name="slide-fade">
-                  <div v-if="showCategories" class="absolute top-12 z-20 w-[300px] bg-white p-4 flex rounded-xl" style="box-shadow: 0px 2px 5px 0px #B7B7B740;">
+                  <div v-if="showCategories" class="absolute top-12 z-20 w-[300px] bg-white p-4 flex rounded-xl" style="box-shadow: 0 2px 5px 0 #B7B7B740;">
                     <ul class="w-3/5 flex flex-col space-y-1">
                       <li class="w-full py-1.5 pl-4 pr-8 rounded-lg hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
                         <div class="w-full flex items-center justify-between">
@@ -171,7 +171,7 @@
                 </svg>
               </button>
               <Transition name="slide-fade">
-                <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg flex flex-col space-y-2" style="box-shadow: 0px 0px 5px 0px #69696940;">
+                <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg flex flex-col space-y-2" style="box-shadow: 0 0 5px 0 #69696940;">
                   <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <rect width="12" height="12" fill="url(#pattern0_461_1998)" fill-opacity="0.5"/>
@@ -249,7 +249,7 @@
         <h3 class="font-black text-2xl">دسته بندی محصولات</h3>
         <ul class="mt-4 flex items-center gap-8">
           <li class="w-[250px] h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0px 0px 15px 0px #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3662)" fill-opacity="0.4"/>
                 <defs>
@@ -266,7 +266,7 @@
             </NuxtLink>
           </li>
           <li class="w-[250px] h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0px 0px 15px 0px #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_308_4026)" fill-opacity="0.7"/>
                 <defs>
@@ -283,7 +283,7 @@
             </NuxtLink>
           </li>
           <li class="w-[250px] h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0px 0px 15px 0px #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3664)" fill-opacity="0.4"/>
                 <defs>
@@ -300,7 +300,7 @@
             </NuxtLink>
           </li>
           <li class="w-[250px] h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0px 0px 15px 0px #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3665)" fill-opacity="0.4"/>
                 <defs>
@@ -336,11 +336,11 @@
         <div class="flex items-center justify-between">
           <div class="text-[#8F8F8F] flex items-end gap-2">
             <div class="text-lg flex items-center gap-2">
-              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD'">49</span></span>
-              <strong class="font-black text-2xl" style="font-family: 'Vazir FD'">:</strong>
-              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD'">17</span></span>
-              <strong class="font-black text-2xl" style="font-family: 'Vazir FD'">:</strong>
-              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD'">01</span></span>
+              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD',serif">49</span></span>
+              <strong class="font-black text-2xl" style="font-family: 'Vazir FD',serif">:</strong>
+              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD',serif">17</span></span>
+              <strong class="font-black text-2xl" style="font-family: 'Vazir FD',serif">:</strong>
+              <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD',serif">01</span></span>
             </div>
             <span>
               تا پایان تخفیف های نوروزی جی پی
@@ -359,6 +359,207 @@
             </button>
           </div>
         </div>
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4">
+          <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-for="i in 5" :key="i">
+            <NuxtLink to="/product/1">
+              <img src="~/assets/images/product-image.png" alt="product Image" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+            </NuxtLink>
+            <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="18" height="18" fill="url(#pattern0_308_4084)" fill-opacity="0.3"/>
+                <defs>
+                  <pattern id="pattern0_308_4084" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_308_4084" transform="scale(0.01)"/>
+                  </pattern>
+                  <image id="image0_308_4084" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                </defs>
+              </svg>
+            </button>
+            <div class="absolute left-4 top-4 grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
+              <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">10%</span>
+            </div>
+            <hr>
+            <div class="p-4 flex flex-col w-full items-stretch">
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col items-start space-y-2">
+                  <NuxtLink to="/product/1">
+                    <strong class="text-xl text-[#626262]">نگین پاکتی</strong>
+                  </NuxtLink>
+                  <span class="font-light text-xs text-[#9E9E9E]">1 مثقال- 4/608 گرم</span>
+                  <ul class="flex items-center gap-0.5">
+                    <li v-for="i in 5" :key="i">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="10" height="10" fill="url(#pattern0_308_3938)"/>
+                        <defs>
+                          <pattern id="pattern0_308_3938" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_308_3938" transform="scale(0.01)"/>
+                          </pattern>
+                          <image id="image0_308_3938" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                        </defs>
+                      </svg>
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="rounded-md rounded-b-xl border border-[#E6E6E6] w-8">
+                    <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
+                  </div>
+                  <div class="rounded-md rounded-b-xl border border-[#E6E6E6] w-8">
+                    <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center w-full mt-4 justify-between">
+                <div class="w-max rounded-lg border border-[#DFDFDF] p-2 flex items-center gap-2">
+                  <button class="bg-brandOrange rounded-md p-0.5">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="14" height="14" fill="url(#pattern0_308_3949)"/>
+                      <defs>
+                        <pattern id="pattern0_308_3949" patternContentUnits="objectBoundingBox" width="1" height="1">
+                          <use xlink:href="#image0_308_3949" transform="scale(0.01)"/>
+                        </pattern>
+                        <image id="image0_308_3949" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAq9JREFUeAHtnWFq20AQhZMf7TXaHqk9hnuQNoE2aU7h5H9ziJwjucDOyPujhS0DEoRCIslkwxvlMwgbvNa+9z0NtuVZ+eSEGwQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAIF0BFprp2b2pZRya2b3scXjw+HwOZ5LZyiz4Nba+2EYbty9PbFdt9beZfaYSvswDFdPBPE4oMtUprKKrbV+MrO/c4GY2Z9a68esPtPoNrOvc2FMz8fYNMayCnX3swn4gvuzrD7T6Hb3HwuCmN5LfqYxllUogYglRyAEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkbgCDljq050h3xz9+8vuZVS7pb+pj6OfdH5w1N0s6RoMRo7Cq+W9E0thao6Lvq+3P1XeD7imO3/kuinnWnvnDpBNnUfniV7iaPxWfVo7q0rvPc/5FfOEJ3nvY2r7j+8r8TVf7iZPagC660rvPcnvHKGWJ/R27jq/sP7Slz9h5dSfqsC660rvPcnvHKGWLnU27jq/sP7Slz9h8dHP3ffq0LrqGvfn+6RM8QyMne/HL80ber7xv+Bjh4vUiydi9MKZrbb8KmTXa31w5HH7bZextlesTwJhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUL0AllzEcxzMfnbk7PyMrG77REQczS2GMVimWf7vriQ8isGFyuX5gJx94tXlPS2p4puwZnVWvsUHYVbijF6iR/9XcVDrNGY/q5iSz7xAgEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIvCUC/wCqIwEyqpFm8AAAAABJRU5ErkJggg=="/>
+                      </defs>
+                    </svg>
+                  </button>
+                  <nuxt-link to="/product/1" class="text-xs font-light">
+                    مشاهده محصول
+                  </nuxt-link>
+                </div>
+                <div class="flex items-center gap-2">
+                  <strong style="font-family: 'Vazir FD-WOL',serif">618,000</strong>
+                  <span class="flex flex-col items-center text-[8px] font-light opacity-70">تــــــو <br> مــان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!--  Top Seller  -->
+      <section class="w-full mt-16">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
+            محصولات پرفروش
+          </h3>
+          <NuxtLink to="/market" class="text-[#8D8D8D] hover:text-[#4C4C4C] transition-colors duration-200 flex items-center gap-1">
+            <span>مشاهده همه</span>
+            <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.05085 8.23784C1.70407 7.47068 1.70407 5.52932 3.05085 4.76216L6.89234 2.57396C8.22564 1.81448 9.88225 2.77736 9.88225 4.3118V8.6882C9.88225 10.2226 8.22564 11.1855 6.89234 10.426L3.05085 8.23784Z" fill="currentColor"/>
+              <path d="M11.293 6.50084C11.293 6.32372 11.4242 6.17404 11.5998 6.15094L15.0782 5.69337C15.5659 5.62921 15.9988 6.00886 15.9988 6.50084C15.9988 6.99282 15.5659 7.37247 15.0782 7.3083L11.5998 6.85073C11.4242 6.82763 11.293 6.67795 11.293 6.50084Z" fill="currentColor"/>
+            </svg>
+          </NuxtLink>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="text-[#8F8F8F] flex flex-col gap-2">
+            <span class="text-sm text-[#8D8D8D]">
+              ارسال رایگان برای خرید های بالاتر از 10 گرم
+            </span>
+            <div class="flex gap-1 items-center">
+              <span class="px-3 py-0.5 rounded-full bg-[#818181] text-[#FAFAFA] text-sm">زعفران</span>
+              <span class="px-3 py-0.5 rounded-full border border-[#BBBBBB] text-[#BBBBBB] text-sm">پسته</span>
+              <span class="px-3 py-0.5 rounded-full border border-[#BBBBBB] text-[#BBBBBB] text-sm">ادویه</span>
+              <span class="px-3 py-0.5 rounded-full border border-[#BBBBBB] text-[#BBBBBB] text-sm">آجیل</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 mt-12">
+            <button class="w-8 h-8 rounded-md border border-[#8D8D8D] text-[#8D8D8D] transition-colors duration-200 grid place-items-center opacity-20 cursor-not-allowed">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4">
+          <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-for="i in 5" :key="i">
+          <NuxtLink to="/product/1">
+            <img src="~/assets/images/product-image.png" alt="product Image" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+          </NuxtLink>
+          <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect width="18" height="18" fill="url(#pattern0_308_4084)" fill-opacity="0.3"/>
+              <defs>
+                <pattern id="pattern0_308_4084" patternContentUnits="objectBoundingBox" width="1" height="1">
+                  <use xlink:href="#image0_308_4084" transform="scale(0.01)"/>
+                </pattern>
+                <image id="image0_308_4084" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAACFBJREFUeAHtnXeoPDUQx7/23ntv2LArYtd/7GIFQVCw+4ciIqKCvaMiWEDsYsPeuyB27L1h77333u7z8/LIb9++TXKb7N3eZeCxuS2Zme9sssnMJE/KlBHICGQEMgIZgYxARiAjkBHICGQEMgIZgYxARiAjkBHICGQEMgIZgVAE5pG0gaQdJe0haR9JO0naUtKykqYKrTDC/fCENzIgCzIhGzKuLwmZh4bmkLSXpKslfSbpX8ffL5IelXS4pJUTorCKpCO6vH51yITMn3aMdpWkPSXNnlCuZFWvKekaSb95KFtlpCcl7Sxp2giSUscukp6qKRMG5AVbI4JMyatYTtKdNRUuM9CbkratIf12HWO8lUCu2yUtU0OuZI9OLelYSb8nUNo20F2S5g/QYgFJ9ySWiV7g6D59/0qhWEjSQ4mVto3yuaTNSiWZ/OTmkrjXfjZl+QFJvAB9peUlvd+g0gbQfyQdWKH5fpL+7oNc73W+L3TbfaEVJX3VB6WNUTgeU6L58X2W6UtJK5TIlfTU4p3h7Ec1Ff9T0jcRvjsMXw3Rl9sGCy3zDUQmZAt91r7/Q0mLGqFSH6fvjHieCxSY7uMRSQd3h4t8mKewBJ1R0mqd7m93STdIYj5iK+gq792d0Lnus6/D4/ouz1UlIYOhKbuDB4a2h3RlD+0Cn5Y0nakw5fHsALBQ4hJJiwUKNF8HoFMDWs9fnYkefzbgE5UZFVH3vIEy0StcFvhtOjOQR/DtuBL4oE6krH3+xc7bvlIwh8kf4M19xZOfzXui8kuSmKXXIZ6nnol42Od5Idepw6zqWZrxC56C3CJplqrKAq7NKulBT742GMXy/RFlQrdbPWV6VhLYRSecbUUly37j84ktwAyS7vPkXybTvZKoIyahIy6UMn7FczvEZGzqwtJFRsXf+IliK27446h83UOGokyvJXQIMhDg413kWfzNPVFpdQ+mP0laOCrX8ZXhJv/RQxYDyA+Slh5fTdQzDG9/9pCp7rdrMqFP92DIhKwJIl5hAHcdcf03QSd6yHRaTEFo9lXKM2Pn49sEMX+5wyEPsnJPUzSbh9fi5VjCLOih/LmxmHnWQ9f4fYVcXEvdfRZFPa9CHl4Qpgshnupi/WO/t3IwgtkWY3c3V9itQi6uNU2EgKt6kWg4HeRgRAStERdBCcJ8T/A9GSC+loQbpR8EBq5wcJWH2ltmpv9G4bLj2941pbkR39pa3T/K/STXxJnBUW262GGQh2tzGJ4K7nZgdWEMVa90MLk5BpMhqeMmB1ZgWZsYQZV1VeYc4dtM/yNAb2FwKTueEwMo16Tnu0EK8MdQuMc6SPSoGopjoCiTZ0YtZda2z+GWH3Xa0AMnEu1qExmENvhlZSZFo04XeeAUJdZO7qurKeJYnHuELUL+r8vB+G3MsAShy7KWYZ87YYQNcpIHPoSyoxGuERv8sjJJA0tG49ieipbyTMrYNKZKjCBIAiszhH2OvN5RI9dkEHzekQSGUWl/D4PAnFDvqBDrSewXcqLyvikAITTLOomJmJrzHycMmabQq9c6CSl/4oEH96QKa09aWWSArzreFnNE0StiCZ8jSOZykxh8dk0ox6Rskic83gqEOSylIH2u+0hPDEj6iJ2BM051Eh7+8BCITMKNxz3d/hPo5JMlSZ4wiX6NkG9S8xeSFmlEomaYoAs6me6o6mgngSeXbhpJj3sKRkppKxdKFlBEB3SpMoK5xsLV6MPcgjzjfrJayGeUgZCPFbLLx1U24CcYJfmuEmO1cdMJFmPwrReQoU4ubONvzZikvRfw5bFEwrz9VUfWlWzUO6s4Tx7gKSyKnB+HZWO1MLy9IEA/Js8DQVcECI0jri10SoBelw+SUiQd+37kaSlRImeJAXBFSu2uC93tFViJRfOrfi5Jrwa8UWULNv04pb/ruAA93uhhNVZ6DbocGF18EKDMUY1J5s+IF8V++6vK+O1Cl+v5SxLpTpaxER2rUsS+1ugEyqEjL4gtW1WZjEmWhreC1vYIadrKnjwAWh0aYAyCcWwz1SoiSTtkN6AzCkulm1KWoe1ZAcZAJ7btaCUheIhRGDo2OXlk0ueTLWJaMw7DrVtpCUto4vEhRmGfLXxlqYn9s64NaBkYY5vUQjVVP2snQozC6qdkUbbu8gnfABOtg3ADe24NFbE02CeOYroHlkHPnAAB1pizZt3wcR2ROcmy5gS6BVfJhz5kHxMibkw4YxEudFzjLiOY67Tq7WMxH9R68IayXNko7TqytQbrHOsSe5s8H8CXbMxN6jJty/Nskhmy1xargOtEHondsArWZXxznYntum0BM5acxJtDtuB7V9ISPTAnm5JnDdiuIzI1FgvvQZ+kj7AzA5t9uUAy1/GThezMwL0h9RMBbY07JJVlcM6xDawB3XUkROoDGsYO2fWOVkSebqbuRztkXyyXUXBwhnSHsQYOQ2VMUjNDglyk45S1FHYF9Ul5NS3xmWHb3z3mW8GeIa6FkwZIjrQCe1US3ZRvJgzPk4U5Z0wFhrGumTr/lYANx2zgq8oYAEPwF9Iy4AGvTB4I4MfyWXdhDEXkjj/z23Wk7pS+Mg8V23cL3lj2bnSBG3qd/eP7vQVH+6zRlRijhHhlXcbBi5yNUfN1IDbimzlYZRDWrPRr16KaEAze40T2QpLxioa5rqGg1+Ahl1AiQru+27LaBuGZJsPCCSEYvKppKa7diWxj0NVlYyS2I0bxaSk35m4qsSWs6vnQs0+X3RrsMuvl8wfcAqyJIkPiS0uMwhYWXMvUJwT4vyNsLsnfyAaW+oR9ZpsRyAhkBDICGYGMQEYgI5ARyAhkBDICGYGMQEYgIzDCCPwHFKhE0KEsecQAAAAASUVORK5CYII="/>
+              </defs>
+            </svg>
+          </button>
+          <div class="absolute left-4 top-4 grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
+            <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">10%</span>
+          </div>
+          <hr>
+          <div class="p-4 flex flex-col w-full items-stretch">
+            <div class="flex items-start justify-between">
+              <div class="flex flex-col items-start space-y-2">
+                <NuxtLink to="/product/1">
+                  <strong class="text-xl text-[#626262]">نگین پاکتی</strong>
+                </NuxtLink>
+                <span class="font-light text-xs text-[#9E9E9E]">1 مثقال- 4/608 گرم</span>
+                <ul class="flex items-center gap-0.5">
+                  <li v-for="i in 5" :key="i">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="10" height="10" fill="url(#pattern0_308_3938)"/>
+                      <defs>
+                        <pattern id="pattern0_308_3938" patternContentUnits="objectBoundingBox" width="1" height="1">
+                          <use xlink:href="#image0_308_3938" transform="scale(0.01)"/>
+                        </pattern>
+                        <image id="image0_308_3938" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                      </defs>
+                    </svg>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="rounded-md rounded-b-xl border border-[#E6E6E6] w-8">
+                  <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
+                </div>
+                <div class="rounded-md rounded-b-xl border border-[#E6E6E6] w-8">
+                  <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center w-full mt-4 justify-between">
+              <div class="w-max rounded-lg border border-[#DFDFDF] p-2 flex items-center gap-2">
+                <button class="bg-brandOrange rounded-md p-0.5">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <rect width="14" height="14" fill="url(#pattern0_308_3949)"/>
+                    <defs>
+                      <pattern id="pattern0_308_3949" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_308_3949" transform="scale(0.01)"/>
+                      </pattern>
+                      <image id="image0_308_3949" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAq9JREFUeAHtnWFq20AQhZMf7TXaHqk9hnuQNoE2aU7h5H9ziJwjucDOyPujhS0DEoRCIslkwxvlMwgbvNa+9z0NtuVZ+eSEGwQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAIF0BFprp2b2pZRya2b3scXjw+HwOZ5LZyiz4Nba+2EYbty9PbFdt9beZfaYSvswDFdPBPE4oMtUprKKrbV+MrO/c4GY2Z9a68esPtPoNrOvc2FMz8fYNMayCnX3swn4gvuzrD7T6Hb3HwuCmN5LfqYxllUogYglRyAEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkbgCDljq050h3xz9+8vuZVS7pb+pj6OfdH5w1N0s6RoMRo7Cq+W9E0thao6Lvq+3P1XeD7imO3/kuinnWnvnDpBNnUfniV7iaPxWfVo7q0rvPc/5FfOEJ3nvY2r7j+8r8TVf7iZPagC660rvPcnvHKGWJ/R27jq/sP7Slz9h5dSfqsC660rvPcnvHKGWLnU27jq/sP7Slz9h8dHP3ffq0LrqGvfn+6RM8QyMne/HL80ber7xv+Bjh4vUiydi9MKZrbb8KmTXa31w5HH7bZextlesTwJhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUL0AllzEcxzMfnbk7PyMrG77REQczS2GMVimWf7vriQ8isGFyuX5gJx94tXlPS2p4puwZnVWvsUHYVbijF6iR/9XcVDrNGY/q5iSz7xAgEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIvCUC/wCqIwEyqpFm8AAAAABJRU5ErkJggg=="/>
+                    </defs>
+                  </svg>
+                </button>
+                <nuxt-link to="/product/1" class="text-xs font-light">
+                  مشاهده محصول
+                </nuxt-link>
+              </div>
+              <div class="flex items-center gap-2">
+                <strong style="font-family: 'Vazir FD-WOL',serif">618,000</strong>
+                <span class="flex flex-col items-center text-[8px] font-light opacity-70">تــــــو <br> مــان</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </section>
+
+
+      <!--  Top Seller  -->
+      <section class="w-full mt-16">
+
       </section>
 
     </main>
@@ -377,12 +578,12 @@ const showAccountOptions = ref(false);
 
 <style scoped>
 *{
-  font-family: 'Epic Ravi';
+  font-family: 'Epic Ravi',serif;
 }
 
 .logo-style{
   position: absolute;
-  box-shadow: 0px 0px 15px 0px #F0462380;
+  box-shadow: 0 0 15px 0 #F0462380;
   backface-visibility: hidden;
 }
 .logo-rotate{
