@@ -90,60 +90,62 @@
               <div class="relative">
                 <button class="flex items-center gap-2" @click="showCategories = !showCategories" type="button">
                   <strong>دسته بندی</strong>
-                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" :class="['transition-all duration-200',{'rotate-180':showCategories}]">
                     <path d="M1 1L5.00065 4.664L9 1" stroke="#3E3E3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                <div v-if="showCategories" class="absolute top-8 z-20 w-[300px] bg-white p-4 flex rounded-xl" style="box-shadow: 0px 2px 5px 0px #B7B7B740;">
-                  <ul class="w-3/5 flex flex-col space-y-1">
-                    <li class="w-full py-1.5 pl-4 pr-8 rounded-lg hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                      <div class="w-full flex items-center justify-between">
-                        <span class="text-brandOrange">زعفران</span>
-                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                          <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
-                    <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                      <div class="w-full flex items-center justify-between">
-                        <span>پسته</span>
-                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                          <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
-                    <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                      <div class="w-full flex items-center justify-between">
-                        <span>ادویه</span>
-                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                          <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
-                    <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                      <div class="w-full flex items-center justify-between">
-                        <span>آجیل</span>
-                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                          <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="flex-1 border-r pr-2 mr-2 space-y-2">
-                    <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
-                      <span>سرگل</span>
-                    </li>
-                    <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
-                      <span>سرگل 2</span>
-                    </li>
-                    <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
-                      <span>سرگل 3</span>
-                    </li>
-                    <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
-                      <span>سرگل 4</span>
-                    </li>
-                  </ul>
-                </div>
+                <Transition name="slide-fade">
+                  <div v-if="showCategories" class="absolute top-12 z-20 w-[300px] bg-white p-4 flex rounded-xl" style="box-shadow: 0px 2px 5px 0px #B7B7B740;">
+                    <ul class="w-3/5 flex flex-col space-y-1">
+                      <li class="w-full py-1.5 pl-4 pr-8 rounded-lg hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
+                        <div class="w-full flex items-center justify-between">
+                          <span class="text-brandOrange">زعفران</span>
+                          <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </li>
+                      <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
+                        <div class="w-full flex items-center justify-between">
+                          <span>پسته</span>
+                          <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </li>
+                      <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
+                        <div class="w-full flex items-center justify-between">
+                          <span>ادویه</span>
+                          <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </li>
+                      <li class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
+                        <div class="w-full flex items-center justify-between">
+                          <span>آجیل</span>
+                          <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+                            <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </li>
+                    </ul>
+                    <ul class="flex-1 border-r pr-2 mr-2 space-y-2">
+                      <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                        <span>سرگل</span>
+                      </li>
+                      <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                        <span>سرگل 2</span>
+                      </li>
+                      <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                        <span>سرگل 3</span>
+                      </li>
+                      <li class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                        <span>سرگل 4</span>
+                      </li>
+                    </ul>
+                  </div>
+                </Transition>
               </div>
               <NuxtLink to="/market" class="font-bold">پرفروش ها</NuxtLink>
               <NuxtLink to="/market" class="font-bold">تخفیف ها</NuxtLink>
@@ -164,37 +166,39 @@
                   </defs>
                 </svg>
                 <strong>حساب کاربری</strong>
-                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" :class="['transition-all duration-200',{'rotate-180':showAccountOptions}]">
                   <path d="M1 1L5.00065 4.664L9 1" stroke="currentColor" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg flex flex-col space-y-2" style="box-shadow: 0px 0px 5px 0px #69696940;">
-                <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="12" height="12" fill="url(#pattern0_461_1998)" fill-opacity="0.5"/>
-                    <defs>
-                      <pattern id="pattern0_461_1998" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_461_1998" transform="scale(0.01)"/>
-                      </pattern>
-                      <image id="image0_461_1998" width="100" height="100" xlink:href="data:image/png;base64,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"/>
-                    </defs>
-                  </svg>
-                  <span>ثبت نام</span>
-                </button>
-                <hr>
-                <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="12" height="12" fill="url(#pattern0_461_1999)" fill-opacity="0.5"/>
-                    <defs>
-                      <pattern id="pattern0_461_1999" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_461_1999" transform="scale(0.01)"/>
-                      </pattern>
-                      <image id="image0_461_1999" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAABNFJREFUeAHtnc3rFVUch5+MUEmKFhnqpoKyTSpWS3e+VNALhoG1ycSFL4EkGIVvoEGIFeQfoIS2qL2VBdGiTe1rV4K9WViom7TX+4XfwHCZ89K993fOfIfPhWHuvefcOec8z5yXuTNzBvQSAREQAREQAREQAREQAREQAREQAREQAREQARGYhMDtwOPADuCVni4vA88DDwELJimkh99sBD4GrgP/Olp+AN4G7vIAOSePK4DzjgSEdpZrwD7gppxC9zXOI6OmyfawUCE9fv8esKivwGP5ugf4dWAymh3oA281ZTHwzUBlNFKs+XLzstFTk/HQ+jvgc+CTHi5fjvoL6zNCebfvr3rp6JcAv0cKYx38gw52rYXAC8DlSFneclAOnokU4Cxws4dCtPK4MiLlew99yemAkJ+BW1sF9fR2W6BM1nTZwWOvX18EMv9mr3Mdz5w1X6E+ZWv8p/VDvw0IsfbY8+urQLl6P9r6JZDxLZ5tAJ8FynWk7+WSkJ4ZkhAJKUJATVYRzPmJSEg+qyIxJaQI5vxEJCSfVZGYElIEc34iEpLPqkhMCRnDbH/iHQeOAWvGwkp8lJAW5WeBv1p/XdwAdrbCS7x1K+THFrj2GbenJ6RmV3l0bfOf0Tn73RNuc5KfuRXyUYcQg3fvJBSAOzu214guKcWtkLXAlTGI05wLsTOMP41trxFi61JS3AqximCXAB0FTgKTNlXtCmWXdRr4toj2+xJSXAtpw5zVe7sWOCXlpVkl1rEdCemAUlOKhHQIsa9qSZGQgJBaUiQkIqSGFAlJCCktpRdC7BjA7u+wg7qSi90cc0fmciAyHJ7lcUp1IU8Cdqlke7zv9b0Nl3dl1LhYlKpC7gf+GIiMZif6E3g4RjwRVlXIawOT0UiZ5mr1qkJeHaiQdxK1IBZcVch9A2yyrB9ZFyOeCKsqxPL2BHBxQDXlYAJ4Kri6EMug3TRfY9j7f4bYqWGv9R+zuCC6F0JSe03tcDu1a6OnptPuWh+eUSYlJAGypAzLioREhJSWISE9kyEhASE1akaTFTVZDYm5dU0ZlgXXQmyobEf7J4ANY2An+Wh/dLYvlOsaTc1iaBvLm1shq4Dfxoair8dKmgizY6HUv87zLcOy6FbIuTEZtjf/DdydAB8KXtaxvXYNKSHDtZDQ/FhPhYgnvr8lMndKKRmuhczHXbh7OmrJoYTIWQe7bbLmQ4jBfWx0GvnduWXTrGlnbE9CMiCVjCIhJWlnpCUhGZBKRpGQkrQz0pKQDEglo0hISdoZaUlIBqSSUSSkJO2MtCQkA1LJKBJSknZGWm6FaBLMDLslo4SmiZ3mutqS+e9Ky/U0sac6/pm18xeXRmcQbRpyj68XA2WycvV+IuXNkczbsze8TTX+gPepxm068fFTuO0zfJ8Cqx1UE2umrGbEyjLNDBVFEeyP1JJGzoUeP67CZrEOTS3e5N8eV7G0KNUpErNHAn2dIaUpnMf13in4VPnpkB959L6Hx1R0Wbd7+lKX8HirHWe8PhSsEbQc+HAAzZf1Ge6aqUZC13r9nBhvD5a0Gm6jKTcdeBf82He3AY+ObpfbPqo1djPNGz1c7NGrzwE2GZvrB0nGRChMBERABERABERABERABERABERABERABERABFIE/gNUOiA0KlQmiAAAAABJRU5ErkJggg=="/>
-                    </defs>
-                  </svg>
-                  <span>ورود</span>
-                </button>
-              </div>
+              <Transition name="slide-fade">
+                <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg flex flex-col space-y-2" style="box-shadow: 0px 0px 5px 0px #69696940;">
+                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="12" height="12" fill="url(#pattern0_461_1998)" fill-opacity="0.5"/>
+                      <defs>
+                        <pattern id="pattern0_461_1998" patternContentUnits="objectBoundingBox" width="1" height="1">
+                          <use xlink:href="#image0_461_1998" transform="scale(0.01)"/>
+                        </pattern>
+                        <image id="image0_461_1998" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                      </defs>
+                    </svg>
+                    <span>ثبت نام</span>
+                  </button>
+                  <hr>
+                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="12" height="12" fill="url(#pattern0_461_1999)" fill-opacity="0.5"/>
+                      <defs>
+                        <pattern id="pattern0_461_1999" patternContentUnits="objectBoundingBox" width="1" height="1">
+                          <use xlink:href="#image0_461_1999" transform="scale(0.01)"/>
+                        </pattern>
+                        <image id="image0_461_1999" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAABNFJREFUeAHtnc3rFVUch5+MUEmKFhnqpoKyTSpWS3e+VNALhoG1ycSFL4EkGIVvoEGIFeQfoIS2qL2VBdGiTe1rV4K9WViom7TX+4XfwHCZ89K993fOfIfPhWHuvefcOec8z5yXuTNzBvQSAREQAREQAREQAREQAREQAREQAREQAREQARGYhMDtwOPADuCVni4vA88DDwELJimkh99sBD4GrgP/Olp+AN4G7vIAOSePK4DzjgSEdpZrwD7gppxC9zXOI6OmyfawUCE9fv8esKivwGP5ugf4dWAymh3oA281ZTHwzUBlNFKs+XLzstFTk/HQ+jvgc+CTHi5fjvoL6zNCebfvr3rp6JcAv0cKYx38gw52rYXAC8DlSFneclAOnokU4Cxws4dCtPK4MiLlew99yemAkJ+BW1sF9fR2W6BM1nTZwWOvX18EMv9mr3Mdz5w1X6E+ZWv8p/VDvw0IsfbY8+urQLl6P9r6JZDxLZ5tAJ8FynWk7+WSkJ4ZkhAJKUJATVYRzPmJSEg+qyIxJaQI5vxEJCSfVZGYElIEc34iEpLPqkhMCRnDbH/iHQeOAWvGwkp8lJAW5WeBv1p/XdwAdrbCS7x1K+THFrj2GbenJ6RmV3l0bfOf0Tn73RNuc5KfuRXyUYcQg3fvJBSAOzu214guKcWtkLXAlTGI05wLsTOMP41trxFi61JS3AqximCXAB0FTgKTNlXtCmWXdRr4toj2+xJSXAtpw5zVe7sWOCXlpVkl1rEdCemAUlOKhHQIsa9qSZGQgJBaUiQkIqSGFAlJCCktpRdC7BjA7u+wg7qSi90cc0fmciAyHJ7lcUp1IU8Cdqlke7zv9b0Nl3dl1LhYlKpC7gf+GIiMZif6E3g4RjwRVlXIawOT0UiZ5mr1qkJeHaiQdxK1IBZcVch9A2yyrB9ZFyOeCKsqxPL2BHBxQDXlYAJ4Kri6EMug3TRfY9j7f4bYqWGv9R+zuCC6F0JSe03tcDu1a6OnptPuWh+eUSYlJAGypAzLioREhJSWISE9kyEhASE1akaTFTVZDYm5dU0ZlgXXQmyobEf7J4ANY2An+Wh/dLYvlOsaTc1iaBvLm1shq4Dfxoair8dKmgizY6HUv87zLcOy6FbIuTEZtjf/DdydAB8KXtaxvXYNKSHDtZDQ/FhPhYgnvr8lMndKKRmuhczHXbh7OmrJoYTIWQe7bbLmQ4jBfWx0GvnduWXTrGlnbE9CMiCVjCIhJWlnpCUhGZBKRpGQkrQz0pKQDEglo0hISdoZaUlIBqSSUSSkJO2MtCQkA1LJKBJSknZGWm6FaBLMDLslo4SmiZ3mutqS+e9Ky/U0sac6/pm18xeXRmcQbRpyj68XA2WycvV+IuXNkczbsze8TTX+gPepxm068fFTuO0zfJ8Cqx1UE2umrGbEyjLNDBVFEeyP1JJGzoUeP67CZrEOTS3e5N8eV7G0KNUpErNHAn2dIaUpnMf13in4VPnpkB959L6Hx1R0Wbd7+lKX8HirHWe8PhSsEbQc+HAAzZf1Ge6aqUZC13r9nBhvD5a0Gm6jKTcdeBf82He3AY+ObpfbPqo1djPNGz1c7NGrzwE2GZvrB0nGRChMBERABERABERABERABERABERABERABERABFIE/gNUOiA0KlQmiAAAAABJRU5ErkJggg=="/>
+                      </defs>
+                    </svg>
+                    <span>ورود</span>
+                  </button>
+                </div>
+              </Transition>
             </div>
             <!-- Cart -->
             <div class="flex items-stretch gap-2">
@@ -394,4 +398,20 @@ const showAccountOptions = ref(false);
     transform: rotateY(360deg);
   }
 }
+
+.slide-fade-enter-active,
+.slide-fade-leave-active{
+  @apply transition-all duration-300;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to{
+  @apply opacity-0 -translate-y-4;
+}
+.slide-fade-enter-to,
+.slide-fade-leave-from{
+  @apply opacity-100 translate-y-0;
+}
+
+
 </style>
