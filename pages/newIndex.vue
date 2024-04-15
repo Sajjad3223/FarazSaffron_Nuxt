@@ -557,12 +557,210 @@
       </section>
 
 
-      <!--  Top Seller  -->
+      <!--  About GP  -->
       <section class="w-full mt-16">
+        <div class="bg-[#F8F8F8] rounded-xl p-12">
+          <div class="flex items-center justify-center gap-24 mx-auto w-3/4">
+            <img src="~/assets/images/gp-filled.png" alt="GP" class="drop-shadow-xl">
+            <div class="flex flex-col items-start gap-4">
+              <strong class="text-xl">اصالت و عطر ماندگار</strong>
+              <p class=" font-light">
+                ورود شما را به جی پی، فروشگاه آنلاین خرید زعفران خوش‌آمد می‌گوییم. <br>
+                خوشحالیم که هم اکنون در جی پی، دارنده نماد اعتماد الکترونیکی و ارائه دهنده‌ی ضمانت هفت روزه حضور دارید
+                <br>
+                به دنیای خاص و شگفت‌انگیز زعفران وارد شوید، از زمین‌های حاصلخیز گرفته تا سفره شما، جایی که خلوص با اصالت برابر می‌شود به‌وسیله زعفران باکیفیت، نماد تجمل و طعم را تضمین می‌کنیم.
+                <br>
+                تمام سعی جی پی بر این است که سفارش‌های شما در خراسان رضوی و خارج از آن، بین 24 تا حداکثر 48 ساعت کاری ساعت به دستتان برسد و همیشه راضی از خرید باشید
+              </p>
+              <NuxtLink to="/aboutUs" class="text-brandOrange flex items-center gap-2">
+                <span>مطالعه بیشتر</span>
+                <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8.23205C1.66667 7.46225 1.66667 5.53775 3 4.76795L6.75 2.60289C8.08333 1.83309 9.75 2.79533 9.75 4.33494V8.66506C9.75 10.2047 8.08333 11.1669 6.75 10.3971L3 8.23205Z" fill="currentColor"/>
+                  <path d="M11.1445 6.50084C11.1445 6.32365 11.2757 6.17382 11.4513 6.15041L14.867 5.69499C15.3543 5.63001 15.7874 6.00916 15.7874 6.50084C15.7874 6.99252 15.3543 7.37167 14.867 7.30668L11.4513 6.85127C11.2757 6.82785 11.1445 6.67803 11.1445 6.50084Z" fill="currentColor"/>
+                </svg>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!--  Blog Posts  -->
+      <section class="w-full mt-16">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
+            مقالات
+          </h3>
+          <NuxtLink to="/market" class="text-[#8D8D8D] hover:text-[#4C4C4C] transition-colors duration-200 flex items-center gap-1">
+            <span>مشاهده همه</span>
+            <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.05085 8.23784C1.70407 7.47068 1.70407 5.52932 3.05085 4.76216L6.89234 2.57396C8.22564 1.81448 9.88225 2.77736 9.88225 4.3118V8.6882C9.88225 10.2226 8.22564 11.1855 6.89234 10.426L3.05085 8.23784Z" fill="currentColor"/>
+              <path d="M11.293 6.50084C11.293 6.32372 11.4242 6.17404 11.5998 6.15094L15.0782 5.69337C15.5659 5.62921 15.9988 6.00886 15.9988 6.50084C15.9988 6.99282 15.5659 7.37247 15.0782 7.3083L11.5998 6.85073C11.4242 6.82763 11.293 6.67795 11.293 6.50084Z" fill="currentColor"/>
+            </svg>
+          </NuxtLink>
+        </div>
+        <div class="flex items-center justify-between mt-4">
+          <div class="text-[#8F8F8F] flex flex-col gap-2">
+            <span class="text-sm text-[#8D8D8D] font-light">
+              بیشتر از ده ها مقاله در مورد زعفران و محصولات جی پی
+            </span>
+          </div>
+        </div>
+
+        <div class="w-full bg-[#F8F8F8] rounded-xl p-6 mt-6">
+          <ul class="w-full grid grid-cols-4 gap-6">
+            <li class="p-2 pb-14 relative flex flex-col rounded-lg border border-[#CACACA]" v-for="i in 4" :key="i">
+              <NuxtLink to="/gpBlog/post" class="w-full overflow-hidden rounded-lg">
+                <img src="~/assets/images/blog-post.png" alt="blog post" class="rounded-lg w-full object-cover hover:scale-110 transition-transform duration-200">
+              </NuxtLink>
+              <NuxtLink class="mt-4 text-[#6A6A6A]">
+                <strong>خواص چای زعفران</strong>
+              </NuxtLink>
+              <p class="my-1 w-2/3 text-sm font-light text-[#7E7E7E]">
+                بیشتر از ده ها مقاله در مورد زعفران و محصولات جی پی
+              </p>
+              <div class="flex items-center gap-1 self-end">
+                <span class="text-xs text-[#CCCCCC] font-light">174</span>
+                <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <rect width="10" height="9" fill="url(#pattern0_306_3845)" fill-opacity="0.2"/>
+                  <defs>
+                    <pattern id="pattern0_306_3845" patternContentUnits="objectBoundingBox" width="1" height="1">
+                      <use xlink:href="#image0_306_3845" transform="matrix(0.01 0 0 0.0111111 0 -0.0555556)"/>
+                    </pattern>
+                    <image id="image0_306_3845" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                  </defs>
+                </svg>
+              </div>
+              <NuxtLink to="/gpBlog/post" class="grid place-items-center border-t absolute border-[#CACACA] bottom-0 inset-x-0 py-3 text-[#C5C5C5] hover:text-[#7E7E7E]">
+                <div class="flex items-center gap-2 transition-colors duration-200">
+                  <span class="text-sm">ادامه و خواندن</span>
+                  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.39063 8.87896C2.05729 8.10916 2.05729 6.18466 3.39063 5.41486L6.90708 3.38463C8.24041 2.61483 9.90708 3.57708 9.90708 5.11668V9.17713C9.90708 10.7167 8.24041 11.679 6.90708 10.9092L3.39063 8.87896Z" fill="currentColor"/>
+                    <path d="M11.2656 7.14559C11.2656 6.97264 11.3937 6.82641 11.5651 6.80355L14.8989 6.35904C15.3746 6.29562 15.7973 6.66568 15.7973 7.14559C15.7973 7.62549 15.3746 7.99556 14.8989 7.93213L11.5651 7.48762C11.3937 7.46477 11.2656 7.31853 11.2656 7.14559Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
 
       </section>
 
+
+      <!--  Instagram  -->
+      <section class="w-full mt-24">
+
+        <div class="flex justify-between items-center w-full h-[150px] rounded-xl bg-gradient-to-r from-[#E63BB0] to-[#EFB243] px-16">
+          <strong class="text-3xl text-[#EBEBEB]">
+            بخشی از فعالیت های جی پی را در اینستاگرام ما مشاهده کنید
+          </strong>
+          <a href="#" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 text-white hover:bg-[#EBEBEB] hover:text-[#6A6A6A] transition-colors duration-200">
+            <span>دنبال کردن</span>
+            <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8.73205C1.66667 7.96225 1.66667 6.03775 3 5.26795L7.5 2.66987C8.83333 1.90007 10.5 2.86232 10.5 4.40192V9.59808C10.5 11.1377 8.83333 12.0999 7.5 11.3301L3 8.73205Z" fill="currentColor"/>
+              <path d="M12 7C12 6.80918 12.1413 6.64783 12.3304 6.62261L16.0088 6.13216C16.5336 6.06218 17 6.4705 17 7C17 7.5295 16.5336 7.93782 16.0088 7.86784L12.3304 7.37739C12.1413 7.35217 12 7.19082 12 7Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <img src="~/assets/images/instagram-3d.png" alt="instagram" class="-translate-y-12 w-[250px]">
+        </div>
+
+      </section>
+
+
+      <!-- Honors -->
+      <section class="w-full mt-16">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
+            افتخارات
+          </h3>
+        </div>
+        <div class="flex items-center justify-between mt-4">
+          <div class="text-[#8F8F8F] flex flex-col gap-2">
+            <span class="text-sm text-[#8D8D8D] font-light">
+              گواهینامه و افتخارات
+            </span>
+          </div>
+        </div>
+
+        <div class="w-full flex items-end justify-between -translate-y-12">
+          <p class="w-[600px] -translate-y-6 text-[#828282] font-thin">
+            شرکت زعفران جی پی به مدت 7 سال مفتخر به دریافت عنوان “واحد نمونه صنعتی” شده است. شرکت ما با بهره مندی از سیستم مدیریت کیفیت عالی توانسته است گواهینامه های ISO 9001 و نیز 22000 ISO را به دست بیاورد.
+          </p>
+          <div class="flex">
+            <img src="~/assets/images/honor1.png" alt="honor" class="max-w-[170px]">
+            <img src="~/assets/images/honor2.png" alt="honor" class="max-w-[170px]">
+            <img src="~/assets/images/honor1.png" alt="honor" class="max-w-[170px]">
+          </div>
+        </div>
+      </section>
+
+      <!-- Your Trust -->
+      <section class="w-full mt-16">
+        <div class="w-full bg-[#F8F8F8] py-12 flex flex-col space-y-12 items-center">
+          <strong class="text-4xl">اعتماد شما  افتخارات ماست</strong>
+          <span>
+            با محصولات ما خیالتان راحت باشد زیرا یکی از افتخارات ما کسب رضایت مشتریان و حفظ رضایت در طی سال های اخیراست . ما همواره تلاش کردیم برترین تولید کننده باشیم و کیفیت را سرلوحه کار خود قرار دهیم
+          </span>
+          <ul class="grid grid-cols-4 gap-5">
+            <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
+              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">2,000 +</strong>
+              <span class="text-sm">ارسال موفق</span>
+            </li>
+            <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
+              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">20 +</strong>
+              <span class="text-sm">تنوع محصول</span>
+            </li>
+            <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
+              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">2,000 +</strong>
+              <span class="text-sm">ارسال موفق</span>
+            </li>
+            <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
+              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">96% +</strong>
+              <span class="text-sm">رضایت مشتری</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Comments -->
+      <section class="w-full mt-16">
+        <div class="w-full flex">
+          <div class="flex flex-col w-1/5 items-start gap-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
+                نظرات شما
+              </h3>
+            </div>
+            <div class="flex items-center justify-between mt-4">
+              <div class="text-[#8F8F8F] flex flex-col gap-2">
+            <span class="text-sm text-[#8D8D8D] font-light">
+              بخش کوچکی از نظرات شما در مورد جی پی
+            </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 w-4/5">
+            <ul class="flex w-full gap-4 overflow-auto p-4" style="scrollbar-width: none">
+              <li class="bg-white w-max min-w-[400px] rounded-xl px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" v-for="i in 4" :key="i">
+                <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full aspect-square w-[40px] h-[40px]">
+                <div class="flex flex-col items-start">
+                  <strong class="text-lg text-[#979797]">پویا نوروزی</strong>
+                  <small class="text-sm font-light text-[#BFBFBF]">کاربر</small>
+                  <p class="max-w-[280px] font-thin text-sm text-[#AAAAAA] mt-5">
+                    دو روز پس از سفارش ، محصول رسید دستم  سرعت ارسال واقعا عالیه  دمتون گرم
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
     </main>
+
+    <footer class="w-full mt-24">
+
+    </footer>
     
   </div>
 </template>
