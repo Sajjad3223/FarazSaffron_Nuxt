@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="h-[60px] bg-white w-full border-b-2 border-[#DCDCDC] relative flex items-center">
-        <img src="~/assets/images/img.png" alt="" class="h-[60px]">
+        <img src="~/assets/images/img.png" alt="" class="h-[60px] w-[85vw]">
         <span class="absolute text-white font-bold text-2xl left-1/2 -translate-x-1/2">با جی پی به دنیای زعفران قدم بزار</span>
       </div>
     </header>
@@ -758,8 +758,136 @@
 
     </main>
 
-    <footer class="w-full mt-24">
-
+    <footer class="w-full mt-24 border-t border-[#E8E8E8]">
+      <div class="container mt-16 flex flex-col mx-auto">
+        <div class="w-full grid grid-cols-2 gap-16">
+          <div class="flex flex-col items-start ">
+            <div class="flex items-center gap-6 mb-14">
+              <div class="flex flex-col items-center text-2xl leading-6">
+                <span class="text-[#B0B0B0]">دربـــــــــاره</span>
+                <strong class="font-black text-[#474747]">جـــی پــــی</strong>
+              </div>
+              <div class="bg-brandOrange rounded-lg w-14 h-14 grid place-items-center">
+                <img src="~/assets/images/icons/doc.png" alt="doc" class="w-7" style="box-shadow: 0 0 5px 0 #F6F6F680;">
+              </div>
+            </div>
+            <p class="text-sm pl-24 text-[#666666]">
+              سرآغاز ما با یک هدف و باور سهل و دست یافتنی شکل گرفت؛ تهیه و عرضه زعفران ناب به مصرف کنندگان(چهانیان، دنیا)!
+              با این توصیف ما به یک شرکت بین المللی تبدیل شدیم و حال تعهد ما به کیفیت، امری ناگسستنی خواهد بود.
+              داستان ما با یک اشتیاق ساده آغاز شد:
+            </p>
+            <NuxtLink to="/aboutUs" class="flex mt-2.5 text-sm items-center gap-2">
+              <span class="text-brandOrange">مطالعه بیشتر</span>
+              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8.32048C1.66667 7.55068 1.66667 5.62618 3 4.85638L6.88249 2.61482C8.21583 1.84502 9.8825 2.80727 9.8825 4.34687V8.82998C9.8825 10.3696 8.21583 11.3318 6.8825 10.562L3 8.32048Z" fill="#F14823"/>
+                <path d="M11.2969 6.58904C11.2969 6.40946 11.4298 6.25762 11.6078 6.23389L15.0695 5.77233C15.5634 5.70647 16.0023 6.09073 16.0023 6.58904C16.0023 7.08736 15.5634 7.47162 15.0695 7.40576L11.6078 6.9442C11.4298 6.92047 11.2969 6.76863 11.2969 6.58904Z" fill="#F14823"/>
+              </svg>
+            </NuxtLink>
+            <ul class="w-3/5 mx-auto flex items-center justify-around mt-4">
+              <li class="w-14 h-14 rounded-full bg-[#F4F4F4] grid place-items-center">
+                <img src="~/assets/images/icons/telegram.png" alt="telegram" class="w-7">
+              </li>
+              <li class="w-14 h-14 rounded-full bg-[#F4F4F4] grid place-items-center">
+                <img src="~/assets/images/icons/instagram.png" alt="instagram" class="w-7">
+              </li>
+              <li class="w-14 h-14 rounded-full bg-[#F4F4F4] grid place-items-center">
+                <img src="~/assets/images/icons/x.png" alt="x" class="w-7">
+              </li>
+              <li class="w-14 h-14 rounded-full bg-[#F4F4F4] grid place-items-center hover:bg-[#00D95F] transition-all duration-300 cursor-pointer">
+                <img src="~/assets/images/icons/whatsapp.png" alt="whatsapp" class="w-7">
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-start ">
+            <div class="flex items-center gap-6 mb-14">
+              <div class="flex flex-col items-center text-2xl leading-6">
+                <span class="text-[#B0B0B0]">تمــاس</span>
+                <strong class="font-black text-[#474747]">با مـــــــا</strong>
+              </div>
+              <div class="bg-brandOrange rounded-lg w-14 h-14 grid place-items-center">
+                <img src="~/assets/images/icons/phone.png" alt="phone" class="w-7" style="box-shadow: 0 0 5px 0 #F6F6F680;">
+              </div>
+              <strong dir="ltr" class="text-brandOrange text-3xl mr-12" style="text-shadow: 0 0 10px rgba(240, 70, 35, 0.5); font-family: 'Vazir FD',serif;">
+                051 - 52329059
+              </strong>
+            </div>
+            <div class="flex items-center gap-5">
+              <div class="w-14 h-14 bg-[#F4F4F4] rounded-full grid place-items-center ">
+                <img src="~/assets/images/icons/location.png" alt="location" class="w-7">
+              </div>
+              <span class="text-[#8D8D8D] font-light">استان خراسان رضوی - شهرستان تربت حیدریه - کیلومتر 2 جاده بایگ <br> ساختمان جی پی سافرون</span>
+            </div>
+            <div class="flex items-center gap-5 mt-8">
+              <div class="w-14 h-14 bg-[#F4F4F4] rounded-full grid place-items-center ">
+                <img src="~/assets/images/icons/email.png" alt="email" class="w-7">
+              </div>
+              <span class="text-[#8D8D8D] font-normal" style="font-family: Montserrat,serif"> info@gpsaffron.com </span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full rounded-xl bg-[#F8F8F8] mt-9 px-16 pt-14 pb-3 mb-8 grid grid-cols-6 gap-6 justify-items-center">
+          <img src="~/assets/images/gp-orange-cutted.png" alt="gp orange" class="justify-self-center self-center">
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-xl">بخش های سایت</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">صفحه اصلی</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">فروشگاه</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">مقالات</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">تماس با ما</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">درباره ما</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-xl">خدمات مشتریان</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">پرسش های متداول</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">رویه بازگرداندن کالا</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">حریم خصوصی</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-xl">راه های خرید از جی پی</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">نحوه ثبت سفارش</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">رویه ارسال سفارش</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">شیوه های پرداخت</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="border rounded-full border-[#666666] aspect-square grid place-items-center">
+            <img src="~/assets/images/salamat.png" alt="salamat" class="w-2/3">
+          </div>
+          <div class="border rounded-full border-[#666666] aspect-square grid place-items-center">
+            <img src="~/assets/images/enamad.png" alt="enamad" class="w-2/3">
+          </div>
+          <div class="col-span-full text-center text-sm font-light mt-7">
+            <span class="flex gap-2 justify-center">
+              برای استفاده از مطالب جی پی، داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست. تمام حقوق اين وب‌سايت نیز برای شرکت فراز زعفران تربت حیدریه <NuxtLink to="/"><strong class="font-black">(فروشگاه آنلاین جی پی)</strong></NuxtLink> است.
+            </span>
+          </div>
+        </div>
+      </div>
     </footer>
     
   </div>
