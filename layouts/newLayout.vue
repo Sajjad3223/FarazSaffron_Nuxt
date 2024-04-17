@@ -398,7 +398,6 @@
         </div>
       </div>
     </footer>
-
   </div>
 </template>
 
@@ -409,7 +408,7 @@ const showAccountOptions = ref(false);
 const showCart = ref(false);
 </script>
 
-<style scoped>
+<style>
 *{
   font-family: 'Epic Ravi',serif;
 }

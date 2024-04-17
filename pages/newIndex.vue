@@ -534,6 +534,9 @@ definePageMeta({
 </script>
 
 <style scoped>
+*{
+  font-family: "Epic Ravi","Vazir FD",serif;
+}
 
 .hover-brand:hover{
   box-shadow: 0 5px 5px 0 #F1482380;
