@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>ویرایش محصول</Title>
+    </Head>
     <base-f-button is-link to="/admin/products" bordered text-color="responsive" color="secondary">
       بازگشت به صفحه محصولات
     </base-f-button>

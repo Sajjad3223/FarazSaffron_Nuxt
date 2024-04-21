@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>پیغام ها</Title>
+    </Head>
     <div>
       <div class="flex items-center justify-between px-2 dark:text-white">
         <div class="text-2xl font-bold flex items-center gap-2">

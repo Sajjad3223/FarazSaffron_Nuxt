@@ -1,5 +1,8 @@
 <template>
   <div class="w-full overflow-hidden">
+    <Head>
+      <Title>محصولات جی پی</Title>
+    </Head>
     <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
     >

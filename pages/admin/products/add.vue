@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>افزودن محصول جدید</Title>
+    </Head>
     <base-f-divider title="افزودن محصول جدید" :logo-divider="false"/>
 
 

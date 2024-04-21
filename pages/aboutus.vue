@@ -1,5 +1,10 @@
 <template>
   <div class="flex flex-col items-center mt-12">
+
+    <Head>
+      <Title>درباره جی پی</Title>
+    </Head>
+
     <h2 class="text-5xl font-semibold">آشنایی مختصر با <span class="text-brandOrange">جی پی</span></h2>
     <div class="mt-12 p-8 bg-[#F8F8F8] rounded-2xl">
       <div class="flex mt-12 items-center justify-between">

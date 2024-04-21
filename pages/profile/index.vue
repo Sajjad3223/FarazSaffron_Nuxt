@@ -1,5 +1,10 @@
 <template>
   <div class="w-full">
+
+    <Head>
+      <Title>حساب کاربری</Title>
+    </Head>
+
     <div >
       <h3 class="text-2xl dark:text-white font-bold ">
         داشبورد

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>نظرات من</Title>
+    </Head>
     <div>
       <div class="text-2xl font-bold flex items-center gap-2 dark:text-white">
         <NuxtLink to="/profile">

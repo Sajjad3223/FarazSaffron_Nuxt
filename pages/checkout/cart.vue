@@ -2,6 +2,10 @@
 <template>
 
   <div class="flex flex-col mx-4 lg:mx-0">
+    <Head>
+      <Title>سبد خرید</Title>
+    </Head>
+
     <div class="w-full mt-8">
       <div>
         <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2 dark:text-currentColor">

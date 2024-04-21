@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>پنل مدیریت</Title>
+    </Head>
     <h2 class="text-xl">
       Index Admin
     </h2>

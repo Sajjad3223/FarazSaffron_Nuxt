@@ -5,7 +5,11 @@ definePageMeta({
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <Head>
+      <Title>کیف پول ها</Title>
+    </Head>
+  </div>
 </template>
 
 <style scoped>

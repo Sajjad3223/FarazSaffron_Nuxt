@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>سفارش #123456</Title>
+    </Head>
     <div>
       <div class="flex items-center justify-between px-2 dark:text-white">
         <h3 class="text-sm lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
@@ -238,4 +241,7 @@
 definePageMeta({
   layout: 'profile',
 })
+
+//TODO make Dynamic
+
 </script>
