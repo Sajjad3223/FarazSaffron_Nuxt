@@ -1,18 +1,30 @@
-<template>
-  <div>
-    Verifying ...
-  </div>
-</template>
-
 <script setup lang="ts">
-definePageMeta({
-  layout:'new-layout'
-})
+
+import {FetchApi} from "~/utilities/CustomApiFetch";
 
 const route = useRoute();
 
-onMounted(()=>{
-  console.log(route.query)
-})
+onMounted( async ()=>{
+  const result = await FetchApi('/payment/verify',{
+    method:'POST',
+    body:{
+      RefId: route.query.RefId,
+      ResCode: route.query.ResCode,
+      SaleOrderId: Number(route.query.SaleOrderId?.toString()),
+      CardHolderInfo: null,
+      CardHolderPan: null,
+      FinalAmount: 10000
+    }
+  });
 
+  console.log(result)
+})
 </script>
+
+<template>
+
+</template>
+
+<style scoped>
+
+</style>

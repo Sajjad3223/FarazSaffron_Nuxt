@@ -15,7 +15,9 @@ const Payment = async ()=>{
   const result = await FetchApi<string>('/payment/payRequest',{
     method:'POST',
     body:{
-      callbackUrl: 'http://localhost:3000/api/payment', // 'https://gpsaffron.com/payment/verify',
+      callbackUrl:'https://api.gpsaffron.com/api/Payment/verify',
+      orderId:-5,
+      price:10000
     }
   });
 
