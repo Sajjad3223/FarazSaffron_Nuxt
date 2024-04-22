@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   app:{
@@ -9,8 +10,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
-      tailwindcss: {},
       autoprefixer: {},
+      tailwindcss: {},
     },
   },
   devServer:{
@@ -19,9 +20,14 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/clickOutsideDirective.ts',
   ],
-  modules: [
-    "@pinia/nuxt",
-  ],
+  modules: ["@pinia/nuxt", "vue3-carousel-nuxt"],
+  alias: {
+    // This is for fixing " Cannot read properties of undefined (reading 'defineComponent') " error
+    'vue3-carousel/dist/carousel': 'vue3-carousel/dist/carousel.es.js',
+  },
+  carousel:{
+    prefix:'GP'
+  },
   nitro: {
     prerender: {
       crawlLinks: true,

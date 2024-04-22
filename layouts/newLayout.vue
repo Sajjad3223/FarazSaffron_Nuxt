@@ -10,7 +10,7 @@
       <div class="container h-[125px] mx-auto mt-5">
         <div class="w-full flex items-center justify-between">
           <div class="flex items-center flex-1 gap-12">
-            <div class="flex items-center gap-4">
+            <NuxtLink to="/" class="flex items-center gap-4">
               <div class="w-max logo-rotate relative">
                 <div class="w-[50px] h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
                 >
@@ -25,7 +25,7 @@
                 <strong>زعفران جی پی</strong>
                 <span class="uppercase text-xs"><strong class="text-brandOrange">GP</strong> Saffron</span>
               </div>
-            </div>
+            </NuxtLink>
             <div class="flex w-[20vw] items-center relative">
               <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>
               <strong class="absolute opacity-50 right-4 pointer-events-none transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی محصول...</strong>
@@ -36,13 +36,13 @@
             </div>
             <ul class="flex items-center gap-9 font-bold">
               <li>
-                <NuxtLink to="/gpblog">مقالات</NuxtLink>
+                <NuxtLink to="/gpblog" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">مقالات</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/aboutus">درباره ما</NuxtLink>
+                <NuxtLink to="/aboutus" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">درباره ما</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/contactus">ارتباط با ما</NuxtLink>
+                <NuxtLink to="/contactus" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">ارتباط با ما</NuxtLink>
               </li>
             </ul>
           </div>
@@ -147,9 +147,9 @@
                   </div>
                 </Transition>
               </div>
-              <NuxtLink to="/market" class="font-bold">پرفروش ها</NuxtLink>
-              <NuxtLink to="/market" class="font-bold">تخفیف ها</NuxtLink>
-              <NuxtLink to="/market" class="font-bold">محصولات جدید</NuxtLink>
+              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">پرفروش ها</NuxtLink>
+              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">تخفیف ها</NuxtLink>
+              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">محصولات جدید</NuxtLink>
             </div>
           </div>
           <div class="flex items-stretch gap-4">
