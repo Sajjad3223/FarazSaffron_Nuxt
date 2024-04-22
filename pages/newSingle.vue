@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head>
-      <Title>زعفران نگین کیفی یک مثقال</Title>
+      <Title>{{product?.title}}</Title>
     </Head>
 
     <!--  Breadcrumb  -->
@@ -32,12 +32,12 @@
           </svg>
         </li>
         <li class="text-brandOrange">
-          <strong>زعفران نگین</strong>
+          <strong>{{ product?.title }}</strong>
         </li>
       </ul>
     </div>
 
-    <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-5 gap-8 mt-4 rounded-2xl">
+    <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-5 gap-8 mt-4 rounded-2xl" v-if="product">
       <!--   Images   -->
       <div class="flex items-center gap-6 col-span-2">
         <div class="flex w-1/5 flex-col items-center gap-2">
@@ -46,8 +46,8 @@
               <path d="M7 14L12 9L17 14" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="bg-white rounded-lg grid place-items-center" v-for="i in 3" :key="i">
-            <img src="~/assets/images/product-image.png" alt="productImage">
+          <div class="bg-white rounded-lg grid place-items-center" v-for="i in product?.images" :key="i.id">
+            <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt">
           </div>
           <button>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
           </button>
         </div>
         <div class="flex-1 bg-white rounded-xl relative grid place-items-center aspect-square ">
-          <img src="~/assets/images/product-image.png" alt="productImage">
+          <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt">
           <div class="flex flex-col space-y-4 absolute top-5 left-5">
             <button>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +83,7 @@
       <!--   Name & Price   -->
       <div class="flex flex-col items-start h-auto col-span-3 mr-12">
         <h2 class="text-4xl font-black text-[#5E5E5E]">
-          زعفران کیفی یک مثقالی   -   ۴ گرم
+          {{ product?.title }}
         </h2>
         <span class="mt-4 text-lg text-[#B8B8B8]">نگین (سرگل)</span>
 
@@ -103,14 +103,14 @@
           <div class="flex justify-between items-center gap-4">
             <!--   Price    -->
             <div class="flex items-center gap-1">
-              <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">618,000</strong>
+              <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</strong>
               <span class="flex flex-col items-center text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
             </div>
             <!--   Discount    -->
-            <div class="flex items-center gap-2" >
-              <span class="line-through opacity-50 text-2xl" style="font-family: 'Vazir FD',serif">630,000</span>
+            <div class="flex items-center gap-2" v-if="product?.discount !== 0">
+              <span class="line-through opacity-50 text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
               <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
-                <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">5%</span>
+                <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ product?.discount }}%</span>
               </div>
             </div>
           </div>
@@ -253,36 +253,44 @@
       <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
         <strong class="text-xl text-[#7D7D7D] pr-2 border-r-2 border-brandOrange">مشخصات</strong>
         <ul class="flex flex-col mt-5 w-full">
-          <li class="w-full flex items-center py-4 border-b">
+          <li class="w-full flex items-center py-4 border-b" v-for="s in product?.specifications">
             <span class="w-1/4 text-[#9D9D9D]">
-              وزن:
+              {{s.title}} :
             </span>
-            <strong class="flex-1 text-[#707070]">
-              2 گرم
+            <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+              {{s.value}}
             </strong>
           </li>
           <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/4 text-[#9D9D9D]">
-              وزن بسته‌بندی:
+              نوع بسته بندی :
             </span>
-            <strong class="flex-1 text-[#707070]">
-              ۱ ۲ گرم
+            <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+              {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
             </strong>
           </li>
           <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/4 text-[#9D9D9D]">
-              ابعاد بسته‌بندی:
+              کد محصول :
             </span>
-            <strong class="flex-1 text-[#707070]">
-              ۱۷ × ۹.۸ × ۰.۸ سانتی‌متر
+            <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+              {{product?.productCode}}
             </strong>
           </li>
           <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/4 text-[#9D9D9D]">
-              شماره پروانه بهداشت:
+              شماره بارکد :
             </span>
-            <strong class="flex-1 text-[#707070]">
-              ۵۰/۱۱۵۰۰
+            <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+              {{product?.barcodeNumber}}
+            </strong>
+          </li>
+          <li class="w-full flex items-center py-4 border-b">
+            <span class="w-1/4 text-[#9D9D9D]">
+              ابعاد :
+            </span>
+            <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
+              {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
             </strong>
           </li>
         </ul>
@@ -403,7 +411,98 @@ definePageMeta({
   layout:'new-layout',
 })
 
+import {useCartStore} from "~/stores/cart.store";
+import {GetProduct} from "~/services/product.service";
+import type {ProductDto} from "~/models/product/productQueries";
+import {EPackingType} from "~/models/product/EPackingType";
+import {SITE_URL} from "~/utilities/api.config";
+import {type CommentDto, type CommentFilterParams} from "~/models/comment/commentQueries";
+import {GetComments} from "~/services/comment.service";
+import {EPostType} from "~/models/EPostType";
+
 const showOptions = ref(false);
+const route = useRoute();
+const slug:string = "زعفران-نگین-جعبه-شش-عددی-یک-مثقالی"; // route.params.slug.toString()!;
+
+const cartStore = useCartStore();
+
+const bannerImage = ref('');
+const showBannerModal = ref(false);
+const showBanner = (src:string) => {
+  bannerImage.value = src;
+  showBannerModal.value = true;
+}
+
+const authStore = useAuthStore();
+const isLoading = ref(false);
+const showAddCommentModal = ref(false);
+const pageId = ref(1);
+const selectedComment:Ref<Number | null> = ref(null);
+
+const product:Ref<ProductDto | undefined> = ref(undefined);
+const productComments:Ref<CommentDto[]> = ref([]);
+const commentsFilterParams:CommentFilterParams = reactive({
+  postId:null,
+  postType:EPostType.Product,
+  take:10,
+  pageId:pageId,
+  search:null,
+  commentStatus:null,
+  endDate:null,
+  startDate:null,
+  userRequested:null
+})
+
+const visitingTab = ref('info');
+
+onMounted(async ()=>{
+  //window.addEventListener('scroll',onScroll)
+
+  isLoading.value = true;
+
+  const result = await GetProduct(slug);
+  if(result.isSuccess){
+    product.value = result.data!;
+    await loadComments();
+  }
+
+  isLoading.value = false;
+})
+
+const loadComments = async ()=>{
+  commentsFilterParams.postId = product.value?.id;
+  const commentsResult = await GetComments(commentsFilterParams);
+  if(commentsResult.isSuccess){
+    productComments.value = commentsResult.data?.data!;
+  }
+}
+
+const totalScore = computed(()=>{
+  let scoreSum:number = 0;
+  if(productComments.value.length > 0){
+    productComments.value.forEach(c=>scoreSum += c.score);
+  }
+  return scoreSum;
+})
+
+const info = ref();
+const comments = ref();
+const catalog = ref();
+const related = ref();
+
+/*const onScroll = ()=>{
+  if (info.value.getBoundingClientRect().top <= 100)
+    visitingTab.value = 'info';
+
+  if (comments.value.getBoundingClientRect().top <= 100)
+    visitingTab.value = 'comments';
+
+  if (catalog.value.getBoundingClientRect().top <= 100)
+    visitingTab.value = 'catalog';
+
+  if (related.value.getBoundingClientRect().top <= 100)
+    visitingTab.value = 'related';
+}*/
 
 </script>
 

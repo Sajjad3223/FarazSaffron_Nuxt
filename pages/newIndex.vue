@@ -139,9 +139,9 @@
       </div>
 
       <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4">
-        <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-for="i in 5" :key="i">
-          <NuxtLink to="/product/1">
-            <img src="~/assets/images/product-image.png" alt="product Image" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+        <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-if="!loading" v-for="p in lastProducts" :key="p.id">
+          <NuxtLink :to="`/product/${p.slug}`">
+            <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
           </NuxtLink>
           <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -161,8 +161,8 @@
           <div class="p-4 flex flex-col w-full items-stretch">
             <div class="flex items-start justify-between">
               <div class="flex flex-col items-start space-y-2">
-                <NuxtLink to="/product/1">
-                  <strong class="text-xl text-[#626262]">نگین پاکتی</strong>
+                <NuxtLink :to="`/product/${p.slug}`">
+                  <strong class="text-xl text-[#626262]">{{ p.title }}</strong>
                 </NuxtLink>
                 <span class="font-light text-sm text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال- 4/608 گرم</span>
                 <ul class="flex items-center gap-0.5">
@@ -179,7 +179,7 @@
                   </li>
                 </ul>
                 <div class="flex items-center gap-1">
-                  <strong class="text-lg" style="font-family: 'Vazir FD',serif">618,000</strong>
+                  <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (p.price / 10).toLocaleString() }}</strong>
                   <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
                 </div>
               </div>
@@ -193,7 +193,7 @@
               </div>
             </div>
             <div class="flex items-stretch w-full mt-4 gap-2 justify-between">
-              <nuxt-link to="/product/1" class="flex-1 rounded-lg border border-[#DDDDDD] hover:bg-[#EFEFEF] transition-all duration-200 p-2 flex items-center justify-center">
+              <nuxt-link :to="`/product/${p.slug}`" class="flex-1 rounded-lg border border-[#DDDDDD] hover:bg-[#EFEFEF] transition-all duration-200 p-2 flex items-center justify-center">
                   <span  class="text-xs font-light">
                     مشاهده محصول
                   </span>
@@ -203,6 +203,18 @@
                   <path d="M9.09844 4.86605C9.09844 6.02585 8.15824 6.96605 6.99844 6.96605C5.83864 6.96605 4.89844 6.02585 4.89844 4.86605M2.75601 12.2161H11.2409C11.9906 12.2161 12.5984 11.6195 12.5984 10.8837L11.7287 3.11603C11.7287 2.3802 11.1209 1.78369 10.3712 1.78369H3.45601C2.70624 1.78369 2.09844 2.3802 2.09844 3.11603L1.39844 10.8837C1.39844 11.6195 2.00624 12.2161 2.75601 12.2161Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
+            </div>
+          </div>
+        </div>
+        <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-else v-for="i in 5" :key="i">
+          <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
+          <div class="p-4 flex flex-col h-1/2 justify-between">
+            <div class="w-3/4 rounded-md bg-gray-300 h-4"></div>
+            <div class="w-1/2 rounded-full bg-gray-300 h-2"></div>
+            <div class="w-1/3 rounded-full bg-gray-200 h-1"></div>
+            <div class="flex items-center mt-4 gap-4">
+              <div class="flex-1 rounded-md bg-gray-300 h-8"></div>
+              <div class="w-1/4 rounded-full bg-gray-200 h-2"></div>
             </div>
           </div>
         </div>
@@ -251,9 +263,9 @@
       </div>
 
       <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4">
-        <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-for="i in 5" :key="i">
-          <NuxtLink to="/product/1">
-            <img src="~/assets/images/product-image.png" alt="product Image" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+        <div class="relative h-max min-w-[250px] rounded-md border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" v-if="!loading" v-for="p in lastProducts" :key="p.id">
+          <NuxtLink :to="`/product/${p.slug}`">
+            <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
           </NuxtLink>
           <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -273,10 +285,10 @@
           <div class="p-4 flex flex-col w-full items-stretch">
             <div class="flex items-start justify-between">
               <div class="flex flex-col items-start space-y-2">
-                <NuxtLink to="/product/1">
-                  <strong class="text-xl text-[#626262]">نگین پاکتی</strong>
+                <NuxtLink :to="`/product/${p.slug}`">
+                  <strong class="text-xl text-[#626262]">{{ p.title }}</strong>
                 </NuxtLink>
-                <span class="font-light text-xs text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال- 4/608 گرم</span>
+                <span class="font-light text-sm text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال- 4/608 گرم</span>
                 <ul class="flex items-center gap-0.5">
                   <li v-for="i in 5" :key="i">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -290,6 +302,10 @@
                     </svg>
                   </li>
                 </ul>
+                <div class="flex items-center gap-1">
+                  <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (p.price / 10).toLocaleString() }}</strong>
+                  <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
+                </div>
               </div>
               <div class="flex items-center gap-1">
                 <div class="rounded-md rounded-b-xl border border-[#E6E6E6] w-8">
@@ -300,27 +316,29 @@
                 </div>
               </div>
             </div>
-            <div class="flex items-center w-full mt-4 justify-between">
-              <div class="w-max rounded-lg border border-[#DFDFDF] p-2 flex items-center gap-2">
-                <button class="bg-brandOrange rounded-md p-0.5">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="14" height="14" fill="url(#pattern0_308_3949)"/>
-                    <defs>
-                      <pattern id="pattern0_308_3949" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_308_3949" transform="scale(0.01)"/>
-                      </pattern>
-                      <image id="image0_308_3949" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAq9JREFUeAHtnWFq20AQhZMf7TXaHqk9hnuQNoE2aU7h5H9ziJwjucDOyPujhS0DEoRCIslkwxvlMwgbvNa+9z0NtuVZ+eSEGwQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAIF0BFprp2b2pZRya2b3scXjw+HwOZ5LZyiz4Nba+2EYbty9PbFdt9beZfaYSvswDFdPBPE4oMtUprKKrbV+MrO/c4GY2Z9a68esPtPoNrOvc2FMz8fYNMayCnX3swn4gvuzrD7T6Hb3HwuCmN5LfqYxllUogYglRyAEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkZATA4VQiBiBMTkUCEEIkbgCDljq050h3xz9+8vuZVS7pb+pj6OfdH5w1N0s6RoMRo7Cq+W9E0thao6Lvq+3P1XeD7imO3/kuinnWnvnDpBNnUfniV7iaPxWfVo7q0rvPc/5FfOEJ3nvY2r7j+8r8TVf7iZPagC660rvPcnvHKGWJ/R27jq/sP7Slz9h5dSfqsC660rvPcnvHKGWLnU27jq/sP7Slz9h8dHP3ffq0LrqGvfn+6RM8QyMne/HL80ber7xv+Bjh4vUiydi9MKZrbb8KmTXa31w5HH7bZextlesTwJhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUIIRIyAmBwqhEDECIjJoUL0AllzEcxzMfnbk7PyMrG77REQczS2GMVimWf7vriQ8isGFyuX5gJx94tXlPS2p4puwZnVWvsUHYVbijF6iR/9XcVDrNGY/q5iSz7xAgEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIvCUC/wCqIwEyqpFm8AAAAABJRU5ErkJggg=="/>
-                    </defs>
-                  </svg>
-                </button>
-                <nuxt-link to="/product/1" class="text-xs font-light">
-                  مشاهده محصول
-                </nuxt-link>
-              </div>
-              <div class="flex items-center gap-2">
-                <strong style="font-family: 'Vazir FD',serif">618,000</strong>
-                <span class="flex flex-col items-center text-[8px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
-              </div>
+            <div class="flex items-stretch w-full mt-4 gap-2 justify-between">
+              <nuxt-link :to="`/product/${p.slug}`" class="flex-1 rounded-lg border border-[#DDDDDD] hover:bg-[#EFEFEF] transition-all duration-200 p-2 flex items-center justify-center">
+                  <span  class="text-xs font-light">
+                    مشاهده محصول
+                  </span>
+              </nuxt-link>
+              <button class="bg-brandOrange rounded-md p-2 transition-all duration-200 hover-brand hover:-translate-y-1">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.09844 4.86605C9.09844 6.02585 8.15824 6.96605 6.99844 6.96605C5.83864 6.96605 4.89844 6.02585 4.89844 4.86605M2.75601 12.2161H11.2409C11.9906 12.2161 12.5984 11.6195 12.5984 10.8837L11.7287 3.11603C11.7287 2.3802 11.1209 1.78369 10.3712 1.78369H3.45601C2.70624 1.78369 2.09844 2.3802 2.09844 3.11603L1.39844 10.8837C1.39844 11.6195 2.00624 12.2161 2.75601 12.2161Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-else v-for="i in 5" :key="i">
+          <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
+          <div class="p-4 flex flex-col h-1/2 justify-between">
+            <div class="w-3/4 rounded-md bg-gray-300 h-4"></div>
+            <div class="w-1/2 rounded-full bg-gray-300 h-2"></div>
+            <div class="w-1/3 rounded-full bg-gray-200 h-1"></div>
+            <div class="flex items-center mt-4 gap-4">
+              <div class="flex-1 rounded-md bg-gray-300 h-8"></div>
+              <div class="w-1/4 rounded-full bg-gray-200 h-2"></div>
             </div>
           </div>
         </div>
@@ -527,8 +545,32 @@
 </template>
 
 <script setup lang="ts">
+import {SITE_URL} from "~/utilities/api.config";
+
 definePageMeta({
   layout:'new-layout',
+})
+
+import type {ProductFilterData} from "~/models/product/productQueries";
+import {GetProducts} from "~/services/product.service";
+import {EOrderBy} from "~/models/product/EOrderBy";
+
+const loading = ref(true);
+const lastProducts:Ref<ProductFilterData[]> = ref([]);
+
+onMounted(async ()=>{
+  loading.value = true;
+
+  const lastProductsResult = await GetProducts({
+    pageId:1,
+    orderBy:EOrderBy.جدیدترین,
+    take:5,
+  });
+  if(lastProductsResult.isSuccess){
+    lastProducts.value = lastProductsResult.data?.data!;
+  }
+
+  loading.value = false;
 })
 
 </script>

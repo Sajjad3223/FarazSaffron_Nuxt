@@ -1,6 +1,7 @@
 <template>
   <div>
-    Failed To pay
+    Failed To pay <br>
+    Result Code: {{route.query.verifyResCode}}
   </div>
 </template>
 
@@ -8,5 +9,7 @@
 definePageMeta({
   layout:'new-layout'
 })
+
+const route = useRoute();
 
 </script>

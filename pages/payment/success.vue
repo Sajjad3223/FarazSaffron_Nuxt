@@ -1,6 +1,7 @@
 <template>
   <div>
-    Payed Successfully!
+    Payed Successfully! <br>
+    Order ID: {{route.query.orderId}}
   </div>
 </template>
 
@@ -8,5 +9,7 @@
 definePageMeta({
   layout:'new-layout'
 })
+
+const route = useRoute();
 
 </script>

@@ -1,22 +1,24 @@
 
 <template>
+  <label for="orderId">Order ID:</label>
+  <input type="number" v-model="orderId" name="orderId" id="orderId" placeholder="orderId">
 <button @click="Payment" class="m-auto border rounded-xl p-8">
   Pay
 </button>
-
-  <form action="" enctype="application/x-www-form-urlencoded"></form>
 
 </template>
 
 <script setup lang="ts">
 import {FetchApi} from '~/utilities/CustomApiFetch';
 
+const orderId = ref(0);
+
 const Payment = async ()=>{
   const result = await FetchApi<string>('/payment/payRequest',{
     method:'POST',
     body:{
       callbackUrl:'https://api.gpsaffron.com/api/Payment/verify',
-      orderId:-5,
+      orderId:orderId.value,
       price:10000
     }
   });
