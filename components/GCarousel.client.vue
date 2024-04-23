@@ -1,10 +1,14 @@
 <template>
   <div class="w-full relative rounded-2xl overflow-hidden">
-    <GPCarousel ref="carousel" :items-to-show="1" class="rounded-xl overflow-hidden imagesCarousel">
-      <GPSlide v-for="i in 4" :key="i">
+    <GPCarousel ref="carousel" :items-to-show="1" class="rounded-xl overflow-hidden imagesCarousel" :autoplay="2000" wrap-around>
+      <GPSlide v-for="i in 1" :key="i">
         <NuxtLink to="/market" class="w-full shrink-0 relative">
-          <img src="~/assets/images/banner.png" alt="banner" class="w-full">
-          <span class="absolute right-4 top-4 bg-gray-200 rounded-full w-6 h-6 grid place-items-center pt-0.5">{{ i }}</span>
+          <img src="~/assets/images/banner1.png" alt="banner" class="w-full">
+        </NuxtLink>
+      </GPSlide>
+      <GPSlide v-for="i in 1" :key="i">
+        <NuxtLink to="/market" class="w-full shrink-0 relative">
+          <img src="~/assets/images/banner2.png" alt="banner" class="w-full">
         </NuxtLink>
       </GPSlide>
     </GPCarousel>

@@ -172,7 +172,7 @@
               </button>
               <Transition name="slide-fade">
                 <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg flex flex-col space-y-2" style="box-shadow: 0 0 5px 0 #69696940;">
-                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
+                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]" @click="authStore.isRegisterModalOpen = true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <rect width="12" height="12" fill="url(#pattern0_461_1998)" fill-opacity="0.5"/>
                       <defs>
@@ -185,7 +185,7 @@
                     <span>ثبت نام</span>
                   </button>
                   <hr>
-                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]">
+                  <button class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]" @click="authStore.isLoginModalOpen = true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <rect width="12" height="12" fill="url(#pattern0_461_1999)" fill-opacity="0.5"/>
                       <defs>
@@ -214,7 +214,10 @@
                     <path d="M1 1L5.00065 4.664L9 1" stroke="currentColor" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                <small>خالی</small>
+                <small v-if="cartStore.cartItemsCount == 0">خالی</small>
+                <span v-else class="bg-brandOrange/20 rounded-lg text-xs text-brandOrange px-4 py-1">
+                  {{cartStore.cartItemsCount}}
+                </span>
               </div>
               <Transition name="slide-fade">
                 <div v-if="showCart" class="absolute top-16 left-0 z-20 w-max bg-white rounded-lg rounded-b-3xl flex flex-col items-center py-6 px-5 space-y-4" style="box-shadow: 0 2px 5px 0 #B7B7B740;">
@@ -402,6 +405,9 @@
 </template>
 
 <script setup lang="ts">
+
+const authStore = useAuthStore();
+const cartStore = useCartStore();
 
 const showCategories = ref(false);
 const showAccountOptions = ref(false);

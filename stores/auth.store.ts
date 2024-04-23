@@ -4,6 +4,7 @@ import type {LoginResultDto} from "~/models/users/loginResultDto";
 
 export const useAuthStore = defineStore("auth",()=>{
     const isLoginModalOpen = ref(false);
+    const isRegisterModalOpen = ref(false);
     const callBackFunctionAfterLogin: Ref<Function | null> = ref(null);
     const currentStep = ref('login');
 
@@ -53,6 +54,7 @@ export const useAuthStore = defineStore("auth",()=>{
 
     return {
         isLoginModalOpen,
+        isRegisterModalOpen,
         isLoggedIn,
         getAccessToken,
         setToken,

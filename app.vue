@@ -5,9 +5,12 @@
     </NuxtLayout>
 
     <ClientOnly>
-      <base-f-modal v-model="authStore.isLoginModalOpen" title="ورود، ثبت نام">
-        <auth-container @loggedIn="authStore.isLoginModalOpen = false , authStore.isLoggedIn = true" />
-      </base-f-modal>
+      <base-g-modal title="ثبت نام" v-model="authStore.isRegisterModalOpen">
+        <auth-register />
+      </base-g-modal>
+      <base-g-modal title="ورود" v-model="authStore.isLoginModalOpen" >
+        <auth-login />
+      </base-g-modal>
     </ClientOnly>
   </div>
 <!--  <coming-soon />-->

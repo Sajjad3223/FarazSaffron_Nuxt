@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button :class="['flex items-center justify-center gap-2 rounded-xl px-4 py-2 transition-colors duration-200',
-                    buttonColor,{'w-full':wFull}]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
+    <button :class="['flex items-center min-h-[50px] justify-center gap-2 rounded-xl transition-colors duration-200',`px-${px} py-${py}`,
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
       <slot></slot>
     </button>
   </div>
@@ -9,19 +9,25 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  color:'primary'|'secondary'|'success'|'info'|'warning'|'danger',
-  buttonType:'bg'|'outline'|'white',
-  isLoading:boolean,
-  disabled:boolean,
-  ltr:boolean,
-  wFull:boolean
+  color?:'primary'|'secondary'|'success'|'info'|'warning'|'danger',
+  buttonType?:'bg'|'outline'|'white',
+  isLoading?:boolean,
+  disabled?:boolean,
+  ltr?:boolean,
+  wFull?:boolean,
+  px?:number | null | undefined,
+  py?:number | null | undefined,
+  customClass?:string | null | undefined
 }>() ,{
   color:'primary',
   buttonType:'bg',
   isLoading:false,
   disabled:false,
   ltr:false,
-  wFull:false
+  wFull:false,
+  px:4,
+  py:2,
+  customClass:undefined
 });
 
 const buttonColor = computed(()=>{
@@ -50,7 +56,7 @@ const buttonColor = computed(()=>{
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* Buttons */
 .primary{
   border-radius: 10px;

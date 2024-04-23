@@ -1,20 +1,40 @@
 <template>
-  <Form class="flex flex-col items-start gap-2 m-4" :validation-schema="registerSchema">
-    <img src="~/assets/images/gp-filled.png" alt="GP" class=" max-h-16 self-center">
-    <base-f-input name="phoneNumber" id="phoneNumber" label="شماره تلفن" is-required place-holder="09121111111" class="text-sm lg:text-base" :rtl="false" v-model="registerData.phoneNumber" />
-    <base-f-input name="password" id="password" type="password" label="رمز عبور" is-required place-holder="••••••••" class="text-sm lg:text-base" :rtl="false" v-model="registerData.password" />
-    <base-f-button color="brand" w-full @click.prevent="register" :loading="isLoading">ثبت نام</base-f-button>
-    <small class="text-danger mx-auto" v-if="errorMessage">{{ errorMessage }}</small>
-    <span class="text-xs text-center lg:text-sm font-thin mx-auto">
-      <NuxtLink to="/" class="text-primary hover:underline">شرایط جی پی</NuxtLink>
-       و
-      <NuxtLink to="/" class="text-primary hover:underline">قوانین حریم ‌خصوصی</NuxtLink>
-      را میپذیرم
-    </span>
-    <base-f-divider class="my-4"/>
-    <div class="flex items-center gap-4">
-      <span>قبلا حساب ایجاد کرده اید؟</span>
-      <base-f-button color="transparent" text-color="primary" px="0" py="0" bordered custom-class="text-sm" @click="authStore.changeStep('login')">وارد شوید</base-f-button>
+  <Form :validation-schema="registerSchema" @submit="register" class="flex flex-col mt-6">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 gap-4 col-span-full">
+        <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="firstName"/>
+        <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="lastName"/>
+      </div>
+      <base-g-input label="شماره تلفن *"  required v-model="registerData.phoneNumber" name="phoneNumber" id="phoneNumber" class="col-span-full"/>
+      <base-g-input label="رمز عبور *"  type="password" required v-model="registerData.password" name="password" id="password" class="col-span-full"/>
+    </div>
+    <base-g-button wFull class="mt-8">ثبت نام</base-g-button>
+    <div class="flex items-center w-full my-4">
+      <div class="flex-1 h-px rounded-full bg-gray-300"></div>
+      <span class="px-4">
+            یا
+          </span>
+      <div class="flex-1 h-px rounded-full bg-gray-300"></div>
+    </div>
+    <base-g-button button-type="outline" color="secondary" w-full :py="0" >
+      <div class="flex items-center justify-center gap-2">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 ">
+          <g clip-path="url(#clip0_569_2169)">
+            <path d="M24 19.6362V28.9308H36.9163C36.3492 31.9199 34.6471 34.4509 32.0944 36.1527L39.8835 42.1964C44.4217 38.0074 47.0399 31.8546 47.0399 24.5456C47.0399 22.8438 46.8872 21.2073 46.6035 19.6365L24 19.6362Z" fill="#4285F4"/>
+            <path d="M10.5492 28.5679L8.7925 29.9126L2.57422 34.7562C6.5233 42.5888 14.6172 47.9998 23.999 47.9998C30.4788 47.9998 35.9115 45.8616 39.8825 42.1963L32.0934 36.1526C29.9552 37.5926 27.2279 38.4654 23.999 38.4654C17.759 38.4654 12.4574 34.2545 10.559 28.5817L10.5492 28.5679Z" fill="#34A853"/>
+            <path d="M2.57436 13.2437C0.938084 16.4726 0 20.1163 0 23.9999C0 27.8834 0.938084 31.5271 2.57436 34.7561C2.57436 34.7778 10.5599 28.5597 10.5599 28.5597C10.08 27.1197 9.79624 25.5926 9.79624 23.9996C9.79624 22.4067 10.08 20.8795 10.5599 19.4395L2.57436 13.2437Z" fill="#FBBC05"/>
+            <path d="M23.9995 9.55636C27.5341 9.55636 30.6758 10.7781 33.1849 13.1345L40.0576 6.2619C35.8903 2.37833 30.4796 0 23.9995 0C14.6177 0 6.5233 5.38908 2.57422 13.2437L10.5596 19.44C12.4576 13.7672 17.7595 9.55636 23.9995 9.55636Z" fill="#EA4335"/>
+          </g>
+        </svg>
+        <span>ورود با گوگل</span>
+      </div>
+    </base-g-button>
+    <hr class="my-4">
+    <div class="w-full flex items-center justify-center gap-2 text-sm">
+      <span class="font-light">قبلا ثبت نام کرده اید؟</span>
+      <NuxtLink to="/" class="text-brandOrange">
+        ورود
+      </NuxtLink>
     </div>
   </Form>
 </template>
@@ -33,6 +53,9 @@ const registerData:RegisterCommand = reactive({
   phoneNumber:"",
   password:""
 });
+
+const firstName = ref('');
+const lastName = ref('');
 
 const registerSchema = Yup.object().shape({
   phoneNumber:Yup.string().length(11,'شماره تلفن وارد شده معتبر نمی باشد'),

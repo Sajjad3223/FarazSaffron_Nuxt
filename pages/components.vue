@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-24 flex flex-col" dir="ltr">
+  <div class="container mx-auto mt-12 flex flex-col" dir="ltr">
     <f-divider title="Buttons" :logo-divider="false"/>
     <div class="grid grid-cols-8 gap-8 place-items-center font-light text-sm ">
       <div></div>
@@ -274,31 +274,7 @@
       <base-g-input label="شماره تلفن" place-holder="09xxxxxxxxx" required type="text"/>
     </div>
 
-    <base-g-modal v-model="showModal" title="ثبت نام" >
-      <div class="flex flex-col space-y-5 mt-6">
-        <base-g-input label="نام و نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required />
-        <base-g-input label="شماره تلفن *" place-holder="09*********" required />
-        <base-g-input label="رمز عبور *" place-holder="******" type="password" required />
-        <base-g-button wFull>ثبت نام</base-g-button>
-        <div class="flex items-center w-full">
-          <div class="flex-1 h-px rounded-full bg-gray-300"></div>
-          <span class="px-4">
-            یا
-          </span>
-          <div class="flex-1 h-px rounded-full bg-gray-300"></div>
-        </div>
-        <base-g-button button-type="outline" color="secondary" w-full>
-          ورود با گوگل
-        </base-g-button>
-        <hr>
-        <div class="w-full flex items-center justify-center gap-2">
-          <span>قبلا ثبت نام کرده اید؟</span>
-          <NuxtLink to="/" class="text-brandOrange">
-            ورود
-          </NuxtLink>
-        </div>
-      </div>
-    </base-g-modal>
+
   </div>
 </template>
 
@@ -306,7 +282,7 @@
 import FDivider from "~/components/base/FDivider.vue";
 
 definePageMeta({
-  layout: ""
+  layout: "new-layout"
 })
 
 const check1 = ref(false);
@@ -362,7 +338,7 @@ const showModal = ref(true);
 
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
 
 /* Buttons */
 .primary {
