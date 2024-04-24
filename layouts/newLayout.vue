@@ -416,7 +416,7 @@ const showCart = ref(false);
 
 <style>
 *{
-  font-family: 'Epic Ravi',serif;
+  font-family: "Vazir FD",serif;
 }
 
 .logo-style{
@@ -456,4 +456,36 @@ const showCart = ref(false);
   box-shadow: 0 5px 5px 0 #F1482380;
 }
 
+</style>
+
+<style>
+:root {
+  --primary: #F04623;
+  --primary-hover: #CE3415;
+  --primary-text: white;
+
+  --secondary: #E0E0E0;
+  --secondary-hover: #C6BFBF;
+  --secondary-text: #847A7A;
+
+  --success: #38C157;
+  --success-hover: #1E9E3A;
+  --success-text: white;
+
+  --danger: #F42020;
+  --danger-hover: #D31212;
+  --danger-text: white;
+
+  --info: #5E8EEA;
+  --info-hover: #275DC5;
+  --info-text: white;
+
+  --warning: #FFFC0D;
+  --warning-hover: #E8E505;
+  --warning-text: #555454;
+
+  --disabled: #F5F5F5;
+  --disabled-text: #BABABA;
+
+}
 </style>

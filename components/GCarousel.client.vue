@@ -1,6 +1,6 @@
 <template>
   <div class="w-full relative rounded-2xl overflow-hidden">
-    <GPCarousel ref="carousel" :items-to-show="1" class="rounded-xl overflow-hidden imagesCarousel" :autoplay="2000" wrap-around>
+    <GPCarousel ref="carousel" :items-to-show="1" class="rounded-xl overflow-hidden imagesCarousel" :autoplay="5000" wrap-around>
       <GPSlide v-for="i in 1" :key="i">
         <NuxtLink to="/market" class="w-full shrink-0 relative">
           <img src="~/assets/images/banner1.png" alt="banner" class="w-full">

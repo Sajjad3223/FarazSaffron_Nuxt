@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button :class="['flex items-center min-h-[50px] justify-center gap-2 rounded-xl transition-colors duration-200',`px-${px} py-${py}`,
+    <button :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
                     buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
       <slot></slot>
     </button>
@@ -17,7 +17,8 @@ const props = withDefaults(defineProps<{
   wFull?:boolean,
   px?:number | null | undefined,
   py?:number | null | undefined,
-  customClass?:string | null | undefined
+  customClass?:string | null | undefined,
+  isIcon?:boolean
 }>() ,{
   color:'primary',
   buttonType:'bg',
@@ -27,7 +28,8 @@ const props = withDefaults(defineProps<{
   wFull:false,
   px:4,
   py:2,
-  customClass:undefined
+  customClass:undefined,
+  isIcon:false
 });
 
 const buttonColor = computed(()=>{

@@ -21,7 +21,7 @@
     <base-f-modal v-model="showAddressModal" title="افزودن آدرس جدید">
       <profile-user-address @address-created="showAddressModal = false,accountStore.initData()" />
     </base-f-modal>
-    <div class="flex flex-col lg:flex-row lg:items-start gap-4 mt-8" v-if="cartStore.PendingOrder != null">
+    <div class="flex flex-col lg:flex-row lg:items-start gap-4 mt-8" v-if="cartStore.PendingOrder !== null">
       <div class="flex-1 flex flex-col space-y-4">
 
         <!--   Addresses    -->
