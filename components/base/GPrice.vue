@@ -1,6 +1,6 @@
 <template>
 <div class="flex gap-1 items-center">
-  <strong class="text-xl">{{price.toLocaleString()}}</strong>
+  <strong class="text-sm lg:text-xl">{{price.toLocaleString()}}</strong>
   <base-g-tooman/>
 </div>
 </template>

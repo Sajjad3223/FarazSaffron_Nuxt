@@ -20,7 +20,6 @@
 import {useAuthStore} from "~/stores/auth.store";
 import {useAccountStore} from "~/stores/account.store";
 import {useCartStore} from "~/stores/cart.store";
-import ComingSoon from "~/pages/comingSoon.vue";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
@@ -44,4 +43,5 @@ onMounted(async ()=>{
 body{
   @apply bg-bgWhite dark:bg-gray-900;
 }
+
 </style>

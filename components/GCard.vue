@@ -82,11 +82,11 @@
 </template>
 
 <script setup lang="ts">
-import type {ProductDto} from "~/models/product/productQueries";
+import type {ProductFilterData} from "~/models/product/productQueries";
 import {SITE_URL} from "~/utilities/api.config";
 
 const props = defineProps<{
-  product:ProductDto
+  product:ProductFilterData
 }>();
 
 const cartStore = useCartStore();

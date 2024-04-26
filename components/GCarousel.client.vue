@@ -44,7 +44,8 @@ const prevSlide = ()=>{
 </script>
 
 <style>
-.imagesCarousel ol{
+.carousel__track{
   padding: 0 !important;
 }
+
 </style>

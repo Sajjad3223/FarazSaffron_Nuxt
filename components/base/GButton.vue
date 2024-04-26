@@ -1,9 +1,13 @@
 <template>
   <div>
-    <button :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
-                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
+    <button v-if="!isLink" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled" @click="emits('click')">
       <slot></slot>
     </button>
+    <NuxtLink v-else :to="to" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
+      <slot></slot>
+    </NuxtLink>
   </div>
 </template>
 
@@ -18,7 +22,9 @@ const props = withDefaults(defineProps<{
   px?:number | null | undefined,
   py?:number | null | undefined,
   customClass?:string | null | undefined,
-  isIcon?:boolean
+  isIcon?:boolean,
+  to?:string | null,
+  isLink?:boolean
 }>() ,{
   color:'primary',
   buttonType:'bg',
@@ -29,8 +35,11 @@ const props = withDefaults(defineProps<{
   px:4,
   py:2,
   customClass:undefined,
-  isIcon:false
+  isIcon:false,
+  isLink:false
 });
+
+const emits = defineEmits(['click']);
 
 const buttonColor = computed(()=>{
   if(!props.disabled)
@@ -104,7 +113,7 @@ const buttonColor = computed(()=>{
   &-white{
     background-color: white;
     color:var(--secondary-text);
-    box-shadow: 0px 1px 4px 0px #A7A7A740;
+    box-shadow: 0 1px 4px 0 #A7A7A740;
     &:hover{
       box-shadow: none;
       background-color: color-mix(in srgb,var(--secondary) 20%,transparent);
@@ -130,7 +139,7 @@ const buttonColor = computed(()=>{
   &-white{
     background-color: white;
     color:var(--success);
-    box-shadow: 0px 1px 4px 0px #A7A7A740;
+    box-shadow: 0 1px 4px 0 #A7A7A740;
     &:hover{
       box-shadow: none;
       background-color: color-mix(in srgb,var(--success) 20%,transparent);
@@ -156,7 +165,7 @@ const buttonColor = computed(()=>{
   &-white{
     background-color: white;
     color:var(--danger);
-    box-shadow: 0px 1px 4px 0px #A7A7A740;
+    box-shadow: 0 1px 4px 0 #A7A7A740;
     &:hover{
       box-shadow: none;
       background-color: color-mix(in srgb,var(--danger) 20%,transparent);
@@ -182,7 +191,7 @@ const buttonColor = computed(()=>{
   &-white{
     background-color: white;
     color:var(--info);
-    box-shadow: 0px 1px 4px 0px #A7A7A740;
+    box-shadow: 0 1px 4px 0 #A7A7A740;
     &:hover{
       box-shadow: none;
       background-color: color-mix(in srgb,var(--info) 20%,transparent);
@@ -207,7 +216,7 @@ const buttonColor = computed(()=>{
   &-white{
     background-color: white;
     color:var(--warning-text);
-    box-shadow: 0px 1px 4px 0px #A7A7A740;
+    box-shadow: 0 1px 4px 0 #A7A7A740;
     &:hover{
       box-shadow: none;
       background-color: color-mix(in srgb,var(--warning) 20%,transparent);

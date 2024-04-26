@@ -23,10 +23,7 @@ const Payment = async ()=>{
     }
   });
 
-  if(result.isSuccess){
-    const response:string[] = result.data?.split(',') ?? [];
-
-    if(response[0] === '0'){
+  if(result.isSuccess && result.data != ''){
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
@@ -34,11 +31,10 @@ const Payment = async ()=>{
       const refId = document.createElement('input');
       refId.name = 'RefId';
       refId.id = 'RefId';
-      refId.value = response[1];
+      refId.value = result.data!;
       form.appendChild(refId);
       document.body.appendChild(form)
       form.submit();
-    }
   }
 }
 

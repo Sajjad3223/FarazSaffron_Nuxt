@@ -47,7 +47,7 @@
       <main class="flex items-start w-full relative gap-8 mt-10">
         <div class="flex flex-col flex-1">
           <!--  Items   -->
-          <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch">
+          <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch" v-if="cartStore.PendingOrder">
             <div class="w-full flex items-center justify-between">
               <strong>سبد خرید</strong>
               <base-g-button button-type="white">
@@ -64,21 +64,25 @@
               </base-g-button>
             </div>
             <ul class="mt-8 flex flex-col">
-              <li class="mx-auto flex items-center border-b last:border-none py-6 border-opacity-30" v-for="i in 3" :key="i">
-                <div class="flex flex-col w-2/5">
-                  <img src="~/assets/images/product-image.png" alt="product">
-                  <!--                <cart-counter />-->
-                </div>
-                <div class="flex flex-col justify-between flex-1">
-                  <strong class="text-2xl">زعفران نگین شیشه ای یک مثقالی</strong>
-                  <ul class="flex flex-col space-y-4 my-12">
-                    <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: دارد</li>
-                    <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: کیفی</li>
-                    <li class="pr-4 border-r-2 border-brandOrange/50">وزن: 21 گرم</li>
-                  </ul>
-                  <g-price :price="618000" />
-                </div>
-              </li>
+              <TransitionGroup name="list">
+                <li class="mx-auto flex items-center border-b last:border-none py-6 border-opacity-30" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
+                  <div class="flex flex-col w-2/5 items-center">
+                    <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
+                    <cart-counter :item="i" class="w-max" />
+                  </div>
+                  <div class="flex flex-col justify-between flex-1">
+                    <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="font-bold text-2xl hover:text-brandOrange duration-200 transition-colors">
+                      {{ i.itemInfo.productName }}
+                    </NuxtLink>
+                    <ul class="flex flex-col space-y-4 my-12">
+                      <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: دارد</li>
+                      <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: کیفی</li>
+                      <li class="pr-4 border-r-2 border-brandOrange/50">وزن: 21 گرم</li>
+                    </ul>
+                    <base-g-price :price="(i.price / 10)" />
+                  </div>
+                </li>
+              </TransitionGroup>
             </ul>
           </div>
         </div>
@@ -86,21 +90,19 @@
         <!--  Prices   -->
         <div class="w-1/4 sticky top-12 p-6 bg-white rounded-xl flex flex-col space-y-4 items-stretch">
           <div class="w-full flex items-center justify-between">
-            <span>قیمت کالاها (2)</span>
+            <span>قیمت کالاها ({{cartStore.cartItemsCount}})</span>
             <div class="flex gap-1 items-center">
-              <strong>618,000</strong>
-              <g-tooman />
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
             </div>
           </div>
           <div class="w-full flex items-center justify-between">
             <span>جمع سبد خرید</span>
             <div class="flex gap-1 items-center">
-              <strong>1,236,000</strong>
-              <g-tooman />
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
             </div>
           </div>
           <hr>
-          <base-g-button w-full>
+          <base-g-button w-full is-link to="/newShipping">
             تکمیل سفارش
           </base-g-button>
         </div>
@@ -115,13 +117,13 @@
         </h3>
         <div class="flex items-center gap-2">
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.next">
+                  @click="carousel.next">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.prev">
+                  @click="carousel.prev">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -130,7 +132,7 @@
       </div>
 
       <client-only v-if="false">
-        <GPCarousel ref="carousel1" :items-to-show="5" class="rounded-xl mt-4">
+        <GPCarousel ref="carousel" :items-to-show="5" class="rounded-xl mt-4">
           <GPSlide v-for="p in 5" :key="p" >
             <!--                  <GCard :product="p" />-->
           </GPSlide>
@@ -156,12 +158,34 @@
 </template>
 
 <script setup lang="ts">
-import GTooman from "~/components/base/GTooman.vue";
-import GPrice from "~/components/base/GPrice.vue";
-import GCard from "~/components/GCard.vue";
-
+import {SITE_URL} from "~/utilities/api.config";
+import {useCartStore} from "~/stores/cart.store";
 definePageMeta({
   layout:'new-layout'
 })
 
+const cartStore = useCartStore();
+
+const carousel = ref();
+
 </script>
+
+<style scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>

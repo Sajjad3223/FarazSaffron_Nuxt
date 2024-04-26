@@ -3,6 +3,13 @@
     <Head>
       <Title>افزودن آدرس</Title>
     </Head>
+
+    <client-only>
+      <base-g-modal v-model="showAddressModal" title="افزودن آدرس جدید">
+        <profile-user-address @address-created="showAddressModal = false,accountStore.initData()" />
+      </base-g-modal>
+    </client-only>
+
     <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center">
 
       <div class="flex items-center w-2/3 mb-12">
@@ -50,16 +57,17 @@
 
         <div class="flex-1 rounded-xl py-4 px-8 flex flex-col items-stretch">
           <!--  Addresses   -->
-          <ul class="p-8 border border-brandOrange/10 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-            <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:drop-shadow hover:border-none transition-all duration-200 space-y-3 p-4 rounded-lg border" v-for="a in 3" :key="a">
-              <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" >
-              <strong>خیابان مزار، مزار 6</strong>
-              <span class="font-light text-xs opacity-70">خراسان رضوی</span>
-              <span class="font-light text-xs opacity-70">تربت حیدریه</span>
-              <span class="font-light text-xs opacity-70">کد پستی: 9559312345</span>
+          <ul class="p-8 border border-brandOrange/10 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" v-if="!accountStore.initLoading">
+            <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:drop-shadow hover:border-none transition-all duration-200 space-y-3 p-4 rounded-lg border"
+                v-for="a in accountStore.currentUser?.addresses" :key="a.id">
+              <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
+              <strong>{{ a.street }}</strong>
+              <span class="font-light text-sm opacity-70">{{ a.state }}</span>
+              <span class="font-light text-sm opacity-70">{{ a.city }}</span>
+              <span class="font-light text-sm opacity-70">کد پستی: {{ a.postCode }}</span>
               <div></div>
-              <span class="font-light text-sm opacity-70">تحویل گیرنده: علی مسافرتی</span>
-              <span class="font-light text-sm opacity-70">شماره تماس: 09123456789</span>
+              <span class="font-light text-sm opacity-70">تحویل گیرنده: {{ a.receiverFirstName + a.receiverLastName }}</span>
+              <span class="font-light text-sm opacity-70">شماره تماس: {{ a.receiverPhoneNumber }}</span>
               <hr class="dark:opacity-30">
               <button class="w-full grid place-items-center text-danger">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +76,7 @@
               </button>
             </li>
             <li class="grid place-items-center bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:drop-shadow hover:border-none transition-all duration-200 rounded-lg border relative min-h-36">
-              <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0 text-brandOrange" >
+              <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0 text-brandOrange" @click="showAddressModal = true">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15.0015 10.4092V19.5671" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M19.5846 14.9881H10.418" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,13 +90,13 @@
           </ul>
 
           <!--  Items   -->
-          <div class="bg-white py-5 px-14 rounded-xl mt-12 flex flex-col">
+          <div class="bg-white py-5 px-14 rounded-xl mt-12 flex flex-col" v-if="cartStore.PendingOrder">
             <strong>سبد خرید</strong>
-            <ul class="grid grid-cols-5 gap-4 mt-8">
-              <li class="flex flex-col items-center space-y-2" v-for="i in 4" :key="i">
-                <img src="~/assets/images/product-image.png" alt="product">
-                <g-price :price="618000" />
-                <base-g-button color="danger" button-type="outline" is-icon custom-class="py-0">
+            <TransitionGroup tag="ul" name="list" class="relative grid grid-cols-5 gap-4 mt-8">
+              <li class="flex flex-col items-center space-y-2" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
+                <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
+                <base-g-price :price="(i.price / 10)" />
+                <base-g-button color="danger" button-type="outline" is-icon custom-class="py-0" @click="cartStore.removeItem(i.id)">
                   <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-150">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.61149 10.0833C4.99045 10.0833 4.38499 10.0764 3.78595 10.0641C3.01961 10.0489 2.48932 9.55211 2.4027 8.76745C2.25832 7.46578 2.01128 4.3977 2.00899 4.36699C1.9934 4.1777 2.13457 4.01178 2.32386 3.99665C2.5104 3.99161 2.67907 4.1227 2.6942 4.31153C2.69649 4.3427 2.94307 7.40024 3.08607 8.69182C3.13511 9.13778 3.37574 9.36786 3.80015 9.37657C4.94599 9.40086 6.1152 9.40224 7.37561 9.37932C7.82661 9.37061 8.07045 9.14511 8.12086 8.68861C8.26295 7.40803 8.51045 4.3427 8.5132 4.31153C8.52832 4.1227 8.69561 3.9907 8.88307 3.99665C9.07236 4.01224 9.21353 4.1777 9.1984 4.36699C9.19565 4.39815 8.94724 7.47403 8.80424 8.76424C8.71532 9.56495 8.1864 10.0522 7.38799 10.0668C6.77703 10.0774 6.18761 10.0833 5.61149 10.0833Z" fill="currentColor"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.49117 3.20337H1.71875C1.529 3.20337 1.375 3.04937 1.375 2.85962C1.375 2.66987 1.529 2.51587 1.71875 2.51587H9.49117C9.68092 2.51587 9.83492 2.66987 9.83492 2.85962C9.83492 3.04937 9.68092 3.20337 9.49117 3.20337Z" fill="currentColor"/>
@@ -96,24 +104,22 @@
                   </svg>
                 </base-g-button>
               </li>
-            </ul>
+            </TransitionGroup>
           </div>
         </div>
 
         <!--  Prices   -->
         <div class="w-1/4 sticky top-12 p-6 bg-white rounded-xl flex flex-col space-y-4 items-stretch">
           <div class="w-full flex items-center justify-between">
-            <span>قیمت کالاها (2)</span>
+            <span>قیمت کالاها ({{cartStore.cartItemsCount}})</span>
             <div class="flex gap-1 items-center">
-              <strong>618,000</strong>
-              <g-tooman />
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
             </div>
           </div>
           <div class="w-full flex items-center justify-between">
             <span>جمع سبد خرید</span>
             <div class="flex gap-1 items-center">
-              <strong>1,236,000</strong>
-              <g-tooman />
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
             </div>
           </div>
           <form class="flex flex-col items-start">
@@ -146,13 +152,13 @@
         </h3>
         <div class="flex items-center gap-2">
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.next">
+                  @click="carousel.next">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.prev">
+                  @click="carousel.prev">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -161,7 +167,7 @@
       </div>
 
       <client-only v-if="false">
-        <GPCarousel ref="carousel1" :items-to-show="5" class="rounded-xl mt-4">
+        <GPCarousel ref="carousel" :items-to-show="5" class="rounded-xl mt-4">
           <GPSlide v-for="p in 5" :key="p" >
             <!--                  <GCard :product="p" />-->
           </GPSlide>
@@ -187,13 +193,49 @@
 </template>
 
 <script setup lang="ts">
-import GTooman from "~/components/base/GTooman.vue";
-import GPrice from "~/components/base/GPrice.vue";
+import {useCartStore} from "~/stores/cart.store";
+import {SITE_URL} from "~/utilities/api.config";
+import {SetAddressAsActive} from "~/services/user.service";
+import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
   layout:'new-layout'
 })
 
 const discountCode = ref('');
+const cartStore = useCartStore()
+const accountStore = useAccountStore();
+const carousel = ref();
+
+const showAddressModal = ref(false);
+
+const toast = useToast();
+
+const setAsActive = async (addressId:number) => {
+  const result = await SetAddressAsActive(addressId);
+  if(result.isSuccess){
+    await toast.showToast('آدرس به عنوان آدرس اصلی ثبت شد',ToastType.success,3000,true);
+  }
+}
 
 </script>
+
+<style scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>
