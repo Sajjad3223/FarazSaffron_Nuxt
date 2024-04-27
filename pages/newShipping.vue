@@ -128,7 +128,7 @@
               <base-g-button>ثبت</base-g-button>
             </div>
           </form>
-          <base-g-button w-full disabled>
+          <base-g-button w-full @click="payOrder">
             تکمیل و پرداخت
           </base-g-button>
           <div class="flex items-center gap-1.5 text-danger">
@@ -197,6 +197,7 @@ import {useCartStore} from "~/stores/cart.store";
 import {SITE_URL} from "~/utilities/api.config";
 import {SetAddressAsActive} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
+import {FetchApi} from "~/utilities/CustomApiFetch";
 
 definePageMeta({
   layout:'new-layout'
@@ -215,6 +216,26 @@ const setAsActive = async (addressId:number) => {
   const result = await SetAddressAsActive(addressId);
   if(result.isSuccess){
     await toast.showToast('آدرس به عنوان آدرس اصلی ثبت شد',ToastType.success,3000,true);
+  }
+}
+
+const payOrder = async ()=>{
+  const result = await FetchApi<string>('/payment/payRequest',{
+    method:'POST'
+  });
+
+  if(result.isSuccess && result.data != ''){
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
+    form.enctype = 'application/x-www-form-urlencoded';
+    const refId = document.createElement('input');
+    refId.name = 'RefId';
+    refId.id = 'RefId';
+    refId.value = result.data!;
+    form.appendChild(refId);
+    document.body.appendChild(form)
+    form.submit();
   }
 }
 

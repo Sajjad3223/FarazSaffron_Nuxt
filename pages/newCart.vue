@@ -3,7 +3,7 @@
     <Head>
       <Title>سبد خرید</Title>
     </Head>
-    <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center">
+    <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center" v-if="cartStore.PendingOrder && cartStore.PendingOrder.orderItems.length > 0">
 
       <div class="flex items-center w-2/3 mb-12">
         <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
@@ -44,10 +44,10 @@
       </div>
 
       <!--  Main   -->
-      <main class="flex items-start w-full relative gap-8 mt-10">
+      <main class="flex items-start w-full relative gap-8 mt-10" v-if="cartStore.PendingOrder">
         <div class="flex flex-col flex-1">
           <!--  Items   -->
-          <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch" v-if="cartStore.PendingOrder">
+          <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch" >
             <div class="w-full flex items-center justify-between">
               <strong>سبد خرید</strong>
               <base-g-button button-type="white">
@@ -65,11 +65,20 @@
             </div>
             <ul class="mt-8 flex flex-col">
               <TransitionGroup name="list">
-                <li class="mx-auto flex items-center border-b last:border-none py-6 border-opacity-30" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
+                <li class="mx-auto flex relative items-center border-b last:border-none py-6 border-opacity-30" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
                   <div class="flex flex-col w-2/5 items-center">
                     <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
                     <cart-counter :item="i" class="w-max" />
                   </div>
+                  <base-g-button button-type="white" color="danger" class="absolute top-4 left-0" @click="cartStore.removeItem(i.id)" v-if="i.count > 1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4">
+                      <path d="M21 5.97998C17.67 5.64998 14.32 5.47998 10.98 5.47998C9 5.47998 7.02 5.57998 5.04 5.77998L3 5.97998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M18.85 9.14001L18.2 19.21C18.09 20.78 18 22 15.21 22H8.79002C6.00002 22 5.91002 20.78 5.80002 19.21L5.15002 9.14001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10.33 16.5H13.66" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.5 12.5H14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </base-g-button>
                   <div class="flex flex-col justify-between flex-1">
                     <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="font-bold text-2xl hover:text-brandOrange duration-200 transition-colors">
                       {{ i.itemInfo.productName }}
@@ -109,6 +118,24 @@
       </main>
 
     </div>
+
+    <!--  Empty Cart  -->
+    <div class="flex items-center justify-center border bg-white w-full py-12 mt-10 rounded-2xl " v-else>
+      <img src="~/assets/images/empty-cart.png" alt="empty cart" class="w-1/3">
+      <div class="flex flex-col items-center space-y-4">
+        <strong class="text-4xl">خالی!</strong>
+        <span class="text-xl text-[#9F9F9F]">هیچ محصولی وجود ندارد</span>
+        <base-g-button is-link button-type="white" to="/market" class="text-brandOrange flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.00043 4.85742V9.13113" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.14106 6.99431H4.86328" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.73464 1.1665H4.26797C2.36241 1.1665 1.16797 2.51522 1.16797 4.42451V9.57516C1.16797 11.4845 2.35686 12.8332 4.26797 12.8332H9.73464C11.6457 12.8332 12.8346 11.4845 12.8346 9.57516V4.42451C12.8346 2.51522 11.6457 1.1665 9.73464 1.1665Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>مشاهده محصولات</span>
+        </base-g-button>
+      </div>
+    </div>
+
     <!--  Popular   -->
     <section class="w-full mt-16">
       <div class="flex items-center justify-between mb-8">
