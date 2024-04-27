@@ -1,11 +1,10 @@
 import {AddToCart, DecreaseCount, GetPendingOrder, IncreaseCount, RemoveItem} from "~/services/cart.service";
 import type {OrderDto} from "~/models/cart/cartQueries";
 import {ToastType} from "~/composables/useSwal";
-import {awaitExpression} from "@babel/types";
 import type {ApiResponse} from "~/models/apiResponse";
 
 export const useCartStore = defineStore("cart",()=>{
-    const PendingOrder:Ref<OrderDto | null> = ref(null);
+    const PendingOrder:Ref<OrderDto | null | undefined> = ref(null);
     const cartItemsCount = ref(0);
     const cartLoading = ref(false);
 
@@ -25,8 +24,8 @@ export const useCartStore = defineStore("cart",()=>{
 
         const result = await GetPendingOrder();
         if(result.isSuccess){
-            PendingOrder.value = result.data!;
-            cartItemsCount.value = result.data?.itemsCount!;
+            PendingOrder.value = result.data;
+            cartItemsCount.value = result.data?.itemsCount ?? 0;
         }
 
         cartLoading.value = false;
