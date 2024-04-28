@@ -16,7 +16,8 @@
     <NuxtLink :to="`/product/${product.slug}`">
       <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
     </NuxtLink>
-    <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
+    <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+            v-if="authStore.isLoggedIn" @click="addFavorite">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect width="18" height="18" fill="url(#pattern0_308_4084)" fill-opacity="0.3"/>
         <defs>
@@ -34,10 +35,13 @@
     <div class="p-4 flex flex-col w-full items-stretch">
       <div class="flex items-start justify-between">
         <div class="flex flex-col items-start space-y-2">
-          <NuxtLink :to="`/product/${product.slug}`">
-            <strong class="text-xl text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title }}</strong>
+          <NuxtLink :to="`/product/${product.slug}`" :title="product.title" class="truncate">
+            <strong class="text-xl text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title.substring(0,20) }} ...</strong>
           </NuxtLink>
-          <span class="font-light text-sm text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال- 4/608 گرم</span>
+<!--          <base-f-badge color="secondary" size="xs" class="opacity-70 font-thin text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">{{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}</base-f-badge>-->
+          <span class="px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin">
+            {{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}
+          </span>
           <ul class="flex items-center gap-0.5">
             <li v-for="i in 5" :key="i">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -57,12 +61,12 @@
           </div>
         </div>
         <div class="flex items-center gap-1 -mt-8">
-          <div class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+          <a :href="product.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.basalamLink">
             <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
-          </div>
-          <div class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+          </a>
+          <a :href="product.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.digikalaLink">
             <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
-          </div>
+          </a>
         </div>
       </div>
       <div class="flex items-stretch w-full mt-4 gap-2 justify-between">
@@ -84,13 +88,21 @@
 <script setup lang="ts">
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {SITE_URL} from "~/utilities/api.config";
+import {CreateFavorite} from "~/services/favorite.service";
+import {EPostType} from "~/models/EPostType";
+import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
+import {ToastType} from "~/composables/useSwal";
+import {EPackingType} from "~/models/product/EPackingType";
 
 const props = defineProps<{
   product:ProductFilterData
 }>();
 
 const cartStore = useCartStore();
+const authStore = useAuthStore();
+const toast = useToast();
 const addedToCart = ref(false);
+
 const addToCart = (id:number)=>{
   cartStore.addToCart(id)
   addedToCart.value =true;
@@ -99,8 +111,16 @@ const addToCart = (id:number)=>{
   },3000)
 }
 
+const addFavorite = async () => {
+  const result = await CreateFavorite({
+    postTitle:props.product.title,
+    postSlug:props.product.slug,
+    postId:props.product.id,
+    postType:EPostType.Product
+  } as CreateFavoriteCommand);
+  if(result.isSuccess){
+    await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+  }
+}
+
 </script>
-
-<style scoped>
-
-</style>

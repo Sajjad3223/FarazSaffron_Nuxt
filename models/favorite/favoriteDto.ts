@@ -8,3 +8,13 @@ export interface FavoriteDto extends BaseMongoDto{
     postSlug:     string;
     postType:     EPostType;
 }
+export interface CreateFavoriteCommand{
+    postId:       number;
+    postTitle:    string;
+    postSlug:     string;
+    postType:     EPostType;
+}
+export interface IsUserFavoriteCommand{
+    postId:       number;
+    postType:     EPostType;
+}

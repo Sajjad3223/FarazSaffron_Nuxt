@@ -47,6 +47,8 @@ export interface ProductFilterData extends BaseDto{
     quantity:     number;
     score:        number;
     visits:       number;
+    digikalaLink?: string | null;
+    basalamLink?:  string | null;
 }
 export interface ProductDto extends BaseDto{
     title:          string;

@@ -1,193 +1,218 @@
-
 <template>
-
-  <div class="flex flex-col mx-4 lg:mx-0">
+  <div class="mt-12">
     <Head>
       <Title>سبد خرید</Title>
     </Head>
+    <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center" v-if="cartStore.PendingOrder && cartStore.PendingOrder.orderItems.length > 0">
 
-    <div class="w-full mt-8">
-      <div>
-        <div class="relative flex space-x-2 space-x-reverse items-center w-max after:bg-brandOrange after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-2 after:rounded-t-full px-2 dark:text-currentColor">
-          <strong>سبد خرید</strong>
-          <span class="grid place-items-center text-sm font-thin rounded-md bg-brandOrange text-currentColor w-4 h-4" v-if="cartStore.cartItemsCount > 0">{{cartStore.cartItemsCount}}</span>
+      <div class="flex items-center w-2/3 mb-12">
+        <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
+          <span>1</span>
+          <span class="absolute -bottom-full w-max">سبد خرید</span>
+        </div>
+        <div class="h-px bg-black/10 opacity-40 flex-1"></div>
+        <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <span>2</span>
+          <span class="absolute -bottom-full w-max">افزودن آدرس</span>
+        </div>
+        <div class="h-px bg-black/10 opacity-40 flex-1"></div>
+        <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <span>3</span>
+          <span class="absolute -bottom-full w-max">تکمیل پرداخت</span>
         </div>
       </div>
-      <hr class="mt-3 border-brandOrange/50">
-    </div>
-    <div class="flex flex-col lg:flex-row items-start gap-4 mt-8" v-if="cartStore.PendingOrder != null">
-      <div class="flex-1 flex flex-col p-4 bg-bgWhite dark:bg-gray-800 dark:text-currentColor border rounded-xl border-black/20">
-        <div class="w-full flex items-start justify-between">
-          <div class="flex flex-col items-start">
-            <strong>سبد خرید شما</strong>
-            <small class="font-light opacity-70"> {{ cartStore.cartItemsCount }} کالا </small>
+
+      <!--  GP Peyk   -->
+      <div class="w-full rounded-xl border border-opacity-25 p-5">
+        <div class="w-3/4 mx-auto grid grid-cols-2 items-center">
+          <div class="flex flex-col items-start space-y-4">
+            <h3 class="text-3xl font-bold text-brandOrange">جی پی پیک</h3>
+            <strong class="text-lg">خدمات ویژه با اشتراک جی پی پیک</strong>
+            <base-g-button color="primary" button-type="bg" >
+              <span>دریافت این خدمات ویژه</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-125">
+                <path d="M14 17L9 12L14 7" stroke="#FAFAFA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </base-g-button>
           </div>
-          <button>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90 opacity-50" >
-              <path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
+          <ul class="list-disc flex flex-col space-y-4 opacity-70 font-semibold">
+            <li>ارسال رایگان این سفارش و ۳ سفارش دیگر (در هرماه اشتراک)</li>
+            <li>مهلت بیشتر مرجوعی کالا تا ۳۰ روز (جز موبایل و کالای بهداشتی)</li>
+            <li>امکان ارسال فوری بعضی از کالاها ( رایگان )</li>
+          </ul>
+        </div>
+      </div>
+
+      <!--  Main   -->
+      <main class="flex items-start w-full relative gap-8 mt-10" v-if="cartStore.PendingOrder">
+        <div class="flex flex-col flex-1">
+          <!--  Items   -->
+          <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch" >
+            <div class="w-full flex items-center justify-between">
+              <strong>سبد خرید</strong>
+              <base-g-button button-type="white">
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g opacity="0.5" clip-path="url(#clip0_769_6316)">
+                    <path d="M8.4987 2.125C7.71953 2.125 7.08203 2.7625 7.08203 3.54167C7.08203 4.32083 7.71953 4.95833 8.4987 4.95833C9.27786 4.95833 9.91536 4.32083 9.91536 3.54167C9.91536 2.7625 9.27786 2.125 8.4987 2.125ZM8.4987 12.0417C7.71953 12.0417 7.08203 12.6792 7.08203 13.4583C7.08203 14.2375 7.71953 14.875 8.4987 14.875C9.27786 14.875 9.91536 14.2375 9.91536 13.4583C9.91536 12.6792 9.27786 12.0417 8.4987 12.0417ZM8.4987 7.08333C7.71953 7.08333 7.08203 7.72083 7.08203 8.5C7.08203 9.27917 7.71953 9.91667 8.4987 9.91667C9.27786 9.91667 9.91536 9.27917 9.91536 8.5C9.91536 7.72083 9.27786 7.08333 8.4987 7.08333Z" fill="#09121F"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_769_6316">
+                      <rect width="17" height="17" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </base-g-button>
+            </div>
+            <ul class="mt-8 flex flex-col">
+              <TransitionGroup name="list">
+                <li class="mx-auto flex relative items-center border-b last:border-none py-6 border-opacity-30" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
+                  <div class="flex flex-col w-2/5 items-center">
+                    <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
+                    <cart-counter :item="i" class="w-max" />
+                  </div>
+                  <base-g-button button-type="white" color="danger" class="absolute top-4 left-0" @click="cartStore.removeItem(i.id)" v-if="i.count > 1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4">
+                      <path d="M21 5.97998C17.67 5.64998 14.32 5.47998 10.98 5.47998C9 5.47998 7.02 5.57998 5.04 5.77998L3 5.97998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M18.85 9.14001L18.2 19.21C18.09 20.78 18 22 15.21 22H8.79002C6.00002 22 5.91002 20.78 5.80002 19.21L5.15002 9.14001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10.33 16.5H13.66" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.5 12.5H14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </base-g-button>
+                  <div class="flex flex-col justify-between flex-1">
+                    <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="font-bold text-2xl hover:text-brandOrange duration-200 transition-colors">
+                      {{ i.itemInfo.productName }}
+                    </NuxtLink>
+                    <ul class="flex flex-col space-y-4 my-12">
+                      <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: دارد</li>
+                      <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: کیفی</li>
+                      <li class="pr-4 border-r-2 border-brandOrange/50">وزن: 21 گرم</li>
+                    </ul>
+                    <base-g-price :price="(i.price / 10)" />
+                  </div>
+                </li>
+              </TransitionGroup>
+            </ul>
+          </div>
+        </div>
+
+        <!--  Prices   -->
+        <div class="w-1/4 sticky top-12 p-6 bg-white rounded-xl flex flex-col space-y-4 items-stretch">
+          <div class="w-full flex items-center justify-between">
+            <span>قیمت کالاها ({{cartStore.cartItemsCount}})</span>
+            <div class="flex gap-1 items-center">
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
+            </div>
+          </div>
+          <div class="w-full flex items-center justify-between">
+            <span>جمع سبد خرید</span>
+            <div class="flex gap-1 items-center">
+              <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
+            </div>
+          </div>
+          <hr>
+          <base-g-button w-full is-link to="/newShipping">
+            تکمیل سفارش
+          </base-g-button>
+        </div>
+      </main>
+
+    </div>
+
+    <!--  Empty Cart  -->
+    <div class="border bg-white" v-else>
+      <div class="w-2/3 flex items-center mx-auto justify-between py-12 mt-10 rounded-2xl ">
+        <div class="flex flex-col items-start space-y-8">
+          <strong class="text-6xl opacity-70 font-normal">خالی!</strong>
+          <span class="text-xl font-thin text-[#9F9F9F]">هیچ محصولی وجود ندارد</span>
+          <base-g-button is-link button-type="white" to="/market" >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.00043 4.85742V9.13113" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.14106 6.99431H4.86328" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.73464 1.1665H4.26797C2.36241 1.1665 1.16797 2.51522 1.16797 4.42451V9.57516C1.16797 11.4845 2.35686 12.8332 4.26797 12.8332H9.73464C11.6457 12.8332 12.8346 11.4845 12.8346 9.57516V4.42451C12.8346 2.51522 11.6457 1.1665 9.73464 1.1665Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>مشاهده محصولات</span>
+          </base-g-button>
+        </div>
+        <img src="../../assets/images/empty-cart.png" alt="empty cart" class="w-1/3">
+      </div>
+    </div>
+
+    <!--  Popular   -->
+    <section class="w-full mt-16">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
+          محصولات پربازدید
+        </h3>
+        <div class="flex items-center gap-2">
+          <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
+                  @click="carousel.next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
+                  @click="carousel.prev">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
         </div>
-        <ul class="w-full mt-8 flex flex-col" >
-          <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none dark:border-gray-600" v-for="i in cartStore.PendingOrder.orderItems" :key="i.id">
-            <div class="w-1/5 flex flex-col items-center">
-              <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="w-full">
-                <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg">
-              </NuxtLink>
-            </div>
-            <div class="flex-1 flex flex-col items-start">
-              <strong class="text-xl mb-6 lg:mt-8">
-                {{ i.itemInfo.productName }}
-              </strong>
-
-              <ul class="flex flex-col space-y-1">
-                <li class="flex items-center space-x-1 space-x-reverse text-sm font-light">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                    <path d="M2.11328 4.95996L7.99995 8.36663L13.8466 4.97996" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 14.4067V8.35999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.62005 1.65336L3.06005 3.62669C2.25338 4.07336 1.59338 5.19336 1.59338 6.11336V9.88002C1.59338 10.8 2.25338 11.92 3.06005 12.3667L6.62005 14.3467C7.38005 14.7667 8.62672 14.7667 9.38672 14.3467L12.9467 12.3667C13.7534 11.92 14.4134 10.8 14.4134 9.88002V6.11336C14.4134 5.19336 13.7534 4.07336 12.9467 3.62669L9.38672 1.64669C8.62005 1.22669 7.38005 1.22669 6.62005 1.65336Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>شیشه ای</span>
-                </li>
-                <li class="flex items-center space-x-2 space-x-reverse text-sm font-light">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                    <path d="M6.66667 14.6667H9.33333C12.6667 14.6667 14 13.3334 14 10V6.00004C14 2.66671 12.6667 1.33337 9.33333 1.33337H6.66667C3.33333 1.33337 2 2.66671 2 6.00004V10C2 13.3334 3.33333 14.6667 6.66667 14.6667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M11.5 5.52666C9.50667 3.75332 6.49333 3.75332 4.5 5.52666L5.95333 7.85999C7.12 6.81999 8.88 6.81999 10.0467 7.85999L11.5 5.52666Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>4 گرم</span>
-                </li>
-                <li class="flex items-center space-x-2 space-x-reverse text-sm font-light">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                    <path d="M14.6667 5.67992V2.65325C14.6667 1.71325 14.24 1.33325 13.18 1.33325H10.4867C9.42667 1.33325 9 1.71325 9 2.65325V5.67325C9 6.61992 9.42667 6.99325 10.4867 6.99325H13.18C14.24 6.99992 14.6667 6.61992 14.6667 5.67992Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14.6667 13.18V10.4867C14.6667 9.42667 14.24 9 13.18 9H10.4867C9.42667 9 9 9.42667 9 10.4867V13.18C9 14.24 9.42667 14.6667 10.4867 14.6667H13.18C14.24 14.6667 14.6667 14.24 14.6667 13.18Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.99999 5.67992V2.65325C6.99999 1.71325 6.57333 1.33325 5.51333 1.33325H2.81999C1.75999 1.33325 1.33333 1.71325 1.33333 2.65325V5.67325C1.33333 6.61992 1.75999 6.99325 2.81999 6.99325H5.51333C6.57333 6.99992 6.99999 6.61992 6.99999 5.67992Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.99999 13.18V10.4867C6.99999 9.42667 6.57333 9 5.51333 9H2.81999C1.75999 9 1.33333 9.42667 1.33333 10.4867V13.18C1.33333 14.24 1.75999 14.6667 2.81999 14.6667H5.51333C6.57333 14.6667 6.99999 14.24 6.99999 13.18Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>نگین</span>
-                </li>
-              </ul>
-
-              <div class="mt-4">
-<!--            <span class="text-danger text-sm font-light"> ريال تخفیف</span>-->
-                <div class="flex items-center space-x-1 space-x-reverse">
-                  <strong class="text-2xl">{{ i.price.toLocaleString() }}</strong>
-                  <small>ريال</small>
-                </div>
-              </div>
-
-              <cart-counter :item="i" />
-
-            </div>
-          </li>
-        </ul>
       </div>
-      <div class="w-full lg:w-1/4 flex flex-col space-y-4" >
-        <div class="p-6 bg-bgWhite dark:bg-gray-800 dark:text-currentColor dark:border-gray-700 rounded-xl drop-shadow border flex flex-col items-stretch space-y-4">
-          <div class="flex items-center justify-between opacity-70">
-            <span class="text-sm" title="بدون اعمال تخفیف ها">قیمت کالاها ({{ cartStore.cartItemsCount }})</span>
-            <strong>
-              {{cartStore.PendingOrder.getFinalPrice.toLocaleString()}}
-              <small class="font-light">ریال</small>
-            </strong>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-sm" title="با اعمال تخفیف ها">جمع سبد خرید</span>
-            <strong>
-              {{cartStore.PendingOrder.getFinalPrice.toLocaleString()}}
-              <small class="font-light">ریال</small>
-            </strong>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-sm text-dgKala">قیمت در دیجی کالا</span>
-            <strong class="text-dgKala">
-              4,753,000
-              <small class="font-light">ریال</small>
-            </strong>
-          </div>
-          <div class="flex items-center justify-between text-brandOrange">
-            <span class="text-sm">سود شما از این خرید</span>
-            <strong>
-              (30%) 1,753,000<small class="font-light">ریال</small>
-            </strong>
-          </div>
-          <NuxtLink class="bg-brandOrange rounded-lg w-full text-currentColor font-bold text-xl p-4 text-center" to="/checkout/shipping">
-            تایید و تکمیل سفارش
-          </NuxtLink>
-          <hr class="dark:border-gray-600">
-          <div class="bg-slate-100 dark:bg-gray-700 p-3 px-6 rounded-lg flex items-center justify-between">
-            <div class="flex items-center space-x-1 space-x-reverse">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-amber-500">
-                <path d="M7.5 12.1673H6C5.26667 12.1673 4.66667 12.7673 4.66667 13.5006V13.6673H4C3.72667 13.6673 3.5 13.894 3.5 14.1673C3.5 14.4406 3.72667 14.6673 4 14.6673H12C12.2733 14.6673 12.5 14.4406 12.5 14.1673C12.5 13.894 12.2733 13.6673 12 13.6673H11.3333V13.5006C11.3333 12.7673 10.7333 12.1673 10 12.1673H8.5V10.6406C8.33333 10.6606 8.16667 10.6673 8 10.6673C7.83333 10.6673 7.66667 10.6606 7.5 10.6406V12.1673Z" fill="currentColor"/>
-                <path d="M12.3195 7.7587C12.7595 7.59203 13.1462 7.3187 13.4529 7.01203C14.0729 6.32536 14.4795 5.50536 14.4795 4.54536C14.4795 3.58536 13.7262 2.83203 12.7662 2.83203H12.3929C11.9595 1.94536 11.0529 1.33203 9.99953 1.33203H5.99953C4.9462 1.33203 4.03953 1.94536 3.6062 2.83203H3.23286C2.27286 2.83203 1.51953 3.58536 1.51953 4.54536C1.51953 5.50536 1.9262 6.32536 2.5462 7.01203C2.85286 7.3187 3.23953 7.59203 3.67953 7.7587C4.37286 9.46536 6.03953 10.6654 7.99953 10.6654C9.95953 10.6654 11.6262 9.46536 12.3195 7.7587ZM9.89287 5.63203L9.47953 6.1387C9.41287 6.21203 9.3662 6.3587 9.37287 6.4587L9.41286 7.11203C9.43953 7.51203 9.15287 7.7187 8.77953 7.57203L8.17287 7.33203C8.07953 7.2987 7.91953 7.2987 7.8262 7.33203L7.21953 7.57203C6.8462 7.7187 6.55953 7.51203 6.5862 7.11203L6.6262 6.4587C6.63286 6.3587 6.5862 6.21203 6.51953 6.1387L6.1062 5.63203C5.8462 5.32536 5.95953 4.98536 6.3462 4.88536L6.97953 4.72536C7.07953 4.6987 7.19953 4.60536 7.25287 4.5187L7.6062 3.97203C7.8262 3.63203 8.17287 3.63203 8.39287 3.97203L8.7462 4.5187C8.79953 4.60536 8.91953 4.6987 9.01953 4.72536L9.65286 4.88536C10.0395 4.98536 10.1529 5.32536 9.89287 5.63203Z" fill="currentColor"/>
-              </svg>
 
-              <span>جی پی کلاب</span>
+      <client-only v-if="false">
+        <GPCarousel ref="carousel" :items-to-show="5" class="rounded-xl mt-4">
+          <GPSlide v-for="p in 5" :key="p" >
+            <!--                  <GCard :product="p" />-->
+          </GPSlide>
+        </GPCarousel>
+      </client-only>
+      <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
+        <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
+          <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
+          <div class="p-4 flex flex-col h-1/2 justify-between">
+            <div class="w-3/4 rounded-md bg-gray-300 h-4"></div>
+            <div class="w-1/2 rounded-full bg-gray-300 h-2"></div>
+            <div class="w-1/3 rounded-full bg-gray-200 h-1"></div>
+            <div class="flex items-center mt-4 gap-4">
+              <div class="flex-1 rounded-md bg-gray-300 h-8"></div>
+              <div class="w-1/4 rounded-full bg-gray-200 h-2"></div>
             </div>
-            <strong>150 <small class="font-light"> امتیاز</small></strong>
           </div>
         </div>
-        <p class="font-light text-sm mx-4 opacity-70 dark:text-currentColor">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از سبد حذف می‌شوند
-        </p>
-        <div class="p-4 border rounded-xl px-6 bg-bgWhite/70 dark:bg-gray-700 dark:border-gray-600">
-          <div class="flex space-x-2 items-center space-x-reverse">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
-              <path d="M12 14H13C14.1 14 15 13.1 15 12V2H6C4.5 2 3.19001 2.82999 2.51001 4.04999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 17C2 18.66 3.34 20 5 20H6C6 18.9 6.9 18 8 18C9.1 18 10 18.9 10 20H14C14 18.9 14.9 18 16 18C17.1 18 18 18.9 18 20H19C20.66 20 22 18.66 22 17V14H19C18.45 14 18 13.55 18 13V10C18 9.45 18.45 9 19 9H20.29L18.58 6.01001C18.22 5.39001 17.56 5 16.84 5H15V12C15 13.1 14.1 14 13 14H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 22C9.10457 22 10 21.1046 10 20C10 18.8954 9.10457 18 8 18C6.89543 18 6 18.8954 6 20C6 21.1046 6.89543 22 8 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 22C17.1046 22 18 21.1046 18 20C18 18.8954 17.1046 18 16 18C14.8954 18 14 18.8954 14 20C14 21.1046 14.8954 22 16 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 12V14H19C18.45 14 18 13.55 18 13V10C18 9.45 18.45 9 19 9H20.29L22 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 8H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 11H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 14H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-sm text-primary">
-              ارسال <b class="text-base">رایگان</b> برای خرید های بالاتر از 500 هزار تومان
-            </span>
-          </div>
-          <p class="text-sm mt-2 font-light dark:text-currentColor">با خرید بیشتر از 500 هزار تومان از فروشگاه ما هزینه ارسال به هر کجای کشور عزیزمان را مهمان ما باشید</p>
-        </div>
       </div>
-    </div>
-    <div v-else class="p-8 border rounded-lg mt-8 flex flex-col items-center space-y-4">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-[400%] my-12 opacity-50">
-        <path d="M8.5 14.25C8.5 16.17 10.08 17.75 12 17.75C13.92 17.75 15.5 16.17 15.5 14.25" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8.81 2L5.19 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M15.19 2L18.81 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2 7.85001C2 6.00001 2.99 5.85001 4.22 5.85001H19.78C21.01 5.85001 22 6.00001 22 7.85001C22 10 21.01 9.85001 19.78 9.85001H4.22C2.99 9.85001 2 10 2 7.85001Z" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <strong>هنوز کالایی به سبد خرید اضافه نکرده اید.</strong>
-      <base-f-button is-link to="/market" bordered color="brand">
-        رفتن به فروشگاه
-      </base-f-button>
-    </div>
 
-<!--    <div class="rounded-xl border p-4 mt-8"> TODO Implement
-      <div class="w-max flex items-center space-x-2 space-x-reverse border-b-2 border-brandOrange pb-2 pl-12 dark:text-currentColor">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-          <path d="M14.6667 8.00004C14.6667 11.68 11.68 14.6667 8.00004 14.6667C4.32004 14.6667 1.33337 11.68 1.33337 8.00004C1.33337 4.32004 4.32004 1.33337 8.00004 1.33337C11.68 1.33337 14.6667 4.32004 14.6667 8.00004Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M10.4733 10.12L8.40663 8.88671C8.04663 8.67338 7.7533 8.16005 7.7533 7.74005V5.00671" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h5 class="text-xl font-bold">بازدید های اخیر</h5>
-      </div>
-      <div class="w-full flex mt-8">
-        <ul class="w-full flex space-x-8 space-x-reverse flex-shrink-0 overflow-x-auto p-4">
-&lt;!&ndash;      <li v-for="i in 4" :key="i" class="flex-shrink-0">
-            <f-card />
-          </li>&ndash;&gt;
-        </ul>
-      </div>
-    </div>-->
+    </section>
   </div>
-
 </template>
 
 <script setup lang="ts">
 import {SITE_URL} from "~/utilities/api.config";
 import {useCartStore} from "~/stores/cart.store";
 
+
 const cartStore = useCartStore();
 
+const carousel = ref();
+
 </script>
+
+<style scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>
