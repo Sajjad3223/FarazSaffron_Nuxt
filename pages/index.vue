@@ -1,5 +1,5 @@
 <template>
-  <div v-if="screenW >= 720">
+  <div v-if="!utilsStore.isMobile()">
     <Head>
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
@@ -426,11 +426,18 @@
     </Head>
 
     <!--  Banner  -->
-    <div class="grid w-full relative">
-      <img src="~/assets/images/banner2.png" alt=" banner1" class="rounded-3xl min-h-[120px] relative">
-      <div class="absolute bg-black/60 -z-10 rounded-3xl translate-y-3 h-[100px] bottom-0 inset-x-4"></div>
-      <div class="absolute bg-black/50 -z-20 rounded-3xl translate-y-5 h-[100px] bottom-0 inset-x-8"></div>
+    <div class="flex flex-col w-full relative" dir="ltr">
+      <img src="~/assets/images/banner2.png" alt=" banner1" class="rounded-3xl min-h-[120px] relative" v-if="bannerIndex === 0">
+      <img src="~/assets/images/banner1.png" alt=" banner1" :class="['transition-all duration-300',
+          bannerIndex === 0 ?
+          'absolute opacity-60 -z-10 rounded-3xl translate-y-2 min-h-[120px] bottom-0 inset-x-0 w-[95%] mx-auto' :
+          'rounded-3xl min-h-[120px] relative'
+      ]" >
+      <img src="~/assets/images/banner2.png" alt=" banner1" class="absolute opacity-50 -z-20 rounded-3xl translate-y-4 min-h-[120px] bottom-0 inset-x-0 w-[90%] mx-auto" >
     </div>
+    <base-g-button @click="bannerIndex = 1">
+      Fade
+    </base-g-button>
 
     <!--  Categories  -->
     <div class="mt-12 grid grid-cols-4 gap-4">
@@ -627,12 +634,11 @@ import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
 
-
-
 const loading = ref(true);
 const lastProducts:Ref<ProductFilterData[]> = ref([]);
-const screenW = process.client ? screen.width : false;
 
+const utilsStore = useUtilStore();
+const bannerIndex = ref(0);
 const carousel1 = ref();
 
 onMounted(async ()=>{

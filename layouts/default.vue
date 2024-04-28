@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isLoading">
-    <div v-if="screenW >= 720">
+    <div v-if="!utilsStore.isMobile()">
       <header>
         <div class="h-[60px] bg-white w-full border-b-2 border-[#DCDCDC] relative flex items-center">
           <img src="~/assets/images/img.png" alt="" class="h-[60px] w-[85vw]">
@@ -651,16 +651,14 @@
 </template>
 
 <script setup lang="ts">
-
 import {SITE_URL} from "~/utilities/api.config";
 import {GetCategories} from "~/services/category.service";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 
-const screenW = ref(0);
-
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const accountStore = useAccountStore();
+const utilsStore = useUtilStore();
 const isLoading = ref(true);
 const showSidebar = ref(false);
 const isCategoryHovered = ref(false);
@@ -668,7 +666,6 @@ const categories:Ref<CategoryDto[]> = ref([]);
 const subCategories:Ref<CategoryDto[]> = ref([]);
 
 onMounted(async ()=>{
-  screenW.value = process.client ? screen.width : 0;
   await refreshCategories();
   isLoading.value = false;
 })
