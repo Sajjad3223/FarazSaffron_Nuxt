@@ -1,9 +1,9 @@
 <template>
   <div class="w-full relative flex items-center mb-4">
-    <input :type="type" @input="onChanged"
+    <input :type="type" @input="onChanged" :title="placeHolder"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
            :required="required" v-if="!showPassword">
-    <input type="text" :required="required"
+    <input type="text" :required="required" :title="placeHolder"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != ''},{'disabled':disabled}]" v-if="type === 'password' && showPassword" :value="inputValue">
     <label for="">{{ label }}</label>
     <transition enter-active-class="duration-200 transition-opacity" enter-from-class="opacity-0" enter-to-class="opacity-100"

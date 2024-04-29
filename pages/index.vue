@@ -425,8 +425,18 @@
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
 
+    <!--  Search  -->
+    <div class="flex mx-4 mt-3 items-center relative">
+      <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>
+      <strong class="absolute opacity-50 right-4 pointer-events-none transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی محصول...</strong>
+      <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute opacity-50 left-4">
+        <circle cx="6.38251" cy="6.38251" r="5.63251" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10.7957 13.4585C10.6083 12.6246 11.4856 11.9552 12.2404 12.356L13.689 13.1252C14.3329 13.4672 14.4063 14.3611 13.8267 14.8034L12.7377 15.6344C12.1581 16.0767 11.3153 15.7701 11.1554 15.0587L10.7957 13.4585Z" fill="currentColor"/>
+      </svg>
+    </div>
+
     <!--  Banner  -->
-    <div class="flex flex-col w-full relative" dir="ltr">
+    <div class="flex flex-col mt-6 w-full relative" dir="ltr">
       <img src="~/assets/images/banner2.png" alt=" banner1" class="rounded-3xl min-h-[120px] relative" v-if="bannerIndex === 0">
       <img src="~/assets/images/banner1.png" alt=" banner1" :class="['transition-all duration-300',
           bannerIndex === 0 ?

@@ -31,9 +31,12 @@
     <hr>
     <div class="w-full flex items-center justify-center gap-2 text-sm">
       <span class="font-light">حساب کاربری ندارید؟</span>
-      <NuxtLink to="/" class="text-brandOrange">
+      <NuxtLink to="/auth/register" class="text-brandOrange" v-if="utilStore.isMobile()">
         ثبت نام کنید
       </NuxtLink>
+      <button class="text-brandOrange" v-else @click="authStore.isLoginModalOpen = false,authStore.isRegisterModalOpen = true">
+        ثبت نام کنید
+      </button>
     </div>
   </Form>
 </template>
@@ -48,6 +51,7 @@ import {ToastType} from "~/composables/useSwal";
 const router = useRouter();
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
+const utilStore = useUtilStore();
 const toast = useToast();
 
 const loginData:LoginCommand = reactive({

@@ -8,7 +8,7 @@
       <base-g-input label="شماره تلفن *"  required v-model="registerData.phoneNumber" name="phoneNumber" id="phoneNumber" class="col-span-full"/>
       <base-g-input label="رمز عبور *"  type="password" required v-model="registerData.password" name="password" id="password" class="col-span-full"/>
     </div>
-    <base-g-button wFull class="mt-8">ثبت نام</base-g-button>
+    <base-g-button wFull class="mt-4">ثبت نام</base-g-button>
     <div class="flex items-center w-full my-4">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">
@@ -32,9 +32,12 @@
     <hr class="my-4">
     <div class="w-full flex items-center justify-center gap-2 text-sm">
       <span class="font-light">قبلا ثبت نام کرده اید؟</span>
-      <NuxtLink to="/" class="text-brandOrange">
-        ورود
+      <NuxtLink to="/auth/login" class="text-brandOrange" v-if="utilStore.isMobile()">
+        وارد شوید
       </NuxtLink>
+      <button class="text-brandOrange" v-else @click="authStore.isLoginModalOpen = true,authStore.isRegisterModalOpen = false">
+        وارد شوید
+      </button>
     </div>
   </Form>
 </template>
@@ -48,6 +51,7 @@ import * as Yup from 'yup'
 
 const router = useRouter();
 const authStore = useAuthStore();
+const utilStore = useUtilStore();
 
 const registerData:RegisterCommand = reactive({
   phoneNumber:"",

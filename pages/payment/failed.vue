@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center w-2/3 mb-12 mx-auto my-12">
+    <div class="hidden lg:flex items-center w-2/3 mb-12 mx-auto my-12">
       <div class="relative grid place-items-center w-8 h-8 rounded-full bg-brandOrange text-brandOrange">
         <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 5.65546L5.23224 9.8877L14.1199 1" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="w-full mt-8 py-24 bg-[#F8F8F8] rounded-2xl flex flex-col items-center space-y-8 ">
+    <div class="w-full mt-8 lg:py-24 lg:bg-[#F8F8F8] rounded-2xl flex flex-col items-center space-y-4 lg:space-y-8 ">
       <svg width="212" height="213" viewBox="0 0 212 213" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="106" cy="106.5" rx="106" ry="106.5" fill="#FF0E38" fill-opacity="0.1" class="pulse delayed"/>
         <circle cx="106" cy="107" r="84" fill="#FF0E38" fill-opacity="0.15" class="pulse"/>
@@ -34,13 +34,13 @@
               stroke-linejoin="round"/>
       </svg>
 
-      <h3 class="text-4xl font-semibold">پرداخت ناموفق</h3>
+      <h3 class="text-2xl lg:text-4xl font-semibold">پرداخت ناموفق</h3>
       <div class="flex items-center gap-4">
         <span class="opacity-60">علت:</span>
         <span class="font-light">{{ errorTranslator() }}</span>
       </div>
       <hr class="w-2/3">
-      <div class="text-danger flex items-center gap-4">
+      <div class="text-danger flex flex-col lg:flex-row items-center gap-4">
         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_878_7768)">
             <path
@@ -48,7 +48,7 @@
                 fill="currentColor"/>
           </g>
         </svg>
-        <span>
+        <span class="text-center text-xs lg:text-base">
          در صورت کسر وجه ، تا 72 ساعت آینده به حساب شما باز می گردد.
       </span>
       </div>
@@ -57,9 +57,6 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'new-layout'
-})
 
 const route = useRoute();
 

@@ -1,10 +1,11 @@
 <template>
-  <div class="mt-12">
+  <div class="mt-12" v-if="!utilStore.isMobile()">
     <Head>
       <Title>سبد خرید</Title>
     </Head>
-    <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center" v-if="cartStore.PendingOrder && cartStore.PendingOrder.orderItems.length > 0">
+    <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center" v-if="cartStore.PendingOrder && cartStore.cartItemsCount > 0">
 
+      <!--  Steps   -->
       <div class="flex items-center w-2/3 mb-12">
         <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
           <span>1</span>
@@ -184,6 +185,94 @@
 
     </section>
   </div>
+  <div class="mt-6 pb-[50px]" v-else>
+    <Head>
+      <Title>سبد خرید</Title>
+    </Head>
+
+    <div v-if="cartStore.PendingOrder && cartStore.cartItemsCount > 0" class="flex flex-col items-center ">
+      <div class="flex items-center gap-1">
+        <strong>
+          سبد خرید
+        </strong>
+        <span class="bg-brandOrange rounded-full px-2 py-0.5 text-white">{{cartStore.cartItemsCount}}</span>
+      </div>
+      <!--  Steps   -->
+      <div class="flex items-center w-2/3 mt-4 mb-6">
+        <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
+          <span>1</span>
+          <span class="absolute -bottom-full w-max">سبد خرید</span>
+        </div>
+        <div class="h-px bg-black/10 opacity-40 flex-1"></div>
+        <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <span>2</span>
+          <span class="absolute -bottom-full w-max">افزودن آدرس</span>
+        </div>
+        <div class="h-px bg-black/10 opacity-40 flex-1"></div>
+        <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <span>3</span>
+          <span class="absolute -bottom-full w-max">تکمیل پرداخت</span>
+        </div>
+      </div>
+      <hr class="w-full mt-6">
+      <!--  Items  -->
+      <ul>
+        <li class="flex items-center gap-6 py-2 border-b last:border-none" v-for="i in cartStore.PendingOrder.orderItems" :key="i.id">
+          <div class=" flex-1 flex flex-col items-start ">
+            <strong>{{i.itemInfo.productName}}</strong>
+            <small>دارای پروانه بهداشت</small>
+            <div class="mt-4 py-3 self-end flex flex-col items-end space-y-2">
+              <base-g-price :price="i.price / 10" />
+            </div>
+          </div>
+          <div class="flex flex-col w-2/5 items-center">
+            <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
+            <cart-counter :item="i" class="w-max scale-75 -mt-2" />
+          </div>
+        </li>
+      </ul>
+      <!--  Total Price  -->
+      <div class="w-full fixed bottom-[75px] border-b bg-white h-[60px] z-20 px-4 grid grid-cols-2 items-center" style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
+        <div class="flex flex-col items-start">
+          <small>مجموع سبد خرید</small>
+          <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
+        </div>
+        <base-g-button is-link to="/checkout/shipping" w-full >
+          تکمیل سفارش
+        </base-g-button>
+      </div>
+    </div>
+    <div v-else class="w-full relative flex flex-col items-center justify-center -mt-5">
+      <NuxtLink to="/auth/login" v-if="!authStore.isLoggedIn" class="w-full rounded-xl bg-white flex flex-col space-y-4 p-4" style="box-shadow: 0 4px 15px 0 #AAAAAA40;">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g opacity="0.8">
+                <path d="M8.18556 11.9775L20.2266 11.9775" stroke="#F04623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.1133 14.8936L8.18528 11.9776L11.1133 9.06155" stroke="#F04623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.4922 16.6105V17.5435C15.4922 19.5785 13.8432 21.2275 11.8072 21.2275H6.92319C4.89319 21.2275 3.24819 19.5825 3.24819 17.5525L3.24819 6.41254C3.24819 4.37754 4.89819 2.72754 6.93319 2.72754H11.8182C13.8472 2.72754 15.4922 4.37354 15.4922 6.40254V7.34454" stroke="#F04623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+            <span>ورود به حساب کاربری</span>
+          </div>
+          <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.8" d="M6 1L1 6.5L6 12" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="font-thin text-sm">
+          برای محصولاتی که پیش تر به سبد خرید خود اضافه کرده اید وارد شوید.
+        </p>
+      </NuxtLink>
+      <div class="flex flex-col items-center space-y-4 mt-8">
+        <img src="../../assets/images/empty-cart.png" alt="empty cart" class="w-2/3">
+        <strong class="text-lg">سبد خرید شما خالی است !</strong>
+        <span class="text-xs">
+        می توانید برای مشاهده بیشتر کالا ها به صفحه دسته بندی بروید.
+      </span>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -192,6 +281,8 @@ import {useCartStore} from "~/stores/cart.store";
 
 
 const cartStore = useCartStore();
+const authStore = useAuthStore();
+const utilStore = useUtilStore();
 
 const carousel = ref();
 
