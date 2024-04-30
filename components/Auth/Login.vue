@@ -7,7 +7,8 @@
         رمز عبور را فراموش کرده اید؟
       </button>
     </div>
-    <base-g-button wFull>ورود</base-g-button>
+    <span class="text-center text-sm font-thin text-danger">{{errorMessage}}</span>
+    <base-g-button wFull :is-loading="isLoading">ورود</base-g-button>
     <div class="flex items-center w-full">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">

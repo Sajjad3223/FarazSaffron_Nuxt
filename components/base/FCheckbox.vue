@@ -3,7 +3,7 @@
     <input :class="['checkbox__input']" type="checkbox" :id="`myCheckbox02${id}`" v-model="checked" :checked="isChecked">
 
     <svg class="checkbox__icon " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
-      <rect width="21" height="21" x=".5" y=".5" fill="#ccc" stroke="#006F94" rx="3" />
+      <rect width="21" height="21" x=".5" y=".5" fill="transparent" stroke="#F04623" rx="3" />
       <path class="tick" stroke="#F04623" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
     </svg>
     <span class="checkbox__label text-sm">{{ label }}</span>

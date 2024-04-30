@@ -1,7 +1,7 @@
 <template>
   <div  class="relative h-max w-[190px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" dir="rtl">
     <NuxtLink :to="`/product/${product.slug}`">
-      <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto max-h-[70px] hover:scale-110 transition-transform duration-300">
+      <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto max-h-[100px] hover:scale-110 transition-transform duration-300">
     </NuxtLink>
     <!-- Like Button  -->
     <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
@@ -15,7 +15,7 @@
         </defs>
       </svg>
     </button>
-    <!-- Dicount  -->
+    <!-- Discount  -->
     <div class="absolute left-4 top-4 grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8" v-if="product.discount !== 0">
       <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">10%</span>
     </div>
@@ -23,7 +23,7 @@
     <div class="p-4 flex flex-col w-full items-stretch">
       <div class="flex flex-col">
         <NuxtLink :to="`/product/${product.slug}`">
-          <strong class=" text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title }}</strong>
+          <strong class=" text-[#626262] hover:text-brandOrange transition-colors duration-200 truncate">{{ product.title.substring(0,17) }}...</strong>
         </NuxtLink>
         <div class="flex items-center justify-between">
           <span class="font-light text-xs text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال</span>

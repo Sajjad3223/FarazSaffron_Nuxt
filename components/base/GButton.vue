@@ -2,7 +2,16 @@
   <div>
     <button v-if="!isLink" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
                     buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled" @click="emits('click')">
-      <slot></slot>
+      <slot v-if="!isLoading"></slot>
+      <span v-else class="animate-spin">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px"
+             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+             style="display:block;background-color:transparent;"><circle
+            cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+            stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+            style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+        </svg>
+      </span>
     </button>
     <NuxtLink v-else :to="to" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
                     buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">

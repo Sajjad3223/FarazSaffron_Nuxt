@@ -1,37 +1,80 @@
 <template>
-  <div class="flex flex-col space-y-4">
-    <span class="dark:text-white text-sm font-light">محدوده قیمت</span>
+  <div class="flex flex-col" dir="ltr">
+    <span class="dark:text-white text-sm font-light mb-4">محدوده قیمت</span>
+    <div class="relative w-full h-[5px] z-[1] top-[3px]">
+      <div ref="progress" id="progress" class="absolute bg-brandOrange h-[5px] rounded-full pointer-events-none"
+           style="box-shadow: 0 0 5px 0 #F0462280;"></div>
+    </div>
     <div class="range-input">
       <input type="range"
              class="min-range"
              min="0"
              max="100"
+             id="min-range-slider"
+             name="min-range-slider"
              v-model="valueData.minValue"
              step="1">
       <input type="range"
              class="max-range"
              min="0"
              max="100"
+             id="max-range-slider"
+             name="max-range-slider"
              v-model="valueData.maxValue"
              step="1">
     </div>
-    <div class="grid grid-cols-2 gap-2">
-      <base-f-input type="number" place-holder="حداقل: 0" v-model="valueData.minValue" />
-      <base-f-input type="number" place-holder="حداکثر: 999" v-model="valueData.maxValue" />
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <base-f-input type="number" name="min-range" id="min-range" place-holder="حداقل: 0" v-model="valueData.minValue" />
+      <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 999" v-model="valueData.maxValue" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const valueData = reactive({
-  minValue: 0,
-  maxValue: null
+const valueData:Ref<any> = ref({
+  minValue: '25',
+  maxValue: '75'
+})
+
+const progress = ref();
+const priceGap = 10
+
+onMounted(()=>{
+  const ranges = document.querySelectorAll('.range-input input');
+  ranges.forEach(r=>{
+    r.addEventListener('input',(e:any)=>{
+      let minValue = parseInt(ranges[0].value),
+          maxValue = parseInt(ranges[1].value);
+
+      if((maxValue - minValue >= priceGap) && maxValue <= ranges[1].max){
+        if(e.target.className === "min-range"){
+          ranges[0].value = minValue;
+          progress.value.style.left = ((minValue / ranges[1].max) * 100) + '%';
+        }
+        else{
+          ranges[1].value = maxValue;
+          progress.value.style.right =100-((maxValue / ranges[0].max) * 100) + '%';
+        }
+      }
+      else{
+        if(e.target.className === "min-range"){
+          ranges[0].value = maxValue - priceGap;
+          valueData.value.minValue = maxValue - priceGap;
+        }else{
+          ranges[1].value = minValue + priceGap;
+          valueData.value.maxValue = minValue + priceGap;
+        }
+      }
+
+    })
+  })
+  progress.value.style.left = ((ranges[0].value / ranges[1].max) * 100) + '%';
+  progress.value.style.right =100-((ranges[1].value / ranges[0].max) * 100) + '%';
 })
 
 </script>
 
-<style scoped >
-
+<style lang="scss">
 /* Remove Arrows/Spinners */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -41,6 +84,9 @@ input::-webkit-inner-spin-button {
 
 .range-input {
   position: relative;
+  height: 2px;
+  border-radius: 5px;
+  background-color: #EFEFEF;
 }
 
 .range-input input {
@@ -48,22 +94,21 @@ input::-webkit-inner-spin-button {
   width: 100%;
   height: 1px;
   background: none;
-  top: -5px;
   pointer-events: none;
   cursor: pointer;
   -webkit-appearance: none;
-}
-.range-input input:first-child {
-  background: white;
+  z-index: 2;
 }
 
 /* Styles for the range thumb in WebKit browsers */
 input[type="range"]::-webkit-slider-thumb {
-  height: 18px;
-  width: 18px;
-  border-radius: 70%;
-  background: #555;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: white;
   pointer-events: auto;
   -webkit-appearance: none;
+  box-shadow: 0 0 5px 0 #8E8E8E40;
 }
+
 </style>

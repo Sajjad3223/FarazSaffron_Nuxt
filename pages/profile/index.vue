@@ -143,9 +143,9 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.294 7.29105C17.294 10.2281 14.9391 12.5831 12 12.5831C9.0619 12.5831 6.70601 10.2281 6.70601 7.29105C6.70601 4.35402 9.0619 2 12 2C14.9391 2 17.294 4.35402 17.294 7.29105ZM12 22C7.66237 22 4 21.295 4 18.575C4 15.8539 7.68538 15.1739 12 15.1739C16.3386 15.1739 20 15.8789 20 18.599C20 21.32 16.3146 22 12 22Z" fill="white"/>
             </svg>
           </div>
-          <div class="flex flex-col space-y-1">
-            <strong>سجاد میرشبی</strong>
-            <span class="text-sm font-light">09154222478</span>
+          <div class="flex flex-col space-y-1" v-if="!accountStore.initLoading">
+            <strong>{{ accountStore.currentUser?.fullName }}</strong>
+            <span class="text-sm font-light">{{accountStore.currentUser?.phoneNumber}}</span>
           </div>
         </div>
         <NuxtLink to="/profile/personal-info">
@@ -188,7 +188,7 @@
               </svg>
             </div>
             <div class="flex flex-col">
-              <strong>16</strong>
+              <strong>{{ ordersGist?.pending + ordersGist?.paid + ordersGist?.returned }}</strong>
               <span class="text-xs font-light">سفارشات</span>
             </div>
           </div>
@@ -205,7 +205,7 @@
               </defs>
             </svg>
             <small class="font-thin">جاری</small>
-            <span class="px-1 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-4">4</span>
+            <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2">{{ ordersGist?.pending }}</span>
           </div>
           <div class="flex flex-col space-y-2 items-center relative">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -218,7 +218,7 @@
               </defs>
             </svg>
             <small class="font-thin">تحویل شده</small>
-            <span class="px-1 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-4">4</span>
+            <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2">{{ ordersGist?.paid }}</span>
           </div>
           <div class="flex flex-col space-y-2 items-center relative">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -231,7 +231,7 @@
               </defs>
             </svg>
             <small class="font-thin">مرجوع شده</small>
-            <span class="px-1 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-4">4</span>
+            <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2" v-if="ordersGist?.returned !== 0">{{ ordersGist?.returned }}</span>
           </div>
         </div>
       </div>
@@ -330,7 +330,7 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="py-4 border-t flex items-center w-full justify-between">
+          <NuxtLink to="/profile/personal-info" class="py-4 border-t flex items-center w-full justify-between">
             <div class="flex gap-4 items-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.8">
@@ -372,6 +372,7 @@ import {GetOrdersGist} from "~/services/cart.service";
 
 const utilStore = useUtilStore();
 const authStore = useAuthStore();
+const accountStore = useAccountStore();
 
 definePageMeta({
   layout: 'profile'

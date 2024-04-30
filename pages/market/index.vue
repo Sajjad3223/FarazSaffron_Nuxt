@@ -45,40 +45,26 @@
         <!--  Filters  -->
         <aside class="w-1/4 flex flex-col space-y-6">
           <div class=" bg-[#F8F8F8] p-5 rounded-2xl flex flex-col space-y-8">
-            <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
+            <div class="border bg-white px-4 py-5 rounded-xl flex flex-col items-stretch">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">قیمت</h3>
-              <!-- <base-f-range />   TODO redesign and place range input component here -->
-              <input type="range" name="" id="" class="w-full mt-6">
-              <div class="grid grid-cols-2 my-4 place-items-center">
-                <div class="flex items-center gap-2">
-              <span class="text-[#BFBFBF]">
-              از
-            </span>
-                  <strong class="text-[#767676]" style="font-family: 'Vazir FD',serif">
-                    0
-                  </strong>
-                  <span class="text-[#BFBFBF]">تومان</span>
-                </div>
-                <div class="flex items-center gap-2">
-              <span class="text-[#BFBFBF]">
-              تا
-            </span>
-                  <strong class="text-[#767676]" style="font-family: 'Vazir FD',serif">
-                    680,000
-                  </strong>
-                  <span class="text-[#BFBFBF]">تومان</span>
-                </div>
-              </div>
-              <button class="py-2 rounded-lg bg-brandOrange/10 hover:bg-brandOrange/15 w-max px-10 mx-auto text-brandOrange transition-colors duration-200">اعمال</button>
+               <ClientOnly><base-f-range /></ClientOnly>
+              <button class="py-2 mt-4 rounded-lg bg-brandOrange/10 hover:bg-brandOrange/15 w-max px-10 mx-auto text-brandOrange transition-colors duration-200">اعمال</button>
             </div>
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">دسته بندی</h3>
               <ul class="mt-6 flex flex-col space-y-4">
-                <li class="flex justify-between font-bold text-brandOrange">
-                  <span>زعفران</span>
-                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                <li class="flex flex-col space-y-4">
+                  <div class="flex justify-between font-bold text-brandOrange">
+                    <span>زعفران</span>
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+                      <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange">
+                    <base-f-checkbox label="نگین" />
+                    <base-f-checkbox label="نگین" />
+                    <base-f-checkbox label="نگین" />
+                  </div>
                 </li>
                 <li class="flex justify-between text-[#858383]">
                   <span>پسته</span>

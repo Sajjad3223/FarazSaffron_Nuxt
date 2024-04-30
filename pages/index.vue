@@ -9,8 +9,8 @@
     <!--  Product Categories   -->
     <section class="w-full flex flex-col items-center my-9">
       <h3 class="font-black text-2xl">دسته بندی محصولات</h3>
-      <ul class="mt-4 flex items-center gap-8">
-        <li class="w-[250px] h-[80px] grid">
+      <ul class="mt-4 w-full grid grid-cols-4 gap-8">
+        <li class="w-full h-[80px] grid">
           <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
             <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
             <div class="flex flex-col items-center">
@@ -19,7 +19,7 @@
             </div>
           </NuxtLink>
         </li>
-        <li class="w-[250px] h-[80px] grid">
+        <li class="w-full h-[80px] grid">
           <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
             <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="38" height="38" fill="url(#pattern0_308_4026)" fill-opacity="0.7"/>
@@ -36,7 +36,7 @@
             </div>
           </NuxtLink>
         </li>
-        <li class="w-[250px] h-[80px] grid">
+        <li class="w-full h-[80px] grid">
           <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
             <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="38" height="38" fill="url(#pattern0_306_3664)" fill-opacity="0.4"/>
@@ -53,7 +53,7 @@
             </div>
           </NuxtLink>
         </li>
-        <li class="w-[250px] h-[80px] grid">
+        <li class="w-full h-[80px] grid">
           <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
             <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="38" height="38" fill="url(#pattern0_306_3665)" fill-opacity="0.4"/>
@@ -102,13 +102,13 @@
         </div>
         <div class="flex items-center gap-2 mt-12">
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-          @click="$refs.carousel1.next">
+          @click="$refs.carousel1.prev">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.prev">
+                  @click="$refs.carousel1.next">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -117,7 +117,7 @@
       </div>
 
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel1" :items-to-show="5" class="rounded-xl mt-4">
+        <GPCarousel ref="carousel1" :items-to-show="5.7" :breakpoints="breakpoints"  class="rounded-xl mt-4" dir="rtl">
           <GPSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
           </GPSlide>
@@ -183,7 +183,7 @@
       </div>
 
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel2" :items-to-show="5" class="rounded-xl mt-4" >
+        <GPCarousel ref="carousel2" :items-to-show="5" :breakpoints="breakpoints" class="rounded-xl mt-4" >
           <GPSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
           </GPSlide>
@@ -209,8 +209,8 @@
     <!--  About GP  -->
     <section class="w-full mt-16">
       <div class="bg-[#F8F8F8] rounded-xl p-12">
-        <div class="flex items-center justify-center gap-24 mx-auto w-3/4">
-          <img src="~/assets/images/gp-filled.png" alt="GP" class="drop-shadow-xl">
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 mx-auto w-3/4">
+          <img src="~/assets/images/gp-filled.png" alt="GP" class="drop-shadow-xl w-1/3 lg:w-auto">
           <div class="flex flex-col items-start gap-4">
             <strong class="text-xl">اصالت و عطر ماندگار</strong>
             <p class=" font-light">
@@ -328,7 +328,7 @@
         </div>
       </div>
 
-      <div class="w-full flex items-end justify-between -translate-y-12">
+      <div class="w-full flex items-end justify-between lg:-translate-y-12">
         <p class="w-[600px] -translate-y-6 text-[#828282] font-thin">
           شرکت زعفران جی پی به مدت 7 سال مفتخر به دریافت عنوان “واحد نمونه صنعتی” شده است. شرکت ما با بهره مندی از سیستم مدیریت کیفیت عالی توانسته است گواهینامه های ISO 9001 و نیز 22000 ISO را به دست بیاورد.
         </p>
@@ -370,8 +370,8 @@
 
     <!-- Comments -->
     <section class="w-full mt-16">
-      <div class="w-full flex">
-        <div class="flex flex-col w-1/5 items-start gap-3">
+      <div class="w-full flex flex-col lg:flex-row">
+        <div class="flex flex-col lg:w-1/5 items-start gap-3">
           <div class="flex items-center justify-between">
             <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
               نظرات شما
@@ -399,9 +399,9 @@
             </button>
           </div>
         </div>
-        <div class="flex-1 w-4/5">
+        <div class="flex-1 lg:w-4/5">
           <client-only>
-            <GPCarousel ref="carousel3" :items-to-show="2.7" class="rounded-xl mt-4 p-4" dir="rtl">
+            <GPCarousel ref="carousel3" :items-to-show="2.7" :breakpoints="commentsBreakpoints" class="rounded-xl mt-4 p-4" dir="rtl">
               <GPSlide v-for="i in 4" :key="i">
                 <li class="bg-white w-max min-w-[400px] rounded-xl border px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" >
                   <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full aspect-square w-[40px] h-[40px]">
@@ -452,6 +452,10 @@
     <!--  Categories  -->
     <div class="mt-12 grid grid-cols-4 gap-4">
       <div class="flex flex-col items-center relative bg-[#F5F5F5] py-2 rounded-xl">
+        <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
+        <span class="absolute top-full translate-y-1"> زعفران</span>
+      </div>
+      <div class="flex flex-col items-center relative bg-[#F5F5F5] py-2 rounded-xl">
          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="38" height="38" fill="url(#pattern0_308_4026)" fill-opacity="0.7"/>
               <defs>
@@ -486,10 +490,6 @@
               </defs>
             </svg>
         <span class="absolute top-full translate-y-1"> آجیل</span>
-      </div>
-      <div class="flex flex-col items-center relative bg-[#F5F5F5] py-2 rounded-xl">
-        <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
-        <span class="absolute top-full translate-y-1"> زعفران</span>
       </div>
     </div>
 
@@ -650,6 +650,41 @@ const lastProducts:Ref<ProductFilterData[]> = ref([]);
 const utilsStore = useUtilStore();
 const bannerIndex = ref(0);
 const carousel1 = ref();
+
+const breakpoints = ref({
+  // 700px and up
+  700: {
+    itemsToShow: 3,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+  // 1024 and up
+  1024: {
+    itemsToShow: 3.7,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+  // 1366 and up
+  1366: {
+    itemsToShow: 5.7,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+});
+const commentsBreakpoints = ref({
+  // 700px and up
+  700: {
+    itemsToShow: 1.7,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+  // 1366 and up
+  1366: {
+    itemsToShow: 2.5,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+});
 
 onMounted(async ()=>{
   loading.value = true;
