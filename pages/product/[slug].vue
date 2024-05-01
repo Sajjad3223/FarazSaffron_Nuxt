@@ -531,13 +531,13 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 px-6 py-2 w-full border rounded-lg flex items-center justify-between">
+          <div class="mt-8 px-6 py-2 w-full border rounded-lg flex items-center justify-between gap-8">
             <div class="flex -space-x-4 space-x-reverse">
               <img src="~/assets/images/avatar.png" alt="avatar" class="w-8 border-2 border-white rounded-full" v-for="i in 3">
             </div>
-            <div>
+            <div class="flex-1 ">
               <span>نظرات مردم</span>
-              <span class="opacity-70 text-xs">(12 نظر)</span>
+              <span class="opacity-70 text-xs mr-2">(12 نظر)</span>
             </div>
             <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.5" d="M6 1L1 6.5L6 12" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>

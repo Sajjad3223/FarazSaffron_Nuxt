@@ -562,7 +562,7 @@ const showCart = ref(false);
   box-shadow: 0 0 15px 0 #F0462380;
   backface-visibility: hidden;
 }
-.logo-rotate{
+/*.logo-rotate{
   width: 50px;
   height: 50px;
   transform-origin: center;
@@ -574,7 +574,7 @@ const showCart = ref(false);
   100%{
     transform: rotateY(360deg);
   }
-}
+}*/
 
 .slide-fade-enter-active,
 .slide-fade-leave-active{
@@ -597,6 +597,7 @@ const showCart = ref(false);
   color:var(--primary);
   & svg path {
     fill: var(--primary);
+    fill-opacity: 0.7;
     stroke: var(--primary);
 
     &.nofill {

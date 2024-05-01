@@ -1,10 +1,10 @@
 <template>
-  <div  class="relative h-max w-[190px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" dir="rtl">
+  <div  class="relative h-max w-[140px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" dir="rtl">
     <NuxtLink :to="`/product/${product.slug}`">
       <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto max-h-[100px] hover:scale-110 transition-transform duration-300">
     </NuxtLink>
     <!-- Like Button  -->
-    <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg">
+    <button class="border grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-2 right-2 hover:shadow-lg">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect width="18" height="18" fill="url(#pattern0_308_4084)" fill-opacity="0.3"/>
         <defs>
@@ -20,13 +20,15 @@
       <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">10%</span>
     </div>
     <hr>
-    <div class="p-4 flex flex-col w-full items-stretch">
+    <div class="px-4 py-2 flex flex-col w-full items-stretch">
       <div class="flex flex-col">
-        <NuxtLink :to="`/product/${product.slug}`">
-          <strong class=" text-[#626262] hover:text-brandOrange transition-colors duration-200 truncate">{{ product.title.substring(0,17) }}...</strong>
+        <NuxtLink :to="`/product/${product.slug}`" class="min-h-[40px]">
+          <strong class=" text-[#626262] hover:text-brandOrange text-[10px] font-black transition-colors duration-200">{{ product.title }}</strong>
         </NuxtLink>
         <div class="flex items-center justify-between">
-          <span class="font-light text-xs text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">1 مثقال</span>
+          <span class="px-2 rounded-full bg-[#F5F5F5] border-b border-black/40 text-[8px] font-thin">
+            {{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}
+          </span>
           <div class="flex items-center gap-0.5 mt-2">
             <span>4.4</span>
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +49,7 @@
 <script setup lang="ts">
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {SITE_URL} from "~/utilities/api.config";
+import {EPackingType} from "~/models/product/EPackingType";
 
 const props = defineProps<{
   product:ProductFilterData

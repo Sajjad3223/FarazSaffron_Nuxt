@@ -35,8 +35,8 @@
     <div class="p-4 flex flex-col w-full items-stretch">
       <div class="flex items-start justify-between">
         <div class="flex flex-col items-start space-y-2">
-          <NuxtLink :to="`/product/${product.slug}`" :title="product.title" class="truncate">
-            <strong class="text-xl text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title.substring(0,20) }} ...</strong>
+          <NuxtLink :to="`/product/${product.slug}`" :title="product.title" class="h-[50px]">
+            <strong class="font-semibold text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title }}</strong>
           </NuxtLink>
 <!--          <base-f-badge color="secondary" size="xs" class="opacity-70 font-thin text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">{{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}</base-f-badge>-->
           <span class="px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin">

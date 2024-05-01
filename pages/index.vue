@@ -117,12 +117,22 @@
       </div>
 
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel1" :items-to-show="5.7" :breakpoints="breakpoints"  class="rounded-xl mt-4" dir="rtl">
-          <GPSlide v-for="p in lastProducts" :key="p.id" >
+        <Swiper ref="carousel1"
+                :freeMode="true"
+                :slides-per-view="6"
+                :loop="true" class="rounded-xl mt-4" dir="rtl">
+          <SwiperSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
-          </GPSlide>
-        </GPCarousel>
+          </SwiperSlide>
+        </Swiper>
       </client-only>
+<!--      <client-only v-if="!loading">
+        <Swiper ref="carousel1" :items-to-show="5.7" :breakpoints="breakpoints"  class="rounded-xl mt-4" dir="rtl">
+          <SwiperSlide v-for="p in lastProducts" :key="p.id" >
+            <GCard :product="p" />
+          </SwiperSlide>
+        </Swiper>
+      </client-only>-->
       <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
         <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
           <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
@@ -426,7 +436,7 @@
     </Head>
 
     <!--  Search  -->
-    <div class="flex mx-4 mt-3 items-center relative">
+    <div class="flex mt-3 items-center relative">
       <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>
       <strong class="absolute opacity-50 right-4 pointer-events-none transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی محصول...</strong>
       <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute opacity-50 left-4">
@@ -436,18 +446,11 @@
     </div>
 
     <!--  Banner  -->
-    <div class="flex flex-col mt-6 w-full relative" dir="ltr">
-      <img src="~/assets/images/banner2.png" alt=" banner1" class="rounded-3xl min-h-[120px] relative" v-if="bannerIndex === 0">
-      <img src="~/assets/images/banner1.png" alt=" banner1" :class="['transition-all duration-300',
-          bannerIndex === 0 ?
-          'absolute opacity-60 -z-10 rounded-3xl translate-y-2 min-h-[120px] bottom-0 inset-x-0 w-[95%] mx-auto' :
-          'rounded-3xl min-h-[120px] relative'
-      ]" >
-      <img src="~/assets/images/banner2.png" alt=" banner1" class="absolute opacity-50 -z-20 rounded-3xl translate-y-4 min-h-[120px] bottom-0 inset-x-0 w-[90%] mx-auto" >
+    <div class="mobileBanner" dir="ltr" ref="banners">
+      <img src="~/assets/images/banner2.png" alt=" banner1" >
+      <img src="~/assets/images/banner1.png" alt=" banner2" >
+      <img src="~/assets/images/banner3.png" alt=" banner3" >
     </div>
-    <base-g-button @click="bannerIndex = 1">
-      Fade
-    </base-g-button>
 
     <!--  Categories  -->
     <div class="mt-12 grid grid-cols-4 gap-4">
@@ -506,11 +509,12 @@
       </div>
 <!--      <GCardMobile :product="product" />-->
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel1" :items-to-show="2" class="rounded-xl mt-4" dir="rtl">
-          <GPSlide v-for="p in lastProducts" :key="p.id" >
+        <Swiper ref="carousel1" :free-mode="true"
+                 :slides-per-view="2.5" :space-between="30" :loop="false" class="w-full rounded-xl mt-4" dir="rtl">
+          <SwiperSlide v-for="p in lastProducts" :key="p.id">
             <GCardMobile :product="p" />
-          </GPSlide>
-        </GPCarousel>
+          </SwiperSlide>
+        </Swiper>
       </client-only>
       <div class="flex gap-4 my-4" v-else>
         <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[150px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 3" :key="i">
@@ -561,7 +565,7 @@
         </NuxtLink>
       </div>
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel2" :items-to-show="2" class="rounded-xl mt-4">
+        <GPCarousel ref="carousel2" :items-to-show="2.2" class="rounded-xl mt-4" dir="rtl">
           <GPSlide v-for="p in lastProducts" :key="p.id" >
             <GCardMobile :product="p" />
           </GPSlide>
@@ -648,7 +652,6 @@ const loading = ref(true);
 const lastProducts:Ref<ProductFilterData[]> = ref([]);
 
 const utilsStore = useUtilStore();
-const bannerIndex = ref(0);
 const carousel1 = ref();
 
 const breakpoints = ref({
@@ -692,18 +695,40 @@ onMounted(async ()=>{
   const lastProductsResult = await GetProducts({
     pageId:1,
     orderBy:EOrderBy.جدیدترین,
-    take:7,
+    take:15,
   });
   if(lastProductsResult.isSuccess){
     lastProducts.value = lastProductsResult.data?.data!;
   }
 
   loading.value = false;
+
+  if(utilsStore.isMobile())
+    setInterval(moveBanner,3000);
 })
+
+const banners = ref();
+
+const moveBanner = ()=>{
+  if(!process.client) return;
+  const banner = banners.value?.firstChild;
+  if(banner === null || banner === undefined) return;
+  banner.style.transitionDuration = "700ms";
+  banner?.classList?.add("scale-105");
+  banner?.classList?.add("opacity-0");
+  banner?.classList?.add("-translate-y-4");
+  setTimeout(()=>{
+    banner.remove();
+  },650);
+  setTimeout(()=>{
+    banners.value.append(banner);
+    banner.className = "";
+  },700);
+}
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 *{
   font-family: "Epic Ravi","Vazir FD",serif;
 }
@@ -711,5 +736,22 @@ onMounted(async ()=>{
 .hover-brand:hover{
   box-shadow: 0 5px 5px 0 #F1482380;
 }
+
+.mobileBanner{
+  @apply flex flex-col mt-6 w-full relative ;
+  img{
+    @apply transition-all duration-1000;
+  }
+  img:first-child{
+    @apply rounded-3xl min-h-[120px] relative;
+  }
+  img:nth-child(2){
+    @apply absolute opacity-80 -z-10 rounded-3xl translate-y-2 min-h-[120px] bottom-0 inset-x-0 scale-x-95 mx-auto;
+  }
+  img:last-child{
+    @apply absolute opacity-50 -z-20 rounded-3xl translate-y-4 min-h-[120px] bottom-0 inset-x-0 scale-x-90 mx-auto;
+  }
+}
+
 
 </style>
