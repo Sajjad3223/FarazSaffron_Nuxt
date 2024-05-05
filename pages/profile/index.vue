@@ -237,7 +237,7 @@
       </div>
       <ul class="mt-6">
         <li>
-          <NuxtLink class="py-4 border-t flex items-center w-full justify-between">
+          <NuxtLink to="/profile/orders" class="py-4 border-t flex items-center w-full justify-between">
             <div class="flex gap-4 items-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.8">
@@ -253,7 +253,7 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="py-4 border-t flex items-center w-full justify-between">
+          <NuxtLink to="/profile/favorites" class="py-4 border-t flex items-center w-full justify-between">
             <div class="flex gap-4 items-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.8">
@@ -288,7 +288,7 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="py-4 border-t flex items-center w-full justify-between">
+          <NuxtLink to="/profile/addresses" class="py-4 border-t flex items-center w-full justify-between">
             <div class="flex gap-4 items-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.8">
@@ -305,7 +305,7 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="py-4 border-t flex items-center w-full justify-between">
+          <NuxtLink to="/profile/user-history" class="py-4 border-t flex items-center w-full justify-between">
             <div class="flex gap-4 items-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.8">

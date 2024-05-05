@@ -411,7 +411,7 @@
     </div>
 
     <div v-else>
-      <div v-if="product" class="flex flex-col pb-[70px]">
+      <div v-if="product" class="flex py-4 flex-col pb-[70px]">
         <div class="flex items-center justify-between w-full">
           <NuxtLink to="/">
             <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -484,66 +484,141 @@
           <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" v-for="i in product?.images" class="rounded-lg">
         </div>
         <hr class="my-6">
-        <div>
-          <!--  Details  -->
-          <div class="flex flex-col bg-white rounded-xl">
-            <strong >مشخصات</strong>
-            <ul class="flex flex-col mt-2 w-full">
-              <li class="w-full flex items-center py-4 border-b" v-for="s in product?.specifications">
+          <div class="relative">
+            <!--  Details  -->
+            <div class="flex flex-col bg-white rounded-xl">
+              <strong >مشخصات</strong>
+              <ul class="flex flex-col mt-2 w-full">
+                <li class="w-full flex items-center py-4 border-b" v-for="s in product?.specifications">
                 <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                   {{s.title}} :
                 </span>
-                <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
-                  {{s.value}}
-                </strong>
-              </li>
-              <li class="w-full flex items-center py-4 border-b">
+                  <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+                    {{s.value}}
+                  </strong>
+                </li>
+                <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
               نوع بسته بندی :
             </span>
-                <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
-                  {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
-                </strong>
-              </li>
-              <li class="w-full flex items-center py-4 border-b">
+                  <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+                    {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
+                  </strong>
+                </li>
+                <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
               کد محصول :
             </span>
-                <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
-                  {{product?.productCode}}
-                </strong>
-              </li>
-              <li class="w-full flex items-center py-4 border-b">
+                  <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+                    {{product?.productCode}}
+                  </strong>
+                </li>
+                <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
               شماره بارکد :
             </span>
-                <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
-                  {{product?.barcodeNumber}}
-                </strong>
-              </li>
-              <li class="w-full flex items-center py-4">
+                  <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+                    {{product?.barcodeNumber}}
+                  </strong>
+                </li>
+                <li class="w-full flex items-center py-4">
             <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
               ابعاد :
             </span>
-                <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
-                  {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
-                </strong>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-8 px-6 py-2 w-full border rounded-lg flex items-center justify-between gap-8">
-            <div class="flex -space-x-4 space-x-reverse">
-              <img src="~/assets/images/avatar.png" alt="avatar" class="w-8 border-2 border-white rounded-full" v-for="i in 3">
+                  <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
+                    {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
+                  </strong>
+                </li>
+              </ul>
             </div>
-            <div class="flex-1 ">
-              <span>نظرات مردم</span>
-              <span class="opacity-70 text-xs mr-2">(12 نظر)</span>
+            <!--  Comments -->
+            <div class="mt-8 px-6 py-2 w-full border rounded-lg flex items-center justify-between gap-8" @click="showComments = true">
+              <div class="flex -space-x-4 space-x-reverse">
+                <img src="~/assets/images/avatar.png" alt="avatar" class="w-8 border-2 border-white rounded-full" v-for="i in 3">
+              </div>
+              <div class="flex-1 ">
+                <span>نظرات مردم</span>
+                <span class="opacity-70 text-xs mr-2" v-if="productComments.length > 0">({{ productComments.length }} نظر)</span>
+                <span class="opacity-70 text-xs mr-2" v-else>(بدون نظر)</span>
+              </div>
+              <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M6 1L1 6.5L6 12" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
-            <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path opacity="0.5" d="M6 1L1 6.5L6 12" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <Transition enter-active-class="transition-opacity duration-200" leave-active-class="transition-opacity duration-200" enter-from-class="opacity-0" leave-to-class="opacity-0">
+              <div class="absolute inset-0 -inset-x-4 px-6 flex flex-col space-y-2 bg-white" v-if="showComments">
+                <button @click="showComments = false" class="self-start flex items-center gap-1 mb-4">
+                  <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.8" d="M1 10L5 5.5L1 1" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>بستن</span>
+                </button>
+                <div class="flex items-center justify-between w-full">
+                  <strong>نظرات</strong>
+                  <span>{{productComments.length}} نظر</span>
+                </div>
+                <ClientOnly>
+                  <Swiper class="w-full" :slides-per-view="1.4" auto-height :space-between="20"> <!--v-if="productComments.length > 0" :slides-per-view="1.4">-->
+                    <SwiperSlide v-for="comment in 4" :key="comment">
+                      <div class="p-4 border rounded-xl">
+                        <div class="flex justify-between items-start w-full">
+                          <div class="flex items-center gap-1">
+                            <img src="~/assets/images/avatar.png" alt="avatar" class="w-10 rounded-full">
+                            <div class="flex flex-col items-start">
+                              <strong>سجاد میرشبی</strong>
+                              <span class="text-xs font-light">کاربر</span>
+                            </div>
+                          </div>
+                         <span class="px-3 rounded-full bg-[#3EBE4B]/10 text-[#3EBE4B] text-xs">
+                           خریدار
+                         </span>
+                        </div>
+                        <div class="flex gap-1 my-3">
+                          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" v-for="i in 5">
+                            <rect width="11" height="11" fill="url(#pattern0_998_8488)"/>
+                            <defs>
+                              <pattern id="pattern0_998_8488" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_998_8488" transform="scale(0.01)"/>
+                              </pattern>
+                              <image id="image0_998_8488" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                            </defs>
+                          </svg>
+                        </div>
+                        <div class="flex items-center gap-1">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 5H9.382C9.55243 5.00001 9.72004 5.04357 9.8689 5.12656C10.0178 5.20955 10.1429 5.32921 10.2326 5.47418C10.3222 5.61915 10.3733 5.78462 10.3809 5.95488C10.3886 6.12514 10.3527 6.29454 10.2765 6.447L8.5265 9.947C8.44343 10.1132 8.31569 10.253 8.1576 10.3507C7.99951 10.4484 7.81733 10.5001 7.6315 10.5H5.623C5.5415 10.5 5.46 10.49 5.3805 10.47L3.5 10M7 5V2.5C7 2.23478 6.89464 1.98043 6.70711 1.79289C6.51957 1.60536 6.26522 1.5 6 1.5H5.9525C5.7025 1.5 5.5 1.7025 5.5 1.9525C5.5 2.3095 5.3945 2.6585 5.196 2.9555L3.5 5.5V10M7 5H6M3.5 10H2.5C2.23478 10 1.98043 9.89464 1.79289 9.70711C1.60536 9.51957 1.5 9.26522 1.5 9V6C1.5 5.73478 1.60536 5.48043 1.79289 5.29289C1.98043 5.10536 2.23478 5 2.5 5H3.75" stroke="#66AD55" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          <span class="text-[#66AD55]">پیشنهاد میکنم</span>
+                        </div>
+                        <p class="max-w-[170x] mt-3 text-sm font-light">
+                          خوبه وخوش قیمت و دیگز نمیدانم پ بگویم که این دتیا عجیب است برودر
+                        </p>
+
+                        <div class="mt-8 flex items-center justify-between">
+                          <small class="opacity-70">3 ساعت پیش</small>
+                          <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 5H9.382C9.55243 5.00001 9.72004 5.04357 9.8689 5.12656C10.0178 5.20955 10.1429 5.32921 10.2326 5.47418C10.3222 5.61915 10.3733 5.78462 10.3809 5.95488C10.3886 6.12514 10.3527 6.29454 10.2765 6.447L8.5265 9.947C8.44343 10.1132 8.31569 10.253 8.1576 10.3507C7.99951 10.4484 7.81733 10.5001 7.6315 10.5H5.623C5.5415 10.5 5.46 10.49 5.3805 10.47L3.5 10M7 5V2.5C7 2.23478 6.89464 1.98043 6.70711 1.79289C6.51957 1.60536 6.26522 1.5 6 1.5H5.9525C5.7025 1.5 5.5 1.7025 5.5 1.9525C5.5 2.3095 5.3945 2.6585 5.196 2.9555L3.5 5.5V10M7 5H6M3.5 10H2.5C2.23478 10 1.98043 9.89464 1.79289 9.70711C1.60536 9.51957 1.5 9.26522 1.5 9V6C1.5 5.73478 1.60536 5.48043 1.79289 5.29289C1.98043 5.10536 2.23478 5 2.5 5H3.75" stroke="#66AD55" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                              <span class="text-xs">4</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+                                <path d="M7 5H9.382C9.55243 5.00001 9.72004 5.04357 9.8689 5.12656C10.0178 5.20955 10.1429 5.32921 10.2326 5.47418C10.3222 5.61915 10.3733 5.78462 10.3809 5.95488C10.3886 6.12514 10.3527 6.29454 10.2765 6.447L8.5265 9.947C8.44343 10.1132 8.31569 10.253 8.1576 10.3507C7.99951 10.4484 7.81733 10.5001 7.6315 10.5H5.623C5.5415 10.5 5.46 10.49 5.3805 10.47L3.5 10M7 5V2.5C7 2.23478 6.89464 1.98043 6.70711 1.79289C6.51957 1.60536 6.26522 1.5 6 1.5H5.9525C5.7025 1.5 5.5 1.7025 5.5 1.9525C5.5 2.3095 5.3945 2.6585 5.196 2.9555L3.5 5.5V10M7 5H6M3.5 10H2.5C2.23478 10 1.98043 9.89464 1.79289 9.70711C1.60536 9.51957 1.5 9.26522 1.5 9V6C1.5 5.73478 1.60536 5.48043 1.79289 5.29289C1.98043 5.10536 2.23478 5 2.5 5H3.75" stroke="#66AD55" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                              <span class="text-xs">0</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+
+                  </Swiper>
+                </ClientOnly>
+              </div>
+            </Transition>
           </div>
-        </div>
 
         <!--  Total Price  -->
         <div class="w-full fixed inset-x-0 place-items-center bottom-[75px] border-b bg-white h-[60px] z-20 px-4 grid grid-cols-2 items-center" style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
@@ -586,6 +661,7 @@ const cartStore = useCartStore();
 
 const bannerImage = ref('');
 const showBannerModal = ref(false);
+const showComments = ref(false);
 const showBanner = (src:string) => {
   bannerImage.value = src;
   showBannerModal.value = true;

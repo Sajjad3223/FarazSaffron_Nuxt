@@ -1,5 +1,5 @@
 <template>
-  <ul class="flex flex-col w-full" v-if="data.length > 0">
+  <ul class="flex flex-col w-full space-y-4" v-if="data.length > 0">
     <li class="flex flex-col p-4 py-6 rounded-xl border bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600" v-for="order in data">
       <div class="flex flex-col-reverse lg:flex-row items-end lg:items-start justify-between">
         <div class="flex flex-col space-y-4 w-full lg:w-max">
@@ -15,14 +15,14 @@
           <div class="flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:items-center lg:space-x-2 lg:space-x-reverse">
             <div class="flex items-center justify-between w-full lg:w-max">
               <span class="text-xs lg:text-sm font-light opacity-70 lg:hidden">تاریخ تحویل</span>
-              <span class="text-xs lg:text-sm opacity-70 font-bold lg:font-light">{{ order.finallyDate?.toLocaleDateString() }}</span>
+              <span class="text-xs lg:text-sm opacity-70 font-bold lg:font-light">{{ order.finallyDate == null ? new Date().toLocaleDateString('fa') : new Date(order.finallyDate).toLocaleDateString('fa') }}</span>
             </div>
             <span class="opacity-40 text-2xl hidden lg:block">•</span>
             <span class="text-xs lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">کد سفارش <b class="text-sm lg:text-base font-bold">{{ order.id }}</b></span>
             <span class="opacity-40 text-2xl hidden lg:block">•</span>
             <span class="text-xs lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">مبلغ <b class="text-sm lg:text-base font-bold">{{ order.finalPrice.toLocaleString() }} ریال</b></span>
-            <span class="hidden lg:block opacity-40 text-2xl">•</span>
-            <span class="text-sm lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70" v-if="order.discount !== null">تخفیف <b class="text-sm lg:text-base font-bold">{{ order.discount?.amount.toLocaleString() }} ریال</b></span>
+            <span class="hidden lg:block opacity-40 text-2xl" v-if="order.discount?.amount !== 0">•</span>
+            <span class="text-sm lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70" v-if="order.discount?.amount !== 0">تخفیف <b class="text-sm lg:text-base font-bold">{{ order.discount?.amount.toLocaleString() }} ریال</b></span>
           </div>
           <div class="flex items-center space-x-2 space-x-reverse">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-amber-500">

@@ -195,7 +195,7 @@
         <strong>
           سبد خرید
         </strong>
-        <span class="bg-brandOrange rounded-full px-2 py-0.5 text-white">{{cartStore.cartItemsCount}}</span>
+        <span class="bg-brandOrange/20 aspect-square text-brandOrange rounded-full px-1 text-[10px]">{{cartStore.cartItemsCount}}</span>
       </div>
       <!--  Steps   -->
       <div class="flex items-center w-2/3 mt-4 mb-6">

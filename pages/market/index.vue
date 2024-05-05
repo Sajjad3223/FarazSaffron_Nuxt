@@ -184,7 +184,7 @@
       </main>
     </div>
 
-    <div v-else>
+    <div v-else class="py-4">
       <!--  Search  -->
       <div class="flex mx-4 mt-3 items-center relative">
         <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>

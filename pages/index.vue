@@ -103,14 +103,19 @@
       </div>
 
       <client-only v-if="!loading">
-        <Swiper ref="carousel1"
+        <Swiper
                 :modules="[FreeMode]"
                 :freeMode="{
                   enabled: true,
                   sticky:true,
                 }"
-                :slides-per-view="6" class="rounded-xl mt-4" dir="rtl">
-          <SwiperControls  />
+                :slides-per-view="6" class="rounded-xl py-4" dir="rtl">
+          <template v-slot:container-start>
+            <div class="w-full flex flex-col items-end mb-4 -mt-20">
+              <SwiperControls class="self-end" />
+            </div>
+          </template>
+            <div class="flex w-full h-8"></div>
           <SwiperSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
           </SwiperSlide>
@@ -167,20 +172,6 @@
             <span class="px-3 py-0.5 rounded-full border border-[#BBBBBB] text-[#BBBBBB] text-sm">آجیل</span>
           </div>
         </div>
-        <div class="flex items-center gap-2 mt-12">
-          <button class="w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center"
-                  @click="$refs.carousel2.next" >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center"
-                  @click="$refs.carousel2.prev">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
       </div>
 
       <client-only v-if="!loading">
@@ -190,11 +181,16 @@
                   enabled: true,
                   sticky:true,
                 }"
-                :slides-per-view="6" class="rounded-xl mt-4" dir="rtl">
+                :slides-per-view="6" class="rounded-xl" dir="rtl">
           <SwiperSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
           </SwiperSlide>
-          <SwiperControls />
+          <template v-slot:container-start>
+            <div class="w-full flex flex-col items-end mb-4 -mt-20">
+              <SwiperControls class="self-end" />
+            </div>
+          </template>
+          <div class="flex w-full h-8"></div>
         </Swiper>
       </client-only>
       <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
@@ -392,25 +388,16 @@
             </span>
             </div>
           </div>
-          <div class="flex items-center mr-auto gap-2 mt-4">
-            <button class="w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center"
-                    @click="$refs.carousel3.prev" >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button class="w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center"
-                    @click="$refs.carousel3.next">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
         </div>
         <div class="flex-1 lg:w-4/5">
           <client-only>
-            <GPCarousel ref="carousel3" :items-to-show="2.7" :breakpoints="commentsBreakpoints" class="rounded-xl mt-4 p-4" dir="rtl">
-              <GPSlide v-for="i in 4" :key="i">
+            <Swiper :modules="[FreeMode]"
+                    :freeMode="{
+                  enabled: true,
+                  sticky:true,
+                }"
+                    :slides-per-view="2.5" class="rounded-xl py-4" dir="rtl">
+              <SwiperSlide v-for="i in 4" :key="i">
                 <li class="bg-white w-max min-w-[400px] rounded-xl border px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" >
                   <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full aspect-square w-[40px] h-[40px]">
                   <div class="flex flex-col items-start">
@@ -421,14 +408,17 @@
                     </p>
                   </div>
                 </li>
-              </GPSlide>
-            </GPCarousel>
+              </SwiperSlide>
+              <template v-slot:container-start>
+                  <SwiperControls class="m-2" />
+              </template>
+            </Swiper>
           </client-only>
         </div>
       </div>
     </section>
   </div>
-  <div v-else>
+  <div v-else class="pb-8">
     <Head>
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
@@ -568,11 +558,17 @@
         </NuxtLink>
       </div>
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel2" :items-to-show="2.2" class="rounded-xl mt-4" dir="rtl">
-          <GPSlide v-for="p in lastProducts" :key="p.id" >
+        <Swiper ref="carousel1"
+                :modules="[FreeMode]"
+                :freeMode="{
+                  enabled: true,
+                  sticky:true,
+                }"
+                :slides-per-view="2.5" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
+          <SwiperSlide v-for="p in lastProducts" :key="p.id">
             <GCardMobile :product="p" />
-          </GPSlide>
-        </GPCarousel>
+          </SwiperSlide>
+        </Swiper>
       </client-only>
       <div class="flex gap-4 my-4" v-else>
         <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[150px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 3" :key="i">
@@ -602,11 +598,12 @@
         </NuxtLink>
       </div>
       <client-only>
-        <GPCarousel ref="carousel3" :items-to-show="2.1" class="rounded-xl mt-4" dir="rtl" >
-          <GPSlide v-for="p in 4" :key="p" >
+
+        <Swiper :slides-per-view="2.1" class="rounded-xl w-full mt-4" dir="rtl" >
+          <SwiperSlide v-for="p in 5" :key="p" >
             <div class="p-2 min-w-[130px] mx-2 relative flex flex-col rounded-lg border border-[#CACACA]" >
               <NuxtLink to="/gpBlog/post" class="w-full overflow-hidden rounded-lg">
-                <img src="~/assets/images/blog-post.png" alt="blog post" class="rounded-lg w-full object-cover hover:scale-110 transition-transform duration-200">
+                <img src="~/assets/images/blog-post.png" alt="blog post" class="rounded-lg max-w-[150px] w-full object-cover hover:scale-110 transition-transform duration-200">
               </NuxtLink>
               <NuxtLink class="mt-4 text-[#6A6A6A]">
                 <strong>خواص چای زعفران</strong>
@@ -638,8 +635,8 @@
                 </div>
               </div>
             </div>
-          </GPSlide>
-        </GPCarousel>
+          </SwiperSlide>
+        </Swiper>
       </client-only>
     </div>
 
