@@ -275,7 +275,7 @@
                           <small>مجموع سبد خرید</small>
                           <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
                         </div>
-                        <base-g-button w-full>
+                        <base-g-button is-link to="/checkout/cart" w-full>
                           مشاهده سبد خرید
                         </base-g-button>
                       </div>
@@ -287,7 +287,7 @@
                         <span class="text-sm text-[#9F9F9F]">قیمت کل:</span>
                         <base-g-price class="text-sm text-[#9F9F9F]" :price="(cartStore.PendingOrder.totalPrice / 10)"  />
                       </div>
-                      <NuxtLink to="/cart" class="text-brandOrange flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
+                      <NuxtLink to="/checkout/cart" class="text-brandOrange flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M7.00043 4.85742V9.13113" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                           <path d="M9.14106 6.99431H4.86328" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>

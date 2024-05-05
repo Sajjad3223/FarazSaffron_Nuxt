@@ -87,7 +87,7 @@
           </svg>
         </NuxtLink>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between mt-6">
         <div class="text-[#8F8F8F] flex items-end gap-2">
           <div class="text-lg flex items-center gap-2">
             <span class="w-8 h-8 rounded-t-md rounded-b-xl border border-[#8F8F8F] grid place-items-center"><span style="font-family: 'Vazir FD',serif">49</span></span>
@@ -100,31 +100,22 @@
               تا پایان تخفیف های نوروزی جی پی
             </span>
         </div>
-        <div class="flex items-center gap-2 mt-12">
-          <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-          @click="$refs.carousel1.prev">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button :class="['w-8 h-8 rounded-md border border-[#8D8D8D] hover:bg-[#8D8D8D] text-[#8D8D8D] hover:text-white transition-colors duration-200 grid place-items-center ']"
-                  @click="$refs.carousel1.next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 17L9 12L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
       </div>
 
       <client-only v-if="!loading">
         <Swiper ref="carousel1"
-                :freeMode="true"
-                :slides-per-view="6"
-                :loop="true" class="rounded-xl mt-4" dir="rtl">
+                :modules="[FreeMode]"
+                :freeMode="{
+                  enabled: true,
+                  sticky:true,
+                }"
+                :slides-per-view="6" class="rounded-xl mt-4" dir="rtl">
+          <SwiperControls  />
           <SwiperSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
           </SwiperSlide>
         </Swiper>
+
       </client-only>
 <!--      <client-only v-if="!loading">
         <Swiper ref="carousel1" :items-to-show="5.7" :breakpoints="breakpoints"  class="rounded-xl mt-4" dir="rtl">
@@ -193,11 +184,18 @@
       </div>
 
       <client-only v-if="!loading">
-        <GPCarousel ref="carousel2" :items-to-show="5" :breakpoints="breakpoints" class="rounded-xl mt-4" >
-          <GPSlide v-for="p in lastProducts" :key="p.id" >
+        <Swiper ref="carousel2"
+                :modules="[FreeMode]"
+                :freeMode="{
+                  enabled: true,
+                  sticky:true,
+                }"
+                :slides-per-view="6" class="rounded-xl mt-4" dir="rtl">
+          <SwiperSlide v-for="p in lastProducts" :key="p.id" >
             <GCard :product="p" />
-          </GPSlide>
-        </GPCarousel>
+          </SwiperSlide>
+          <SwiperControls />
+        </Swiper>
       </client-only>
       <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
         <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
@@ -509,8 +507,13 @@
       </div>
 <!--      <GCardMobile :product="product" />-->
       <client-only v-if="!loading">
-        <Swiper ref="carousel1" :free-mode="true"
-                 :slides-per-view="2.5" :space-between="30" :loop="false" class="w-full rounded-xl mt-4" dir="rtl">
+        <Swiper ref="carousel1"
+                :modules="[FreeMode]"
+                :freeMode="{
+                  enabled: true,
+                  sticky:true,
+                }"
+                 :slides-per-view="2.5" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
           <SwiperSlide v-for="p in lastProducts" :key="p.id">
             <GCardMobile :product="p" />
           </SwiperSlide>
@@ -647,12 +650,13 @@
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
+import {FreeMode} from "swiper/modules";
 
 const loading = ref(true);
 const lastProducts:Ref<ProductFilterData[]> = ref([]);
 
 const utilsStore = useUtilStore();
-const carousel1 = ref();
+const swiper = useSwiper();
 
 const breakpoints = ref({
   // 700px and up
