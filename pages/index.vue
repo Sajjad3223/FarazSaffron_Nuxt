@@ -111,6 +111,7 @@
                   enabled: true,
                   sticky:true,
                 }"
+              :breakpoints="breakpoints"
               :slides-per-view="6" class="rounded-xl py-4" dir="rtl">
             <template v-slot:container-start>
               <div class="w-full flex flex-col items-end mb-4 -mt-20">
@@ -177,12 +178,13 @@
         </div>
 
         <client-only v-if="!loading">
-          <Swiper ref="carousel2"
+          <Swiper
                   :modules="[FreeMode]"
                   :freeMode="{
                   enabled: true,
                   sticky:true,
                 }"
+                  :breakpoints="breakpoints"
                   :slides-per-view="6" class="rounded-xl" dir="rtl">
             <SwiperSlide v-for="p in lastProducts" :key="p.id" >
               <GCard :product="p" />
@@ -598,7 +600,7 @@
         </div>
         <client-only>
 
-          <Swiper :slides-per-view="2.1" class="rounded-xl w-full mt-4" dir="rtl" >
+          <Swiper :slides-per-view="2.1" :breakpoints="commentsBreakpoints" class="rounded-xl w-full mt-4" dir="rtl" >
             <SwiperSlide v-for="p in 5" :key="p" >
               <div class="p-2 min-w-[130px] mx-2 relative flex flex-col rounded-lg border border-[#CACACA]" >
                 <NuxtLink to="/gpBlog/post" class="w-full overflow-hidden rounded-lg">
