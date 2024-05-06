@@ -10,14 +10,14 @@
     </div>
     <span class="text-center text-sm font-thin text-danger">{{errorMessage}}</span>
     <base-g-button wFull class="mt-4" :is-loading="isLoading">ثبت نام</base-g-button>
-    <div class="flex items-center w-full my-4">
+    <div class="flex items-center w-full my-4" v-if="false">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">
             یا
           </span>
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
     </div>
-    <base-g-button button-type="outline" color="secondary" w-full :py="0" >
+    <base-g-button button-type="outline" color="secondary" w-full :py="0" v-if="false"> <!-- TODO implement Login with Google -->
       <div class="flex items-center justify-center gap-2">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 ">
           <g clip-path="url(#clip0_569_2169)">
@@ -63,7 +63,7 @@ const firstName = ref('');
 const lastName = ref('');
 
 const registerSchema = Yup.object().shape({
-  phoneNumber:Yup.string().length(11,'شماره تلفن وارد شده معتبر نمی باشد'),
+  phoneNumber:Yup.string().matches(new RegExp('^(\\+98|0)?9\\d{9}$'),'شماره تلفن وارد شده معتبر نمی باشد'),
   password:Yup.string().min(6,'کلمه عبور باید بیشتر از 6 کاراکتر باشد')
 })
 

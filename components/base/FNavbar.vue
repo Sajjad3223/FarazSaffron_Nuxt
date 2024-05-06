@@ -98,15 +98,6 @@
                 <Transition name="slide-fade">
                   <div v-if="showCategories" class="absolute top-12 z-20 w-max min-w-[400px]  bg-white p-4 flex rounded-xl" style="box-shadow: 0 2px 5px 0 #B7B7B740;">
                     <ul class="w-3/5 flex flex-col space-y-1">
-                      <li v-for="c in categories" v-if="false"
-                          class="w-full py-1.5 pl-4 pr-8 rounded-lg hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                        <div class="w-full flex items-center justify-between">
-                          <span class="text-brandOrange">{{ c.title }}</span>
-                          <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-                            <path d="M6 11L1 6L6 1" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                      </li>
                       <li v-for="c in categories" @click="categoryHovered(c)"
                           class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
                         <div class="w-full flex items-center justify-between">
@@ -119,18 +110,20 @@
                     </ul>
                     <Transition name="slide-fade">
                       <ul class="flex-1 border-r pr-2 mr-2 space-y-2" v-if="isCategoryHovered && subCategories.length > 0">
-                        <li v-for="s in subCategories"
-                            class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
-                          <span>{{s.title}}</span>
+                        <li class="w-full" v-for="s in subCategories">
+                          <NuxtLink :to="`/market?categories=${s.id}`"
+                                    class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                            <span>{{s.title}}</span>
+                          </NuxtLink>
                         </li>
                       </ul>
                     </Transition>
                   </div>
                 </Transition>
               </div>
-              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">پرفروش ها</NuxtLink>
-              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">تخفیف ها</NuxtLink>
-              <NuxtLink to="/market" class="font-bold hover:text-brandOrange transition-colors duration-200">محصولات جدید</NuxtLink>
+              <NuxtLink :to="`/market?orderBy=${EOrderBy.محبوبیت}`" class="font-bold hover:text-brandOrange transition-colors duration-200">پرفروش ها</NuxtLink>
+              <NuxtLink :to="`/market?orderBy=${EOrderBy.ارزان_ترین}`" class="font-bold hover:text-brandOrange transition-colors duration-200">تخفیف ها</NuxtLink>
+              <NuxtLink :to="`/market?orderBy=${EOrderBy.جدیدترین}`" class="font-bold hover:text-brandOrange transition-colors duration-200">محصولات جدید</NuxtLink>
             </div>
           </div>
           <div class="flex items-stretch gap-4">
@@ -315,6 +308,7 @@ import {GetUnseenNotificationsCount} from "~/services/notification.service";
 import {SITE_URL} from "~/utilities/api.config";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
+import {EOrderBy} from "~/models/product/EOrderBy";
 
 const loading = ref(false);
 const authStore = useAuthStore();
@@ -339,7 +333,6 @@ const isCategoryHovered = ref(false);
 const categories:Ref<CategoryDto[]> = ref([]);
 const subCategories:Ref<CategoryDto[]> = ref([]);
 
-
 const refreshCategories = async ()=>{
   const result = await GetCategories({pageId:1,take:100,search:''});
   if(result.isSuccess){
@@ -355,10 +348,14 @@ const categoryHovered = (category:CategoryDto) => {
 onMounted(async()=>{
   loading.value = true;
 
-  const result = await GetUnseenNotificationsCount();
-  if(result.isSuccess){
-    unseenNotifs.value = result.data ?? 0;
+  if(authStore.isLoggedIn)
+  {
+    const result = await GetUnseenNotificationsCount();
+    if(result.isSuccess){
+      unseenNotifs.value = result.data ?? 0;
+    }
   }
+
   await refreshCategories();
 
   loading.value = false;

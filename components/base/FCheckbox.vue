@@ -37,10 +37,6 @@ watch(
     ()=> emits('valueChanged',checked,props.value)
 )
 
-onMounted(()=>{
-  console.log(props.isChecked)
-})
-
 </script>
 
 <style scoped lang="scss">

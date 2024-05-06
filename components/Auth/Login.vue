@@ -3,20 +3,20 @@
     <div class="grid grid-cols-1 gap-4">
       <base-g-input label="شماره تلفن *" place-holder="09*********" required name="phoneNumber" id="phoneNumber" v-model="loginData.phoneNumber"/>
       <base-g-input label="رمز عبور *" place-holder="******" type="password" required name="password" id="password" v-model="loginData.password"/>
-      <button class="text-brandOrange text-right text-sm">
+      <button class="text-brandOrange text-right text-sm" v-if="false"> <!-- TODO implement Forget Password -->
         رمز عبور را فراموش کرده اید؟
       </button>
     </div>
     <span class="text-center text-sm font-thin text-danger">{{errorMessage}}</span>
     <base-g-button wFull :is-loading="isLoading">ورود</base-g-button>
-    <div class="flex items-center w-full">
+    <div class="flex items-center w-full" v-if="false">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">
             یا
           </span>
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
     </div>
-    <base-g-button button-type="outline" color="secondary" w-full :py="0">
+    <base-g-button button-type="outline" color="secondary" w-full :py="0" v-if="false" > <!-- TODO implement Login with Google -->
       <div class="flex items-center justify-center gap-2">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 ">
           <g clip-path="url(#clip0_569_2169)">
@@ -61,7 +61,7 @@ const loginData:LoginCommand = reactive({
 });
 
 const loginSchema = Yup.object().shape({
-  phoneNumber:Yup.string().required('وارد کردن شماره تلفن الزامی است').length(11,'شماره تلفن وارد شده معتبر نمی باشد'),
+  phoneNumber:Yup.string().required('وارد کردن شماره تلفن الزامی است').matches(new RegExp('^(\\+98|0)?9\\d{9}$'),'شماره تلفن وارد شده معتبر نمی باشد'),
   password:Yup.string().required('وارد کردن رمز عبور الزامی است').min(6,'رمز عبور باید حداقل 6 حرف باشد')
 })
 
@@ -87,7 +87,7 @@ const login = async ()=>{
 
   }
   else{
-    errorMessage.value = result.metaData.message;
+    errorMessage.value = result.metaData.message ?? 'حساب کاربری با این مشخصات یافت نشد';
   }
 
   isLoading.value = false;

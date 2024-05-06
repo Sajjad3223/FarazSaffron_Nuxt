@@ -39,7 +39,6 @@
 
           </LMap>
         </div>
-        <!--        <img src="https://s3-alpha-sig.figma.com/img/5e22/67ef/d2a2754d4b909e7809deb629a0b08e52?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Wzh4ETglN8dXDEKO4EP5mW20FhUvj2YusQ828AlWZKsiFLRpjS41FD~X4IUR8QbrWkc6dXNrN24tXdqpY-w~~3OigB-H~zAIjag74JkC9aBNpBCRCOSN3dPXU5v7IPD-WnrXGENFC2uV~xUDyWsGkhIBHAKVviel7rsiKJ2bpE9hjFkNqnKy~lDKA7S5BLB8BGT6RcQkq76rE48M44DVtJCjrBPYpwM2FWGOvto9UDbgO53UfRZWuBHcwQQYYrOwYdxHicDDxLeAZB99agJn~-VMpAdiB8h5WLBuvA47UT1-Vb7iaQsiJzVRTcExQbN3QRneZjutw-XomLwDN9sCmw__" alt="location " class="rounded-2xl">-->
       </div>
       <div class="my-12 bg-[#F8F8F8] rounded-2xl p-8">
         <h3 class="pr-4 border-r-4 border-brandOrange text-3xl font-bold">اطلاعات <strong class="text-brandOrange">جی پی</strong></h3>

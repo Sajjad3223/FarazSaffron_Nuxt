@@ -1,8 +1,11 @@
 <template>
   <div class="w-full relative flex items-center mb-4">
+    <textarea @input="onChanged" :title="placeHolder" rows="5"
+           :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
+              :required="required" v-if="multiLine"></textarea>
     <input :type="type" @input="onChanged" :title="placeHolder"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
-           :required="required" v-if="!showPassword">
+           :required="required" v-if="!showPassword && !multiLine">
     <input type="text" :required="required" :title="placeHolder"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != ''},{'disabled':disabled}]" v-if="type === 'password' && showPassword" :value="inputValue">
     <label for="">{{ label }}</label>
@@ -47,10 +50,13 @@ const props = withDefaults(defineProps<{
     disabled?:boolean,
     name?:string | null | undefined,
     id?:string | null | undefined,
+    rule?:string | null  | undefined,
+    multiLine?:boolean | null | undefined
   }>(),{
     type:'text',
     disabled:false,
-    required:false
+    required:false,
+    multiLine:false
   });
 
   const emits = defineEmits(['update:modelValue']);
@@ -82,6 +88,11 @@ const onChanged = (e: any) => {
 
 <style lang="scss" scoped>
 /* Inputs */
+
+textarea + label{
+  @apply top-4;
+}
+
 .input {
   @apply form-input transition-all duration-200;
   width: 100%;
@@ -110,7 +121,6 @@ const onChanged = (e: any) => {
 
   & + label {
     @apply absolute left-4 text-sm font-light font-[montserrat] text-opacity-70 px-2 bg-transparent transition-all duration-200 rounded-full pointer-events-none;
-
   }
 
   &.rtl + label {
