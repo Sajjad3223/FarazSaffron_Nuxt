@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 definePageMeta({
+  //@ts-ignore
   layout: ''
 })
 </script>

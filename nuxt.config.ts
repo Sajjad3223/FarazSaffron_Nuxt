@@ -20,11 +20,12 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/clickOutsideDirective.ts',
   ],
-  modules: ["@pinia/nuxt", "vue3-carousel-nuxt","nuxt-swiper"],
+  modules: ["@pinia/nuxt", "vue3-carousel-nuxt","nuxt-swiper","nuxt3-leaflet"],
   alias: {
     // This is for fixing " Cannot read properties of undefined (reading 'defineComponent') " error
     'vue3-carousel/dist/carousel': 'vue3-carousel/dist/carousel.es.js',
   },
+  //@ts-ignore
   carousel:{
     prefix:'GP'
   },

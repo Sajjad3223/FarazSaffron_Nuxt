@@ -200,7 +200,7 @@ const showFilters = ref(false)
 const showAddModal = ref(false)
 const pageId = ref(1);
 const categories:Ref<CategoryDto[]> = ref([]);
-const paginationData:Ref<PaginationData> = ref();
+const paginationData:Ref<PaginationData | null | undefined> = ref();
 
 const filterParams:CategoryFilterParams = reactive({
   pageId:pageId.value,

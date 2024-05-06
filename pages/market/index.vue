@@ -184,9 +184,9 @@
       </main>
     </div>
 
-    <div v-else class="py-4">
+    <div v-else>
       <!--  Search  -->
-      <div class="flex mx-4 mt-3 items-center relative">
+      <div class="flex mt-3 items-center relative">
         <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>
         <strong class="absolute opacity-50 right-4 pointer-events-none transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی محصول...</strong>
         <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute opacity-50 left-4">

@@ -281,9 +281,6 @@
 <script setup lang="ts">
 import FDivider from "~/components/base/FDivider.vue";
 
-definePageMeta({
-  layout: "new-layout"
-})
 
 const check1 = ref(false);
 const check2 = ref(true);

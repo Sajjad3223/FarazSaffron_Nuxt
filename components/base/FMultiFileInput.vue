@@ -79,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-ignore
 import createFileList from "create-file-list/dist/create-file-list.mjs";
 
 const props = defineProps({
@@ -111,7 +112,9 @@ const drop = (e:any) => {
   let removed, add;
   let localFiles = [...files.value];
 
+  //@ts-ignore
   removed = localFiles.splice(fileDropping.value, 1);
+  //@ts-ignore
   localFiles.splice(fileDropping.value, 0, ...removed);
 
   files.value = createFileList(localFiles);
@@ -120,30 +123,32 @@ const drop = (e:any) => {
   fileDropping.value = null;
   fileDragging.value = null;
 }
-const dragenter = (e) => {
+const dragenter = (e:any) => {
   let targetElem = e.target.closest("[draggable]");
 
   fileDropping.value = targetElem.getAttribute("data-index");
 }
-const dragstart = (e) => {
+const dragstart = (e:any) => {
   fileDragging.value = e.target
       .closest("[draggable]")
       .getAttribute("data-index");
   e.dataTransfer.effectAllowed = "move";
 }
-const loadFile = (file) => {
+const loadFile = (file:any) => {
   const preview = document.querySelectorAll(".preview");
   const blobUrl = URL.createObjectURL(file);
 
   preview.forEach(elem => {
+    //@ts-ignore
     elem.onload = () => {
+      //@ts-ignore
       URL.revokeObjectURL(elem.src); // free memory
     };
   });
 
   return blobUrl;
 }
-const addFiles = (e) => {
+const addFiles = (e:any) => {
   const localFiles = createFileList([...files.value], [...e.target.files]);
   files.value = localFiles;
   //form.formData.files = [...localFiles];

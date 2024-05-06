@@ -160,7 +160,7 @@ const showFilters = ref(false)
 const showAddModal = ref(false)
 const pageId = ref(1);
 const comments:Ref<CommentDto[]> = ref([]);
-const paginationData:Ref<PaginationData> = ref();
+const paginationData:Ref<PaginationData | null | undefined> = ref();
 const toast = useToast();
 
 const filterParams:CommentFilterParams = reactive({

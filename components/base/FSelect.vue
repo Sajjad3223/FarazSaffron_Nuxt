@@ -67,7 +67,7 @@ const props = defineProps<{
 const emits = defineEmits(['update:modelValue']);
 
 const showOptions = ref(false);
-const selectedItem:Ref<SelectOption> = ref(props.modelValue ? props.data!.find(o=>o.id == props.modelValue) ?? props.placeHolder : {title:props.placeHolder,id:0});
+const selectedItem:Ref<SelectOption | string> = ref(props.modelValue ? props.data!.find(o=>o.id == props.modelValue) ?? props.placeHolder : {title:props.placeHolder,id:0});
 const selectedItems:Ref<SelectOption[]> = ref(props.selectedData ?? []);
 
 const addToSelectedItems=(item:SelectOption)=>{

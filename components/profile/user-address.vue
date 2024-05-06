@@ -46,8 +46,8 @@ const addAddressData:AddUserAddressCommand = reactive({
   city: '',
   street: '',
   postCode: '',
-  plaque: '',
-  unit: ''
+  plaque: 0,
+  unit: 0
 })
 
 const AddAddress = async () =>{

@@ -8,8 +8,8 @@
         <div class="text-2xl font-bold flex items-center gap-2 dark:text-white">
           <NuxtLink to="/profile">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </NuxtLink>
           <strong>اطلاعات حساب کاربری</strong>
@@ -227,6 +227,12 @@
           </div>
         </div>
       </div>
+      <div class="grid grid-cols-2 mt-6 gap-2 animate-pulse " v-else>
+        <div class="h-28 border rounded-2xl flex flex-col justify-center items-start space-y-4 px-6" v-for="i in 6">
+          <div class="w-1/3 bg-gray-300 rounded-full animate-pulse h-2"></div>
+          <div class="w-full bg-gray-300 rounded-full animate-pulse h-2"></div>
+        </div>
+      </div>
     </div>
     <div v-else>
       <header class="w-full h-[80px] px-4 flex items-center justify-center relative">
@@ -309,6 +315,13 @@
           </svg>
         </NuxtLink>
       </div>
+      <div class="flex flex-col mt-6 gap-4 animate-pulse items-center" v-else>
+        <div class="w-16 aspect-square rounded-full bg-gray-200"></div>
+        <div class="h-16 border rounded-lg flex flex-col justify-center w-full items-start space-y-4 px-6" v-for="i in 4" :key="i">
+          <div class="w-1/3 bg-gray-300 rounded-full animate-pulse h-2"></div>
+          <div class="w-full bg-gray-300 rounded-full animate-pulse h-2"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -342,6 +355,7 @@ const phoneNumber = ref(accountStore?.currentUser?.phoneNumber);
 const changePasswordSchema = Yup.object().shape({
   oldPassword:Yup.string().required('پسورد فعلی الزامی است'),
   newPassword:Yup.string().required('پسورد جدید الزامی است').min(6,'پسورد باید حداقل 6 حرف باشد!'),
+  //@ts-ignore
   newPasswordConfirm:Yup.string().oneOf([Yup.ref('newPassword'), null], 'پسورد جدید و تکرار آن مطابقت ندارند')
 });
 const changePasswordCommand:ChangePasswordCommand = reactive({
@@ -356,7 +370,8 @@ onMounted(async ()=>{
 
 const ChangeEmail = async ()=>{
   loading.value = true;
-  const res = await EditUserEmail(email.value);
+  if(email.value === "") return;
+  const res = await EditUserEmail(email.value!);
   if(res.isSuccess){
     editEmailModal.value = false;
     await toast.showToast();
@@ -367,7 +382,8 @@ const ChangeEmail = async ()=>{
 }
 const EditPhoneNumber = async ()=>{
   loading.value = true;
-  const res = await EditUserPhoneNumber(phoneNumber.value);
+  if(phoneNumber.value === "") return;
+  const res = await EditUserPhoneNumber(phoneNumber.value!);
   if(res.isSuccess){
     editPhoneModal.value = false;
     await toast.showToast();

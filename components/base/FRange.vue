@@ -43,24 +43,33 @@ onMounted(()=>{
   const ranges = document.querySelectorAll('.range-input input');
   ranges.forEach(r=>{
     r.addEventListener('input',(e:any)=>{
+      //@ts-ignore
       let minValue = parseInt(ranges[0].value),
+          //@ts-ignore
           maxValue = parseInt(ranges[1].value);
 
+      //@ts-ignore
       if((maxValue - minValue >= priceGap) && maxValue <= ranges[1].max){
         if(e.target.className === "min-range"){
+          //@ts-ignore
           ranges[0].value = minValue;
+          //@ts-ignore
           progress.value.style.left = ((minValue / ranges[1].max) * 100) + '%';
         }
         else{
+          //@ts-ignore
           ranges[1].value = maxValue;
+          //@ts-ignore
           progress.value.style.right =100-((maxValue / ranges[0].max) * 100) + '%';
         }
       }
       else{
         if(e.target.className === "min-range"){
+          //@ts-ignore
           ranges[0].value = maxValue - priceGap;
           valueData.value.minValue = maxValue - priceGap;
         }else{
+          //@ts-ignore
           ranges[1].value = minValue + priceGap;
           valueData.value.maxValue = minValue + priceGap;
         }
@@ -68,7 +77,9 @@ onMounted(()=>{
 
     })
   })
+  //@ts-ignore
   progress.value.style.left = ((ranges[0].value / ranges[1].max) * 100) + '%';
+  //@ts-ignore
   progress.value.style.right =100-((ranges[1].value / ranges[0].max) * 100) + '%';
 })
 

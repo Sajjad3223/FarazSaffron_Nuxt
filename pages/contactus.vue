@@ -14,14 +14,32 @@
       <hr class="my-8">
       <div class="grid grid-cols-2 gap-8">
         <div class="grid grid-cols-2 gap-4">
-          <base-f-input place-holder="نام و نام خانوادگی*" />
-          <base-f-input place-holder="ایمیل*" />
-          <base-f-input place-holder="شماره تلفن*" />
-          <base-f-input place-holder="موضوع*" />
-          <base-f-input place-holder="متن پیام*" multi-line class="col-span-full"/>
-          <base-f-button color="brand" text-color="white">ثبت و ارسال</base-f-button>
+          <base-g-input label="نام و نام خانوادگی*"  required name="fullName" id="fullName" v-model="contactMessage.fullName"/>
+          <base-g-input label="ایمیل*"  required name="email" id="email" v-model="contactMessage.email"/>
+          <base-g-input label="شماره تلفن*"  required name="phoneNumber" id="phoneNumber" v-model="contactMessage.phoneNumber"/>
+          <base-g-input label="موضوع*"  required name="subject" id="subject" v-model="contactMessage.subject"/>
+          <base-g-input label="متن پیام*" multi-line class="col-span-full" required name="content" id="content" v-model="contactMessage.content" multiline/>
+          <base-g-button color="primary" w-full>ثبت و ارسال</base-g-button>
         </div>
-        <img src="https://s3-alpha-sig.figma.com/img/5e22/67ef/d2a2754d4b909e7809deb629a0b08e52?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Wzh4ETglN8dXDEKO4EP5mW20FhUvj2YusQ828AlWZKsiFLRpjS41FD~X4IUR8QbrWkc6dXNrN24tXdqpY-w~~3OigB-H~zAIjag74JkC9aBNpBCRCOSN3dPXU5v7IPD-WnrXGENFC2uV~xUDyWsGkhIBHAKVviel7rsiKJ2bpE9hjFkNqnKy~lDKA7S5BLB8BGT6RcQkq76rE48M44DVtJCjrBPYpwM2FWGOvto9UDbgO53UfRZWuBHcwQQYYrOwYdxHicDDxLeAZB99agJn~-VMpAdiB8h5WLBuvA47UT1-Vb7iaQsiJzVRTcExQbN3QRneZjutw-XomLwDN9sCmw__" alt="location " class="rounded-2xl">
+        <div style="height: 30vh; width:100%" class="rounded-2xl border overflow-hidden">
+          <LMap
+              ref="map"
+              :zoom="16"
+              :center="[35.29199744307878, 59.16538418430383]"
+          >
+            <LTileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                layer-type="base"
+                name="OpenStreetMap"
+            />
+            <LMarker :draggable="false" name="GP Saffron" attribution="GP Saffron"  :lat-lng="[35.29199744307878, 59.16538418430383]">
+              <LPopup content="شرکت فراز زعفران تربت"  />
+            </LMarker>
+
+          </LMap>
+        </div>
+        <!--        <img src="https://s3-alpha-sig.figma.com/img/5e22/67ef/d2a2754d4b909e7809deb629a0b08e52?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Wzh4ETglN8dXDEKO4EP5mW20FhUvj2YusQ828AlWZKsiFLRpjS41FD~X4IUR8QbrWkc6dXNrN24tXdqpY-w~~3OigB-H~zAIjag74JkC9aBNpBCRCOSN3dPXU5v7IPD-WnrXGENFC2uV~xUDyWsGkhIBHAKVviel7rsiKJ2bpE9hjFkNqnKy~lDKA7S5BLB8BGT6RcQkq76rE48M44DVtJCjrBPYpwM2FWGOvto9UDbgO53UfRZWuBHcwQQYYrOwYdxHicDDxLeAZB99agJn~-VMpAdiB8h5WLBuvA47UT1-Vb7iaQsiJzVRTcExQbN3QRneZjutw-XomLwDN9sCmw__" alt="location " class="rounded-2xl">-->
       </div>
       <div class="my-12 bg-[#F8F8F8] rounded-2xl p-8">
         <h3 class="pr-4 border-r-4 border-brandOrange text-3xl font-bold">اطلاعات <strong class="text-brandOrange">جی پی</strong></h3>
@@ -38,7 +56,7 @@
             </div>
             <span class="text-[#8D8D8D]">استان خراسان رضوی - شهرستان تربت حیدریه - کیلومتر 2 جاده بایگ</span>
             <span class="text-[#8D8D8D]">ساعت کاری :   <strong class="text-[#6D6D6D] mr-2">شنبه تا پنج شنبه از ساعت 8:00 تا 14:00  </strong></span>
-            <span class="text-[#8D8D8D]">شماره تماس :    <strong class="text-brandOrange mr-2">52223456-051</strong></span>
+            <a href="tel:05152223456" class="text-[#8D8D8D]">شماره تماس :    <strong class="text-brandOrange mr-2">52223456-051</strong></a>
           </div>
           <div class="flex flex-col items-start space-y-4 mt-8">
             <strong class="text-xl text-[#7E7E7E] ">خدمات پس از فروش</strong>
@@ -121,3 +139,14 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+
+const contactMessage = reactive({
+  fullName:'',
+  email:'',
+  phoneNumber:'',
+  subject:'',
+  content:''
+})
+
+</script>

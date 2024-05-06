@@ -120,7 +120,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout:'mobile-layout-just-footer'
+  layout:'profile'
 })
 
 const utilStore = useUtilStore();

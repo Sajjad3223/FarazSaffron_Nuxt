@@ -391,7 +391,12 @@ onMounted(async ()=>{
 
   const result = await GetOrdersGist();
   if(result.isSuccess){
-    ordersGist.value = result.data;
+    ordersGist.value = result.data ?? {
+      pending: 0,
+      paid: 0,
+      returned: 0,
+      canceled: 0
+    };
   }
 
   loading.value = false;
