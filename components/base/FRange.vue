@@ -8,16 +8,16 @@
     <div class="range-input">
       <input type="range"
              class="min-range"
-             min="0"
-             max="100"
+             :min="min"
+             :max="max"
              id="min-range-slider"
              name="min-range-slider"
              v-model="valueData.minValue"
              step="1">
       <input type="range"
              class="max-range"
-             min="0"
-             max="100"
+             :min="min"
+             :max="max"
              id="max-range-slider"
              name="max-range-slider"
              v-model="valueData.maxValue"
@@ -25,16 +25,22 @@
     </div>
     <div class="grid grid-cols-2 gap-2 mt-4">
       <base-f-input type="number" name="min-range" id="min-range" place-holder="حداقل: 0" v-model="valueData.minValue" />
-      <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 999" v-model="valueData.maxValue" />
+      <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 5,000,000" v-model="valueData.maxValue" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const props = defineProps<{
+  min:number,
+  max:number
+}>();
+
 const valueData:Ref<any> = ref({
-  minValue: '25',
-  maxValue: '75'
+  minValue: props.min,
+  maxValue: props.max
 })
+const getValues = ()=> valueData;
 
 const progress = ref();
 const priceGap = 10
@@ -81,6 +87,10 @@ onMounted(()=>{
   progress.value.style.left = ((ranges[0].value / ranges[1].max) * 100) + '%';
   //@ts-ignore
   progress.value.style.right =100-((ranges[1].value / ranges[0].max) * 100) + '%';
+})
+
+defineExpose({
+  getValues
 })
 
 </script>

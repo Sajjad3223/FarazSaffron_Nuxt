@@ -47,7 +47,7 @@
           <div class=" bg-[#F8F8F8] p-5 rounded-2xl flex flex-col space-y-8">
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col items-stretch">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">قیمت</h3>
-               <ClientOnly><base-f-range /></ClientOnly>
+               <ClientOnly><base-f-range :min="0" :max="5000000" /></ClientOnly>
               <button class="py-2 mt-4 rounded-lg bg-brandOrange/10 hover:bg-brandOrange/15 w-max px-10 mx-auto text-brandOrange transition-colors duration-200">اعمال</button>
             </div>
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
@@ -109,16 +109,16 @@
             <div class="mt-8">
               <client-only>
                 <GPCarousel ref="carousel" :items-to-show="1" wrap-around dir="rtl" :autoplay="5000">
-                  <GPSlide v-for="i in 5" :key="i">
+                  <GPSlide v-for="i in popularProducts" :key="i">
                     <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
-                      <div class="w-2/5 grid place-items-center relative">
+                      <NuxtLink :to="`/product/${i.slug}`" class="w-2/5 grid place-items-center relative">
                         <img src="../../assets/images/product-image.png" alt="product" class="w-full ">
-                      </div>
+                      </NuxtLink>
                       <div class="flex-1 flex flex-col items-start space-y-4">
-                        <strong class="text-lg">نگین پاکتی</strong>
-                        <span class="text-[#9E9E9E] text-sm">
-                1 مثقال- 4/608 گرم
-              </span>
+                        <NuxtLink :to="`/product/${i.slug}`" class="w-4/5 text-right min-h-12">{{ i.title }}</NuxtLink>
+                        <span class="text-[#9E9E9E] text-sm hidden">
+                          1 مثقال- 4/608 گرم
+                        </span>
                         <ul class="flex items-center gap-0.5">
                           <li v-for="i in 5" :key="i">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -132,10 +132,7 @@
                             </svg>
                           </li>
                         </ul>
-                        <div class="flex items-center gap-1">
-                          <strong class="text-lg" style="font-family: 'Vazir FD',serif">618,000</strong>
-                          <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
-                        </div>
+                        <base-g-price :price="i.price / 10" />
                       </div>
                     </li>
                   </GPSlide>
@@ -285,6 +282,7 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {SITE_URL} from "~/utilities/api.config";
+import {useProductUtils} from "~/composables/useProductUtils";
 
 const route = useRoute();
 const loading = ref(false);
@@ -293,6 +291,8 @@ const pageId = ref(1);
 const carousel = ref();
 const paginationData:Ref<PaginationData | null> = ref(null);
 const utilStore = useUtilStore();
+const productUtils = useProductUtils();
+const popularProducts = ref([]);
 
 const orderBys = Object.entries(EOrderBy).map(t => {
   return {
@@ -325,9 +325,9 @@ watch(pageId, async () => await getData())
 watch(()=>route.query,async ()=>await getData())
 
 onMounted(async () => {
-  console.log(filterParams.categoriesIncluded)
   await getData();
   await refreshCategories();
+  popularProducts.value = await productUtils.GetPopularProducts(5);
 })
 
 const categories:Ref<CategoryDto[]> = ref([]);
