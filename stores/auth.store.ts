@@ -8,6 +8,8 @@ export const useAuthStore = defineStore("auth",()=>{
     const callBackFunctionAfterLogin: Ref<Function | null> = ref(null);
     const currentStep = ref('login');
 
+    const cartStore = useCartStore();
+
     const isLoggedIn = computed(() => {
         const cookie = getAccessToken();
         return cookie != null && cookie != "";
@@ -19,7 +21,7 @@ export const useAuthStore = defineStore("auth",()=>{
         });
         return cookie.value;
     };
-    const setToken = (tokenResult: LoginResultDto) => {
+    const setToken = async (tokenResult: LoginResultDto) => {
         const cookie = useCookie("c-access-token", {
             expires: new Date(new Date().setDate(new Date().getDate() + 30)),
         });
@@ -32,6 +34,9 @@ export const useAuthStore = defineStore("auth",()=>{
                 callBackFunctionAfterLogin.value!();
             }
         }, 300);
+        setTimeout(async ()=>{
+            await cartStore.transferOrder();
+        },3000)
     };
     const router = useRouter();
     const logOut = async () => {

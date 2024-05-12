@@ -12,9 +12,9 @@
         </NuxtLink>
       </GPSlide>
     </GPCarousel>-->
-    <Swiper
+    <Swiper :modules="[SwiperAutoplay]" dir="rtl"
         :slides-per-view="1" loop :space-between="20"
-        class="rounded-xl overflow-hidden imagesCarousel" autoplay >
+        class="rounded-xl overflow-hidden imagesCarousel" autoplay>
       <SwiperSlide >
         <NuxtLink to="/market" class="w-full shrink-0 relative">
           <img src="~/assets/images/banner1.png" alt="banner" class="w-full">

@@ -153,7 +153,7 @@
           </tbody>
         </table>
       </div>
-      <FPagination :pagination-data="paginationData" :page-id="pageId" />
+      <FPagination :pagination-data="paginationData" v-model="pageId" />
     </div>
     <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
       <span class="animate-spin">
@@ -170,6 +170,7 @@
 </template>
 
 <script setup lang="ts">
+import {Form} from 'vee-validate';
 import type {ProductFilterData, ProductFilterParams} from "~/models/product/productQueries";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {GetProductsByAdmin, SetProductActivity} from "~/services/product.service";
@@ -215,6 +216,8 @@ onMounted(async ()=>{
 const getData = async ()=>{
   isLoading.value = true;
 
+  filterParams.pageId = pageId.value;
+  console.log(filterParams.pageId)
   const result = await GetProductsByAdmin(filterParams);
   if(result.isSuccess){
     products.value = result.data?.data!;
@@ -223,6 +226,11 @@ const getData = async ()=>{
 
   isLoading.value = false;
 }
+
+
+watch(
+    pageId,
+    async ()=> await getData())
 
 const ToggleActivity = async (productId:number,isActive:boolean)=>{
   if(isActive){

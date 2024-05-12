@@ -101,7 +101,7 @@
               <NuxtLink to="/">فروشگاه</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/">مقالات</NuxtLink>
+              <a :href="BLOGS_URL" target="_blank">مقالات</a>
             </li>
             <li>
               <NuxtLink to="/">تماس با ما</NuxtLink>
@@ -155,3 +155,6 @@
   </footer>
 </template>
 
+<script setup lang="ts">
+import {BLOGS_URL} from "~/utilities/api.config.js";
+</script>

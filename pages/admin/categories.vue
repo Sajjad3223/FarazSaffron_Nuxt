@@ -42,7 +42,10 @@
     </base-f-divider>
 
     <f-modal title="افزودن دسته بندی جدید" v-model="showAddModal">
-      <admin-categories-add @category-added="showAddModal = false" />
+      <admin-categories-add @category-added="showAddModal = false,getData()" />
+    </f-modal>
+    <f-modal title="افزودن دسته بندی جدید" v-model="showEditModal">
+      <admin-categories-edit @category-added="showEditModal = false,getData()" :category="selectedCategory"/>
     </f-modal>
 
     <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">
@@ -78,7 +81,7 @@
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
-                  <button
+                  <button @click="editCategory(c)"
                       class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                       aria-label="Edit"
                   >
@@ -129,7 +132,7 @@
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <button
+                <button @click="editCategory(ch)"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
@@ -168,7 +171,7 @@
           </tbody>
         </table>
       </div>
-      <FPagination :page-id="pageId" :pagination-data="paginationData" />
+      <FPagination v-model="pageId" :pagination-data="paginationData" />
     </div>
     <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
       <span class="animate-spin">
@@ -198,8 +201,10 @@ definePageMeta({
 const isLoading = ref(true)
 const showFilters = ref(false)
 const showAddModal = ref(false)
+const showEditModal = ref(false)
 const pageId = ref(1);
 const categories:Ref<CategoryDto[]> = ref([]);
+const selectedCategory:Ref<CategoryDto | null> = ref(null);
 const paginationData:Ref<PaginationData | null | undefined> = ref();
 
 const filterParams:CategoryFilterParams = reactive({
@@ -213,6 +218,11 @@ watch(pageId,async ()=>await getData());
 onMounted(async ()=>{
   await getData();
 })
+
+const editCategory = (category:CategoryDto)=>{
+  selectedCategory.value = category;
+  showEditModal.value = true;
+}
 
 const getData = async () => {
   isLoading.value = true;

@@ -29,9 +29,13 @@ export const GetOrdersGist = ():Promise<ApiResponse<OrderGist>> => {
         method:'GET',
     });
 }
-export const AddToCart = (productId:number):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/cart/${productId}`,{
+export const AddToCart = (productId:number,count:number = 1):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart`,{
         method:'POST',
+        body:{
+            productId,
+            count
+        }
     });
 }
 export const IncreaseCount = (itemId:number):Promise<ApiResponse<undefined>> => {

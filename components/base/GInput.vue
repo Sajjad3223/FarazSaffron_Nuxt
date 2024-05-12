@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<{
     required:boolean,
     label?:string | null | undefined,
     placeHolder?:string | null | undefined,
-    type:'text'|'email'|'number'|'password',
+    type?:'text'|'email'|'number'|'password',
     disabled?:boolean,
     name?:string | null | undefined,
     id?:string | null | undefined,

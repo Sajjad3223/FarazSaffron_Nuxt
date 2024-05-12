@@ -102,7 +102,7 @@
           </li>
         </ul>
         <hr class="my-4">
-        <a href="https://blog.farazSaffron.com" target="_blank" class="flex items-center justify-between">
+        <a :href="BLOGS_URL" target="_blank" class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.8346 2.72383V9.76467C12.8346 10.3247 12.3796 10.8497 11.8196 10.9197L11.6271 10.943C10.3555 11.1122 8.39545 11.7597 7.27545 12.378C7.12379 12.4655 6.87297 12.4655 6.71547 12.378L6.69212 12.3663C5.57212 11.7538 3.61799 11.1122 2.35215 10.943L2.18296 10.9197C1.62296 10.8497 1.16797 10.3247 1.16797 9.76467V2.71799C1.16797 2.02382 1.73379 1.49883 2.42795 1.55716C3.65295 1.65633 5.50795 2.27468 6.54629 2.92218L6.69212 3.00966C6.86129 3.11466 7.14132 3.11466 7.31049 3.00966L7.40964 2.9455C7.77714 2.718 8.2438 2.4905 8.7513 2.28633V4.66634L9.91797 3.8905L11.0846 4.66634V1.62136C11.2421 1.59219 11.3938 1.57467 11.5338 1.563H11.5688C12.263 1.50467 12.8346 2.02383 12.8346 2.72383Z" stroke="#3A3A3A" stroke-linecap="round" stroke-linejoin="round"/>
@@ -132,6 +132,7 @@
 <script setup lang="ts">
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
+import {BLOGS_URL} from "~/utilities/api.config";
 
 const showSidebar = ref(false);
 const loading = ref(false);

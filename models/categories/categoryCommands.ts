@@ -5,6 +5,7 @@ export interface CreateCategoryCommand {
 }
 export interface EditCategoryCommand {
     categoryId:number;
+    parentId?:number | null;
     title:string;
     slug:string;
 }

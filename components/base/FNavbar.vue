@@ -37,7 +37,10 @@
             </div>
             <ul class="flex items-center gap-9 font-bold">
               <li>
-                <NuxtLink to="/gpblog" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">مقالات</NuxtLink>
+                <NuxtLink to="/" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">خانه</NuxtLink>
+              </li>
+              <li>
+                <a :href="BLOGS_URL" target="_blank" class="hover:text-brandOrange transition-colors duration-200" >مقالات</a>
               </li>
               <li>
                 <NuxtLink to="/aboutus" class="hover:text-brandOrange transition-colors duration-200" exact-active-class="text-brandOrange">درباره ما</NuxtLink>
@@ -305,7 +308,7 @@ import {useCartStore} from "~/stores/cart.store";
 import {Form} from "vee-validate";
 import {ToastType, useToast} from "~/composables/useSwal";
 import {GetUnseenNotificationsCount} from "~/services/notification.service";
-import {SITE_URL} from "~/utilities/api.config";
+import {BLOGS_URL, SITE_URL} from "~/utilities/api.config";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import {EOrderBy} from "~/models/product/EOrderBy";

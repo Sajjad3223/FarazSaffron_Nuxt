@@ -112,7 +112,7 @@
                   sticky:true,
                 }"
               :breakpoints="breakpoints"
-              :slides-per-view="6" class="rounded-xl py-4" dir="rtl">
+              class="rounded-xl py-4" dir="rtl">
             <template v-slot:container-start>
               <div class="w-full flex flex-col items-end mb-4 -mt-20">
                 <SwiperControls class="self-end" />
@@ -185,7 +185,7 @@
                   sticky:true,
                 }"
                   :breakpoints="breakpoints"
-                  :slides-per-view="6" class="rounded-xl" dir="rtl">
+                  class="rounded-xl" dir="rtl">
             <SwiperSlide v-for="p in lastProducts" :key="p.id" >
               <GCard :product="p" />
             </SwiperSlide>
@@ -357,7 +357,7 @@
           </span>
           <ul class="grid grid-cols-4 gap-5">
             <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
-              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">2,000 +</strong>
+              <strong style="font-family: 'Vazir FD',serif;" class="text-2xl">1,000 +</strong>
               <span class="text-sm">ارسال موفق</span>
             </li>
             <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
@@ -659,19 +659,19 @@ const utilsStore = useUtilStore();
 const breakpoints = ref({
   // 700px and up
   700: {
-    itemsToShow: 3,
+    slidesPerView: 3,
     snapAlign:'start',
     dir:'rtl'
   },
   // 1024 and up
   1024: {
-    itemsToShow: 3.7,
+    slidesPerView: 3.7,
     snapAlign:'start',
     dir:'rtl'
   },
   // 1366 and up
   1366: {
-    itemsToShow: 5.7,
+    slidesPerView: 4.7,
     snapAlign:'start',
     dir:'rtl'
   },
@@ -679,13 +679,13 @@ const breakpoints = ref({
 const commentsBreakpoints = ref({
   // 700px and up
   700: {
-    itemsToShow: 1.7,
+    slidesPerView: 1.7,
     snapAlign:'start',
     dir:'rtl'
   },
   // 1366 and up
   1366: {
-    itemsToShow: 2.5,
+    slidesPerView: 2.5,
     snapAlign:'start',
     dir:'rtl'
   },

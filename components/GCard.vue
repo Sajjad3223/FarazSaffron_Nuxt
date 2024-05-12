@@ -75,7 +75,7 @@
                     مشاهده محصول
                   </span>
         </nuxt-link>
-        <button class="bg-brandOrange rounded-md p-2 transition-all duration-200 hover-brand hover:-translate-y-1" @click="addToCart(product.id)">
+        <button class="bg-brandOrange rounded-md p-2 transition-all duration-200 hover-brand hover:-translate-y-1" @click="addToCart(product.id,product.slug)">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.09844 4.86605C9.09844 6.02585 8.15824 6.96605 6.99844 6.96605C5.83864 6.96605 4.89844 6.02585 4.89844 4.86605M2.75601 12.2161H11.2409C11.9906 12.2161 12.5984 11.6195 12.5984 10.8837L11.7287 3.11603C11.7287 2.3802 11.1209 1.78369 10.3712 1.78369H3.45601C2.70624 1.78369 2.09844 2.3802 2.09844 3.11603L1.39844 10.8837C1.39844 11.6195 2.00624 12.2161 2.75601 12.2161Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -103,8 +103,8 @@ const authStore = useAuthStore();
 const toast = useToast();
 const addedToCart = ref(false);
 
-const addToCart = (id:number)=>{
-  cartStore.addToCart(id)
+const addToCart = (id:number,slug:string)=>{
+  cartStore.addToCart(id,slug)
   addedToCart.value =true;
   setTimeout(()=>{
     addedToCart.value = false;

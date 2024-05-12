@@ -65,7 +65,7 @@
               </base-g-button>
             </div>
             <ul class="mt-8 flex flex-col">
-              <TransitionGroup name="list">
+              <TransitionGroup name="none">
                 <li class="mx-auto flex relative items-center border-b last:border-none py-6 border-opacity-30" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
                   <div class="flex flex-col w-2/5 items-center">
                     <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
@@ -112,8 +112,11 @@
             </div>
           </div>
           <hr>
-          <base-g-button w-full is-link to="/newShipping">
+          <base-g-button w-full is-link to="/checkout/shipping" v-if="authStore.isLoggedIn">
             تکمیل سفارش
+          </base-g-button>
+          <base-g-button button-type="white" color="info" custom-class="text-center text-sm" @click="authStore.isLoginModalOpen = true" w-full v-else>
+            برای تکمیل سفارش باید وارد حساب کاربری خود شوید
           </base-g-button>
         </div>
       </main>
@@ -237,8 +240,11 @@
           <small>مجموع سبد خرید</small>
           <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
         </div>
-        <base-g-button is-link to="/checkout/shipping" w-full >
+        <base-g-button is-link to="/checkout/shipping" w-full v-if="authStore.isLoggedIn">
           تکمیل سفارش
+        </base-g-button>
+        <base-g-button is-link to="/checkout/shipping" w-full v-else>
+          برای تکمیل سفارش باید وارد حساب کاربری خود شوید
         </base-g-button>
       </div>
     </div>

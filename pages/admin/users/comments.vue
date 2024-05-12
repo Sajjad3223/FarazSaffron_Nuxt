@@ -138,7 +138,7 @@
           </tbody>
         </table>
       </div>
-      <FPagination :page-id="pageId" :pagination-data="paginationData" />
+      <FPagination v-model="pageId" :pagination-data="paginationData" />
     </div>
   </div>
 </template>

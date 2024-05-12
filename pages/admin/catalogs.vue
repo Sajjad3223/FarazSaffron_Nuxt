@@ -119,7 +119,7 @@
           </tbody>
         </table>
       </div>
-      <FPagination :page-id="pageId" :pagination-data="paginationData" />
+      <FPagination v-model="pageId" :pagination-data="paginationData" />
     </div>
     <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
       <span class="animate-spin">

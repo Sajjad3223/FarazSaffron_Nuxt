@@ -160,7 +160,7 @@
         <Form class="grid grid-cols-1 my-4" v-show="step === 1">
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
-          <div class="grid grid-cols-2 gap-4 col-span-full">
+          <div class="grid grid-cols-3 gap-4 col-span-full">
             <base-f-button bordered color="primary" text-color="responsive" @clicked="step--">
               رفتن به صفحه قبل
             </base-f-button>
@@ -180,7 +180,7 @@
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
             افزودن ویژگی جدید
           </base-f-button>
-          <div class="grid grid-cols-2 gap-4 col-span-full">
+          <div class="grid grid-cols-3 gap-4 col-span-full">
             <base-f-button bordered color="primary" text-color="responsive" @clicked="step--">
               رفتن به صفحه قبل
             </base-f-button>
