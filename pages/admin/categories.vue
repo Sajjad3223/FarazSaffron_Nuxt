@@ -44,8 +44,8 @@
     <f-modal title="افزودن دسته بندی جدید" v-model="showAddModal">
       <admin-categories-add @category-added="showAddModal = false,getData()" />
     </f-modal>
-    <f-modal title="افزودن دسته بندی جدید" v-model="showEditModal">
-      <admin-categories-edit @category-added="showEditModal = false,getData()" :category="selectedCategory"/>
+    <f-modal title="ویرایش دسته بندی" v-model="showEditModal">
+      <admin-categories-edit @category-edited="showEditModal = false,getData()" :category="selectedCategory"/>
     </f-modal>
 
     <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">

@@ -241,6 +241,8 @@
         </div>
       </section>
 
+<!--      <GPSaffronCard class="mx-auto mt-6" />-->
+
       <!--  Blog Posts  -->
       <section class="w-full mt-16">
         <div class="flex items-center justify-between">
@@ -299,7 +301,6 @@
             </li>
           </ul>
         </div>
-
       </section>
 
       <!--  Instagram  -->

@@ -1,11 +1,11 @@
 <template>
   <Form class="grid grid-cols-1 gap-4" @submit.prevent="AddCategory">
     <base-f-select ref="categoriesSelect" label="دسته بندی مادر" v-model="addCategoryCommand.parentId" place-holder="دسته بندی مادر را انتخاب کنید" :data="categories"/>
-    <base-f-input label="عنوان دسته بندی" place-holder="عنوان را وارد کنید" v-model="addCategoryCommand.title" @update:modelValue="generateSlug" name="title" id="title"/>
-    <base-f-input label="عنوان یکتا" place-holder="عنوان یکتا وارد کنید" v-model="addCategoryCommand.slug" name="slug" id="slug"/>
-    <base-f-button color="brand" :loading="isLoading" type="submit">
+    <base-g-input label="عنوان دسته بندی" v-model="addCategoryCommand.title" @update:modelValue="generateSlug" name="title" id="title" required/>
+    <base-g-input label="عنوان یکتا" v-model="addCategoryCommand.slug" name="slug" id="slug" required/>
+    <base-g-button color="primary" w-full :loading="isLoading" type="submit">
       ثبت دسته بندی
-    </base-f-button>
+    </base-g-button>
   </Form>
 </template>
 

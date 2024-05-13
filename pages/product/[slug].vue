@@ -320,10 +320,13 @@
               </ul>
               <span class="text-sm text-[#B3B3B3] mt-3 font-light">  (امتیاز ۳۱ خریدار)</span>
               <small class="text-xs font-light text-[#B3B3B3] mt-6">شما هم درباره این کالا دیدگاه ثبت کنید</small>
-              <button class="w-full text-center py-2 rounded-xl border border-brandOrange text-brandOrange mt-4 hover:bg-brandOrange/10 transition-colors duration-200">
+              <button class="w-full text-center py-2 rounded-xl border border-brandOrange text-brandOrange mt-4 hover:bg-brandOrange/10 transition-colors duration-200" @click="showAddCommentModal = true">
                 ثبت دیدگاه
               </button>
             </div>
+            <base-g-modal title="ثبت دیدگاه" v-model="showAddCommentModal">
+              <product-add-comment :post-id="product.id" :post-slug="product.slug" :post-title="product.title" :post-type="EPostType.Product" />
+            </base-g-modal>
             <!--   Comments   -->
             <ul class="flex-1 flex flex-col mr-8 px-1">
               <li class="py-4 mt-4 border-b last:border-none flex flex-col" v-for="i in 5" :key="i">

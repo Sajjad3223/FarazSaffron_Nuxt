@@ -1,28 +1,32 @@
 <template>
-  <Form class="flex flex-col space-y-4">
+  <Form @submit="AddComment" class="flex flex-col space-y-4">
     <div class="flex flex-col w-full space-y-2">
       <span class="font-bold mr-4">به این محصول امتیاز دهید</span>
-      <div class="flex flex-col px-6 items-center">
-        <input type="range" name="r" id="r" max="4" step="1" v-model="sendCommentData.score" class="w-full px-4 ">
-        <div class="w-full flex justify-between">
-          <span class="text-center text-xs w-6 text-nowrap overflow-visible">خیلی ضعیف</span>
-          <span class="text-center text-xs w-6 text-nowrap overflow-visible ">ضعیف</span>
-          <span class="text-center text-xs w-6 text-nowrap overflow-visible ">متوسط</span>
-          <span class="text-center text-xs w-6 text-nowrap overflow-visible ">خوب</span>
-          <span class="text-center text-xs w-6 text-nowrap overflow-visible ">عالی</span>
-        </div>
+      <div class="rating space-x-2 space-x-reverse">
+        <input value="5" name="rating" id="star5" type="radio">
+        <label for="star5"></label>
+        <input value="4" name="rating" id="star4" type="radio">
+        <label for="star4"></label>
+        <input value="3" name="rating" id="star3" type="radio">
+        <label for="star3"></label>
+        <input value="2" name="rating" id="star2" type="radio">
+        <label for="star2"></label>
+        <input value="1" name="rating" id="star1" type="radio">
+        <label for="star1"></label>
       </div>
+
     </div>
     <hr>
-    <base-f-input multi-line name="comment" id="comment" v-model="sendCommentData.content" label="نظر شما" place-holder="نظر خود را وارد کنید ..." is-required />
+    <base-g-input multi-line name="comment" id="comment" v-model="sendCommentData.content" label="نظر شما" place-holder="نظر خود را وارد کنید ..." required />
     <hr>
-    <base-f-button class="bg-brandOrange w-full p-2 text-xl text-white text-center rounded-lg" @clicked="AddComment" :loading="isLoading" color="brand" text-color="white">
+    <base-g-button w-full class="bg-brandOrange w-full p-2 text-xl text-white text-center rounded-lg" :loading="isLoading" color="primary" text-color="white">
       ثبت نظر
-    </base-f-button>
+    </base-g-button>
   </Form>
 </template>
 
 <script setup lang="ts">
+import {Form} from 'vee-validate';
 import {EPostType} from "~/models/EPostType";
 import {SendComment} from "~/services/comment.service";
 import type {SendCommentCommand} from "~/models/comment/commentCommands";
@@ -65,3 +69,34 @@ const AddComment = async ()=>{
   isLoading.value = false;
 }
 </script>
+
+<style scoped>
+.rating {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 40px;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffb907;
+  transition: color 0.3s;
+}
+
+</style>

@@ -23,6 +23,10 @@ const props = defineProps({
   step:{
     type:Number,
     default:1
+  },
+  offsetToCount:{
+    type:Number,
+    default:500
   }
 })
 
@@ -31,7 +35,7 @@ const counter = ref();
 const isActivated = ref(false);
 
 document.addEventListener('scroll',()=>{
-  if(scrollY > counter.value.offsetTop - 400 && !isActivated.value){
+  if(scrollY > counter.value.offsetTop - props.offsetToCount && !isActivated.value){
     startCounting();
   }
 })
