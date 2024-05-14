@@ -53,36 +53,16 @@
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">دسته بندی</h3>
               <ul class="mt-6 flex flex-col space-y-4">
-                <li class="flex flex-col space-y-4">
-                  <div class="flex justify-between font-bold text-brandOrange">
-                    <span>زعفران</span>
-                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+                <li class="flex flex-col space-y-4 max-h-6 overflow-hidden cursor-pointer transition-all duration-300" v-for="c in categories" @click="toggleDropdown">
+                  <div class="flex justify-between pointer-events-none">
+                    <span class="transition-all duration-300">{{ c.title }}</span>
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-all duration-300">
                       <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange">
-                    <base-f-checkbox label="نگین" />
-                    <base-f-checkbox label="نگین" />
-                    <base-f-checkbox label="نگین" />
+                  <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange max-h-36 overflow-auto">
+                    <base-f-checkbox :label="s.title" v-for="s in c.children"/>
                   </div>
-                </li>
-                <li class="flex justify-between text-[#858383]">
-                  <span>پسته</span>
-                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </li>
-                <li class="flex justify-between text-[#858383]">
-                  <span>ادویه</span>
-                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </li>
-                <li class="flex justify-between text-[#858383]">
-                  <span>آجیل</span>
-                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
                 </li>
               </ul>
             </div>
@@ -351,6 +331,23 @@ const getData = async () => {
   }
 
   loading.value = false;
+}
+
+const toggleDropdown = ($event)=>{
+  const dropdown = $event.target;
+
+  dropdown.classList.toggle('max-h-6');
+  dropdown.classList.toggle('max-h-48');
+  if(dropdown.classList.contains('max-h-48')){
+    dropdown.querySelector('div:first-child').classList.add('font-bold');
+    dropdown.querySelector('div:first-child').classList.add('text-brandOrange');
+    dropdown.querySelector('svg').classList.add('rotate-180');
+  }
+  else{
+    dropdown.querySelector('div:first-child').classList.remove('font-bold');
+    dropdown.querySelector('div:first-child').classList.remove('text-brandOrange');
+    dropdown.querySelector('div svg').classList.remove('rotate-180');
+  }
 }
 </script>
 

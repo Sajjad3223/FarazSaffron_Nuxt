@@ -13,6 +13,7 @@
              :required="isRequired"
              @input="handleInputChange"
              :maxlength="maxLength"
+             :step="floatStep"
              ref="input"
       >
       <textarea v-else rows="4" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none',`py-${py} px-${px}`]"
@@ -26,7 +27,7 @@
 
       <div v-if="type === 'number' && isPrice" class="dark:text-white absolute left-12 text-left w-1/2 opacity-50 flex gap-2 items-center pointer-events-none" dir="ltr">
         <small class="font-light">ریال</small>
-        <span>{{price}}</span>
+        <span>{{price ?? 0}}</span>
       </div>
       <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 dark:text-gray-400',
       {'peer-focus:-translate-x-2':rtl},{'peer-focus:translate-x-2':!rtl},
@@ -137,6 +138,10 @@ const props = defineProps({
   isPrice:{
     type:Boolean,
     default:false
+  },
+  floatStep:{
+    type:Number,
+    required:false
   }
 })
 
@@ -163,7 +168,8 @@ const {
   errorMessage,
   handleChange,
   value: inputValue,
-  setValue
+  setValue,
+  validate
 } = useField(props.name, undefined, {
   initialValue: props.modelValue,
 })
@@ -179,7 +185,10 @@ const handleInputChange = (e: any) => {
   if(props.type == 'password') {
     showEye.value = e.target.value != '';
   }
-  handleChange(e, true);
+  handleChange(e, false);
+  validate(e).then(res=>{
+    if(!res.valid) throw new Error('sjdfjsdf');
+  });
   emits('update:modelValue', e.target.value);
 }
 

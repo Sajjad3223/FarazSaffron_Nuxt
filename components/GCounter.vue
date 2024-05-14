@@ -26,7 +26,7 @@ const props = defineProps({
   },
   offsetToCount:{
     type:Number,
-    default:500
+    default:900
   }
 })
 

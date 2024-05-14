@@ -53,7 +53,7 @@
           <span class="hidden lg:block opacity-40 lg:text-2xl">•</span>
           <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">
             <span>تاریخ ثبت سفارش </span>
-            <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">{{ new Date(order?.finallyDate).toLocaleDateString('fa') }}</b>
+            <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">{{ order.finallyPersianDate }}</b>
           </div>
         </div>
         <hr class="dark:opacity-50">

@@ -118,7 +118,10 @@
           <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount"/>
           <base-f-input type="file" name="mainImage" id="mainImage" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
           <base-f-input label="متن تصویر" name="altImage" id="altImage" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
-          <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
+          <div class="grid grid-cols-2 gap-4">
+            <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="addProductData.quantity"/>
+            <base-f-input type="number" name="weight" id="weight" label="وزن محصول (بسته بندی)" place-holder="وزن محصول با بسته بندی" v-model="addProductData.weight" :float-step="0.01"/>
+          </div>
           <div class="flex items-end">
             <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
             <button :class="['grid place-items-center h-10 w-10 origin-center dark:text-white',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
@@ -144,13 +147,17 @@
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="addProductData.packingType" />
           <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثال: SN0000" v-model="addProductData.productCode"/>
           <base-f-input label="شماره بارکد" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="addProductData.barcodeNumber"/>
-          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaLink" :rtl="false"/>
+          <base-f-input label="شماره بهداشت" name="healthNumber" id="healthNumber" place-holder="شماره بهداشت" v-model="addProductData.healthNumber"/>
+          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digikalaData.digikalaLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digikalaData.digikalaPrice" is-price />
+          <base-f-input label="لینک باسلام" name="basalamLink" id="basalamLink" class="font-thin" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="addProductData.basalamData.basalamLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در باسلام" name="basalamPrice" id="basalamPrice" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="addProductData.basalamData.basalamPrice" is-price />
           <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
             ثبت کالا و رفتن به صفحه بعد
           </base-f-button>
         </Form>
       </Transition>
-      <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
+      <Transition enter-active-class="transition-all duration-300 delay-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4" v-show="step === 1">
           <f-multi-file-input v-model="imageFiles" />
@@ -165,7 +172,7 @@
           </div>
         </Form>
       </Transition>
-      <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
+      <Transition enter-active-class="transition-all duration-300 delay-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2" >
           <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
@@ -185,7 +192,7 @@
           </div>
         </Form>
       </Transition>
-      <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
+      <Transition enter-active-class="transition-all duration-300 delay-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 3" >
           <FSeoData v-model="addProductData.seoData" />
@@ -266,6 +273,8 @@ const addProductData:CreateProductCommand = reactive({
   slug: '',
   price: null,
   discount: 0,
+  weight:null,
+  healthNumber:null,
   packingType: EPackingType.کیفی,
   mainImage: null,
   mainImageAlt: '',
@@ -279,7 +288,14 @@ const addProductData:CreateProductCommand = reactive({
     height:0,
     length:0
   },
-  digiKalaLink: null,
+  digikalaData:{
+    digikalaLink:'',
+    digikalaPrice:0
+  },
+  basalamData:{
+    basalamLink:'',
+    basalamPrice:0
+  },
   seoData: {
     metaTitle:'',
     metaDescription:'',
@@ -298,6 +314,7 @@ const addProductSchema = Yup.object().shape({
   productCode: Yup.string().required('وارد کردن کد محصول ضروری است'),
   barcodeNumber: Yup.string().required('وارد کردن بارکد ضروری است'),
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
+  weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
 })
 
 
@@ -361,6 +378,8 @@ const AddProduct = async ()=>{
   productData.append('slug',addProductData.slug);
   productData.append('price',addProductData.price.toString());
   productData.append('discount',addProductData.discount.toString());
+  productData.append('weight',addProductData.weight.toString());
+  productData.append('healthNumber',addProductData.healthNumber ?? '');
   productData.append('packingType',addProductData.packingType.toString());
   if(addProductData.mainImage)
     productData.append('mainImage',addProductData.mainImage);
@@ -373,7 +392,10 @@ const AddProduct = async ()=>{
   productData.append('dimensions.Width',addProductData.dimensions.width.toString());
   productData.append('dimensions.Length',addProductData.dimensions.length.toString());
   productData.append('dimensions.Height',addProductData.dimensions.height.toString());
-  productData.append('digiKalaLink',addProductData.digiKalaLink ?? '');
+  productData.append('digikalaData.digiKalaLink',addProductData.digikalaData?.digikalaLink ?? '');
+  productData.append('digikalaData.digiKalaPrice',addProductData.digikalaData?.digikalaPrice?.toString() ?? '0');
+  productData.append('basalamData.basalamLink',addProductData.basalamData?.basalamLink ?? '');
+  productData.append('basalamData.basalamPrice',addProductData.basalamData?.basalamPrice?.toString() ?? '0');
   productData.append('quantity',addProductData.quantity.toString());
 
   const productResult = await CreateProduct(productData);

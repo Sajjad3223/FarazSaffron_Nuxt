@@ -24,7 +24,17 @@ export interface ProductFilterParams extends BaseFilterParams{
     minDiscount?:        number | null | undefined;
     maxDiscount?:        number | null | undefined;
     serialNumber?:       string | null | undefined;
-    dgkalaLink?:         string | null | undefined;
+    dgkalaData?:         DigikalaData | null | undefined;
+    basalamData?:        BasalamData | null | undefined;
+}
+
+export interface DigikalaData {
+    digikalaLink?:string;
+    digikalaPrice?:number;
+}
+export interface BasalamData {
+    basalamLink?:string;
+    basalamPrice?:number;
 }
 
 export interface CatalogFilterParams extends BaseFilterParams{
@@ -41,20 +51,24 @@ export interface ProductFilterData extends BaseDto{
     slug:         string;
     price:        number;
     discount:     number;
+    weight:         number;
+    healthNumber:   string;
     totalPrice:   number;
     packingType:  EPackingType;
     mainImage:    Img;
     quantity:     number;
     score:        number;
     visits:       number;
-    digikalaLink?: string | null;
-    basalamLink?:  string | null;
+    digikalaData?:  DigikalaData | null | undefined;
+    basalamData?: BasalamData | null | undefined;
 }
 export interface ProductDto extends BaseDto{
     title:          string;
     slug:           string;
     price:          number;
     discount:       number;
+    weight:         number;
+    healthNumber:   string;
     totalPrice:     number;
     packingType:    EPackingType;
     mainImage:      Img;
@@ -63,7 +77,8 @@ export interface ProductDto extends BaseDto{
     category:       CategoryDto;
     subCategory?:   CategoryDto | null;
     dimensions:     DimensionDto;
-    digiKalaLink?:   string | null;
+    digikalaData?:  DigikalaData | null;
+    basalamData?: BasalamData | null;
     seoData:        SeoData;
     quantity:       number;
     score:          number;

@@ -15,7 +15,7 @@
           <div class="flex flex-col lg:flex-row w-full space-y-2 lg:space-y-0 lg:items-center lg:space-x-2 lg:space-x-reverse">
             <div class="flex items-center justify-between w-full lg:w-max">
               <span class="text-xs lg:text-sm font-light opacity-70 lg:hidden">تاریخ تحویل</span>
-              <span class="text-xs lg:text-sm opacity-70 font-bold lg:font-light">{{ order.finallyDate == null ? new Date().toLocaleDateString('fa') : new Date(order.finallyDate).toLocaleDateString('fa') }}</span>
+              <span class="text-xs lg:text-sm opacity-70 font-bold lg:font-light">{{ order.finallyDate == null ? order.persianDate : order.finallyPersianDate }}</span>
             </div>
             <span class="opacity-40 text-2xl hidden lg:block">•</span>
             <span class="text-xs lg:text-sm flex items-center lg:gap-2 justify-between font-light opacity-70">کد سفارش <b class="text-sm lg:text-base font-bold">{{ order.id }}</b></span>
@@ -34,16 +34,18 @@
             <strong>5</strong>
           </div>
         </div>
-        <NuxtLink :to="`/profile/orders/${order.id}`">
+        <NuxtLink :to=" status == EOrderStatus.Pending ? `/checkout/cart` : `/profile/orders/${order.id}`" class="flex items-center gap-1 text-sm font-light">
+          <span v-if="status === EOrderStatus.Pending">رفتن به سبد خرید</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 19.9201L8.47997 13.4001C7.70997 12.6301 7.70997 11.3701 8.47997 10.6001L15 4.08008" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 19.9201L8.47997 13.4001C7.70997 12.6301 7.70997 11.3701 8.47997 10.6001L15 4.08008" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </NuxtLink>
       </div>
       <hr class="my-3">
       <ul class="w-full flex items-center flex-wrap space-x-4 space-x-reverse">
-        <li v-for="item in order.itemsCount">
-          <img src="~/assets/images/saffron-bar.png" alt="jar" class="max-w-24 rounded-md">
+        <li v-for="i in order.orderItems">
+          <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+               :alt="i.itemInfo.productImage.alt" alt="jar" class="max-w-24 rounded-md">
         </li>
       </ul>
       <hr class="my-3">
@@ -80,6 +82,7 @@
 
 <script setup lang="ts">
 import {EOrderStatus, type OrderFilterData} from "~/models/cart/cartQueries";
+import {SITE_URL} from "~/utilities/api.config";
 
 const props = defineProps<{
   status:EOrderStatus,

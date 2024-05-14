@@ -29,6 +29,7 @@ export interface OrderFilterData extends BaseDto {
     orderStatus: EOrderStatus;
     finalPrice: number;
     itemsCount: number;
+    orderItems: OrderItem[];
 }
 
 export interface DiscountData {
@@ -43,12 +44,23 @@ export interface OrderDto extends BaseDto {
     discount: DiscountData;
     finallyPrice: number;
     finallyDate?: Date | null;
+    finallyPersianDate?: string | null;
     isFinally: boolean;
     referCode?: string | null;
     orderStatus: EOrderStatus;
     getFinalPrice: number;
     itemsCount: number;
     orderItems: OrderItem[];
+    address?: OrderAddressDto | null;
+    postFollowUpCode?: string | null;
+    transmissionPrice?: number | null;
+}
+
+export interface OrderAddressDto {
+    addressId: number;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    completeAddress: string;
 }
 
 export interface OrderItem extends BaseDto {

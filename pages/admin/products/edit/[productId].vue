@@ -119,6 +119,7 @@
           <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="editProductData.price" is-price/>
           <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount"/>
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="editProductData.quantity"/>
+          <base-f-input type="number" name="weight" id="weight" label="وزن محصول (بسته بندی)" place-holder="وزن محصول با بسته بندی" v-model="editProductData.weight" :float-step="0.01"/>
           <div class="flex items-end">
             <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="editProductData.categoryId" v-if="!loadingCategories" />
             <button :class="['grid dark:text-white place-items-center h-10 w-10 origin-center',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
@@ -144,7 +145,11 @@
           <base-f-select label="نوع بسته بندی" name="packingType" id="packingType" place-holder="نوع بسته بندی را انتخاب کنید" :data="packingTypeOptions" v-model="editProductData.packingType" />
           <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثل: SN00AA0" v-model="editProductData.productCode"/>
           <base-f-input label="بارکد محصول" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="editProductData.barcodeNumber"/>
-          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaLink" :rtl="false"/>
+          <base-f-input label="شماره بهداشت" name="healthNumber" id="healthNumber" place-holder="شماره بهداشت" v-model="editProductData.healthNumber"/>
+          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digikalaLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digikalaPrice" is-price />
+          <base-f-input label="لینک باسلام" name="basalamLink" id="basalamLink" class="font-thin" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در باسلام" name="basalamPrice" id="basalamPrice" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamPrice" is-price />
           <div class="grid grid-cols-2 gap-4 col-span-full">
             <base-f-button type="submit" color="primary" text-color="white" >
               ثبت کالا و رفتن به صفحه بعد
@@ -211,7 +216,7 @@
 
       <div class="absolute -inset-4 rounded-lg bg-white/20 grid place-items-center dark:text-white backdrop-blur-[2px]" v-if="isLoading">
         <span class="animate-spin">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
+          <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
                style="display:block;background-color:transparent;"><circle
               cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
@@ -246,7 +251,6 @@ import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
 import FSeoData from "~/components/base/FSeoData.vue";
 import {
-  CreateProduct,
   EditProduct,
   GetProductById,
   SetImages,
@@ -258,7 +262,7 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
-import type {CatalogDto, ProductDto} from "~/models/product/productQueries";
+import type {BasalamData, CatalogDto, DigikalaData, ProductDto} from "~/models/product/productQueries";
 import {GetCatalogs} from "~/services/catalog.service";
 
 definePageMeta({
@@ -283,7 +287,8 @@ const editProductData:EditProductCommand = reactive({
   title: '',
   slug: '',
   price: null,
-  discount: 0,
+  weight:null,
+  healthNumber:null,
   packingType: EPackingType.کیفی,
   productCode: '',
   barcodeNumber: '',
@@ -295,7 +300,14 @@ const editProductData:EditProductCommand = reactive({
     height:0,
     length:0
   },
-  digiKalaLink: null,
+  digikalaData:{
+    digikalaLink:'',
+    digikalaPrice:0
+  },
+  basalamData:{
+    basalamLink:'',
+    basalamPrice:0
+  },
   seoData: {
     metaTitle:'',
     metaDescription:'',
@@ -314,6 +326,7 @@ const editProductSchema = Yup.object().shape({
   productCode: Yup.string().required('وارد کردن کد محصول ضروری است'),
   barcodeNumber: Yup.string().required('وارد کردن بارکد محصول ضروری است'),
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
+  weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
 })
 
 
@@ -350,6 +363,8 @@ onMounted(async ()=>{
     editProductData.slug = product.value.slug;
     editProductData.price = product.value.price;
     editProductData.discount = product.value.discount;
+    editProductData.weight = product.value.weight;
+    editProductData.healthNumber = product.value.healthNumber;
     editProductData.packingType = product.value.packingType;
     editProductData.productCode = product.value.productCode;
     editProductData.barcodeNumber = product.value.barcodeNumber;
@@ -358,7 +373,14 @@ onMounted(async ()=>{
     editProductData.dimensions.width = product.value.dimensions.width;
     editProductData.dimensions.height = product.value.dimensions.height;
     editProductData.dimensions.length = product.value.dimensions.length;
-    editProductData.digiKalaLink = product.value.digiKalaLink;
+    editProductData.digikalaData = {
+      digikalaLink: product.value.digikalaData?.digikalaLink ?? '',
+      digikalaPrice: product.value.digikalaData?.digikalaPrice ?? 0
+    } as DigikalaData;
+    editProductData.basalamData = {
+      basalamLink: product.value.basalamData?.basalamLink ?? '',
+      basalamPrice: product.value.basalamData?.basalamPrice ?? 0
+    } as BasalamData;
     editProductData.seoData.metaTitle = product.value.seoData.metaTitle;
     editProductData.seoData.metaDescription = product.value.seoData.metaDescription;
     editProductData.seoData.canonical = product.value.seoData.canonical;

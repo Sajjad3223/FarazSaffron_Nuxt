@@ -3,15 +3,15 @@
     <div class="flex flex-col w-full space-y-2">
       <span class="font-bold mr-4">به این محصول امتیاز دهید</span>
       <div class="rating space-x-2 space-x-reverse">
-        <input value="5" name="rating" id="star5" type="radio">
+        <input value="5" name="rating" id="star5" type="radio" v-model="sendCommentData.score">
         <label for="star5"></label>
-        <input value="4" name="rating" id="star4" type="radio">
+        <input value="4" name="rating" id="star4" type="radio" v-model="sendCommentData.score">
         <label for="star4"></label>
-        <input value="3" name="rating" id="star3" type="radio">
+        <input value="3" name="rating" id="star3" type="radio" v-model="sendCommentData.score">
         <label for="star3"></label>
-        <input value="2" name="rating" id="star2" type="radio">
+        <input value="2" name="rating" id="star2" type="radio" v-model="sendCommentData.score">
         <label for="star2"></label>
-        <input value="1" name="rating" id="star1" type="radio">
+        <input value="1" name="rating" id="star1" type="radio" v-model="sendCommentData.score">
         <label for="star1"></label>
       </div>
 
@@ -45,7 +45,7 @@ const sendCommentData:SendCommentCommand = reactive({
   postId:props.postId,
   parentId:props.parentId,
   content:'',
-  score:2,
+  score:3,
   postSlug:props.postSlug,
   postTitle:props.postTitle
 })
