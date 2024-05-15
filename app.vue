@@ -47,6 +47,9 @@ body{
 </style>
 
 <style lang="scss">
+body{
+  @apply bg-white dark:bg-white;
+}
 *{
   font-family: "Vazir FD",serif;
 }
@@ -117,6 +120,15 @@ body{
 .slide-fade-enter-to,
 .slide-fade-leave-from{
   @apply opacity-100 translate-y-0;
+}
+
+.fade-enter-active,
+.fade-leave-active{
+  @apply transition-opacity duration-300;
+}
+.fade-enter-from,
+.fade-leave-to{
+  @apply opacity-0;
 }
 
 .hover-brand:hover{

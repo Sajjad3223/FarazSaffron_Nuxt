@@ -59,6 +59,11 @@ export const RemoveItem = (itemId:number):Promise<ApiResponse<undefined>> => {
         method:'DELETE',
     });
 }
+export const RemoveAllItems = ():Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart/clear`,{
+        method:'DELETE',
+    });
+}
 export const SetDiscount = (discountCode:string):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/cart/setDiscount/${discountCode}`,{
         method:'PUT',

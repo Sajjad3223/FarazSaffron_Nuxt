@@ -2,8 +2,8 @@
   <Transition enter-from-class="-translate-y-24 opacity-0" enter-to-class="translate-y-0 opacity-100" enter-active-class="transition-all duration-300"
               leave-to-class="-translate-y-24 opacity-0" leave-from-class="translate-y-0 opacity-100" leave-active-class="transition-all duration-300">
     <div v-if="modelValue" @click.self="closeModal" class="modalWrapper flex items-center justify-center fixed inset-0 bg-black/50 z-50">
-      <div class="modal bg-bgWhite dark:bg-gray-800 p-4 rounded-xl drop-shadow-lg sm:w-[90%] lg:w-[400px] xl:w-[500px]">
-        <div class="modal-header flex flex-col items-center dark:text-white">
+      <div class="modal bg-bgWhite p-4 rounded-xl drop-shadow-lg sm:w-[90%] lg:w-[400px] xl:w-[500px]">
+        <div class="modal-header flex flex-col items-center ">
           <button class="w-8 h-8 self-end grid place-items-center hover:bg-danger/10 text-danger rounded-lg transition-colors duration-200" @click="closeModal" v-if="!hideCloseButton">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 18L6 6M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -16,7 +16,7 @@
             <div class="flex items-center w-full">
               <div class="flex-1 h-px rounded-full bg-gray-300"></div>
               <div class="flex flex-col items-center w-max px-4">
-                <h5 class="text-xl font-bold dark:text-gray-300">{{title}}</h5>
+                <h5 class="text-xl font-bold">{{title}}</h5>
                 <p class="font-light text-xs mt-1">{{subTitle}}</p>
               </div>
               <div class="flex-1 h-px rounded-full bg-gray-300"></div>

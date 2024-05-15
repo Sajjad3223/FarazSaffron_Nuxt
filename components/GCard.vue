@@ -1,6 +1,17 @@
 <template>
-  <div class="relative h-max min-w-[250px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl" dir="rtl">
+  <div :class="['relative h-max min-w-[250px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl']" dir="rtl">
     <div :class="['absolute bg-brandOrange w-[200px] h-[200px] right-0 top-0 translate-x-1/2 -translate-y-1/2 origin-center transition-all duration-500 rounded-full z-10 ',{'scale-[500%]':addedToCart},{'scale-[0]':!addedToCart}]">
+    </div>
+    <div class="absolute grid place-items-center backdrop-blur inset-0 z-10" v-if="loading">
+      <span class="animate-spin">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px" class="scale-[200%]" opacity="0.6"
+             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+             style="display:block;background-color:transparent;"><circle
+            cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+            stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+            style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+        </svg>
+      </span>
     </div>
     <transition enter-active-class="transition-all duration-300 delay-300" enter-from-class="translate-y-8 opacity-0" enter-to-class="translate-y-0 opacity-100"
                 leave-active-class="transition-all duration-300 " leave-to-class="translate-y-8 opacity-0" leave-from-class="translate-y-0 opacity-100">
@@ -102,13 +113,22 @@ const cartStore = useCartStore();
 const authStore = useAuthStore();
 const toast = useToast();
 const addedToCart = ref(false);
+const loading = ref(false);
 
 const addToCart = (id:number,slug:string)=>{
-  cartStore.addToCart(id,slug)
-  addedToCart.value =true;
-  setTimeout(()=>{
-    addedToCart.value = false;
-  },3000)
+  loading.value = true;
+  cartStore.addToCart(id,slug).then(res=>{
+    if(res){
+      addedToCart.value =true;
+      setTimeout(()=>{
+        addedToCart.value = false;
+      },3000)
+    }
+  }).catch(async (e)=>{
+    await toast.showToast('مشکلی رخ داد',ToastType.error,3000,true);
+  }).finally(()=>{
+    loading.value = false;
+  })
 }
 
 const addFavorite = async () => {

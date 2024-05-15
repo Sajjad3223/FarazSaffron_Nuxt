@@ -3,6 +3,7 @@ import {
     DecreaseCount,
     GetPendingOrder,
     IncreaseCount,
+    RemoveAllItems,
     RemoveItem,
     SetDiscount
 } from "~/services/cart.service";
@@ -70,7 +71,8 @@ export const useCartStore = defineStore("cart",()=>{
             if(item != undefined){
                 item.count++;
                 item.totalPrice = item.count * item.price;
-            }else{
+            }
+            else{
                 const product = await GetProduct(slug);
                 if(!product.isSuccess) {
                     await toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
@@ -94,7 +96,7 @@ export const useCartStore = defineStore("cart",()=>{
                 cartData.orderItems.push(itemToAdd);
             }
 
-            cartCookie.value = JSON.stringify(cartData);
+            cartCookie.value = cartData;
             toast.showToast('محصول با موفقیت به سبد اضافه شد',ToastType.success,3000,true);
         }
 
@@ -238,6 +240,23 @@ export const useCartStore = defineStore("cart",()=>{
         }
     }
 
+    const removeAllItems = async ()=>{
+        cartLoading.value = true;
+        if(!authStore.isLoggedIn){
+            const cartCookie = useCookie("g-cart", {
+                watch:true,
+                expires: new Date(new Date().setDate(new Date().getDate() + 30)),
+            });
+            cartCookie.value = null;
+        }else{
+            const result = await RemoveAllItems();
+            if(!result.isSuccess){
+                await toast.showToast(result.metaData.message,ToastType.error,3000,true);
+            }
+        }
+        await refreshCart();
+    }
+
     const transferOrder = async () =>{
         cartLoading.value = true;
 
@@ -246,7 +265,7 @@ export const useCartStore = defineStore("cart",()=>{
             expires: new Date(new Date().setDate(new Date().getDate() + 30)),
         });
         if(cartCookie.value !== undefined){
-            const cartData:OrderDto = cartCookie.value;
+            const cartData:OrderDto = JSON.parse(cartCookie.value!) as OrderDto;
             for (const item of cartData.orderItems) {
                 await AddToCart(item.itemInfo.productId,item.count);
             }
@@ -267,6 +286,7 @@ export const useCartStore = defineStore("cart",()=>{
         increaseCount,
         decreaseCount,
         removeItem,
-        transferOrder
+        transferOrder,
+        removeAllItems
     };
 })

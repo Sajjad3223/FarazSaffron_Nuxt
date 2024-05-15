@@ -29,11 +29,14 @@
           <div class="flex flex-col items-start space-y-4">
             <h3 class="text-3xl font-bold text-brandOrange">جی پی پیک</h3>
             <strong class="text-lg">خدمات ویژه با اشتراک جی پی پیک</strong>
-            <base-g-button color="primary" button-type="bg" >
+            <base-g-button color="primary" button-type="bg" v-if="false">
               <span>دریافت این خدمات ویژه</span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-125">
                 <path d="M14 17L9 12L14 7" stroke="#FAFAFA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
+            </base-g-button>
+            <base-g-button w-full v-else disabled>
+              <span>به زودی ...</span>
             </base-g-button>
           </div>
           <ul class="list-disc flex flex-col space-y-4 opacity-70 font-semibold">
@@ -45,24 +48,29 @@
       </div>
 
       <!--  Main   -->
-      <main class="flex items-start w-full relative gap-8 mt-10" v-if="cartStore.PendingOrder">
+      <main class="flex items-start w-full relative gap-8 mt-10" v-if="!cartStore.cartLoading && cartStore.PendingOrder">
         <div class="flex flex-col flex-1">
           <!--  Items   -->
           <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch" >
             <div class="w-full flex items-center justify-between">
               <strong>سبد خرید</strong>
-              <base-g-button button-type="white">
-                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.5" clip-path="url(#clip0_769_6316)">
-                    <path d="M8.4987 2.125C7.71953 2.125 7.08203 2.7625 7.08203 3.54167C7.08203 4.32083 7.71953 4.95833 8.4987 4.95833C9.27786 4.95833 9.91536 4.32083 9.91536 3.54167C9.91536 2.7625 9.27786 2.125 8.4987 2.125ZM8.4987 12.0417C7.71953 12.0417 7.08203 12.6792 7.08203 13.4583C7.08203 14.2375 7.71953 14.875 8.4987 14.875C9.27786 14.875 9.91536 14.2375 9.91536 13.4583C9.91536 12.6792 9.27786 12.0417 8.4987 12.0417ZM8.4987 7.08333C7.71953 7.08333 7.08203 7.72083 7.08203 8.5C7.08203 9.27917 7.71953 9.91667 8.4987 9.91667C9.27786 9.91667 9.91536 9.27917 9.91536 8.5C9.91536 7.72083 9.27786 7.08333 8.4987 7.08333Z" fill="#09121F"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_769_6316">
-                      <rect width="17" height="17" fill="white"/>
-                    </clipPath>
-                  </defs>
-                </svg>
-              </base-g-button>
+              <div class="relative">
+                <base-g-button button-type="white" @click="showCartOptions = !showCartOptions">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g opacity="0.5" clip-path="url(#clip0_769_6316)">
+                      <path d="M8.4987 2.125C7.71953 2.125 7.08203 2.7625 7.08203 3.54167C7.08203 4.32083 7.71953 4.95833 8.4987 4.95833C9.27786 4.95833 9.91536 4.32083 9.91536 3.54167C9.91536 2.7625 9.27786 2.125 8.4987 2.125ZM8.4987 12.0417C7.71953 12.0417 7.08203 12.6792 7.08203 13.4583C7.08203 14.2375 7.71953 14.875 8.4987 14.875C9.27786 14.875 9.91536 14.2375 9.91536 13.4583C9.91536 12.6792 9.27786 12.0417 8.4987 12.0417ZM8.4987 7.08333C7.71953 7.08333 7.08203 7.72083 7.08203 8.5C7.08203 9.27917 7.71953 9.91667 8.4987 9.91667C9.27786 9.91667 9.91536 9.27917 9.91536 8.5C9.91536 7.72083 9.27786 7.08333 8.4987 7.08333Z" fill="#09121F"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_769_6316">
+                        <rect width="17" height="17" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </base-g-button>
+                <div class="p-2 rounded-xl drop-shadow-lg bg-gray-50 absolute -bottom-14 z-10 left-0 w-max" v-if="showCartOptions" v-click-outside="closeOptions">
+                  <button class="font-light text-sm w-full hover:bg-white p-2 px-4 rounded-lg transition-colors duration-200" @click="removeAll">حذف همه کالا ها</button>
+                </div>
+              </div>
             </div>
             <ul class="mt-8 flex flex-col">
               <TransitionGroup name="none">
@@ -291,6 +299,15 @@ const authStore = useAuthStore();
 const utilStore = useUtilStore();
 
 const carousel = ref();
+
+const showCartOptions = ref(false);
+const removeAll = async ()=>{
+  await cartStore.removeAllItems();
+  await cartStore.refreshCart();
+}
+const closeOptions = ()=>{
+  showCartOptions.value = false
+}
 
 </script>
 

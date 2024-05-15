@@ -1,12 +1,10 @@
 <template>
   <div ref="counter" class="relative min-h-8 grid place-items-center" >
-    <Transition enter-active-class="absolute " leave-active-class="absolute" leave-to-class="opacity-0">
-      <div class="text-2xl flex items-center gap-1" :key="count">
-        <slot name="after"></slot>
-        <strong>{{ count.toLocaleString() }}</strong>
-        <slot name="before"></slot>
-      </div>
-    </Transition>
+    <div class="text-2xl flex items-center gap-1">
+      <slot name="after"></slot>
+      <strong>{{ count.toLocaleString() }}</strong>
+      <slot name="before"></slot>
+    </div>
   </div>
 </template>
 

@@ -21,7 +21,7 @@
           <base-g-input label="متن پیام*" multi-line class="col-span-full" required name="content" id="content" v-model="contactMessage.content" multiline/>
           <base-g-button color="primary" w-full>ثبت و ارسال</base-g-button>
         </div>
-        <div style="height: 30vh; width:100%" class="rounded-2xl border overflow-hidden">
+        <div style="height: 30vh; width:100%" class="rounded-2xl border overflow-hidden z-10">
           <LMap
               ref="map"
               :zoom="16"
