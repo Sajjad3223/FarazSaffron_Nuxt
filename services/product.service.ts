@@ -67,8 +67,8 @@ export const SetImages = (command:FormData):Promise<ApiResponse<undefined>> => {
         body:command,
     });
 }
-export const SetMainImage = (command:SetMainImageCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/admin/Product/mainImages`,{
+export const SetMainImage = (command:FormData):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/mainImage`,{
         method:'PUT',
         body:command
     });

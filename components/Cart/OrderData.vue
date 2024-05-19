@@ -43,9 +43,20 @@
       </div>
       <hr class="my-3">
       <ul class="w-full flex items-center flex-wrap space-x-4 space-x-reverse">
-        <li v-for="i in order.orderItems">
+        <li v-for="i in order.orderItems.slice(0,3)">
           <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
                :alt="i.itemInfo.productImage.alt" alt="jar" class="max-w-24 rounded-md">
+        </li>
+        <li v-if="order.itemsCount > 3">
+          <NuxtLink :to="`/profile/orders/${order.id}`" class="relative grid place-items-center border rounded-lg">
+            <img :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`"
+                 :alt="order.orderItems[3].itemInfo.productImage.alt" alt="jar" class="max-w-24 rounded-md blur-sm">
+            <div class="flex items-center gap-1 absolute">
+              <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+            </div>
+          </NuxtLink>
         </li>
       </ul>
       <hr class="my-3">

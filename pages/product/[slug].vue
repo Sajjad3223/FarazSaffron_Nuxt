@@ -257,7 +257,7 @@
       </div>
 
       <!--  Details & Comments  -->
-      <div class="bg-[#F8F8F8] rounded-xl p-9 mt-9 flex flex-col">
+      <div class="bg-[#F8F8F8] rounded-xl p-9 mt-9 flex flex-col" v-if="product">
         <!--  Buttons  -->
         <div class="flex gap-4">
           <button class="bg-brandOrange rounded-lg py-2 px-8 text-white font-bold">مشخصات</button>
@@ -683,8 +683,8 @@ const comments = ref();
   border-radius: 50%;
   cursor: none;
   /*Set the size of the magnifier glass:*/
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   scale: 0;
   transition: scale 0.3s ease;
 }

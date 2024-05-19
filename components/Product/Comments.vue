@@ -14,6 +14,7 @@ const props = defineProps<{
 
 const selectedComment:Ref<Number | null> = ref(null);
 const pageId = ref(1);
+const loading = ref(true);
 const showAddCommentModal = ref(false);
 const productComments:Ref<CommentDto[]> = ref([]);
 const commentsPagination:Ref<PaginationData | null> = ref(null);
@@ -34,12 +35,16 @@ onMounted(async ()=>{
 })
 
 const loadComments = async ()=>{
+  loading.value = true;
+
   commentsFilterParams.postId = props.product.id;
   const commentsResult = await GetComments(commentsFilterParams);
   if(commentsResult.isSuccess){
     productComments.value = commentsResult.data?.data!;
     commentsPagination.value = FillPaginationData(commentsResult.data!);
   }
+
+  loading.value = false;
 }
 
 const totalScore = computed(()=>{
@@ -53,7 +58,7 @@ const totalScore = computed(()=>{
 </script>
 
 <template>
-  <div class="flex items-start w-full mt-5">
+  <div class="flex items-start w-full mt-5" v-if="!loading">
     <!--   Add Comment   -->
     <div class="w-1/5 border p-3 rounded-xl flex flex-col">
       <div class="text-2xl flex gap-2 items-end">
@@ -74,11 +79,11 @@ const totalScore = computed(()=>{
       </button>
     </div>
     <base-g-modal title="ثبت دیدگاه" v-model="showAddCommentModal">
-      <product-add-comment :post-id="product.id" :post-slug="product.slug" :post-title="product.title" :post-type="EPostType.Product" />
+      <product-add-comment :post-id="product.id" :post-slug="product.slug" :post-title="product.title" :post-type="EPostType.Product" @comment-submitted="showAddCommentModal = false ,loadComments" />
     </base-g-modal>
     <!--   Comments   -->
     <ul class="flex-1 flex flex-col mr-8 px-1" v-if="productComments.length > 0">
-      <ProductComment v-for="c in productComments" :key="c.id" :comment="c" />
+      <ProductComment v-for="c in productComments" :key="c.id" :comment="c" @comment-deleted="loadComments" />
       <li v-if="commentsPagination.pageCount > 1" class="mt-4">
         <button class="px-6 py-2 border rounded-lg border-[#3AC2ED] hover:bg-[#3AC2ED]/10 text-[#3AC2ED] flex items-center gap-2 transition-colors duration-200">
           <span>مشاهده بیشتر</span>
@@ -101,6 +106,12 @@ const totalScore = computed(()=>{
       </svg>
       <strong class="text-xl font-light opacity-70" >هیچ نظری برای این محصول وجود ندارد</strong>
       <base-g-button button-type="white" custom-class="mt-4" @click="showAddCommentModal = true">شما اولین نظر را ثبت کنید</base-g-button>
+    </div>
+  </div>
+  <div class="w-full flex gap-4 animate-pulse mt-5" v-else>
+    <div class="w-1/5 bg-gray-200 rounded-xl h-72"></div>
+    <div class="flex-1 flex flex-col space-y-4">
+      <div class="bg-gray-200 rounded-xl w-full h-24" v-for="i in 4" :key="i"></div>
     </div>
   </div>
 </template>

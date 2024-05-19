@@ -143,11 +143,22 @@
             </li>
           </ul>
         </div>
-        <div class="border rounded-full border-[#666666] aspect-square grid place-items-center">
-          <img src="~/assets/images/salamat.png" alt="salamat" class="w-2/3">
-        </div>
-        <div class="border rounded-full border-[#666666] aspect-square grid place-items-center">
-          <img src="~/assets/images/enamad.png" alt="enamad" class="w-2/3">
+        <div class="grid grid-cols-3 gap-4 self-center col-span-2">
+          <!--   Salamat Logo   -->
+          <div class="border rounded-full border-[#666666] aspect-square grid place-items-center relative">
+            <img src="~/assets/images/salamat.png" alt="salamat" class="w-2/3">
+            <span class="absolute bottom-4 text-xs font-light pointer-events-none">
+            57/1018-1
+          </span>
+          </div>
+          <!--   ENamad   -->
+          <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ' class="border rounded-full border-[#666666] aspect-square grid place-items-center">
+            <img src="~/assets/images/enamad.png" alt="enamad" class="w-2/3" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
+          </a>
+          <!--   Standard   -->
+          <div class="border rounded-full border-[#666666] aspect-square w-36 h-36 grid place-items-center relative p-4">
+            <img src="~/assets/images/standard.png" alt="standard" class="w-16">
+          </div>
         </div>
         <div class="col-span-full text-center text-sm font-light mt-7">
             <span class="flex gap-2 justify-center">
@@ -158,6 +169,8 @@
     </div>
   </footer>
 </template>
+
+
 
 <script setup lang="ts">
 import {BLOGS_URL} from "~/utilities/api.config.js";

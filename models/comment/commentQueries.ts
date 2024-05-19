@@ -26,6 +26,8 @@ export interface CommentDto extends BaseDto{
     likesCount:    number;
     dislikesCount: number;
     userReaction:  string;
+    postTitle:     string;
+    postSlug:     string;
     isConsumer:  boolean;
     answers:       CommentDto[];
 }

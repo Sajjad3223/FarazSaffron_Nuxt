@@ -22,17 +22,18 @@ export const useCartStore = defineStore("cart",()=>{
     const authStore = useAuthStore();
 
     const addToCart = async (id:number,slug:string):Promise<boolean> =>{
+        let addResult = false;
         if(authStore.isLoggedIn){
             //If user is logged in request to server for add to Cart
             const result = await AddToCart(id);
             if(result.isSuccess){
                 toast.showToast(result.metaData.message,ToastType.success,3000,true);
-                return true;
+                addResult = true;
             }else{
                 toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
-                return false;
             }
-        }else{
+        }
+        else{
             // If user is not logged in save items in cookie
 
             const cartCookie = useCookie("g-cart", {
@@ -76,32 +77,34 @@ export const useCartStore = defineStore("cart",()=>{
                 const product = await GetProduct(slug);
                 if(!product.isSuccess) {
                     await toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
-                    return false;
                 }
-                const itemToAdd:OrderItem = {
-                    id:cartData.orderItems.length + 1,
-                    itemInfo:{
-                        productName:product.data?.title,
-                        productImage:product.data?.mainImage,
-                        eItemType:product.data?.packingType,
-                        productSlug:product.data?.slug,
-                        productId:product.data?.id
-                    },
-                    count:1,
-                    price:product.data?.price,
-                    totalPrice:product.data?.totalPrice,
-                    orderId:cartData.id,
-                    creationDate:new Date()
-                };
-                cartData.orderItems.push(itemToAdd);
-            }
+                else {
+                    const itemToAdd: OrderItem = {
+                        id: cartData.orderItems.length + 1,
+                        itemInfo: {
+                            productName: product.data?.title,
+                            productImage: product.data?.mainImage,
+                            eItemType: product.data?.packingType,
+                            productSlug: product.data?.slug,
+                            productId: product.data?.id
+                        },
+                        count: 1,
+                        price: product.data?.price,
+                        totalPrice: product.data?.totalPrice,
+                        orderId: cartData.id,
+                        creationDate: new Date()
+                    };
+                    cartData.orderItems.push(itemToAdd);
 
-            cartCookie.value = cartData;
-            toast.showToast('محصول با موفقیت به سبد اضافه شد',ToastType.success,3000,true);
+                    cartCookie.value = cartData;
+                    toast.showToast('محصول با موفقیت به سبد اضافه شد',ToastType.success,3000,true);
+                    addResult = true;
+                }
+            }
         }
 
         await refreshCart();
-        return true;
+        return addResult;
     }
 
     const refreshCart = async ()=>{
@@ -112,6 +115,7 @@ export const useCartStore = defineStore("cart",()=>{
             if (result.isSuccess) {
                 PendingOrder.value = result.data;
                 cartItemsCount.value = result.data?.itemsCount ?? 0;
+                console.log('refresh')
             }
         }else{
             const cartData:OrderDto = getCookieCart(true);
@@ -127,6 +131,7 @@ export const useCartStore = defineStore("cart",()=>{
 
             PendingOrder.value = cartData;
             cartItemsCount.value = cartData.itemsCount ?? 0;
+            console.log('refresh')
         }
 
         cartLoading.value = false;
@@ -153,7 +158,6 @@ export const useCartStore = defineStore("cart",()=>{
                 item.count++;
                 item.totalPrice = item.count * item.price;
                 cartCookie.value = cartData;
-                await refreshCart();
                 return handleResult({isSuccess:true,metaData:{appStatusCode:ApiStatusCode.Success,message:'عملیات با موفقیت انجام شد'}})
             }else{
                 return handleResult({isSuccess:false,metaData:{appStatusCode:ApiStatusCode.Success,message:'محصول یافت نشد'}})
@@ -181,7 +185,6 @@ export const useCartStore = defineStore("cart",()=>{
                 item.count--;
                 item.totalPrice = item.count * item.price;
                 cartCookie.value = cartData;
-                await refreshCart();
                 return handleResult({isSuccess:true,metaData:{appStatusCode:ApiStatusCode.Success,message:'عملیات با موفقیت انجام شد'}})
             }else{
                 return handleResult({isSuccess:false,metaData:{appStatusCode:ApiStatusCode.Success,message:'محصول یافت نشد'}})

@@ -1,16 +1,44 @@
 <script setup lang="ts">
-import type {CommentDto} from "~/models/comment/commentQueries";
+import {type CommentDto, ECommentStatus} from "~/models/comment/commentQueries";
+import FAlert from "~/components/base/FAlert.vue";
+import {ToastType} from "~/composables/useSwal";
+import {DeleteComment} from "~/services/comment.service";
 
 const props = defineProps<{
   comment:CommentDto
-}>()
+}>();
+
+const emits = defineEmits(['commentDeleted'])
 
 const showOptions = ref(false);
+const closeOptions = ()=>{
+  showOptions.value = false;
+};
+
+const toast = useToast();
+const deleteComment = async (id:number)=>{
+  toast.showToast("آیا از حذف این نظر مطمئن هستید؟",ToastType.warning,0).then(async (res)=>{
+    if(res.isConfirmed){
+      const result = await DeleteComment(id);
+      if(result.isSuccess){
+        emits('commentDeleted');
+        await toast.showToast();
+      }
+      else{
+        await toast.showToast(result.metaData.message,ToastType.error,3000);
+      }
+    }
+  })
+}
 
 </script>
 
 <template>
   <li class="py-4 mt-4 border-b last:border-none flex flex-col" >
+    <f-alert v-if="comment.commentStatus == ECommentStatus.Pending" color="warning" class="mb-4">
+      <span class="bg-warning/30 px-2 rounded-full ml-2 aspect-square">!</span>
+      <span>( نظر شما ثبت شده است و پس از تایید منتشر خواهد شد )</span>
+    </f-alert>
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-6">
         <span class="text-sm opacity-70">{{ comment.sender.fullName ?? 'کاربر' }}</span>
@@ -35,9 +63,9 @@ const showOptions = ref(false);
           </svg>
         </button>
         <Transition name="slide-fade">
-          <div v-if="showOptions" class="border p-2 min-w-28 rounded-lg left-0 top-10 absolute shadow-lg flex flex-col space-y-1">
+          <div v-if="showOptions" class="border p-2 min-w-28 rounded-lg left-0 top-10 absolute shadow-lg flex flex-col space-y-1" v-click-outside="closeOptions">
             <button class="text-xs w-full text-right p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200">ویرایش</button>
-            <button class="text-xs w-full text-right p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200">حذف</button>
+            <button class="text-xs w-full text-right p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200" @click="deleteComment(comment.id)">حذف</button>
             <hr>
             <button class="text-xs w-full text-right p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200">گزارش</button>
           </div>
@@ -71,11 +99,11 @@ const showOptions = ref(false);
       <span class="text-current text-sm">پیشنهاد نمی‌کنم</span>
     </div>
     <!--   Comment Text   -->
-    <p class="mt-8 text-lg">
+    <p class="mt-8">
       {{ comment.text }}
     </p>
     <!--   Reaction   -->
-    <div class="flex items-center gap-2 mr-auto">
+    <div v-if="comment.commentStatus == ECommentStatus.Published" class="flex items-center gap-2 mr-auto">
       <button class="px-2 py-1 rounded-lg hover:shadow-md transition-shadow duration-200 flex gap-1 items-center">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 scale-150">
           <path d="M7 5H9.382C9.55243 5.00001 9.72004 5.04357 9.8689 5.12656C10.0178 5.20955 10.1429 5.32921 10.2326 5.47418C10.3222 5.61915 10.3733 5.78462 10.3809 5.95488C10.3886 6.12514 10.3527 6.29454 10.2765 6.447L8.5265 9.947C8.44343 10.1132 8.31569 10.253 8.1576 10.3507C7.99951 10.4484 7.81733 10.5001 7.6315 10.5H5.623C5.5415 10.5 5.46 10.49 5.3805 10.47L3.5 10M7 5V2.5C7 2.23478 6.89464 1.98043 6.70711 1.79289C6.51957 1.60536 6.26522 1.5 6 1.5H5.9525C5.7025 1.5 5.5 1.7025 5.5 1.9525C5.5 2.3095 5.3945 2.6585 5.196 2.9555L3.5 5.5V10M7 5H6M3.5 10H2.5C2.23478 10 1.98043 9.89464 1.79289 9.70711C1.60536 9.51957 1.5 9.26522 1.5 9V6C1.5 5.73478 1.60536 5.48043 1.79289 5.29289C1.98043 5.10536 2.23478 5 2.5 5H3.75" stroke="#9D9D9D" stroke-linecap="round" stroke-linejoin="round"/>

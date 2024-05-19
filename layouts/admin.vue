@@ -156,10 +156,11 @@
                     </NuxtLink>
                   </li>
                   <li
-                      class="relative px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                      class="relative  px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
                     <NuxtLink exact-active-class="pr-2 text-gray-800 dark:text-gray-100 before:absolute before:inset-y-0 before:right-0 before:w-1 before:bg-purple-600 before:rounded-l-lg" to="/admin/users/comments">
-                      نظرات
+                      <span>نظرات</span>
+                      <span class="aspect-square mr-1 px-2 text-xs rounded-full bg-warning text-black">{{ pendingComments }}</span>
                     </NuxtLink>
                   </li>
                   <li
@@ -804,6 +805,8 @@
 
 <script setup lang="ts">
 
+import {GetPendingCommentsCount} from "~/services/comment.service";
+
 const route = useRoute();
 const isSideMenuOpen = ref(false);
 const isProductMenuOpen = ref(false);
@@ -812,7 +815,16 @@ const isOrdersMenuOpen = ref(false);
 const isBlogMenuOpen = ref(false);
 const isProfileMenuOpen = ref(false);
 const isNotificationsMenuOpen = ref(false);
+const pendingComments = ref(0);
 const dark = ref(false);
+
+onMounted(async ()=>{
+  const result = await GetPendingCommentsCount();
+  if(result.isSuccess){
+    pendingComments.value = result.data ?? 0;
+  }
+})
+
 const toggleSideMenu = () => isSideMenuOpen.value = !isSideMenuOpen.value;
 const closeSideMenu = () => isSideMenuOpen.value = false;
 

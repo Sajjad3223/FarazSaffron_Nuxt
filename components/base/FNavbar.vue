@@ -1,13 +1,13 @@
 <template>
 
-  <header>
-    <div class="h-[60px] bg-white w-full border-b-2 border-[#DCDCDC] relative flex items-center">
+  <header >
+    <div class="h-[60px] bg-white w-full border-b-2 border-[#DCDCDC] relative flex items-center" >
       <img src="~/assets/images/img.png" alt="" class="h-[60px] w-[85vw]">
       <span
           class="absolute text-white font-bold text-2xl left-1/2 -translate-x-1/2">با جی پی به دنیای زعفران قدم بزار</span>
     </div>
   </header>
-  <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative">
+  <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative" >
     <div class="container h-[125px] mx-auto mt-5">
       <div class="w-full flex items-center justify-between">
         <div class="flex items-center flex-1 gap-12">
@@ -112,7 +112,7 @@
           </div>
           <div class="flex items-center gap-10">
             <div class="relative">
-              <button class="flex items-center gap-2" @click="openCategories" type="button">
+              <button class="flex items-center gap-2" @click="showCategories = !showCategories" type="button">
                 <strong>دسته بندی</strong>
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"
                      :class="['transition-all duration-200',{'rotate-180':showCategories}]">
@@ -121,7 +121,7 @@
                 </svg>
               </button>
               <Transition name="slide-fade">
-                <div v-if="showCategories"
+                <div v-if="showCategories" v-click-outside="closeCategories"
                      :class="['absolute overflow-hidden top-12 z-20 bg-white p-4 flex rounded-xl transition-all duration-300',
                      isCategoryHovered ? 'w-[320px]' : 'w-[180px]']"
                      style="box-shadow: 0 2px 5px 0 #B7B7B740;">
@@ -171,7 +171,7 @@
           <div class="relative">
             <button type="button"
                     class="h-10 px-3 rounded-lg text-brandOrange flex items-center gap-2 border border-brandOrange"
-                    @click="showAccountOptions = !showAccountOptions,showCategories=false,showCart=false">
+                    @click="showAccountOptions = !showAccountOptions">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="14" height="14" fill="url(#pattern0_306_3622)"/>
@@ -191,7 +191,7 @@
               </svg>
             </button>
             <Transition name="slide-fade">
-              <div v-if="showAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg"
+              <div v-if="showAccountOptions" v-click-outside="closeAccountOptions" class="absolute z-20 bg-white top-12 w-[150px] p-2 rounded-lg"
                    style="box-shadow: 0 0 5px 0 #69696940;">
                 <div class="flex flex-col w-full space-y-2" v-if="!authStore.isLoggedIn">
                   <button
@@ -286,7 +286,7 @@
           <div class="flex h-auto w-max items-stretch relative gap-2">
             <button class=" h-auto grid place-items-center bg-brandOrange rounded-md rounded-b-xl"
                     style="box-shadow: 0 0 10px 0 #F0462380;"
-                    @click="showCart = !showCart,showAccountOptions=false,showCategories=false">
+                    @click="showCart = !showCart">
               <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
                    class="w-[34px]">
                 <path
@@ -296,7 +296,7 @@
             </button>
             <div class="flex flex-col items-start">
               <button class="flex items-center gap-2"
-                      @click="showCart = !showCart,showAccountOptions=false,showCategories=false">
+                      @click="showCart = !showCart">
                 <strong class="text-sm">سبد خرید</strong>
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"
                      :class="['transition-transform duration-200',{'rotate-180':showCart}]">
@@ -310,7 +310,7 @@
                 </span>
             </div>
             <Transition name="slide-fade">
-              <div v-if="showCart" class="absolute top-16 left-0 z-20 w-max bg-white rounded-lg rounded-b-3xl"
+              <div v-if="showCart" v-click-outside="closeCart" class="absolute top-16 left-0 z-20 w-max bg-white rounded-lg rounded-b-3xl"
                    style="box-shadow: 0 2px 5px 0 #B7B7B740;">
                 <div class="flex flex-col items-center space-y-4 p-6 min-w-[300px]"
                      v-if="!cartStore.PendingOrder || cartStore.cartItemsCount == 0">
@@ -413,6 +413,9 @@ const showOptions = ref(false);
 const showCategories = ref(false);
 const showAccountOptions = ref(false);
 const showCart = ref(false);
+const closeCategories = ()=>{showCategories.value = false};
+const closeAccountOptions = ()=>{showAccountOptions.value = false};
+const closeCart = ()=>{showCart.value = false};
 const showResponsiveNavbar = ref(false);
 const unseenNotifs = ref(0);
 

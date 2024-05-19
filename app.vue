@@ -117,9 +117,15 @@ body{
 .slide-fade-leave-to{
   @apply opacity-0 -translate-y-4;
 }
-.slide-fade-enter-to,
-.slide-fade-leave-from{
-  @apply opacity-100 translate-y-0;
+
+.slide-fade-bottom-enter-active,
+.slide-fade-bottom-leave-active{
+  @apply transition-all duration-300;
+}
+
+.slide-fade-bottom-enter-from,
+.slide-fade-bottom-leave-to{
+  @apply opacity-0 translate-y-4;
 }
 
 .fade-enter-active,

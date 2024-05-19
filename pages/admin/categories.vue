@@ -96,7 +96,7 @@
                       ></path>
                     </svg>
                   </button>
-                  <button
+                  <button @click="deleteCategory(c.id)"
                       class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                       aria-label="Delete"
                   >
@@ -147,7 +147,7 @@
                     ></path>
                   </svg>
                 </button>
-                <button
+                <button @click="deleteCategory(ch.id)"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete"
                 >
@@ -190,9 +190,10 @@
 <script setup lang="ts">
 import FModal from "~/components/base/FModal.vue";
 import type {CategoryDto, CategoryFilterParams} from "~/models/categories/categoryQueries";
-import {GetCategoriesByAdmin} from "~/services/category.service";
+import {DeleteCategory, GetCategoriesByAdmin} from "~/services/category.service";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
+import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
   layout:'admin'
@@ -202,6 +203,7 @@ const isLoading = ref(true)
 const showFilters = ref(false)
 const showAddModal = ref(false)
 const showEditModal = ref(false)
+const toast = useToast();
 const pageId = ref(1);
 const categories:Ref<CategoryDto[]> = ref([]);
 const selectedCategory:Ref<CategoryDto | null> = ref(null);
@@ -234,6 +236,22 @@ const getData = async () => {
   }
 
   isLoading.value = false;
+}
+
+const deleteCategory = (id:number)=>{
+  toast.showToast("با حذف این دسته بندی همه محصولات آن نیز حذف خواهند شد، آیا از حذف اطمینان دارید؟",ToastType.warning,0)
+      .then(async (res)=>{
+        if(res.isConfirmed){
+          const result = await DeleteCategory(id);
+          if(result.isSuccess){
+            toast.showToast();
+            await getData();
+          }
+          else{
+            await toast.showToast(result.metaData.message,ToastType.error,0);
+          }
+        }
+      })
 }
 
 </script>

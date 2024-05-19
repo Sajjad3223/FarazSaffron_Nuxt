@@ -43,7 +43,7 @@ export const EditCategory = (command:EditCategoryCommand):Promise<ApiResponse<un
     });
 }
 export const DeleteCategory = (categoryId:number):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/admin/category/${categoryId}`,{
+    return FetchApi(`/admin/Category/${categoryId}`,{
         method:'DELETE'
     });
 }

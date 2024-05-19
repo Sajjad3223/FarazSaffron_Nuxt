@@ -1,7 +1,7 @@
 <template>
   <div>
     <button v-if="!isLink" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
-                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled" @click="emits('click')">
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled" @click="emits('click')" :type="type">
       <slot v-if="!isLoading"></slot>
       <span v-else class="animate-spin">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px"
@@ -33,7 +33,8 @@ const props = withDefaults(defineProps<{
   customClass?:string | null | undefined,
   isIcon?:boolean,
   to?:string | null,
-  isLink?:boolean
+  isLink?:boolean,
+  type?:'submit'|'button'
 }>() ,{
   color:'primary',
   buttonType:'bg',
@@ -45,7 +46,8 @@ const props = withDefaults(defineProps<{
   py:2,
   customClass:undefined,
   isIcon:false,
-  isLink:false
+  isLink:false,
+  type:'button'
 });
 
 const emits = defineEmits(['click']);

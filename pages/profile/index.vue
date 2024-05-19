@@ -159,7 +159,7 @@
       <hr class="my-4">
       <div class="flex flex-col">
         <div class="flex gap-2">
-          <div class="bg-[#F5F5F5] flex-1 flex gap-2 items-center rounded-xl py-2 px-4">
+          <NuxtLink to="/profile/wallet" class="bg-[#F5F5F5] flex-1 flex gap-2 items-center rounded-xl py-2 px-4">
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <circle cx="25" cy="25" r="25" fill="white"/>
               <rect x="13" y="12" width="25" height="25" fill="url(#pattern0_906_7776)"/>
@@ -171,10 +171,10 @@
               </defs>
             </svg>
             <div class="flex flex-col">
-              <base-g-price :price="618000" />
+              <base-g-price :price="accountStore.currentUser?.walletCash / 10" />
               <span class="text-xs font-light">کیف پول</span>
             </div>
-          </div>
+          </NuxtLink>
           <div class="bg-[#F5F5F5] w-max flex gap-2 items-center rounded-xl py-2 px-4">
             <div class="bg-white p-3 aspect-square rounded-full">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

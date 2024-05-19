@@ -33,17 +33,7 @@
       </Transition>
     </div>
 
-    <base-f-divider :logo-divider="false" title="دسته بندی ها">
-      <template #left>
-        <base-f-button color="primary" @clicked="showAddModal = true" text-color="white">
-          افزودن دسته بندی جدید
-        </base-f-button>
-      </template>
-    </base-f-divider>
-
-    <f-modal title="افزودن دسته بندی جدید" v-model="showAddModal">
-      <admin-categories-add @category-added="showAddModal = false" />
-    </f-modal>
+    <base-f-divider :logo-divider="false" title="نظرات کاربران" />
 
     <div class=" w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto" >
@@ -52,6 +42,7 @@
           <tr
               class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
           >
+            <th class="px-4 py-3">پست</th>
             <th class="px-4 py-3">کاربر</th>
             <th class="px-4 py-3">متن</th>
             <th class="px-4 py-3">تاریخ ثبت</th>
@@ -64,6 +55,11 @@
           >
           <template v-for="c in comments">
             <tr class="text-gray-700 dark:text-gray-400" >
+              <td class="px-4">
+                <NuxtLink :to="`/product/${c.postSlug}`" class="text-sm font-bold">
+                  {{c.postTitle}}
+                </NuxtLink>
+              </td>
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
                   <div>
@@ -71,7 +67,7 @@
                   </div>
                 </div>
               </td>
-              <td class="px-4 py-3 text-sm text-nowrap">
+              <td class="px-4 py-3 text-sm text-wrap max-w-[20vw] leading-relaxed">
                 {{ c.text }}
               </td>
               <td class="px-4 py-3 text-sm">

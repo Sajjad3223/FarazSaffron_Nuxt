@@ -49,7 +49,7 @@
       </div>
 
       <div class="mt-6" v-if="!loading">
-        <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders" />
+        <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders.itemsCount > 0 ? pendingOrders : []" />
         <cart-order-data v-if="tab === EOrderStatus.Paid" :status="EOrderStatus.Paid" :data="paidOrders" />
         <cart-order-data v-if="tab === EOrderStatus.Returned" :status="EOrderStatus.Returned" :data="returnedOrders" />
         <cart-order-data v-if="tab === EOrderStatus.Canceled" :status="EOrderStatus.Canceled" :data="canceledOrders" />
@@ -94,7 +94,7 @@
         </button>
       </div>
       <div class="flex flex-col mt-6" v-if="!loading">
-        <ul v-if="getOrders.length > 0">
+        <ul v-if="getOrders.length > 0 && (getOrders.length == 1 ? getOrders[0].itemsCount > 0 : true)">
           <li>
             <span class="font-light text-sm mb-8">
               تعداد سفارشات این گروه: {{getOrders.length}}
@@ -103,15 +103,29 @@
           <li class=" border-b last:border-none py-4 w-full flex" v-for="order in getOrders">
             <div class="flex-1 grid grid-cols-2">
               <span>شماره فاکتور:</span>
-              <strong>#{{order.id}}</strong>
+              <NuxtLink :to="`/profile/orders/${order.id}`" class="underline-offset-4 text-sm underline text-primary tracking-widest">#{{order.id}}</NuxtLink>
               <span>خریدار:</span>
-              <strong>{{order.fullName}}</strong>
+              <small>{{order.fullName}}</small>
               <span>تعداد کالا:</span>
               <strong>{{order.itemsCount}}</strong>
               <span>جمع کل:</span>
               <base-g-price :price="order.totalPrice /10" />
             </div>
-            <img src="~/assets/images/product-image.png" alt="productImage" class="max-w-[120px]">
+            <div :class="['grid place-items-center',order.itemsCount > 1 ? 'grid-cols-2' : 'grid-cols-1']" class="max-w-[120px]" dir="ltr">
+              <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" v-for="i in [...order.orderItems].slice(0,3)" :key="i.id"
+                   :alt="i.itemInfo.productImage.alt" alt="jar" class="w-full rounded-md ">
+              <img :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`" v-if="order.itemsCount == 4"
+                   :alt="order.orderItems[3].itemInfo.productImage.alt" alt="jar" class="w-full rounded-md ">
+              <div class="border rounded-xl grid place-items-center h-full" v-if="order.itemsCount > 4">
+                <img :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`"
+                     :alt="order.orderItems[3].itemInfo.productImage.alt" class="blur-[1px] aspect-square">
+                <div class="flex items-center gap-1 absolute">
+                  <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
         <div class="mt-6 flex flex-col items-center" v-else>
@@ -140,6 +154,7 @@
 import FBadge from "~/components/base/FBadge.vue";
 import {GetOrders, GetOrdersGist} from "~/services/cart.service";
 import {EOrderStatus, type OrderFilterData, type OrderFilterParams, type OrderGist} from "~/models/cart/cartQueries";
+import {SITE_URL} from "~/utilities/api.config";
 
 const loading = ref(false);
 const ordersGist:Ref<OrderGist | null> = ref({
