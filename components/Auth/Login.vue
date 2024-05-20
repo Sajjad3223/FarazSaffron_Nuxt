@@ -8,7 +8,7 @@
       </button>
     </div>
     <span class="text-center text-sm font-thin text-danger">{{errorMessage}}</span>
-    <base-g-button wFull :is-loading="isLoading">ورود</base-g-button>
+    <base-g-button wFull type="submit" :is-loading="isLoading">ورود</base-g-button>
     <div class="flex items-center w-full" v-if="false">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">
@@ -74,7 +74,7 @@ const login = async ()=>{
 
   const result = await Login(loginData);
   if(result.isSuccess){
-    authStore.setToken(result.data!);
+    await authStore.setToken(result.data!);
     await toast.showToast('با موفقیت وارد شدید');
     authStore.isLoginModalOpen = false;
     await accountStore.initData();

@@ -1,6 +1,8 @@
 import type {EWalletType} from "~/models/users/userDto";
 
 export interface RegisterCommand {
+    firstName?: string | null;
+    lastName?: string | null;
     phoneNumber: string;
     password: string;
 }

@@ -2,8 +2,8 @@
   <Form :validation-schema="registerSchema" @submit="register" class="flex flex-col mt-6">
     <div class="grid grid-cols-2 gap-4">
       <div class="grid grid-cols-2 gap-4 col-span-full">
-        <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="firstName"/>
-        <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="lastName"/>
+        <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="registerData.firstName"/>
+        <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="registerData.lastName"/>
       </div>
       <base-g-input label="شماره تلفن *"  required v-model="registerData.phoneNumber" name="phoneNumber" id="phoneNumber" class="col-span-full"/>
       <base-g-input label="رمز عبور *"  type="password" required v-model="registerData.password" name="password" id="password" class="col-span-full"/>
@@ -53,14 +53,14 @@ import * as Yup from 'yup'
 const router = useRouter();
 const authStore = useAuthStore();
 const utilStore = useUtilStore();
+const accountStore = useAccountStore();
 
 const registerData:RegisterCommand = reactive({
+  firstName: null,
+  lastName: null,
   phoneNumber:"",
   password:""
 });
-
-const firstName = ref('');
-const lastName = ref('');
 
 const registerSchema = Yup.object().shape({
   phoneNumber:Yup.string().matches(new RegExp('^(\\+98|0)?9\\d{9}$'),'شماره تلفن وارد شده معتبر نمی باشد'),
@@ -76,15 +76,17 @@ const register = async ()=>{
 
   const result = await Register(registerData);
   if(result.isSuccess){
-    authStore.setToken(result.data!);
+    await authStore.setToken(result.data!);
     await Swal.fire({
       title:"حساب شما ساخته شد",
       text:'در حال انتقال به پنل کاربری',
       icon:'success',
       timerProgressBar:true,
     });
-    authStore.isLoginModalOpen = false;
+    authStore.isRegisterModalOpen = false;
     await router.push('/profile');
+    await accountStore.initData();
+
   }
   else{
     errorMessage.value = result.metaData.message;
