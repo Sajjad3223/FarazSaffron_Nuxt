@@ -24,17 +24,17 @@
       <div>
         <ul class="flex items-center gap-2" v-if="paginationData.pageCount <= 5">
           <li  v-for="p in paginationData.pageCount" :key="p">
-            <button v-if="p === modelValue" disabled class="bg-brandOrange rounded-lg w-8 h-8 text-sm grid place-items-center text-white" >
+            <button v-if="p === modelValue" disabled class="bg-brandOrange rounded-md lg:rounded-lg w-6 lg:w-8 h-6 lg:h-8 text-xs lg:text-sm grid place-items-center text-white" >
               <span style="font-family: 'Vazir FD',serif">{{ p }}</span>
             </button>
-            <button v-else class="border border-[#C9C9C9] rounded-lg w-8 h-8 text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(p)">
+            <button v-else class="border border-[#C9C9C9] rounded-md lg:rounded-lg w-6 lg:w-8 h-6 lg:h-8 text-xs lg:text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(p)">
               <span style="font-family: 'Vazir FD',serif">{{ p }}</span>
             </button>
           </li>
         </ul>
         <ul class="flex items-center gap-2" v-else>
           <li v-if="paginationData.currentPage > 2">
-            <button class="border border-[#C9C9C9] rounded-lg w-8 h-8 text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(1)">
+            <button class="border border-[#C9C9C9] rounded-md lg:rounded-lg w-6 lg:w-8 h-6 lg:h-8 text-xs lg:text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(1)">
               <span style="font-family: 'Vazir FD',serif">{{ 1 }}</span>
             </button>
           </li>
@@ -42,7 +42,7 @@
             ...
           </li>
           <li v-if="paginationData.currentPage > 1">
-            <button class="border border-[#C9C9C9] rounded-lg w-8 h-8 text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(paginationData.currentPage - 1)">
+            <button class="border border-[#C9C9C9] rounded-md lg:rounded-lg w-6 lg:w-8 h-6 lg:h-8 text-xs lg:text-sm grid place-items-center text-[#C9C9C9]" @click="changePageId(paginationData.currentPage - 1)">
               <span style="font-family: 'Vazir FD',serif">{{ paginationData.currentPage - 1 }}</span>
             </button>
           </li>

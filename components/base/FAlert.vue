@@ -52,5 +52,6 @@ const props = defineProps<{
 
 .alert-bordered{
   @apply border;
+  background-color: transparent !important;
 }
 </style>

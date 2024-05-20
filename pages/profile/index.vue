@@ -187,13 +187,13 @@
                 </defs>
               </svg>
             </div>
-            <div class="flex flex-col">
+            <NuxtLink to="/profile/orders" class="flex flex-col">
               <strong>{{ ordersGist?.pending + ordersGist?.paid + ordersGist?.returned }}</strong>
               <span class="text-xs font-light">سفارشات</span>
-            </div>
+            </NuxtLink>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-4 place-items-center mt-4">
+        <NuxtLink to="/profile/orders" class="grid grid-cols-3 gap-4 place-items-center mt-4">
           <div class="flex flex-col space-y-2 items-center relative">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="35" height="35" fill="url(#pattern0_906_7787)"/>
@@ -207,7 +207,7 @@
             <small class="font-thin">جاری</small>
             <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2">{{ ordersGist?.pending }}</span>
           </div>
-          <div class="flex flex-col space-y-2 items-center relative">
+          <NuxtLink to="/profile/orders" class="flex flex-col space-y-2 items-center relative">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="35" height="35" fill="url(#pattern0_906_7788)"/>
               <defs>
@@ -219,8 +219,8 @@
             </svg>
             <small class="font-thin">تحویل شده</small>
             <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2">{{ ordersGist?.paid }}</span>
-          </div>
-          <div class="flex flex-col space-y-2 items-center relative">
+          </NuxtLink>
+          <NuxtLink to="/profile/orders" class="flex flex-col space-y-2 items-center relative">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="35" height="35" fill="url(#pattern0_906_7786)"/>
               <defs>
@@ -232,8 +232,8 @@
             </svg>
             <small class="font-thin">مرجوع شده</small>
             <span class="min-w-5 grid place-items-center font-thin aspect-square rounded-full bg-brandOrange text-white text-xs absolute left-0 translate-y-2" v-if="ordersGist?.returned !== 0">{{ ordersGist?.returned }}</span>
-          </div>
-        </div>
+          </NuxtLink>
+        </NuxtLink>
       </div>
       <ul class="mt-6">
         <li>

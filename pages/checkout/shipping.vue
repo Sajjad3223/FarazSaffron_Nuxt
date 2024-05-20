@@ -168,10 +168,10 @@
           </div>
         </div>
 
-        <client-only v-if="false">
+        <client-only v-if="!loading">
           <GPCarousel ref="carousel" :items-to-show="5" class="rounded-xl mt-4">
-            <GPSlide v-for="p in 5" :key="p" >
-              <!--                  <GCard :product="p" />-->
+            <GPSlide v-for="p in products" :key="p.id" >
+              <GCard :product="p" />
             </GPSlide>
           </GPCarousel>
         </client-only>
@@ -293,6 +293,9 @@ import {SITE_URL} from "~/utilities/api.config";
 import {SetAddressAsActive} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
 import {FetchApi} from "~/utilities/CustomApiFetch";
+import type {ProductFilterData} from "~/models/product/productQueries";
+import {GetProducts} from "~/services/product.service";
+import {EOrderBy} from "~/models/product/EOrderBy";
 
 
 
@@ -305,6 +308,20 @@ const carousel = ref();
 const showAddressModal = ref(false);
 
 const toast = useToast();
+
+const loading = ref(true);
+const products:Ref<ProductFilterData[] | null> = ref([]);
+
+onMounted(async()=>{
+  loading.value = true;
+
+  const result = await GetProducts({pageId:1,take:5,orderBy:EOrderBy.جدیدترین});
+  if(result.isSuccess){
+    products.value = result.data?.data ?? [];
+  }
+
+  loading.value = false;
+})
 
 const setAsActive = async (addressId:number) => {
   const result = await SetAddressAsActive(addressId);

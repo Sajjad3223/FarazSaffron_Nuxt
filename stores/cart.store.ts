@@ -12,6 +12,7 @@ import {ToastType} from "~/composables/useSwal";
 import type {ApiResponse} from "~/models/apiResponse";
 import {GetProduct} from "~/services/product.service";
 import {ApiStatusCode} from "~/models/metaData";
+import {EItemType} from "~/models/EPostType";
 
 export const useCartStore = defineStore("cart",()=>{
     const PendingOrder:Ref<OrderDto | null | undefined> = ref(null);
@@ -41,7 +42,7 @@ export const useCartStore = defineStore("cart",()=>{
                 expires: new Date(new Date().setDate(new Date().getDate() + 30)),
             });
 
-            let cartData:OrderDto = cartCookie.value;
+            let cartData:OrderDto = JSON.parse(cartCookie.value!);
 
             if(cartData === null || cartData === undefined){
                 cartData = {
@@ -82,21 +83,24 @@ export const useCartStore = defineStore("cart",()=>{
                     const itemToAdd: OrderItem = {
                         id: cartData.orderItems.length + 1,
                         itemInfo: {
-                            productName: product.data?.title,
-                            productImage: product.data?.mainImage,
-                            eItemType: product.data?.packingType,
-                            productSlug: product.data?.slug,
-                            productId: product.data?.id
+                            productName: product.data!.title!,
+                            productImage: {
+                                image:product.data!.mainImage!,
+                                productId:product.data!.id!,
+                            },
+                            eItemType: EItemType.Saffron,
+                            productSlug: product.data!.slug!,
+                            productId: product.data!.id!
                         },
                         count: 1,
-                        price: product.data?.price,
-                        totalPrice: product.data?.totalPrice,
+                        price: product.data!.price!,
+                        totalPrice: product.data!.totalPrice!,
                         orderId: cartData.id,
                         creationDate: new Date()
                     };
                     cartData.orderItems.push(itemToAdd);
 
-                    cartCookie.value = cartData;
+                    cartCookie.value = JSON.stringify(cartData);
                     toast.showToast('محصول با موفقیت به سبد اضافه شد',ToastType.success,3000,true);
                     addResult = true;
                 }

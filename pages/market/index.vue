@@ -246,6 +246,8 @@
             </NuxtLink>
           </li>
         </ul>
+
+        <FPagination :pagination-data="paginationData" v-model="pageId" />
       </div>
     </div>
 
@@ -322,7 +324,7 @@ const getData = async () => {
   loading.value = true;
 
   filterParams.pageId = pageId.value;
-  filterParams.orderBy = route.query?.orderBy;
+  filterParams.orderBy = route.query?.orderBy ?? EOrderBy.جدیدترین;
 
   const productsResult = await GetProducts(filterParams);
   if (productsResult.isSuccess) {

@@ -20,8 +20,8 @@
         <div class="flex justify-between items-start">
 
             <div class="flex items-center flex-wrap gap-2 lg:gap-4">
-              <NuxtLink to="/product/thing#comments">
-                <strong class="text-sm lg:text-base">زعفران نگین شیشه ای</strong>
+              <NuxtLink :to="`/product/${c.postSlug}`">
+                <strong class="text-sm lg:text-base">{{ c.postTitle }}</strong>
               </NuxtLink>
 
               <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden lg:block">

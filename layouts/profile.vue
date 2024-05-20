@@ -20,7 +20,7 @@
           </NuxtLink>
         </div>
         <div class="animate-pulse w-full bg-gray-200 rounded-xl p-4" v-else></div>
-        <div class="flex justify-between items-center">
+        <NuxtLink to="/profile/wallet" class="flex justify-between items-center">
           <div class="flex items-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
               <g id="Iconly/Curved/Wallet">
@@ -36,8 +36,8 @@
               کیف پول
             </span>
           </div>
-          <span class="text-sm font-light"><strong class="font-bold text-lg ml-2">{{accountStore.currentUser?.walletCash?.toLocaleString() ?? 0}}</strong> ریــال</span>
-        </div>
+          <base-g-price :price="accountStore.currentUser?.walletCash ?? 0" />
+        </NuxtLink>
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75 text-brandOrange">

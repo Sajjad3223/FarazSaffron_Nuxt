@@ -1,5 +1,5 @@
 <template>
-  <div :class="['relative h-max min-w-[250px] rounded-md overflow-hidden mx-2 text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl']" dir="rtl">
+  <div :class="['relative h-max min-w-[250px] rounded-md overflow-hidden mx-2 bg-white text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl']" dir="rtl">
     <div :class="['absolute bg-brandOrange w-[200px] h-[200px] right-0 top-0 translate-x-1/2 -translate-y-1/2 origin-center transition-all duration-500 rounded-full z-10 ',{'scale-[500%]':addedToCart},{'scale-[0]':!addedToCart}]">
     </div>
     <div class="absolute grid place-items-center backdrop-blur inset-0 z-10" v-if="loading">

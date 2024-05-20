@@ -3,10 +3,10 @@
     <textarea @input="onChanged" :title="placeHolder" rows="5"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
               :required="required" v-if="multiLine"></textarea>
-    <input :type="type" @input="onChanged" :title="placeHolder"
+    <input :type="type" :title="placeHolder" @input="onChanged"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
            :required="required" v-show="!showPassword && !multiLine">
-    <input type="text" :required="required" :title="placeHolder"
+    <input type="text" :required="required" :title="placeHolder" @input="onChanged"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != ''},{'disabled':disabled}]" v-show="type === 'password' && showPassword" :value="inputValue">
     <label for="">{{ label }}</label>
     <transition enter-active-class="duration-200 transition-opacity" enter-from-class="opacity-0" enter-to-class="opacity-100"

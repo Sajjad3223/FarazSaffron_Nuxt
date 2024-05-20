@@ -9,7 +9,7 @@
       <base-g-input label="رمز عبور *"  type="password" required v-model="registerData.password" name="password" id="password" class="col-span-full"/>
     </div>
     <span class="text-center text-sm font-thin text-danger">{{errorMessage}}</span>
-    <base-g-button wFull class="mt-4" :is-loading="isLoading">ثبت نام</base-g-button>
+    <base-g-button wFull class="mt-4" :is-loading="isLoading" type="submit">ثبت نام</base-g-button>
     <div class="flex items-center w-full my-4" v-if="false">
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
       <span class="px-4">

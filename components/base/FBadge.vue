@@ -1,26 +1,23 @@
 <template>
 <div :class="['badge',
-              `badge-${color}`,`text-${size}`,`text-${foreColor}`]">
+              `badge-${color}`,`text-${size}`,`text-${foreColor}`,{'badge-outline':outline}]">
   <slot/>
 </div>
 </template>
 
 <script setup lang="ts">
 
-const props = defineProps<{
-  color:{
-    type:String,
-    default:'danger'|'warning'|'primary'|'brandOrange'|'secondary',
-  },
-  size:{
-    type:String,
-    default:'xs'|'sm'|'base'|'lg'|'xl',
-  },
-  foreColor:{
-    type:String,
-    default:'white'
-  },
-}>()
+const props = withDefaults(defineProps<{
+  color:'danger'|'warning'|'primary'|'brandOrange'|'secondary',
+  size?:'xs'|'sm'|'base'|'lg'|'xl',
+  foreColor?:string,
+  outline?:boolean
+}>(),{
+  color:'primary',
+  size:'sm',
+  foreColor:'white',
+  outline:false
+})
 
 </script>
 
@@ -31,19 +28,25 @@ const props = defineProps<{
 }
 
 .badge-warning{
-  @apply bg-warning text-black;
+  @apply bg-warning border-warning text-black;
 }
 .badge-danger{
-  @apply bg-danger text-white;
+  @apply bg-danger border-danger text-white;
 }
 .badge-primary{
-  @apply bg-primary text-white;
+  @apply bg-primary border-primary text-white;
 }
 .badge-brandOrange{
-  @apply bg-brandOrange text-white;
+  @apply bg-brandOrange border-brandOrange text-white;
 }
 .badge-secondary{
-  @apply bg-secondary text-white;
+  @apply bg-secondary border-secondary text-white;
+}
+
+.badge-outline{
+  @apply border;
+  background-color: transparent !important;
+  color: black;
 }
 
 </style>

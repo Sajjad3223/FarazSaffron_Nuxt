@@ -35,10 +35,10 @@ const deleteComment = async (id:number)=>{
 
 <template>
   <li class="py-4 mt-4 border-b last:border-none flex flex-col" >
-    <f-alert v-if="comment.commentStatus == ECommentStatus.Pending" color="warning" class="mb-4">
+    <base-f-alert v-if="comment.commentStatus == ECommentStatus.Pending" color="warning" class="mb-4">
       <span class="bg-warning/30 px-2 rounded-full ml-2 aspect-square">!</span>
       <span>( نظر شما ثبت شده است و پس از تایید منتشر خواهد شد )</span>
-    </f-alert>
+    </base-f-alert>
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-6">
         <span class="text-sm opacity-70">{{ comment.sender.fullName ?? 'کاربر' }}</span>
