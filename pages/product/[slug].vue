@@ -209,7 +209,40 @@
           <client-only>
             <GPCarousel ref="carousel" :items-to-show="4" wrap-around dir="rtl">
               <GPSlide v-for="p in relativeProducts" :key="p">
-                <GCard :product="p" />
+<!--                <GCard :product="p" />-->
+                <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
+                  <NuxtLink :to="`/product/${p.slug}`" class="w-2/5 grid place-items-center relative">
+                    <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+                  </NuxtLink>
+                  <div class="flex-1 flex flex-col items-start space-y-4">
+                    <strong class="text-lg text-right">{{p.title}}</strong>
+                    <span class="text-[#9E9E9E] text-sm">
+
+                    </span>
+                    <ul class="flex items-center gap-0.5">
+                      <li v-for="i in 5" :key="i">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <rect width="10" height="10" fill="url(#pattern0_308_3938)"/>
+                          <defs>
+                            <pattern id="pattern0_308_3938" patternContentUnits="objectBoundingBox" width="1" height="1">
+                              <use xlink:href="#image0_308_3938" transform="scale(0.01)"/>
+                            </pattern>
+                            <image id="image0_308_3938" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                          </defs>
+                        </svg>
+                      </li>
+                    </ul>
+                    <div class="flex items-center gap-1">
+                      <base-g-price :price="p.price / 10" />
+                    </div>
+                    <button class="border text-xs rounded-lg border-[#E8E8E8] py-2 flex gap-2 px-3 items-center justify-center w-full text-[#939393] hover:bg-[#F3F3F3] transition-colors duration-200">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <span>افزودن به سبد خرید</span>
+                    </button>
+                  </div>
+                </li>
               </GPSlide>
             </GPCarousel>
           </client-only>
@@ -427,22 +460,39 @@
 </template>
 
 <script setup lang="ts">
-
-
 import {useCartStore} from "~/stores/cart.store";
 import {GetProduct, GetRelativeProducts} from "~/services/product.service";
 import type {ProductDto, ProductFilterData} from "~/models/product/productQueries";
 import {EPackingType} from "~/models/product/EPackingType";
 import {SITE_URL} from "~/utilities/api.config";
 import {EPostType} from "~/models/EPostType";
+import {useAsyncData} from "#app";
+import {ToastType} from "~/composables/useSwal";
+import {CreateFavorite} from "~/services/favorite.service";
+import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
+
+
+const route = useRoute();
+const router = useRouter();
+const slug:string = route.params.slug.toString()!;
+const toast = useToast();
+
+const { data: result, pending } = await useAsyncData("getCourse", async () => await GetProduct(slug))
+if(!result.value?.isSuccess){
+  if(process.server){
+    throw createError({statusCode:404,message:'Not Found'})
+  }else{
+    router.push('/market');
+    await toast.showToast('درود مورد نظر یافت نشد',ToastType.error,0)
+  }
+}
+
+const product:Ref<ProductDto> = ref(result.value?.data!);
+const relativeProducts:Ref<ProductFilterData[]> = ref([]);
 
 definePageMeta({
   layout:'mobile-layout-just-footer'
 })
-
-const showOptions = ref(false);
-const route = useRoute();
-const slug:string = route.params.slug.toString()!;
 
 const cartStore = useCartStore();
 
@@ -461,9 +511,6 @@ const authStore = useAuthStore();
 const utilStore = useUtilStore();
 const isLoading = ref(false);
 const pageId = ref(1);
-
-const product:Ref<ProductDto | undefined> = ref(undefined);
-const relativeProducts:Ref<ProductFilterData[]> = ref([]);
 
 
 const magnify = (imgID:string, zoom:number) => {
@@ -528,15 +575,9 @@ const magnify = (imgID:string, zoom:number) => {
   }
 }
 
-
 onMounted(async ()=>{
 
   isLoading.value = true;
-
-  const result = await GetProduct(slug);
-  if(result.isSuccess){
-    product.value = result.data!;
-  }
 
   isLoading.value = false;
 
@@ -551,6 +592,19 @@ onMounted(async ()=>{
     magnify("mainImage", 2);
   },2000);
 })
+
+const addFavorite = async () => {
+  const result = await CreateFavorite({
+    postTitle:product.value.title,
+    postSlug:product.value.slug,
+    postId:product.value.id,
+    postType:EPostType.Product,
+    postImage:product.value.mainImage
+  } as CreateFavoriteCommand);
+  if(result.isSuccess){
+    await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+  }
+}
 
 const info = ref();
 const comments = ref();

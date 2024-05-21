@@ -123,6 +123,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  noValidation: {
+    type: Boolean,
+    default: false
+  },
   placeHolder: {
     type: String,
     default: ''
@@ -185,10 +189,7 @@ const handleInputChange = (e: any) => {
   if(props.type == 'password') {
     showEye.value = e.target.value != '';
   }
-  handleChange(e, false);
-  validate(e).then(res=>{
-    if(!res.valid) throw new Error('sjdfjsdf');
-  });
+  handleChange(e, true);
   emits('update:modelValue', e.target.value);
 }
 

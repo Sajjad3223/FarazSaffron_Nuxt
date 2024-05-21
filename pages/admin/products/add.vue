@@ -114,8 +114,24 @@
         <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" :on-submit="AddProduct">
           <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="addProductData.title" @update:modelValue="generateSlug"/>
           <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="addProductData.slug"/>
-          <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" is-price/>
-          <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount"/>
+          <div class="grid grid-cols-3 gap-4 place-items-center">
+            <base-f-input class="col-span-2" type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="addProductData.price" :rtl="false"/>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">قیمت به تومان</small>
+              <base-g-price :price="Number(addProductData.price/10)"/>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 place-items-center">
+            <base-f-input  type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="addProductData.discount" no-validation :float-step="0.01" :rtl="false"/>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">مبلغ تخفیف</small>
+              <base-g-price :price="Number(((addProductData.price / 10) * addProductData.discount / 100))" class="justify-self-start"/>
+            </div>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">قیمت با تخفیف</small>
+              <base-g-price :price="Number((addProductData.price / 10) - ((addProductData.price / 10) * addProductData.discount / 100))" class="justify-self-start"/>
+            </div>
+          </div>
           <base-f-input type="file" name="mainImage" id="mainImage" class="row-span-4" label="تصویر محصول" v-model="addProductData.mainImage"/>
           <base-f-input label="متن تصویر" name="altImage" id="altImage" place-holder="در صورت لود نشدن تصویر نمایش داده میشود" v-model="addProductData.mainImageAlt"/>
           <div class="grid grid-cols-2 gap-4">
@@ -209,7 +225,7 @@
 
       <div class="absolute -inset-4 rounded-lg bg-dark/20 dark:bg-white/20 grid place-items-center dark:text-white backdrop-blur-[2px]" v-if="isLoading">
         <span class="animate-spin">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
+          <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
                style="display:block;background-color:transparent;"><circle
               cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
@@ -316,7 +332,6 @@ const addProductSchema = Yup.object().shape({
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
   weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
 })
-
 
 const packingTypes = Object.entries(EPackingType).map(t=>{
   return{

@@ -72,10 +72,10 @@
           </div>
         </div>
         <div class="flex items-center gap-1 -mt-8">
-          <a :href="product.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.basalamLink">
+          <a :href="product.basalamData?.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.basalamData">
             <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
           </a>
-          <a :href="product.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.digikalaLink">
+          <a :href="product.digikalaData?.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.digikalaData">
             <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
           </a>
         </div>
@@ -136,7 +136,8 @@ const addFavorite = async () => {
     postTitle:props.product.title,
     postSlug:props.product.slug,
     postId:props.product.id,
-    postType:EPostType.Product
+    postType:EPostType.Product,
+    postImage:props.product.mainImage
   } as CreateFavoriteCommand);
   if(result.isSuccess){
     await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);

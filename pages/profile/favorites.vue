@@ -17,21 +17,20 @@
         <hr class="my-3 border-2 dark:border-gray-600">
       </div>
       <ul class="grid grid-cols-1 md:grid-cols-2 mt-12">
-        <li class="flex flex-col items-center space-y-4 lg:odd:border-l border-b dark:text-white dark:border-gray-700 p-4" v-for="i in 3" :key="i">
-          <NuxtLink to="/product/thing" class="w-1/3 lg:w-auto">
-            <img src="~/assets/images/saffron-bar.png" alt="jar" class="w-full rounded-lg">
+        <li class="flex flex-col items-center space-y-4 lg:odd:border-l border-b dark:text-white dark:border-gray-700 p-4" v-for="f in favorites" :key="f.id">
+          <NuxtLink :to="`/product/${f.postSlug}`" class="w-1/3 lg:w-auto">
+            <img :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg">
           </NuxtLink>
-          <NuxtLink to="/product/thing" class="text-lg lg:text-xl font-bold">
-            زعفران شیشه ای نگین صد در صد خالص
+          <NuxtLink :to="`/product/${f.postSlug}`" class="text-lg lg:text-xl font-bold">
+            {{f.postTitle}}
           </NuxtLink>
-          <span>2,206,000 <small>ریال</small></span>
           <div class="flex space-x-2 space-x-reverse w-full lg:w-1/2">
-            <button class="p-2 border-danger border rounded-lg text-danger hover:bg-danger hover:text-white transition duration-200">
+            <base-g-button button-type="white" color="danger" @click="removeFavorite(f.id)">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
                 <path d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z" fill="currentColor"/>
               </svg>
-            </button>
-            <button class="flex gap-2 flex-row-reverse rounded-lg border-brandOrange border p-2 text-brandOrange flex-1 justify-center hover:bg-brandOrange hover:text-white transition duration-200">
+            </base-g-button>
+            <base-g-button button-type="outline" @click="cartStore.addToCart(f.postId,f.postSlug)">
               <span>اضافه به سبد خرید</span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -39,7 +38,7 @@
                 <path d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9 8H21" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </button>
+            </base-g-button>
           </div>
         </li>
       </ul>
@@ -57,12 +56,12 @@
       </header>
       <hr>
       <ul>
-        <li class=" border-b last:border-none py-4 w-full flex items-stretch" v-for="favorite in 4">
+        <li class=" border-b last:border-none py-4 w-full flex items-stretch" v-for="f in favorites" :key="f.id">
           <div class="flex-1 flex flex-col py-2">
             <div class="flex items-start justify-between">
-              <strong>
-                زعفران نگین
-              </strong>
+              <NuxtLink :to="`/product/${f.postSlug}`" class="text-lg lg:text-xl font-bold">
+                {{f.postTitle}}
+              </NuxtLink>
               <div class="flex items-center gap-1 font-light text-xs">
                 <span>4.4</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +110,9 @@
               </div>
             </div>
           </div>
-          <img src="~/assets/images/product-image.png" alt="productImage" class="max-w-[120px]">
+          <NuxtLink :to="`/product/${f.postSlug}`" class="max-w-[120px]">
+            <img :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg">
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -119,9 +120,44 @@
 </template>
 
 <script setup lang="ts">
+import type {FavoriteDto} from "~/models/favorite/favoriteDto";
+import {DeleteFavorite, GetFavorites} from "~/services/favorite.service";
+import {SITE_URL} from "~/utilities/api.config";
+import {ToastType} from "~/composables/useSwal";
+
 definePageMeta({
   layout:'profile'
 })
 
 const utilStore = useUtilStore();
+const cartStore = useCartStore();
+const toast = useToast();
+const pageId = ref(1);
+
+const favorites: Ref<FavoriteDto[]> = ref([]);
+
+onMounted(async ()=>{
+
+})
+
+const getData = async ()=>{
+  const result = await GetFavorites({
+    pageId:pageId.value,
+    take:6
+  });
+  if(result.isSuccess){
+    favorites.value = result.data ?? [];
+  }
+}
+
+const removeFavorite = async (id:string) =>{
+  const result = await DeleteFavorite(id);
+  if(result.isSuccess){
+    toast.showToast("علاقه مندی با موفقیت حذف شد",ToastType.success,3000,true);
+    await getData();
+  }else{
+    await toast.showError(result.metaData);
+  }
+}
+
 </script>

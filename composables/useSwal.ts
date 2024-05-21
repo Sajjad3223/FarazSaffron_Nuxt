@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import type {MetaData} from "~/models/metaData";
 
 export class Toast {
     constructor(
@@ -75,6 +76,21 @@ export const useToast = () => {
             }
         }
     };
+    const showError = (
+        metaData: MetaData,
+        toast:boolean = false
+    ) => {
+        return Swal.fire({
+            title:'عملیات با شکست مواجه شد',
+            text:metaData.message,
+            toast,
+            position:toast ? "top-start" : "center",
+            icon:'error',
+            timerProgressBar:toast,
+            timer:3000,
+            confirmButtonText:'باشه'
+        })
+    };
 
-    return { showToast };
+    return { showToast,showError };
 };

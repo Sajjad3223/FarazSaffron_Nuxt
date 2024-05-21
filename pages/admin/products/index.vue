@@ -241,7 +241,6 @@ const getData = async ()=>{
   isLoading.value = true;
 
   filterParams.pageId = pageId.value;
-  console.log(filterParams.pageId)
   const result = await GetProductsByAdmin(filterParams);
   if(result.isSuccess){
     products.value = result.data?.data!;

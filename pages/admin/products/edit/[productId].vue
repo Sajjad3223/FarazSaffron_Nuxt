@@ -116,8 +116,24 @@
         <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" @submit="UpdateProduct">
           <base-f-input label="عنوان محصول" name="title" id="title" place-holder="عنوان محصول را وارد کنید" v-model="editProductData.title" @update:modelValue="generateSlug"/>
           <base-f-input label="لینک یکتای محصول" name="slug" id="slug" place-holder="لینک یکتا" v-model="editProductData.slug"/>
-          <base-f-input type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="editProductData.price" is-price/>
-          <base-f-input type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount"/>
+          <div class="grid grid-cols-3 gap-4 place-items-center">
+            <base-f-input class="col-span-2" type="number" name="price" id="price" label="قیمت محصول (ریال)" place-holder="قیمت محصول را وارد کنید" v-model="editProductData.price" :rtl="false"/>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">قیمت به تومان</small>
+              <base-g-price :price="Number(editProductData.price/10)"/>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 place-items-center">
+            <base-f-input  type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount" no-validation :float-step="0.01" :rtl="false"/>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">مبلغ تخفیف</small>
+              <base-g-price :price="Number(((editProductData.price / 10) * editProductData.discount / 100))" class="justify-self-start"/>
+            </div>
+            <div class="flex flex-col space-y-1 justify-self-start">
+              <small class="font-light">قیمت با تخفیف</small>
+              <base-g-price :price="Number((editProductData.price / 10) - ((editProductData.price / 10) * editProductData.discount / 100))" class="justify-self-start"/>
+            </div>
+          </div>
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="editProductData.quantity"/>
           <base-f-input type="number" name="weight" id="weight" label="وزن محصول (بسته بندی)" place-holder="وزن محصول با بسته بندی" v-model="editProductData.weight" :float-step="0.01"/>
           <div class="flex items-end">

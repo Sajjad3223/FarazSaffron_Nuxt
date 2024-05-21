@@ -8,8 +8,8 @@
       <div class="w-full lg:w-1/4 p-4 bg-bgWhite dark:bg-gray-800 border dark:border-gray-700 dark:text-white sticky top-12 rounded-xl flex flex-col space-y-6">
         <div class="flex w-full justify-between items-end " v-if="!accountStore.initLoading">
           <div class="flex flex-col items-start">
-            <strong class="text-lg">{{accountStore.currentUser.fullName}}</strong>
-            <span class="font-light opacity-70">{{accountStore.currentUser.phoneNumber}}</span>
+            <strong class="text-lg">{{accountStore.currentUser?.fullName}}</strong>
+            <span class="font-light opacity-70">{{accountStore.currentUser?.phoneNumber}}</span>
           </div>
           <NuxtLink class="text-gray-600 dark:text-gray-300" to="/profile/personal-info">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@
               </div>
             </NuxtLink>
           </li>
-<!--          <li class="border-b py-3"> TODO Implement
+          <li class="border-b py-3">
             <NuxtLink active-class="activeLink" to="/profile/favorites">
               <div class="flex items-center space-x-4 space-x-reverse py-1">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@
                 </span>
               </div>
             </NuxtLink>
-          </li>-->
+          </li>
           <li class="border-b py-3">
             <NuxtLink active-class="activeLink" to="/profile/comments">
               <div class="flex items-center space-x-4 space-x-reverse py-1">

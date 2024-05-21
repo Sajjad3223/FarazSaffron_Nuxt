@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   app:{
     head:{
       htmlAttrs:{dir:'rtl',lang:'fa'}
@@ -13,9 +13,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
       tailwindcss: {},
     },
-  },
-  devServer:{
-    port:3000
   },
   plugins: [
     '~/plugins/clickOutsideDirective.ts',

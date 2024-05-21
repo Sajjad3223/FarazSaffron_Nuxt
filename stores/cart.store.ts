@@ -119,7 +119,6 @@ export const useCartStore = defineStore("cart",()=>{
             if (result.isSuccess) {
                 PendingOrder.value = result.data;
                 cartItemsCount.value = result.data?.itemsCount ?? 0;
-                console.log('refresh')
             }
         }else{
             const cartData:OrderDto = getCookieCart(true);
@@ -135,7 +134,6 @@ export const useCartStore = defineStore("cart",()=>{
 
             PendingOrder.value = cartData;
             cartItemsCount.value = cartData.itemsCount ?? 0;
-            console.log('refresh')
         }
 
         cartLoading.value = false;
