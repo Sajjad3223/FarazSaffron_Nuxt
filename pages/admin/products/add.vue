@@ -408,7 +408,7 @@ const AddProduct = async ()=>{
   productData.append('dimensions.Length',addProductData.dimensions.length.toString());
   productData.append('dimensions.Height',addProductData.dimensions.height.toString());
   productData.append('digikalaData.digiKalaLink',addProductData.digikalaData?.digikalaLink ?? '');
-  productData.append('digikalaData.digiKalaPrice',addProductData.digikalaData?.digikalaPrice?.toString() ?? '0');
+  productData.append('digikalaData.digiKalaPrice',addProductData.digikalaData?.digiKalaPrice?.toString() ?? '0');
   productData.append('basalamData.basalamLink',addProductData.basalamData?.basalamLink ?? '');
   productData.append('basalamData.basalamPrice',addProductData.basalamData?.basalamPrice?.toString() ?? '0');
   productData.append('quantity',addProductData.quantity.toString());

@@ -17,7 +17,19 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/clickOutsideDirective.ts',
   ],
-  modules: ["@pinia/nuxt", "vue3-carousel-nuxt","nuxt-swiper","nuxt3-leaflet",'@vueuse/motion/nuxt'],
+  modules: [
+    "@pinia/nuxt",
+    "vue3-carousel-nuxt",
+    "nuxt-swiper",
+    "nuxt3-leaflet",
+    '@vueuse/motion/nuxt',
+    "@nuxtjs/google-fonts"
+  ],
+  googleFonts: {
+    families:{
+      Montserrat:true,
+    },
+  },
   alias: {
     // This is for fixing " Cannot read properties of undefined (reading 'defineComponent') " error
     'vue3-carousel/dist/carousel': 'vue3-carousel/dist/carousel.es.js',

@@ -19,13 +19,21 @@
           <li class="text-[#A5A5A5]">
             <NuxtLink to="/market">محصولات</NuxtLink>
           </li>
-          <li>
+          <li v-if="product.subCategory == null">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 17L10 12L15 7" stroke="#A5A5A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </li>
-          <li class="text-[#A5A5A5]">
-            <NuxtLink to="/market?category=saffron">زعفران</NuxtLink>
+          <li class="text-[#A5A5A5]" v-if="product.subCategory == null">
+            <NuxtLink :to="`/market?category=${product.category.slug}`">{{ product.category.title }}</NuxtLink>
+          </li>
+          <li v-if="product.subCategory != null">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 17L10 12L15 7" stroke="#A5A5A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </li>
+          <li class="text-[#A5A5A5]" v-if="product.subCategory != null">
+            <NuxtLink :to="`/market?category=${product.subCategory.slug}`">{{ product.subCategory.title }}</NuxtLink>
           </li>
           <li>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,15 +49,20 @@
       <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-5 gap-8 mt-4 rounded-2xl" v-if="product">
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
-          <div class="flex w-1/5 flex-col items-center gap-2">
+          <div class="flex w-1/5 flex-col items-center gap-2 max-h-[50vh]">
             <button>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 14L12 9L17 14" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <div class="bg-white rounded-lg overflow-hidden grid place-items-center cursor-pointer" v-for="i in product?.images" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+            <Swiper direction="vertical" :slides-per-view="3" :space-between="20">
+              <SwiperSlide v-for="i in product?.images">
+                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full cursor-pointer h-full object-cover rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+              </SwiperSlide>
+            </Swiper>
+<!--            <div class="bg-white rounded-lg overflow-hidden grid place-items-center cursor-pointer" v-for="i in product?.images" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
               <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" >
-            </div>
+            </div>-->
             <button>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17 10L12 15L7 10" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,10 +71,15 @@
           </div>
           <div class="flex-1 bg-white rounded-xl relative grid place-items-center aspect-square image-magnifier-container">
             <img id="mainImage" class="cursor-none" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
-            <div class="flex flex-col space-y-4 absolute top-5 left-5">
-              <button>
+            <div class="flex flex-col space-y-4 absolute top-5 left-5 bg-white">
+              <button @click="removeFavorite" v-if="!accountStore.initLoading && accountStore.isFavorite(product.id,EPostType.Product)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-danger">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button @click="addFavorite" v-else>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" stroke="#808080" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" stroke="#808080" stroke-width="1.5" stroke-linejoin="round" />
                 </svg>
               </button>
               <button>
@@ -96,7 +114,7 @@
               شکل ماده غذایی : کیفی
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              وزن : 21 گرم
+              وزن : {{ product.weight }} گرم
             </li>
           </ul>
 
@@ -104,7 +122,7 @@
             <div class="flex justify-between items-center gap-4">
               <!--   Price    -->
               <div class="flex items-center gap-1">
-                <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</strong>
+                <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
                 <span class="flex flex-col items-center text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
               </div>
               <!--   Discount    -->
@@ -468,7 +486,7 @@ import {SITE_URL} from "~/utilities/api.config";
 import {EPostType} from "~/models/EPostType";
 import {useAsyncData} from "#app";
 import {ToastType} from "~/composables/useSwal";
-import {CreateFavorite} from "~/services/favorite.service";
+import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.service";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 
 
@@ -507,6 +525,7 @@ const showBanner = (src:string,alt:string) => {
 
 const carousel = ref();
 
+const accountStore = useAccountStore();
 const authStore = useAuthStore();
 const utilStore = useUtilStore();
 const isLoading = ref(false);
@@ -603,6 +622,12 @@ const addFavorite = async () => {
   } as CreateFavoriteCommand);
   if(result.isSuccess){
     await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+  }
+}
+const removeFavorite = async () => {
+  const result = await DeleteFavoriteByPostId(product.value.id,EPostType.Product);
+  if(result.isSuccess){
+    await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
   }
 }
 

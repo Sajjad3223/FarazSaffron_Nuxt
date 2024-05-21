@@ -274,7 +274,7 @@ const carousel = ref();
 const paginationData:Ref<PaginationData | null> = ref(null);
 const utilStore = useUtilStore();
 const productUtils = useProductUtils();
-const popularProducts = ref([]);
+const popularProducts:Ref<ProductFilterData[] | undefined> = ref([]);
 
 const orderBys = Object.entries(EOrderBy).map(t => {
   return {
@@ -284,12 +284,13 @@ const orderBys = Object.entries(EOrderBy).map(t => {
 });
 const orderByOptions = orderBys.splice(orderBys.length / 2, orderBys.length);
 
+//@ts-ignore
 const filterParams: ProductFilterParams = reactive({
   pageId: pageId.value,
   take: 8,
   search: route.query?.search?.toString() ?? undefined,
   orderBy: route.query?.orderBy,
-  categoriesIncluded:route.query?.categories?.split(','),
+  categoriesIncluded: route.query?.categories?.toString().split(','),
   dgkalaLink:undefined,
   maxPrice:undefined,
   minPrice:undefined,
@@ -324,6 +325,7 @@ const getData = async () => {
   loading.value = true;
 
   filterParams.pageId = pageId.value;
+  //@ts-ignore
   filterParams.orderBy = route.query?.orderBy ?? EOrderBy.جدیدترین;
 
   const productsResult = await GetProducts(filterParams);
@@ -335,7 +337,7 @@ const getData = async () => {
   loading.value = false;
 }
 
-const toggleDropdown = ($event)=>{
+const toggleDropdown = ($event:any)=>{
   const dropdown = $event.target;
 
   dropdown.classList.toggle('max-h-6');

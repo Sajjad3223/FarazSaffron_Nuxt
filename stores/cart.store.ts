@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
     AddToCart,
     DecreaseCount,
@@ -85,8 +86,13 @@ export const useCartStore = defineStore("cart",()=>{
                         itemInfo: {
                             productName: product.data!.title!,
                             productImage: {
-                                image:product.data!.mainImage!,
-                                productId:product.data!.id!,
+                                image: product.data!.mainImage!,
+                                productId: product.data!.id!,
+                                id: 0,
+                                creationDate: new Date(),
+                                isActive: true,
+                                persianDate: "",
+                                persianTime: ""
                             },
                             eItemType: EItemType.Saffron,
                             productSlug: product.data!.slug!,

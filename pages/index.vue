@@ -120,7 +120,7 @@
             </template>
             <div class="flex w-full h-8"></div>
             <SwiperSlide v-for="(p,i) in lastProducts" :key="p.id" >
-              <GCard :product="p" v-motion-slide-visible-once-right :delay="i * 200"/>
+              <GCard :product="p" v-motion-slide-visible-once-left :delay="i * 200"/>
             </SwiperSlide>
           </Swiper>
 

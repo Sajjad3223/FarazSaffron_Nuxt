@@ -30,7 +30,7 @@ export interface ProductFilterParams extends BaseFilterParams{
 
 export interface DigikalaData {
     digikalaLink?:string;
-    digikalaPrice?:number;
+    digiKalaPrice?:number;
 }
 export interface BasalamData {
     basalamLink?:string;
@@ -59,7 +59,7 @@ export interface ProductFilterData extends BaseDto{
     quantity:     number;
     score:        number;
     visits:       number;
-    digikalaData?:  DigikalaData | null | undefined;
+    digiKalaData?:  DigikalaData | null | undefined;
     basalamData?: BasalamData | null | undefined;
 }
 export interface ProductDto extends BaseDto{

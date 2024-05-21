@@ -163,7 +163,7 @@
           <base-f-input label="بارکد محصول" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="editProductData.barcodeNumber"/>
           <base-f-input label="شماره بهداشت" name="healthNumber" id="healthNumber" place-holder="شماره بهداشت" v-model="editProductData.healthNumber"/>
           <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digikalaLink" :rtl="false"/>
-          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digikalaPrice" is-price />
+          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digiKalaPrice" is-price />
           <base-f-input label="لینک باسلام" name="basalamLink" id="basalamLink" class="font-thin" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamLink" :rtl="false"/>
           <base-f-input type="number" label="قیمت در باسلام" name="basalamPrice" id="basalamPrice" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamPrice" is-price />
           <div class="grid grid-cols-2 gap-4 col-span-full">
@@ -391,7 +391,7 @@ onMounted(async ()=>{
     editProductData.dimensions.length = product.value.dimensions.length;
     editProductData.digikalaData = {
       digikalaLink: product.value.digikalaData?.digikalaLink ?? '',
-      digikalaPrice: product.value.digikalaData?.digikalaPrice ?? 0
+      digikalaPrice: product.value.digikalaData?.digiKalaPrice ?? 0
     } as DigikalaData;
     editProductData.basalamData = {
       basalamLink: product.value.basalamData?.basalamLink ?? '',

@@ -32,7 +32,10 @@ export interface CommentDto extends BaseDto{
     answers:       CommentDto[];
 }
 
-export interface CommentFilterResult extends BaseFilterResult<CommentDto>{}
+export interface CommentFilterResult extends BaseFilterResult<CommentDto>{
+    totalScore:number;
+    totalConsumersCount:number;
+}
 
 export interface GetPostScoreParams{
     postType:EPostType;

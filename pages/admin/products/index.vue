@@ -279,6 +279,7 @@ const ChangeProductPicture = async ()=>{
 
   const formData = new FormData();
   formData.append('productId',selectedProduct.value.toString());
+  //@ts-ignore
   formData.append('image',newPicture.value);
   formData.append('imageAlt',newPictureAlt.value);
 
@@ -287,6 +288,7 @@ const ChangeProductPicture = async ()=>{
     await toast.showToast();
     showChangePictureModal.value = false;
     await getData();
+    newPicture.value = null;
   }
   else{
     await toast.showToast(result.metaData.message,ToastType.error,0);

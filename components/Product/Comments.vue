@@ -17,6 +17,8 @@ const pageId = ref(1);
 const loading = ref(true);
 const showAddCommentModal = ref(false);
 const productComments:Ref<CommentDto[]> = ref([]);
+const totalScore:Ref<number> = ref(0);
+const totalConsumersCount:Ref<number> = ref(0);
 const commentsPagination:Ref<PaginationData | null> = ref(null);
 const commentsFilterParams:CommentFilterParams = reactive({
   postId:null,
@@ -42,18 +44,20 @@ const loadComments = async ()=>{
   if(commentsResult.isSuccess){
     productComments.value = commentsResult.data?.data!;
     commentsPagination.value = FillPaginationData(commentsResult.data!);
+    totalConsumersCount.value = commentsResult.data?.totalConsumersCount ?? 0;
+    totalScore.value = commentsResult.data?.totalScore ?? 0;
   }
 
   loading.value = false;
 }
 
-const totalScore = computed(()=>{
+/*const totalScore = computed(()=>{
   let scoreSum:number = 0;
   if(productComments.value.length > 0){
     productComments.value.forEach(c=>scoreSum += c.score);
   }
   return scoreSum;
-})
+})*/
 
 </script>
 
@@ -62,17 +66,22 @@ const totalScore = computed(()=>{
     <!--   Add Comment   -->
     <div class="w-1/5 border p-3 rounded-xl flex flex-col">
       <div class="text-2xl flex gap-2 items-end">
-        <strong>۴.۴</strong> <span class="text-base text-[#ABABAB]">  از ۵ </span>
+        <strong>{{ totalScore }}</strong> <span class="text-base text-[#ABABAB]">  از ۵ </span>
       </div>
       <hr class="my-3">
       <ul class="flex items-center gap-0.5">
-        <li v-for="i in 5" :key="i" >
+        <li v-for="i in totalScore" :key="i" >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11.4936 2.71381C11.7002 2.29527 12.297 2.29527 12.5036 2.71381L15.1776 8.13194C15.2596 8.29814 15.4182 8.41334 15.6016 8.43999L21.5809 9.30883C22.0427 9.37595 22.2272 9.94357 21.893 10.2694L17.5663 14.4868C17.4336 14.6162 17.373 14.8026 17.4044 14.9852L18.4257 20.9403C18.5046 21.4004 18.0218 21.7512 17.6087 21.534L12.2607 18.7224C12.0966 18.6361 11.9006 18.6361 11.7366 18.7224L6.38855 21.534C5.97542 21.7512 5.49257 21.4004 5.57147 20.9403L6.59285 14.9852C6.62419 14.8026 6.56362 14.6162 6.4309 14.4868L2.10427 10.2694C1.77004 9.94357 1.95447 9.37595 2.41636 9.30883L8.39562 8.43999C8.57904 8.41334 8.7376 8.29814 8.81962 8.13194L11.4936 2.71381Z" fill="#F9A824"/>
           </svg>
         </li>
+        <li v-for="i in 5 - totalScore" :key="i" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-500">
+            <path d="M11.4936 2.71381C11.7002 2.29527 12.297 2.29527 12.5036 2.71381L15.1776 8.13194C15.2596 8.29814 15.4182 8.41334 15.6016 8.43999L21.5809 9.30883C22.0427 9.37595 22.2272 9.94357 21.893 10.2694L17.5663 14.4868C17.4336 14.6162 17.373 14.8026 17.4044 14.9852L18.4257 20.9403C18.5046 21.4004 18.0218 21.7512 17.6087 21.534L12.2607 18.7224C12.0966 18.6361 11.9006 18.6361 11.7366 18.7224L6.38855 21.534C5.97542 21.7512 5.49257 21.4004 5.57147 20.9403L6.59285 14.9852C6.62419 14.8026 6.56362 14.6162 6.4309 14.4868L2.10427 10.2694C1.77004 9.94357 1.95447 9.37595 2.41636 9.30883L8.39562 8.43999C8.57904 8.41334 8.7376 8.29814 8.81962 8.13194L11.4936 2.71381Z" fill="currentColor"/>
+          </svg>
+        </li>
       </ul>
-      <span class="text-sm text-[#B3B3B3] mt-3 font-light">  (امتیاز ۳۱ خریدار)</span>
+      <span class="text-sm text-[#B3B3B3] mt-3 font-light">  (امتیاز {{ totalConsumersCount }} خریدار)</span>
       <small class="text-xs font-light text-[#B3B3B3] mt-6">شما هم درباره این کالا دیدگاه ثبت کنید</small>
       <button class="w-full text-center py-2 rounded-xl border border-brandOrange text-brandOrange mt-4 hover:bg-brandOrange/10 transition-colors duration-200" @click="showAddCommentModal = true">
         ثبت دیدگاه
