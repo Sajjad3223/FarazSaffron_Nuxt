@@ -1,6 +1,6 @@
 <template>
   <footer class="w-full mt-24 border-t border-[#E8E8E8]">
-    <div class="container mt-16 flex flex-col mx-auto">
+    <div class="container px-24 3xl:px-0 mt-16 flex flex-col mx-auto">
       <div class="w-full grid grid-cols-2 gap-16">
         <div class="flex flex-col items-start ">
           <div class="flex items-center gap-6 mb-14">

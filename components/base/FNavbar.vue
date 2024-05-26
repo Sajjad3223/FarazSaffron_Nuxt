@@ -8,7 +8,7 @@
     </div>
   </header>
   <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative" >
-    <div class="container h-[125px] mx-auto mt-5">
+    <div class="container px-24 3xl:px-0 h-[125px] mx-auto mt-5">
       <div class="w-full flex items-center justify-between">
         <div class="flex items-center flex-1 gap-12">
           <NuxtLink to="/" class="flex items-center gap-4">

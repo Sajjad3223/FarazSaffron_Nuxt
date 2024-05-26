@@ -9,7 +9,7 @@
       <GCarousel v-motion-pop-visible-once/>
 
       <!--  Product Categories   -->
-      <section class="w-full flex flex-col items-center my-9">
+      <section class="w-full flex flex-col items-center mt-16 mb-9">
         <h3 class="font-black text-2xl" v-motion-slide-top>دسته بندی محصولات</h3>
         <ul class="mt-4 w-full grid grid-cols-4 gap-8">
           <li v-motion-slide-top :delay="300" class="w-full h-[80px] grid">

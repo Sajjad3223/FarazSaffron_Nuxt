@@ -4,7 +4,7 @@
       <base-f-navbar />
 
       <!--  Body  -->
-      <main class="container mx-auto z-0 mt-5">
+      <main class="container mx-auto px-24 3xl:px-0 z-0 mt-5">
 
         <slot />
 

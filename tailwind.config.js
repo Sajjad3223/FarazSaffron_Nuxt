@@ -26,6 +26,9 @@ export default {
         danger:'#FF0E38',
         warning:'#6bb927',
       },
+      screens:{
+        '3xl':'1700px',
+      },
     },
   },
   plugins: [
