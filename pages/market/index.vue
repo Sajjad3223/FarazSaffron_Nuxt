@@ -134,16 +134,24 @@
           <!--   Order By    -->
           <div class="bg-[#F8F8F8] rounded-3xl py-4 px-8 flex justify-between items-center">
             <div class="flex items-center gap-6">
-              <button class="text-[#898989] hover:text-[#656565] transition-colors duration-200">
-                فروش ویژه
+              <button :class="[orderBy === EOrderBy.ارزان_ترین ?
+               'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
+               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.ارزان_ترین">
+                ارزان ترین ها
               </button>
-              <button class="text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2">
+              <button :class="[orderBy === EOrderBy.محبوبیت ?
+               'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
+               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.محبوبیت">
                 محبوب ترین ها
               </button>
-              <button class="text-[#898989] hover:text-[#656565] transition-colors duration-200">
+              <button :class="[orderBy === EOrderBy.جدیدترین ?
+               'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
+               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.جدیدترین">
                 جدیدترین ها
               </button>
-              <button class="text-[#898989] hover:text-[#656565] transition-colors duration-200">
+              <button :class="[orderBy === EOrderBy.امتیاز ?
+               'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
+               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.امتیاز">
                 موجود در انبار
               </button>
             </div>
@@ -271,6 +279,7 @@ const route = useRoute();
 const loading = ref(false);
 const products: Ref<ProductFilterData[]> = ref([]);
 const pageId = ref(1);
+const orderBy = ref(EOrderBy.جدیدترین);
 const carousel = ref();
 const priceRange = ref();
 const paginationData:Ref<PaginationData | null> = ref(null);
@@ -291,7 +300,7 @@ const filterParams: ProductFilterParams = reactive({
   pageId: pageId.value,
   take: 8,
   search: route.query?.search?.toString() ?? undefined,
-  orderBy: route.query?.orderBy,
+  orderBy: orderBy.value,
   categoriesIncluded: route.query?.categories?.toString().split(','),
   dgkalaLink:undefined,
   maxPrice:undefined,
@@ -307,6 +316,7 @@ const filterParams: ProductFilterParams = reactive({
 });
 
 watch(pageId, async () => await getData())
+watch(orderBy, async () => await getData())
 watch(()=>route.query,async ()=>await getData())
 
 onMounted(async () => {
