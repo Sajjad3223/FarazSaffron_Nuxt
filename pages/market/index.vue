@@ -53,15 +53,15 @@
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">دسته بندی</h3>
               <ul class="mt-6 flex flex-col space-y-4">
-                <li class="flex flex-col space-y-4 max-h-6 overflow-hidden cursor-pointer transition-all duration-300" v-for="c in categories" @click="toggleDropdown">
-                  <div class="flex justify-between pointer-events-none">
+                <li class="flex flex-col space-y-4 max-h-6 overflow-hidden cursor-pointer transition-all duration-300" v-for="c in categories">
+                  <div class="flex justify-between " @click="toggleDropdown">
                     <span class="transition-all duration-300">{{ c.title }}</span>
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-all duration-300">
                       <path d="M16 10L11 15L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                   <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange max-h-36 overflow-auto">
-                    <base-f-checkbox :label="s.title" v-for="s in c.children"/>
+                    <base-f-checkbox :label="s.title" v-for="s in c.children" is-checked :value="s.id" @value-changed="categoryChanged"/>
                   </div>
                 </li>
               </ul>
@@ -338,7 +338,7 @@ const getData = async () => {
 }
 
 const toggleDropdown = ($event:any)=>{
-  const dropdown = $event.target;
+  const dropdown = $event.target.parentElement;
 
   dropdown.classList.toggle('max-h-6');
   dropdown.classList.toggle('max-h-48');
@@ -353,6 +353,19 @@ const toggleDropdown = ($event:any)=>{
     dropdown.querySelector('div svg').classList.remove('rotate-180');
   }
 }
+
+const categoryChanged = async (checked,value)=>{
+  if(checked){
+    if(filterParams.categoriesIncluded == null)
+      filterParams.categoriesIncluded = []
+    filterParams.categoriesIncluded.push(value);
+  }else{
+    const index:number = filterParams.categoriesIncluded?.indexOf(value);
+    filterParams.categoriesIncluded?.splice(index,1);
+  }
+  await getData();
+}
+
 </script>
 
 <style scoped>

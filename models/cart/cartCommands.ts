@@ -9,6 +9,10 @@ export interface FinalizeOrderCommand{
     orderId:number;
     refCode:string;
 }
+export interface FollowUpCommand{
+    orderId:number;
+    followUpCode:string;
+}
 export interface SetOrderStatusCommand{
     orderId:number;
     orderStatus:EOrderStatus;

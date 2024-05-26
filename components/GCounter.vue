@@ -32,11 +32,13 @@ const count = ref(0);
 const counter = ref();
 const isActivated = ref(false);
 
-document.addEventListener('scroll',()=>{
-  if(scrollY > counter.value.offsetTop - props.offsetToCount && !isActivated.value){
-    startCounting();
-  }
-})
+if(process.client) {
+  document.addEventListener('scroll', () => {
+    if (scrollY > counter.value.offsetTop - props.offsetToCount && !isActivated.value) {
+      startCounting();
+    }
+  })
+}
 
 const startCounting = ()=>{
   isActivated.value = true;

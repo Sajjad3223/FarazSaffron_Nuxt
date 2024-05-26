@@ -41,10 +41,4 @@ export default defineNuxtConfig({
   swiper:{
     modules:'*',
   },
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      failOnError: false,
-    },
-  },
 })

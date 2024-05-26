@@ -24,8 +24,14 @@
              step="1">
     </div>
     <div class="grid grid-cols-2 gap-2 mt-4">
-      <base-f-input type="number" name="min-range" id="min-range" place-holder="حداقل: 0" v-model="valueData.minValue" />
-      <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 5,000,000" v-model="valueData.maxValue" />
+      <div class="relative flex items-center">
+        <base-f-input type="number" name="min-range" id="min-range" place-holder="حداقل: 0" v-model="valueData.minValue" />
+        <base-g-tooman class="absolute left-4 opacity-70" />
+      </div>
+      <div class="relative flex items-center">
+        <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 5,000,000" v-model="valueData.maxValue" />
+        <base-g-tooman class="absolute left-4 opacity-70" />
+      </div>
     </div>
   </div>
 </template>

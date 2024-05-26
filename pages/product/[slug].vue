@@ -1,7 +1,16 @@
 <template>
-  <div>
+  <div v-if="!pending">
     <Head>
       <Title>{{product?.title}}</Title>
+      <Meta title="title" :content="product?.title" />
+      <Meta title="og:title" :content="product?.title" />
+      <Meta title="product_id" :content="(product?.id).toString()" />
+      <Meta title="product_name" :content="product?.title" />
+      <Meta title="og:image" :content="`${SITE_URL}/product/images/${product.mainImage.src}`" />
+      <Meta title="product_price" :content="(product?.totalPrice / 10).toString()" />
+      <Meta title="product_old_price" :content="(product?.price / 10).toString()" />
+      <Meta title="availability" :content="product?.quantity > 0 ? 'instock' : 'outofstock'" />
+      <Meta title="guarantee" content="تا 1 هفته ضمانت اصالت و تازگی کالا" />
     </Head>
 
     <div v-if="!utilStore.isMobile()">
@@ -49,7 +58,7 @@
       <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-5 gap-8 mt-4 rounded-2xl" v-if="product">
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
-          <div class="flex w-1/5 flex-col items-center gap-2 max-h-[50vh]">
+          <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
             <button>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 14L12 9L17 14" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,10 +78,12 @@
               </svg>
             </button>
           </div>
-          <div class="flex-1 bg-white rounded-xl relative grid place-items-center aspect-square image-magnifier-container">
-            <img id="mainImage" class="cursor-none" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
-            <div class="flex flex-col space-y-4 absolute top-5 left-5 bg-white">
-              <button @click="removeFavorite" v-if="!accountStore.initLoading && accountStore.isFavorite(product.id,EPostType.Product)">
+          <div class="flex-1 bg-white rounded-xl grid relative place-items-center aspect-square">
+            <div class="aspect-square image-magnifier-container grid place-items-center">
+              <img id="mainImage" class="cursor-none" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
+            </div>
+            <div class="flex flex-col space-y-4 absolute top-0 left-0 p-2 rounded-full bg-white">
+              <button @click="removeFavorite" v-if="isFavorite">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-danger">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
                 </svg>
@@ -94,8 +105,8 @@
               </button>
             </div>
             <span class="absolute top-5 right-5 px-3 py-0.5 bg-brandOrange/10 text-brandOrange rounded-lg">
-            جدید
-          </span>
+              جدید
+            </span>
           </div>
         </div>
 
@@ -133,7 +144,7 @@
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-4" v-if="product.quantity > 0">
               <div class="bg-white rounded-lg flex p-2 gap-1">
                 <button class="grid place-items-center p-2">
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,13 +161,16 @@
                   </svg>
                 </button>
               </div>
-              <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center">
+              <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug)">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <span class="text-white">افزودن به سبد خرید</span>
               </button>
             </div>
+            <base-g-button w-full button-type="outline" color="danger" v-else>
+              موجود شد به من اطلاع بده
+            </base-g-button>
           </div>
           <div class="w-full border rounded-xl p-4 mt-5 flex items-center gap-4">
             <img src="../../assets/images/icons/fastDelivery.png" alt="fastDelivery" class="w-8 opacity-70">
@@ -225,7 +239,7 @@
         </div>
         <div class="mt-8">
           <client-only>
-            <GPCarousel ref="carousel" :items-to-show="4" wrap-around dir="rtl">
+            <GPCarousel ref="carousel" :breakpoints="carouselBreakpoints" wrap-around dir="rtl">
               <GPSlide v-for="p in relativeProducts" :key="p">
 <!--                <GCard :product="p" />-->
                 <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
@@ -233,10 +247,9 @@
                     <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
                   </NuxtLink>
                   <div class="flex-1 flex flex-col items-start space-y-4">
-                    <strong class="text-lg text-right">{{p.title}}</strong>
-                    <span class="text-[#9E9E9E] text-sm">
-
-                    </span>
+                    <NuxtLink :to="`/product/${p.slug}`" class="text-right">
+                      <strong class="text-lg text-right">{{p.title}}</strong>
+                    </NuxtLink>
                     <ul class="flex items-center gap-0.5">
                       <li v-for="i in 5" :key="i">
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -253,7 +266,7 @@
                     <div class="flex items-center gap-1">
                       <base-g-price :price="p.price / 10" />
                     </div>
-                    <button class="border text-xs rounded-lg border-[#E8E8E8] py-2 flex gap-2 px-3 items-center justify-center w-full text-[#939393] hover:bg-[#F3F3F3] transition-colors duration-200">
+                    <button @click="cartStore.addToCart(p.id,p.slug)" class="border text-xs rounded-lg border-[#E8E8E8] py-2 flex gap-2 px-3 items-center justify-center w-full text-[#939393] hover:bg-[#F3F3F3] transition-colors duration-200">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
@@ -279,7 +292,7 @@
         <!--  Buttons  -->
         <div class="flex gap-4">
           <button class="bg-brandOrange rounded-lg py-2 px-8 text-white font-bold">مشخصات</button>
-          <button class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">نظرات (8)</button>
+          <a href="#comments" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">نظرات (8)</a>
         </div>
         <!--  Details  -->
         <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
@@ -328,7 +341,7 @@
           </ul>
         </div>
         <!--  Comments  -->
-        <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
+        <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl" id="comments">
           <strong class="text-xl text-[#7D7D7D] pr-2 border-r-2 border-brandOrange">نظرات</strong>
           <ProductComments :product="product" :post-type="EPostType.Product" />
         </div>
@@ -475,6 +488,8 @@
     </div>
 
   </div>
+  <div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -484,24 +499,23 @@ import type {ProductDto, ProductFilterData} from "~/models/product/productQuerie
 import {EPackingType} from "~/models/product/EPackingType";
 import {SITE_URL} from "~/utilities/api.config";
 import {EPostType} from "~/models/EPostType";
-import {useAsyncData} from "#app";
 import {ToastType} from "~/composables/useSwal";
 import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.service";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 
 
 const route = useRoute();
+const slug:string = route.params.slug.toString() ?? '';
+const { data: result, pending,error,status } = await useAsyncData("GetProduct", () => GetProduct(slug),{lazy:false,server:true});
 const router = useRouter();
-const slug:string = route.params.slug.toString()!;
-const toast = useToast();
 
-const { data: result, pending } = await useAsyncData("getCourse", async () => await GetProduct(slug))
+const toast = useToast();
 if(!result.value?.isSuccess){
   if(process.server){
     throw createError({statusCode:404,message:'Not Found'})
   }else{
     router.push('/market');
-    await toast.showToast('درود مورد نظر یافت نشد',ToastType.error,0)
+    await toast.showToast('محصول مورد نظر یافت نشد',ToastType.error,0)
   }
 }
 
@@ -522,6 +536,21 @@ const showBanner = (src:string,alt:string) => {
   bannerImageAlt.value = alt;
   showBannerModal.value = true;
 }
+
+const carouselBreakpoints = ref({
+  // 700px and up
+  760: {
+    itemsToShow: 2.7,
+  },
+  // 1024 and up
+  1024: {
+    itemsToShow: 3.3,
+  },
+  // 1366 and up
+  1600: {
+    itemsToShow: 4,
+  },
+});
 
 const carousel = ref();
 
@@ -594,11 +623,11 @@ const magnify = (imgID:string, zoom:number) => {
   }
 }
 
+const isFavorite = ref(false);
+
 onMounted(async ()=>{
 
   isLoading.value = true;
-
-  isLoading.value = false;
 
   if(product.value != null) {
     const relativeResult = await GetRelativeProducts(product.value!.subCategory?.id ?? product.value!.category.id);
@@ -607,8 +636,11 @@ onMounted(async ()=>{
     }
   }
 
+  isLoading.value = false;
+
   setTimeout(()=>{
     magnify("mainImage", 2);
+    isFavorite.value = accountStore.isFavorite(product.value.id,EPostType.Product)
   },2000);
 })
 
@@ -621,13 +653,15 @@ const addFavorite = async () => {
     postImage:product.value.mainImage
   } as CreateFavoriteCommand);
   if(result.isSuccess){
-    await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+    //await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+    isFavorite.value = true;
   }
 }
 const removeFavorite = async () => {
   const result = await DeleteFavoriteByPostId(product.value.id,EPostType.Product);
   if(result.isSuccess){
-    await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
+    //await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
+    isFavorite.value = false;
   }
 }
 

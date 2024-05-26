@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <div v-if="!utilsStore.isMobile()">
       <base-f-navbar />
 
@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import {SITE_URL} from "~/utilities/api.config";
 import {GetCategories} from "~/services/category.service";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 
@@ -32,10 +31,7 @@ const cartStore = useCartStore();
 const accountStore = useAccountStore();
 const utilsStore = useUtilStore();
 const isLoading = ref(true);
-const showSidebar = ref(false);
-const isCategoryHovered = ref(false);
 const categories:Ref<CategoryDto[]> = ref([]);
-const subCategories:Ref<CategoryDto[]> = ref([]);
 
 onMounted(async ()=>{
   await refreshCategories();
@@ -49,14 +45,6 @@ const refreshCategories = async ()=>{
   }
 }
 
-const categorHovered = (category:CategoryDto) => {
-  isCategoryHovered.value = true;
-  subCategories.value = category.children ?? [];
-}
-
-const showCategories = ref(false);
-const showAccountOptions = ref(false);
-const showCart = ref(false);
 </script>
 
 <style lang="scss">
@@ -69,19 +57,6 @@ const showCart = ref(false);
   box-shadow: 0 0 15px 0 #F0462380;
   backface-visibility: hidden;
 }
-/*.logo-rotate{
-  width: 50px;
-  height: 50px;
-  transform-origin: center;
-  transform-style: preserve-3d;
-  animation: rotate-logo 4s linear infinite;
-}
-
-@keyframes rotate-logo {
-  100%{
-    transform: rotateY(360deg);
-  }
-}*/
 
 .slide-fade-enter-active,
 .slide-fade-leave-active{

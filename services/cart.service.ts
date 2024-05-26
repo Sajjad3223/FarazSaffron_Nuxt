@@ -3,7 +3,7 @@ import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {OrderDto, OrderFilterParams, OrderFilterResult, OrderGist} from "~/models/cart/cartQueries";
 import type {
     AdminSetOrderDiscountCommand,
-    FinalizeOrderCommand,
+    FinalizeOrderCommand, FollowUpCommand,
     SetOrderItemCountCommand,
     SetOrderStatusCommand
 } from "~/models/cart/cartCommands";
@@ -112,6 +112,12 @@ export const RemoveDiscountByAdmin = (userId:number):Promise<ApiResponse<undefin
 }
 export const FinalizeOrderByAdmin = (command:FinalizeOrderCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/cart/finalize`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const SetFollowUpCode = (command:FollowUpCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/cart/followUp`,{
         method:'PUT',
         body:command
     });

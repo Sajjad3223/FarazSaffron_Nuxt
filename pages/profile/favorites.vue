@@ -93,7 +93,6 @@
 import type {FavoriteDto} from "~/models/favorite/favoriteDto";
 import {DeleteFavorite, GetFavorites} from "~/services/favorite.service";
 import {SITE_URL} from "~/utilities/api.config";
-import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
   layout:'profile'
@@ -123,7 +122,7 @@ const getData = async ()=>{
 const removeFavorite = async (id:string) =>{
   const result = await DeleteFavorite(id);
   if(result.isSuccess){
-    toast.showToast("علاقه مندی با موفقیت حذف شد",ToastType.success,3000,true);
+    //toast.showToast("علاقه مندی با موفقیت حذف شد",ToastType.success,3000,true);
     await getData();
   }else{
     await toast.showError(result.metaData);

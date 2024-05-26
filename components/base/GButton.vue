@@ -238,17 +238,17 @@ const buttonColor = computed(()=>{
   border-radius: 10px;
   background-color: var(--disabled);
   color:var(--disabled-text);
-  cursor: not-allowed;
+  //cursor: not-allowed;
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--disabled);
     color:var(--disabled-text);
-    cursor: not-allowed;
+    //cursor: not-allowed;
   }
   &-white{
     background-color: white;
     color:var(--disabled-text);
-    cursor: not-allowed;
+    //cursor: not-allowed;
   }
 }
 </style>

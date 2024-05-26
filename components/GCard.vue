@@ -1,5 +1,5 @@
 <template>
-  <div :class="['relative h-max min-w-[250px] rounded-md  mx-2 bg-white text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl']" dir="rtl">
+  <div :class="['relative h-max min-w-[250px] rounded-md overflow-hidden mx-2 bg-white text-right border border-[#DDDDDD] transition-shadow duration-300 hover:shadow-xl']" dir="rtl">
     <div :class="['absolute bg-brandOrange w-[200px] h-[200px] right-0 top-0 translate-x-1/2 -translate-y-1/2 origin-center transition-all duration-500 rounded-full z-10 ',{'scale-[500%]':addedToCart},{'scale-[0]':!addedToCart}]">
     </div>
     <div class="absolute grid place-items-center backdrop-blur inset-0 z-10" v-if="loading">
@@ -52,7 +52,7 @@
     </div>
     <hr>
     <div class="p-4 flex flex-col w-full items-stretch">
-      <div class="flex items-start justify-between">
+      <div class="flex relative items-start justify-between">
         <div class="flex flex-col items-start space-y-2">
           <NuxtLink :to="`/product/${product.slug}`" :title="product.title" class="h-[50px]">
             <strong class="font-semibold text-[#626262] hover:text-brandOrange transition-colors duration-200">{{ product.title }}</strong>
@@ -85,16 +85,20 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center gap-1 -mt-8">
-          <a :href="product.basalamData?.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.basalamData?.basalamLink">
+        <div class="flex absolute left-0 items-center gap-1 -mt-8">
+          <a :href="product.basalamData?.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+             title="محصول در باسلام"
+             v-if="product.basalamData.basalamLink">
             <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
           </a>
-          <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-7 transition-all duration-200 hover:shadow-lg hover:-translate-y-1" v-if="product.digiKalaData">
+          <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+             title="محصول در دیجی کالا"
+             v-if="product.digiKalaData.digikalaLink">
             <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
           </a>
         </div>
       </div>
-      <div class="flex items-stretch w-full mt-4 gap-2 justify-between">
+      <div class="flex items-stretch w-full mt-4 gap-2 justify-between" v-if="product.quantity > 0">
         <nuxt-link :to="`/product/${product.slug}`" class="flex-1 rounded-lg border border-[#DDDDDD] hover:bg-[#EFEFEF] transition-all duration-200 p-2 flex items-center justify-center">
                   <span  class="text-xs font-light">
                     مشاهده محصول
@@ -106,6 +110,11 @@
           </svg>
         </button>
       </div>
+      <base-g-button disabled w-full v-else class="mt-3" is-icon>
+        <span  class="text-xs font-light p-1">
+          کالا فعلا موجود نیست
+        </span>
+      </base-g-button>
     </div>
   </div>
 </template>
@@ -159,7 +168,7 @@ const addFavorite = async () => {
   if(result.isSuccess){
     isFavorite.value = true;
     removedFavorite.value = false;
-    await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
+    //await toast.showToast("محصول به علاقه مندی ها اضافه شد",ToastType.success,2000 ,true);
   }
 }
 const removeFavorite = async () => {
@@ -167,7 +176,7 @@ const removeFavorite = async () => {
   if(result.isSuccess){
     removedFavorite.value = true;
     isFavorite.value = false;
-    await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
+    //await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
   }
 }
 

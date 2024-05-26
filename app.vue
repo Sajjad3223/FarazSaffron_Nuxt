@@ -13,7 +13,6 @@
       </base-g-modal>
     </ClientOnly>
   </div>
-<!--  <coming-soon />-->
 </template>
 
 <script setup lang="ts">

@@ -28,8 +28,8 @@
               <span class="uppercase text-xs"><strong class="text-brandOrange">GP</strong> Saffron</span>
             </div>
           </NuxtLink>
-          <div class="flex w-[20vw] items-center relative">
-            <input type="text"
+          <form class="flex w-[20vw] items-center relative" action="/market">
+            <input type="text" name="search" id="search"
                    class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer"
                    required>
             <strong
@@ -42,7 +42,7 @@
                   d="M10.7957 13.4585C10.6083 12.6246 11.4856 11.9552 12.2404 12.356L13.689 13.1252C14.3329 13.4672 14.4063 14.3611 13.8267 14.8034L12.7377 15.6344C12.1581 16.0767 11.3153 15.7701 11.1554 15.0587L10.7957 13.4585Z"
                   fill="currentColor"/>
             </svg>
-          </div>
+          </form>
           <ul class="flex items-center gap-9 font-bold">
             <li>
               <NuxtLink to="/" class="hover:text-brandOrange transition-colors duration-200"

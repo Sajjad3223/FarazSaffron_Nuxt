@@ -15,6 +15,8 @@ export enum EOrderStatus {
     Paid,
     Canceled,
     Returned,
+    Delivered,
+    Sending
 }
 
 export interface OrderFilterData extends BaseDto {
