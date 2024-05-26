@@ -60,7 +60,7 @@
           <div class="flex-1 rounded-xl py-4 px-8 flex flex-col items-stretch">
             <!--  Addresses   -->
             <ul class="p-8 border border-brandOrange/10 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" v-if="!accountStore.initLoading">
-              <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:drop-shadow hover:border-none transition-all duration-200 space-y-3 p-4 rounded-lg border"
+              <li class="flex flex-col bg-bgWhite  hover:drop-shadow hover:border-none transition-all duration-200 space-y-3 p-4 rounded-lg border"
                   v-for="a in accountStore.currentUser?.addresses" :key="a.id">
                 <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
                 <strong>{{ a.street }}</strong>
@@ -77,7 +77,7 @@
                   </svg>
                 </button>
               </li>
-              <li class="grid place-items-center bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 hover:drop-shadow hover:border-none transition-all duration-200 rounded-lg border relative min-h-36">
+              <li class="grid place-items-center bg-bgWhite  hover:drop-shadow hover:border-none transition-all duration-200 rounded-lg border relative min-h-36">
                 <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0 text-brandOrange" @click="showAddressModal = true">
                   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.0015 10.4092V19.5671" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

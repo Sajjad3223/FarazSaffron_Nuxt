@@ -5,7 +5,7 @@
     </Head>
     <div v-if="!utilStore.isMobile()">
       <div>
-        <div class="flex items-center justify-between px-2 dark:text-white">
+        <div class="flex items-center justify-between px-2 ">
           <h3 class="text-sm lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
             <NuxtLink to="/profile/orders">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,11 +41,11 @@
               </span>
           </button>
         </div>
-        <hr class="my-3 border-2 dark:border-gray-600">
+        <hr class="my-3 border-2 ">
       </div>
 
       <div v-if="!isLoading">
-        <div class="flex flex-col space-y-4 p-4 dark:text-white" v-if="order.isFinally">
+        <div class="flex flex-col space-y-4 p-4 " v-if="order.isFinally">
           <div class="flex flex-col lg:flex-row lg:items-center gap-3">
             <div class="flex justify-between items-center lg:justify-center font-light text-xs lg:text-sm opacity-70">
               <span>کد پیگیری سفارش </span>
@@ -76,8 +76,8 @@
             </b>
           </div>
         </div>
-        <hr class="border-white dark:opacity-40">
-        <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4 dark:text-white">
+        <hr class="border-white ">
+        <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4 ">
           <div class="flex flex-col gap-4 mt-4 lg:mt-0">
             <div class="flex flex-col lg:flex-row lg:items-center gap-3">
               <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">مبلغ <b
@@ -117,8 +117,8 @@
             </svg>
           </button>
         </div>
-        <hr class="border-white dark:opacity-40 my-3">
-        <div class="p-6 border rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 flex flex-col space-y-4">
+        <hr class="border-white my-3">
+        <div class="p-6 border rounded-lg bg-bgWhite flex flex-col space-y-4">
           <div v-if="order.isFinally">
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end">
               <span class="hidden lg:block text-sm font-light">وضعیت تحویل</span>
@@ -138,7 +138,7 @@
               </div>
               <span class="flex justify-between items-center font-light opacity-70">کد پیگیری مرسوله: <b class="text-base font-bold opacity-100 mr-2">268475216841</b></span>
             </div>
-            <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-500">
+            <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100">
               <span class="text-sm font-light">با استفاده از سامانه رهگیری پست می‌توانید از وضعیت مرسوله باخبر شوید.</span>
               <a href="https://tracking.post.ir/search.aspx?id=191489717701655129539111"
                  class="text-primary text-sm font-light">

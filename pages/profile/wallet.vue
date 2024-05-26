@@ -5,7 +5,7 @@
     </Head>
     <div v-if="!utilStore.isMobile()">
       <div>
-        <div class="text-2xl font-bold flex items-center gap-2 dark:text-white">
+        <div class="text-2xl font-bold flex items-center gap-2 ">
           <NuxtLink to="/profile">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5"
@@ -16,7 +16,7 @@
           </NuxtLink>
           <strong>کیف پول من</strong>
         </div>
-        <hr class="my-3 border-2 dark:border-gray-600">
+        <hr class="my-3 border-2 ">
         <div class="flex items-center gap-2" v-if="!accountStore.initLoading">
           <span>اعتبار کیف پول:</span>
           <base-g-price :price="accountStore.currentUser?.walletCash / 10"/>

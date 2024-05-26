@@ -7,12 +7,12 @@
 
     <div v-if="!utilStore.isMobile()">
       <div >
-        <h3 class="text-2xl dark:text-white font-bold ">
+        <h3 class="text-2xl font-bold ">
           داشبورد
         </h3>
         <hr class="my-3 border-2">
       </div>
-      <div class="flex flex-col space-y-8 bg-gray-50 dark:bg-gray-800 dark:text-white rounded-xl p-8">
+      <div class="flex flex-col space-y-8 bg-gray-50 rounded-xl p-8">
         <div class="flex justify-between">
           <strong class="border-b-2 border-brandOrange pb-2">سفارش های من</strong>
           <NuxtLink class="text-primary opacity-70 text-sm" to="/profile/orders">
