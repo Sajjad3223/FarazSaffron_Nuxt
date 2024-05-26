@@ -88,12 +88,12 @@
         <div class="flex absolute left-0 items-center gap-1 -mt-8">
           <a :href="product.basalamData?.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
              title="محصول در باسلام"
-             v-if="product.basalamData.basalamLink">
+             v-if="product.basalamData?.basalamLink">
             <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
           </a>
           <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
              title="محصول در دیجی کالا"
-             v-if="product.digiKalaData.digikalaLink">
+             v-if="product.digiKalaData?.digikalaLink">
             <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
           </a>
         </div>

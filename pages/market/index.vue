@@ -47,8 +47,9 @@
           <div class=" bg-[#F8F8F8] p-5 rounded-2xl flex flex-col space-y-8">
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col items-stretch">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">قیمت</h3>
-               <ClientOnly><base-f-range :min="0" :max="5000000" /></ClientOnly>
-              <button class="py-2 mt-4 rounded-lg bg-brandOrange/10 hover:bg-brandOrange/15 w-max px-10 mx-auto text-brandOrange transition-colors duration-200">اعمال</button>
+               <ClientOnly><base-f-range :min="0" :max="9000000" ref="priceRange" /></ClientOnly>
+              <button class="py-2 mt-4 rounded-lg bg-brandOrange/10 hover:bg-brandOrange/15 w-max px-10 mx-auto text-brandOrange transition-colors duration-200"
+              @click="applyRange" >اعمال</button>
             </div>
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">دسته بندی</h3>
@@ -271,6 +272,7 @@ const loading = ref(false);
 const products: Ref<ProductFilterData[]> = ref([]);
 const pageId = ref(1);
 const carousel = ref();
+const priceRange = ref();
 const paginationData:Ref<PaginationData | null> = ref(null);
 const utilStore = useUtilStore();
 const productUtils = useProductUtils();
@@ -363,6 +365,12 @@ const categoryChanged = async (checked,value)=>{
     const index:number = filterParams.categoriesIncluded?.indexOf(value);
     filterParams.categoriesIncluded?.splice(index,1);
   }
+  await getData();
+}
+
+const applyRange = async ()=>{
+  filterParams.minPrice = priceRange.value.getValues().minValue * 10;
+  filterParams.maxPrice = priceRange.value.getValues().maxValue * 10;
   await getData();
 }
 
