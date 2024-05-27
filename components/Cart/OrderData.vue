@@ -1,6 +1,6 @@
 <template>
   <ul class="flex flex-col w-full space-y-4" v-if="data.length > 0">
-    <li class="flex flex-col p-4 py-6 rounded-xl border bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600" v-for="order in data">
+    <li class="flex flex-col p-4 py-6 rounded-xl border bg-bgWhite " v-for="order in data">
       <div class="flex flex-col-reverse lg:flex-row items-end lg:items-start justify-between">
         <div class="flex flex-col space-y-4 w-full lg:w-max">
           <div class="flex space-x-2 space-x-reverse items-center">

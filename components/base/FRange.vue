@@ -25,12 +25,12 @@
     </div>
     <div class="grid grid-cols-2 gap-2 mt-4">
       <div class="relative flex items-center">
-        <base-f-input type="number" name="min-range" id="min-range" place-holder="حداقل: 0" v-model="valueData.minValue" class="text-transparent selection:text-transparent"/>
+        <base-f-input type="number" name="min-range" id="min-range" v-model="valueData.minValue" class="text-transparent selection:text-transparent"/>
         <base-g-tooman class="absolute left-4 opacity-70" />
         <span class="absolute right-4 pointer-events-none">{{Number(valueData.minValue).toLocaleString()}}</span>
       </div>
       <div class="relative flex items-center">
-        <base-f-input type="number" name="max-range" id="max-range" place-holder="حداکثر: 5,000,000" v-model="valueData.maxValue" class="text-transparent selection:text-transparent"/>
+        <base-f-input type="number" name="max-range" id="max-range" v-model="valueData.maxValue" class="text-transparent selection:text-transparent"/>
         <base-g-tooman class="absolute left-4 opacity-70" />
         <span class="absolute right-4 pointer-events-none">{{Number(valueData.maxValue).toLocaleString()}}</span>
       </div>

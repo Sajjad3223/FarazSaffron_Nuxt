@@ -5,7 +5,7 @@
     </Head>
     <div v-if="!utilStore.isMobile()">
       <div>
-        <div class="text-2xl font-bold flex dark:text-white items-center gap-2">
+        <div class="text-2xl font-bold flex  items-center gap-2">
           <NuxtLink to="/profile">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -14,10 +14,10 @@
           </NuxtLink>
           <strong>سفارش های من</strong>
         </div>
-        <hr class="my-3 border-2 dark:border-gray-600">
+        <hr class="my-3 border-2 ">
       </div>
 
-      <div class="flex flex-col w-full mt-8 dark:text-white">
+      <div class="flex flex-col w-full mt-8 ">
         <div>
           <ul class="flex items-center border-b pb-4">
             <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Pending}]" @click="tab = EOrderStatus.Pending">

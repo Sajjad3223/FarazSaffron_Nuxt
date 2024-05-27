@@ -5,13 +5,13 @@
     <div id="overlay2"></div>
 
     <div class="container mx-auto flex items-start gap-4 mt-12">
-      <div class="w-full lg:w-1/4 p-4 bg-bgWhite dark:bg-gray-800 border dark:border-gray-700 dark:text-white sticky top-12 rounded-xl flex flex-col space-y-6">
+      <div class="w-full lg:w-1/4 p-4 bg-bgWhite border sticky top-12 rounded-xl flex flex-col space-y-6">
         <div class="flex w-full justify-between items-end " v-if="!accountStore.initLoading">
           <div class="flex flex-col items-start">
             <strong class="text-lg">{{accountStore.currentUser?.fullName}}</strong>
             <span class="font-light opacity-70">{{accountStore.currentUser?.phoneNumber}}</span>
           </div>
-          <NuxtLink class="text-gray-600 dark:text-gray-300" to="/profile/personal-info">
+          <NuxtLink class="text-gray-600" to="/profile/personal-info">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.3352 19.5078H19.7122" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0578 4.85901V4.85901C14.7138 3.85101 12.8078 4.12301 11.7998 5.46601C11.7998 5.46601 6.7868 12.144 5.0478 14.461C3.3088 16.779 4.9538 19.651 4.9538 19.651C4.9538 19.651 8.1978 20.397 9.9118 18.112C11.6268 15.828 16.6638 9.11701 16.6638 9.11701C17.6718 7.77401 17.4008 5.86701 16.0578 4.85901Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -265,7 +265,7 @@
           </li>
         </ul>
       </div>
-      <div class="flex-1 p-4 border dark:border-gray-700 rounded-xl">
+      <div class="flex-1 p-4 border  rounded-xl">
         <slot></slot>
       </div>
     </div>

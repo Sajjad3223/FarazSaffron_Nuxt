@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col space-y-2 w-full">
-    <label :for="id" v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">
+    <label :for="id" v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm">
       <slot name="labelIcon" />
       <span>{{label}}</span>
     </label>
     <div v-if="type !== 'file'" class="w-full relative flex items-center ">
-      <input :type="type" v-if="!multiLine" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
+      <input :type="type" v-if="!multiLine" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
              :id="id"
              :name="name"
              :value="inputValue"
@@ -16,7 +16,7 @@
              :step="floatStep"
              ref="input"
       >
-      <textarea v-else rows="4" :class="['w-full peer border bg-bgWhite dark:bg-gray-800 dark:border-gray-700 dark:text-white rounded-lg focus:outline-none',`py-${py} px-${px}`]"
+      <textarea v-else rows="4" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none',`py-${py} px-${px}`]"
                 :id="id"
                 :name="name"
                 :dir="rtl ? 'rtl' : 'ltr'"
@@ -29,7 +29,7 @@
         <small class="font-light">ریال</small>
         <span>{{price ?? 0}}</span>
       </div>
-      <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 dark:text-gray-400',
+      <span :class="['absolute font-light opacity-50 pointer-events-none peer-focus:opacity-0 peer-valid:opacity-0 transition-all duration-300 ',
       {'peer-focus:-translate-x-2':rtl},{'peer-focus:translate-x-2':!rtl},
       {'right-4':!$slots.inputIcon && rtl},{'left-4':!$slots.inputIcon && !rtl},
       {'r-12':$slots.inputIcon && rtl},{'l-12':$slots.inputIcon && !rtl}]">
