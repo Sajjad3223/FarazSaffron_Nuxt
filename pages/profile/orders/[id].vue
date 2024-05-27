@@ -61,18 +61,18 @@
           <div class="flex flex-col lg:flex-row lg:items-center gap-3">
             <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">
               <span>تحویل گیرنده </span>
-              <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">سجاد میرشبی</b>
+              <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">{{ order.address?.receiverName }}</b>
             </div>
             <span class="hidden lg:block opacity-40 text-2xl">•</span>
             <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">
               <span>شماره موبایل </span>
-              <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">09154222478</b>
+              <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">{{ order.address?.receiverPhoneNumber }}</b>
             </div>
           </div>
           <div class="flex flex-col items-start gap-2 font-light text-xs lg:text-sm opacity-70">
             <span>آدرس </span>
             <b class="text-sm lg:text-base font-bold opacity-100">
-              خراسان رضوی، تربت حیدریه، خیابان کاشانی، کاشانی 18، پلاک 20
+              {{order.address?.completeAddress}}
             </b>
           </div>
         </div>
@@ -107,7 +107,7 @@
               <strong>5</strong>
             </div>
           </div>
-          <button
+          <NuxtLink to="/profile/wallet"
               class="self-end lg:self-start flex space-x-1 items-center space-x-reverse text-primary text-sm lg:text-base">
             <span>تاریخچه تراکنش ها</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
@@ -115,11 +115,11 @@
                     stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                     stroke-linejoin="round"/>
             </svg>
-          </button>
+          </NuxtLink>
         </div>
         <hr class="border-white dark:opacity-40 my-3">
         <div class="p-6 border rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 flex flex-col space-y-4">
-          <div v-if="order.isFinally">
+          <div v-if="order.isFinally && order.orderStatus === EOrderStatus.Sending">
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end">
               <span class="hidden lg:block text-sm font-light">وضعیت تحویل</span>
               <div class="flex flex-col space-y-2 w-full lg:w-2/5">
@@ -132,22 +132,22 @@
             </div>
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
               <div class="flex flex-col lg:flex-row lg:items-center gap-3">
-                <div class="flex justify-between items-center font-light text-sm opacity-70">هزینه ارسال <b class="text-base font-bold opacity-100 mr-2">253,000 ریال</b></div>
+                <div class="flex justify-between items-center font-light text-sm opacity-70">هزینه ارسال <b class="text-base font-bold opacity-100 mr-2">{{order.transmissionPrice ?? 0}} ریال</b></div>
                 <span class="hidden lg:block opacity-40 text-2xl">•</span>
                 <div class="flex justify-between items-center font-light text-sm opacity-70">مبلغ مرسوله <b class="text-base font-bold opacity-100 mr-2">{{ order.finallyPrice.toLocaleString() }} ریال</b></div>
               </div>
-              <span class="flex justify-between items-center font-light opacity-70">کد پیگیری مرسوله: <b class="text-base font-bold opacity-100 mr-2">268475216841</b></span>
+              <span class="flex justify-between items-center font-light opacity-70">کد پیگیری مرسوله: <b class="text-base font-bold opacity-100 mr-2">{{ order.postFollowUpCode ?? '' }}</b></span>
             </div>
             <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-500">
               <span class="text-sm font-light">با استفاده از سامانه رهگیری پست می‌توانید از وضعیت مرسوله باخبر شوید.</span>
-              <a href="https://tracking.post.ir/search.aspx?id=191489717701655129539111"
+              <a :href="`https://tracking.post.ir/search.aspx?id=${order.postFollowUpCode ?? ''}`"
                  class="text-primary text-sm font-light">
                 ورود به سامانه رهگیری >
               </a>
               <div class="flex items-center flex-wrap lg:w-1/3">
                 <span class="text-sm font-light opacity-70">کد رهگیری:</span>
                 <div class="flex items-center gap-3 mr-auto">
-                  <strong class="text-xs lg:text-base">۱۹۱۴۸۹۷۱۷۷۰۱۶۵۵۱۲۹۵۳۹۱۱۱</strong>
+                  <strong class="text-xs lg:text-base">{{ order.postFollowUpCode ?? '' }}</strong>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
                     <path d="M17 13.4V16.4C17 20.4 15.4 22 11.4 22H7.6C3.6 22 2 20.4 2 16.4V12.6C2 8.6 3.6 7 7.6 7H10.6"
                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -167,14 +167,21 @@
             </div>
             <hr>
           </div>
+          <base-f-alert :outline="true" color="primary">
+            <div class="flex flex-col gap-2">
+              <span>سفارش شما در صف ارسال قرار گرفته است و به زودی تحویل پست خواهد شد</span>
+              <span>کد رهگیری پستی به زودی برای شما ارسال خواهد شد</span>
+            </div>
+          </base-f-alert>
           <ul>
             <li class="w-full flex items-stretch pb-4 mb-4 border-b space-x-4 space-x-reverse last:border-none"
                 v-for="i in order.orderItems" :key="i.id">
-              <div class="w-1/6 flex flex-col items-center">
+              <div class="w-1/6 flex flex-col items-center relative">
                 <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="w-full">
                   <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
                        :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg">
                 </NuxtLink>
+                <span class="absolute top-4 left-4 grid place-items-center text-sm bg-brandOrange/20 text-brandOrange rounded-full px-3">{{i.count}} عدد</span>
               </div>
               <div class="flex-1 flex flex-col items-start">
                 <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="text-sm lg:text-xl mb-6 lg:mt-8">
@@ -234,10 +241,13 @@
                               </span>-->
 
                 <div class="mt-4 flex flex-col space-y-1">
-                  <span class="text-danger text-xs lg:text-sm font-light">تعداد {{ i.count }} عدد</span>
-                  <div class="flex items-center space-x-1 space-x-reverse">
-                    <strong class="lg:text-2xl">{{ i.totalPrice.toLocaleString() }}</strong>
-                    <small>ريال</small>
+                  <div class="flex items-center gap-2 origin-right scale-75">
+                    <small class="font-thin">جمع واحد:</small>
+                    <base-g-price :price="i.price / 10"/>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <small class="font-thin">جمع کل:</small>
+                    <base-g-price :price="i.totalPrice / 10"/>
                   </div>
                 </div>
 
@@ -355,7 +365,7 @@
 
 <script setup lang="ts">
 import {GetOrderById} from "~/services/cart.service";
-import type {OrderDto} from "~/models/cart/cartQueries";
+import {EOrderStatus, type OrderDto} from "~/models/cart/cartQueries";
 import {SITE_URL} from "~/utilities/api.config";
 import {EItemType} from "~/models/EPostType";
 

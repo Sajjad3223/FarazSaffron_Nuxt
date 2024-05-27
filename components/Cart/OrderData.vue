@@ -111,6 +111,10 @@ const getStatusText = computed(()=>{
       return 'لغو شده';
     case EOrderStatus.Returned:
       return 'مرجوع شده';
+    case EOrderStatus.Sending:
+      return 'ارسال شده';
+    case EOrderStatus.Delivered:
+      return 'تحویل شده';
   }
 })
 </script>

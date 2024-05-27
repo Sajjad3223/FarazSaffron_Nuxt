@@ -43,7 +43,7 @@ export const useCartStore = defineStore("cart",()=>{
                 expires: new Date(new Date().setDate(new Date().getDate() + 30)),
             });
 
-            let cartData:OrderDto = JSON.parse(cartCookie.value!);
+            let cartData:OrderDto = cartCookie.value;
 
             if(cartData === null || cartData === undefined){
                 cartData = {

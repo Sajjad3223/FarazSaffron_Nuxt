@@ -76,6 +76,8 @@ export interface OrderItem extends BaseDto {
 export interface OrderGist {
     pending: number;
     paid: number;
+    sent: number;
+    delivered: number;
     returned: number;
     canceled: number;
 }

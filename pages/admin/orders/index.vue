@@ -104,7 +104,7 @@
               {{ o.persianDate }}
             </td>
             <td class="px-4 py-3">
-              <div class="flex items-center space-x-4 text-sm">
+              <div class="flex items-center gap-2 text-sm">
                 <NuxtLink :to="`/admin/orders/${o.id}`" title="مشاهده جزئیات"
                         :class="['flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-300 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray',{'opacity-30 pointer-events-none':o.itemsCount <= 0}]"
                          >
@@ -113,14 +113,17 @@
                     <path d="M11.9999 9.14001C10.4299 9.14001 9.1499 10.42 9.1499 12C9.1499 13.57 10.4299 14.85 11.9999 14.85C13.5699 14.85 14.8599 13.57 14.8599 12C14.8599 10.43 13.5699 9.14001 11.9999 9.14001Z" fill="currentColor"/>
                   </svg>
                 </NuxtLink>
-                <select name="orderStatus" id="orderStatus" :value="o.orderStatus" class="text-xs" @change="setOrderStatus(o.id,$event)">
-                  <option :value="0">جاری</option>
-                  <option :value="1">پرداخت شده</option>
-                  <option :value="2">لغو شده</option>
-                  <option :value="3">مرجوع شده</option>
-                  <option :value="4">تحویل شده</option>
-                  <option :value="5">ارسال شده</option>
-                </select>
+                <div class="flex flex-col">
+                  <label class="text-[10px]" for="">تغییر وضعیت</label>
+                  <select name="orderStatus" id="orderStatus" :value="o.orderStatus" class="text-xs border rounded px-1" @change="setOrderStatus(o.id,$event)">
+                    <option :value="0">جاری</option>
+                    <option :value="1">پرداخت شده</option>
+                    <option :value="2">لغو شده</option>
+                    <option :value="3">مرجوع شده</option>
+                    <option :value="4">تحویل شده</option>
+                    <option :value="5">ارسال شده</option>
+                  </select>
+                </div>
               </div>
             </td>
           </tr>

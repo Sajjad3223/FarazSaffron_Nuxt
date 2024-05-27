@@ -6,7 +6,7 @@
     <h4
         class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
     >
-      محصولات
+      دسته بندی ها
     </h4>
     <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">

@@ -15,7 +15,7 @@
         <ol
             class="grid grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg border border-gray-100 text-sm text-gray-500 sm:grid-cols-4"
         >
-          <li :class="['flex items-center justify-center gap-2 p-4',{'active-step':step >= 0}]">
+          <li :class="['flex items-center justify-center cursor-pointer gap-2 p-4',{'active-step':step >= 0}]" @click="step = 0">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 8.25V18C20 21 18.21 22 16 22H8C5.79 22 4 21 4 18V8.25C4 5 5.79 4.25 8 4.25C8 4.87 8.24997 5.43 8.65997 5.84C9.06997 6.25 9.63 6.5 10.25 6.5H13.75C14.99 6.5 16 5.49 16 4.25C18.21 4.25 20 5 20 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M16 4.25C16 5.49 14.99 6.5 13.75 6.5H10.25C9.63 6.5 9.06997 6.25 8.65997 5.84C8.24997 5.43 8 4.87 8 4.25C8 3.01 9.01 2 10.25 2H13.75C14.37 2 14.93 2.25 15.34 2.66C15.75 3.07 16 3.63 16 4.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,7 +35,7 @@
               <small class="mt-1"> توضیحات و مشخصات اصلی کالا </small>
             </p>
           </li >
-          <li :class="['flex items-center justify-center gap-2 p-4',{'active-step':step >= 1}]">
+          <li :class="['flex items-center justify-center cursor-pointer gap-2 p-4',{'active-step':step >= 1}]" @click="step = 1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M13 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,7 +57,7 @@
               <small class="mt-1"> بارگزاری تصاویر </small>
             </p>
           </li>
-          <li :class="['flex items-center justify-center gap-2 p-4',{'active-step':step >= 2}]">
+          <li :class="['flex items-center justify-center cursor-pointer gap-2 p-4',{'active-step':step >= 2}]" @click="step = 2">
 
             <span v-if="step >= 2"
                   class="absolute -left-2 top-1/2 hidden size-4 -translate-y-1/2 rotate-45 border border-gray-100 sm:block ltr:border-b-0 ltr:border-s-0 ltr:bg-white rtl:border-e-0 rtl:border-t-0 rtl:bg-gray-50"
@@ -85,7 +85,7 @@
               <small class="mt-1"> ویژگی های محصول </small>
             </p>
           </li>
-          <li :class="['flex items-center justify-center gap-2 p-4',{'active-step':step >= 3}]" >
+          <li :class="['flex items-center justify-center cursor-pointer gap-2 p-4',{'active-step':step >= 3}]" @click="step = 3" >
 
             <span v-if="step >= 3"
                   class="absolute -left-2 top-1/2 hidden size-4 -translate-y-1/2 rotate-45 border border-gray-100 sm:block ltr:border-b-0 ltr:border-s-0 ltr:bg-white rtl:border-e-0 rtl:border-t-0 rtl:bg-gray-50"
@@ -110,7 +110,7 @@
     </div>
 
 
-    <div class="w-full relative" v-if="product">
+    <div class="w-full relative" v-if="!pending">
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form :validation-schema="editProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4" v-show="step === 0" @submit="UpdateProduct">
@@ -179,6 +179,26 @@
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4" v-show="step === 1">
+          <ul class="w-full flex gap-2 mb-4">
+            <li v-for="image in product.images" class="max-w-[200px] relative">
+              <img :src="`${SITE_URL}/product/images/${product.id}/${image.image.src}`" :alt="image.image.alt" class="w-full h-full object-cover rounded-xl" :key="image.id" >
+              <button class="absolute left-2 top-2 w-8 h-8 bg-danger text-white/70 hover:text-white transition-all duration-200 hover:drop-shadow-lg hover:-translate-y-0.5 rounded-lg grid place-items-center"
+                      title="حذف تصویر" @click="removeImage(image.id)">
+                <svg
+                    class="w-4 h-4 pointer-events-none"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                  <path
+                      fill-rule="evenodd"
+                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                      clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </li>
+          </ul>
           <f-multi-file-input v-model="imageFiles" />
           <base-f-input label="متن جایگزین تصاویر" place-holder="متن جایگزین را وارد کنید" id="imagesAlt" name="imagesAlt" v-model="imagesAlt" class="my-4"/>
           <div class="grid grid-cols-3 gap-4 col-span-full">
@@ -243,25 +263,17 @@
       </div>
 
     </div>
-    <!--    <div class="flex items-center gap-4 mt-12">
-          <base-f-button w-full type="button" color="secondary" text-color="responsive" class="col-span-2" bordered @clicked="step&#45;&#45;" v-if="step > 0">
-            قبلی
-          </base-f-button>
-          <base-f-button w-full type="button" color="primary" text-color="white" class="col-span-2" @clicked="step++" v-if="step < 3 && createdProductId != 0">
-            بعدی
-          </base-f-button>
-          <base-f-button w-full type="button" color="primary" text-color="white" class="col-span-2" @clicked="AddProduct" >
-            ثبت
-          </base-f-button>
-        </div>-->
+
   </div>
 </template>
 
 <script setup lang="ts">
 import {Form} from "vee-validate";
 import type {
-  CreateSpecificationViewModel, EditProductCommand,
-  SetSeoDataCommand, SetSpecificationsCommand
+  CreateSpecificationViewModel,
+  EditProductCommand,
+  SetSeoDataCommand,
+  SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import {EPackingType} from "~/models/product/EPackingType";
 import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
@@ -269,6 +281,7 @@ import FSeoData from "~/components/base/FSeoData.vue";
 import {
   EditProduct,
   GetProductById,
+  RemoveImage,
   SetImages,
   SetSeoData,
   SetSpecifications
@@ -280,6 +293,8 @@ import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
 import type {BasalamData, CatalogDto, DigikalaData, ProductDto} from "~/models/product/productQueries";
 import {GetCatalogs} from "~/services/catalog.service";
+import {SITE_URL} from "~/utilities/api.config";
+import {ApiStatusCode} from "~/models/metaData";
 
 definePageMeta({
   layout:'admin'
@@ -287,15 +302,26 @@ definePageMeta({
 
 const route = useRoute();
 const router = useRouter();
+const productId = Number(route.params.productId);
 const toast = useToast();
+
+const {data: result,pending} = await useAsyncData("GetProduct" + productId.toString(),()=>GetProductById(productId));
+if(!result.value?.isSuccess){
+  if(process.server)
+    throw createError({statusCode:404,statusMessage:"محصول یافت نشد"})
+  else{
+    router.push("/admin/products")
+    toast.showError({message:"محصول یافت نشد",appStatusCode:ApiStatusCode.NotFound})
+  }
+}
+const productResult = result.value!;
 
 const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
 const loadingCategories = ref(false);
 const loadingCatalogs = ref(false);
-const product:Ref<ProductDto | undefined> = ref(undefined);
-const productId = Number(route.params.productId);
+const product:Ref<ProductDto> = ref(productResult.data!);
 
 //@ts-ignore
 const editProductData:EditProductCommand = reactive({
@@ -372,47 +398,43 @@ const specifications:Ref<CreateSpecificationViewModel[]> = ref([
 onMounted(async ()=>{
   isLoading.value = true;
 
-  const productResult = await GetProductById(productId);
-  if(productResult.isSuccess){
-    product.value = productResult.data!;
-    editProductData.title = product.value.title;
-    editProductData.slug = product.value.slug;
-    editProductData.price = product.value.price;
-    editProductData.discount = product.value.discount;
-    editProductData.weight = product.value.weight;
-    editProductData.healthNumber = product.value.healthNumber;
-    editProductData.packingType = product.value.packingType;
-    editProductData.productCode = product.value.productCode;
-    editProductData.barcodeNumber = product.value.barcodeNumber;
-    editProductData.categoryId = product.value.category?.id;
-    editProductData.subCategoryId = product.value.subCategory?.id;
-    editProductData.dimensions.width = product.value.dimensions.width;
-    editProductData.dimensions.height = product.value.dimensions.height;
-    editProductData.dimensions.length = product.value.dimensions.length;
-    editProductData.digikalaData = {
-      digikalaLink: product.value.digikalaData?.digikalaLink ?? '',
-      digikalaPrice: product.value.digikalaData?.digiKalaPrice ?? 0
-    } as DigikalaData;
-    editProductData.basalamData = {
-      basalamLink: product.value.basalamData?.basalamLink ?? '',
-      basalamPrice: product.value.basalamData?.basalamPrice ?? 0
-    } as BasalamData;
-    editProductData.seoData.metaTitle = product.value.seoData.metaTitle;
-    editProductData.seoData.metaDescription = product.value.seoData.metaDescription;
-    editProductData.seoData.canonical = product.value.seoData.canonical;
-    editProductData.seoData.indexPage = product.value.seoData.indexPage;
-    editProductData.seoData.metaKeyWords = product.value.seoData.metaKeyWords;
-    editProductData.seoData.schema = product.value.seoData.schema;
-    editProductData.quantity = product.value.quantity;
-    editProductData.catalogId = product.value.catalog?.id ?? null;
+  editProductData.title = product.value.title;
+  editProductData.slug = product.value.slug;
+  editProductData.price = product.value.price;
+  editProductData.discount = product.value.discount;
+  editProductData.weight = product.value.weight;
+  editProductData.healthNumber = product.value.healthNumber;
+  editProductData.packingType = product.value.packingType;
+  editProductData.productCode = product.value.productCode;
+  editProductData.barcodeNumber = product.value.barcodeNumber;
+  editProductData.categoryId = product.value.category?.id;
+  editProductData.subCategoryId = product.value.subCategory?.id;
+  editProductData.dimensions.width = product.value.dimensions.width;
+  editProductData.dimensions.height = product.value.dimensions.height;
+  editProductData.dimensions.length = product.value.dimensions.length;
+  editProductData.digikalaData = {
+    digikalaLink: product.value.digikalaData?.digikalaLink ?? '',
+    digikalaPrice: product.value.digikalaData?.digiKalaPrice ?? 0
+  } as DigikalaData;
+  editProductData.basalamData = {
+    basalamLink: product.value.basalamData?.basalamLink ?? '',
+    basalamPrice: product.value.basalamData?.basalamPrice ?? 0
+  } as BasalamData;
+  editProductData.seoData.metaTitle = product.value.seoData.metaTitle;
+  editProductData.seoData.metaDescription = product.value.seoData.metaDescription;
+  editProductData.seoData.canonical = product.value.seoData.canonical;
+  editProductData.seoData.indexPage = product.value.seoData.indexPage;
+  editProductData.seoData.metaKeyWords = product.value.seoData.metaKeyWords;
+  editProductData.seoData.schema = product.value.seoData.schema;
+  editProductData.quantity = product.value.quantity;
+  editProductData.catalogId = product.value.catalog?.id ?? null;
 
-    specifications.value = productResult.data!.specifications.map(s=>{
-      return {
-        key:s.title,
-        value:s.value
-      } as CreateSpecificationViewModel
-    })
-  }
+  specifications.value = productResult.data!.specifications.map(s=>{
+    return {
+      key:s.title,
+      value:s.value
+    } as CreateSpecificationViewModel
+  })
 
   await refreshCategories();
   await refreshCatalogs();
@@ -515,6 +537,13 @@ const AddSeoData = async ()=>{
 const generateSlug = (value:string)=>{
   if(customSlug.value) return;
   editProductData.slug = value.replaceAll(' ','-');
+}
+
+const removeImage = async (imageId:number) => {
+  const result = await RemoveImage(productId,imageId);
+  if(result.isSuccess){
+
+  }
 }
 
 </script>

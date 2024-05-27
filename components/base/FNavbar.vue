@@ -317,7 +317,7 @@
                   <img src="~/assets/images/empty-cart.png" alt="empty cart" class="w-full max-w-[170px]">
                   <strong class="text-2xl">خالی!</strong>
                   <span class="text-sm text-[#9F9F9F]">هیچ محصولی وجود ندارد</span>
-                  <NuxtLink to="/market"
+                  <button @click="goToMarket"
                             class="text-brandOrange flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.00043 4.85742V9.13113" stroke="currentColor" stroke-linecap="round"
@@ -329,7 +329,7 @@
                             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>مشاهده محصولات</span>
-                  </NuxtLink>
+                  </button>
                 </div>
                 <div class="flex flex-col relative w-[400px] p-6 pb-0" v-else-if="cartStore.cartItemsCount <= 3">
                       <span>
@@ -357,7 +357,7 @@
                       <small>مجموع سبد خرید</small>
                       <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)"/>
                     </div>
-                    <base-g-button is-link to="/checkout/cart" w-full>
+                    <base-g-button @click="goToCart" w-full>
                       مشاهده سبد خرید
                     </base-g-button>
                   </div>
@@ -369,8 +369,8 @@
                     <span class="text-sm text-[#9F9F9F]">قیمت کل:</span>
                     <base-g-price class="text-sm text-[#9F9F9F]" :price="(cartStore.PendingOrder.totalPrice / 10)"/>
                   </div>
-                  <NuxtLink to="/checkout/cart"
-                            class="text-brandOrange flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
+                  <button @click="goToCart"
+                            class="text-brandOrange cursor-pointer flex items-center gap-1 px-6 py-2 rounded-md hover:bg-brandOrange/10 transition-colors duration-200">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.00043 4.85742V9.13113" stroke="currentColor" stroke-linecap="round"
                             stroke-linejoin="round"/>
@@ -381,7 +381,7 @@
                             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>مشاهده سبد خرید</span>
-                  </NuxtLink>
+                  </button>
                 </div>
               </div>
             </Transition>
@@ -478,6 +478,15 @@ const LogOut = async () => {
       await authStore.logOut();
     }
   })
+}
+
+const goToCart=()=>{
+  showCart.value = false;
+  router.push("/checkout/cart");
+}
+const goToMarket=()=>{
+  showCart.value = false;
+  router.push("/market");
 }
 </script>
 

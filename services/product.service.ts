@@ -84,6 +84,11 @@ export const SetMainImageFromImages = (command:SetMainImageFromImagesCommand):Pr
         body:command
     });
 }
+export const RemoveImage = (productId:number,imageId:number):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/images/${productId}/${imageId}`,{
+        method:'DELETE',
+    });
+}
 export const SetSpecifications = (command:SetSpecificationsCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/Product/specification`,{
         method:'PUT',
