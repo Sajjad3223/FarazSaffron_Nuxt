@@ -36,7 +36,7 @@
               کیف پول
             </span>
           </div>
-          <base-g-price :price="accountStore.currentUser?.walletCash ?? 0" />
+          <base-g-price :price="(accountStore.currentUser?.walletCash ?? 0) / 10" />
         </NuxtLink>
         <div class="flex justify-between items-center">
           <div class="flex items-center">

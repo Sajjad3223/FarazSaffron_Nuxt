@@ -39,8 +39,9 @@ export const EditUserPhoneNumber = (phoneNumber:string):Promise<ApiResponse<unde
     });
 }
 export const ChargeWallet = (amount:number):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/user/charge-wallet?price=${amount}`,{
-        method:'PUT',
+    return FetchApi(`/payment/chargeWallet`,{
+        method:'POST',
+        body:amount
     });
 }
 export const AddUserAddress = (command:AddUserAddressCommand):Promise<ApiResponse<undefined>> => {

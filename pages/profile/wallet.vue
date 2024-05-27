@@ -21,11 +21,11 @@
           <span>اعتبار کیف پول:</span>
           <base-g-price :price="accountStore.currentUser?.walletCash / 10"/>
         </div>
-        <form class="flex items-start gap-2 mt-5">
+        <form class="flex items-start gap-2 mt-5" @submit.prevent="charge">
           <span class="translate-y-3">شارژ حساب کاربری</span>
           <base-g-input type="number" label="مبلغ" name="price" id="price" v-model="price" class="w-max" required/>
           <span class="translate-y-3 font-light">تومان</span>
-          <base-g-button w-full>
+          <base-g-button w-full type="submit" >
             پرداخت
           </base-g-button>
         </form>
@@ -56,7 +56,7 @@
             </div>
             <div class="justify-self-center flex items-center gap-4">
               <span class="font-thin"> {{ w.persianDate }} </span>
-              <base-f-badge color="brandOrange" size="xs" fore-color="brandOrange" outline v-if="w.isFinally">
+              <base-f-badge color="primary" size="xs" v-if="w.isFinally">
                 نهایی شده
               </base-f-badge>
               <base-f-badge color="danger" size="xs" fore-color="danger" outline v-else>
@@ -64,7 +64,7 @@
               </base-f-badge>
             </div>
             <div class="justify-self-end">
-              <base-g-price :price="w.price"/>
+              <base-g-price :price="w.price / 10"/>
             </div>
           </div>
         </div>
@@ -246,6 +246,7 @@
 
 <script setup lang="ts">
 import {EWalletType} from "~/models/users/userDto";
+import {ChargeWallet} from "~/services/user.service";
 
 definePageMeta({
   layout: 'profile'
@@ -257,5 +258,24 @@ const price = ref();
 const accountStore = useAccountStore();
 const toast = useToast();
 const utilStore = useUtilStore();
+
+const charge = async ()=>{
+  const result = await ChargeWallet(price.value);
+  if(result.isSuccess){
+    if(result.isSuccess && result.data != ''){
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
+      form.enctype = 'application/x-www-form-urlencoded';
+      const refId = document.createElement('input');
+      refId.name = 'RefId';
+      refId.id = 'RefId';
+      refId.value = result.data!;
+      form.appendChild(refId);
+      document.body.appendChild(form)
+      form.submit();
+    }
+  }
+}
 
 </script>

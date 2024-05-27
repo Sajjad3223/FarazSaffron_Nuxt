@@ -36,7 +36,12 @@
         <span class="font-light">{{route.query.saleRefId}}</span>
       </div>
       <hr class="w-2/3">
-      <NuxtLink :to="`/profile/orders/${route.query.orderId}`" class="text-xl font-light text-[#38C157] hover:underline underline-offset-8">
+      <NuxtLink v-if="route.query?.walletCharge == '1'"
+                :to="`/profile/wallet`" class="text-xl font-light text-[#38C157] hover:underline underline-offset-8">
+        مشاهده سفارش
+      </NuxtLink>
+      <NuxtLink v-else
+          :to="`/profile/orders/${route.query.orderId}`" class="text-xl font-light text-[#38C157] hover:underline underline-offset-8">
         مشاهده سفارش
       </NuxtLink>
     </div>

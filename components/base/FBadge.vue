@@ -28,19 +28,19 @@ const props = withDefaults(defineProps<{
 }
 
 .badge-warning{
-  @apply bg-warning border-warning text-black;
+  @apply bg-warning/20 border-warning text-black;
 }
 .badge-danger{
-  @apply bg-danger border-danger text-white;
+  @apply bg-danger/20 border-danger text-danger;
 }
 .badge-primary{
-  @apply bg-primary border-primary text-white;
+  @apply bg-primary/20 border-primary text-primary;
 }
 .badge-brandOrange{
-  @apply bg-brandOrange border-brandOrange text-white;
+  @apply bg-brandOrange/20 border-brandOrange text-brandOrange;
 }
 .badge-secondary{
-  @apply bg-secondary border-secondary text-white;
+  @apply bg-secondary/20 border-secondary text-secondary;
 }
 
 .badge-outline{
