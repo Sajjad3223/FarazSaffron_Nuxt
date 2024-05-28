@@ -38,6 +38,8 @@ export const useAccountStore = defineStore('account',()=> {
             if(favCountResult.isSuccess){
                 myFavoritesCount.value = favCountResult.data ?? 0;
             }
+            if(userData.data?.wallets == null || userData.data.wallets.length <= 0)
+                currentUser.value.wallets = [];
 
         } else if ( userData.metaData.appStatusCode == ApiStatusCode.UnAuthorize) {
             const cookie = useCookie("c-access-token");

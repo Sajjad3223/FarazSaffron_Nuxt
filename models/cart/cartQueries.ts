@@ -88,6 +88,8 @@ export interface ItemInfo {
     productSlug: string;
     eItemType: EItemType;
     productImage: ProductImageDto;
+    weight: number;
+    healthNumber?: string | null;
 }
 
 export interface OrderFilterResult extends BaseFilterResult<OrderFilterData> {

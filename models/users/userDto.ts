@@ -1,5 +1,7 @@
 import type {BaseDto} from "~/models/baseDto";
 import type {RoleDto} from "~/models/role/roleQueries";
+import type {BaseFilterResult} from "~/models/baseFilterResult";
+import type {BaseFilterParams} from "~/models/baseFilterParams";
 
 export interface UserDto extends BaseDto {
     firstName: string;
@@ -37,6 +39,20 @@ export interface WalletDto extends BaseDto {
     finallyDate: Date;
     walletType: EWalletType;
     refCode?: string;
+}
+
+export interface WalletFilterParams extends BaseFilterParams{
+    walletType?: number | null | undefined;
+    userId?: number | null | undefined;
+    minPrice?: number | null | undefined;
+    maxPrice?: number | null | undefined;
+    justFinally?: boolean | null | undefined;
+    fromDate?: string | null | undefined;
+    toDate?: string | null | undefined;
+    search?: string | null | undefined;
+}
+export interface WalletFilterResult extends BaseFilterResult<WalletDto>{
+
 }
 
 export enum EWalletType {

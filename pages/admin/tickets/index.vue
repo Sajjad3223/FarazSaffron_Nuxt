@@ -50,7 +50,7 @@ const getData = async ()=>{
               <small class="opacity-70">{{ ticket.persianDate }}</small>
               <span class="opacity-30">•</span>
               <base-f-badge class="animate-pulse py-1" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Pending">در دست بررسی</base-f-badge>
-              <base-f-badge class="py-1" color="brandOrange" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Answered">پاسخ داده</base-f-badge>
+              <base-g-badge color="success" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Answered">پاسخ داده</base-g-badge>
               <base-f-badge class="py-1" color="secondary" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Closed">بسته شده</base-f-badge>
             </div>
 

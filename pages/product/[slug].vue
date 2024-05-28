@@ -129,48 +129,60 @@
             </li>
           </ul>
 
-          <div class="w-3/5 flex flex-col space-y-4 mt-auto">
-            <div class="flex justify-between items-center gap-4">
-              <!--   Price    -->
-              <div class="flex items-center gap-1">
-                <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
-                <span class="flex flex-col items-center text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
-              </div>
-              <!--   Discount    -->
-              <div class="flex items-center gap-2" v-if="product?.discount !== 0">
-                <span class="line-through opacity-50 text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
-                <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
-                  <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ product?.discount }}%</span>
+          <div class="w-full grid grid-cols-5 gap-4">
+            <div class="col-span-3 flex flex-col space-y-4 mt-auto">
+              <div class="flex justify-between items-center gap-4">
+                <!--   Price    -->
+                <div class="flex items-center gap-1">
+                  <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
+                  <span class="flex flex-col items-center text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
+                </div>
+                <!--   Discount    -->
+                <div class="flex items-center gap-2" v-if="product?.discount !== 0">
+                  <span class="line-through opacity-50 text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
+                  <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
+                    <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ product?.discount }}%</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4" v-if="product.quantity > 0">
-              <div class="bg-white rounded-lg flex p-2 gap-1">
-                <button class="grid place-items-center p-2">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 5H9" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M5 9L5 1" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
+              <div class="grid grid-cols-2 gap-4" v-if="product.quantity > 0">
+                <div class="bg-white rounded-lg flex p-2 gap-1">
+                  <button class="grid place-items-center p-2">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 5H9" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M5 9L5 1" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <input type="number" class="bg-[#F8F8F8] text-[#A9A9A9] rounded-lg flex-1 w-1/3 text-center" value="1" style="font-family: 'Vazir FD',serif">
+                  <button class="grid place-items-center p-2">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.18599 16.4994C8.16974 16.4994 7.17899 16.4881 6.19874 16.4679C4.94474 16.4431 4.07699 15.6301 3.93524 14.3461C3.69899 12.2161 3.29474 7.19563 3.29099 7.14538C3.26549 6.83563 3.49649 6.56413 3.80624 6.53938C4.11149 6.53113 4.38749 6.74563 4.41224 7.05463C4.41599 7.10563 4.81949 12.1089 5.05349 14.2224C5.13374 14.9521 5.52749 15.3286 6.22199 15.3429C8.09699 15.3826 10.0102 15.3849 12.0727 15.3474C12.8107 15.3331 13.2097 14.9641 13.2922 14.2171C13.5247 12.1216 13.9297 7.10563 13.9342 7.05463C13.959 6.74563 14.2327 6.52963 14.5395 6.53938C14.8492 6.56488 15.0802 6.83563 15.0555 7.14538C15.051 7.19638 14.6445 12.2296 14.4105 14.3409C14.265 15.6511 13.3995 16.4484 12.093 16.4724C11.0932 16.4896 10.1287 16.4994 9.18599 16.4994" fill="#F42020"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M15.531 5.24219H2.8125C2.502 5.24219 2.25 4.99019 2.25 4.67969C2.25 4.36919 2.502 4.11719 2.8125 4.11719H15.531C15.8415 4.11719 16.0935 4.36919 16.0935 4.67969C16.0935 4.99019 15.8415 5.24219 15.531 5.24219" fill="#F42020"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M13.079 5.24175C12.2255 5.24175 11.4845 4.6335 11.3165 3.7965L11.1342 2.8845C11.096 2.74575 10.9377 2.625 10.7577 2.625H7.58297C7.40297 2.625 7.24472 2.74575 7.19897 2.919L7.02422 3.7965C6.85697 4.6335 6.11522 5.24175 5.26172 5.24175C4.95122 5.24175 4.69922 4.98975 4.69922 4.67925C4.69922 4.36875 4.95122 4.11675 5.26172 4.11675C5.58122 4.11675 5.85872 3.88875 5.92172 3.57525L6.10397 2.66325C6.28922 1.96425 6.89447 1.5 7.58297 1.5H10.7577C11.4462 1.5 12.0515 1.96425 12.2292 2.6295L12.4197 3.57525C12.482 3.88875 12.7595 4.11675 13.079 4.11675C13.3895 4.11675 13.6415 4.36875 13.6415 4.67925C13.6415 4.98975 13.3895 5.24175 13.079 5.24175" fill="#F42020"/>
+                    </svg>
+                  </button>
+                </div>
+                <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug)">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                </button>
-                <input type="number" class="bg-[#F8F8F8] text-[#A9A9A9] rounded-lg flex-1 w-1/3 text-center" value="1" style="font-family: 'Vazir FD',serif">
-                <button class="grid place-items-center p-2">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.18599 16.4994C8.16974 16.4994 7.17899 16.4881 6.19874 16.4679C4.94474 16.4431 4.07699 15.6301 3.93524 14.3461C3.69899 12.2161 3.29474 7.19563 3.29099 7.14538C3.26549 6.83563 3.49649 6.56413 3.80624 6.53938C4.11149 6.53113 4.38749 6.74563 4.41224 7.05463C4.41599 7.10563 4.81949 12.1089 5.05349 14.2224C5.13374 14.9521 5.52749 15.3286 6.22199 15.3429C8.09699 15.3826 10.0102 15.3849 12.0727 15.3474C12.8107 15.3331 13.2097 14.9641 13.2922 14.2171C13.5247 12.1216 13.9297 7.10563 13.9342 7.05463C13.959 6.74563 14.2327 6.52963 14.5395 6.53938C14.8492 6.56488 15.0802 6.83563 15.0555 7.14538C15.051 7.19638 14.6445 12.2296 14.4105 14.3409C14.265 15.6511 13.3995 16.4484 12.093 16.4724C11.0932 16.4896 10.1287 16.4994 9.18599 16.4994" fill="#F42020"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.531 5.24219H2.8125C2.502 5.24219 2.25 4.99019 2.25 4.67969C2.25 4.36919 2.502 4.11719 2.8125 4.11719H15.531C15.8415 4.11719 16.0935 4.36919 16.0935 4.67969C16.0935 4.99019 15.8415 5.24219 15.531 5.24219" fill="#F42020"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.079 5.24175C12.2255 5.24175 11.4845 4.6335 11.3165 3.7965L11.1342 2.8845C11.096 2.74575 10.9377 2.625 10.7577 2.625H7.58297C7.40297 2.625 7.24472 2.74575 7.19897 2.919L7.02422 3.7965C6.85697 4.6335 6.11522 5.24175 5.26172 5.24175C4.95122 5.24175 4.69922 4.98975 4.69922 4.67925C4.69922 4.36875 4.95122 4.11675 5.26172 4.11675C5.58122 4.11675 5.85872 3.88875 5.92172 3.57525L6.10397 2.66325C6.28922 1.96425 6.89447 1.5 7.58297 1.5H10.7577C11.4462 1.5 12.0515 1.96425 12.2292 2.6295L12.4197 3.57525C12.482 3.88875 12.7595 4.11675 13.079 4.11675C13.3895 4.11675 13.6415 4.36875 13.6415 4.67925C13.6415 4.98975 13.3895 5.24175 13.079 5.24175" fill="#F42020"/>
-                  </svg>
+                  <span class="text-white">افزودن به سبد خرید</span>
                 </button>
               </div>
-              <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug)">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="text-white">افزودن به سبد خرید</span>
-              </button>
+              <base-g-button w-full button-type="outline" color="danger" v-else>
+                موجود شد به من اطلاع بده
+              </base-g-button>
             </div>
-            <base-g-button w-full button-type="outline" color="danger" v-else>
-              موجود شد به من اطلاع بده
-            </base-g-button>
+            <div class="col-span-2 grid grid-cols-2 gap-4 self-end items-end">
+              <a href="" class="bg-white rounded-2xl w-3/4 justify-self-center h-[50px] relative flex flex-col items-center group">
+                <img src="~/assets/images/digikala-icon.png" alt="digikala icon" class="rounded-full w-[100px] -mt-5 group-hover:-translate-y-2 group-hover:shadow-md transition-all duration-200">
+                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-1.5 transition-all duration-200 opacity-0 group-hover:opacity-100">دیجی کالا</small>
+              </a>
+              <a href="" class="bg-white rounded-2xl w-3/4 justify-self-center h-[50px] relative flex flex-col items-center group">
+                <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[100px] -mt-5 group-hover:-translate-y-2 group-hover:shadow-md transition-all duration-200">
+                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-1.5 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
+              </a>
+            </div>
           </div>
           <div class="w-full border rounded-xl p-4 mt-5 flex items-center gap-4">
             <img src="../../assets/images/icons/fastDelivery.png" alt="fastDelivery" class="w-8 opacity-70">
@@ -178,7 +190,6 @@
             ارسال رایگان برای کالاهای بالاتر از 5 گرم
           </span>
           </div>
-
         </div>
       </div>
 
@@ -693,6 +704,17 @@ const comments = ref();
 
 .image-magnifier-container:hover .img-magnifier-glass{
   scale: 100%;
+}
+
+.corner{
+  @apply before:absolute before:-left-3 before:w-3 before:h-3 before:bottom-2 before:rounded-tr-lg;
+  @apply after:absolute after:-right-3 after:w-3 after:h-3 after:bottom-2 after:rounded-tl-lg;
+}
+.corner:before{
+  box-shadow: 3px -3px 0 0 #F8F8F8;
+}
+.corner:after{
+  box-shadow: -3px -3px 0 0 #F8F8F8;
 }
 
 </style>

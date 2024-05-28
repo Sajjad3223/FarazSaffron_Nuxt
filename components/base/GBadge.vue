@@ -1,5 +1,5 @@
 <template>
-  <div :class="['badge',{'badge-square':isSquare}
+  <div :class="['badge',{'badge-square':isSquare},
               `badge-${color}`,`text-${size}`,`text-${foreColor}`]">
     <slot/>
   </div >
@@ -8,31 +8,19 @@
 <script setup lang="ts">
 
 const props = defineProps<{
-  color:{
-    type:String,
-    default:'danger'|'warning'|'primary'|'brandOrange'|'secondary',
-  },
-  size:{
-    type:String,
-    default:'xs'|'sm'|'base'|'lg'|'xl',
-  },
-  foreColor:{
-    type:String,
-    default:'white'
-  },
-  isSquare:{
-    type:boolean,
-    default:false
-  }
+  color:'danger'|'warning'|'primary'|'brandOrange'|'secondary',
+  size:'xs'|'sm'|'base'|'lg'|'xl',
+  foreColor?:string,
+  isSquare?:boolean
 }>()
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 /* Badges */
 .badge {
-  @apply grid place-items-center rounded-full px-2;
+  @apply grid place-items-center rounded-full px-3 py-[2px] w-max;
 
   font-size: 12px;
 

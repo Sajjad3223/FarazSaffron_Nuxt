@@ -1,6 +1,6 @@
 import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
-import type {UserDto} from "~/models/users/userDto";
+import type {UserDto, WalletDto, WalletFilterParams, WalletFilterResult} from "~/models/users/userDto";
 import type {
     AddUserAddressCommand,
     AdminChargeWalletCommand,
@@ -38,9 +38,11 @@ export const EditUserPhoneNumber = (phoneNumber:string):Promise<ApiResponse<unde
         }
     });
 }
+
 export const ChargeWallet = (amount:number):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/payment/chargeWallet`,{
         method:'POST',
+        //@ts-ignore
         body:amount
     });
 }
@@ -96,5 +98,11 @@ export const FinalizeWalletByAdmin = (command:AdminFinalizeWalletCommand):Promis
     return FetchApi(`/admin/user/VerifyChargeWallet`,{
         method:'PUT',
         body:command
+    });
+}
+export const GetWalletsByAdmin = (filterParams:WalletFilterParams):Promise<ApiResponse<WalletFilterResult>> => {
+    return FetchApi(`/admin/user/wallets`,{
+        method:'GET',
+        params:filterParams
     });
 }

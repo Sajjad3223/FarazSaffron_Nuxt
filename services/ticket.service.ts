@@ -48,6 +48,11 @@ export const CreateTicketByAdmin = (command:CreateTicketByAdminCommand):Promise<
         body:command
     });
 }
+export const GetPendingTicketsCount = ():Promise<ApiResponse<number>> => {
+    return FetchApi(`/admin/ticket/count`,{
+        method:'GET',
+    });
+}
 export const SendTicketMessageByAdmin = (command:SendTicketMessageCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/ticket`,{
         method:'PUT',

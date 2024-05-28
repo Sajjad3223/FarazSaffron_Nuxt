@@ -158,9 +158,9 @@
                   <li
                       class="relative  px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <NuxtLink exact-active-class="pr-2 text-gray-800 dark:text-gray-100 before:absolute before:inset-y-0 before:right-0 before:w-1 before:bg-purple-600 before:rounded-l-lg" to="/admin/users/comments">
+                    <NuxtLink class="flex items-center" exact-active-class="pr-2 text-gray-800 dark:text-gray-100 before:absolute before:inset-y-0 before:right-0 before:w-1 before:bg-purple-600 before:rounded-l-lg" to="/admin/users/comments">
                       <span>نظرات</span>
-                      <span class="aspect-square mr-1 px-2 text-xs rounded-full bg-warning text-black">{{ pendingComments }}</span>
+                      <span class="aspect-square mr-1 px-2 grid place-items-center font-light w-max text-xs rounded-full bg-warning text-black" v-if="pendingComments > 0">{{ pendingComments }}</span>
                     </NuxtLink>
                   </li>
                   <li
@@ -336,6 +336,7 @@
                 <path d="M15.59 12.4V16.47C15.59 16.83 15.55 17.17 15.46 17.48C15.09 18.95 13.87 19.87 12.19 19.87H9.47L6.45 21.88C6 22.19 5.39999 21.86 5.39999 21.32V19.87C4.37999 19.87 3.53 19.53 2.94 18.94C2.34 18.34 2 17.49 2 16.47V12.4C2 10.5 3.18 9.19002 5 9.02002C5.13 9.01002 5.25999 9 5.39999 9H12.19C14.23 9 15.59 10.36 15.59 12.4Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="mr-4">تیکت ها</span>
+              <span class="aspect-square mr-1 px-2 grid place-items-center font-light text-xs rounded-full bg-warning text-black" v-if="pendingTickets > 0">{{ pendingTickets }}</span>
             </NuxtLink>
           </li>
         </ul>
@@ -806,6 +807,7 @@
 <script setup lang="ts">
 
 import {GetPendingCommentsCount} from "~/services/comment.service";
+import {CloseTicket, GetPendingTicketsCount} from "~/services/ticket.service";
 
 const route = useRoute();
 const isSideMenuOpen = ref(false);
@@ -816,12 +818,17 @@ const isBlogMenuOpen = ref(false);
 const isProfileMenuOpen = ref(false);
 const isNotificationsMenuOpen = ref(false);
 const pendingComments = ref(0);
+const pendingTickets = ref(0);
 const dark = ref(false);
 
 onMounted(async ()=>{
   const result = await GetPendingCommentsCount();
   if(result.isSuccess){
     pendingComments.value = result.data ?? 0;
+  }
+  const ticketsResult = await GetPendingTicketsCount();
+  if(ticketsResult.isSuccess){
+    pendingTickets.value = ticketsResult.data ?? 0;
   }
 })
 

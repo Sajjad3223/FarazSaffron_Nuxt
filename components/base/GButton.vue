@@ -1,7 +1,7 @@
 <template>
   <div>
     <button v-if="!isLink" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
-                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled" @click="emits('click')" :type="type">
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled || isLoading" @click="emits('click')" :type="type">
       <slot v-if="!isLoading"></slot>
       <span v-else class="animate-spin">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px"
@@ -14,7 +14,7 @@
       </span>
     </button>
     <NuxtLink v-else :to="to" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
-                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled">
+                    buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled || isLoading">
       <slot></slot>
     </NuxtLink>
   </div>

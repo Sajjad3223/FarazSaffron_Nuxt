@@ -25,14 +25,14 @@
           <span class="translate-y-3">شارژ حساب کاربری</span>
           <base-g-input type="number" label="مبلغ" name="price" id="price" v-model="price" class="w-max" required/>
           <span class="translate-y-3 font-light">تومان</span>
-          <base-g-button w-full type="submit" >
+          <base-g-button w-full type="submit" :is-loading="loading">
             پرداخت
           </base-g-button>
         </form>
         <hr class="my-5">
         <div class="flex flex-col space-y-4" v-if="!accountStore.initLoading">
           <span class="mr-4">تاریخچه تراکنش ها</span>
-          <div class="w-full border rounded-xl px-6 py-4 grid grid-cols-3 items-center" v-if="accountStore.currentUser.wallets.length > 0" v-for="w in accountStore.currentUser.wallets">
+          <div class="w-full border rounded-xl px-6 py-4 grid grid-cols-3 items-center" v-if="accountStore.currentUser?.wallets.length > 0" v-for="w in accountStore.currentUser.wallets">
             <div class="flex items-center gap-4">
               <span class="bg-brandOrange/10 text-brandOrange rounded-full p-2" v-if="w.walletType == EWalletType.Withdraw">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -254,12 +254,14 @@ definePageMeta({
 
 const showChargeModal = ref(false);
 const price = ref();
+const loading = ref(false);
 
 const accountStore = useAccountStore();
 const toast = useToast();
 const utilStore = useUtilStore();
 
 const charge = async ()=>{
+  loading.value = true;
   const result = await ChargeWallet(price.value);
   if(result.isSuccess){
     if(result.isSuccess && result.data != ''){
