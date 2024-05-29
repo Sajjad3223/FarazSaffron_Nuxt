@@ -39,13 +39,13 @@ const getData = async ()=>{
     </h4>
     <hr class="my-4">
     <div v-if="!loading">
-      <ul v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
-        <li class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">
+      <div v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
+        <NuxtLink :to="`/admin/tickets/${ticket.id}`" class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
-              <NuxtLink :to="`/admin/tickets/${ticket.id}`">
-                <strong>{{ ticket.title }}</strong>
-              </NuxtLink>
+              <strong>{{ ticket.title }}</strong>
+              <span class="opacity-30">•</span>
+              <span class="font-light text-sm">{{ ticket.sender.fullName }}</span>
               <span class="opacity-30">•</span>
               <small class="opacity-70">{{ ticket.persianDate }}</small>
               <span class="opacity-30">•</span>
@@ -58,8 +58,8 @@ const getData = async ()=>{
           <p class="text-sm font-light opacity-70">
             {{ticket.content}}
           </p>
-        </li>
-      </ul>
+        </NuxtLink>
+      </div>
       <div v-else>
         <div class="w-full flex flex-col items-center py-8" >
           <svg width="172" height="177" viewBox="0 0 172 177" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

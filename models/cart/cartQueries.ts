@@ -91,6 +91,10 @@ export interface ItemInfo {
     weight: number;
     healthNumber?: string | null;
 }
+export interface PayWithWalletResult {
+    orderId: number;
+    refCode: string;
+}
 
 export interface OrderFilterResult extends BaseFilterResult<OrderFilterData> {
 }

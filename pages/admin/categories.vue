@@ -229,6 +229,7 @@ const editCategory = (category:CategoryDto)=>{
 const getData = async () => {
   isLoading.value = true;
 
+  filterParams.pageId = pageId.value;
   const result = await GetCategoriesByAdmin(filterParams);
   if(result.isSuccess){
     categories.value = result.data?.data!;

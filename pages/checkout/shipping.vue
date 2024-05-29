@@ -289,13 +289,14 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart.store";
-import {SITE_URL} from "~/utilities/api.config";
+import {BASE_URL, SITE_URL} from "~/utilities/api.config";
 import {SetAddressAsActive} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
 import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
+import {PayWithWallet} from "~/services/cart.service";
 
 
 
@@ -304,11 +305,13 @@ const cartStore = useCartStore()
 const accountStore = useAccountStore();
 const utilStore = useUtilStore();
 const carousel = ref();
+const router = useRouter();
 
 const showAddressModal = ref(false);
 
 const toast = useToast();
 
+const payWithWallet = ref(false);
 const loading = ref(true);
 const products:Ref<ProductFilterData[] | null> = ref([]);
 
@@ -326,27 +329,37 @@ onMounted(async()=>{
 const setAsActive = async (addressId:number) => {
   const result = await SetAddressAsActive(addressId);
   if(result.isSuccess){
-    await toast.showToast('آدرس به عنوان آدرس اصلی ثبت شد',ToastType.success,3000,true);
+    await toast.showToast('آدرس اصلی تغییر کرد',ToastType.success,3000,true);
   }
 }
 
 const payOrder = async ()=>{
-  const result = await FetchApi<string>('/payment/payRequest',{
-    method:'POST'
-  });
+  if(!payWithWallet.value){
+    const result = await FetchApi<string>('/payment/payRequest',{
+      method:'POST'
+    });
 
-  if(result.isSuccess && result.data != ''){
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
-    form.enctype = 'application/x-www-form-urlencoded';
-    const refId = document.createElement('input');
-    refId.name = 'RefId';
-    refId.id = 'RefId';
-    refId.value = result.data!;
-    form.appendChild(refId);
-    document.body.appendChild(form)
-    form.submit();
+    if(result.isSuccess && result.data != ''){
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
+      form.enctype = 'application/x-www-form-urlencoded';
+      const refId = document.createElement('input');
+      refId.name = 'RefId';
+      refId.id = 'RefId';
+      refId.value = result.data!;
+      form.appendChild(refId);
+      document.body.appendChild(form)
+      form.submit();
+    }
+  }
+  else{
+    const result = await PayWithWallet();
+    if(result.isSuccess){
+      await router.push(`/payment/success?orderId=${result.data?.orderId}&saleRefId=${result.data?.refCode}`);
+    }else{
+      await toast.showError({message:"پرداخت سفارش با مشکل مواجه شد",appStatusCode:result.metaData.appStatusCode});
+    }
   }
 }
 

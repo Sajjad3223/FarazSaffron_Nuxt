@@ -24,7 +24,7 @@
         <form class="flex items-start gap-2 mt-5" @submit.prevent="charge">
           <span class="translate-y-3">شارژ حساب کاربری</span>
           <base-g-input type="number" label="مبلغ" name="price" id="price" v-model="price" class="w-max" required/>
-          <span class="translate-y-3 font-light">تومان</span>
+          <span class="translate-y-3 font-light">ریال</span>
           <base-g-button w-full type="submit" :is-loading="loading">
             پرداخت
           </base-g-button>
@@ -261,6 +261,8 @@ const toast = useToast();
 const utilStore = useUtilStore();
 
 const charge = async ()=>{
+  if(price.value == '') return;
+
   loading.value = true;
   const result = await ChargeWallet(price.value);
   if(result.isSuccess){

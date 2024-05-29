@@ -33,6 +33,7 @@ export interface AddressDto extends BaseDto {
 
 export interface WalletDto extends BaseDto {
     userId: number;
+    fullName: string;
     price: number;
     description: string;
     isFinally: boolean;

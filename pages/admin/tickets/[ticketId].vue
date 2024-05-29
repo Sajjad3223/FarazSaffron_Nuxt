@@ -34,7 +34,7 @@
           </p>
           <span class="mr-auto text-xs opacity-70">{{ticket.persianTime}}</span>
         </li>
-        <li :class="['flex flex-col space-y-2 p-4 w-max max-w-[50%] border text-sm font-light bg-white',{'self-end bg-indigo-100':message.sender.userId != accountStore.currentUser?.id}]"
+        <li :class="['flex flex-col space-y-2 p-4 w-max max-w-[50%] border text-sm font-light',message.sender.userId == ticket.sender.userId ? 'self-end bg-indigo-100' : 'bg-white']"
             :style="{borderRadius: message.sender.userId == accountStore.currentUser?.id ?'16px 2px 16px 16px' : '2px 16px 16px 16px' }"
             v-for="message in ticket.messages" :key="message.id">
           <template v-if="message.sender.userId == accountStore.currentUser?.id">

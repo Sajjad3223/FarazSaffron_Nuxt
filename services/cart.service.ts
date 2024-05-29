@@ -1,6 +1,12 @@
 import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
-import type {OrderDto, OrderFilterParams, OrderFilterResult, OrderGist} from "~/models/cart/cartQueries";
+import type {
+    OrderDto,
+    OrderFilterParams,
+    OrderFilterResult,
+    OrderGist,
+    PayWithWalletResult
+} from "~/models/cart/cartQueries";
 import type {
     AdminSetOrderDiscountCommand,
     FinalizeOrderCommand, FollowUpCommand,
@@ -126,5 +132,10 @@ export const SetOrderStatusByAdmin = (command:SetOrderStatusCommand):Promise<Api
     return FetchApi(`/admin/cart/status`,{
         method:'PUT',
         body:command
+    });
+}
+export const PayWithWallet = ():Promise<ApiResponse<PayWithWalletResult>> => {
+    return FetchApi(`/admin/payment/payWithWallet`,{
+        method:'POST'
     });
 }

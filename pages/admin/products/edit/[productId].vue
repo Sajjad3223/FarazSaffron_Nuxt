@@ -162,8 +162,8 @@
           <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثل: SN00AA0" v-model="editProductData.productCode"/>
           <base-f-input label="بارکد محصول" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="editProductData.barcodeNumber"/>
           <base-f-input label="شماره بهداشت" name="healthNumber" id="healthNumber" place-holder="شماره بهداشت" v-model="editProductData.healthNumber"/>
-          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digikalaLink" :rtl="false"/>
-          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digikalaData.digiKalaPrice" is-price />
+          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaData.digikalaLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="editProductData.digiKalaData.digiKalaPrice" is-price />
           <base-f-input label="لینک باسلام" name="basalamLink" id="basalamLink" class="font-thin" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamLink" :rtl="false"/>
           <base-f-input type="number" label="قیمت در باسلام" name="basalamPrice" id="basalamPrice" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="editProductData.basalamData.basalamPrice" is-price />
           <div class="grid grid-cols-2 gap-4 col-span-full">
@@ -291,7 +291,7 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
-import type {BasalamData, CatalogDto, DigikalaData, ProductDto} from "~/models/product/productQueries";
+import type {BasalamData, CatalogDto, ProductDto} from "~/models/product/productQueries";
 import {GetCatalogs} from "~/services/catalog.service";
 import {SITE_URL} from "~/utilities/api.config";
 import {ApiStatusCode} from "~/models/metaData";
@@ -338,13 +338,13 @@ const editProductData:EditProductCommand = reactive({
   subCategoryId: null,
   catalogId: null,
   dimensions: {
-    width:0,
-    height:0,
-    length:0
+    width:product.value.dimensions.width,
+    height:product.value.dimensions.height,
+    length:product.value.dimensions.length
   },
-  digikalaData:{
-    digikalaLink:'',
-    digikalaPrice:0
+  digiKalaData:{
+    digikalaLink:product.value.digiKalaData?.digikalaLink,
+    digikalaPrice:product.value.digiKalaData?.digiKalaPrice
   },
   basalamData:{
     basalamLink:'',
@@ -412,10 +412,7 @@ onMounted(async ()=>{
   editProductData.dimensions.width = product.value.dimensions.width;
   editProductData.dimensions.height = product.value.dimensions.height;
   editProductData.dimensions.length = product.value.dimensions.length;
-  editProductData.digikalaData = {
-    digikalaLink: product.value.digikalaData?.digikalaLink ?? '',
-    digikalaPrice: product.value.digikalaData?.digiKalaPrice ?? 0
-  } as DigikalaData;
+  
   editProductData.basalamData = {
     basalamLink: product.value.basalamData?.basalamLink ?? '',
     basalamPrice: product.value.basalamData?.basalamPrice ?? 0
@@ -479,6 +476,16 @@ const UpdateProduct = async ()=>{
   isLoading.value = false;
 }
 const AddImages = async ()=>{
+  if(imagesAlt.value == ''){
+    await toast.showToast("لطفا متن جایگزین را پر کنید",ToastType.error,3000,false);
+    return;
+  }
+  if(imageFiles.value.length <= 0){
+    await toast.showToast("لطفا تصاویر خود را برگزاری کنید",ToastType.error,3000,false);
+    return;
+  }
+
+
   isLoading.value = true;
 
   const imagesData = new FormData();

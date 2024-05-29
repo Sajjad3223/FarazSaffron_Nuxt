@@ -22,8 +22,8 @@
     </div>
 
     <div v-if="!loading">
-      <ul v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
-        <li class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">
+      <div v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
+        <NuxtLink :to="`/profile/tickets/${ticket.id}`" class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
               <NuxtLink :to="`/profile/tickets/${ticket.id}`">
@@ -36,13 +36,12 @@
               <base-g-badge color="success" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Answered">پاسخ داده</base-g-badge>
               <base-f-badge class="py-1" color="secondary" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Closed">بسته شده</base-f-badge>
             </div>
-
           </div>
           <p class="text-sm font-light opacity-70">
             {{ticket.content}}
           </p>
-        </li>
-      </ul>
+        </NuxtLink>
+      </div>
       <div v-else>
         <div class="w-full flex flex-col items-center py-8" >
           <svg width="172" height="177" viewBox="0 0 172 177" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -60,7 +59,7 @@
     </div>
 
     <base-g-modal title="ثبت تیکت" v-model="showAddTicketModal">
-      <Form class="mt-4" @submit="addTicket">
+      <Form class="mt-4" :validation-schema="addTicketSchema" @submit="addTicket">
         <base-g-input label="عنوان تیکت" required v-model="addTicketData.title" name="title" id="title"/>
         <base-g-input label="پیام شما" required v-model="addTicketData.text" name="text" id="text" multi-line/>
         <hr class="my-4">
@@ -75,11 +74,10 @@
 
 <script setup lang="ts">
 import {Form} from 'vee-validate';
-import type {CommentDto, CommentFilterParams} from "~/models/comment/commentQueries";
-import {GetUserComments} from "~/services/comment.service";
 import type {CreateTicketCommand} from "~/models/ticket/ticketCommands";
 import {CreateTicket, GetTickets} from "~/services/ticket.service";
 import {ETicketStatus, type TicketFilterData} from "~/models/ticket/ticketQueries";
+import * as Yup from 'yup';
 
 definePageMeta({
   layout:'profile'
@@ -90,6 +88,11 @@ const showAddTicketModal = ref(false);
 const loading = ref(true);
 const toast = useToast();
 const pageId = ref(1);
+
+const addTicketSchema = Yup.object().shape({
+  title:Yup.string().required("وارد کردن عنوان ضروری است"),
+  text:Yup.string().required("وارد کردن عنوان متن پیام است")
+});
 
 const addTicketData:CreateTicketCommand = reactive({
   title:'',

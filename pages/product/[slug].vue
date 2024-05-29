@@ -372,7 +372,7 @@
                 <p class="text-sm font-light">کاتالوگ محصول ، فهرستی از اطلاعات محصول را به صورت یکپارچه در اختیار شما قرار  می دهد .</p>
               </div>
             </div>
-            <base-g-button v-if="product.catalog != null">
+            <a v-if="product.catalog != null" :href="`${SITE_URL}/catalogs/${product.catalog.fileName}`" target="_blank" class="px-6 py-3 rounded-lg bg-brandOrange text-white">
               <span class="flex items-center gap-4">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1545_10063)">
@@ -386,7 +386,7 @@
                 </svg>
                 <span>دانلود کاتالوگ</span>
               </span>
-            </base-g-button>
+            </a>
             <base-g-button v-else disabled custom-class="font-light text-sm">
               برای این محصول کاتالوگی ثبت نشده
             </base-g-button>

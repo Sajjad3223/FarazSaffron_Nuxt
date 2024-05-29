@@ -163,7 +163,10 @@ const filterParams:CatalogFilterParams = reactive({
 
 const toast = useToast();
 
-watch(pageId,async ()=>await getData());
+watch(
+    pageId,
+    async ()=>await getData()
+);
 
 onMounted(async ()=>{
   await getData();
@@ -172,6 +175,7 @@ onMounted(async ()=>{
 const getData = async () => {
   isLoading.value = true;
 
+  filterParams.pageId = pageId.value;
   const result = await GetCatalogs(filterParams);
   if(result.isSuccess){
     catalogs.value = result.data?.data!;

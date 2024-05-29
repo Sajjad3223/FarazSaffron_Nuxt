@@ -18,7 +18,7 @@ export interface CreateProductCommand {
     categoryId: number;
     subCategoryId?: number | null;
     dimensions: DimensionDto;
-    digikalaData?:  DigikalaData | null;
+    digiKalaData?:  DigikalaData | null;
     basalamData?: BasalamData | null;
     seoData: SeoData;
     quantity: number;
@@ -39,7 +39,7 @@ export interface EditProductCommand {
     categoryId: number;
     subCategoryId?: number | null;
     dimensions: DimensionDto;
-    digikalaData:  DigikalaData;
+    digiKalaData:  DigikalaData;
     basalamData: BasalamData;
     seoData: SeoData;
     quantity: number;

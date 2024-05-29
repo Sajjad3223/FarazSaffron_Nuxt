@@ -81,7 +81,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
-                  <p class="text-sm text-nowrap">نام کاربر اضافه شود</p>
+                  <p class="text-sm text-nowrap">{{ w.fullName }}</p>
                 </div>
               </div>
             </td>

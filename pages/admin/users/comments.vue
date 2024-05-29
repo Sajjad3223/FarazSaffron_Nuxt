@@ -76,7 +76,7 @@
               <td class="px-4 py-3 text-sm">
                 <f-badge color="brandOrange" size="xs" fore-color="white" v-if="c.commentStatus == ECommentStatus.Published">منتشر شده</f-badge>
                 <f-badge color="warning" size="xs" fore-color="black" v-if="c.commentStatus == ECommentStatus.Pending">در انتظار بررسی</f-badge>
-                <f-badge color="red" size="xs" fore-color="white" v-if="c.commentStatus == ECommentStatus.Rejected">رد شده</f-badge>
+                <f-badge color="danger" size="xs" fore-color="white" v-if="c.commentStatus == ECommentStatus.Rejected">رد شده</f-badge>
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
