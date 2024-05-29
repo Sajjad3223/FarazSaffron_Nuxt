@@ -111,18 +111,18 @@
         </div>
 
         <!--   Name & Price   -->
-        <div class="flex flex-col items-start h-auto col-span-3 mr-12">
+        <div class="flex flex-col items-start h-auto col-span-3 mr-12 ">
           <h2 class="text-4xl font-black text-[#5E5E5E]">
             {{ product?.title }}
           </h2>
           <span class="mt-4 text-lg text-[#B8B8B8]">نگین (سرگل)</span>
 
-          <ul class="mt-auto flex flex-col space-y-3 text-lg">
+          <ul class="my-auto flex flex-col space-y-3 text-lg">
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
               پروانه بهداشت: دارد
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              شکل ماده غذایی : کیفی
+              شکل ماده غذایی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
               وزن : {{ product.weight }} گرم
@@ -173,14 +173,15 @@
                 موجود شد به من اطلاع بده
               </base-g-button>
             </div>
-            <div class="col-span-2 grid grid-cols-2 gap-4 self-end items-end">
-              <a href="" class="bg-white rounded-2xl w-3/4 justify-self-center h-[50px] relative flex flex-col items-center group">
-                <img src="~/assets/images/digikala-icon.png" alt="digikala icon" class="rounded-full w-[100px] -mt-5 group-hover:-translate-y-2 group-hover:shadow-md transition-all duration-200">
-                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-1.5 transition-all duration-200 opacity-0 group-hover:opacity-100">دیجی کالا</small>
+            <div class="col-span-2 flex gap-4 self-end justify-end">
+              <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.digiKalaData?.digikalaLink">
+                <img src="~/assets/images/digikala-icon.png" alt="digikala icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-4 group-hover:shadow-md transition-all duration-200">
+                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-100">دیجی کالا</small>
+                <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}}</small>
               </a>
-              <a href="" class="bg-white rounded-2xl w-3/4 justify-self-center h-[50px] relative flex flex-col items-center group">
-                <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[100px] -mt-5 group-hover:-translate-y-2 group-hover:shadow-md transition-all duration-200">
-                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-1.5 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
+              <a href="" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.basalamData?.basalamLink">
+                <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-3 group-hover:shadow-md transition-all duration-200">
+                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-2 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
               </a>
             </div>
           </div>
@@ -303,7 +304,8 @@
         <!--  Buttons  -->
         <div class="flex gap-4">
           <button class="bg-brandOrange rounded-lg py-2 px-8 text-white font-bold">مشخصات</button>
-          <a href="#comments" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">نظرات (8)</a>
+          <a href="#catalog" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">دانلود کاتالوگ </a>
+          <a href="#comments" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">نظرات </a>
         </div>
         <!--  Details  -->
         <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
@@ -351,6 +353,46 @@
             </li>
           </ul>
         </div>
+
+        <!--  Catalog  -->
+        <div class="bg-white rounded-xl px-9 py-8 mt-7" id="catalog">
+          <div class="flex items-center justify-between w-full mx-auto" >
+            <div class="flex items-center gap-12">
+              <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="66" height="66" fill="url(#pattern0_1545_10060)"/>
+                <defs>
+                  <pattern id="pattern0_1545_10060" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_1545_10060" transform="scale(0.00195312)"/>
+                  </pattern>
+                  <image id="image0_1545_10060" width="512" height="512" xlink:href="data:image/png;base64,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"/>
+                </defs>
+              </svg>
+              <div class="flex flex-col items-start space-y-2">
+                <strong>کاتالوگ محصول</strong>
+                <p class="text-sm font-light">کاتالوگ محصول ، فهرستی از اطلاعات محصول را به صورت یکپارچه در اختیار شما قرار  می دهد .</p>
+              </div>
+            </div>
+            <base-g-button v-if="product.catalog != null">
+              <span class="flex items-center gap-4">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1545_10063)">
+                  <path d="M2 12.6668H14V14.0002H2V12.6668ZM8.66667 8.7815L12.714 4.7335L13.6567 5.67616L8 11.3335L2.34333 5.67683L3.286 4.7335L7.33333 8.78016V1.3335H8.66667V8.7815Z" fill="white"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_1545_10063">
+                  <rect width="16" height="16" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+                <span>دانلود کاتالوگ</span>
+              </span>
+            </base-g-button>
+            <base-g-button v-else disabled custom-class="font-light text-sm">
+              برای این محصول کاتالوگی ثبت نشده
+            </base-g-button>
+          </div>
+        </div>
+
         <!--  Comments  -->
         <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl" id="comments">
           <strong class="text-xl text-[#7D7D7D] pr-2 border-r-2 border-brandOrange">نظرات</strong>

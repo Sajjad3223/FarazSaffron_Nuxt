@@ -46,6 +46,12 @@
         <p class="mt-2 font-estedad font-light text-xs lg:text-sm leading-relaxed text-justify">
           {{c.text}}
         </p>
+        <base-f-alert v-if="c.commentStatus == ECommentStatus.Pending" color="warning" class="mt-4">
+          نظر شما در دست بررسی است و پس از تایید نمایش داده خواهد شد
+        </base-f-alert>
+        <base-f-alert v-if="c.commentStatus == ECommentStatus.Rejected" color="danger" class="mt-4">
+          نظر شما تایید نشد
+        </base-f-alert>
       </li>
       <li v-else>
         <div class="w-full flex flex-col items-center py-8" >
@@ -74,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import type {CommentDto, CommentFilterParams} from "~/models/comment/commentQueries";
+import {type CommentDto, type CommentFilterParams, ECommentStatus} from "~/models/comment/commentQueries";
 import {GetUserComments} from "~/services/comment.service";
 import type {Ref} from "vue";
 

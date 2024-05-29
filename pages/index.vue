@@ -743,9 +743,9 @@ const commentsBreakpoints = ref({
     snapAlign:'start',
     dir:'rtl'
   },
-  // 1366 and up
-  1366: {
-    slidesPerView: 2.5,
+  // 1500 and up
+  1500:{
+    slidesPerView: 2.7,
     snapAlign:'start',
     dir:'rtl'
   },

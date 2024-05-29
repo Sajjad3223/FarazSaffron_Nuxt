@@ -110,9 +110,9 @@
                       ></path>
                     </svg>
                   </button>
-                  <button
+                  <button title="رد نظر"
                       class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                      aria-label="Delete"
+                      aria-label="Delete" @click="rejectComment(c.id)"
                   >
                     <svg
                         class="w-5 h-5"
@@ -144,7 +144,7 @@ import FModal from "~/components/base/FModal.vue";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {type CommentDto, type CommentFilterParams, ECommentStatus} from "~/models/comment/commentQueries";
-import {GetCommentsByAdmin, VerifyComment} from "~/services/comment.service";
+import {GetCommentsByAdmin, RejectComment, VerifyComment} from "~/services/comment.service";
 import FBadge from "~/components/base/FBadge.vue";
 import {ToastType, useToast} from "~/composables/useSwal";
 
@@ -187,6 +187,15 @@ const getData = async () => {
 
 const PublishComment = async (commentId:number) =>{
   const result = await VerifyComment(commentId);
+  if(result.isSuccess){
+    await toast.showToast();
+    await getData();
+  }else{
+    await toast.showToast(result.metaData.message,ToastType.error,0)
+  }
+}
+const rejectComment = async (commentId:number) =>{
+  const result = await RejectComment(commentId);
   if(result.isSuccess){
     await toast.showToast();
     await getData();

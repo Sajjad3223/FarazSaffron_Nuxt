@@ -123,13 +123,13 @@
               <Transition name="slide-fade">
                 <div v-if="showCategories" v-click-outside="closeCategories"
                      :class="['absolute overflow-hidden top-12 z-20 bg-white p-4 flex rounded-xl transition-all duration-300',
-                     isCategoryHovered ? 'w-[320px]' : 'w-[180px]']"
+                     isCategoryHovered ? 'w-[350px]' : 'w-[180px]']"
                      style="box-shadow: 0 2px 5px 0 #B7B7B740;">
                   <div class="min-w-[150px]">
                     <ul class="w-full flex flex-col space-y-1" v-if="!loading">
                       <li v-for="c in categories" @click="categoryHovered(c)"
-                          class="w-full py-1.5 pl-4 pr-8 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
-                        <div class="w-full flex items-center justify-between">
+                          class="w-full py-1.5 pl-4 pr-8 rounded-lg hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer relative flex items-center before:absolute before:w-1.5 before:h-1.5 before:rounded-full before:right-3 before:bg-[#D9D9D9]">
+                        <div class="w-full flex items-center justify-between font-bold text-black/50 hover:text-black/100 transition-colors duration-200">
                           <span>{{ c.title }}</span>
                           <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg"
                                opacity="0.5">
@@ -147,7 +147,7 @@
                       v-if="isCategoryHovered && subCategories.length > 0">
                     <li class="w-full" v-for="s in subCategories">
                       <NuxtLink :to="`/market?categories=${s.id}`"
-                                class="w-full py-1 px-2 rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
+                                class="w-full py-1 px-2 font-light rounded-lg text-[#9E9E9E] hover:text-black hover:bg-[#F2F2F2] transition-colors duration-200 cursor-pointer">
                         <span>{{ s.title }}</span>
                       </NuxtLink>
                     </li>

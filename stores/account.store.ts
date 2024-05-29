@@ -13,9 +13,9 @@ export const useAccountStore = defineStore('account',()=> {
     const myFavorites:Ref<FavoriteDto[]> = ref([]);
     const myFavoritesCount:Ref<number> = ref(0);
 
-    const isAdmin = ()=>{
+    const isAdmin = computed(()=>{
         return currentUser.value?.roles.some(r=>r.title === 'ادمین');
-    }
+    })
     const isFavorite = (postId:number,postType:EPostType)=>{
         if(myFavorites.value.length <= 0) return false;
         return myFavorites.value.some(f=>f.postId == postId && postType == postType);

@@ -77,7 +77,7 @@ export interface ProductDto extends BaseDto{
     category:       CategoryDto;
     subCategory?:   CategoryDto | null;
     dimensions:     DimensionDto;
-    digikalaData?:  DigikalaData | null;
+    digiKalaData?:  DigikalaData | null;
     basalamData?: BasalamData | null;
     seoData:        SeoData;
     quantity:       number;
