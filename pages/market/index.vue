@@ -62,7 +62,7 @@
                     </svg>
                   </div>
                   <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange max-h-36 overflow-auto">
-                    <base-f-checkbox :label="s.title" v-for="s in c.children" is-checked :value="s.id" @value-changed="categoryChanged"/>
+                    <base-f-checkbox ref="categoryCheckboxes" :label="s.title" v-for="s in c.children" is-checked :value="s.id" @value-changed="categoryChanged"/>
                   </div>
                 </li>
               </ul>
@@ -149,9 +149,9 @@
                'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.جدیدترین">
                 جدیدترین ها
               </button>
-              <button :class="[orderBy === EOrderBy.امتیاز ?
+              <button :class="[orderBy === EOrderBy.موجود ?
                'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
-               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.امتیاز">
+               'text-[#898989] hover:text-[#656565] transition-colors duration-200']" @click="orderBy = EOrderBy.موجود">
                 موجود در انبار
               </button>
             </div>
@@ -162,7 +162,7 @@
             </div>
           </div>
           <!--    Products List    -->
-          <div class="w-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 my-4" v-if="!loading">
+          <div class="w-full grid 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 my-4" v-if="!loading">
             <GCard :product="p" v-for="p in products" :key="p.id" v-if="products.length > 0"/>
             <div class="mt-6 flex flex-col items-center col-span-full" v-else>
               <svg width="172" height="177" viewBox="0 0 172 177" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -279,9 +279,10 @@ const route = useRoute();
 const loading = ref(false);
 const products: Ref<ProductFilterData[]> = ref([]);
 const pageId = ref(1);
-const orderBy = ref(EOrderBy.جدیدترین);
+const orderBy:Ref<EOrderBy> = ref(route.query?.orderBy ?? EOrderBy.جدیدترین);
 const carousel = ref();
 const priceRange = ref();
+const categoryCheckboxes = ref();
 const paginationData:Ref<PaginationData | null> = ref(null);
 const utilStore = useUtilStore();
 const productUtils = useProductUtils();
@@ -338,7 +339,7 @@ const getData = async () => {
 
   filterParams.pageId = pageId.value;
   //@ts-ignore
-  filterParams.orderBy = route.query?.orderBy ?? EOrderBy.جدیدترین;
+  filterParams.orderBy = orderBy.value;
 
   const productsResult = await GetProducts(filterParams);
   if (productsResult.isSuccess) {
@@ -367,14 +368,14 @@ const toggleDropdown = ($event:any)=>{
 }
 
 const categoryChanged = async (checked,value)=>{
-  if(checked){
-    if(filterParams.categoriesIncluded == null)
-      filterParams.categoriesIncluded = []
-    filterParams.categoriesIncluded.push(value);
-  }else{
-    const index:number = filterParams.categoriesIncluded?.indexOf(value);
-    filterParams.categoriesIncluded?.splice(index,1);
-  }
+  filterParams.categoriesIncluded = [];
+
+  categoryCheckboxes.value.forEach(ch=>{
+    if(ch.checked){
+      filterParams.categoriesIncluded?.push(ch.chValue);
+    }
+  })
+
   await getData();
 }
 

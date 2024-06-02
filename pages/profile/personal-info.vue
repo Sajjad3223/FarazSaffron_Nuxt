@@ -24,6 +24,17 @@
         </template>
       </base-f-modal>
 
+      <base-g-modal title="تایید تلفن همراه" v-model="showVerifyNumberModal">
+        <div class="flex flex-col space-y-4 mt-4">
+          <span>کد تایید به شماره {{ accountStore.currentUser?.phoneNumber }} ارسال شد.</span>
+          <base-g-verification-input label="کد را وارد کنید" ref="verifyInput"/>
+          <button class="text-brandOrange underline underline-offset-4 underline-brandOrange">ارسال مجدد</button>
+          <base-g-button w-full @click="VerifyPhone">
+            ثبت
+          </base-g-button>
+        </div>
+      </base-g-modal>
+
       <base-f-modal v-model="editPhoneModal">
         <template #header>تغییر تلفن همراه</template>
         <template #default>
@@ -180,9 +191,15 @@
           <div class="flex flex-col space-y-4">
             <div class="flex items-center space-x-2 space-x-reverse">
               <span class="font-light text-sm opacity-70">شماره موبایل</span>
-              <!--            <base-f-badge color="warning" fore-color="black" size="sm"> TODO Implement
-                            تایید نشده
-                          </base-f-badge>-->
+              <base-g-badge color="danger" fore-color="black" size="sm" v-if="!accountStore.currentUser.isPhoneConfirmed">
+                تایید نشده
+              </base-g-badge>
+              <base-g-badge color="success" fore-color="black" size="sm" v-else>
+                تایید شده
+              </base-g-badge>
+              <button @click="SendConfirmCode" class="text-xs" v-if="!accountStore.currentUser.isPhoneConfirmed">
+                برای تایید <u>کلیک کنید</u>
+              </button>
             </div>
             <strong>{{ accountStore.currentUser.phoneNumber }}</strong>
           </div>
@@ -328,7 +345,7 @@
 
 <script setup lang="ts">
 import {Form} from 'vee-validate';
-import {EditUserEmail, EditUserPhoneNumber} from "~/services/user.service";
+import {EditUserEmail, EditUserPhoneNumber, GenerateMobileCode, VerifyPhoneNumber} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
 import {ChangePassword} from "~/services/auth.service";
 import type {ChangePasswordCommand} from "~/models/users/userCommands";
@@ -344,9 +361,11 @@ const utilStore = useUtilStore();
 const loading = ref(false);
 const editPersonalModal = ref(false);
 const editPhoneModal = ref(false);
+const showVerifyNumberModal = ref(false);
 const editEmailModal = ref(false);
 const editPasswordModal = ref(false);
 const editBirthModal = ref(false);
+const verifyInput = ref();
 const toast = useToast();
 
 const email = ref(accountStore?.currentUser?.email);
@@ -410,6 +429,26 @@ const ChangeUserPassword = async ()=>{
     await toast.showToast(res.metaData.message,ToastType.error,0);
   }
  loading.value = false;
+}
+
+const SendConfirmCode = async ()=>{
+  const result = await GenerateMobileCode();
+  if(result.isSuccess){
+    showVerifyNumberModal.value = true;
+  }else{
+    await toast.showError(result.metaData,false);
+  }
+}
+
+const VerifyPhone = async ()=>{
+  const code = verifyInput.value.getValue;
+  const result = await VerifyPhoneNumber(code);
+  if(result.isSuccess){
+    showVerifyNumberModal.value = false;
+    await toast.showToast();
+  }else{
+    await toast.showError(result.metaData,false);
+  }
 }
 
 </script>

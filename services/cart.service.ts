@@ -135,7 +135,7 @@ export const SetOrderStatusByAdmin = (command:SetOrderStatusCommand):Promise<Api
     });
 }
 export const PayWithWallet = ():Promise<ApiResponse<PayWithWalletResult>> => {
-    return FetchApi(`/admin/payment/payWithWallet`,{
+    return FetchApi(`/payment/payWithWallet`,{
         method:'POST'
     });
 }

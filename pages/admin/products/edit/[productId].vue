@@ -291,7 +291,7 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
-import type {BasalamData, CatalogDto, ProductDto} from "~/models/product/productQueries";
+import type {BasalamData, CatalogDto, DigikalaData, ProductDto} from "~/models/product/productQueries";
 import {GetCatalogs} from "~/services/catalog.service";
 import {SITE_URL} from "~/utilities/api.config";
 import {ApiStatusCode} from "~/models/metaData";
@@ -343,8 +343,8 @@ const editProductData:EditProductCommand = reactive({
     length:product.value.dimensions.length
   },
   digiKalaData:{
-    digikalaLink:product.value.digiKalaData?.digikalaLink,
-    digikalaPrice:product.value.digiKalaData?.digiKalaPrice
+    digikalaLink:'',
+    digikalaPrice:0
   },
   basalamData:{
     basalamLink:'',
@@ -412,7 +412,11 @@ onMounted(async ()=>{
   editProductData.dimensions.width = product.value.dimensions.width;
   editProductData.dimensions.height = product.value.dimensions.height;
   editProductData.dimensions.length = product.value.dimensions.length;
-  
+  editProductData.digiKalaData = {
+    digikalaLink: product.value.digiKalaData?.digikalaLink ?? '',
+    digiKalaPrice: product.value.digiKalaData?.digiKalaPrice ?? 0
+  } as DigikalaData;
+
   editProductData.basalamData = {
     basalamLink: product.value.basalamData?.basalamLink ?? '',
     basalamPrice: product.value.basalamData?.basalamPrice ?? 0

@@ -1,11 +1,9 @@
 <template>
 
   <header >
-    <div class="h-[60px] bg-white w-full border-b-2 border-[#DCDCDC] relative flex items-center" >
-      <img src="~/assets/images/img.png" alt="" class="h-[60px] w-[85vw]">
-      <span
-          class="absolute text-white font-bold text-2xl left-1/2 -translate-x-1/2">با جی پی به دنیای زعفران قدم بزار</span>
-    </div>
+    <NuxtLink to="/market" class="h-[60px] bg-white w-full relative flex items-center justify-center" style="background: linear-gradient(90deg, #F04623 0%, #C82805 100%);">
+      <img src="~/assets/images/header-image.png" alt="" class="h-[60px]">
+    </NuxtLink>
   </header>
   <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative" >
     <div class="container px-24 3xl:px-0 h-[125px] mx-auto mt-5">
@@ -343,8 +341,18 @@
                              :alt="i.itemInfo.productImage.alt" class="w-full">
                         <cart-counter :item="i" class="scale-75"/>
                       </div>
-                      <div class="flex flex-col justify-between flex-1 pb-2 pt-8">
+                      <div class="flex flex-col justify-between flex-1 pb-2 pt-4">
                         <strong class="text-lg w-4/5">{{ i.itemInfo.productName }}</strong>
+                        <div class="flex flex-col">
+                          <div class="flex items-center gap-1">
+                            <span class="text-sm opacity-50 font-light">وزن:</span>
+                            <span>{{i.itemInfo.weight}} <small>گرم</small></span>
+                          </div>
+                          <div class="flex items-center gap-1" v-if="i.itemInfo.healthNumber != null">
+                            <span class="text-sm opacity-50 font-light">شماره بهداشت:</span>
+                            <span>{{i.itemInfo.healthNumber}}</span>
+                          </div>
+                        </div>
                         <div class="flex items-center mt-top justify-between">
                           <base-g-price :price="(i.totalPrice / 10)" class="scale-125 mr-4"/>
                           <!--                              <base-g-price :price="()" /> TODO discount-->

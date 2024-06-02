@@ -16,6 +16,14 @@ export const GetCurrentUser = ():Promise<ApiResponse<UserDto>> => {
         method:'GET',
     });
 }
+export const GetWalletsByAdmin = (filterParams:WalletFilterParams):Promise<ApiResponse<WalletFilterResult>> => {
+    return FetchApi(`/admin/user/wallets`,{
+        method:'GET',
+        params:filterParams
+    });
+}
+
+
 export const EditUser = (command:EditUserCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi("/user",{
         method:'PUT',
@@ -100,9 +108,25 @@ export const FinalizeWalletByAdmin = (command:AdminFinalizeWalletCommand):Promis
         body:command
     });
 }
-export const GetWalletsByAdmin = (filterParams:WalletFilterParams):Promise<ApiResponse<WalletFilterResult>> => {
-    return FetchApi(`/admin/user/wallets`,{
-        method:'GET',
-        params:filterParams
+export const GenerateMobileCode = ():Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/generateMobileVerification`,{
+        method:'POST',
+    });
+}
+export const GenerateEmailCode = ():Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/generateEmailVerification`,{
+        method:'POST',
+    });
+}
+export const VerifyPhoneNumber = (code:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/verifyPhone`,{
+        method:'PUT',
+        body: {code}
+    });
+}
+export const VerifyEmail = (code:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/verifyEmail`,{
+        method:'PUT',
+        body: {code}
     });
 }

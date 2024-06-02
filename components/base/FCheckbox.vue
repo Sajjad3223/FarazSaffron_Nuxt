@@ -1,6 +1,6 @@
 <template>
   <label :for="`myCheckbox02${id}`" class="checkbox " >
-    <input :class="['checkbox__input']" type="checkbox" :id="`myCheckbox02${id}`" v-model="checked" :checked="isChecked" @input="update">
+    <input :class="['checkbox__input']" type="checkbox" :id="`myCheckbox02${id}`" v-model="checked" :checked="isChecked" @change="update">
 
     <svg class="checkbox__icon " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
       <rect width="21" height="21" x=".5" y=".5" fill="transparent" stroke="#F04623" rx="3" />
@@ -31,10 +31,16 @@ const id = "id" + Math.random().toString(16).slice(2)
 const emits = defineEmits(['valueChanged'])
 
 const checked = ref(props.isChecked);
+const chValue = props.value;
 
 const update = ()=>{
-  emits('valueChanged', !checked.value, props.value)
+  emits('valueChanged', checked.value, props.value)
 }
+
+defineExpose({
+  checked,
+  chValue,
+});
 
 </script>
 

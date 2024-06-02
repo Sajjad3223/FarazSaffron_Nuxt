@@ -14,6 +14,8 @@ export interface UserFilterData extends BaseDto {
     phoneNumber: string;
     email?: string;
     avatar?: string;
+    isPhoneConfirmed:boolean;
+    isEmailConfirmed:boolean;
 }
 
 export interface UserFilterResult extends BaseFilterResult<UserFilterData>{}

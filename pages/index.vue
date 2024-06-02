@@ -222,7 +222,7 @@
       <section class="w-full mt-16">
         <div class="bg-[#F8F8F8] rounded-xl p-12" v-motion-pop-visible-once>
           <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 mx-auto w-3/4">
-            <img src="~/assets/images/gp-filled.png" alt="GP" class="drop-shadow-xl w-1/3 lg:w-auto" v-motion-slide-visible-once-bottom :delay="200">
+            <img src="~/assets/images/GP-filled.png" alt="GP" class="drop-shadow-xl w-1/3 lg:w-auto max-w-[220px]" v-motion-slide-visible-once-bottom :delay="200">
             <div class="flex flex-col items-start gap-4">
               <strong class="text-xl" v-motion-slide-visible-once-top :delay="300">اصالت و عطر ماندگار</strong>
               <p class=" font-light" v-motion-slide-visible-once-left :delay="400">

@@ -39,8 +39,8 @@
             <div class="flex flex-col items-start space-y-4">
               <h3 class="text-3xl font-bold text-brandOrange">جی پی پیک</h3>
               <strong class="text-lg">خدمات ویژه با اشتراک جی پی پیک</strong>
-              <base-g-button color="primary" button-type="bg" >
-                <span>دریافت این خدمات ویژه</span>
+              <base-g-button color="primary" button-type="bg" :disabled="true">
+                <span>به زودی ...</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-125">
                   <path d="M14 17L9 12L14 7" stroke="#FAFAFA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -124,16 +124,34 @@
                 <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
               </div>
             </div>
+            <!--  Discount   -->
             <form class="flex flex-col items-start">
               <div class="flex items-start gap-1 w-full mt-4">
                 <base-g-input v-model="discountCode" type="text" label="کد تخفیف" required/>
                 <base-g-button>ثبت</base-g-button>
               </div>
             </form>
-            <base-g-button w-full @click="payOrder">
+            <!--  Payment Method  -->
+            <div>
+              <span class="font-light opacity-70">روش پرداخت</span>
+              <hr class="my-2">
+              <div class="flex items-center gap-2 mt-2">
+                <input type="radio" id="gateway" name="paymentMethod" v-model="paymentMethod" :value="EPaymentMethod.Gateway" checked>
+                <label for="gateway" class="font-light">درگاه بانکی</label>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <input type="radio" id="wallet" name="paymentMethod" v-model="paymentMethod" :value="EPaymentMethod.Wallet">
+                <label for="wallet" class="font-light">کیف پول</label>
+                <div class="flex items-center">
+                  (<base-g-price :price="(accountStore.currentUser?.walletCash ?? 0) / 10" class="scale-75" />)
+                </div>
+              </div>
+            </div>
+            <hr class="my-2">
+            <base-g-button w-full @click="payOrder" :disabled="!accountStore.hasActiveAddress">
               تکمیل و پرداخت
             </base-g-button>
-            <div class="flex items-center gap-1.5 text-danger">
+            <div class="flex items-center gap-1.5 text-danger" v-if="!accountStore.hasActiveAddress">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_774_7201)">
                   <path d="M6 11C3.2385 11 1 8.7615 1 6C1 3.2385 3.2385 1 6 1C8.7615 1 11 3.2385 11 6C11 8.7615 8.7615 11 6 11ZM6 10C7.06087 10 8.07828 9.57857 8.82843 8.82843C9.57857 8.07828 10 7.06087 10 6C10 4.93913 9.57857 3.92172 8.82843 3.17157C8.07828 2.42143 7.06087 2 6 2C4.93913 2 3.92172 2.42143 3.17157 3.17157C2.42143 3.92172 2 4.93913 2 6C2 7.06087 2.42143 8.07828 3.17157 8.82843C3.92172 9.57857 4.93913 10 6 10ZM5.5 7.5H6.5V8.5H5.5V7.5ZM5.5 3.5H6.5V6.5H5.5V3.5Z" fill="currentColor"/>
@@ -279,7 +297,7 @@
           <small>مجموع سبد خرید</small>
           <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
         </div>
-        <base-g-button is-link @click="payOrder" w-full >
+        <base-g-button is-link @click="payOrder" w-full :disabled="!accountStore.hasActiveAddress">
           تکمیل سفارش
         </base-g-button>
       </div>
@@ -289,7 +307,7 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart.store";
-import {BASE_URL, SITE_URL} from "~/utilities/api.config";
+import {SITE_URL} from "~/utilities/api.config";
 import {SetAddressAsActive} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
 import {FetchApi} from "~/utilities/CustomApiFetch";
@@ -297,7 +315,7 @@ import type {ProductFilterData} from "~/models/product/productQueries";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import {PayWithWallet} from "~/services/cart.service";
-
+import {EPaymentMethod} from "~/models/ePaymentMethod";
 
 
 const discountCode = ref('');
@@ -306,12 +324,12 @@ const accountStore = useAccountStore();
 const utilStore = useUtilStore();
 const carousel = ref();
 const router = useRouter();
+const paymentMethod = ref();
 
 const showAddressModal = ref(false);
 
 const toast = useToast();
 
-const payWithWallet = ref(false);
 const loading = ref(true);
 const products:Ref<ProductFilterData[] | null> = ref([]);
 
@@ -334,7 +352,7 @@ const setAsActive = async (addressId:number) => {
 }
 
 const payOrder = async ()=>{
-  if(!payWithWallet.value){
+  if(paymentMethod.value == EPaymentMethod.Gateway){
     const result = await FetchApi<string>('/payment/payRequest',{
       method:'POST'
     });
@@ -354,6 +372,12 @@ const payOrder = async ()=>{
     }
   }
   else{
+    if(accountStore.currentUser?.walletCash < cartStore.PendingOrder?.finallyPrice)
+    {
+      await toast.showToast("موجودی کیف پول شما از مبلغ سفارش کمتر است",ToastType.error,5000,false);
+      return;
+    }
+
     const result = await PayWithWallet();
     if(result.isSuccess){
       await router.push(`/payment/success?orderId=${result.data?.orderId}&saleRefId=${result.data?.refCode}`);

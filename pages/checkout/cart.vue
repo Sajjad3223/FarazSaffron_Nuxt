@@ -116,9 +116,9 @@
                         {{ i.itemInfo.productName }}
                       </NuxtLink>
                       <ul class="flex flex-col space-y-4 my-12">
-                        <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: دارد</li>
-                        <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: کیفی</li>
-                        <li class="pr-4 border-r-2 border-brandOrange/50">وزن: 21 گرم</li>
+                        <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: {{ i.itemInfo.healthNumber != null ? 'دارد' : 'ندارد' }}</li>
+                        <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: {{ i.itemInfo.eItemType }}</li>
+                        <li class="pr-4 border-r-2 border-brandOrange/50">وزن: {{ i.itemInfo.weight }} گرم</li>
                       </ul>
                       <base-g-price :price="(i.price / 10)"/>
                     </div>

@@ -79,7 +79,7 @@
               <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (product.totalPrice / 10).toLocaleString() }}</strong>
               <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
             </div>
-            <div class="flex items-center gap-1 opacity-50 line-through scale-75">
+            <div class="flex items-center gap-1 opacity-50 line-through scale-75" v-if="product.discount !== 0">
               <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (product.price / 10).toLocaleString() }}</strong>
               <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
             </div>
@@ -110,11 +110,14 @@
           </svg>
         </button>
       </div>
-      <base-g-button disabled w-full v-else class="mt-3" is-icon>
-        <span  class="text-xs font-light p-1">
-          کالا فعلا موجود نیست
-        </span>
-      </base-g-button>
+      <div class="flex items-center gap-2 mt-4 py-1.5" v-else>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.9987 1.8335C11.404 1.8335 14.1654 4.59416 14.1654 8.00016C14.1654 11.4055 11.404 14.1668 7.9987 14.1668C4.5927 14.1668 1.83203 11.4055 1.83203 8.00016C1.83203 4.59416 4.5927 1.8335 7.9987 1.8335Z" stroke="#FF2D46" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.99349 5.46973V8.41573" stroke="#FF2D46" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.99406 10.5306H8.00073" stroke="#FF2D46" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-[#FF2D46]">کالا موجود نیست</span>
+      </div>
     </div>
   </div>
 </template>

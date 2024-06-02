@@ -16,6 +16,8 @@ export interface UserDto extends BaseDto {
     wallets: WalletDto[];
     walletCash:number;
     GPClubScore:number;
+    isPhoneConfirmed:boolean;
+    isEmailConfirmed:boolean;
 }
 
 export interface AddressDto extends BaseDto {

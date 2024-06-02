@@ -20,6 +20,11 @@ export const useAccountStore = defineStore('account',()=> {
         if(myFavorites.value.length <= 0) return false;
         return myFavorites.value.some(f=>f.postId == postId && postType == postType);
     }
+
+    const hasActiveAddress = computed(()=>{
+        return currentUser.value?.addresses.some(a=>a.isActiveAddress);
+    })
+
     const initData = async () => {
         initLoading.value = true;
 
@@ -58,6 +63,7 @@ export const useAccountStore = defineStore('account',()=> {
         unseenNotifs,
         myFavorites,
         myFavoritesCount,
-        isFavorite
+        isFavorite,
+        hasActiveAddress
     }
 })
