@@ -272,8 +272,8 @@
         </svg>
       </div>
       <base-g-input label="شماره تلفن" place-holder="09xxxxxxxxx" required type="text"/>
+      <input type="text" @keydown="checkInput" class="p-4 border rounded-lg" v-model="priceInput" @input="parseValue">
     </div>
-
 
   </div>
 </template>
@@ -288,6 +288,7 @@ const toggle1 = ref(false);
 const toggle2 = ref(true);
 const text = ref('');
 const textRtl = ref('');
+const priceInput = ref('');
 const errorValidation = computed(() => {
   return text.value.toLowerCase() !== 'sajjad' && text.value !== '';
 });
@@ -300,6 +301,20 @@ const errorValidationRtl = computed(() => {
 const successValidationRtl = computed(() => {
   return textRtl.value.toLowerCase() === 'سجاد' && textRtl.value !== '';
 });
+
+const checkInput = (event)=>{
+  const evt = event;
+  let key = evt.keyCode >= 96 ? evt.keyCode - 48 : evt.keyCode;
+  let res = (/[0123456789,.]/.test(String.fromCharCode(key))) || key == 8 || key == 46 || key == 37 || key == 39 || key == 35 || key == 36 || key == 17 || key == 65;
+  if(!res)
+    evt.preventDefault();
+}
+
+const parseValue = ()=>{
+  let pureValue = priceInput.value.replaceAll(',','');
+  pureValue = pureValue == '' ? '0' : pureValue;
+  priceInput.value = parseInt(pureValue).toLocaleString();
+}
 
 const showModal = ref(true);
 </script>

@@ -22,7 +22,10 @@
         </p>
         <ul class="mt-8 grid grid-cols-3 gap-12">
           <li class="flex flex-col items-start space-y-4">
-            <strong class="text-2xl before:w-4 before:h-4 before:bg-brandOrange before:rounded-full relative before:absolute pr-8 before:right-0 flex items-center text-[#7E7E7E]">
+            <strong class="text-2xl flex items-center text-[#7E7E7E] relative pr-8
+            before:w-4 before:h-4 before:bg-brandOrange before:rounded-full before:absolute before:right-0
+            after:w-4 after:h-4 after:bg-brandOrange after:rounded-full after:absolute after:right-0 after:animate-ping
+            ">
               اهداف جی پی
             </strong>
             <p class="text-[#8D8D8D] text-justify px-8">
@@ -32,7 +35,10 @@
             </p>
           </li>
           <li class="flex flex-col items-start space-y-4">
-            <strong class="text-2xl before:w-4 before:h-4 before:bg-brandOrange before:rounded-full relative before:absolute pr-8 before:right-0 flex items-center text-[#7E7E7E]">
+            <strong class="text-2xl flex items-center text-[#7E7E7E] relative pr-8
+            before:w-4 before:h-4 before:bg-brandOrange before:rounded-full before:absolute before:right-0
+            after:w-4 after:h-4 after:bg-brandOrange after:rounded-full after:absolute after:right-0 after:animate-ping
+            ">
               دلایل اعتماد
             </strong>
             <p class="text-[#8D8D8D] text-justify px-8">
@@ -40,7 +46,10 @@
             </p>
           </li>
           <li class="flex flex-col items-start space-y-4">
-            <strong class="text-2xl before:w-4 before:h-4 before:bg-brandOrange before:rounded-full relative before:absolute pr-8 before:right-0 flex items-center text-[#7E7E7E]">
+            <strong class="text-2xl flex items-center text-[#7E7E7E] relative pr-8
+            before:w-4 before:h-4 before:bg-brandOrange before:rounded-full before:absolute before:right-0
+            after:w-4 after:h-4 after:bg-brandOrange after:rounded-full after:absolute after:right-0 after:animate-ping
+            ">
               ضمانت <span class="text-brandOrange mx-1">هفت روزه</span> کالا
             </strong>
             <p class="text-[#8D8D8D] text-justify px-8">
@@ -115,3 +124,5 @@
   </div>
 </template>
 
+<script setup lang="ts">
+</script>

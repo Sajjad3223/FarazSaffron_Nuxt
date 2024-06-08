@@ -62,7 +62,7 @@
                     </svg>
                   </div>
                   <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange max-h-36 overflow-auto">
-                    <base-f-checkbox ref="categoryCheckboxes" :label="s.title" v-for="s in c.children" is-checked :value="s.id" @value-changed="categoryChanged"/>
+                    <base-f-checkbox ref="categoryCheckboxes" :label="s.title" v-for="s in c.children" :is-checked="filterParams.categoriesIncluded.includes(s.id.toString())" :value="s.id" @value-changed="categoryChanged"/>
                   </div>
                 </li>
               </ul>
@@ -318,7 +318,7 @@ const filterParams: ProductFilterParams = reactive({
 
 watch(pageId, async () => await getData())
 watch(orderBy, async () => await getData())
-watch(()=>route.query,async ()=>await getData())
+watch(()=>route.query,() => location.reload())
 
 onMounted(async () => {
   await getData();

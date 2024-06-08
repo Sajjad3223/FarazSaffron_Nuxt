@@ -6,13 +6,13 @@
     <div v-if="!utilsStore.isMobile()">
 
       <!--  Banner   -->
-      <GCarousel v-motion-pop-visible-once/>
+      <GCarousel />
 
       <!--  Product Categories   -->
       <section class="w-full flex flex-col items-center mt-16 mb-9">
-        <h3 class="font-black text-2xl" v-motion-slide-top>دسته بندی محصولات</h3>
+        <h3 class="font-black text-2xl" >دسته بندی محصولات</h3>
         <ul class="mt-4 w-full grid grid-cols-4 gap-8">
-          <li v-motion-slide-top :delay="300" class="w-full h-[80px] grid">
+          <li  class="w-full h-[80px] grid">
             <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
               <div class="flex flex-col items-center">
@@ -21,7 +21,7 @@
               </div>
             </NuxtLink>
           </li>
-          <li v-motion-slide-bottom :delay="600" class="w-full h-[80px] grid">
+          <li  class="w-full h-[80px] grid">
             <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="29" viewBox="0 0 38 29" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="28.5" fill="url(#pattern0_1115_9692)" fill-opacity="0.4"/>
@@ -38,7 +38,7 @@
               </div>
             </NuxtLink>
           </li>
-          <li v-motion-slide-top :delay="900" class="w-full h-[80px] grid">
+          <li  class="w-full h-[80px] grid">
             <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3664)" fill-opacity="0.4"/>
@@ -55,7 +55,7 @@
               </div>
             </NuxtLink>
           </li>
-          <li v-motion-slide-bottom :delay="1200" class="w-full h-[80px] grid">
+          <li class="w-full h-[80px] grid">
             <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3665)" fill-opacity="0.4"/>
@@ -120,7 +120,7 @@
             </template>
             <div class="flex w-full h-8"></div>
             <SwiperSlide v-for="(p,i) in lastProducts" :key="p.id" >
-              <GCard :product="p" v-motion-slide-visible-once-left :delay="i * 200"/>
+              <GCard :product="p" />
             </SwiperSlide>
           </Swiper>
 
@@ -186,12 +186,8 @@
                 }"
                   :breakpoints="breakpoints"
                   class="rounded-xl" dir="rtl">
-            <SwiperSlide v-for="(p,i) in lastProducts" :key="p.id" >
-              <GCard :product="p" v-motion-slide-visible-once-left :delay="i * 200" :enter="{
-                transition:{
-                  delay:i * 200
-                }
-              }"/>
+            <SwiperSlide v-for="(p,i) in popularProducts" :key="p.id" >
+              <GCard :product="p"/>
             </SwiperSlide>
             <template v-slot:container-start>
               <div class="w-full flex flex-col items-end mb-4 -mt-20">
@@ -220,12 +216,12 @@
 
       <!--  About GP  -->
       <section class="w-full mt-16">
-        <div class="bg-[#F8F8F8] rounded-xl p-12" v-motion-pop-visible-once>
-          <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 mx-auto w-3/4">
+        <div class="bg-[#F8F8F8] rounded-xl p-12" >
+          <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 mx-auto w-full 2xl:w-3/4">
             <img src="~/assets/images/GP-filled.png" alt="GP" class="drop-shadow-xl w-1/3 lg:w-auto max-w-[220px]" v-motion-slide-visible-once-bottom :delay="200">
             <div class="flex flex-col items-start gap-4">
-              <strong class="text-xl" v-motion-slide-visible-once-top :delay="300">اصالت و عطر ماندگار</strong>
-              <p class=" font-light" v-motion-slide-visible-once-left :delay="400">
+              <strong class="text-xl" >اصالت و عطر ماندگار</strong>
+              <p class=" font-light" >
                 ورود شما را به جی پی، فروشگاه آنلاین خرید زعفران خوش‌آمد می‌گوییم. <br>
                 خوشحالیم که هم اکنون در جی پی، دارنده نماد اعتماد الکترونیکی و ارائه دهنده‌ی ضمانت هفت روزه حضور دارید
                 <br>
@@ -309,12 +305,11 @@
 
       <!--  Instagram  -->
       <section class="w-full mt-24">
-
         <div class="flex justify-between items-center w-full h-[150px] rounded-xl bg-gradient-to-r from-[#E63BB0] to-[#EFB243] px-16">
-          <strong class="text-3xl text-[#EBEBEB]">
+          <strong class="text-xl 2xl:text-3xl text-[#EBEBEB]">
             بخشی از فعالیت های جی پی را در اینستاگرام ما مشاهده کنید
           </strong>
-          <a href="#" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 text-white hover:bg-[#FCFCFC] hover:text-[#E9638B] transition-colors duration-200">
+          <a href="https://www.instagram.com/gp_saffron" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 text-white hover:bg-[#FCFCFC] hover:text-[#E9638B] transition-colors duration-200">
             <span>دنبال کردن</span>
             <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 8.73205C1.66667 7.96225 1.66667 6.03775 3 5.26795L7.5 2.66987C8.83333 1.90007 10.5 2.86232 10.5 4.40192V9.59808C10.5 11.1377 8.83333 12.0999 7.5 11.3301L3 8.73205Z" fill="currentColor"/>
@@ -414,7 +409,7 @@
                   enabled: true,
                   sticky:true,
                 }"
-                      :slides-per-view="2.5" class="rounded-xl py-4" dir="rtl">
+                      :breakpoints="commentsBreakpoints" class="rounded-xl py-4" dir="rtl">
                 <SwiperSlide v-for="i in 4" :key="i">
                   <li class="bg-white w-max min-w-[400px] rounded-xl border px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" >
                     <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full aspect-square w-[40px] h-[40px]">
@@ -547,7 +542,7 @@
       <div class="mt-16 flex flex-col items-stretch overflow-hidden">
         <div class="flex items-center justify-between">
           <strong>تخفیف های جی پی</strong>
-          <NuxtLink class="flex items-center gap-1 text-[#8D8D8D]">
+          <NuxtLink to="/market" class="flex items-center gap-1 text-[#8D8D8D]">
             <span class="">مشاهده همه </span>
             <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 1L1 4.5L4 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -562,7 +557,7 @@
                   enabled: true,
                   sticky:true,
                 }"
-                  :slides-per-view="2.5" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
+                  :breakpoints="mobileBreakpoints" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
             <SwiperSlide v-for="p in lastProducts" :key="p.id">
               <GCardMobile :product="p" />
             </SwiperSlide>
@@ -592,7 +587,7 @@
             <strong class=" text-[#EBEBEB] text-center">
               بخشی از فعالیت های جی پی را در اینستاگرام ما مشاهده کنید
             </strong>
-            <a href="#" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 bg-[#FCFCFC] text-[#E9638B] transition-colors duration-200">
+            <a href="https://www.instagram.com/gp_saffron" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 bg-[#FCFCFC] text-[#E9638B] transition-colors duration-200">
               <span>دنبال کردن</span>
               <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 1L1 4.5L4 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -609,7 +604,7 @@
       <div class="mt-16 flex flex-col items-stretch overflow-hidden">
         <div class="flex items-center justify-between">
           <strong>محصولات پرفروش</strong>
-          <NuxtLink class="flex items-center gap-1 text-[#8D8D8D]">
+          <NuxtLink to="/market" class="flex items-center gap-1 text-[#8D8D8D]">
             <span class="">مشاهده همه </span>
             <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 1L1 4.5L4 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -623,7 +618,7 @@
                   enabled: true,
                   sticky:true,
                 }"
-                  :slides-per-view="2.5" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
+                  :breakpoints="mobileBreakpoints" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
             <SwiperSlide v-for="p in lastProducts" :key="p.id">
               <GCardMobile :product="p" />
             </SwiperSlide>
@@ -658,7 +653,7 @@
         </div>
         <client-only>
 
-          <Swiper :slides-per-view="2.1" :breakpoints="commentsBreakpoints" class="rounded-xl w-full mt-4" dir="rtl" >
+          <Swiper :breakpoints="commentsBreakpoints" class="rounded-xl w-full mt-4" dir="rtl" >
             <SwiperSlide v-for="p in 5" :key="p" >
               <div class="p-2 min-w-[130px] mx-2 relative flex flex-col rounded-lg border border-[#CACACA]" >
                 <NuxtLink to="/gpBlog/post" class="w-full overflow-hidden rounded-lg">
@@ -704,8 +699,6 @@
 </template>
 
 <script setup lang="ts">
-import {GetProducts} from "~/services/product.service";
-import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {FreeMode} from "swiper/modules";
 import {BLOGS_URL} from "~/utilities/api.config";
@@ -713,6 +706,9 @@ import {BLOGS_URL} from "~/utilities/api.config";
 const showSearchModal = ref(false);
 const loading = ref(true);
 const lastProducts:Ref<ProductFilterData[]> = ref([]);
+const popularProducts:Ref<ProductFilterData[]> = ref([]);
+
+const productUtils = useProductUtils();
 
 const utilsStore = useUtilStore();
 
@@ -740,13 +736,35 @@ const commentsBreakpoints = ref({
   // 700px and up
   700: {
     slidesPerView: 1.7,
-    snapAlign:'start',
     dir:'rtl'
   },
-  // 1500 and up
-  1500:{
+  // 1300px and up
+  1300: {
+    slidesPerView: 2.1,
+    dir:'rtl'
+  },
+  // 1700px and up
+  1700:{
     slidesPerView: 2.7,
-    snapAlign:'start',
+    dir:'rtl'
+  },
+});
+
+
+const mobileBreakpoints = ref({
+  // 300 and up
+  300: {
+    slidesPerView: 2.2,
+    dir:'rtl'
+  },
+  // 380 and up
+  380: {
+    slidesPerView: 2.5,
+    dir:'rtl'
+  },
+  // 430 and up
+  430: {
+    slidesPerView: 2.8,
     dir:'rtl'
   },
 });
@@ -754,14 +772,8 @@ const commentsBreakpoints = ref({
 onMounted(async ()=>{
   loading.value = true;
 
-  const lastProductsResult = await GetProducts({
-    pageId:1,
-    orderBy:EOrderBy.جدیدترین,
-    take:15,
-  });
-  if(lastProductsResult.isSuccess){
-    lastProducts.value = lastProductsResult.data?.data!;
-  }
+  lastProducts.value = await productUtils.GetNewestProducts();
+  popularProducts.value = await productUtils.GetPopularProducts();
 
   loading.value = false;
 

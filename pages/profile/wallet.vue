@@ -90,7 +90,7 @@
         </div>
 
         <!--  Bank Cart   -->
-        <div
+        <div v-if="false"
             class="w-full min-h-[160px] rounded-2xl mt-8 relative overflow-hidden flex flex-col items-center space-y-6 text-white"
             style="
           background: linear-gradient(83.27deg, #FF5532 2.2%, #B71F00 97.05%);
@@ -150,10 +150,10 @@
         <div class="w-full rounded-t-3xl border-t flex flex-col items-center p-4 mt-8">
           <span class="font-light">تاریخچه تراکنش</span>
           <ul class="flex w-full flex-col space-y-4 mt-6">
-            <li class="w-full flex items-center justify-between">
+            <li class="w-full flex items-center justify-between" v-for="wallet in accountStore.currentUser?.wallets">
               <div class="flex items-center gap-4">
                 <div class="bg-[#0A0A0A1A] w-[40px] h-[40px] rounded-full grid place-items-center ">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="wallet.walletType == EWalletType.Withdraw">
                     <g opacity="0.5">
                       <path
                           d="M13.1454 7.75387V5.2272C13.1454 3.49054 11.7379 2.08304 10.0021 2.08304C8.26542 2.07554 6.85125 3.47637 6.84375 5.21304V5.2272V7.75387"
@@ -163,50 +163,21 @@
                             stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </g>
                   </svg>
-                </div>
-                <div class="flex flex-col items-start space-y-1 text-sm">
-                  <strong>خرید از جی پی</strong>
-                  <span class="text-xs opacity-50">سه شنبه - 12 اردیبهشت - 12:38</span>
-                </div>
-              </div>
-              <base-g-price :price="125000"/>
-            </li>
-            <li class="w-full flex items-center justify-between">
-              <div class="flex items-center gap-4">
-                <div class="bg-[#0A0A0A1A] w-[40px] h-[40px] rounded-full grid place-items-center ">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g opacity="0.5">
-                      <path
-                          d="M13.1454 7.75387V5.2272C13.1454 3.49054 11.7379 2.08304 10.0021 2.08304C8.26542 2.07554 6.85125 3.47637 6.84375 5.21304V5.2272V7.75387"
-                          stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M13.9518 17.4999H6.04815C4.08808 17.4999 2.5 15.9124 2.5 13.954V9.35736C2.5 7.39902 4.08808 5.81152 6.04815 5.81152H13.9518C15.9119 5.81152 17.5 7.39902 17.5 9.35736V13.954C17.5 15.9124 15.9119 17.4999 13.9518 17.4999Z"
-                            stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </g>
-                  </svg>
-                </div>
-                <div class="flex flex-col items-start space-y-1 text-sm">
-                  <strong>خرید از جی پی</strong>
-                  <span class="text-xs opacity-50">سه شنبه - 12 اردیبهشت - 12:38</span>
-                </div>
-              </div>
-              <base-g-price :price="725000"/>
-            </li>
-            <li class="w-full flex items-center justify-between">
-              <div class="flex items-center gap-4" c>
-                <div class="bg-[#0AD91F1A] w-[40px] h-[40px] rounded-full grid place-items-center ">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" v-else>
                     <path
                         d="M11.5351 15.533H3.53537C2.43082 15.533 1.5354 14.6376 1.53537 13.5331L1.53516 6.03326C1.53512 4.92867 2.43056 4.0332 3.53516 4.0332H15.5347C16.6393 4.0332 17.5347 4.92812 17.5347 6.03272L17.5348 9.5332M2.03477 7.53308H17.0348M16.3629 15.9667L16.3629 13.8615M16.3629 13.8615L16.3629 11.7563M16.3629 13.8615H14.2577M16.3629 13.8615H18.4681"
                         stroke="#2EDC47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <div class="flex flex-col items-start space-y-1 text-sm">
-                  <strong>شارژ حساب</strong>
-                  <span class="text-xs opacity-50">سه شنبه - 12 اردیبهشت - 12:38</span>
+                  <div class="flex items-center gap-2">
+                    <strong class="text-xs">{{ wallet.description }}</strong>
+                    <small class="bg-danger/20 text-danger px-2 text-[10px] rounded-full" v-if="!wallet.isFinally">لغو شده</small>
+                  </div>
+                  <span class="text-xs opacity-50">{{ wallet.persianDate }}</span>
                 </div>
               </div>
-              <base-g-price :price="1000000"/>
+              <base-g-price :price="wallet.price / 10" :class="[{'opacity-50':!wallet.isFinally}]"/>
             </li>
           </ul>
         </div>

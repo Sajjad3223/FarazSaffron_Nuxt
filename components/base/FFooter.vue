@@ -46,8 +46,8 @@
             </a>
             <!--  Instagram  -->
             <a href="https://www.instagram.com/gp_saffron" target="_blank"
-               class="w-14 h-14 logo-rotate text-[#7A7A7A] hover:text-[#F6F6F6] rounded-full bg-[#F4F4F4] grid place-items-center hover:bg-[#000100] transition-all duration-300 cursor-pointer">
-              <svg class="w-5" width="48" height="48" viewBox="0 0 48 48" fill="none"
+               class="w-14 h-14 relative logo-rotate text-[#7A7A7A] hover:text-[#F6F6F6] rounded-full bg-[#F4F4F4] grid place-items-center group transition-all duration-300 cursor-pointer">
+              <svg class="relative z-10 w-5" width="48" height="48" viewBox="0 0 48 48" fill="none"
                    xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_569_2177)">
                   <path
@@ -66,6 +66,7 @@
                   </clipPath>
                 </defs>
               </svg>
+              <span class="bg-gradient-to-r from-[#E63BB0] to-[#EFB243] absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200"></span>
             </a>
             <!--  Youtube  -->
             <a href="https://www.youtube.com/@gpsaffron" target="_blank"
@@ -180,39 +181,29 @@
         </div>
         <div class="grid grid-cols-3 gap-4 self-center col-span-2">
           <!--   Salamat Logo   -->
-          <div class="border rounded-full border-[#666666] aspect-square grid place-items-center relative">
-            <img src="~/assets/images/salamat.png" alt="salamat" class="w-3/4 -translate-y-4">
-            <span class="absolute bottom-4 text-sm font-light pointer-events-none">
+          <div class="border rounded-full border-[#666666]/20 aspect-square grid place-items-center relative w-full">
+            <img src="~/assets/images/salamat.png" alt="salamat" class="w-3/4 2xl:-translate-y-4">
+            <span class="absolute bottom-4 text-sm font-light pointer-events-none hidden 2xl:block">
             57/1018-1
             </span>
           </div>
           <!--   ENamad   -->
-          <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn' class="relative border rounded-full border-[#666666] aspect-square grid place-items-center">
+          <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn' class="relative border rounded-full border-[#666666]/20 aspect-square grid place-items-center w-full">
             <img referrerpolicy='origin'
                  src='https://trustseal.enamad.ir/logo.aspx?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
                  alt='Enamad' style='cursor:pointer' Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
                  class="w-3/4 opacity-0 absolute">
-            <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4 -translate-y-4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
-            <span class="absolute bottom-8 text-xs font-light pointer-events-none">
+            <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4 2xl:-translate-y-4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
+            <span class="absolute bottom-8 text-xs font-light pointer-events-none hidden 2xl:block">
             نماد تجارت الکترونیک
             </span>
           </a>
-<!--          <a referrerpolicy='origin' target='_blank'
-             href='https://trustseal.enamad.ir/?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
-             class="relative border rounded-full border-[#666666] aspect-square grid place-items-center">
-            <img referrerpolicy='origin'
-                 src='https://trustseal.enamad.ir/logo.aspx?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
-                 alt='Enamad' style='cursor:pointer' Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
-                 class="w-3/4 opacity-0 absolute">
-            <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
-          </a>-->
-          <!--   Standard   -->
           <div
-              class="border rounded-full border-[#666666] aspect-square w-36 h-36 grid place-items-center relative p-4">
-            <img src="~/assets/images/standard.png" alt="standard" class="w-16">
+              class="border rounded-full border-[#666666]/20 aspect-square grid place-items-center relative p-4 w-full overflow-hidden">
+            <img src="~/assets/images/standard.png" alt="standard" class="w-2/3 2xl:w-16">
           </div>
         </div>
-        <div class="col-span-full text-center text-sm font-light mt-7">
+        <div class="col-span-full text-center text-xs 2xl:text-sm font-light mt-7">
             <span class="flex gap-2 justify-center">
               برای استفاده از مطالب جی پی، داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست. تمام حقوق اين وب‌سايت نیز برای شرکت فراز زعفران تربت حیدریه <NuxtLink
                 to="/"><strong class="font-black">(فروشگاه آنلاین جی پی)</strong></NuxtLink> است.

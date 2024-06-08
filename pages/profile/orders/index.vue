@@ -85,7 +85,7 @@
         </span>
       </header>
       <div class="w-full flex items-center relative">
-        <input type="search" name="search" id="search" class="w-full py-2 pr-8 bg-[#F6F6F6] rounded-lg font-light text-sm" placeholder="جستجو در سفارش ها" >
+        <input type="search" name="search" id="search" class="w-full py-2 pr-8 bg-[#F6F6F6] rounded-lg font-light text-sm" placeholder="جستجو در سفارش ها" v-model="orderFilterParams.search" @input="getData">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-2">
           <g opacity="0.3">
             <path d="M8.625 15.75C12.56 15.75 15.75 12.56 15.75 8.625C15.75 4.68997 12.56 1.5 8.625 1.5C4.68997 1.5 1.5 4.68997 1.5 8.625C1.5 12.56 4.68997 15.75 8.625 15.75Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -93,24 +93,24 @@
           </g>
         </svg>
       </div>
-      <div class="grid grid-cols-4 w-full border-b mt-6 pb-2">
+      <div class="grid grid-cols-6 w-full border-b mt-6 pb-2">
         <button @click="tab = EOrderStatus.Pending" :class="['text-xs',tab === EOrderStatus.Pending ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
           جاری
         </button>
         <button @click="tab = EOrderStatus.Paid" :class="['text-xs',tab === EOrderStatus.Paid ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
-          پرداخت شده
+          پرداخت <br>شده
         </button>
         <button @click="tab = EOrderStatus.Sending" :class="['text-xs',tab === EOrderStatus.Sending ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
-          ارسال شده
+          ارسال <br> شده
         </button>
         <button @click="tab = EOrderStatus.Delivered" :class="['text-xs',tab === EOrderStatus.Delivered ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
-          تحویل شده
+          تحویل <br> شده
         </button>
         <button @click="tab = EOrderStatus.Returned" :class="['text-xs',tab === EOrderStatus.Returned ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
-          مرجوع شده
+          مرجوع <br> شده
         </button>
         <button @click="tab = EOrderStatus.Canceled" :class="['text-xs',tab === EOrderStatus.Canceled ? 'relative font-bold after:absolute after:-bottom-2 after:inset-x-0 after:h-1 after:rounded-t-xl after:bg-brandOrange' : 'font-light']">
-          لغو شده
+          لغو <br> شده
         </button>
       </div>
       <div class="flex flex-col mt-6" v-if="!loading">
@@ -215,6 +215,14 @@ onMounted(async ()=>{
     ordersGist.value = result.data ?? null;
   }
 
+  await getData();
+
+  loading.value = false;
+})
+
+const getData = async ()=>{
+  loading.value = true;
+
   const userOrdersResult = await GetOrders(orderFilterParams);
   if(userOrdersResult.isSuccess){
     pendingOrders.value = userOrdersResult.data?.data!.filter(o=>o.orderStatus == EOrderStatus.Pending) ?? [];
@@ -227,7 +235,7 @@ onMounted(async ()=>{
   }
 
   loading.value = false;
-})
+}
 
 const getOrders = computed(()=>{
   switch (tab.value){

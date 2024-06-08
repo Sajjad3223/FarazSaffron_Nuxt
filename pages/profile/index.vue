@@ -5,7 +5,7 @@
       <Title>حساب کاربری</Title>
     </Head>
 
-    <div v-if="!utilStore.isMobile()">
+<!--    <div v-if="!utilStore.isMobile()">
       <div >
         <h3 class="text-2xl font-bold ">
           داشبورد
@@ -132,6 +132,124 @@
             </div>
           </li>
         </ul>
+      </div>
+    </div>-->
+
+    <div v-if="!utilStore.isMobile()">
+      <div class="flex items-start gap-4">
+        <div class="flex-1 grid grid-cols-3 gap-5">
+          <div class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+            <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-brandOrange/10">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="25" height="25" fill="url(#pattern0_438_2606)"/>
+                <defs>
+                  <pattern id="pattern0_438_2606" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_438_2606" transform="scale(0.01)"/>
+                  </pattern>
+                  <image id="image0_438_2606" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                </defs>
+              </svg>
+            </div>
+            <div class="flex flex-col ">
+              <div class="flex items-center gap-1">
+                <strong class="text-2xl">{{ accountStore.currentUser?.GPClubScore ?? 0 }}</strong>
+                <span class="text-xs font-light">امتیاز</span>
+              </div>
+              <span class="text-sm font-bold opacity-50">جی پی کلاب</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+            <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-[#F4F9FF]">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="25" height="25" fill="url(#pattern0_438_2613)"/>
+                <defs>
+                  <pattern id="pattern0_438_2613" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_438_2613" transform="scale(0.01)"/>
+                  </pattern>
+                  <image id="image0_438_2613" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                </defs>
+              </svg>
+            </div>
+            <div class="flex flex-col ">
+              <div class="flex items-center gap-1">
+                <strong class="text-2xl">{{((accountStore.currentUser?.walletCash ?? 0) / 10).toLocaleString()}}</strong>
+                <span class="text-xs font-light">تومان</span>
+              </div>
+              <span class="text-sm font-bold opacity-50">کیف پول</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+            <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-[#FEF0F4]">
+              <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="25" height="25" fill="url(#pattern0_438_2619)"/>
+                <defs>
+                  <pattern id="pattern0_438_2619" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_438_2619" transform="scale(0.01)"/>
+                  </pattern>
+                  <image id="image0_438_2619" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                </defs>
+              </svg>
+            </div>
+            <div class="flex flex-col ">
+              <div class="flex items-center gap-1">
+                <strong class="text-2xl">{{ ordersGist?.pending + ordersGist?.paid + ordersGist?.returned }}</strong>
+                <span class="text-xs font-light">عدد</span>
+              </div>
+              <span class="text-sm font-bold opacity-50">سفارشات</span>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg relative p-4 col-span-full">
+            <div class="flex items-center justify-between">
+              <span>آخرین تراکنش ها</span>
+              <NuxtLink to="/profile/wallet" class="text-sm opacity-50 hover:opacity-80 transition-opacity duration-200 text-primary flex items-center group">
+                <span>همه تراکنش ها</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:-translate-x-1 transition-transform duration-200">
+                  <path d="M15 17L10 12L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </NuxtLink>
+            </div>
+            <hr class="my-4 border">
+            <ul class="flex w-full flex-col space-y-4 mt-6 px-5">
+              <li :class="['w-full grid grid-cols-4 gap-2',{'opacity-60':!wallet.isFinally}]" v-for="wallet in accountStore.currentUser?.wallets?.slice(0,5)">
+                <div class="flex items-center gap-4 col-span-2">
+                  <div class="bg-[#f8f8f8] w-[50px] h-[50px] rounded-full grid place-items-center ">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="!wallet.isFinally" class="text-danger" title="لغو شده">
+                      <path d="M12 12.9V8.41447M12 16.2248V16.2642M17.6699 20H6.33007C4.7811 20 3.47392 18.9763 3.06265 17.5757C2.88709 16.9778 3.10281 16.3551 3.43276 15.8249L9.10269 5.60102C10.4311 3.46632 13.5689 3.46633 14.8973 5.60103L20.5672 15.8249C20.8972 16.3551 21.1129 16.9778 20.9373 17.5757C20.5261 18.9763 19.2189 20 17.6699 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="wallet.isFinally && wallet.walletType == EWalletType.Withdraw">
+                      <g opacity="0.5">
+                        <path
+                            d="M13.1454 7.75387V5.2272C13.1454 3.49054 11.7379 2.08304 10.0021 2.08304C8.26542 2.07554 6.85125 3.47637 6.84375 5.21304V5.2272V7.75387"
+                            stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M13.9518 17.4999H6.04815C4.08808 17.4999 2.5 15.9124 2.5 13.954V9.35736C2.5 7.39902 4.08808 5.81152 6.04815 5.81152H13.9518C15.9119 5.81152 17.5 7.39902 17.5 9.35736V13.954C17.5 15.9124 15.9119 17.4999 13.9518 17.4999Z"
+                              stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="wallet.isFinally && wallet.walletType == EWalletType.Deposit">
+                      <path
+                          d="M11.5351 15.533H3.53537C2.43082 15.533 1.5354 14.6376 1.53537 13.5331L1.53516 6.03326C1.53512 4.92867 2.43056 4.0332 3.53516 4.0332H15.5347C16.6393 4.0332 17.5347 4.92812 17.5347 6.03272L17.5348 9.5332M2.03477 7.53308H17.0348M16.3629 15.9667L16.3629 13.8615M16.3629 13.8615L16.3629 11.7563M16.3629 13.8615H14.2577M16.3629 13.8615H18.4681"
+                          stroke="#2EDC47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col items-start space-y-1 text-sm ">
+                    <div class="flex items-center gap-2">
+                      <span>{{ wallet.description }}</span>
+                    </div>
+                    <span class="text-xs opacity-50">{{ wallet.persianDate }}</span>
+                  </div>
+                </div>
+                <div></div>
+<!--                <small class="bg-danger/20 text-danger px-2 text-[10px] rounded-full grid place-items-center w-max h-max self-center" v-if="!wallet.isFinally">لغو شده</small>
+                <small class="bg-green-200 text-green-500 px-2 text-[10px] rounded-full grid place-items-center w-max h-max self-center" v-else>نهایی شده</small>-->
+                <base-g-price :price="wallet.price / 10" class="mr-auto"/>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-1/4 flex flex-col">
+          <div class="bg-white rounded-xl p-4 min-h-[250px]"></div>
+        </div>
       </div>
     </div>
 
@@ -369,6 +487,7 @@
 <script setup lang="ts">
 import type {OrderGist} from "~/models/cart/cartQueries";
 import {GetOrdersGist} from "~/services/cart.service";
+import {EWalletType} from "~/models/users/userDto";
 
 const utilStore = useUtilStore();
 const authStore = useAuthStore();

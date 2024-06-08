@@ -23,11 +23,11 @@ export const useCartStore = defineStore("cart",()=>{
     const toast = useToast();
     const authStore = useAuthStore();
 
-    const addToCart = async (id:number,slug:string):Promise<boolean> =>{
+    const addToCart = async (id:number,slug:string,count:number = 1):Promise<boolean> =>{
         let addResult = false;
         if(authStore.isLoggedIn){
             //If user is logged in request to server for add to Cart
-            const result = await AddToCart(id);
+            const result = await AddToCart(id,count);
             if(result.isSuccess){
                 toast.showToast(result.metaData.message,ToastType.success,3000,true);
                 addResult = true;

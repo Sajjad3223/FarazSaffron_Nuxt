@@ -230,7 +230,7 @@ const filterParams:ProductFilterParams = reactive({
   serialNumber: undefined,
   dgkalaLink: undefined,
   pageId:pageId.value,
-  take:10
+  take:20
 });
 
 onMounted(async ()=>{

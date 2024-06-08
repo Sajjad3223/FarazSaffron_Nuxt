@@ -59,24 +59,14 @@
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
           <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
-            <button>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 14L12 9L17 14" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <Swiper direction="vertical" :slides-per-view="3" :space-between="20">
+            <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]"
+                    :mousewheel="{enabled:true}"
+                    :slides-per-view="2.5" :space-between="20">
+              <SwiperSinglePageControls />
               <SwiperSlide v-for="i in product?.images">
                 <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full cursor-pointer h-full object-cover rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
               </SwiperSlide>
             </Swiper>
-<!--            <div class="bg-white rounded-lg overflow-hidden grid place-items-center cursor-pointer" v-for="i in product?.images" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
-              <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" >
-            </div>-->
-            <button>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 10L12 15L7 10" stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
           </div>
           <div class="flex-1 bg-white rounded-xl grid relative place-items-center aspect-square">
             <div class="aspect-square image-magnifier-container grid place-items-center">
@@ -147,22 +137,20 @@
               </div>
               <div class="grid grid-cols-2 gap-4" v-if="product.quantity > 0">
                 <div class="bg-white rounded-lg flex p-2 gap-1">
-                  <button class="grid place-items-center p-2">
+                  <button class="grid place-items-center p-2" @click.prevent="quantity++">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M1 5H9" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
                       <path d="M5 9L5 1" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </button>
-                  <input type="number" class="bg-[#F8F8F8] text-[#A9A9A9] rounded-lg flex-1 w-1/3 text-center" value="1" style="font-family: 'Vazir FD',serif">
-                  <button class="grid place-items-center p-2">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.18599 16.4994C8.16974 16.4994 7.17899 16.4881 6.19874 16.4679C4.94474 16.4431 4.07699 15.6301 3.93524 14.3461C3.69899 12.2161 3.29474 7.19563 3.29099 7.14538C3.26549 6.83563 3.49649 6.56413 3.80624 6.53938C4.11149 6.53113 4.38749 6.74563 4.41224 7.05463C4.41599 7.10563 4.81949 12.1089 5.05349 14.2224C5.13374 14.9521 5.52749 15.3286 6.22199 15.3429C8.09699 15.3826 10.0102 15.3849 12.0727 15.3474C12.8107 15.3331 13.2097 14.9641 13.2922 14.2171C13.5247 12.1216 13.9297 7.10563 13.9342 7.05463C13.959 6.74563 14.2327 6.52963 14.5395 6.53938C14.8492 6.56488 15.0802 6.83563 15.0555 7.14538C15.051 7.19638 14.6445 12.2296 14.4105 14.3409C14.265 15.6511 13.3995 16.4484 12.093 16.4724C11.0932 16.4896 10.1287 16.4994 9.18599 16.4994" fill="#F42020"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M15.531 5.24219H2.8125C2.502 5.24219 2.25 4.99019 2.25 4.67969C2.25 4.36919 2.502 4.11719 2.8125 4.11719H15.531C15.8415 4.11719 16.0935 4.36919 16.0935 4.67969C16.0935 4.99019 15.8415 5.24219 15.531 5.24219" fill="#F42020"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M13.079 5.24175C12.2255 5.24175 11.4845 4.6335 11.3165 3.7965L11.1342 2.8845C11.096 2.74575 10.9377 2.625 10.7577 2.625H7.58297C7.40297 2.625 7.24472 2.74575 7.19897 2.919L7.02422 3.7965C6.85697 4.6335 6.11522 5.24175 5.26172 5.24175C4.95122 5.24175 4.69922 4.98975 4.69922 4.67925C4.69922 4.36875 4.95122 4.11675 5.26172 4.11675C5.58122 4.11675 5.85872 3.88875 5.92172 3.57525L6.10397 2.66325C6.28922 1.96425 6.89447 1.5 7.58297 1.5H10.7577C11.4462 1.5 12.0515 1.96425 12.2292 2.6295L12.4197 3.57525C12.482 3.88875 12.7595 4.11675 13.079 4.11675C13.3895 4.11675 13.6415 4.36875 13.6415 4.67925C13.6415 4.98975 13.3895 5.24175 13.079 5.24175" fill="#F42020"/>
+                  <input type="number" class="bg-[#F8F8F8] text-[#A9A9A9] rounded-lg flex-1 w-1/3 text-center" v-model="quantity" :max="product.quantity" style="font-family: 'Vazir FD',serif">
+                  <button class="grid place-items-center p-2" v-if="quantity > 1" @click.prevent="quantity--">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 5H9" stroke="#CFCFCF" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </button>
                 </div>
-                <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug)">
+                <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug,quantity)">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -185,7 +173,7 @@
               </a>
             </div>
           </div>
-          <div class="w-full border rounded-xl p-4 mt-5 flex items-center gap-4">
+          <div class="w-full border rounded-xl p-4 mt-5 flex items-center gap-4" v-if="false"> <!-- TODO show if available -->
             <img src="../../assets/images/icons/fastDelivery.png" alt="fastDelivery" class="w-8 opacity-70">
             <span class="text-[#ABABAB] text-lg">
             ارسال رایگان برای کالاهای بالاتر از 5 گرم
@@ -253,10 +241,9 @@
           <client-only>
             <GPCarousel ref="carousel" :breakpoints="carouselBreakpoints" wrap-around dir="rtl">
               <GPSlide v-for="p in relativeProducts" :key="p">
-<!--                <GCard :product="p" />-->
                 <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
                   <NuxtLink :to="`/product/${p.slug}`" class="w-2/5 grid place-items-center relative">
-                    <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+                    <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="mx-auto w-full hover:scale-110 transition-transform duration-300">
                   </NuxtLink>
                   <div class="flex-1 flex flex-col items-start space-y-4">
                     <NuxtLink :to="`/product/${p.slug}`" class="text-right">
@@ -555,6 +542,9 @@ import {EPostType} from "~/models/EPostType";
 import {ToastType} from "~/composables/useSwal";
 import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.service";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
+import SwiperSinglePageControls from "~/components/SwiperSinglePageControls.vue";
+import {FreeMode, Mousewheel, Navigation} from "swiper/modules";
+import {SwiperMousewheel} from "#imports";
 
 
 const route = useRoute();
@@ -606,13 +596,19 @@ const carouselBreakpoints = ref({
 });
 
 const carousel = ref();
+const swiperRef = ref();
 
 const accountStore = useAccountStore();
 const authStore = useAuthStore();
 const utilStore = useUtilStore();
 const isLoading = ref(false);
 const pageId = ref(1);
+const quantity = ref(1);
+const swiper = useSwiper();
 
+const nextSlide=()=>{
+  swiperRef.value.slideNext(200);
+}
 
 const magnify = (imgID:string, zoom:number) => {
   let img:any, glass:any, w:number, h:number, bw:number;

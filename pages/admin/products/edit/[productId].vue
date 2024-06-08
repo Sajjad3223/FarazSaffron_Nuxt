@@ -183,7 +183,7 @@
             <li v-for="image in product.images" class="max-w-[200px] relative">
               <img :src="`${SITE_URL}/product/images/${product.id}/${image.image.src}`" :alt="image.image.alt" class="w-full h-full object-cover rounded-xl" :key="image.id" >
               <button class="absolute left-2 top-2 w-8 h-8 bg-danger text-white/70 hover:text-white transition-all duration-200 hover:drop-shadow-lg hover:-translate-y-0.5 rounded-lg grid place-items-center"
-                      title="حذف تصویر" @click="removeImage(image.id)">
+                      title="حذف تصویر" @click.prevent="removeImage(image.id)" type="button">
                 <svg
                     class="w-4 h-4 pointer-events-none"
                     aria-hidden="true"
