@@ -119,7 +119,7 @@
             </svg>
             <div class="flex flex-col items-start">
               <strong class="text-xl opacity-70">واتساپ</strong>
-              <span dir="ltr" class="opacity-60">+98 9305876712</span>
+              <span dir="ltr" class="opacity-60">+98 9912937952</span>
             </div>
           </div>
           <div class="bg-[#F8F8F8] border rounded-3xl border-[#DFDFDF] p-4 flex items-center gap-6">

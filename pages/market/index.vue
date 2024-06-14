@@ -41,9 +41,9 @@
         </div>
       </div>
 
-      <main class="flex items-start mt-12 gap-8">
+      <main class="flex items-start mt-12 gap-4 2xl:gap-8">
         <!--  Filters  -->
-        <aside class="w-1/4 flex flex-col space-y-6">
+        <aside class="w-1/3 2xl:w-1/4 flex flex-col space-y-6">
           <div class=" bg-[#F8F8F8] p-5 rounded-2xl flex flex-col space-y-8">
             <div class="border bg-white px-4 py-5 rounded-xl flex flex-col items-stretch">
               <h3 class="text-2xl font-bold text-[#494949] border-r-[4px] -mr-4 border-brandOrange pr-4">قیمت</h3>
@@ -62,7 +62,7 @@
                     </svg>
                   </div>
                   <div class="flex flex-col space-y-2 pr-4 border-r border-brandOrange max-h-36 overflow-auto">
-                    <base-f-checkbox ref="categoryCheckboxes" :label="s.title" v-for="s in c.children" :is-checked="filterParams.categoriesIncluded.includes(s.id.toString())" :value="s.id" @value-changed="categoryChanged"/>
+                    <base-f-checkbox ref="categoryCheckboxes" :label="s.title" v-for="s in c.children" :is-checked="filterParams.categoriesIncluded?.includes(s.id.toString())" :value="s.id" @value-changed="categoryChanged"/>
                   </div>
                 </li>
               </ul>
@@ -89,9 +89,9 @@
             </div>
             <div class="mt-8">
               <client-only>
-                <GPCarousel ref="carousel" :items-to-show="1" wrap-around dir="rtl" :autoplay="5000">
+                <GPCarousel ref="carousel"  wrap-around snap-align="start" dir="rtl" :autoplay="5000">
                   <GPSlide v-for="i in popularProducts" :key="i">
-                    <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
+                    <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] w-full rounded-xl transition-all duration-300 similar" >
                       <NuxtLink :to="`/product/${i.slug}`" class="w-2/5 grid place-items-center relative">
                         <img src="../../assets/images/product-image.png" alt="product" class="w-full ">
                       </NuxtLink>
@@ -132,7 +132,7 @@
         <!--  Products   -->
         <div class="flex-1">
           <!--   Order By    -->
-          <div class="bg-[#F8F8F8] rounded-3xl py-4 px-8 flex justify-between items-center">
+          <div class="bg-[#F8F8F8] rounded-xl 2xl:rounded-3xl py-4 px-8 flex justify-between items-center">
             <div class="flex items-center gap-6">
               <button :class="[orderBy === EOrderBy.ارزان_ترین ?
                'text-[#656565] font-bold relative after:h-1.5 after:absolute after:-bottom-4 after:rounded-full after:w-1/2 after:bg-brandOrange after:inset-x-0 after:-translate-x-1/2' :
@@ -162,8 +162,8 @@
             </div>
           </div>
           <!--    Products List    -->
-          <div class="w-full grid 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 my-4" v-if="!loading">
-            <GCard :product="p" v-for="p in products" :key="p.id" v-if="products.length > 0"/>
+          <div class="w-full grid 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 2xl:gap-5 my-4" v-if="!loading">
+            <GCard :product="p" v-for="p in products" :key="p.id" v-if="products.length > 0" class="scale-90 2xl:scale-100"/>
             <div class="mt-6 flex flex-col items-center col-span-full" v-else>
               <svg width="172" height="177" viewBox="0 0 172 177" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="172" height="177" rx="86" fill="url(#pattern0_1006_8500)"/>

@@ -5,62 +5,69 @@
     </Head>
     <div v-if="!utilStore.isMobile()">
       <div>
-        <div class="text-2xl font-bold flex items-center gap-2 ">
-          <NuxtLink to="/profile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="text-xl font-bold flex items-center gap-2 ">
+          <span>آدرس ها</span>
+          <base-g-button button-type="white" color="info" is-icon @click="showAddressModal = true"
+                 class="mr-auto text-sm font-light text-[#3787FF] flex items-center gap-1">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.25733 4.12842L8.25732 12.3853M12.3857 8.25683L4.12891 8.25684" stroke="currentColor" stroke-linecap="round"/>
             </svg>
-          </NuxtLink>
-          <strong>آدرس ها</strong>
+            <span>ثبت آدرس جدید</span>
+          </base-g-button>
         </div>
-        <hr class="my-3 border-2 ">
+        <hr class="my-3  ">
       </div>
       <div v-if="!accountStore.initLoading">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" v-if="!accountStore.initLoading">
-        <li class="flex flex-col bg-bgWhite drop-shadow space-y-3 p-4 rounded-lg border" v-for="a in accountStore.currentUser?.addresses" :key="a.id">
-          <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
-          <strong>{{ a.street }}</strong>
-          <span class="font-light text-sm opacity-70">{{ a.state }}</span>
-          <span class="font-light text-sm opacity-70">{{ a.city }}</span>
-          <span class="font-light text-sm opacity-70">کد پستی: {{ a.postCode }}</span>
-          <div></div>
-          <span class="font-light text-sm opacity-70">تحویل گیرنده: {{ a.receiverFirstName + a.receiverLastName }}</span>
-          <span class="font-light text-sm opacity-70">شماره تماس: {{ a.receiverPhoneNumber }}</span>
-          <hr class="dark:opacity-30">
-          <button class="w-full grid place-items-center text-danger">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 20H3C3 20.5523 3.44772 21 4 21V20ZM20 21C20.5523 21 21 20.5523 21 20C21 19.4477 20.5523 19 20 19V21ZM4 16L3.29289 15.2929C3.10536 15.4804 3 15.7348 3 16H4ZM14.8686 5.13134L14.1615 4.42423L14.1615 4.42423L14.8686 5.13134ZM17.1313 5.13134L16.4242 5.83845V5.83845L17.1313 5.13134ZM18.8686 6.8686L19.5757 6.16149V6.16149L18.8686 6.8686ZM18.8686 9.13134L18.1615 8.42423V8.42423L18.8686 9.13134ZM8 20L8.00001 21C8.26522 21 8.51957 20.8946 8.70711 20.7071L8 20ZM19.5369 7.691L20.4879 7.38198L19.5369 7.691ZM19.5369 8.30895L18.5858 7.99994L19.5369 8.30895ZM15.691 4.46313L15.382 3.51207V3.51207L15.691 4.46313ZM16.3091 4.46313L16.6181 3.51207V3.51207L16.3091 4.46313ZM12.7071 7.29289C12.3166 6.90236 11.6834 6.90236 11.2929 7.29289C10.9024 7.68341 10.9024 8.31658 11.2929 8.7071L12.7071 7.29289ZM15.2929 12.7071C15.6834 13.0976 16.3166 13.0976 16.7071 12.7071C17.0976 12.3166 17.0976 11.6834 16.7071 11.2929L15.2929 12.7071ZM4 21H20V19H4V21ZM5 20V16H3V20H5ZM4.70711 16.7071L15.5757 5.83845L14.1615 4.42423L3.29289 15.2929L4.70711 16.7071ZM16.4242 5.83845L18.1615 7.57571L19.5757 6.16149L17.8385 4.42423L16.4242 5.83845ZM18.1615 8.42423L7.29289 19.2929L8.70711 20.7071L19.5757 9.83845L18.1615 8.42423ZM7.99999 19L3.99999 19L4.00001 21L8.00001 21L7.99999 19ZM18.1615 7.57571C18.3712 7.78538 18.4854 7.90068 18.5611 7.98986C18.6292 8.07014 18.6058 8.06142 18.5858 8.00002L20.4879 7.38198C20.3938 7.09225 20.2342 6.87034 20.0858 6.6955C19.9449 6.52957 19.7621 6.34784 19.5757 6.16149L18.1615 7.57571ZM19.5757 9.83845C19.7621 9.6521 19.9449 9.47036 20.0858 9.30444C20.2342 9.12959 20.3938 8.90769 20.4879 8.61797L18.5858 7.99994C18.6058 7.93855 18.6292 7.92983 18.5611 8.01009C18.4854 8.09927 18.3712 8.21456 18.1615 8.42423L19.5757 9.83845ZM18.5858 8.00002L18.5858 7.99994L20.4879 8.61797C20.6184 8.21628 20.6184 7.78367 20.4879 7.38198L18.5858 8.00002ZM15.5757 5.83845C15.7854 5.62878 15.9007 5.5146 15.9899 5.4389C16.0701 5.37078 16.0614 5.39424 16 5.41418L15.382 3.51207C15.0923 3.6062 14.8704 3.76576 14.6955 3.91419C14.5296 4.05505 14.3479 4.23788 14.1615 4.42423L15.5757 5.83845ZM17.8385 4.42423C17.6522 4.23794 17.4704 4.0551 17.3046 3.91427C17.1298 3.76583 16.9079 3.60622 16.6181 3.51207L16.0001 5.41418C15.9386 5.39422 15.9299 5.37071 16.0101 5.43883C16.0993 5.51456 16.2145 5.62873 16.4242 5.83845L17.8385 4.42423ZM16 5.41418H16.0001L16.6181 3.51207C16.2164 3.38156 15.7837 3.38156 15.382 3.51207L16 5.41418ZM11.2929 8.7071L15.2929 12.7071L16.7071 11.2929L12.7071 7.29289L11.2929 8.7071Z" fill="currentColor"/>
-            </svg>
-          </button>
-        </li>
-        <li class="grid place-items-center bg-bgWhite    drop-shadow rounded-lg border relative min-h-36">
-          <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0" @click="showAddressModal = true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 18V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="font-light text-sm">
-            افزود آدرس جدید
-          </span>
-          </button>
-        </li>
-      </ul>
+        <ul class="flex flex-col space-y-4 w-full" v-if="!accountStore.initLoading">
+          <li class="flex bg-white rounded-xl p-4 min-h-[120px]"
+              v-for="a in accountStore.currentUser?.addresses" :key="a.id">
+            <div class="w-1/12 grid place-items-center">
+              <input type="radio" name="activeAddress" class="accent-primary my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
+            </div>
+            <div class="flex-1 flex flex-col space-y-2">
+              <span class="font-normal text-xl hidden">آدرس تحویل</span>
+              <div class="flex flex-col space-y-2">
+                <p class="font-semibold text-lg">
+                  {{ a.street }}
+                </p>
+                <div class="flex items-center divide-x-2 divide-x-reverse">
+                  <span class="font-light text-sm opacity-70 pl-2 ">{{ a.state }}</span>
+                  <span class="font-light text-sm opacity-70 pl-2 pr-2">{{ a.city }}</span>
+                  <span class="font-light text-sm opacity-70 pr-2">کد پستی: {{ a.postCode }}</span>
+                </div>
+                <div class="flex items-center divide-x-2 divide-x-reverse">
+                  <span class="font-light text-sm opacity-70 pl-2">تحویل گیرنده: {{ a.receiverFirstName + a.receiverLastName }}</span>
+                  <span class="font-light text-sm opacity-70 px-2">شماره تماس: {{ a.receiverPhoneNumber }}</span>
+                </div>
+              </div>
+            </div>
+            <button class="self-start text-[#3787FF] flex items-center gap-0.5">
+              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.84371 4.34477L9.94371 6.59477M2.59375 12.2198L5.14057 11.6699C5.27578 11.6408 5.39992 11.5694 5.49742 11.4649L11.1987 5.35301C11.4721 5.05997 11.4719 4.58498 11.1983 4.29219L9.99057 2.99964C9.71711 2.70698 9.274 2.70718 9.00077 3.00009L3.29886 9.11262C3.20155 9.21694 3.13511 9.34968 3.10784 9.49424L2.59375 12.2198Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="text-xs font-light">ویرایش</span>
+            </button>
+          </li>
+        </ul>
       </div>
-      <div class="grid grid-cols-4 min-h-[300px] gap-4 w-full mt-6" v-else>
-        <div class="w-full items-center bg-gray-100 p-4 grid grid-cols-2 gap-4 rounded-xl animate-pulse" v-for="i in 3" :key="i">
-          <div class="h-2 rounded-full bg-gray-300"></div>
-          <div class="h-2 rounded-full bg-gray-300 col-span-full"></div>
-          <div class="h-2 rounded-full bg-gray-300 col-span-full w-2/3"></div>
-          <div class="h-2 rounded-full bg-gray-300 col-span-2"></div>
-          <div class="h-2 rounded-full bg-gray-300 col-span-2"></div>
-          <div class="h-2 rounded-full bg-gray-300 "></div>
-          <div class="h-2 rounded-full bg-gray-300 "></div>
+      <div class="flex flex-col gap-4 w-full mt-6" v-else>
+        <div class="w-full flex items-center p-4 rounded-xl animate-pulse bg-white min-h-[120px]" style="box-shadow: 0 5px 15px 0 #CBCBCB33;" v-for="i in 3" :key="i">
+          <div class="w-1/12 grid place-items-center">
+            <span class="w-6 h-6 bg-gray-300 rounded-full"></span>
+          </div>
+          <div class="flex-1 flex flex-col">
+            <div class="w-1/6 h-5 rounded-full bg-gray-300"></div>
+            <div class="w-1/2 h-3 rounded-full bg-gray-300 mt-5"></div>
+            <div class="w-2/6 h-3 rounded-full bg-gray-300 mt-3"></div>
+          </div>
+          <div class="w-1/12 grid self-start">
+            <span class="w-12 h-2 bg-gray-300 rounded-full mr-auto"></span>
+          </div>
         </div>
       </div>
-      <base-f-modal v-model="showAddressModal" title="افزودن آدرس جدید">
+      <base-g-modal v-model="showAddressModal" title="افزودن آدرس جدید">
         <profile-user-address @address-created="showAddressModal = false,accountStore.initData()" />
-      </base-f-modal>
+      </base-g-modal>
     </div>
     <div v-else class="relative">
       <header class="w-full h-[80px] px-4 flex items-center justify-center relative">

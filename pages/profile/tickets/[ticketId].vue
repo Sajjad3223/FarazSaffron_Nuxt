@@ -3,51 +3,35 @@
     <Head>
       <Title>تیکت {{ ticketId }}</Title>
     </Head>
-    <div>
-      <div class="flex items-center justify-between">
-        <div class="text-2xl font-bold flex items-center gap-2">
-          <NuxtLink to="/profile/tickets">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </NuxtLink>
-          <span class="font-light text-base">{{ticket.title}}</span>
-        </div>
-        <base-g-button button-type="white" is-icon @click="closeTicket" v-if="ticket.ticketStatus != ETicketStatus.Closed">
-          بستن تیکت
-        </base-g-button>
-      </div>
-      <hr class="my-3 border-[1px] dark:border-gray-600">
-    </div>
 
     <div v-if="!accountStore.initLoading" class="relative">
-      <ul ref="chatBox" class="w-full flex flex-col bg-gray-100 p-5 rounded-xl min-h-[50vh] max-h-[60vh] overflow-auto pb-[120px] space-y-4">
-        <li class="w-full flex items-center gap-2">
-          <div class="flex-1 h-px bg-black"></div>
-          <span>{{ticket.persianDate}}</span>
-          <div class="flex-1 h-px bg-black"></div>
-        </li>
-        <li class="bg-white flex flex-col space-y-2 p-4 w-max max-w-[50%] border text-sm font-light" style="border-radius: 16px 2px 16px 16px">
+
+      <div class="h-[70px] bg-[#F8F8F8] rounded-lg flex absolute z-20 inset-x-8 top-5 p-5 items-center justify-between">
+        <span>{{accountStore.currentUser?.fullName}}</span>
+        <span class="text-sm font-light opacity-70">{{ticket.persianDate}}</span>
+      </div>
+
+      <ul ref="chatBox" class=" pt-[120px] w-full flex flex-col bg-white p-5 px-12 rounded-xl min-h-[50vh] max-h-[60vh] overflow-auto pb-[120px] space-y-8">
+        <li class="bg-[#EFEFEF] relative flex flex-col space-y-2 p-4 w-max max-w-[50%] text-sm font-light" style="border-radius: 25px 25px 0 25px">
           <p>
             {{ticket.content}}
           </p>
-          <span class="mr-auto text-xs opacity-70">{{ticket.persianTime}}</span>
+          <span class="right-0 absolute -bottom-5 text-xs opacity-70">{{ticket.persianTime}}</span>
         </li>
-        <li :class="['flex flex-col space-y-2 p-4 w-max max-w-[50%] border text-sm font-light',message.sender.userId != accountStore.currentUser?.id ? 'self-end bg-indigo-100': 'bg-white']"
-            :style="{borderRadius: message.sender.userId == accountStore.currentUser?.id ?'16px 2px 16px 16px' : '2px 16px 16px 16px' }"
+        <li :class="['flex flex-col relative space-y-2 p-4 w-max max-w-[50%] text-sm font-light',message.sender.userId != accountStore.currentUser?.id ? 'self-end bg-indigo-100': 'bg-[#EFEFEF]']"
+            :style="{borderRadius: message.sender.userId == accountStore.currentUser?.id ?'25px 25px 0 25px' : '25px 25px 25px 0' }"
             v-for="message in ticket.messages" :key="message.id">
           <template v-if="message.sender.userId == accountStore.currentUser?.id">
             <p>
               {{message.message}}
             </p>
-            <span class="mr-auto text-xs opacity-70">{{ticket.persianTime}}</span>
+            <span class="right-0 absolute -bottom-5 text-xs opacity-70">{{message.persianTime}}</span>
           </template>
           <template v-else>
             <p>
               {{message.message}}
             </p>
-            <span class="ml-auto text-xs opacity-70">{{ticket.persianTime}}</span>
+            <span class="left-0 absolute -bottom-5 text-xs opacity-70">{{message.persianTime}}</span>
           </template>
         </li>
       </ul>
@@ -99,10 +83,18 @@ const sendMessageData:SendTicketMessageCommand = reactive({
   text:''
 });
 
+let interval;
 onMounted(()=>{
-  setInterval(async ()=>{
+  interval = setInterval(async ()=>{
     await refreshTicket();
   },5000)
+  setTimeout(async ()=>{
+    chatBox.value.scrollTop = chatBox.value.scrollHeight;
+  },1000)
+})
+
+onUnmounted(()=>{
+  clearInterval(interval);
 })
 
 const refreshTicket = async ()=>{

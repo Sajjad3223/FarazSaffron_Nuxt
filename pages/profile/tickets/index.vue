@@ -4,30 +4,26 @@
       <Title>تیکت های من</Title>
     </Head>
     <div>
-      <div class="flex items-center justify-between">
-        <div class="text-2xl font-bold flex items-center gap-2">
-          <NuxtLink to="/profile/tickets">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </NuxtLink>
-          <span>تیکت های من</span>
-        </div>
-        <base-g-button button-type="white" color="info" custom-class="text-sm" @click="showAddTicketModal = true">
-          ثبت تیکت جدید
+      <div class="text-xl font-bold flex items-center gap-2 ">
+        <span>تیکت ها</span>
+        <base-g-button button-type="white" color="info" is-icon @click="showAddTicketModal = true"
+                       class="mr-auto text-sm font-light text-[#3787FF] flex items-center gap-1">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.25733 4.12842L8.25732 12.3853M12.3857 8.25683L4.12891 8.25684" stroke="currentColor" stroke-linecap="round"/>
+          </svg>
+          <span>ثبت تیکت جدید</span>
         </base-g-button>
       </div>
-      <hr class="my-3 border-[1px] dark:border-gray-600">
+      <hr class="my-3  ">
     </div>
 
     <div v-if="!loading">
       <div v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
-        <NuxtLink :to="`/profile/tickets/${ticket.id}`" class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">
+        <NuxtLink :to="`/profile/tickets/${ticket.id}`" class="w-full flex flex-col ticket transition-shadow duration-200 space-y-5 p-8 min-h-[90px] bg-white rounded-xl " v-for="ticket in tickets" :key="ticket.id">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
               <NuxtLink :to="`/profile/tickets/${ticket.id}`">
-                <strong>{{ ticket.title }}</strong>
+                <span class="font-medium text-xl">{{ ticket.title }}</span>
               </NuxtLink>
               <span class="opacity-30">•</span>
               <small class="opacity-70">{{ ticket.persianDate }}</small>
@@ -36,6 +32,13 @@
               <base-g-badge color="success" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Answered">پاسخ داده</base-g-badge>
               <base-f-badge class="py-1" color="secondary" size="xs" v-if="ticket.ticketStatus == ETicketStatus.Closed">بسته شده</base-f-badge>
             </div>
+            <button>
+              <svg width="3" height="13" viewBox="0 0 3 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="1.5" cy="1.5" r="1.5" fill="#171717"/>
+                <circle cx="1.5" cy="6.5" r="1.5" fill="#171717"/>
+                <circle cx="1.5" cy="11.5" r="1.5" fill="#171717"/>
+              </svg>
+            </button>
           </div>
           <p class="text-sm font-light opacity-70">
             {{ticket.content}}
@@ -126,3 +129,9 @@ const addTicket = async ()=>{
 }
 
 </script>
+
+<style>
+.ticket:hover{
+  box-shadow: 0 5px 10px 0 #DADADA80;
+}
+</style>

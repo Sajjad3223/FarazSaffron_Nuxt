@@ -87,7 +87,7 @@ export const useToast = () => {
             position:toast ? "top-start" : "center",
             icon:'error',
             timerProgressBar:toast,
-            timer:3000,
+            timer:0,
             confirmButtonText:'باشه'
         })
     };

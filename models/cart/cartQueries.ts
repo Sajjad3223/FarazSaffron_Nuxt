@@ -3,6 +3,7 @@ import type {BaseDto} from "~/models/baseDto";
 import type {BaseFilterResult} from "~/models/baseFilterResult";
 import type {ProductImageDto} from "~/models/product/productImageDto";
 import type {EItemType} from "~/models/EPostType";
+import type {EPackingType} from "~/models/product/EPackingType";
 
 export interface OrderFilterParams extends BaseFilterParams {
     search?: string | null;
@@ -90,6 +91,7 @@ export interface ItemInfo {
     productImage: ProductImageDto;
     weight: number;
     healthNumber?: string | null;
+    packingType:EPackingType;
 }
 export interface PayWithWalletResult {
     orderId: number;

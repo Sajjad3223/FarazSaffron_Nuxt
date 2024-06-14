@@ -489,9 +489,9 @@
 
       <!--  Banner  -->
       <div class="mobileBanner" dir="ltr" ref="banners">
-        <img src="~/assets/images/banner2.png" alt=" banner1" >
-        <img src="~/assets/images/banner1.png" alt=" banner2" >
-        <img src="~/assets/images/banner3.png" alt=" banner3" >
+        <img src="~/assets/images/05.jpg" alt="banner" >
+        <img src="~/assets/images/03.png" alt="banner" >
+        <img src="~/assets/images/04.jpg" alt="banner" >
       </div>
 
       <!--  Categories  -->
@@ -653,7 +653,7 @@
         </div>
         <client-only>
 
-          <Swiper :breakpoints="commentsBreakpoints" class="rounded-xl w-full mt-4" dir="rtl" >
+          <Swiper slides-per-view="2.2" class="rounded-xl w-full mt-4" dir="rtl" >
             <SwiperSlide v-for="p in 5" :key="p" >
               <div class="p-2 min-w-[130px] mx-2 relative flex flex-col rounded-lg border border-[#CACACA]" >
                 <NuxtLink to="/gpBlog/post" class="w-full overflow-hidden rounded-lg">

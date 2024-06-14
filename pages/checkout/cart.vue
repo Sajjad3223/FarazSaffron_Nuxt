@@ -117,7 +117,10 @@
                       </NuxtLink>
                       <ul class="flex flex-col space-y-4 my-12">
                         <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: {{ i.itemInfo.healthNumber != null ? 'دارد' : 'ندارد' }}</li>
-                        <li class="pr-4 border-r-2 border-brandOrange/50">شکل ماده غذایی: {{ i.itemInfo.eItemType }}</li>
+                        <li class="pr-4 border-r-2 border-brandOrange/50">
+                          شکل ماده غذایی:
+                          {{ i.itemInfo.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
+                        </li>
                         <li class="pr-4 border-r-2 border-brandOrange/50">وزن: {{ i.itemInfo.weight }} گرم</li>
                       </ul>
                       <base-g-price :price="(i.price / 10)"/>
@@ -370,6 +373,7 @@ import {useCartStore} from "~/stores/cart.store";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
+import {EPackingType} from "../../models/product/EPackingType";
 
 
 const cartStore = useCartStore();

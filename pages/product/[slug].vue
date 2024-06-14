@@ -108,8 +108,11 @@
           <span class="mt-4 text-lg text-[#B8B8B8]">نگین (سرگل)</span>
 
           <ul class="my-auto flex flex-col space-y-3 text-lg">
-            <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              پروانه بهداشت: دارد
+            <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494] flex items-center gap-2">
+              <span>
+                پروانه بهداشت: دارد
+              </span>
+              <img src="~/assets/images/salamat.png" alt="salamat" class="w-8">
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
               شکل ماده غذایی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}

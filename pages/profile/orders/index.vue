@@ -24,7 +24,7 @@
             <span>
               جاری
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.pending > 0">{{ ordersGist.pending }}</f-badge>
+              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.pending > 0 && pendingOrders.length > 0 && pendingOrders[0].itemsCount > 0">{{ ordersGist.pending }}</f-badge>
             </li>
             <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Paid}]" @click="tab = EOrderStatus.Paid">
             <span>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="mt-6" v-if="!loading">
-        <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders.itemsCount > 0 ? pendingOrders : []" />
+        <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders[0]?.itemsCount > 0 ? pendingOrders : []" />
         <cart-order-data v-if="tab === EOrderStatus.Paid" :status="EOrderStatus.Paid" :data="paidOrders" />
         <cart-order-data v-if="tab === EOrderStatus.Returned" :status="EOrderStatus.Returned" :data="returnedOrders" />
         <cart-order-data v-if="tab === EOrderStatus.Canceled" :status="EOrderStatus.Canceled" :data="canceledOrders" />

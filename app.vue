@@ -50,7 +50,8 @@ body{
   @apply bg-white dark:bg-white;
 }
 *{
-  font-family: "Vazir FD",serif;
+  //font-family: "Vazir FD",serif;
+  font-family: "IRANSansWeb(FaNum)",serif !important;
 }
 
 .logo-rotate, .logo-rotate-always{

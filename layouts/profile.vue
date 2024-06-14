@@ -268,7 +268,7 @@
       </div>
     </div>-->
     <div class="container mx-auto flex items-start mt-12">
-      <aside class="w-1/4 flex flex-col items-start">
+      <aside class="w-1/6 text-sm flex flex-col items-start">
         <div class="h-[100px] bg-white py-5 flex flex-col gap-2">
           <strong class="text-4xl">پنل کاربری</strong>
           <NuxtLink to="/" class="flex items-center gap-1 mr-2 group hover:text-brandOrange transition-colors duration-200">
@@ -332,10 +332,7 @@
           <NuxtLink to="/profile/tickets" class="p-4 rounded-r-lg w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="bg-brandOrange/15 text-brandOrange border-l-4 border-brandOrange [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange">
             <div class="flex items-center gap-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.75 3.25L4.83 3.61L5.793 15.083C5.87 16.02 6.653 16.739 7.593 16.736H18.502C19.399 16.738 20.16 16.078 20.287 15.19L21.236 8.632C21.342 7.899 20.833 7.219 20.101 7.113C20.037 7.104 5.164 7.099 5.164 7.099" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M14.125 10.7949H16.898" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.15338 20.2021C7.45438 20.2021 7.69738 20.4461 7.69738 20.7461C7.69738 21.0471 7.45438 21.2911 7.15338 21.2911C6.85238 21.2911 6.60938 21.0471 6.60938 20.7461C6.60938 20.4461 6.85238 20.2021 7.15338 20.2021Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4346 20.2021C18.7356 20.2021 18.9796 20.4461 18.9796 20.7461C18.9796 21.0471 18.7356 21.2911 18.4346 21.2911C18.1336 21.2911 17.8906 21.0471 17.8906 20.7461C17.8906 20.4461 18.1336 20.2021 18.4346 20.2021Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4.99983 11C4.99983 6.58172 8.58125 3 12.9992 3C17.4171 3 20.9985 6.58172 20.9985 11C20.9985 12.15 20.7558 13.2434 20.319 14.2316L21 18.9992L16.9146 17.9778C15.7572 18.6287 14.4215 19 12.9992 19M3.00095 16C3.00095 16.7188 3.15258 17.4021 3.4256 18.0198L3 20.9995L5.55315 20.3611C6.27643 20.768 7.11115 21 8.00005 21C10.761 21 12.9992 18.7614 12.9992 16C12.9992 13.2386 10.761 11 8.00005 11C5.23912 11 3.00095 13.2386 3.00095 16Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>تیکت ها</span>
             </div>
@@ -343,10 +340,8 @@
           <NuxtLink to="/profile/favorites" class="p-4 rounded-r-lg w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="bg-brandOrange/15 text-brandOrange border-l-4 border-brandOrange [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange">
             <div class="flex items-center gap-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.75 3.25L4.83 3.61L5.793 15.083C5.87 16.02 6.653 16.739 7.593 16.736H18.502C19.399 16.738 20.16 16.078 20.287 15.19L21.236 8.632C21.342 7.899 20.833 7.219 20.101 7.113C20.037 7.104 5.164 7.099 5.164 7.099" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M14.125 10.7949H16.898" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.15338 20.2021C7.45438 20.2021 7.69738 20.4461 7.69738 20.7461C7.69738 21.0471 7.45438 21.2911 7.15338 21.2911C6.85238 21.2911 6.60938 21.0471 6.60938 20.7461C6.60938 20.4461 6.85238 20.2021 7.15338 20.2021Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4346 20.2021C18.7356 20.2021 18.9796 20.4461 18.9796 20.7461C18.9796 21.0471 18.7356 21.2911 18.4346 21.2911C18.1336 21.2911 17.8906 21.0471 17.8906 20.7461C17.8906 20.4461 18.1336 20.2021 18.4346 20.2021Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.87187 11.5983C1.79887 8.24832 3.05287 4.41932 6.56987 3.28632C8.41987 2.68932 10.4619 3.04132 11.9999 4.19832C13.4549 3.07332 15.5719 2.69332 17.4199 3.28632C20.9369 4.41932 22.1989 8.24832 21.1269 11.5983C19.4569 16.9083 11.9999 20.9983 11.9999 20.9983C11.9999 20.9983 4.59787 16.9703 2.87187 11.5983Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 6.7002C17.07 7.0462 17.826 8.0012 17.917 9.1222" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>علاقه مندی ها</span>
             </div>
@@ -410,15 +405,6 @@
               <strong class="text-xl">{{ accountStore.currentUser?.fullName }}</strong>
               <span class="text-sm font-light opacity-70">{{ accountStore.currentUser?.phoneNumber }}</span>
             </span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <rect opacity="0.9" y="12" width="12" height="12" transform="rotate(-90 0 12)" fill="url(#pattern0_438_2599)" fill-opacity="0.5"/>
-              <defs>
-                <pattern id="pattern0_438_2599" patternContentUnits="objectBoundingBox" width="1" height="1">
-                  <use xlink:href="#image0_438_2599" transform="scale(0.01)"/>
-                </pattern>
-                <image id="image0_438_2599" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAABBdJREFUeAHtnVuoTFEYx39uIfe7yF2RJPIoeZUoRfJEyCV1oogQIg8UpTwoeZW8KPc8KAm5yy3KXeT+gHK/zaeZl9OcWd85e681R/NfNU3t1v6+b37/2bP3Xnut/4CaCIiACIiACIiACIiACIiACIiACIiACIiACIiACIhAkwi0BTYC14CzwJwmRdFOuRDoCJwuCPKn3mtJLtEVpFEEOgPn6glREuZBoyKpc2YCXYGLDYhhonzMnEEB3AR6AFcriGGCHHRHU8dMBHoBNwJiPAcGZMqinV0E+gA3A2I8A4a7oqlTJgJ9gdsBMZ4AwzJl0c4uAvbzcz8gxmNgiCuaOmUiMAiwS9jS5Wy593tA/0xZtLOLwODCXfejgBh3gX6uaOqUicAIwK6Wyh0RpW13ADu3qEUmMBJ4ERDDxq16Rq5D4YFRwMuAGFeA7qIVn8A44G1ADBu7sjEstcgExgPvA2KcATpFrkPhgQnAh4AYNsRuQ+1qkQlMLI7Mlq6cyr2fANpHrkPhgUnAp8CRcQxoJ1rxCUwGPgfEOALY41m1yASmAF8CYhwA2kSuQ+GBqcDXgBj7gdaiFZ/ALOB7QIx9QKv4pSjDbOBHQIw9QEuhik9gPvArIMZuoEX8UpRhoUOMHRIjzRfFJqv9DhwZ29KUoiwrAkLYHflWYUpDYJVDjA1pSlGW1Q4x1glTGgKbAmLY+WR5mlKUZYtDjDphik/A7h12OsRYGr8UZTAxdgXE+AnMFao0BPYGxLChEhsyUUtAwL715Z7ulbbZIOKMBHUoRZHA8QqCfAOmi1RaAocqCKLzRlot/mWbWUEQ+9kyUeZVoa6aTrk9IIoNuS+uaUJV+PCbA6LY3fmyKtRV0yk941dra5pQFT68Z4R3fRXqqumUegbSDOXXU8JmKIrnObpdoaklJLDAMblBM00SCmKpNBcrMXBPOs9sRRs11gQ5D82c+kzTfN6cSOYYRjPec4SZVyjPmpDDWhOSF25fHK2a8nFK2kvrCpPi9iXTylsfp6S9tDY9KW5fMnNveBd4pmJevHJv8PHMpddY4E1AFPmb5ILaH8TrAGSOpGqJCHg8sq4D5kyqloiA+SbKRS4RbG8a81l8GDinyGfRSzOnfgMdTqR2JMmJNCfgnjDmp2i+iqX5wuXezat3qCeY+uRDwNysbwVEeSo363xge6P0dvi9m0+j+TWqJSLQDbgUOFJeAaMT1aM0haVz9p8hFwKivC78VcUY0UpHoAtwPiCKOZvaTaZaIgLmTGoOpeWuukrbzDRTLSGBDsCpCqLY+hTZAyYUxFKZU+nJBkQxD2C1KhAwx9KjZURZU4ValLJIwPwZVwKXi3+jt0j+W/puiIAIiIAIiIAIiIAIiIAIiIAIiIAIiIAIiIAI/HcE/gJrFXWEM+ilbwAAAABJRU5ErkJggg=="/>
-              </defs>
-            </svg>
           </button>
         </div>
         <div class="bg-[#F8F8F8] p-10 min-h-[70vh] rounded-md">

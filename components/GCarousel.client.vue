@@ -17,7 +17,7 @@
         class="rounded-xl overflow-hidden imagesCarousel" :autoplay="{
           delay:5000
         }">
-      <SwiperSlide >
+<!--      <SwiperSlide >
         <NuxtLink to="/market" class="w-full shrink-0 relative">
           <img src="~/assets/images/03.png" alt="banner" class="w-full max-h-[68vh] object-cover">
         </NuxtLink>
@@ -26,7 +26,7 @@
         <NuxtLink to="/market" class="w-full shrink-0 relative">
           <img src="~/assets/images/04.jpg" alt="banner" class="w-full max-h-[68vh] object-cover">
         </NuxtLink>
-      </SwiperSlide>
+      </SwiperSlide>-->
       <SwiperSlide >
         <NuxtLink to="/market" class="w-full shrink-0 relative">
           <img src="~/assets/images/05.jpg" alt="banner" class="w-full max-h-[68vh] object-cover">

@@ -59,7 +59,50 @@
 
           <div class="flex-1 rounded-xl py-4 px-8 flex flex-col items-stretch">
             <!--  Addresses   -->
-            <ul class="p-8 border border-brandOrange/10 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" v-if="!accountStore.initLoading">
+            <ul class="2xl:hidden flex flex-col space-y-4 w-full">
+              <li class="flex bg-white border rounded-xl p-4 min-h-[120px]"
+                  v-for="a in accountStore.currentUser?.addresses" :key="a.id">
+                <div class="w-1/5 grid place-items-center">
+                  <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
+                </div>
+                <div class="flex-1 flex flex-col space-y-2">
+                  <span class="font-thin">آدرس تحویل</span>
+                  <div class="flex flex-col space-y-1">
+                    <p>
+                      {{ a.street }}
+                    </p>
+                    <div class="flex items-center divide-x-2 divide-x-reverse">
+                      <span class="font-light text-sm opacity-70 pl-2 ">{{ a.state }}</span>
+                      <span class="font-light text-sm opacity-70 pl-2 pr-2">{{ a.city }}</span>
+                      <span class="font-light text-sm opacity-70 pr-2">کد پستی: {{ a.postCode }}</span>
+                    </div>
+                    <div class="flex items-center divide-x-2 divide-x-reverse">
+                      <span class="font-light text-sm opacity-70 pl-2">تحویل گیرنده: {{ a.receiverFirstName + a.receiverLastName }}</span>
+                      <span class="font-light text-sm opacity-70 px-2">شماره تماس: {{ a.receiverPhoneNumber }}</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="self-start text-[#3787FF] flex items-center gap-0.5">
+                  <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.84371 4.34477L9.94371 6.59477M2.59375 12.2198L5.14057 11.6699C5.27578 11.6408 5.39992 11.5694 5.49742 11.4649L11.1987 5.35301C11.4721 5.05997 11.4719 4.58498 11.1983 4.29219L9.99057 2.99964C9.71711 2.70698 9.274 2.70718 9.00077 3.00009L3.29886 9.11262C3.20155 9.21694 3.13511 9.34968 3.10784 9.49424L2.59375 12.2198Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="text-xs font-light">ویرایش</span>
+                </button>
+              </li>
+              <li class="grid place-items-center bg-bgWhite  hover:drop-shadow hover:border-none transition-all duration-200 rounded-lg border relative min-h-36">
+                <button class="flex flex-col items-center absolute justify-center space-y-2 w-full inset-0 text-brandOrange" @click="showAddressModal = true">
+                  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.0015 10.4092V19.5671" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.5846 14.9881H10.418" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8571 2.5H9.14286C5.05952 2.5 2.5 5.3901 2.5 9.48145V20.5186C2.5 24.6099 5.04762 27.5 9.14286 27.5H20.8571C24.9524 27.5 27.5 24.6099 27.5 20.5186V9.48145C27.5 5.3901 24.9524 2.5 20.8571 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="font-light text-sm">
+                  افزودن آدرس جدید
+                </span>
+                </button>
+              </li>
+            </ul>
+            <ul class="hidden 2xl:grid p-8 border border-brandOrange/10 rounded-xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 mt-8" v-if="!accountStore.initLoading">
               <li class="flex flex-col bg-bgWhite  hover:drop-shadow hover:border-none transition-all duration-200 space-y-3 p-4 rounded-lg border"
                   v-for="a in accountStore.currentUser?.addresses" :key="a.id">
                 <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
@@ -94,7 +137,7 @@
             <!--  Items   -->
             <div class="bg-white py-5 px-14 rounded-xl mt-12 flex flex-col" v-if="cartStore.PendingOrder">
               <strong>سبد خرید</strong>
-              <TransitionGroup tag="ul" name="list" class="relative grid grid-cols-5 gap-4 mt-8">
+              <ul class="relative grid grid-cols-4 2xl:grid-cols-5 gap-4 w-full mt-8">
                 <li class="flex flex-col items-center space-y-2" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
                   <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
                   <base-g-price :price="(i.price / 10)" />
@@ -106,7 +149,7 @@
                     </svg>
                   </base-g-button>
                 </li>
-              </TransitionGroup>
+              </ul>
             </div>
           </div>
 
@@ -148,7 +191,7 @@
               </div>
             </div>
             <hr class="my-2">
-            <base-g-button w-full @click="payOrder" :disabled="!accountStore.hasActiveAddress">
+            <base-g-button w-full @click="payOrder" :disabled="!accountStore.hasActiveAddress" :is-loading="payLoading">
               تکمیل و پرداخت
             </base-g-button>
             <div class="flex items-center gap-1.5 text-danger" v-if="!accountStore.hasActiveAddress">
@@ -324,13 +367,14 @@ const accountStore = useAccountStore();
 const utilStore = useUtilStore();
 const carousel = ref();
 const router = useRouter();
-const paymentMethod = ref();
+const paymentMethod = ref(EPaymentMethod.Gateway);
 
 const showAddressModal = ref(false);
 
 const toast = useToast();
 
 const loading = ref(true);
+const payLoading = ref(false);
 const products:Ref<ProductFilterData[] | null> = ref([]);
 
 onMounted(async()=>{
@@ -352,6 +396,8 @@ const setAsActive = async (addressId:number) => {
 }
 
 const payOrder = async ()=>{
+  payLoading.value = true;
+
   if(paymentMethod.value == EPaymentMethod.Gateway){
     const result = await FetchApi<string>('/payment/payRequest',{
       method:'POST'
@@ -385,6 +431,8 @@ const payOrder = async ()=>{
       await toast.showError({message:"پرداخت سفارش با مشکل مواجه شد",appStatusCode:result.metaData.appStatusCode});
     }
   }
+
+  payLoading.value = false;
 }
 
 </script>

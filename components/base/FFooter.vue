@@ -17,7 +17,7 @@
               </svg>
             </div>
           </div>
-          <p class="text-sm pl-24 text-[#666666]">
+          <p class="text-sm text-justify 2xl:pl-24 text-[#666666]">
             سرآغاز ما با یک هدف و باور سهل و دست یافتنی شکل گرفت؛ تهیه و عرضه زعفران ناب به مصرف کنندگان(چهانیان، دنیا)!
             با این توصیف ما به یک شرکت بین المللی تبدیل شدیم و حال تعهد ما به کیفیت، امری ناگسستنی خواهد بود.
             داستان ما با یک اشتیاق ساده آغاز شد:
@@ -109,10 +109,17 @@
                       fill="#F6F6F6"/>
               </svg>
             </div>
-            <strong dir="ltr" class="text-brandOrange text-3xl mr-12"
-                    style="text-shadow: 0 0 10px rgba(240, 70, 35, 0.5); font-family: 'Vazir FD',serif;">
-              051 - 52329059
-            </strong>
+            <div class="flex flex-col 2xl:flex-row 2xl:items-center gap-1 2xl:gap-4 mr-12">
+              <span dir="ltr" class="text-xl 2xl:text-2xl text-[#B0B0B0] font-medium"
+                      style="font-family: 'Vazir FD',serif;">
+                051 - 52329059
+              </span>
+              <span class="text-brandOrange text-2xl hidden 2xl:block">,</span>
+              <span dir="ltr" class="text-xl 2xl:text-2xl text-[#B0B0B0] font-medium"
+                      style="font-family: 'Vazir FD',serif;">
+                0991 - 2937952
+              </span>
+            </div>
           </div>
           <div class="flex items-center gap-5">
             <div class="w-14 h-14 bg-[#F4F4F4] rounded-full grid place-items-center ">
@@ -129,61 +136,63 @@
         </div>
       </div>
       <div
-          class="w-full rounded-xl bg-[#F8F8F8] mt-9 px-16 pt-14 pb-3 mb-8 grid grid-cols-6 gap-6 justify-items-center">
-        <img src="~/assets/images/gp-orange-cutted.png" alt="gp orange" class="justify-self-center self-center">
-        <div class="flex flex-col items-start">
-          <h4 class="font-bold text-xl">بخش های سایت</h4>
-          <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
-            <li>
-              <NuxtLink to="/">صفحه اصلی</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/market">فروشگاه</NuxtLink>
-            </li>
-            <li>
-              <a :href="BLOGS_URL" target="_blank">مقالات</a>
-            </li>
-            <li>
-              <NuxtLink to="/contactus">تماس با ما</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/aboutus">درباره ما</NuxtLink>
-            </li>
-          </ul>
+          class="w-full rounded-xl bg-[#F8F8F8] mt-9 px-16 pt-14 pb-3 mb-8 grid grid-cols-7 2xl:grid-cols-8 gap-6 justify-items-center items-start">
+        <img src="~/assets/images/gp-orange-cutted.png" alt="gp orange">
+        <div class="col-span-4 2xl:col-span-5 grid grid-cols-3 gap-6">
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-sm 2xl:text-xl">بخش های سایت</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-xs 2xl:text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">صفحه اصلی</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/market">فروشگاه</NuxtLink>
+              </li>
+              <li>
+                <a :href="BLOGS_URL" target="_blank">مقالات</a>
+              </li>
+              <li>
+                <NuxtLink to="/contactus">تماس با ما</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/aboutus">درباره ما</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-sm 2xl:text-xl">خدمات مشتریان</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-xs 2xl:text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">پرسش های متداول</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">رویه بازگرداندن کالا</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">حریم خصوصی</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col items-start">
+            <h4 class="font-bold text-sm 2xl:text-xl">راه های خرید از جی پی</h4>
+            <ul class="flex flex-col items-start text-[#666666] text-xs 2xl:text-sm font-light pr-5 list-disc space-y-2 mt-3">
+              <li>
+                <NuxtLink to="/">نحوه ثبت سفارش</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">رویه ارسال سفارش</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/">شیوه های پرداخت</NuxtLink>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="flex flex-col items-start">
-          <h4 class="font-bold text-xl">خدمات مشتریان</h4>
-          <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
-            <li>
-              <NuxtLink to="/">پرسش های متداول</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/">رویه بازگرداندن کالا</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/">حریم خصوصی</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="flex flex-col items-start">
-          <h4 class="font-bold text-xl">راه های خرید از جی پی</h4>
-          <ul class="flex flex-col items-start text-[#666666] text-sm font-light pr-5 list-disc space-y-2 mt-3">
-            <li>
-              <NuxtLink to="/">نحوه ثبت سفارش</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/">رویه ارسال سفارش</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/">شیوه های پرداخت</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="grid grid-cols-3 gap-4 self-center col-span-2">
+        <div class="grid grid-cols-3 gap-4 col-span-2">
           <!--   Salamat Logo   -->
           <div class="border rounded-full border-[#666666]/20 aspect-square grid place-items-center relative w-full">
             <img src="~/assets/images/salamat.png" alt="salamat" class="w-3/4 2xl:-translate-y-4">
-            <span class="absolute bottom-4 text-sm font-light pointer-events-none hidden 2xl:block">
+            <span class="absolute bottom-4 text-xs font-light pointer-events-none hidden 2xl:block">
             57/1018-1
             </span>
           </div>
@@ -193,17 +202,15 @@
                  src='https://trustseal.enamad.ir/logo.aspx?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
                  alt='Enamad' style='cursor:pointer' Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
                  class="w-3/4 opacity-0 absolute">
-            <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4 2xl:-translate-y-4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
-            <span class="absolute bottom-8 text-xs font-light pointer-events-none hidden 2xl:block">
-            نماد تجارت الکترونیک
-            </span>
+            <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
           </a>
+          <!--   Standard  -->
           <div
               class="border rounded-full border-[#666666]/20 aspect-square grid place-items-center relative p-4 w-full overflow-hidden">
-            <img src="~/assets/images/standard.png" alt="standard" class="w-2/3 2xl:w-16">
+            <img src="~/assets/images/standard.png" alt="standard" class="w-1/2">
           </div>
         </div>
-        <div class="col-span-full text-center text-xs 2xl:text-sm font-light mt-7">
+        <div class="col-span-full text-center text-xs 2xl:text-sm font-light 2xl:mt-7 pb-2">
             <span class="flex gap-2 justify-center">
               برای استفاده از مطالب جی پی، داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست. تمام حقوق اين وب‌سايت نیز برای شرکت فراز زعفران تربت حیدریه <NuxtLink
                 to="/"><strong class="font-black">(فروشگاه آنلاین جی پی)</strong></NuxtLink> است.

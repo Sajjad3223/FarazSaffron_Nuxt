@@ -6,7 +6,7 @@
     </NuxtLink>
   </header>
   <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative" >
-    <div class="container px-24 3xl:px-0 h-[125px] mx-auto mt-5">
+    <div class=" container px-24 3xl:px-0 h-[125px] mx-auto mt-5">
       <div class="w-full flex items-center justify-between">
         <div class="flex items-center flex-1 gap-12">
           <NuxtLink to="/" class="flex items-center gap-4">
@@ -23,7 +23,7 @@
             </div>
             <div class="flex flex-col items-start">
               <strong>زعفران جی پی</strong>
-              <span class="uppercase text-xs"><strong class="text-brandOrange">GP</strong> Saffron</span>
+              <span class="text-sm"><strong class="text-brandOrange text-base">gp</strong> Saffron</span>
             </div>
           </NuxtLink>
           <form class="flex w-[20vw] items-center relative" action="/market">
