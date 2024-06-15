@@ -58,9 +58,9 @@
             <span class="opacity-50 text-sm">بنرهای اسلایدر</span>
             <div class="grid grid-cols-3 w-full gap-4" v-if="template.mainBanners.length > 0">
               <div>
-                <img :src="`${SITE_URL}/images/banners/${b.image.src}`"
+                <img :src="`${SITE_URL}/banners/${b.image.src}`"
                      :alt="b.image.alt"
-                     class="w-full" v-for="b in template.mainBanners" :key="b.id">
+                     class="w-full rounded-2xl" v-for="b in template.mainBanners" :key="b.id">
               </div>
             </div>
             <div class="w-full flex items-center justify-between rounded-lg p-6 text-lg bg-gray-100/10" v-else>
@@ -73,7 +73,7 @@
         </div>
         <div class="col-span-full mt-5">
           <div v-if="template.honors.length > 0">
-            <img :src="`${SITE_URL}/images/banners/${b.image.src}`"
+            <img :src="`${SITE_URL}/honors/${b.image.src}`"
                  :alt="b.image.alt"
                  class="w-full" v-for="b in template.honors" :key="b.id">
           </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="col-span-full mt-5">
           <div v-if="template.specialComments.length > 0">
-            <img :src="`${SITE_URL}/images/banners/${b.image.src}`"
+            <img :src="`${SITE_URL}/specialComments/${b.image.src}`"
                  :alt="b.image.alt"
                  class="w-full" v-for="b in template.specialComments" :key="b.id">
           </div>
@@ -99,9 +99,9 @@
         </div>
         <div class="col-span-full mt-5">
           <div v-if="template.blogPreviews.length > 0">
-            <img :src="`${SITE_URL}/images/banners/${b.image.src}`"
+            <img :src="`${SITE_URL}/blogPreviews/${b.image.src}`"
                  :alt="b.image.alt"
-                 class="w-full" v-for="b in template.blogPreviews" :key="b.id">
+                 class="w-full rounded-2xl" v-for="b in template.blogPreviews" :key="b.id">
           </div>
           <div class="w-full flex items-center justify-between rounded-lg p-6 text-lg bg-gray-100/10" v-else>
             <span>پست مقاله ای اضافه نشده است</span>
