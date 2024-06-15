@@ -8,7 +8,7 @@ export interface DataTemplateDto extends BaseDto{
     title: string
     firstItemSection: EOrderBy
     secondItemSection: EOrderBy
-    topBanner: Banner
+    topBanner: TopBanner
     mainBanners: Banner[]
     honors: Honor[]
     specialComments: SpecialComment[]
@@ -26,10 +26,15 @@ export interface DataTemplateFilterParams extends BaseFilterParams{
 
 export interface DataTemplateFilterResult extends BaseFilterResult<DataTemplateFilterData>{}
 
+export interface TopBanner extends BaseDto{
+    templateId: number
+    image: Img
+    url: string
+}
 export interface Banner extends BaseDto{
     templateId: number
     image: Img
-    isMain: boolean
+    order: number
     url: string
 }
 

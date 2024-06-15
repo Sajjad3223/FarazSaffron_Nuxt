@@ -7,7 +7,7 @@
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
            :required="required" v-show="!showPassword && !multiLine">
     <input type="text" :required="required" :title="placeHolder" @input="onChanged"
-           :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != ''},{'disabled':disabled}]" v-show="type === 'password' && showPassword" :value="inputValue">
+           :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != ''},{'disabled':disabled}]" v-if="type === 'password' && showPassword" :value="inputValue">
     <label for="">{{ label }}</label>
     <transition enter-active-class="duration-200 transition-opacity" enter-from-class="opacity-0" enter-to-class="opacity-100"
                 leave-active-class="duration-200 transition-opacity" leave-from-class="opacity-100" leave-to-class="opacity-0">

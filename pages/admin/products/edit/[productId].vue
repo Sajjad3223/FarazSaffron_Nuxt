@@ -109,7 +109,6 @@
       </div>
     </div>
 
-
     <div class="w-full relative" v-if="!pending">
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">

@@ -61,10 +61,10 @@
           <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
             <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]"
                     :mousewheel="{enabled:true}"
-                    :slides-per-view="2.5" :space-between="20">
+                    :slides-per-view="3.5" :space-between="20">
               <SwiperSinglePageControls />
               <SwiperSlide v-for="i in product?.images">
-                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full cursor-pointer h-full object-cover rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full max-w-24 cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
               </SwiperSlide>
             </Swiper>
           </div>
@@ -102,10 +102,9 @@
 
         <!--   Name & Price   -->
         <div class="flex flex-col items-start h-auto col-span-3 mr-12 ">
-          <h2 class="text-4xl font-black text-[#5E5E5E]">
+          <h2 class="text-3xl font-bold text-[#5E5E5E]">
             {{ product?.title }}
           </h2>
-          <span class="mt-4 text-lg text-[#B8B8B8]">نگین (سرگل)</span>
 
           <ul class="my-auto flex flex-col space-y-3 text-lg">
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494] flex items-center gap-2">
@@ -113,12 +112,13 @@
                 پروانه بهداشت: دارد
               </span>
               <img src="~/assets/images/salamat.png" alt="salamat" class="w-8">
+              <img src="~/assets/images/standard-notext.png" alt="standard" class="w-6">
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              شکل ماده غذایی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
+              شکل بسته بندی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              وزن : {{ product.weight }} گرم
+              وزن بسته بندی : {{ product.weight }} گرم
             </li>
           </ul>
 

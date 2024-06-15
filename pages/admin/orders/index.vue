@@ -82,7 +82,10 @@
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
-                  <p class="text-sm text-nowrap">{{o.fullName}}</p>
+                  <p class="text-sm text-nowrap" v-if="o.fullName != ' '">{{o.fullName}}</p>
+                  <p class="text-sm text-nowrap opacity-70" v-else>
+                    کاربر شماره {{o.userId}}
+                  </p>
                 </div>
               </div>
             </td>
@@ -177,9 +180,11 @@ onMounted(async ()=>{
   await getData();
 })
 
+watch(pageId, async ()=>await getData());
+
 const getData = async ()=>{
   isLoading.value = true;
-
+  orderFilterParams.pageId = pageId.value;
   const result = await GetOrdersByAdmin(orderFilterParams);
   if(result.isSuccess){
     orders.value = result.data?.data ?? [];
