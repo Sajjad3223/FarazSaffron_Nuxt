@@ -200,10 +200,10 @@
               </div>
               <div class="flex items-center w-full gap-4">
                 <base-g-input class="flex-1" type="number" required name="price" id="price" label="مبلغ"
-                              v-model="price"/>
+                              v-model="price" />
                 <base-g-tooman class="-translate-y-2"/>
               </div>
-              <base-g-button w-full class="w-full">
+              <base-g-button w-full class="w-full" type="submit" @click="charge">
                 پرداخت
               </base-g-button>
             </div>

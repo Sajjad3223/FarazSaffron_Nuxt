@@ -148,9 +148,9 @@
               <li>
                 <NuxtLink to="/market">فروشگاه</NuxtLink>
               </li>
-              <li>
+<!--              <li>
                 <a :href="BLOGS_URL" target="_blank">مقالات</a>
-              </li>
+              </li>-->
               <li>
                 <NuxtLink to="/contactus">تماس با ما</NuxtLink>
               </li>

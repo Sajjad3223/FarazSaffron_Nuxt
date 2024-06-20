@@ -1,6 +1,7 @@
 export enum EPostType {
     Product,
-    BlogPost
+    BlogPost,
+    None
 }
 
 export enum EItemType

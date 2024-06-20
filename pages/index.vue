@@ -215,7 +215,7 @@
       </section>
 
       <!--  About GP  -->
-      <section class="w-full mt-16">
+<!--      <section class="w-full mt-16">
         <div class="bg-[#F8F8F8] rounded-xl p-12" >
           <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 mx-auto w-full 2xl:w-3/4">
             <img src="~/assets/images/GP-filled.png" alt="GP" class="drop-shadow-xl w-1/3 lg:w-auto max-w-[220px]" v-motion-slide-visible-once-bottom :delay="200">
@@ -239,12 +239,12 @@
             </div>
           </div>
         </div>
-      </section>
+      </section>-->
 
 <!--      <GPSaffronCard class="mx-auto mt-6" />-->
 
       <!--  Blog Posts  -->
-      <section class="w-full mt-16">
+<!--      <section class="w-full mt-16">
         <div class="flex items-center justify-between">
           <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
             مقالات
@@ -301,7 +301,7 @@
             </li>
           </ul>
         </div>
-      </section>
+      </section>-->
 
       <!--  Instagram  -->
       <section class="w-full mt-24">
@@ -641,7 +641,7 @@
       </div>
 
       <!--  Blog Posts  -->
-      <div class="mt-16 flex flex-col items-stretch overflow-hidden">
+<!--      <div class="mt-16 flex flex-col items-stretch overflow-hidden">
         <div class="flex items-center justify-between">
           <strong>مقالات</strong>
           <a :href="BLOGS_URL" class="flex items-center gap-1 text-[#8D8D8D]">
@@ -692,7 +692,7 @@
             </SwiperSlide>
           </Swiper>
         </client-only>
-      </div>
+      </div>-->
 
     </div>
   </div>

@@ -95,7 +95,7 @@
             </Transition>
           </li>
         </ul>
-        <hr class="my-4">
+<!--        <hr class="my-4">
         <a :href="BLOGS_URL" target="_blank" class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@
           <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 1L1 4.5L4 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-        </a>
+        </a>-->
         <hr class="my-4">
         <button class="flex items-center gap-2 text-danger">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

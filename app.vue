@@ -193,7 +193,7 @@ body{
   --secondary-hover: #C6BFBF;
   --secondary-text: #847A7A;
 
-  --success: #38C15733;
+  --success: #38C157;
   --success-hover: #1E9E3A;
   --success-text: #30ad4d;
 

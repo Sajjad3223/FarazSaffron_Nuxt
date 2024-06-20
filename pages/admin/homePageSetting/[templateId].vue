@@ -57,11 +57,20 @@
           <div class="flex flex-col gap-2">
             <span class="opacity-50 text-sm">بنرهای اسلایدر</span>
             <div class="grid grid-cols-3 w-full gap-4" v-if="template.mainBanners.length > 0">
-              <div>
+              <div class="relative">
                 <img :src="`${SITE_URL}/banners/${b.image.src}`"
                      :alt="b.image.alt"
                      class="w-full rounded-2xl" v-for="b in template.mainBanners" :key="b.id">
+                <button class="bg-danger/30 text-danger hover:bg-danger transition-colors duration-300 hover:text-white px-4 py-1 rounded-xl absolute top-2 left-2">
+                  حذف
+                </button>
               </div>
+              <button class="border border-white/20 rounded-2xl grid place-items-center"
+                      @click="showAddMainBannerModal = true">
+                <span class="text-xl opacity-50">
+                  + افزودن بنر
+                </span>
+              </button>
             </div>
             <div class="w-full flex items-center justify-between rounded-lg p-6 text-lg bg-gray-100/10" v-else>
               <span>بنری اضافه نشده است</span>

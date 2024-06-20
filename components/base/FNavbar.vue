@@ -47,10 +47,10 @@
                         exact-active-class="text-brandOrange">خانه
               </NuxtLink>
             </li>
-            <li>
+<!--            <li>
               <a :href="BLOGS_URL" target="_blank"
                  class="hover:text-brandOrange transition-colors duration-200">مقالات</a>
-            </li>
+            </li>-->
             <li>
               <NuxtLink to="/aboutus" class="hover:text-brandOrange transition-colors duration-200"
                         exact-active-class="text-brandOrange">درباره ما
