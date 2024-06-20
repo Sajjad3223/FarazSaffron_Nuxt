@@ -110,10 +110,7 @@ defineExpose({
 </template>
 
 <style scoped>
-
-div {
-  .form-control {
-    @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border max-w-12 rounded-lg;
-  }
+.form-control {
+  @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border max-w-12 rounded-lg;
 }
 </style>

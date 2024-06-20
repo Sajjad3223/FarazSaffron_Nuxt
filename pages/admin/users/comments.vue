@@ -140,7 +140,6 @@
 </template>
 
 <script setup lang="ts">
-import FModal from "~/components/base/FModal.vue";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {type CommentDto, type CommentFilterParams, ECommentStatus} from "~/models/comment/commentQueries";
