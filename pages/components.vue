@@ -275,6 +275,10 @@
       <input type="text" @keydown="checkInput" class="p-4 border rounded-lg" v-model="priceInput" @input="parseValue">
     </div>
 
+    <div>
+      <g-p-saffron-card />
+    </div>
+
   </div>
 </template>
 

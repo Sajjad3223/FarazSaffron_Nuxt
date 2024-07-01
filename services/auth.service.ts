@@ -25,8 +25,28 @@ export const ChangePassword = (command:ChangePasswordCommand):Promise<ApiRespons
 }
 
 export const ForgetPassword = (phoneNumber:string):Promise<ApiResponse<undefined>> => {
-    alert("Not implemented in Back-End");
     return FetchApi("/auth/forget-password",{
-        method:'PUT'
+        method:'PUT',
+        body:{
+            phoneNumber
+        }
+    });
+}
+export const VerifyForgetPassword = (phoneNumber:string,code:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi("/auth/confirm-forget-password",{
+        method:'PUT',
+        body:{
+            phoneNumber,
+            code
+        }
+    });
+}
+export const ChangePasswordForgetPassword = (phoneNumber:string,newPassword:string):Promise<ApiResponse<undefined>> => {
+    return FetchApi("/auth/change-password-forget",{
+        method:'PUT',
+        body:{
+            phoneNumber,
+            newPassword
+        }
     });
 }

@@ -1,75 +1,71 @@
 <template>
-  <div>
+  <div class="flex-1 flex flex-col h-full">
     <Head>
       <Title>سفارشات</Title>
     </Head>
-    <div v-if="!utilStore.isMobile()">
+    <div v-if="!utilStore.isMobile()" class="flex flex-1 flex-col h-full">
       <div>
-        <div class="text-2xl font-bold flex  items-center gap-2">
-          <NuxtLink to="/profile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </NuxtLink>
-          <strong>سفارش های من</strong>
+        <div class="text-xl font-bold flex justify-between items-center gap-2 ">
+          <span>سفارشات من</span>
         </div>
-        <hr class="my-3 border-2 ">
+        <hr class="my-5">
       </div>
 
-      <div class="flex flex-col w-full mt-8 ">
-        <div>
-          <ul class="flex items-center border-b pb-4">
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Pending}]" @click="tab = EOrderStatus.Pending">
+      <div class="bg-white rounded-xl mt-4 p-5 flex-1">
+        <div class="flex flex-col w-full ">
+          <div>
+            <ul class="flex items-center border-b pb-4">
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Pending}]" @click="tab = EOrderStatus.Pending">
             <span>
               جاری
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.pending > 0 && pendingOrders.length > 0 && pendingOrders[0].itemsCount > 0">{{ ordersGist.pending }}</f-badge>
-            </li>
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Paid}]" @click="tab = EOrderStatus.Paid">
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.pending > 0 && pendingOrders.length > 0 && pendingOrders[0].itemsCount > 0">{{ ordersGist.pending }}</f-badge>
+              </li>
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Paid}]" @click="tab = EOrderStatus.Paid">
             <span>
               پرداخت شده
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.paid > 0">{{ ordersGist.paid }}</f-badge>
-            </li>
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Sending}]" @click="tab = EOrderStatus.Sending">
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.paid > 0">{{ ordersGist.paid }}</f-badge>
+              </li>
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Sending}]" @click="tab = EOrderStatus.Sending">
             <span>
               ارسال شده
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.sent > 0">{{ ordersGist.sent }}</f-badge>
-            </li>
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Delivered}]" @click="tab = EOrderStatus.Delivered">
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.sent > 0">{{ ordersGist.sent }}</f-badge>
+              </li>
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Delivered}]" @click="tab = EOrderStatus.Delivered">
             <span>
               تحویل شده
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.delivered > 0">{{ ordersGist.delivered }}</f-badge>
-            </li>
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Returned}]" @click="tab = EOrderStatus.Returned">
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.delivered > 0">{{ ordersGist.delivered }}</f-badge>
+              </li>
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Returned}]" @click="tab = EOrderStatus.Returned">
             <span>
               مرجوع شده
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.returned > 0">{{ ordersGist.returned }}</f-badge>
-            </li>
-            <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Canceled}]" @click="tab = EOrderStatus.Canceled">
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.returned > 0">{{ ordersGist.returned }}</f-badge>
+              </li>
+              <li :class="['flex flex-wrap gap-1 items-center justify-center text-xs lg:text-sm px-4 opacity-50 cursor-pointer',{'activeTab':tab === EOrderStatus.Canceled}]" @click="tab = EOrderStatus.Canceled">
             <span>
               لغو شده
             </span>
-              <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.canceled > 0">{{ ordersGist.canceled }}</f-badge>
-            </li>
-          </ul>
+                <f-badge color="brandOrange" size="xs" fore-color="white" v-if="!loading && ordersGist.canceled > 0">{{ ordersGist.canceled }}</f-badge>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="mt-6" v-if="!loading">
-        <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders[0]?.itemsCount > 0 ? pendingOrders : []" />
-        <cart-order-data v-if="tab === EOrderStatus.Paid" :status="EOrderStatus.Paid" :data="paidOrders" />
-        <cart-order-data v-if="tab === EOrderStatus.Returned" :status="EOrderStatus.Returned" :data="returnedOrders" />
-        <cart-order-data v-if="tab === EOrderStatus.Canceled" :status="EOrderStatus.Canceled" :data="canceledOrders" />
-        <cart-order-data v-if="tab === EOrderStatus.Sending" :status="EOrderStatus.Sending" :data="sentOrders" />
-        <cart-order-data v-if="tab === EOrderStatus.Delivered" :status="EOrderStatus.Delivered" :data="deliveredOrders" />
-      </div>
-      <div class="flex flex-col w-full" v-else>
-        <div class="w-full min-h-48 bg-gray-200 rounded-xl mt-6 animate-pulse" v-for="i in 3" :key="i"></div>
+        <div class="mt-6" v-if="!loading">
+          <cart-order-data v-if="tab === EOrderStatus.Pending" :status="EOrderStatus.Pending" :data="pendingOrders[0]?.itemsCount > 0 ? pendingOrders : []" />
+          <cart-order-data v-if="tab === EOrderStatus.Paid" :status="EOrderStatus.Paid" :data="paidOrders" />
+          <cart-order-data v-if="tab === EOrderStatus.Returned" :status="EOrderStatus.Returned" :data="returnedOrders" />
+          <cart-order-data v-if="tab === EOrderStatus.Canceled" :status="EOrderStatus.Canceled" :data="canceledOrders" />
+          <cart-order-data v-if="tab === EOrderStatus.Sending" :status="EOrderStatus.Sending" :data="sentOrders" />
+          <cart-order-data v-if="tab === EOrderStatus.Delivered" :status="EOrderStatus.Delivered" :data="deliveredOrders" />
+        </div>
+        <div class="flex flex-col w-full" v-else>
+          <div class="w-full min-h-48 bg-gray-200 rounded-xl mt-6 animate-pulse" v-for="i in 3" :key="i"></div>
+        </div>
       </div>
     </div>
 

@@ -546,8 +546,7 @@ import {ToastType} from "~/composables/useSwal";
 import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.service";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import SwiperSinglePageControls from "~/components/SwiperSinglePageControls.vue";
-import {FreeMode, Mousewheel, Navigation} from "swiper/modules";
-import {SwiperMousewheel} from "#imports";
+import {Mousewheel} from "swiper/modules";
 
 
 const route = useRoute();

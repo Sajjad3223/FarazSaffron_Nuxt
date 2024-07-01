@@ -216,7 +216,8 @@
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
         <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2">
-          <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" />
+          <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" v-if="false"/>
+          <product-properties-add v-for="(p,i) in properties" :key="p.id" v-model="propertiesViewModels[i]" :property="p"/>
           <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
             افزودن ویژگی جدید
           </base-f-button>
@@ -270,7 +271,7 @@
 import {Form} from "vee-validate";
 import type {
   CreateSpecificationViewModel,
-  EditProductCommand,
+  EditProductCommand, ProductPropertyViewModel,
   SetSeoDataCommand,
   SetSpecificationsCommand
 } from "~/models/product/productCommands";
@@ -279,7 +280,7 @@ import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
 import FSeoData from "~/components/base/FSeoData.vue";
 import {
   EditProduct,
-  GetProductById,
+  GetProductById, GetProperties,
   RemoveImage,
   SetImages,
   SetSeoData,
@@ -290,10 +291,11 @@ import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import * as Yup from 'yup';
 import type {ApiResponse} from "~/models/apiResponse";
-import type {BasalamData, CatalogDto, DigikalaData, ProductDto} from "~/models/product/productQueries";
+import type {BasalamData, CatalogDto, DigikalaData, ProductDto, PropertyDto} from "~/models/product/productQueries";
 import {GetCatalogs} from "~/services/catalog.service";
 import {SITE_URL} from "~/utilities/api.config";
 import {ApiStatusCode} from "~/models/metaData";
+import {FillPaginationData} from "~/utilities/fillPaginationData";
 
 definePageMeta({
   layout:'admin'
@@ -321,6 +323,8 @@ const isLoading = ref(false);
 const loadingCategories = ref(false);
 const loadingCatalogs = ref(false);
 const product:Ref<ProductDto> = ref(productResult.data!);
+const properties:Ref<PropertyDto[]> = ref([]);
+
 
 //@ts-ignore
 const editProductData:EditProductCommand = reactive({
@@ -393,6 +397,7 @@ const imagesAlt = ref('');
 const specifications:Ref<CreateSpecificationViewModel[]> = ref([
   {key:'',value:''}
 ]);
+const propertiesViewModels:Ref<ProductPropertyViewModel[]> = ref([]);
 
 onMounted(async ()=>{
   isLoading.value = true;
@@ -435,6 +440,15 @@ onMounted(async ()=>{
       value:s.value
     } as CreateSpecificationViewModel
   })
+
+  const propertiesResult = await GetProperties({pageId:1,take:100});
+  if(propertiesResult.isSuccess){
+    properties.value = propertiesResult.data?.data ?? [];
+    propertiesViewModels.value = properties.value.map(p=>{
+      return {propertyId:p.id,value:''} as ProductPropertyViewModel;
+    });
+    console.log(propertiesViewModels.value)
+  }
 
   await refreshCategories();
   await refreshCatalogs();

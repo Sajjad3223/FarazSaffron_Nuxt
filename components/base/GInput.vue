@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly>
   <div class="w-full relative flex items-center mb-4">
     <textarea @input="onChanged" :title="placeHolder" rows="5"
            :class="['peer rtl input',{'input-error':errorMessage},{'input-valid':!errorMessage && inputValue != '' },{'disabled':disabled}]" :disabled="disabled" :value="inputValue"
@@ -36,6 +37,7 @@
       </svg>
     </button>
   </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -43,7 +45,7 @@ import {useField} from "vee-validate";
 
 const props = withDefaults(defineProps<{
     modelValue:any,
-    required:boolean,
+    required?:boolean,
     label?:string | null | undefined,
     placeHolder?:string | null | undefined,
     type?:'text'|'email'|'number'|'password',
@@ -68,7 +70,7 @@ const {
   handleChange,
   value: inputValue,
   setValue
-} = useField(props.name!, undefined, {
+} = useField(props.name, undefined, {
   initialValue: props.modelValue,
 })
 

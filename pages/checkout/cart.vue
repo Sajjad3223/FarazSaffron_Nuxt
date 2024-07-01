@@ -85,11 +85,11 @@
               </div>
               <ul class="mt-8 flex flex-col">
                 <TransitionGroup name="none">
-                  <li class="mx-auto flex relative items-center border-b last:border-none py-6 border-opacity-30"
+                  <li class="flex relative gap-5 items-center border-b last:border-none py-6 border-opacity-30"
                       v-for="i in cartStore.PendingOrder.orderItems" :key="i">
-                    <div class="flex flex-col w-2/5 items-center">
+                    <div class="flex flex-col w-2/5 max-w-[200px] mx-auto items-center">
                       <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                           :alt="i.itemInfo.productImage.alt">
+                           :alt="i.itemInfo.productImage.alt" class="w-full mx-auto">
                       <cart-counter :item="i" class="w-max"/>
                     </div>
                     <base-g-button button-type="white" color="danger" class="absolute top-4 left-0"

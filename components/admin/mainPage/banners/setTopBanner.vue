@@ -19,6 +19,7 @@ const props = defineProps<{
 
 const emits = defineEmits(['bannerUpdated'])
 
+const loading = ref(false);
 const image = ref();
 const imageAlt = ref('');
 const url = ref('');
@@ -26,6 +27,8 @@ const url = ref('');
 const toast = useToast();
 
 const setTopBanner = async () =>{
+  loading.value = true;
+
   const formData = new FormData();
   formData.append('templateId',props.templateId.toString())
   formData.append('image',image.value.files[0])
@@ -40,5 +43,7 @@ const setTopBanner = async () =>{
   else{
     toast.showError(result.metaData);
   }
+
+  loading.value = false;
 }
 </script>

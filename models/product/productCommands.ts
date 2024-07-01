@@ -77,6 +77,24 @@ export interface SetSpecificationsCommand {
     specifications: [];
 }
 
+export interface SetPropertiesCommand {
+    productId: string;
+    properties: ProductPropertyViewModel[];
+}
+export interface ProductPropertyViewModel{
+    propertyId:number;
+    value:string;
+}
+export interface CreatePropertyCommand {
+    title: string;
+    hintValue?:string | null;
+}
+export interface EditPropertyCommand {
+    propertyId: number;
+    title: string;
+    hintValue?:string | null;
+}
+
 export interface SetSeoDataCommand {
     productId: number;
     seoData: SeoData;

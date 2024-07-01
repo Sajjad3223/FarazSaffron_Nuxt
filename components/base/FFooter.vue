@@ -1,7 +1,7 @@
 <template>
   <footer class="w-full mt-24 border-t border-[#E8E8E8]">
     <div class="container px-24 3xl:px-0 mt-16 flex flex-col mx-auto">
-      <div class="w-full grid grid-cols-2 gap-16">
+      <div class="w-full grid lg:grid-cols-2 gap-16">
         <div class="flex flex-col items-start ">
           <div class="flex items-center gap-6 mb-14">
             <div class="flex flex-col items-center text-2xl leading-6">
@@ -136,9 +136,9 @@
         </div>
       </div>
       <div
-          class="w-full rounded-xl bg-[#F8F8F8] mt-9 px-16 pt-14 pb-3 mb-8 grid grid-cols-7 2xl:grid-cols-8 gap-6 justify-items-center items-start">
+          class="w-full rounded-xl bg-[#F8F8F8] mt-9 px-16 pt-14 pb-3 mb-8 grid grid-cols-5 lg:grid-cols-7 2xl:grid-cols-8 gap-6 justify-items-center items-start">
         <img src="~/assets/images/gp-orange-cutted.png" alt="gp orange">
-        <div class="col-span-4 2xl:col-span-5 grid grid-cols-3 gap-6">
+        <div class="col-span-4 lg:col-span-4 2xl:col-span-5 grid grid-cols-3 gap-6">
           <div class="flex flex-col items-start">
             <h4 class="font-bold text-sm 2xl:text-xl">بخش های سایت</h4>
             <ul class="flex flex-col items-start text-[#666666] text-xs 2xl:text-sm font-light pr-5 list-disc space-y-2 mt-3">
@@ -188,7 +188,7 @@
             </ul>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-4 col-span-2">
+        <div class="grid col-span-full grid-cols-3 gap-4 lg:col-span-2">
           <!--   Salamat Logo   -->
           <div class="border rounded-full border-[#666666]/20 aspect-square grid place-items-center relative w-full">
             <img src="~/assets/images/salamat.png" alt="salamat" class="w-3/4 2xl:-translate-y-4">

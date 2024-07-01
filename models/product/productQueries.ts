@@ -90,3 +90,13 @@ export interface ProductDto extends BaseDto{
 
 export interface ProductFilterResult extends BaseFilterResult<ProductFilterData>{}
 
+export interface PropertyDto extends BaseDto{
+    title:string;
+    hintValue?: string | null;
+}
+export interface PropertyFilterParams extends BaseFilterParams{
+    search?: string | null | undefined;
+}
+
+export interface PropertyFilterResult extends BaseFilterResult<PropertyDto>{
+}

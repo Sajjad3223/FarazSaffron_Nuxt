@@ -13,15 +13,18 @@
       </div>
       <hr class="my-8">
       <div class="grid grid-cols-2 gap-8">
-        <div class="grid grid-cols-2 gap-4">
+        <Form @submit="sendMessage" class="grid grid-cols-2 gap-4">
           <base-g-input label="نام و نام خانوادگی*"  required name="fullName" id="fullName" v-model="contactMessage.fullName"/>
           <base-g-input label="ایمیل*"  required name="email" id="email" v-model="contactMessage.email"/>
           <base-g-input label="شماره تلفن*"  required name="phoneNumber" id="phoneNumber" v-model="contactMessage.phoneNumber"/>
           <base-g-input label="موضوع*"  required name="subject" id="subject" v-model="contactMessage.subject"/>
-          <base-g-input label="متن پیام*" multi-line class="col-span-full" required name="content" id="content" v-model="contactMessage.content" multiline/>
-          <base-g-button color="primary" w-full>ثبت و ارسال</base-g-button>
-        </div>
-        <div style="height: 30vh; width:100%" class="rounded-2xl border overflow-hidden z-10">
+          <div class="col-span-full">
+            <base-g-input label="متن پیام*" multi-line required name="content" id="content" v-model="contactMessage.text"/>
+          </div>
+          <div></div>
+          <base-g-button color="primary" type="submit" w-full>ثبت و ارسال</base-g-button>
+        </Form>
+        <div style="height: 40vh; width:100%" class="rounded-2xl border overflow-hidden z-10">
           <LMap
               ref="map"
               :zoom="16"
@@ -55,7 +58,8 @@
             </div>
             <span class="text-[#8D8D8D]">استان خراسان رضوی - شهرستان تربت حیدریه - کیلومتر 2 جاده بایگ</span>
             <span class="text-[#8D8D8D]">ساعت کاری :   <strong class="text-[#6D6D6D] mr-2">شنبه تا پنج شنبه از ساعت 8:00 تا 14:00  </strong></span>
-            <a href="tel:05152223456" class="text-[#8D8D8D]">شماره تماس :    <strong class="text-brandOrange mr-2">52223456-051</strong></a>
+            <a href="tel:05152329059" class="text-[#8D8D8D]">شماره تماس :    <strong class="text-brandOrange mr-2">52329059-051</strong></a>
+            <a href="mailto:info@gpsaffron.com" class="text-[#8D8D8D]">ایمیل :    <strong class="text-brandOrange mr-2">info@gpsaffron.com</strong></a>
           </div>
           <div class="flex flex-col items-start space-y-4 mt-8">
             <strong class="text-xl text-[#7E7E7E] ">خدمات پس از فروش</strong>
@@ -139,13 +143,33 @@
 </template>
 
 <script lang="ts" setup>
+import {Form} from "vee-validate";
+import {SendContactForm} from "~/services/contact.service";
+import type {SendContactFormCommand} from "~/models/contact/contactCommands";
 
-const contactMessage = reactive({
+const contactMessage:SendContactFormCommand = reactive({
   fullName:'',
-  email:'',
   phoneNumber:'',
+  email:'',
   subject:'',
-  content:''
+  text:''
 })
+
+const toast = useToast();
+const loading = ref(false);
+
+const sendMessage = async ()=>{
+  loading.value = true;
+
+  const result = await SendContactForm(contactMessage);
+  if(result.isSuccess){
+    toast.showToast();
+  }
+  else{
+    toast.showError(result.metaData)
+  }
+
+  loading.value = false;
+}
 
 </script>

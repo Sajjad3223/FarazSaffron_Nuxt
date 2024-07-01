@@ -6,7 +6,7 @@ import type {
     AdminChargeWalletCommand,
     AdminEditUserCommand, AdminFinalizeWalletCommand,
     AdminSetUserRolesCommand,
-    CreateUserCommand,
+    CreateUserCommand, EditUserAddressCommand,
     EditUserCommand
 } from "~/models/users/userCommands";
 import type {UserFilterParams, UserFilterResult} from "~/models/users/userQueries";
@@ -57,6 +57,12 @@ export const ChargeWallet = (amount:number):Promise<ApiResponse<undefined>> => {
 export const AddUserAddress = (command:AddUserAddressCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/user/address`,{
         method:'POST',
+        body:command
+    });
+}
+export const EditUserAddress = (command:EditUserAddressCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/user/address`,{
+        method:'PUT',
         body:command
     });
 }

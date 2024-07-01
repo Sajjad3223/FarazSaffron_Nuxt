@@ -10,6 +10,7 @@ export interface ContactFormDto extends BaseDto{
     fullName:    string;
     phoneNumber: string;
     email:       string;
+    subject:       string;
     text:        string;
 }
 

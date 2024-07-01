@@ -15,7 +15,7 @@ export const GetDiscount = (code:string):Promise<ApiResponse<DiscountDto>> => {
     });
 }
 export const UseDiscount = (code:string):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/contact/${code}`,{
+    return FetchApi(`/discount/${code}`,{
         method:'POST',
     });
 }
@@ -35,20 +35,20 @@ export const GetDiscountById = (discountId:number):Promise<ApiResponse<DiscountD
 }
 
 export const CreateDiscount = (command:CreateDiscountCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi("/contact",{
+    return FetchApi("/admin/discount",{
         method:'POST',
         body:command
     });
 }
 
 export const EditDiscount = (command:EditDiscountCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi("/contact",{
+    return FetchApi("/admin/discount",{
         method:'PUT',
         body:command
     });
 }
 export const RemoveDiscount = (discountId:number):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/admin/contact/${discountId}`,{
+    return FetchApi(`/admin/discount/${discountId}`,{
         method:'DELETE'
     });
 }

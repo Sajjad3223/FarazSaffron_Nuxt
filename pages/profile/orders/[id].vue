@@ -5,19 +5,19 @@
     </Head>
     <div v-if="!utilStore.isMobile()">
       <div>
-        <div class="flex items-center justify-between px-2 dark:text-white">
-          <h3 class="text-sm lg:text-2xl font-bold flex space-x-2 space-x-reverse items-center">
+        <div class="flex items-center justify-between px-2 ">
+          <h3 class="text-sm lg:text-2xl flex space-x-2 space-x-reverse items-center">
             <NuxtLink to="/profile/orders">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="2"
+                <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1"
                       stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="2" stroke-miterlimit="10"
+                <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1" stroke-miterlimit="10"
                       stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </NuxtLink>
-            <span>جزئیات سفارش #{{ orderId }}</span>
+            <span>جزئیات سفارش {{ orderId }}-gp</span>
           </h3>
-          <button class="flex items-center space-x-2 space-x-reverse text-primary text-xs lg:text-base hidden">
+          <!--          <button class="flex items-center space-x-2 space-x-reverse text-primary text-xs lg:text-base hidden">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
               <path
                   d="M22 6V8.42C22 10 21 11 19.42 11H16V4.01C16 2.9 16.91 2 18.02 2C19.11 2.01 20.11 2.45 20.83 3.17C21.55 3.9 22 4.9 22 6Z"
@@ -39,13 +39,13 @@
             <span>
                 مشاهده فاکتور
               </span>
-          </button>
+          </button>-->
         </div>
-        <hr class="my-3 border-2 dark:border-gray-600">
+        <hr class="my-3 ">
       </div>
 
       <div v-if="!isLoading">
-        <div class="flex flex-col space-y-4 p-4 dark:text-white" v-if="order.isFinally">
+        <div class="flex flex-col space-y-4 p-4 " v-if="order.isFinally">
           <div class="flex flex-col lg:flex-row lg:items-center gap-3">
             <div class="flex justify-between items-center lg:justify-center font-light text-xs lg:text-sm opacity-70">
               <span>کد پیگیری سفارش </span>
@@ -57,7 +57,7 @@
               <b class="text-sm lg:text-base font-bold opacity-100 mr-1 lg:mr-2">{{ order.finallyPersianDate }}</b>
             </div>
           </div>
-          <hr class="dark:opacity-50">
+          <hr class="">
           <div class="flex flex-col lg:flex-row lg:items-center gap-3">
             <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">
               <span>تحویل گیرنده </span>
@@ -76,8 +76,8 @@
             </b>
           </div>
         </div>
-        <hr class="border-white dark:opacity-40">
-        <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4 dark:text-white">
+        <hr class="border-white ">
+        <div class="flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between p-4 ">
           <div class="flex flex-col gap-4 mt-4 lg:mt-0">
             <div class="flex flex-col lg:flex-row lg:items-center gap-3">
               <div class="flex justify-between items-center font-light text-xs lg:text-sm opacity-70">مبلغ <b
@@ -117,8 +117,8 @@
             </svg>
           </NuxtLink>
         </div>
-        <hr class="border-white dark:opacity-40 my-3">
-        <div class="p-6 border rounded-lg bg-bgWhite dark:bg-gray-800 dark:text-white dark:border-gray-600 flex flex-col space-y-4">
+        <hr class="border-white  my-3">
+        <div class="p-6 border rounded-lg bg-bgWhite flex flex-col space-y-4">
           <div v-if="order.isFinally && order.orderStatus === EOrderStatus.Sending">
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end">
               <span class="hidden lg:block text-sm font-light">وضعیت تحویل</span>
@@ -138,7 +138,7 @@
               </div>
               <span class="flex justify-between items-center font-light opacity-70">کد پیگیری مرسوله: <b class="text-base font-bold opacity-100 mr-2">{{ order.postFollowUpCode ?? '' }}</b></span>
             </div>
-            <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-500">
+            <div class="w-full p-4 rounded-lg flex flex-col space-y-4 bg-gray-100">
               <span class="text-sm font-light">با استفاده از سامانه رهگیری پست می‌توانید از وضعیت مرسوله باخبر شوید.</span>
               <a :href="`https://tracking.post.ir/search.aspx?id=${order.postFollowUpCode ?? ''}`"
                  class="text-primary text-sm font-light">
@@ -184,11 +184,16 @@
                 <span class="absolute top-4 left-4 grid place-items-center text-sm bg-brandOrange/20 text-brandOrange rounded-full px-3">{{i.count}} عدد</span>
               </div>
               <div class="flex-1 flex flex-col items-start">
-                <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="text-sm lg:text-xl mb-6 lg:mt-8">
-                  {{ i.itemInfo.productName }}
-                </NuxtLink>
+                <div class="flex items-center gap-4 mb-6 lg:mt-8">
+                  <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="text-sm lg:text-xl">
+                    {{ i.itemInfo.productName }}
+                  </NuxtLink>
+                  <NuxtLink :to="`/product/${i.itemInfo.productSlug}#comments`" class="text-sm text-primary underline underline-offset-4" v-if="order.orderStatus != EOrderStatus.Pending">
+                    ثبت دیدگاه
+                  </NuxtLink>
+                </div>
 
-                <!--              <ul class="flex flex-col space-y-1">
+                              <ul class="flex flex-col space-y-2">
                                 <li class="flex items-center space-x-1 space-x-reverse text-sm font-light">
                                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                                        opacity="0.5">
@@ -200,7 +205,7 @@
                                         d="M6.62005 1.65336L3.06005 3.62669C2.25338 4.07336 1.59338 5.19336 1.59338 6.11336V9.88002C1.59338 10.8 2.25338 11.92 3.06005 12.3667L6.62005 14.3467C7.38005 14.7667 8.62672 14.7667 9.38672 14.3467L12.9467 12.3667C13.7534 11.92 14.4134 10.8 14.4134 9.88002V6.11336C14.4134 5.19336 13.7534 4.07336 12.9467 3.62669L9.38672 1.64669C8.62005 1.22669 7.38005 1.22669 6.62005 1.65336Z"
                                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                   </svg>
-                                  <span class="text-xs">شیشه ای</span>
+                                  <span class="text-xs">{{ EPackingType[i.itemInfo.packingType].toString().replaceAll('_',' ') }}</span>
                                 </li>
                                 <li class="flex items-center space-x-2 space-x-reverse text-sm font-light">
                                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -212,33 +217,9 @@
                                         d="M11.5 5.52666C9.50667 3.75332 6.49333 3.75332 4.5 5.52666L5.95333 7.85999C7.12 6.81999 8.88 6.81999 10.0467 7.85999L11.5 5.52666Z"
                                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                   </svg>
-                                  <span class="text-xs">4 گرم</span>
+                                  <span class="text-xs">{{ i.itemInfo.weight }} گرم</span>
                                 </li>
-                                <li class="flex items-center space-x-2 space-x-reverse text-sm font-light">
-                                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                       opacity="0.5">
-                                    <path
-                                        d="M14.6667 5.67992V2.65325C14.6667 1.71325 14.24 1.33325 13.18 1.33325H10.4867C9.42667 1.33325 9 1.71325 9 2.65325V5.67325C9 6.61992 9.42667 6.99325 10.4867 6.99325H13.18C14.24 6.99992 14.6667 6.61992 14.6667 5.67992Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path
-                                        d="M14.6667 13.18V10.4867C14.6667 9.42667 14.24 9 13.18 9H10.4867C9.42667 9 9 9.42667 9 10.4867V13.18C9 14.24 9.42667 14.6667 10.4867 14.6667H13.18C14.24 14.6667 14.6667 14.24 14.6667 13.18Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path
-                                        d="M6.99999 5.67992V2.65325C6.99999 1.71325 6.57333 1.33325 5.51333 1.33325H2.81999C1.75999 1.33325 1.33333 1.71325 1.33333 2.65325V5.67325C1.33333 6.61992 1.75999 6.99325 2.81999 6.99325H5.51333C6.57333 6.99992 6.99999 6.61992 6.99999 5.67992Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path
-                                        d="M6.99999 13.18V10.4867C6.99999 9.42667 6.57333 9 5.51333 9H2.81999C1.75999 9 1.33333 9.42667 1.33333 10.4867V13.18C1.33333 14.24 1.75999 14.6667 2.81999 14.6667H5.51333C6.57333 14.6667 6.99999 14.24 6.99999 13.18Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                  <span class="text-xs">نگین</span>
-                                </li>
-                              </ul>-->
-                <!--              <span class="px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin" v-if="i.itemInfo.eItemType === EItemType.Saffron">
-                                زعفران
-                              </span>
-                              <span class="px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin" v-if="i.itemInfo.eItemType === EItemType.Pistachio">
-                                پسته
-                              </span>-->
+                              </ul>
 
                 <div class="mt-4 flex flex-col space-y-1">
                   <div class="flex items-center gap-2 origin-right scale-75">
@@ -368,6 +349,7 @@ import {GetOrderById} from "~/services/cart.service";
 import {EOrderStatus, type OrderDto} from "~/models/cart/cartQueries";
 import {SITE_URL} from "~/utilities/api.config";
 import {EItemType} from "~/models/EPostType";
+import {EPackingType} from "../../../models/product/EPackingType";
 
 definePageMeta({
   layout: 'profile',

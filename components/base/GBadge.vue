@@ -8,7 +8,7 @@
 <script setup lang="ts">
 
 const props = defineProps<{
-  color:'danger'|'warning'|'primary'|'brandOrange'|'secondary',
+  color:'danger'|'warning'|'primary'|'info'|'secondary'|'success',
   size:'xs'|'sm'|'base'|'lg'|'xl',
   foreColor?:string,
   isSquare?:boolean
@@ -20,7 +20,14 @@ const props = defineProps<{
 
 /* Badges */
 .badge {
-  @apply grid place-items-center rounded-full px-3 py-[2px] w-max;
+  @apply grid place-items-center rounded-full px-3 py-[2px] w-max relative overflow-hidden;
+  &:before{
+    @apply absolute inset-0 z-0;
+    content: '';
+  }
+  & > *{
+    z-index: 1;
+  }
 
   font-size: 12px;
 
@@ -31,32 +38,50 @@ const props = defineProps<{
   }
 
   &-primary {
-    background-color: var(--primary);
+    &:before{
+      background-color: var(--primary);
+      opacity: 0.2;
+    }
     color: var(--primary-text)
   }
 
   &-danger {
-    background-color: var(--danger);
+    &:before{
+      background-color: var(--danger);
+      opacity: 0.2;
+    }
     color: var(--danger-text)
   }
 
   &-secondary {
-    background-color: var(--secondary);
+    &:before{
+      background-color: var(--secondary);
+      opacity: 0.2;
+    }
     color: var(--secondary-text)
   }
 
   &-success {
-    background-color: var(--success);
+    &:before{
+      background-color: var(--success);
+      opacity: 0.2;
+    }
     color: var(--success-text)
   }
 
   &-info {
-    background-color: var(--info);
+    &:before{
+      background-color: var(--info);
+      opacity: 0.2;
+    }
     color: var(--info-text)
   }
 
   &-warning {
-    background-color: var(--warning);
+    &:before{
+      background-color: var(--warning);
+      opacity: 0.2;
+    }
     color: var(--warning-text)
   }
 }

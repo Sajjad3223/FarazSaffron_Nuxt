@@ -5,27 +5,30 @@
       <hr class="my-5 opacity-20">
     </div>
 
-    <div class="dark:text-white mt-12">
-      <div class="grid grid-cols-6 gap-5 font-bold opacity-50">
-        <span>IP</span>
-        <span>آیدی محصول</span>
-        <span>لینک آدرس</span>
-        <span>دستگاه</span>
-        <span>نوع پست</span>
-        <span>تاریخ</span>
-      </div>
-      <hr class="my-4 opacity-50">
-      <div v-for="v in visits" :key="v.id">
-        <div class="grid grid-cols-6 gap-5 py-5 border-b dark:border-white/10">
-          <span>{{v.ip}}</span>
-          <span>{{v.entityId ?? '-----'}}</span>
-          <span class="truncate" :title="v.address">{{v.address ?? '------'}}</span>
-          <span class="truncate">{{v.device}}</span>
-          <span>{{EPostType[v.postType]}}</span>
-          <span>{{v.persianDate}}</span>
-        </div>
-      </div>
-    </div>
+    <table class="dark:text-white mt-12 w-full">
+      <thead class="font-bold opacity-50">
+        <tr>
+          <th class="px-4 pb-10">IP</th>
+          <th class="px-4 pb-10">آیدی کاربر</th>
+          <th class="px-4 pb-10">آیدی محصول</th>
+          <th class="px-4 pb-10" width="30%">لینک آدرس</th>
+          <th class="px-4 pb-10">دستگاه</th>
+          <th class="px-4 pb-10">نوع پست</th>
+          <th class="px-4 pb-10">تاریخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="v in visits" :key="v.id">
+          <td class="px-4 py-5">{{v.ip}}</td>
+          <td class="px-4 py-5">{{v.userId}}</td>
+          <td class="px-4 py-5">{{v.entityId ?? '-----'}}</td>
+          <td class="truncate px-4 py-5 max-w-12" dir="ltr" :title="v.address">{{v.address ?? '------'}}</td>
+          <td class="truncate px-4 py-5" dir="ltr">{{v.device}}</td>
+          <td class="px-4 py-5">{{EPostType[v.postType]}}</td>
+          <td class="px-4 py-5">{{v.persianDate}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

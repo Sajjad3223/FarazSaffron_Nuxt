@@ -2,7 +2,7 @@
   <Transition enter-from-class="-translate-y-24 opacity-0" enter-to-class="translate-y-0 opacity-100" enter-active-class="transition-all duration-300"
               leave-to-class="-translate-y-24 opacity-0" leave-from-class="translate-y-0 opacity-100" leave-active-class="transition-all duration-300">
     <div v-if="modelValue" @click.self="closeModal" class="modalWrapper flex items-center justify-center fixed inset-0 bg-black/50 z-50">
-      <div class="modal bg-bgWhite p-4 rounded-xl drop-shadow-lg sm:w-[90%] lg:w-[400px] xl:w-[500px]">
+      <div class="modal bg-bgWhite p-4 rounded-xl drop-shadow-lg sm:w-[90%] lg:w-[400px] xl:w-[500px]" :style="{width:props.width}">
         <div class="modal-header flex flex-col items-center ">
           <button class="w-8 h-8 self-end grid place-items-center hover:bg-danger/10 text-danger rounded-lg transition-colors duration-200" @click="closeModal" v-if="!hideCloseButton">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +54,10 @@ const props = defineProps({
     type:String,
     required:false
   },
+  width:{
+    type:String,
+    required:false
+  }
 })
 const emit = defineEmits(['update:modelValue']);
 

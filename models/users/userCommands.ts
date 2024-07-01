@@ -43,6 +43,18 @@ export interface AddUserAddressCommand {
     plaque: number
     unit: number
 }
+export interface EditUserAddressCommand {
+    addressId:number;
+    receiverFirstName: string;
+    receiverLastName: string;
+    receiverPhoneNumber: string;
+    state: string;
+    city: string;
+    street: string;
+    postCode: string;
+    plaque: number;
+    unit: number;
+}
 
 export interface AdminEditUserCommand {
     userId: number;

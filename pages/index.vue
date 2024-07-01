@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div v-if="!pending">
     <Head>
       <Title>جی پی زعفران | GP Saffron</Title>
     </Head>
-    <div v-if="!utilsStore.isMobile()">
+    <div class="hidden md:block" >
 
       <!--  Banner   -->
-      <GCarousel />
+      <GCarousel :banners="activeTemp.mainBanners" />
 
       <!--  Product Categories   -->
       <section class="w-full flex flex-col items-center mt-16 mb-9">
         <h3 class="font-black text-2xl" >دسته بندی محصولات</h3>
-        <ul class="mt-4 w-full grid grid-cols-4 gap-8">
+        <ul class="mt-4 w-full grid grid-cols-2 lg:grid-cols-4 gap-8">
           <li  class="w-full h-[80px] grid">
             <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
@@ -119,7 +119,7 @@
               </div>
             </template>
             <div class="flex w-full h-8"></div>
-            <SwiperSlide v-for="(p,i) in lastProducts" :key="p.id" >
+            <SwiperSlide v-for="(p,i) in firstItemsSection" :key="p.id" >
               <GCard :product="p" />
             </SwiperSlide>
           </Swiper>
@@ -186,7 +186,7 @@
                 }"
                   :breakpoints="breakpoints"
                   class="rounded-xl" dir="rtl">
-            <SwiperSlide v-for="(p,i) in popularProducts" :key="p.id" >
+            <SwiperSlide v-for="(p,i) in secondItemsSection" :key="p.id" >
               <GCard :product="p"/>
             </SwiperSlide>
             <template v-slot:container-start>
@@ -305,25 +305,25 @@
 
       <!--  Instagram  -->
       <section class="w-full mt-24">
-        <div class="flex justify-between items-center w-full h-[150px] rounded-xl bg-gradient-to-r from-[#E63BB0] to-[#EFB243] px-16">
-          <strong class="text-xl 2xl:text-3xl text-[#EBEBEB]">
+        <div class="flex justify-center lg:justify-between flex-col lg:flex-row gap-4 items-center w-full h-[150px] rounded-xl bg-gradient-to-r from-[#E63BB0] to-[#EFB243] pl-20 pr-4 lg:px-16 relative">
+          <strong class="text-lg lg:text-xl 2xl:text-3xl text-[#EBEBEB]">
             بخشی از فعالیت های جی پی را در اینستاگرام ما مشاهده کنید
           </strong>
-          <a href="https://www.instagram.com/gp_saffron" class="rounded-full border border-white px-4 py-2 flex items-center gap-2 text-white hover:bg-[#FCFCFC] hover:text-[#E9638B] transition-colors duration-200">
-            <span>دنبال کردن</span>
+          <a href="https://www.instagram.com/gp_saffron" class="rounded-full w-max border border-white px-4 py-2 flex items-center gap-2 text-white hover:bg-[#FCFCFC] hover:text-[#E9638B] transition-colors duration-200">
+            <span class="w-max">دنبال کردن</span>
             <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 8.73205C1.66667 7.96225 1.66667 6.03775 3 5.26795L7.5 2.66987C8.83333 1.90007 10.5 2.86232 10.5 4.40192V9.59808C10.5 11.1377 8.83333 12.0999 7.5 11.3301L3 8.73205Z" fill="currentColor"/>
               <path d="M12 7C12 6.80918 12.1413 6.64783 12.3304 6.62261L16.0088 6.13216C16.5336 6.06218 17 6.4705 17 7C17 7.5295 16.5336 7.93782 16.0088 7.86784L12.3304 7.37739C12.1413 7.35217 12 7.19082 12 7Z" fill="currentColor"/>
             </svg>
           </a>
-          <img src="~/assets/images/instagram-3d.png" alt="instagram" class="-translate-y-12 w-[250px]">
+          <img src="~/assets/images/instagram-3d.png" alt="instagram" class="absolute -left-5 lg:relative w-[120px] lg:-translate-y-12 lg:w-[250px]">
         </div>
 
       </section>
 
       <!-- Honors -->
       <section class="w-full mt-16">
-        <div class="flex items-center justify-between">
+        <div class="flex  items-center justify-between">
           <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
             افتخارات
           </h3>
@@ -336,8 +336,8 @@
           </div>
         </div>
 
-        <div class="w-full flex items-end justify-between lg:-translate-y-12">
-          <p class="w-[600px] -translate-y-6 text-[#828282] font-thin">
+        <div class="w-full flex flex-col lg:flex-row items-center gap-5 lg:items-end justify-between lg:-translate-y-12 mt-4 lg:mt-0">
+          <p class="w-[600px] lg:-translate-y-6 text-[#828282] font-thin">
             شرکت زعفران جی پی به مدت 7 سال مفتخر به دریافت عنوان “واحد نمونه صنعتی” شده است. شرکت ما با بهره مندی از سیستم مدیریت کیفیت عالی توانسته است گواهینامه های ISO 9001 و نیز 22000 ISO را به دست بیاورد.
           </p>
           <div class="flex">
@@ -355,7 +355,7 @@
           <span>
             با محصولات ما خیالتان راحت باشد زیرا یکی از افتخارات ما کسب رضایت مشتریان و حفظ رضایت در طی سال های اخیراست . ما همواره تلاش کردیم برترین تولید کننده باشیم و کیفیت را سرلوحه کار خود قرار دهیم
           </span>
-          <ul class="grid grid-cols-4 gap-5">
+          <ul class="grid grid-cols-2 lg:grid-cols-4 gap-5">
             <li class="bg-white border-[#D6D6D6] border rounded-lg flex flex-col items-center px-8 py-4 gap-1">
               <g-counter :target="15000" :time="5" :step="100">
                 <template #before>+</template>
@@ -410,14 +410,16 @@
                   sticky:true,
                 }"
                       :breakpoints="commentsBreakpoints" class="rounded-xl py-4" dir="rtl">
-                <SwiperSlide v-for="i in 4" :key="i">
+                <SwiperSlide v-for="s in activeTemp.specialComments" :key="s.id">
                   <li class="bg-white w-max min-w-[400px] rounded-xl border px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" >
-                    <img src="~/assets/images/avatar.png" alt="avatar" class="rounded-full aspect-square w-[40px] h-[40px]">
+                    <img :src="`${SITE_URL}/specialComments/${s.userAvatar}`"
+                         :alt="s.userName"
+                         class="rounded-full aspect-square w-[40px] h-[40px] object-cover">
                     <div class="flex flex-col items-start">
-                      <strong class="text-lg text-[#979797]">پویا نوروزی</strong>
-                      <small class="text-sm font-light text-[#BFBFBF]">کاربر</small>
+                      <strong class="text-lg text-[#979797]">{{ s.userName }}</strong>
+                      <small class="text-sm font-light text-[#BFBFBF]">{{ s.userJob }}</small>
                       <p class="max-w-[280px] font-light text-sm text-[#818181] mt-5">
-                        دو روز پس از سفارش ، محصول رسید دستم  سرعت ارسال واقعا عالیه  دمتون گرم
+                        {{ s.content }}
                       </p>
                     </div>
                   </li>
@@ -431,7 +433,7 @@
         </div>
       </section>
     </div>
-    <div v-else class="pb-8">
+    <div class="md:hidden pb-8">
 
       <!--  Search  -->
       <button class="flex w-full mt-3 items-center relative" @click="showSearchModal = true">
@@ -549,7 +551,7 @@
             </svg>
           </NuxtLink>
         </div>
-        <!--      <GCardMobile :product="product" />-->
+        <!-- <GCardMobile :product="product" /> -->
         <client-only v-if="!loading">
           <Swiper ref="carousel1"
                   :modules="[FreeMode]"
@@ -558,7 +560,7 @@
                   sticky:true,
                 }"
                   :breakpoints="mobileBreakpoints" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
-            <SwiperSlide v-for="p in lastProducts" :key="p.id">
+            <SwiperSlide v-for="p in firstItemsSection" :key="p.id">
               <GCardMobile :product="p" />
             </SwiperSlide>
           </Swiper>
@@ -599,7 +601,6 @@
 
       </section>
 
-
       <!--  Top Sellers  -->
       <div class="mt-16 flex flex-col items-stretch overflow-hidden">
         <div class="flex items-center justify-between">
@@ -619,7 +620,7 @@
                   sticky:true,
                 }"
                   :breakpoints="mobileBreakpoints" :space-between="10" class="w-full rounded-xl mt-4 " dir="rtl">
-            <SwiperSlide v-for="p in lastProducts" :key="p.id">
+            <SwiperSlide v-for="p in firstItemsSection" :key="p.id">
               <GCardMobile :product="p" />
             </SwiperSlide>
           </Swiper>
@@ -701,20 +702,43 @@
 <script setup lang="ts">
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {FreeMode} from "swiper/modules";
-import {BLOGS_URL} from "~/utilities/api.config";
+import {BLOGS_URL, SITE_URL} from "~/utilities/api.config";
+import {GetProduct, GetProducts} from "~/services/product.service";
+import {GetActiveTemplate} from "~/services/mainPage.service";
+import type {DataTemplateDto} from "~/models/mainPage/dataTemplate";
+import {ToastType} from "~/composables/useSwal";
+import {EOrderBy} from "~/models/product/EOrderBy";
 
 const showSearchModal = ref(false);
 const loading = ref(true);
-const lastProducts:Ref<ProductFilterData[]> = ref([]);
-const popularProducts:Ref<ProductFilterData[]> = ref([]);
+const firstItemsSection:Ref<ProductFilterData[]> = ref([]);
+const secondItemsSection:Ref<ProductFilterData[]> = ref([]);
 
-const productUtils = useProductUtils();
+const toast = useToast();
+const router = useRouter();
+
+const { data: result, pending,error } = await useAsyncData("GetActiveTemplate", () => GetActiveTemplate());
+if(!result.value?.isSuccess){
+  if(process.server){
+    throw createError({statusCode:500,message:'Server Error'})
+  }else{
+    router.push('/500');
+  }
+}
+
+const activeTemp:Ref<DataTemplateDto> = ref(result.value?.data!);
 
 const utilsStore = useUtilStore();
 
 const breakpoints = ref({
   // 700px and up
-  700: {
+  500: {
+    slidesPerView: 2.1,
+    snapAlign:'start',
+    dir:'rtl'
+  },
+  // 700px and up
+  1000: {
     slidesPerView: 3,
     snapAlign:'start',
     dir:'rtl'
@@ -725,8 +749,8 @@ const breakpoints = ref({
     snapAlign:'start',
     dir:'rtl'
   },
-  // 1366 and up
-  1366: {
+  // 1800 and up
+  1800: {
     slidesPerView: 4.7,
     snapAlign:'start',
     dir:'rtl'
@@ -749,8 +773,6 @@ const commentsBreakpoints = ref({
     dir:'rtl'
   },
 });
-
-
 const mobileBreakpoints = ref({
   // 300 and up
   300: {
@@ -772,8 +794,10 @@ const mobileBreakpoints = ref({
 onMounted(async ()=>{
   loading.value = true;
 
-  lastProducts.value = await productUtils.GetNewestProducts();
-  popularProducts.value = await productUtils.GetPopularProducts();
+  const firstResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.firstItemSection});
+  firstItemsSection.value = firstResult.data?.data;
+  const secondResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.secondItemSection});
+  secondItemsSection.value = secondResult.data?.data;
 
   loading.value = false;
 

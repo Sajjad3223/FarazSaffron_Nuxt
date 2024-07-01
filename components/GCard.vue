@@ -59,7 +59,7 @@
           </NuxtLink>
 <!--          <base-f-badge color="secondary" size="xs" class="opacity-70 font-thin text-[#9E9E9E]" style="font-family: 'Vazir FD',serif">{{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}</base-f-badge>-->
           <span class="px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin">
-            {{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}
+            {{ EPackingType[product.packingType]?.toString().replaceAll('_',' ') }}
           </span>
           <ul class="flex items-center gap-0.5">
             <li v-for="i in 5" :key="i">

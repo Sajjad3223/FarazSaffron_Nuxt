@@ -1,6 +1,8 @@
 export interface CreateDiscountCommand{
     amountInPercent:   number;
-    expireTime:        Date;
+    days:        number;
+    hours:        number;
+    minutes:        number;
     availableQuantity: number;
     justForUser?:       number | null;
 }

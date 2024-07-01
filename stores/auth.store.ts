@@ -3,10 +3,12 @@ import type {LoginResultDto} from "~/models/users/loginResultDto";
 
 
 export const useAuthStore = defineStore("auth",()=>{
-    const isLoginModalOpen = ref(false);
-    const isRegisterModalOpen = ref(false);
+    const isAuthModalOpen = ref(false);
     const callBackFunctionAfterLogin: Ref<Function | null> = ref(null);
+    const authModalTitle = ref('ثبت نام');
     const currentStep = ref('login');
+
+    const tempPhoneNumber:Ref<string | null> = ref(null);
 
     const cartStore = useCartStore();
 
@@ -51,20 +53,35 @@ export const useAuthStore = defineStore("auth",()=>{
             | "login"
             | "register"
             | "forgotPassword"
-            | "activate"
-            | "forgotPasswordByEmail"
+            | "confirmForgetPassword"
+            | "changePasswordForgetPassword"
     ) => {
         currentStep.value = step;
+        switch (step){
+            case "register": authModalTitle.value = 'ثبت نام'; break;
+            case "login": authModalTitle.value = 'ورود'; break;
+            case "forgotPassword": authModalTitle.value = 'فراموشی رمز عبور'; break;
+            case "confirmForgetPassword": authModalTitle.value = 'تایید کد ارسال شده'; break;
+            case "changePasswordForgetPassword": authModalTitle.value = 'تغییر رمز عبور'; break;
+        }
+    };
+
+    const setTempPhoneNumber = (
+        phoneNumber:string
+    ) => {
+        tempPhoneNumber.value = phoneNumber;
     };
 
     return {
-        isLoginModalOpen,
-        isRegisterModalOpen,
+        isAuthModalOpen,
         isLoggedIn,
         getAccessToken,
         setToken,
         logOut,
         changeStep,
-        currentStep
+        currentStep,
+        authModalTitle,
+        tempPhoneNumber,
+        setTempPhoneNumber
     };
 })

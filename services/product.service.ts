@@ -1,9 +1,15 @@
 import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
-import type {ProductDto, ProductFilterParams, ProductFilterResult} from "~/models/product/productQueries";
 import type {
-    EditProductCommand, SetMainImageCommand, SetMainImageFromImagesCommand,
-    SetProductDiscountCommand, SetSeoDataCommand, SetSpecificationsCommand
+    ProductDto,
+    ProductFilterParams,
+    ProductFilterResult, PropertyFilterParams,
+    PropertyFilterResult
+} from "~/models/product/productQueries";
+import type {
+    CreatePropertyCommand,
+    EditProductCommand, EditPropertyCommand, SetMainImageCommand, SetMainImageFromImagesCommand,
+    SetProductDiscountCommand, SetPropertiesCommand, SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import type {SetActivityCommand} from "~/models/setActivityCommand";
 
@@ -37,6 +43,12 @@ export const GetProductById = (id:number):Promise<ApiResponse<ProductDto>> => {
         method:'GET'
     });
 }
+export const GetProperties = (filterParams:PropertyFilterParams):Promise<ApiResponse<PropertyFilterResult>> => {
+    return FetchApi(`/admin/product/properties`,{
+        method:'GET',
+        params:filterParams
+    });
+}
 export const CreateProduct = (command:FormData):Promise<ApiResponse<number>> => {
     return FetchApi(`/admin/Product`,{
         method:'POST',
@@ -47,6 +59,23 @@ export const EditProduct = (command:EditProductCommand):Promise<ApiResponse<unde
     return FetchApi(`/admin/Product`,{
         method:'PUT',
         body:command
+    });
+}
+export const CreateProperty = (command:CreatePropertyCommand):Promise<ApiResponse<number>> => {
+    return FetchApi(`/admin/Product/property`,{
+        method:'POST',
+        body:command
+    });
+}
+export const EditProperty = (command:EditPropertyCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/property`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const DeleteProperty = (propertyId:number):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/property/${propertyId}`,{
+        method:'DELETE'
     });
 }
 export const SetProductActivity = (command:SetActivityCommand):Promise<ApiResponse<undefined>> => {
@@ -91,6 +120,12 @@ export const RemoveImage = (productId:number,imageId:number):Promise<ApiResponse
 }
 export const SetSpecifications = (command:SetSpecificationsCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/Product/specification`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const SetProperties = (command:SetPropertiesCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/productProperties`,{
         method:'PUT',
         body:command
     });

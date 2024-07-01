@@ -1,14 +1,16 @@
 <template>
 
-  <header >
-    <NuxtLink to="/market" class="h-[60px] bg-white w-full relative flex items-center justify-center" style="background: linear-gradient(90deg, #F04623 0%, #C82805 100%);">
-      <img src="~/assets/images/header-image.png" alt="" class="h-[60px]">
-    </NuxtLink>
+  <header v-if="topBanner != null">
+    <a :href="topBanner.url" class="h-[60px] bg-white w-full relative flex items-center justify-center" style="background: linear-gradient(90deg, #F04623 0%, #C82805 100%);">
+      <img :src="`${SITE_URL}/banners/${topBanner.image.src}`"
+           :alt="topBanner.image.alt"
+           class="h-[60px]">
+    </a>
   </header>
-  <nav class="w-full border-b border-[#ECECEC] pt-2 bg-white relative" >
-    <div class=" container px-24 3xl:px-0 h-[125px] mx-auto mt-5">
-      <div class="w-full flex items-center justify-between">
-        <div class="flex items-center flex-1 gap-12">
+  <nav class="w-full border-b pb-2 border-[#ECECEC] pt-2 bg-white relative" >
+    <div class=" container px-24 3xl:px-0 min-h-[125px] mx-auto mt-5">
+      <div class="w-full flex items-center flex-wrap justify-between">
+        <div class="flex items-center flex-wrap gap-4 flex-1 xl:gap-12">
           <NuxtLink to="/" class="flex items-center gap-4">
             <div class="w-max logo-rotate-always relative">
               <div class="w-[50px] h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
@@ -63,7 +65,7 @@
             </li>
           </ul>
         </div>
-        <div class="flex items-stretch gap-2">
+        <div class="flex items-stretch mr-auto gap-2">
           <div class="flex items-end flex-col">
             <a href="tel:05152329059" dir="ltr" class="text-brandOrange font-bold text-sm"
                style="text-shadow: 0 0 10px rgba(240, 70, 35, 0.5); font-family: 'Vazir FD',serif;">051 - 52329059</a>
@@ -101,7 +103,7 @@
           </a>
         </div>
       </div>
-      <div class="mt-5 flex items-center justify-between">
+      <div class="mt-5 gap-4 flex flex-wrap items-center justify-between">
         <div class="flex items-center gap-4">
           <div class="bg-[#F6F6F6] rounded-lg w-7 h-8 relative flex items-center">
             <span class="bg-[#C3C3C3] absolute h-0.5 rounded-full inset-x-1 right-1/2 top-1/3"></span>
@@ -164,7 +166,7 @@
             </NuxtLink>
           </div>
         </div>
-        <div class="flex items-stretch gap-4">
+        <div class="flex items-stretch mr-auto gap-4">
           <!-- User Account -->
           <div class="relative">
             <button type="button"
@@ -194,7 +196,7 @@
                 <div class="flex flex-col w-full space-y-2" v-if="!authStore.isLoggedIn">
                   <button
                       class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]"
-                      @click="authStore.isRegisterModalOpen = true">
+                      @click="authStore.isAuthModalOpen = true,authStore.changeStep('register')">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                       <rect width="12" height="12" fill="url(#pattern0_461_1998)" fill-opacity="0.5"/>
@@ -211,7 +213,7 @@
                   <hr>
                   <button
                       class="flex items-center gap-2 px-2 rounded-md py-1 transition-colors duration-200 hover:bg-[#F2F2F2]"
-                      @click="authStore.isLoginModalOpen = true">
+                      @click="authStore.isAuthModalOpen = true,authStore.changeStep('login')">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
                       <rect width="12" height="12" fill="url(#pattern0_461_1999)" fill-opacity="0.5"/>
@@ -411,8 +413,13 @@ import {BLOGS_URL, SITE_URL} from "~/utilities/api.config";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 import {GetCategories} from "~/services/category.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
+import {GetActiveTemplate} from "~/services/mainPage.service";
+import type {TopBanner} from "~/models/mainPage/dataTemplate";
 
 const loading = ref(false);
+const topBannerLoading = ref(true);
+const topBanner:Ref<TopBanner | null> = ref(null);
+
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 const accountStore = useAccountStore();
@@ -467,6 +474,16 @@ onMounted(async () => {
   await refreshCategories();
 
   loading.value = false;
+
+  topBannerLoading.value = true;
+
+  const tempResult = await GetActiveTemplate();
+  if(tempResult.isSuccess){
+    topBanner.value = tempResult.data?.topBanner;
+  }
+
+  topBannerLoading.value = false;
+
 })
 
 const openCategories = () => {

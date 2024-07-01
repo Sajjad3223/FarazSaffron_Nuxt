@@ -55,6 +55,7 @@
           <tr
               class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
           >
+            <th class="px-4 py-3">ID</th>
             <th class="px-4 py-3">نام و نام خانوادگی</th>
             <th class="px-4 py-3">شماره تلفن</th>
             <th class="px-4 py-3">ایمیل</th>
@@ -67,6 +68,9 @@
               class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
           <tr class="text-gray-700 dark:text-gray-400" v-for="u in users" :key="u">
+            <td class="px-4 py-3 text-sm text-nowrap">
+              {{ u.id }}
+            </td>
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>

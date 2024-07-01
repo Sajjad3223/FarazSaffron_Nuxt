@@ -10,7 +10,7 @@ export default {
   ],
   theme: {
     fontFamily:{
-      'vazir':['"Vazir FD"'],
+      'vazir':['Vazir FD'],
       'estedad': ['Estedad'],
     },
     extend: {

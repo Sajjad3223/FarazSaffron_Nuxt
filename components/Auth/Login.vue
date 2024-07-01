@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-4">
       <base-g-input label="شماره تلفن *" place-holder="09*********" required name="phoneNumber" id="phoneNumber" v-model="loginData.phoneNumber"/>
       <base-g-input label="رمز عبور *" place-holder="******" type="password" required name="password" id="password" v-model="loginData.password"/>
-      <button class="text-brandOrange text-right text-sm" v-if="false"> <!-- TODO implement Forget Password -->
+      <button class="text-brandOrange text-right text-sm" @click="authStore.changeStep('forgotPassword')">
         رمز عبور را فراموش کرده اید؟
       </button>
     </div>
@@ -35,7 +35,7 @@
       <NuxtLink to="/auth/register" class="text-brandOrange" v-if="utilStore.isMobile()">
         ثبت نام کنید
       </NuxtLink>
-      <button class="text-brandOrange" v-else @click="authStore.isLoginModalOpen = false,authStore.isRegisterModalOpen = true">
+      <button class="text-brandOrange" v-else @click="authStore.changeStep('register')">
         ثبت نام کنید
       </button>
     </div>
@@ -76,7 +76,7 @@ const login = async ()=>{
   if(result.isSuccess){
     await authStore.setToken(result.data!);
     await toast.showToast('با موفقیت وارد شدید');
-    authStore.isLoginModalOpen = false;
+    authStore.isAuthModalOpen = false;
     await accountStore.initData();
 
     toast.showToast('آیا مایلید به پنل کاربری منتقل شوید؟',ToastType.warning,0).then(async (result) => {

@@ -12,8 +12,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             user = (await GetCurrentUser()).data;
         }
 
-        console.log('middleware riched')
-
         if (!user?.roles.some(r => r.title === 'ادمین' || r.title === 'مدیر محصولات')) {
             return navigateTo('/profile');
         }

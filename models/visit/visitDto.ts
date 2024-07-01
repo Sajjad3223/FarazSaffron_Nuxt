@@ -5,7 +5,8 @@ import type {BaseFilterResult} from "~/models/baseFilterResult";
 
 export interface VisitDto extends BaseMongoDto{
     ip: string;
-    entityId:number;
+    entityId:number | null;
+    userId:number | null;
     address: string;
     device: string;
     postType: EPostType;

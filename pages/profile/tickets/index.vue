@@ -62,25 +62,15 @@
     </div>
 
     <base-g-modal title="ثبت تیکت" v-model="showAddTicketModal">
-      <Form class="mt-4" :validation-schema="addTicketSchema" @submit="addTicket">
-        <base-g-input label="عنوان تیکت" required v-model="addTicketData.title" name="title" id="title"/>
-        <base-g-input label="پیام شما" required v-model="addTicketData.text" name="text" id="text" multi-line/>
-        <hr class="my-4">
-        <base-g-button w-full type="submit">
-          ثبت تیکت
-        </base-g-button>
-      </Form>
+      <profile-ticket-add @ticketAdded="showAddTicketModal = false,getData()" />
     </base-g-modal>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import {Form} from 'vee-validate';
-import type {CreateTicketCommand} from "~/models/ticket/ticketCommands";
-import {CreateTicket, GetTickets} from "~/services/ticket.service";
+import {GetTickets} from "~/services/ticket.service";
 import {ETicketStatus, type TicketFilterData} from "~/models/ticket/ticketQueries";
-import * as Yup from 'yup';
 
 definePageMeta({
   layout:'profile'
@@ -89,18 +79,7 @@ definePageMeta({
 const tickets:Ref<TicketFilterData[]> = ref([]);
 const showAddTicketModal = ref(false);
 const loading = ref(true);
-const toast = useToast();
 const pageId = ref(1);
-
-const addTicketSchema = Yup.object().shape({
-  title:Yup.string().required("وارد کردن عنوان ضروری است"),
-  text:Yup.string().required("وارد کردن عنوان متن پیام است")
-});
-
-const addTicketData:CreateTicketCommand = reactive({
-  title:'',
-  text:''
-});
 
 onMounted(async ()=>{
   await getData();
@@ -115,17 +94,6 @@ const getData = async ()=>{
   }
 
   loading.value = false;
-}
-
-const addTicket = async ()=>{
-  const result = await CreateTicket(addTicketData);
-  if(result.isSuccess){
-    toast.showToast();
-    showAddTicketModal.value = false;
-    await getData();
-  }else{
-    await toast.showError(result.metaData)
-  }
 }
 
 </script>

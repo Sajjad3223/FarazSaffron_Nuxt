@@ -41,7 +41,7 @@
                 </div>
               </div>
             </div>
-            <button class="self-start text-[#3787FF] flex items-center gap-0.5">
+            <button class="self-start text-[#3787FF] flex items-center gap-0.5" @click="editAddress(a)">
               <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.84371 4.34477L9.94371 6.59477M2.59375 12.2198L5.14057 11.6699C5.27578 11.6408 5.39992 11.5694 5.49742 11.4649L11.1987 5.35301C11.4721 5.05997 11.4719 4.58498 11.1983 4.29219L9.99057 2.99964C9.71711 2.70698 9.274 2.70718 9.00077 3.00009L3.29886 9.11262C3.20155 9.21694 3.13511 9.34968 3.10784 9.49424L2.59375 12.2198Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -51,22 +51,25 @@
         </ul>
       </div>
       <div class="flex flex-col gap-4 w-full mt-6" v-else>
-        <div class="w-full flex items-center p-4 rounded-xl animate-pulse bg-white min-h-[120px]" style="box-shadow: 0 5px 15px 0 #CBCBCB33;" v-for="i in 3" :key="i">
+        <div class="w-full flex items-center p-4 rounded-xl skeleton bg-white min-h-[120px]" style="box-shadow: 0 5px 15px 0 #CBCBCB33;" v-for="i in 3" :key="i">
           <div class="w-1/12 grid place-items-center">
-            <span class="w-6 h-6 bg-gray-300 rounded-full"></span>
+            <span class="w-6 h-6 skeleton-el rounded-full"></span>
           </div>
           <div class="flex-1 flex flex-col">
-            <div class="w-1/6 h-5 rounded-full bg-gray-300"></div>
-            <div class="w-1/2 h-3 rounded-full bg-gray-300 mt-5"></div>
-            <div class="w-2/6 h-3 rounded-full bg-gray-300 mt-3"></div>
+            <div class="w-1/6 h-5 rounded-full skeleton-el"></div>
+            <div class="w-1/2 h-3 rounded-full skeleton-el mt-5"></div>
+            <div class="w-2/6 h-3 rounded-full skeleton-el mt-3"></div>
           </div>
           <div class="w-1/12 grid self-start">
-            <span class="w-12 h-2 bg-gray-300 rounded-full mr-auto"></span>
+            <span class="w-12 h-2 skeleton-el rounded-full mr-auto"></span>
           </div>
         </div>
       </div>
       <base-g-modal v-model="showAddressModal" title="افزودن آدرس جدید">
         <profile-user-address @address-created="showAddressModal = false,accountStore.initData()" />
+      </base-g-modal>
+      <base-g-modal v-model="showEditAddressModal" title="ویرایش آدرس">
+        <profile-edit-user-address :address="addressToEdit" @address-edited="showEditAddressModal = false,accountStore.initData()" />
       </base-g-modal>
     </div>
     <div v-else class="relative">
@@ -142,16 +145,24 @@
 <script setup lang="ts">
 import {SetAddressAsActive} from "~/services/user.service";
 import {ToastType} from "~/composables/useSwal";
+import type {AddressDto} from "~/models/users/userDto";
 
 definePageMeta({
   layout:'profile'
 })
 
 const showAddressModal = ref(false);
+const showEditAddressModal = ref(false);
+const addressToEdit:Ref<AddressDto | null> = ref(null);
 
 const accountStore = useAccountStore();
 const toast = useToast();
 const utilStore = useUtilStore();
+
+const editAddress = async (address:AddressDto) => {
+  showEditAddressModal.value = true;
+  addressToEdit.value = address;
+}
 
 const setAsActive = async (addressId:number) => {
   const result = await SetAddressAsActive(addressId);

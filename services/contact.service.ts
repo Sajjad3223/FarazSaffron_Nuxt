@@ -13,7 +13,7 @@ import type {
 } from "~/models/contact/contactQueries";
 
 export const SendContactForm = (command:SendContactFormCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi("/contact",{
+    return FetchApi("/Contact",{
         method:'POST',
         body:command
     });

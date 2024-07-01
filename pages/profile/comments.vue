@@ -4,22 +4,17 @@
       <Title>نظرات من</Title>
     </Head>
     <div>
-      <div class="text-2xl font-bold flex items-center gap-2 ">
-        <NuxtLink to="/profile">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </NuxtLink>
-        <strong>نظرات من</strong>
+      <div>
+        <div class="text-xl font-bold flex items-center gap-2 ">
+          <span>دیدگاه های من</span>
+        </div>
+        <hr class="my-3  ">
       </div>
-      <hr class="my-3 border-2 ">
     </div>
-    <ul class="flex-flex-col space-y-4 mt-8 p-4" v-if="!loading">
-      <li class="w-full flex flex-col bg-bgWhite  p-4 drop-shadow rounded-lg last:border-none" v-if="comments.length > 0" v-for="c in comments" :key="c.id">
+    <ul class="flex-flex-col space-y-4 mt-4" v-if="!loading">
+      <li class="w-full flex flex-col bg-bgWhite p-4 rounded-lg last:border-none" v-if="comments.length > 0" v-for="c in comments" :key="c.id">
         <div class="flex justify-between items-start">
-
-            <div class="flex items-center flex-wrap gap-2 lg:gap-4">
+          <div class="flex items-center flex-wrap gap-2 lg:gap-4">
               <NuxtLink :to="`/product/${c.postSlug}`">
                 <strong class="text-sm lg:text-base">{{ c.postTitle }}</strong>
               </NuxtLink>
@@ -40,7 +35,10 @@
                 </div>
               </div>
             </div>
-
+          <base-g-button button-type="white" color="danger" is-icon v-if="c.commentStatus === ECommentStatus.Rejected"
+          @click="removeComment(c.id)">
+            حذف
+          </base-g-button>
         </div>
         <hr class="my-2">
         <p class="mt-2 font-estedad font-light text-xs lg:text-sm leading-relaxed text-justify">
@@ -68,12 +66,13 @@
         </div>
       </li>
     </ul>
-    <div class="flex flex-col w-full space-y-8 mt-6" v-else>
-      <div class="w-full items-center bg-gray-100 p-4 grid grid-cols-3 gap-4 rounded-xl animate-pulse" v-for="i in 3" :key="i">
-        <div class="h-2 rounded-full bg-gray-300"></div>
-        <div class="h-1 rounded-full bg-gray-300 w-1/3"></div>
-        <div class="h-2 rounded-full bg-gray-300 col-span-full"></div>
-        <div class="h-2 rounded-full bg-gray-300 col-span-2"></div>
+    <div class="flex flex-col w-full space-y-8 mt-4" v-else>
+      <div class="w-full items-center bg-white skeleton p-8 grid grid-cols-3 gap-4 rounded-xl" v-for="i in 3" :key="i">
+        <div class="h-4 rounded-full skeleton-el"></div>
+        <div class="h-2 rounded-full skeleton-el w-1/3"></div>
+        <hr class="w-full my-2 col-span-full">
+        <div class="h-4 rounded-full skeleton-el col-span-full"></div>
+        <div class="h-3 rounded-full skeleton-el col-span-2"></div>
       </div>
     </div>
   </div>
@@ -81,8 +80,8 @@
 
 <script setup lang="ts">
 import {type CommentDto, type CommentFilterParams, ECommentStatus} from "~/models/comment/commentQueries";
-import {GetUserComments} from "~/services/comment.service";
-import type {Ref} from "vue";
+import {DeleteComment, GetUserComments} from "~/services/comment.service";
+import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
   layout:'profile'
@@ -91,10 +90,17 @@ definePageMeta({
 const accountStore = useAccountStore();
 const comments:Ref<CommentDto[]> = ref([]);
 const loading = ref(true);
+const toast = useToast();
 
 onMounted(async ()=>{
-  loading.value = true;
+
   await accountStore.initData();
+  await refreshData();
+
+})
+
+const refreshData = async ()=>{
+  loading.value = true;
 
   const result = await GetUserComments({
   } as CommentFilterParams);
@@ -103,6 +109,22 @@ onMounted(async ()=>{
   }
 
   loading.value = false;
-})
+}
+
+const removeComment = async (id:number) => {
+  toast.showToast('آیا از حذف این نظر مطمئن هستید؟',ToastType.warning,0)
+      .then( async (res)=>{
+        if(res.isConfirmed){
+          const result = await DeleteComment(id);
+          if(result.isSuccess){
+            toast.showToast();
+            await refreshData();
+          }
+          else{
+            toast.showError(result.metaData);
+          }
+        }
+      });
+}
 
 </script>

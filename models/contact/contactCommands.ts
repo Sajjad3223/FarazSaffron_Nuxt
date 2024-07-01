@@ -2,6 +2,7 @@ export interface SendContactFormCommand{
     fullName:    string;
     phoneNumber: string;
     email:       string;
+    subject:       string;
     text:        string;
 }
 

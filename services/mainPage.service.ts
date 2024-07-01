@@ -60,6 +60,12 @@ export const SetTopBanner = (command:FormData):Promise<ApiResponse<undefined>> =
         body:command
     });
 }
+export const EditTopBanner = (command:FormData):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/MainPage/banners/top-banner/edit`,{
+        method:'PUT',
+        body:command
+    });
+}
 export const EditBanner = (command:FormData):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/MainPage/banners`,{
         method:'PUT',

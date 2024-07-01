@@ -1,15 +1,13 @@
 <template>
-  <div>
+  <div class="max-w-[100vw] overflow-x-hidden">
+    <NuxtLoadingIndicator/>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
 
     <ClientOnly>
-      <base-g-modal title="ثبت نام" v-model="authStore.isRegisterModalOpen">
-        <auth-register />
-      </base-g-modal>
-      <base-g-modal title="ورود" v-model="authStore.isLoginModalOpen" >
-        <auth-login />
+      <base-g-modal :title="authStore.authModalTitle" v-model="authStore.isAuthModalOpen">
+        <auth-container />
       </base-g-modal>
     </ClientOnly>
   </div>
@@ -50,8 +48,7 @@ body{
   @apply bg-white dark:bg-white;
 }
 *{
-  //font-family: "Vazir FD",serif;
-  font-family: "IRANSansWeb(FaNum)",serif !important;
+  font-family: "Vazir FD",serif;
 }
 
 .logo-rotate, .logo-rotate-always{
@@ -187,7 +184,7 @@ body{
 :root {
   --primary: #F04623;
   --primary-hover: #CE3415;
-  --primary-text: white;
+  --primary-text: #F04623;
 
   --secondary: #E0E0E0;
   --secondary-hover: #C6BFBF;
@@ -197,13 +194,13 @@ body{
   --success-hover: #1E9E3A;
   --success-text: #30ad4d;
 
-  --danger: #F4202033;
+  --danger: #F42020;
   --danger-hover: #D31212;
   --danger-text: #F42020;
 
   --info: #5E8EEA;
   --info-hover: #275DC5;
-  --info-text: white;
+  --info-text: #5E8EEA;
 
   --warning: #FFFC0D;
   --warning-hover: #E8E505;

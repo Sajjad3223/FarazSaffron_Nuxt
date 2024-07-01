@@ -36,7 +36,7 @@
       <NuxtLink to="/auth/login" class="text-brandOrange" v-if="utilStore.isMobile()">
         وارد شوید
       </NuxtLink>
-      <button class="text-brandOrange" v-else @click="authStore.isLoginModalOpen = true,authStore.isRegisterModalOpen = false">
+      <button class="text-brandOrange" v-else @click="authStore.changeStep('login')">
         وارد شوید
       </button>
     </div>
@@ -83,7 +83,7 @@ const register = async ()=>{
       icon:'success',
       timerProgressBar:true,
     });
-    authStore.isRegisterModalOpen = false;
+    authStore.isAuthModalOpen = false;
     await router.push('/profile');
     await accountStore.initData();
 

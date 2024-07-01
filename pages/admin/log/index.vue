@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2 class="dark:text-white text-2xl">گزارش بازدید ها</h2>
+      <h2 class="dark:text-white text-2xl">گزارش ها</h2>
       <hr class="my-5 opacity-20">
     </div>
 
@@ -23,9 +23,9 @@
       <hr class="my-4 opacity-50">
       <div v-for="l in logs" :key="l.id">
         <div :class="['grid grid-cols-6 gap-5 py-5 border-b dark:border-white/10'
-        ,{'text-warning':l.logLevel === LogLevel.Warning},{'text-danger':l.logLevel === LogLevel.Error}]">
+        ,{'text-warning':l.level === LogLevel.Warning},{'text-danger':l.level === LogLevel.Error}]">
           <span class="truncate cursor-pointer hover:text-primary transition-colors hover:200" @click="showText(l.message)" >{{l.message}}</span>
-          <span>{{LogLevel[l.logLevel]}}</span>
+          <span>{{LogLevel[l.level]}}</span>
           <span class="truncate cursor-pointer hover:text-primary transition-colors hover:200" @click="showText(l.messageTemplate)" :title="l.messageTemplate">{{l.messageTemplate}}</span>
           <span >{{l.persianDate}}</span>
           <span class="truncate cursor-pointer hover:text-primary transition-colors hover:200" @click="showText(l.exception)" >{{l.exception}}</span>
@@ -33,28 +33,41 @@
         </div>
       </div>
     </div>
+    <FPagination :pagination-data="paginationData" v-model="pageId" />
 
   </div>
 </template>
 
 <script setup lang="ts">
-import {type LogDto, LogLevel} from "~/models/logs/logDto";
+import {type LogDto, LogLevel} from "~/models/log/logDto";
 import {GetAllLogs} from "~/services/logs.service";
+import type {PaginationData} from "~/models/baseFilterResult";
+import {FillPaginationData} from "~/utilities/fillPaginationData";
 
 definePageMeta({
   layout:'admin'
 })
+
+const pageId:Ref<number> = ref(1);
+const paginationData:Ref<PaginationData> = ref(null);
 
 const logs:Ref<LogDto[]> = ref([]);
 const textToShow = ref('');
 const showCompleteTextModal = ref(false);
 
 onMounted(async ()=>{
-  const result = await GetAllLogs({pageId:1,take:100});
+  await getData();
+})
+
+watch(pageId,async ()=>await getData());
+
+const getData = async ()=>{
+  const result = await GetAllLogs({pageId:pageId.value,take:20});
   if(result.isSuccess){
     logs.value = result.data?.data ?? [];
+    paginationData.value = FillPaginationData(result.data!);
   }
-})
+}
 
 const showText = (text:string)=>{
   textToShow.value = text;

@@ -1,10 +1,10 @@
 <template>
-  <div v-if="!isLoading">
-    <div v-if="!utilsStore.isMobile()">
+  <div>
+    <div class="hidden md:block">
       <base-f-navbar />
 
       <!--  Body  -->
-      <main class="container mx-auto px-24 3xl:px-0 z-0 mt-5">
+      <main class="container mx-auto md:px-24 3xl:px-0 z-0 mt-5">
 
         <slot />
 
@@ -12,7 +12,7 @@
 
       <base-f-footer />
     </div>
-    <div v-else class="h-screen overflow-y-auto relative text-sm font-medium">
+    <div class="md:hidden h-screen overflow-y-auto relative text-sm font-medium">
       <BaseMobileNavbar />
       <main class="my-6 mx-4 mb-[90px]">
         <slot></slot>
@@ -20,7 +20,7 @@
       <BaseMobileFooter />
     </div>
   </div>
-  <div class="flex flex-col items-center h-screen w-full justify-center relative" v-else>
+  <div class="flex flex-col items-center bg-white w-full justify-center fixed inset-0 z-20" v-if="isLoading">
     <div class="logo-rotate-loading origin-center relative">
       <div class="rounded-full bg-brandOrange grid place-items-center logo-style"
       >

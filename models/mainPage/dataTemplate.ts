@@ -38,14 +38,14 @@ export interface Banner extends BaseDto{
     url: string
 }
 
-export interface Honor {
+export interface Honor extends BaseDto{
     templateId: number
     image: Img
     description: string
     link: string
 }
 
-export interface SpecialComment {
+export interface SpecialComment extends BaseDto {
     templateId: number
     postId: number
     userName: string
@@ -56,7 +56,7 @@ export interface SpecialComment {
     linkToDGKala?: string | null
 }
 
-export interface BlogPreview {
+export interface BlogPreview extends BaseDto {
     templateId: number
     banner: Img
     title: string

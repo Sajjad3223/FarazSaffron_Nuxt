@@ -4,18 +4,10 @@
       <Title>اطلاعات کاربری</Title>
     </Head>
     <div v-if="!utilStore.isMobile()">
-      <div>
-        <div class="text-2xl font-bold flex items-center gap-2 ">
-          <NuxtLink to="/profile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </NuxtLink>
-          <strong>اطلاعات حساب کاربری</strong>
-        </div>
-        <hr class="my-3 border-2 rounded-full ">
+      <div class="text-xl font-bold flex items-center gap-2 ">
+        <span>اطلاعات کاربری</span>
       </div>
+      <hr class="my-3  ">
 
       <base-f-modal v-model="editPersonalModal">
         <template #header>تغییر اطلاعات شناسایی</template>
@@ -160,7 +152,7 @@
       </base-f-modal>
 
 
-      <div v-if="!accountStore.initLoading" class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite    border rounded-xl lg:m-4">
+      <div v-if="!accountStore.initLoading" class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite border rounded-xl">
         <div class="flex justify-between p-4 border-b lg:odd:border-l ">
           <div class="flex flex-col space-y-4">
             <span class="font-light text-sm opacity-70">نام و نام خانوادگی</span>
@@ -194,7 +186,7 @@
               <base-g-badge color="danger" fore-color="black" size="sm" v-if="!accountStore.currentUser.isPhoneConfirmed">
                 تایید نشده
               </base-g-badge>
-              <base-g-badge color="success" fore-color="black" size="sm" v-else>
+              <base-g-badge color="info" fore-color="black" size="sm" v-else>
                 تایید شده
               </base-g-badge>
               <button @click="SendConfirmCode" class="text-xs" v-if="!accountStore.currentUser.isPhoneConfirmed">
@@ -244,10 +236,13 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 mt-6 gap-2 animate-pulse " v-else>
-        <div class="h-28 border rounded-2xl flex flex-col justify-center items-start space-y-4 px-6" v-for="i in 6">
-          <div class="w-1/3 bg-gray-300 rounded-full animate-pulse h-2"></div>
-          <div class="w-full bg-gray-300 rounded-full animate-pulse h-2"></div>
+      <div class="grid grid-cols-2 mt-6 gap-2" v-else>
+        <div class="h-28 border rounded-2xl flex flex-col bg-white skeleton justify-center items-start space-y-4 px-6" v-for="i in 6">
+          <div class="w-1/3 skeleton-el rounded-full animate-pulse h-3"></div>
+          <div class="flex w-full items-center justify-between">
+            <div class="w-1/2 skeleton-el rounded-full animate-pulse h-4"></div>
+            <div class="w-8 skeleton-el rounded-full animate-pulse h-2"></div>
+          </div>
         </div>
       </div>
     </div>

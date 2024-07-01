@@ -139,7 +139,7 @@
               <strong>سبد خرید</strong>
               <ul class="relative grid grid-cols-4 2xl:grid-cols-5 gap-4 w-full mt-8">
                 <li class="flex flex-col items-center space-y-2" v-for="i in cartStore.PendingOrder.orderItems" :key="i">
-                  <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt">
+                  <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt" class="max-h-[150px]">
                   <base-g-price :price="(i.price / 10)" />
                   <base-g-button color="danger" button-type="outline" is-icon custom-class="py-0" @click="cartStore.removeItem(i.id)">
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-150">
@@ -158,7 +158,13 @@
             <div class="w-full flex items-center justify-between">
               <span>قیمت کالاها ({{cartStore.cartItemsCount}})</span>
               <div class="flex gap-1 items-center">
-                <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
+                <base-g-price :price="(cartStore.PendingOrder?.totalPrice / 10)" />
+              </div>
+            </div>
+            <div class="w-full flex items-center justify-between" v-if="cartStore.PendingOrder?.discount.code != ''">
+              <span>کد تخفیف</span>
+              <div class="flex gap-1 items-center">
+                <base-g-price :price="(cartStore.PendingOrder?.totalPrice - cartStore.PendingOrder?.getFinalPrice) / 10" />
               </div>
             </div>
             <div class="w-full flex items-center justify-between">
@@ -168,18 +174,21 @@
               </div>
             </div>
             <!--  Discount   -->
-            <form class="flex flex-col items-start">
+            <form class="flex flex-col items-start" v-if="cartStore.PendingOrder?.discount.code == ''">
               <div class="flex items-start gap-1 w-full mt-4">
                 <base-g-input v-model="discountCode" type="text" label="کد تخفیف" required/>
-                <base-g-button>ثبت</base-g-button>
+                <base-g-button @click="applyDiscount" :is-loading="discountLoading">ثبت</base-g-button>
               </div>
             </form>
+            <base-g-button v-else w-full button-type="outline" @click="removeDiscount">
+              حذف کد تخفیف
+            </base-g-button>
             <!--  Payment Method  -->
             <div>
               <span class="font-light opacity-70">روش پرداخت</span>
               <hr class="my-2">
               <div class="flex items-center gap-2 mt-2">
-                <input type="radio" id="gateway" name="paymentMethod" v-model="paymentMethod" :value="EPaymentMethod.Gateway" checked>
+                <input type="radio" id="gateway" name="paymentMethod" v-model="paymentMethod" :value="EPaymentMethod.Gateway">
                 <label for="gateway" class="font-light">درگاه بانکی</label>
               </div>
               <div class="flex items-center gap-2 mt-2">
@@ -357,7 +366,7 @@ import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
-import {PayWithWallet} from "~/services/cart.service";
+import {PayWithWallet, RemoveDiscount, SetDiscount} from "~/services/cart.service";
 import {EPaymentMethod} from "~/models/ePaymentMethod";
 
 
@@ -374,6 +383,7 @@ const showAddressModal = ref(false);
 const toast = useToast();
 
 const loading = ref(true);
+const discountLoading = ref(false);
 const payLoading = ref(false);
 const products:Ref<ProductFilterData[] | null> = ref([]);
 
@@ -393,6 +403,21 @@ const setAsActive = async (addressId:number) => {
   if(result.isSuccess){
     await toast.showToast('آدرس اصلی تغییر کرد',ToastType.success,3000,true);
   }
+}
+
+const applyDiscount = async () => {
+  discountLoading.value = true;
+
+  const result = await SetDiscount(discountCode.value);
+  if(result.isSuccess){
+    toast.showToast();
+    await cartStore.refreshCart();
+  }
+  else{
+    toast.showToast(result.metaData)
+  }
+
+  discountLoading.value = false;
 }
 
 const payOrder = async ()=>{
@@ -421,6 +446,7 @@ const payOrder = async ()=>{
     if(accountStore.currentUser?.walletCash < cartStore.PendingOrder?.finallyPrice)
     {
       await toast.showToast("موجودی کیف پول شما از مبلغ سفارش کمتر است",ToastType.error,5000,false);
+      payLoading.value = false;
       return;
     }
 
@@ -433,6 +459,19 @@ const payOrder = async ()=>{
   }
 
   payLoading.value = false;
+}
+
+const removeDiscount = async ()=>{
+  toast.showToast('آیا از حذف کد تخفیف اطمینان دارید؟',ToastType.warning)
+    .then(async (res) => {
+      if(res.isConfirmed){
+        const result = await RemoveDiscount();
+        if(result.isSuccess)  {
+          toast.showToast();
+          await cartStore.refreshCart();
+        }
+      }
+    })
 }
 
 </script>
