@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-[100vw] overflow-x-hidden">
-    <NuxtLoadingIndicator/>
+    <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
