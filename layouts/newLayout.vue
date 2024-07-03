@@ -1,6 +1,6 @@
 <template>
 <div>
-  <header class="bg-[#FFD29DB2] z-10 min-h-[45px]">
+  <header class="bg-[#FFD29DB2] min-h-[45px]">
     <div class="container text-[#171717] mx-auto py-4 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <a href="">
@@ -51,7 +51,7 @@
           </svg>
         </a>
       </div>
-      <span>“  <span class="text-brandOrange">ارسال رایگان</span> برای محصولات بالاتر از 10 گرم        “</span>
+      <span>“  <span class="text-[#FB7511]">ارسال رایگان</span> برای محصولات بالاتر از 10 گرم        “</span>
       <div class="flex items-center gap-2">
         <span dir="ltr" class="text-[#171717]/60">
           051 - 52329059
@@ -66,10 +66,10 @@
       </div>
     </div>
   </header>
-  <nav class="py-8 min-h-[100px] z-10 bg-[#222222]/30 backdrop-blur border-b border-white/10">
-    <div class="flex container mx-auto justify-between">
+  <nav class="py-8 min-h-[100px] bg-[#222222]/30 backdrop-blur border-b border-white/10">
+    <div class="flex container mx-auto justify-between relative ">
       <div class="flex gap-4 text-white">
-        <div class="bg-brandOrange w-14 h-14 rounded-full grid place-items-center">
+        <div class="bg-[#FB7511] w-14 h-14 rounded-full grid place-items-center">
           <img src="~/assets/images/gp-alone-white.png" alt="logo" class="w-8">
         </div>
         <div class="flex flex-col">
@@ -78,7 +78,7 @@
         </div>
       </div>
       <ul class="flex items-center gap-10 text-white text-lg">
-        <li>
+        <li class="relative group">
           <button class="flex items-center gap-2">
             <span>محصولات</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,11 +87,69 @@
               </g>
             </svg>
           </button>
+          <div class="group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto flex flex-col group-hover:translate-y-2 absolute p-4 rounded-lg bg-white min-w-[150px] border right-0 -translate-y-2 opacity-0 transition-all duration-200">
+            <ul class="text-black font-light space-y-4 flex flex-col text-sm relative">
+              <li >
+                <button class="peer w-full flex items-center justify-between">
+                  <span>پسته</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+                    <g opacity="0.5">
+                      <path d="M11.0832 4.95831L6.99984 9.04165L2.9165 4.95831" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                  </svg>
+                </button>
+                <div class="bg-white peer-hover:opacity-100 opacity-0 transition-opacity duration-200 p-5 absolute right-full -top-4 border rounded-lg w-max -translate-x-5">
+                  <ul class="flex flex-col space-y-3">
+                    <li>پسته خندان</li>
+                    <li>پسته غیر خندان</li>
+                    <li>پسته کوچک</li>
+                    <li>پسته متوسط</li>
+                    <li>پسته بزرگ</li>
+                    <li>پسته خیلی بزرگ</li>
+                    <li>پسته سر بسته</li>
+                  </ul>
+                </div>
+              </li>
+              <li >
+                <button class="peer w-full flex items-center justify-between">
+                  <span>زعفران</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+                    <g opacity="0.5">
+                      <path d="M11.0832 4.95831L6.99984 9.04165L2.9165 4.95831" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                  </svg>
+                </button>
+                <div class="bg-white peer-hover:opacity-100 opacity-0 transition-opacity duration-200 p-5 absolute right-full -top-4 border rounded-lg w-max -translate-x-5">
+                  <ul class="flex flex-col space-y-3">
+                    <li>زعفران نگین</li>
+                    <li>زعفران پوشال</li>
+                    <li>زعفران سرگل</li>
+                    <hr>
+                    <li>زعفران شیشه ای</li>
+                    <li>زعفران هدیه</li>
+                    <li>زعفران عمده</li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <button>آجیل</button>
+              </li>
+              <li>
+                <button>میوه خشک</button>
+              </li>
+              <li>
+                <button>ادویه</button>
+              </li>
+              <li>
+                <button>باکس هدیه</button>
+              </li>
+            </ul>
+          </div>
         </li>
         <li>
           <button class="flex items-center gap-2">
             <span>مقالات</span>
-            <span class="text-brandOrange bg-brandOrange/10 rounded-md text-xs px-2 py-0.5">بزودی</span>
+            <span class="text-[#FB7511] bg-[#FB7511]/10 rounded-md text-xs px-2 py-0.5">بزودی</span>
           </button>
         </li>
         <li>
@@ -106,6 +164,7 @@
         </li>
       </ul>
       <div class="flex items-center gap-4">
+        <!-- Search -->
         <button>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
@@ -114,7 +173,8 @@
             </g>
           </svg>
         </button>
-        <button>
+        <!-- Account -->
+        <button @click="count.push({id:count.length + 1})">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9847 15.3462C8.11707 15.3462 4.81421 15.931 4.81421 18.2729C4.81421 20.6148 8.09611 21.2205 11.9847 21.2205C15.8523 21.2205 19.1542 20.6348 19.1542 18.2938C19.1542 15.9529 15.8733 15.3462 11.9847 15.3462Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -122,7 +182,8 @@
             </g>
           </svg>
         </button>
-        <button class="flex flex-col relative items-center space-y-1">
+        <!-- Cart -->
+        <button class="flex flex-col relative items-center space-y-1" @click="showCart = true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
               <path d="M2.75 3.24988L4.83 3.60988L5.793 15.0829C5.87 16.0199 6.653 16.7389 7.593 16.7359H18.502C19.399 16.7379 20.16 16.0779 20.287 15.1899L21.236 8.63188C21.342 7.89888 20.833 7.21888 20.101 7.11288C20.037 7.10388 5.164 7.09888 5.164 7.09888" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -131,11 +192,89 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4346 20.2025C18.7356 20.2025 18.9796 20.4465 18.9796 20.7465C18.9796 21.0475 18.7356 21.2915 18.4346 21.2915C18.1336 21.2915 17.8906 21.0475 17.8906 20.7465C17.8906 20.4465 18.1336 20.2025 18.4346 20.2025Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
           </svg>
-          <span class="absolute -bottom-full text-white bg-brandOrange rounded-full text-xs leading-5 w-5 h-5 grid place-items-center">
+          <span class="absolute -bottom-full text-white bg-[#FB7511] rounded-full text-xs leading-5 w-5 h-5 grid place-items-center">
             2
           </span>
         </button>
-        <button>
+        <Transition name="slide-fade">
+          <div v-if="showCart" class="bg-[#FAFAFA] absolute left-0 top-[150%] origin-top p-5 rounded-3xl flex flex-col justify-between min-w-[400px] min-h-[50vh]" v-click-outside="closeCartModal">
+            <div class="flex flex-col">
+              <div class="flex items-center justify-between">
+                <button class="w-9 h-9 bg-white rounded-full border grid place-items-center" @click="closeCartModal">
+                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.34819 0.650026L0.648193 8.35002M8.34819 8.35002L0.648194 0.650024" stroke="#070707" stroke-linecap="round"/>
+                  </svg>
+                </button>
+                <div class="flex items-center gap-2">
+                  <span>سبد خرید</span>
+                  <span class="text-white bg-[#FB7511] rounded-full text-xs leading-5 w-5 h-5 grid place-items-center">
+                2
+              </span>
+                </div>
+                <button class="w-9 h-9 bg-white rounded-full border grid place-items-center" @click="showCartModal = true,closeCartModal()">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g opacity="0.6">
+                      <path d="M1.83337 2.16663L3.22004 2.40663L3.86204 10.0553C3.91337 10.68 4.43537 11.1593 5.06204 11.1573H12.3347C12.9327 11.1586 13.44 10.7186 13.5247 10.1266L14.1574 5.75463C14.228 5.26596 13.8887 4.81263 13.4007 4.74196C13.358 4.73596 3.44271 4.73263 3.44271 4.73263" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.41675 7.19655H11.2654" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.76953 13.4684C4.97019 13.4684 5.13219 13.6311 5.13219 13.8311C5.13219 14.0317 4.97019 14.1944 4.76953 14.1944C4.56886 14.1944 4.40686 14.0317 4.40686 13.8311C4.40686 13.6311 4.56886 13.4684 4.76953 13.4684Z" fill="#070707" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2898 13.4684C12.4905 13.4684 12.6531 13.6311 12.6531 13.8311C12.6531 14.0317 12.4905 14.1944 12.2898 14.1944C12.0891 14.1944 11.9271 14.0317 11.9271 13.8311C11.9271 13.6311 12.0891 13.4684 12.2898 13.4684Z" fill="#070707" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+              <hr class="my-4">
+              <ul class="flex flex-col space-y-4">
+                <li class="flex items-start gap-6 pb-4 border-b last:border-none" v-for="i in 2" :key="i">
+                  <div class="w-1/3 max-w-[200px] rounded-xl bg-white border grid place-items-center aspect-square">
+                    <img src="~/assets/images/saffron-pocket.png" alt="saffron pocket" class="w-2/3">
+                  </div>
+                  <div class="flex-1 flex flex-col items-start space-y-4">
+                    <button class="self-end">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.104 7.89014C16.104 7.89014 15.6515 13.5026 15.389 15.8668C15.264 16.996 14.5665 17.6576 13.424 17.6785C11.2499 17.7176 9.0732 17.7201 6.89986 17.6743C5.8007 17.6518 5.11486 16.9818 4.99236 15.8726C4.7282 13.4876 4.2782 7.89014 4.2782 7.89014" stroke="#EF2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.2568 5.19975H3.12512" stroke="#EF2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.5337 5.19974C13.8796 5.19974 13.3162 4.73724 13.1879 4.0964L12.9854 3.08307C12.8604 2.61557 12.4371 2.29224 11.9546 2.29224H8.42707C7.94457 2.29224 7.52123 2.61557 7.39623 3.08307L7.19373 4.0964C7.0654 4.73724 6.50207 5.19974 5.8479 5.19974" stroke="#EF2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                    <span class="font-thin px-3 py-0.5 rounded-full bg-[#FB7511]/10 text-[#FB7511] w-max text-xs">پاکتی</span>
+                    <span>زعفران نگین 8 گرمی</span>
+                    <div class="flex gap-2 items-center">
+                      <span class="line-through text-[#D0D0D0]">265.000 تومان</span>
+                      <span>230.000 تومان</span>
+                    </div>
+                    <div class="border rounded-full px-4 py-2 flex items-center justify-between gap-4">
+                      <button class="p-2">
+                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g opacity="0.8">
+                            <path d="M5.84412 3.2785L0.972688 3.2785" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M3.40833 5.71417L3.40833 0.842744" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                          </g>
+                        </svg>
+                      </button>
+                      <input type="number" class="appearance-none bg-white w-6 h-6 rounded-full border grid place-items-center text-center text-sm" value="1">
+                      <button class="p-2">
+                        <svg width="7" height="2" viewBox="0 0 7 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path opacity="0.8" d="M6 1L1 1" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col">
+                <span class="text-xs opacity-60">قیمت نهایی:</span>
+                <span >460,000 تومان</span>
+              </div>
+              <button class="w-1/2 rounded-xl bg-[#FB7511] text-white py-3" @click="showCartModal = true,closeCartModal()">
+                مشاهده سبد خرید
+              </button>
+            </div>
+          </div>
+        </Transition>
+        <!-- Favorites -->
+        <button @click="removeRandom">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.8">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M2.87187 11.5983C1.79887 8.24832 3.05287 4.41932 6.56987 3.28632C8.41987 2.68932 10.4619 3.04132 11.9999 4.19832C13.4549 3.07332 15.5719 2.69332 17.4199 3.28632C20.9369 4.41932 22.1989 8.24832 21.1269 11.5983C19.4569 16.9083 11.9999 20.9983 11.9999 20.9983C11.9999 20.9983 4.59787 16.9703 2.87187 11.5983Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -146,15 +285,204 @@
       </div>
     </div>
   </nav>
+  <Transition name="slideUp">
+    <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-20" @click.self="showCartModal = false" v-if="showCartModal">
+      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[20%] rounded-t-[60px] flex flex-col items-center">
+        <button class="bg-[#FAFAFA] w-[50px] h-[50px] rounded-full border grid place-items-center -translate-y-1/2" @click="showCartModal = false">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.375 6.83333L6 11M6 11L1.625 6.83333M6 11L6 1" stroke="#09090B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="container mx-auto flex flex-col items-center space-y-20 mt-24">
+          <h4 class="text-3xl">سبد خرید</h4>
+          <div class="w-full flex items-start gap-12">
+            <div class="flex-1 flex flex-col">
+              <div class="grid grid-cols-5 gap-5 items-center">
+                <div class="col-span-2 text-lg">محصول</div>
+                <div class=" text-lg">نوع</div>
+                <div class=" text-lg">تعداد</div>
+                <div class=" text-lg">قیمت</div>
+                <hr class="col-span-full">
+                <div class="col-span-full grid grid-cols-5 gap-5 relative border-b pb-4 items-center last:border-none" v-for="i in 3">
+                  <button class="absolute -right-12 top-4 p-4">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.75 1.25L1.25 9.75M9.75 9.75L1.25 1.25" stroke="#070707" stroke-width="0.7" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <div class="col-span-2 flex items-center gap-4">
+                    <div class="bg-white rounded-xl w-[70px] h-[70px] grid place-items-center border">
+                      <img src="~/assets/images/saffron-pocket.png" alt="saffron Pocket" class="w-2/3">
+                    </div>
+                    <span class="opacity-60">زعفران نگین پاکتی</span>
+                  </div>
+                  <div  class="opacity-60">8 گرمی</div>
+                  <div class="w-full">
+                    <div class="border rounded-full px-4 py-2 flex items-center justify-between gap-4">
+                      <button class="p-2">
+                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g opacity="0.8">
+                            <path d="M5.84412 3.2785L0.972688 3.2785" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M3.40833 5.71417L3.40833 0.842744" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                          </g>
+                        </svg>
+                      </button>
+                      <input type="number" class="appearance-none bg-white w-6 h-6 rounded-full border grid place-items-center text-center text-sm" value="1">
+                      <button class="p-2">
+                        <svg width="7" height="2" viewBox="0 0 7 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path opacity="0.8" d="M6 1L1 1" stroke="#070707" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div  class="opacity-60">230,000 تومان</div>
+                </div>
+              </div>
+            </div>
+            <div class="w-1/3 max-w-[310px] py-6 px-8 rounded-xl border bg-white flex flex-col justify-between min-h-[400px]">
+              <div class="flex flex-col space-y-8">
+                <h5>مجموع قیمت</h5>
+                <div class="flex flex-col w-full space-y-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-light opacity-50">جمع محصولات</span>
+                    <span class="text-xs font-light opacity-50">460,000 تومان</span>
+                  </div>
+                  <hr class="my-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-light opacity-50">هزینه ارسال پست</span>
+                    <span class="text-xs font-light opacity-50">75,000 تومان</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-light">مجموع</span>
+                    <span class="text-xs font-light">525,000 تومان</span>
+                  </div>
+                </div>
+              </div>
+              <button class="w-full py-2 rounded-xl bg-[#FB7511] text-white" @click="showShippingModal = true,showCartModal = false">ادامه و پرداخت</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Transition>
+  <Transition name="slideUp">
+    <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-20" @click.self="showShippingModal = false" v-if="showShippingModal">
+      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[15%] rounded-t-[60px] flex flex-col items-center">
+        <button class="bg-[#FAFAFA] w-[50px] h-[50px] rounded-full border grid place-items-center -translate-y-1/2" @click="showShippingModal = false">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.375 6.83333L6 11M6 11L1.625 6.83333M6 11L6 1" stroke="#09090B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="flex flex-col w-full h-full items-center mt-24">
+          <div class="container mx-auto flex items-center justify-center relative">
+            <h4 class="text-3xl">جزئیات صورتحساب</h4>
+            <button @click="showCartModal = true,showShippingModal = false" class="flex items-center gap-2 absolute left-0">
+              <span class="text-sm">سبد خرید</span>
+              <span class="w-9 h-9 rounded-full bg-white border grid place-items-center">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g opacity="0.6">
+                  <path d="M1.83337 2.1665L3.22004 2.4065L3.86204 10.0552C3.91337 10.6798 4.43537 11.1592 5.06204 11.1572H12.3347C12.9327 11.1585 13.44 10.7185 13.5247 10.1265L14.1574 5.7545C14.228 5.26584 13.8887 4.8125 13.4007 4.74184C13.358 4.73584 3.44271 4.7325 3.44271 4.7325" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9.41675 7.19637H11.2654" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.76953 13.4683C4.97019 13.4683 5.13219 13.6309 5.13219 13.8309C5.13219 14.0316 4.97019 14.1943 4.76953 14.1943C4.56886 14.1943 4.40686 14.0316 4.40686 13.8309C4.40686 13.6309 4.56886 13.4683 4.76953 13.4683Z" fill="#070707" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2898 13.4683C12.4905 13.4683 12.6531 13.6309 12.6531 13.8309C12.6531 14.0316 12.4905 14.1943 12.2898 14.1943C12.0891 14.1943 11.9271 14.0316 11.9271 13.8309C11.9271 13.6309 12.0891 13.4683 12.2898 13.4683Z" fill="#070707" stroke="#070707" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <hr class="mt-20 w-full">
+          <div class="w-full h-full flex items-stretch gap-12 relative justify-center">
+            <div class="bg-white border-l w-1/2 h-full"></div>
+            <div class="flex-1"></div>
+            <div class="absolute top-20 container flex items-start justify-between">
+              <div class="w-2/5 flex flex-col space-y-6">
+                <div class="grid grid-cols-2 gap-6 w-full">
+                  <input type="text" placeholder="نام" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
+                  <input type="text" placeholder="نام خانوادگی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
+                  <input type="text" placeholder="شرکت (اختیاری)" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                  <input type="text" placeholder="استان" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
+                  <input type="text" placeholder="شهر" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
+                  <input type="text" placeholder="آدرس" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                  <input type="text" placeholder="کد پستی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                  <input type="text" placeholder="شماره تلفن" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                  <input type="text" placeholder="ایمیل" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                </div>
+                <hr class="w-full">
+                <div class="p-4 rounded-lg border w-full flex items-center gap-4">
+                  <input type="checkbox" name="save" id="save">
+                  <label for="save" class="font-light">برای پرداخت سریع ، اطلاعاتم را ذخیره کن</label>
+                </div>
+                <button class="w-full py-3 rounded-lg text-white bg-[#FB7511]">
+                  پرداخت
+                </button>
+              </div>
+              <div class="flex flex-col items-end w-2/5 space-y-7">
+                <div class="w-full">
+                  <ul class="w-full">
+                    <li class="w-full flex items-center gap-8 py-3 border-b last:border-none first:pt-0" v-for="i in 2" :key="i">
+                      <div class="w-1/5 border rounded-md aspect-square bg-white grid place-items-center relative">
+                        <img src="~/assets/images/saffron-pocket.png" alt="saffron pocket" class="w-2/3">
+                        <span class="text-white bg-[#FB7511] rounded-full text-xs leading-5 w-5 h-5 grid place-items-center absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
+                          2
+                        </span>
+                      </div>
+                      <div class="flex-1 flex items-center justify-between">
+                        <div class="flex flex-col gap-1">
+                          <span class="text-sm">زعفران نگین / پاکتی</span>
+                          <span class="text-xs">8 گرمی</span>
+                        </div>
+                        <span class="text-sm">460,000 تومان</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="w-4/5 pr-8 mr-auto flex flex-col space-y-5">
+                  <div class="flex gap-3 w-full items-stretch">
+                    <input type="text" class="border rounded-lg flex-1 py-2 text-xs px-4" placeholder="کد تخفیف">
+                    <button class="rounded-xl text-xs w-max px-7 py-2 text-[#FB7511] bg-[#FB7511]/20">
+                      اعمال
+                    </button>
+                  </div>
+                  <div class="w-full flex flex-col space-y-3">
+                    <div class="w-full flex items-center justify-between">
+                      <span class="opacity-50 text-xs">کد تخفیف</span>
+                      <span class="opacity-50 text-xs">0 تومان</span>
+                    </div>
+                    <div class="w-full flex items-center justify-between">
+                      <span class="opacity-50 text-xs">جمع محصولات</span>
+                      <span class="opacity-50 text-xs">460,000 تومان</span>
+                    </div>
+                    <div class="w-full flex items-center justify-between">
+                      <span class="opacity-50 text-xs">هزینه ارسال پست</span>
+                      <span class="opacity-50 text-xs">75,000 تومان</span>
+                    </div>
+                    <hr class="w-full">
+                    <div class="w-full flex items-center justify-between">
+                      <span>مجموع</span>
+                      <span>525,000 تومان</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Transition>
   <main>
     <slot></slot>
   </main>
+  <div class="fixed inset-0 pointer-events-none">
+    <TransitionGroup name="slideUp" tag="div" class="bottom-12 right-12 fixed flex flex-col-reverse gap-4">
+      <GToast v-for="i in count" :key="i" />
+    </TransitionGroup>
+  </div>
   <footer class="pt-[90px] bg-[#DCE4DB]/50">
     <div class="container mx-auto">
       <div class="flex items-start w-full justify-between">
         <div class="flex flex-col">
           <div class="flex items-center gap-5">
-            <div class="w-[70px] h-[70px] bg-brandOrange rounded-full grid place-items-center">
+            <div class="w-[70px] h-[70px] bg-[#FB7511] rounded-full grid place-items-center">
               <img src="~/assets/images/gp-alone-white.png" alt="gp" class="w-1/2">
             </div>
             <span class="text-2xl">زعفران جی پی</span>
@@ -340,6 +668,22 @@
 
 <script setup lang="ts">
 
+const showCart = ref(false);
+const showCartModal = ref(false);
+const showShippingModal = ref(false);
+
+const count = ref([
+  {id:1}
+]);
+
+const removeRandom = ()=>{
+  const rnd = Math.floor(Math.random() * count.value.length);
+  count.value.splice(rnd,1);
+}
+
+const closeCartModal = ()=>{
+  showCart.value = false;
+}
 </script>
 
 <style>
@@ -349,4 +693,35 @@ body{
 .container{
   max-width: 1200px;
 }
+hr,.border{
+  @apply border-[#818C92]/20;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.slideUp-move,
+.slideUp-enter-active,
+.slideUp-leave-active{
+  @apply transition-all duration-300;
+}
+
+.slideUp-enter-from,
+.slideUp-leave-to{
+  @apply opacity-0 translate-y-[200px];
+}
+
+
+.slideUp-leave-active {
+  @apply absolute;
+}
+
 </style>

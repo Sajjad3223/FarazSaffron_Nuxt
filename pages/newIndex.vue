@@ -1,11 +1,11 @@
 <template>
 <div>
-  <div class="h-[105vh] flex flex-col items-center justify-center -mt-[125px]" style="background-image: url(/images/home-banner.jpg);background-size: cover;">
+  <div class="h-[105vh] flex flex-col items-center justify-center -z-10 relative -mt-[125px]" style="background-image: url(/images/home-banner.jpg);background-size: cover;">
     <div class="container mx-auto my-auto flex pt-[100px] flex-col items-center">
       <div class="flex flex-col items-center space-y-12 mr-auto">
         <div class="flex font-light text-5xl flex-col space-y-10 text-white items-center">
           <h2>
-            تجربه ای <span class="text-brandOrange">منحصر به فرد</span> از طعم <br>
+            تجربه ای <span class="text-[#FB7511]">منحصر به فرد</span> از طعم <br>
           </h2>
           <div class="flex items-center gap-2">
             <div class="flex flex-row-reverse items-center -space-x-5 space-x-reverse" dir="ltr">
@@ -25,7 +25,7 @@
             15% تخفیف برای اولین خرید از جی پی
           </h4>
         </div>
-        <button class="bg-[#FB7511] text-white gap-2 text-lg rounded-xl flex items-center px-4 py-2 relative">
+        <button class="bg-[#FB7511] relative text-white gap-2 text-lg rounded-xl flex items-center px-4 py-2">
           <span>خرید</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.16667 10.375L1 6M1 6L5.16667 1.625M1 6H11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -87,11 +87,11 @@
       <div class="bg-white group w-[20%] shrink-0 border hover:shadow-md rounded-3xl p-5 flex flex-col space-y-5 transition-shadow duration-300" v-for="i in 7" :key="i">
         <img src="~/assets/images/saffron-pocket.png" alt="pocket" class="mx-auto max-w-[170px]">
         <div class="flex flex-col space-y-2">
-          <span class="font-thin">پاکتی</span>
-          <span>زعفران نگین 1 مثقالی - 4.38 گرم</span>
+          <span class="font-thin px-3 py-0.5 rounded-full bg-[#FB7511]/10 text-[#FB7511] w-max text-xs">پاکتی</span>
+          <span class="text-sm">زعفران نگین 1 مثقالی - 4.38 گرم</span>
         </div>
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 text-sm">
             <span>740,000</span>
             <span>تومان</span>
           </div>
@@ -153,7 +153,7 @@
         </div>
         <div class="flex-1 flex flex-col justify-between">
           <span class="opacity-50">محصول ویژه این ماه</span>
-          <span>پاکتی</span>
+          <span class="font-thin px-3 py-0.5 rounded-full bg-[#FB7511]/10 text-[#FB7511] w-max text-xs">پاکتی</span>
           <span>زعفران نگین / 8گرمی </span>
           <div class="flex gap-2 items-center">
             <span class="line-through text-[#D0D0D0]">265.000 تومان</span>
