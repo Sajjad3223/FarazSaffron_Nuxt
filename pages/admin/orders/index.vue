@@ -4,14 +4,14 @@
       <Title>سفارشات</Title>
     </Head>
     <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+        class="mb-4 text-lg font-semibold text-gray-600 "
     >
       سفارشات
     </h4>
 <!--    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
-        <strong class="text-xl dark:text-white">فیلتر محصولات</strong>
-        <span class="dark:text-white">
+        <strong class="text-xl ">فیلتر محصولات</strong>
+        <span class="">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -24,7 +24,7 @@
         <Form class="grid grid-cols-4 mb-4 gap-4 items-end" v-if="showFilters">
           <base-f-input class="col-span-2" name="search" type="text" label="جستجو" place-holder="جستجو در نام، توضیحات و ..." id="search" />
           <div class="flex flex-col space-y-2 w-full col-span-2">
-            <label for="" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">انتخاب دسته بندی ها</label>
+            <label for="" class="flex items-center space-x-1 space-x-reverse font-light text-sm ">انتخاب دسته بندی ها</label>
             <select name="categories" id="categories" class="px-4 py-2 rounded-lg">
               <option selected>دسته بندی ها</option>
             </select>
@@ -40,7 +40,7 @@
             <base-f-input label="سریال نامبر" place-holder="1234-5678-9123"/>
             <div class="flex items-center gap-2">
               <input type="checkbox" name="" id="" class="w-11 h-11 opacity-50 checked:opacity-90">
-              <label for="" class="dark:text-white">فقط تخفیف دار ها</label>
+              <label for="" class="">فقط تخفیف دار ها</label>
             </div>
           </div>
           <base-f-button class="col-span-3" color="primary" text-color="white">
@@ -59,7 +59,7 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
-              class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">شماره سفارش</th>
             <th class="px-4 py-3">نام خریدار</th>
@@ -71,9 +71,9 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr :class="['text-gray-700 dark:text-gray-400']" v-for="(o) in orders">
+          <tr :class="['text-gray-700 ']" v-for="(o) in orders">
             <td class="px-4 py-3 text-sm text-nowrap">
               <NuxtLink :to="`/admin/orders/${o.id}`" class="text-indigo-600">
                 {{o.id}}
@@ -109,7 +109,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center gap-2 text-sm">
                 <NuxtLink :to="`/admin/orders/${o.id}`" title="مشاهده جزئیات"
-                        :class="['flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-300 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray',{'opacity-30 pointer-events-none':o.itemsCount <= 0}]"
+                        :class="['flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-300 rounded-lg  focus:outline-none focus:shadow-outline-gray',{'opacity-30 pointer-events-none':o.itemsCount <= 0}]"
                          >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21.25 9.14999C18.94 5.51999 15.56 3.42999 12 3.42999C10.22 3.42999 8.49 3.94999 6.91 4.91999C5.33 5.89999 3.91 7.32999 2.75 9.14999C1.75 10.72 1.75 13.27 2.75 14.84C5.06 18.48 8.44 20.56 12 20.56C13.78 20.56 15.51 20.04 17.09 19.07C18.67 18.09 20.09 16.66 21.25 14.84C22.25 13.28 22.25 10.72 21.25 9.14999ZM12 16.04C9.76 16.04 7.96 14.23 7.96 12C7.96 9.76999 9.76 7.95999 12 7.95999C14.24 7.95999 16.04 9.76999 16.04 12C16.04 14.23 14.24 16.04 12 16.04Z" fill="currentColor"/>
@@ -136,7 +136,7 @@
       </div>
       <FPagination :pagination-data="pagination" v-model="pageId" />
     </div>
-    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+    <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"

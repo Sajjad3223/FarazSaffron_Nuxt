@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <h2 class="dark:text-white text-2xl">ویرایش ها</h2>
-      <hr class="my-5 opacity-20">
-    </div>
+    <base-f-divider :logo-divider="false" title="ویرایش ها" />
 
     <base-g-modal title="نمایش مقادیر" v-model="showCompleteTextModal" width="50vw">
       <div class="grid grid-cols-2 gap-5 max-h-[60vh] overflow-y-auto">
@@ -48,24 +45,28 @@
       </div>
     </base-g-modal>
 
-    <table class="dark:text-white mt-12 w-full">
+    <table class=" mt-12 w-full">
       <thead class="font-bold opacity-50">
-      <tr>
-        <th class="px-4 pb-10">کاربر</th>
-        <th class="px-4 pb-10">عنوان</th>
-        <th class="px-4 pb-10">نوع تغییر</th>
-        <th class="px-4 pb-10">تاریخ</th>
-        <th class="px-4 pb-10">عملیات</th>
+      <tr class="text-xs font-bold text-right text-gray-500 uppercase border-b bg-gray-50 ">
+        <th class="px-4 py-5">کاربر</th>
+        <th class="px-4 py-5">عنوان</th>
+        <th class="px-4 py-5">نوع تغییر</th>
+        <th class="px-4 py-5">تاریخ</th>
+        <th class="px-4 py-5">عملیات</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="m in modifications" :key="m.id">
         <td class="px-4 py-5">{{m.userName}}</td>
         <td class="px-4 py-5">{{m.itemTitle}}</td>
-        <td class="px-4 py-5">{{EModificationType[m.modificationType]}}</td>
+        <td class="px-4 py-5">
+          <span class="text-xs px-2 py-0.5 rounded-full bg-primary/20 font-light text-primary" v-if="m.modificationType == EModificationType.Create">{{EModificationType[m.modificationType]}}</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-warning/20 font-light text-black/70" v-if="m.modificationType == EModificationType.Edit">{{EModificationType[m.modificationType]}}</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-danger/20 font-light text-danger" v-if="m.modificationType == EModificationType.Delete">{{EModificationType[m.modificationType]}}</span>
+        </td>
         <td class="px-4 py-5">{{m.persianDate}}</td>
         <td class="px-4 py-5">
-          <button @click="showText(m.id)">
+          <button @click="showText(m.id)" title="مشاهده تغییرات">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1614 12.0531C15.1614 13.7991 13.7454 15.2141 11.9994 15.2141C10.2534 15.2141 8.83838 13.7991 8.83838 12.0531C8.83838 10.3061 10.2534 8.89111 11.9994 8.89111C13.7454 8.89111 15.1614 10.3061 15.1614 12.0531Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M11.998 19.3549C15.806 19.3549 19.289 16.6169 21.25 12.0529C19.289 7.48885 15.806 4.75085 11.998 4.75085H12.002C8.194 4.75085 4.711 7.48885 2.75 12.0529C4.711 16.6169 8.194 19.3549 12.002 19.3549H11.998Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

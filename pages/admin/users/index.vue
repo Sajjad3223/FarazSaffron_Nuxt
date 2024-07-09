@@ -3,15 +3,18 @@
     <Head>
       <Title>کاربران جی پی</Title>
     </Head>
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-    >
-      کاربران
-    </h4>
-    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
+    <base-f-divider :logo-divider="false" title="کاربران">
+      <template #left>
+        <base-f-button color="primary" @clicked="showAddUserModal = true">
+          کاربر جدید
+        </base-f-button>
+      </template>
+    </base-f-divider>
+
+    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden" v-if="false">
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
-        <strong class="text-xl dark:text-white">فیلتر کاربران</strong>
-        <span :class="['dark:text-white transition duration-200',{'rotate-180':showFilters}]">
+        <strong class="text-xl ">فیلتر کاربران</strong>
+        <span :class="[' transition duration-200',{'rotate-180':showFilters}]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -33,14 +36,6 @@
       </Transition>
     </div>
 
-    <base-f-divider :logo-divider="false" title="کاربران">
-      <template #left>
-        <base-f-button color="primary" @clicked="showAddUserModal = true">
-          افزودن کاربر جدید
-        </base-f-button>
-      </template>
-    </base-f-divider>
-
     <base-f-modal v-model="showAddUserModal" title="افزودن کاربر جدید">
       <admin-users-add @operation-finished="showAddUserModal = false" />
     </base-f-modal>
@@ -53,7 +48,7 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
-              class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">ID</th>
             <th class="px-4 py-3">نام و نام خانوادگی</th>
@@ -65,9 +60,9 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="u in users" :key="u">
+          <tr class="text-gray-700 " v-for="u in users" :key="u">
             <td class="px-4 py-3 text-sm text-nowrap">
               {{ u.id }}
             </td>
@@ -75,7 +70,7 @@
               <div class="flex items-center text-sm">
                 <div>
                   <p class="font-semibold text-nowrap">{{u.fullName}}</p>
-                  <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
+                  <p class="text-xs font-light text-gray-600  text-nowrap">
                     ( <span class="text-primary hover:underline cursor-pointer" @click.prevent="selectedUserId = u.id, showSetRolesModal = true">مدیریت دسترسی ها</span> )
                   </p>
                 </div>
@@ -96,7 +91,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
                 <button
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
                   <svg
@@ -111,7 +106,7 @@
                   </svg>
                 </button>
                 <button
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete"
                 >
                   <svg
@@ -128,7 +123,7 @@
                   </svg>
                 </button>
                 <button title="مدیریت دسترسی ها" @click.prevent="selectedUserId = u.id, showSetRolesModal = true"
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Set Permissions"
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,7 +141,7 @@
       </div>
       <FPagination v-model="pageId" :pagination-data="paginationData" />
     </div >
-    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+    <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"

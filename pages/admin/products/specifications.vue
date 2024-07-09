@@ -3,9 +3,13 @@
     <Head>
       <Title>ویژگی ها</Title>
     </Head>
-    <base-g-button @click="showCreatePropertyModal = true" >
-      افزودن ویژگی جدید
-    </base-g-button>
+    <base-f-divider :logo-divider="false" title="ویژگی ها">
+      <template #left>
+        <base-f-button color="primary" @clicked="showCreatePropertyModal = true" text-color="white">
+          ویژگی جدید
+        </base-f-button>
+      </template>
+    </base-f-divider>
 
     <base-g-modal title="افزودن ویژگی جدید" v-model="showCreatePropertyModal">
       <admin-properties-create-property @propertyCreated="showCreatePropertyModal = false,getData()" />
@@ -15,14 +19,14 @@
       <admin-properties-edit-property :property="selectedProperties" @propertyEdited="showEditPropertyModal = false,getData()" />
     </base-g-modal>
 
-    <table class="dark:text-white mt-12 w-full" v-if="properties.length > 0">
+    <table class=" mt-12 w-full" v-if="properties.length > 0">
       <thead class="font-bold opacity-50">
-      <tr>
-        <th class="px-4 text-right pb-10">عنوان</th>
-        <th class="px-4 text-right pb-10">متن راهنما</th>
-        <th class="px-4 text-right pb-10">وضعیت</th>
-        <th class="px-4 text-right pb-10">تاریخ ثبت</th>
-        <th class="px-4 text-right pb-10">عملیات</th>
+      <tr class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  ">
+        <th class="px-4 text-right py-5">عنوان</th>
+        <th class="px-4 text-right py-5">متن راهنما</th>
+        <th class="px-4 text-right py-5">وضعیت</th>
+        <th class="px-4 text-right py-5">تاریخ ثبت</th>
+        <th class="px-4 text-right py-5">عملیات</th>
       </tr>
       </thead>
       <tbody>

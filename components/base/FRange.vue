@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col" dir="ltr">
-    <span class="dark:text-white text-sm font-light mb-4">محدوده قیمت</span>
+    <span class=" text-sm font-light mb-4">محدوده قیمت</span>
     <div class="relative w-full h-[5px] z-[1] top-[3px]">
       <div ref="progress" id="progress" class="absolute bg-brandOrange h-[5px] rounded-full pointer-events-none"
            style="box-shadow: 0 0 5px 0 #F0462280;"></div>

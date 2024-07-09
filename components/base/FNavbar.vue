@@ -344,7 +344,7 @@
                         <cart-counter :item="i" class="scale-75"/>
                       </div>
                       <div class="flex flex-col justify-between flex-1 pb-2 pt-4">
-                        <strong class="text-lg w-4/5">{{ i.itemInfo.productName }}</strong>
+                        <strong class=" w-4/5">{{ i.itemInfo.productName }}</strong>
                         <div class="flex flex-col">
                           <div class="flex items-center gap-1">
                             <span class="text-sm opacity-50 font-light">وزن:</span>
@@ -356,7 +356,7 @@
                           </div>
                         </div>
                         <div class="flex items-center mt-top justify-between">
-                          <base-g-price :price="(i.totalPrice / 10)" class="scale-125 mr-4"/>
+                          <base-g-price :size="'xs'" :price="(i.totalPrice / 10)" class="scale-125 mr-4"/>
                           <!--                              <base-g-price :price="()" /> TODO discount-->
                         </div>
                       </div>

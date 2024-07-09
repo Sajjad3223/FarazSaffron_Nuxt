@@ -12,7 +12,7 @@
       </div>
     </div>
     <ul class="flex-flex-col space-y-4 mt-4" v-if="!loading">
-      <li class="w-full flex flex-col bg-bgWhite p-4 rounded-lg last:border-none" v-if="comments.length > 0" v-for="c in comments" :key="c.id">
+      <li class="w-full flex flex-col bg-bgWhite p-4 rounded-lg border" v-if="comments.length > 0" v-for="c in comments" :key="c.id">
         <div class="flex justify-between items-start">
           <div class="flex items-center flex-wrap gap-2 lg:gap-4">
               <NuxtLink :to="`/product/${c.postSlug}`">

@@ -3,16 +3,45 @@
     <Head>
       <Title>فرم های تماس با ها</Title>
     </Head>
-    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-      فرم های تماس با ما
-    </h4>
+    <base-f-divider :logo-divider="false" title="فرم های تماس با ما" />
+
+    <base-g-modal title="نمایش پیام" v-model="showMessageModal">
+      <div class="grid grid-cols-2 gap-4 mt-5">
+        <div class="flex flex-col space-y-2 col-span-2">
+          <span class="text-xs opacity-60">موضوع</span>
+          <span class="text-sm font-light">{{selectedForm?.subject}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <span class="text-xs opacity-60">نام و نام خانوادگی</span>
+          <span class="text-sm font-light">{{selectedForm?.fullName}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <span class="text-xs opacity-60">تلفن</span>
+          <span class="text-sm font-light">{{selectedForm?.phoneNumber}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <span class="text-xs opacity-60">ایمیل</span>
+          <span class="text-sm font-light">{{selectedForm?.email}}</span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <span class="text-xs opacity-60">تاریخ ثبت</span>
+          <span class="text-sm font-light">{{selectedForm?.persianDate}}</span>
+        </div>
+        <div class="col-span-full flex flex-col space-y-2">
+          <span class="text-xs opacity-60">متن پیام</span>
+          <p class="font-light">
+            {{selectedForm?.text}}
+          </p>
+        </div>
+      </div>
+    </base-g-modal>
 
     <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
-              class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">ID</th>
             <th class="px-4 py-3">موضوع</th>
@@ -24,9 +53,9 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr class="text-gray-700 dark:text-gray-400" v-for="c in contactForms" :key="c">
+          <tr class="text-gray-700 " v-for="c in contactForms" :key="c">
             <td class="px-4 py-3 text-sm text-nowrap">
               {{ c.id }}
             </td>
@@ -34,9 +63,9 @@
               <div class="flex items-center text-sm">
                 <div>
                   <p class="font-semibold text-nowrap">{{c.subject}}</p>
-                  <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
+                  <button class="text-xs font-light text-gray-600 text-nowrap" @click="selectedForm = c,showMessageModal = true">
                     ( <span class="text-primary hover:underline cursor-pointer">مشاهده پیام</span> )
-                  </p>
+                  </button>
                 </div>
               </div>
             </td>
@@ -55,7 +84,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
                 <button
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
                   <svg
@@ -70,7 +99,7 @@
                   </svg>
                 </button>
                 <button
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete"
                 >
                   <svg
@@ -95,7 +124,7 @@
       </div>
       <FPagination v-model="pageId" :pagination-data="paginationData" />
     </div >
-    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+    <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
@@ -120,8 +149,10 @@ definePageMeta({
   layout:'admin'
 })
 
+const showMessageModal = ref(false);
 const isLoading = ref(true);
 const pageId = ref(1);
+const selectedForm:Ref<ContactFormDto | undefined> = ref(undefined);
 const contactForms:Ref<ContactFormDto[] | undefined> = ref([]);
 const paginationData:Ref<PaginationData | null | undefined> = ref(null);
 

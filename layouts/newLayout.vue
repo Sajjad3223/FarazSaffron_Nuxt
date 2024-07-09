@@ -396,19 +396,26 @@
             <div class="absolute top-20 container flex items-start justify-between">
               <div class="w-2/5 flex flex-col space-y-6">
                 <div class="grid grid-cols-2 gap-6 w-full">
-                  <input type="text" placeholder="نام" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
-                  <input type="text" placeholder="نام خانوادگی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
-                  <input type="text" placeholder="شرکت (اختیاری)" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
-                  <input type="text" placeholder="استان" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
-                  <input type="text" placeholder="شهر" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light">
-                  <input type="text" placeholder="آدرس" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
-                  <input type="text" placeholder="کد پستی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
-                  <input type="text" placeholder="شماره تلفن" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
-                  <input type="text" placeholder="ایمیل" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light">
+                  <input type="text" placeholder="نام" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="نام خانوادگی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="شرکت (اختیاری)" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="استان" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="شهر" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="آدرس" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="کد پستی" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="شماره تلفن" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light focus:ring-none focus:outline-black/20">
+                  <input type="text" placeholder="ایمیل" class="w-full rounded-lg bg-[#FAFAFA] border px-4 py-3 col-span-full font-light focus:ring-none focus:outline-black/20">
                 </div>
                 <hr class="w-full">
                 <div class="p-4 rounded-lg border w-full flex items-center gap-4">
-                  <input type="checkbox" name="save" id="save">
+                  <div class="relative">
+                    <input type="checkbox" name="save" id="save" class="rounded-md accent-primary w-5 h-5 appearance-none border bg-[#FAFAFA] peer cursor-pointer">
+                    <div class="bg-transparent peer-checked:bg-primary peer-checked:text-white w-5 h-5 rounded-md absolute inset-0 pointer-events-none duration-200 transition-colors grid place-items-center text-transparent">
+                      <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3">
+                        <path d="M17 1L6 12L1 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
                   <label for="save" class="font-light">برای پرداخت سریع ، اطلاعاتم را ذخیره کن</label>
                 </div>
                 <button class="w-full py-3 rounded-lg text-white bg-[#FB7511]">
@@ -418,19 +425,23 @@
               <div class="flex flex-col items-end w-2/5 space-y-7">
                 <div class="w-full">
                   <ul class="w-full">
-                    <li class="w-full flex items-center gap-8 py-3 border-b last:border-none first:pt-0" v-for="i in 2" :key="i">
+                    <li class="w-full flex flex-wrap items-stretch gap-x-8 py-3 first:pt-0" v-for="i in 2" :key="i">
                       <div class="w-1/5 border rounded-md aspect-square bg-white grid place-items-center relative">
                         <img src="~/assets/images/saffron-pocket.png" alt="saffron pocket" class="w-2/3">
                         <span class="text-white bg-[#FB7511] rounded-full text-xs leading-5 w-5 h-5 grid place-items-center absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
                           2
                         </span>
                       </div>
-                      <div class="flex-1 flex items-center justify-between">
+                      <div class="flex-1 flex items-center justify-between my-auto">
                         <div class="flex flex-col gap-1">
                           <span class="text-sm">زعفران نگین / پاکتی</span>
                           <span class="text-xs">8 گرمی</span>
                         </div>
                         <span class="text-sm">460,000 تومان</span>
+                      </div>
+                      <div class="flex gap-8 items-center w-full -mb-6" v-if="i != 2">
+                        <div class="w-1/5"></div>
+                        <hr class="w-4/5 flex-1">
                       </div>
                     </li>
                   </ul>

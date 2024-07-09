@@ -3,7 +3,7 @@
     <Head>
       <Title>سبد خرید</Title>
     </Head>
-    <div class="mt-12" v-if="!utilStore.isMobile()">
+    <div class="mt-12 hidden md:block">
       <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center"
            v-if="cartStore.PendingOrder && cartStore.cartItemsCount > 0">
 
@@ -26,7 +26,7 @@
         </div>
 
         <!--  GP Peyk   -->
-        <div class="w-full rounded-xl border border-opacity-25 p-5">
+        <div class="w-full rounded-xl border border-opacity-25 p-5" v-if="false">
           <div class="w-3/4 mx-auto grid grid-cols-2 items-center">
             <div class="flex flex-col items-start space-y-4">
               <h3 class="text-3xl font-bold text-brandOrange">جی پی پیک</h3>
@@ -150,7 +150,7 @@
               تکمیل سفارش
             </base-g-button>
             <base-g-button button-type="white" color="info" custom-class="text-center text-sm"
-                           @click="authStore.isLoginModalOpen = true" w-full v-else>
+                           @click="authStore.isAuthModalOpen = true" w-full v-else>
               برای تکمیل سفارش باید وارد حساب کاربری خود شوید
             </base-g-button>
           </div>
@@ -209,7 +209,7 @@
 
         <client-only v-if="!loading">
           <div class="bg-[#F8F8F8] rounded-xl p-8 flex flex-col">
-            <GPCarousel ref="carousel" items-to-show="4.3" snap-align="start" wrap-around dir="rtl">
+            <GPCarousel ref="carousel" :items-to-show="4.3" snap-align="start" wrap-around dir="rtl">
               <GPSlide v-for="p in products" :key="p">
                 <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] rounded-xl transition-all duration-300 similar" >
                   <NuxtLink :to="`/product/${p.slug}`" class="w-2/5 grid place-items-center relative">
@@ -266,7 +266,7 @@
 
       </section>
     </div>
-    <div class="mt-6 pb-[50px]" v-else>
+    <div class="mt-6 pb-[50px] md:hidden">
       <div v-if="cartStore.PendingOrder && cartStore.cartItemsCount > 0" class="flex flex-col items-center ">
         <div class="flex items-center gap-1">
           <strong>
@@ -373,7 +373,7 @@ import {useCartStore} from "~/stores/cart.store";
 import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
-import {EPackingType} from "../../models/product/EPackingType";
+import {EPackingType} from "~/models/product/EPackingType";
 
 
 const cartStore = useCartStore();

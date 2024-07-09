@@ -13,7 +13,7 @@
       <Meta title="guarantee" content="تا 1 هفته ضمانت اصالت و تازگی کالا" />
     </Head>
 
-    <div v-if="!utilStore.isMobile()">
+    <div class="hidden md:block">
       <!--  Breadcrumb  -->
       <div class="my-8">
         <ul class="flex items-center gap-1">
@@ -28,23 +28,23 @@
           <li class="text-[#A5A5A5]">
             <NuxtLink to="/market">محصولات</NuxtLink>
           </li>
-          <li v-if="product.subCategory == null">
+          <li v-if="product.category">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 17L10 12L15 7" stroke="#A5A5A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </li>
-          <li class="text-[#A5A5A5]" v-if="product.subCategory == null">
-            <NuxtLink :to="`/market?category=${product.category.slug}`">{{ product.category.title }}</NuxtLink>
+          <li class="text-[#A5A5A5]" v-if="product.category">
+            <NuxtLink :to="`/market?category=${product?.category?.id}`">{{ product?.category?.title }}</NuxtLink>
           </li>
-          <li v-if="product.subCategory != null">
+          <li >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 17L10 12L15 7" stroke="#A5A5A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </li>
-          <li class="text-[#A5A5A5]" v-if="product.subCategory != null">
-            <NuxtLink :to="`/market?category=${product.subCategory.slug}`">{{ product.subCategory.title }}</NuxtLink>
+          <li class="text-[#A5A5A5]"  v-if="product.subCategory">
+            <NuxtLink :to="`/market?category=${product?.subCategory?.id}`">{{ product?.subCategory?.title }}</NuxtLink>
           </li>
-          <li>
+          <li v-if="product.subCategory">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 17L10 12L15 7" stroke="#A5A5A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -59,18 +59,18 @@
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
           <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
-            <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]"
+            <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[450px] rounded-2xl"
                     :mousewheel="{enabled:true}"
                     :slides-per-view="3.5" :space-between="20">
               <SwiperSinglePageControls />
               <SwiperSlide v-for="i in product?.images">
-                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full max-w-24 cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
               </SwiperSlide>
             </Swiper>
           </div>
           <div class="flex-1 bg-white rounded-xl grid relative place-items-center aspect-square">
             <div class="aspect-square image-magnifier-container grid place-items-center">
-              <img id="mainImage" class="cursor-none" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
+              <img id="mainImage" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
             </div>
             <div class="flex flex-col space-y-4 absolute top-0 left-0 p-2 rounded-full bg-white">
               <button @click="removeFavorite" v-if="isFavorite">
@@ -153,12 +153,12 @@
                     </svg>
                   </button>
                 </div>
-                <button class="bg-brandOrange rounded-lg py-2 flex gap-2 px-3 items-center justify-center" @click="cartStore.addToCart(product.id,product.slug,quantity)">
+                <base-g-button w-full @click="addToCart" :is-loading="addToCartLoading">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.4016 5.56176C10.4016 6.88724 9.32705 7.96176 8.00156 7.96176C6.67608 7.96176 5.60156 6.88724 5.60156 5.56176M3.15308 13.9618H12.85C13.7069 13.9618 14.4016 13.28 14.4016 12.4391L13.4076 3.56174C13.4076 2.72079 12.713 2.03906 11.8561 2.03906H3.95308C3.0962 2.03906 2.40156 2.72079 2.40156 3.56174L1.60156 12.4391C1.60156 13.28 2.2962 13.9618 3.15308 13.9618Z" stroke="#F4F4F4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                   <span class="text-white">افزودن به سبد خرید</span>
-                </button>
+                </base-g-button>
               </div>
               <base-g-button w-full button-type="outline" color="danger" v-else>
                 موجود شد به من اطلاع بده
@@ -186,6 +186,28 @@
       </div>
 
       <Transition name="fade">
+        <div class="fixed inset-0 grid place-items-center z-40 bg-black/20 backdrop-blur-sm" @click.self="showAddedToCartModal = false" v-if="showAddedToCartModal">
+          <div class="w-1/5 bg-white rounded-xl addedToCartAnim flex flex-col px-2 pt-4 pb-8">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-[150px]">
+                <div class="flex flex-col space-y-2">
+                  <span>{{product.title}}</span>
+                  <span class="opacity-60 text-sm font-light text-green-600">با موفقیت به سبد خرید اضافه شد</span>
+                </div>
+              </div>
+            </div>
+            <NuxtLink to="/checkout/cart" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
+              <span>رفتن به سبد خرید</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </NuxtLink>
+          </div>
+        </div>
+      </Transition>
+
+      <Transition name="fade">
         <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-30 grid place-items-center" v-if="showBannerModal" @click.self="showBannerModal = false">
           <div class="w-2/5">
             <img :src="bannerImage" :alt="bannerImageAlt" class="w-full rounded-3xl">
@@ -197,13 +219,13 @@
       <div class="my-10 border rounded-2xl border-[#BEBEBE] grid grid-cols-4 gap-4 place-items-center py-8">
         <div class="flex items-center gap-4">
           <div class="w-[50px] h-[50px] rounded-full border border-[#BEBEBE] grid place-items-center">
-            <img src="../../assets/images/icons/support.png" alt="support" class="w-2/3">
+            <img src="../../assets/images/icons/support.png" alt="support" class="w-2/3 opacity-50">
           </div>
           <strong class="text-[#808080]">پشتیبانی آنلاین</strong>
         </div>
         <div class="flex items-center gap-4">
           <div class="w-[50px] h-[50px] rounded-full border border-[#BEBEBE] grid place-items-center">
-            <img src="../../assets/images/icons/guarrany.png" alt="guarrany" class="w-2/3">
+            <img src="../../assets/images/icons/guarrany.png" alt="guarrany" class="w-2/3 opacity-50">
           </div>
           <strong class="text-[#808080]">تضمین کیفیت</strong>
         </div>
@@ -215,7 +237,7 @@
         </div>
         <div class="flex items-center gap-4">
           <div class="w-[50px] h-[50px] rounded-full border border-[#BEBEBE] grid place-items-center">
-            <img src="../../assets/images/icons/fastDelivery.png" alt="fastDelivery" class="w-2/3">
+            <img src="../../assets/images/icons/fastDelivery.png" alt="fastDelivery" class="w-2/3 opacity-50">
           </div>
           <strong class="text-[#808080]">ارسال سریع</strong>
         </div>
@@ -391,7 +413,7 @@
       </div>
     </div>
 
-    <div v-else>
+    <div class="md:hidden">
       <div v-if="product" class="flex py-4 flex-col pb-[70px]">
         <div class="flex items-center justify-between w-full">
           <NuxtLink to="/">
@@ -522,7 +544,7 @@
 <!--            <small>قیمت محصول:</small>-->
             <base-g-price :price="(product.price / 10)" class="scale-150"/>
           </div>
-          <base-g-button @click="cartStore.addToCart(product.id,product.slug)" w-full class="w-full" :py="0">
+          <base-g-button @click="addToCart" w-full class="w-full" :py="0" :is-loading="addToCartLoading">
             افزودن به سبد خرید
           </base-g-button>
         </div>
@@ -603,6 +625,8 @@ const swiperRef = ref();
 const accountStore = useAccountStore();
 const authStore = useAuthStore();
 const utilStore = useUtilStore();
+const showAddedToCartModal = ref(false);
+const addToCartLoading = ref(false);
 const isLoading = ref(false);
 const pageId = ref(1);
 const quantity = ref(1);
@@ -690,7 +714,7 @@ onMounted(async ()=>{
   isLoading.value = false;
 
   setTimeout(()=>{
-    magnify("mainImage", 2);
+    //magnify("mainImage", 2);
     isFavorite.value = accountStore.isFavorite(product.value.id,EPostType.Product)
   },2000);
 })
@@ -714,6 +738,16 @@ const removeFavorite = async () => {
     //await toast.showToast("محصول از علاقه مندی ها حذف شد",ToastType.success,2000 ,true);
     isFavorite.value = false;
   }
+}
+
+const addToCart = async () => {
+  addToCartLoading.value = true;
+
+  let res = await cartStore.addToCart(product.value.id,product.value.slug,quantity.value);
+  if(res)
+    showAddedToCartModal.value = true;
+
+  addToCartLoading.value = false;
 }
 
 const info = ref();
@@ -755,6 +789,26 @@ const comments = ref();
 }
 .corner:after{
   box-shadow: -3px -3px 0 0 #F8F8F8;
+}
+
+.addedToCartAnim{
+  animation-delay: 1s;
+  animation-name: greenShadow;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes greenShadow {
+  0%{
+    box-shadow: 0 0 0 0 #3ACC3E4D;
+  }
+  50%{
+    box-shadow: 0 0 20px 0 #3ACC3E4D;
+  }
+  100%{
+    box-shadow: 0 0 0 0 #3ACC3E4D;
+  }
 }
 
 </style>

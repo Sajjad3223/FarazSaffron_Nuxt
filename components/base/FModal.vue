@@ -2,15 +2,15 @@
   <Transition enter-from-class="-translate-y-24 opacity-0" enter-to-class="translate-y-0 opacity-100" enter-active-class="transition-all duration-300"
               leave-to-class="-translate-y-24 opacity-0" leave-from-class="translate-y-0 opacity-100" leave-active-class="transition-all duration-300">
     <div v-if="modelValue" @click.self="closeModal" class="modalWrapper flex items-center justify-center fixed inset-0 bg-black/50 z-50">
-      <div class="modal bg-bgWhite dark:bg-gray-800 p-4 rounded-xl drop-shadow-lg w-[500px]">
-        <div class="modal-header flex items-center justify-between pb-4 border-b mb-4 dark:text-white">
+      <div class="modal bg-bgWhite  p-4 rounded-xl drop-shadow-lg w-[500px]">
+        <div class="modal-header flex items-center justify-between pb-4 border-b mb-4 ">
           <div>
             <template v-if="$slots.header">
               <slot name="header" />
             </template>
             <template v-else>
               <div>
-                <h5 class="text-xl font-bold dark:text-gray-300">{{title}}</h5>
+                <h5 class="text-xl font-bold ">{{title}}</h5>
                 <p class="font-light">{{subTitle}}</p>
               </div>
             </template>

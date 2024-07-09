@@ -174,7 +174,7 @@ const emits = defineEmits(['clicked']);
   @apply text-inherit;
 }
 .textColor-responsive {
-  @apply text-black dark:text-white;
+  @apply text-black ;
 }
 
 </style>

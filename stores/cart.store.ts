@@ -85,15 +85,7 @@ export const useCartStore = defineStore("cart",()=>{
                         id: cartData.orderItems.length + 1,
                         itemInfo: {
                             productName: product.data!.title!,
-                            productImage: {
-                                image: product.data!.mainImage!,
-                                productId: product.data!.id!,
-                                id: 0,
-                                creationDate: new Date(),
-                                isActive: true,
-                                persianDate: "",
-                                persianTime: ""
-                            },
+                            productImage: product.data!.mainImage!,
                             eItemType: EItemType.Saffron,
                             productSlug: product.data!.slug!,
                             productId: product.data!.id!
@@ -286,6 +278,7 @@ export const useCartStore = defineStore("cart",()=>{
         cartCookie.value = null;
 
         cartLoading.value = false;
+        location.reload();
     }
 
     return {

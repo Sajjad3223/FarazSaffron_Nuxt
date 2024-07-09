@@ -6,7 +6,7 @@
   </Head>
 
   <div class="flex flex-col mt-12 mx-6 lg:mx-0">
-    <h2 class="font-black dark:text-white text-3xl">
+    <h2 class="font-black  text-3xl">
       مقالات جی پی
     </h2>
     <div class="flex flex-col lg:flex-row lg:space-x-4 lg:space-x-reverse mt-12">
@@ -33,7 +33,7 @@
         </form>
         <hr class="my-4">
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <li class="flex flex-col bg-bgWhite dark:bg-gray-800 dark:text-white rounded-xl drop-shadow overflow-hidden" v-for="i in 10" :key="i">
+          <li class="flex flex-col bg-bgWhite   rounded-xl drop-shadow overflow-hidden" v-for="i in 10" :key="i">
             <NuxtLink to="/gpblog/post">
               <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full object-cover rounded-xl">
             </NuxtLink>
@@ -70,7 +70,7 @@
       </div>
       <div class="w-full lg:w-1/4 mt-8 lg:mt-0 flex flex-col space-y-4">
         <div class="w-full p-4 border rounded-xl flex flex-col">
-          <h4 class="text-lg dark:text-white font-bold">
+          <h4 class="text-lg  font-bold">
             مقالات اخیر
           </h4>
           <hr class="my-3">
@@ -79,7 +79,7 @@
               <NuxtLink to="/gpblog/post" class="w-1/2">
                 <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full aspect-square object-cover rounded-xl">
               </NuxtLink>
-              <div class="flex items-center dark:text-white space-x-1 space-x-reverse opacity-50 mt-2">
+              <div class="flex items-center  space-x-1 space-x-reverse opacity-50 mt-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2498 12C21.2498 17.108 17.1088 21.25 11.9998 21.25C6.8918 21.25 2.7498 17.108 2.7498 12C2.7498 6.891 6.8918 2.75 11.9998 2.75C17.1088 2.75 21.2498 6.891 21.2498 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M16.1907 12.7672L11.6607 12.6932V7.84619" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -90,7 +90,7 @@
                 زعفران در چه محیطی به عمل می‌آید؟
               </NuxtLink>
             </li>
-            <li class="flex items-center overflow-hidden dark:text-white" v-for="i in 3" :key="i">
+            <li class="flex items-center overflow-hidden " v-for="i in 3" :key="i">
               <NuxtLink to="/gpblog/post" class="w-1/5">
                 <img src="~/assets/images/blogBanner.jpg" alt="blog banner" class="w-full aspect-square object-cover rounded-xl">
               </NuxtLink>
@@ -110,11 +110,11 @@
           </ul>
         </div>
         <div class="w-full p-4 border rounded-xl flex flex-col">
-          <h4 class="text-lg dark:text-white font-bold">
+          <h4 class="text-lg  font-bold">
             دسته بندی ها
           </h4>
           <hr class="my-3">
-          <ul class="space-y-6 list-disc mr-6 dark:text-white">
+          <ul class="space-y-6 list-disc mr-6 ">
             <li class="font-light space-y-2" v-for="x in 3" :key="x">
               <span>زعفران (5)</span>
               <ul class="space-y-3 list-disc mr-6">

@@ -5,10 +5,10 @@
       <Title>حساب کاربری</Title>
     </Head>
 
-    <div v-if="!utilStore.isMobile()">
+    <div class="hidden md:block">
       <div class="flex items-start gap-4">
         <div class="flex-1 grid grid-cols-3 gap-5">
-          <div v-if="!loading" class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+          <div v-if="!loading" class="bg-white border border-[#818C92]/20 rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
             <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-brandOrange/10">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="25" height="25" fill="url(#pattern0_438_2606)"/>
@@ -28,14 +28,14 @@
               <span class="text-sm font-bold opacity-50">جی پی کلاب</span>
             </div>
           </div>
-          <div v-else class="bg-white rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
+          <div v-else class="bg-white  rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
             <div class="w-[50px] aspect-square skeleton-el rounded-full"></div>
             <div class="flex flex-col space-y-2">
               <div class="w-24 h-4 rounded-full skeleton-el"></div>
               <div class="w-10 h-2 rounded-full skeleton-el"></div>
             </div>
           </div>
-          <NuxtLink v-if="!accountStore.initLoading" to="/profile/wallet" class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+          <NuxtLink v-if="!accountStore.initLoading" to="/profile/wallet" class="bg-white border border-[#818C92]/20 rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
             <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-[#F4F9FF]">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="25" height="25" fill="url(#pattern0_438_2613)"/>
@@ -55,14 +55,14 @@
               <span class="text-sm font-bold opacity-50">کیف پول</span>
             </div>
           </NuxtLink>
-          <div v-else class="bg-white rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
+          <div v-else class="bg-white  rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
             <div class="w-[50px] aspect-square skeleton-el rounded-full"></div>
             <div class="flex flex-col space-y-2">
               <div class="w-24 h-4 rounded-full skeleton-el"></div>
               <div class="w-10 h-2 rounded-full skeleton-el"></div>
             </div>
           </div>
-          <NuxtLink v-if="!loading" to="/profile/orders" class="bg-white rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
+          <NuxtLink v-if="!loading" to="/profile/orders" class="bg-white border border-[#818C92]/20 rounded-lg relative p-4 flex items-center justify-center gap-4 min-h-[120px]">
             <div class="w-[50px] aspect-square grid place-items-center rounded-full bg-[#FEF0F4]">
               <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="25" height="25" fill="url(#pattern0_438_2619)"/>
@@ -82,14 +82,14 @@
               <span class="text-sm font-bold opacity-50">سفارشات</span>
             </div>
           </NuxtLink>
-          <div v-else class="bg-white rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
+          <div v-else class="bg-white  rounded-lg flex items-center justify-center gap-4 min-h-[120px] skeleton">
             <div class="w-[50px] aspect-square skeleton-el rounded-full"></div>
             <div class="flex flex-col space-y-2">
               <div class="w-24 h-4 rounded-full skeleton-el"></div>
               <div class="w-10 h-2 rounded-full skeleton-el"></div>
             </div>
           </div>
-          <div class="bg-white rounded-lg relative p-8 col-span-full overflow-x-hidden">
+          <div class="bg-white border border-[#818C92]/20 rounded-lg relative p-8 col-span-full overflow-x-hidden">
             <div class="flex items-center justify-between">
               <span>آخرین تراکنش ها</span>
               <NuxtLink to="/profile/wallet" class="text-sm opacity-50 hover:opacity-80 transition-opacity duration-200 text-primary flex items-center group">
@@ -167,7 +167,7 @@
           </div>
         </div>
         <div class="w-1/4 flex flex-col" >
-          <div class="bg-white rounded-xl flex flex-col p-4 min-h-[250px]">
+          <div class="bg-white border border-[#818C92]/20 rounded-xl flex flex-col p-4 min-h-[250px]">
             <span class="text-lg opacity-50 font-semibold mb-4 mx-auto">سفارشات</span>
             <div v-if="!hasNoOrder">
               <div class="donut" ref="chart" v-show="!loading">
@@ -212,7 +212,7 @@
       </div>
     </div>
 
-    <div v-else class="my-4">
+    <div class="my-4 md:hidden">
       <div class="w-full flex items-center justify-between">
         <div class="flex gap-4 items-center">
           <div class="p-3 rounded-full aspect-square bg-[#D9D9D9]">

@@ -19,7 +19,7 @@
 
     <div v-if="!loading">
       <div v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
-        <NuxtLink :to="`/profile/tickets/${ticket.id}`" class="w-full flex flex-col ticket transition-shadow duration-200 space-y-5 p-8 min-h-[90px] bg-white rounded-xl " v-for="ticket in tickets" :key="ticket.id">
+        <NuxtLink :to="`/profile/tickets/${ticket.id}`" class="w-full border flex flex-col ticket transition-shadow duration-200 space-y-5 p-8 min-h-[90px] bg-white rounded-xl " v-for="ticket in tickets" :key="ticket.id">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4">
               <NuxtLink :to="`/profile/tickets/${ticket.id}`">

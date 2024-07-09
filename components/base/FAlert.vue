@@ -28,7 +28,7 @@ const props = defineProps<{
 
 <style scoped>
 .alert{
-  @apply p-3 text-sm font-light rounded-lg dark:bg-gray-800 dark:text-blue-400 flex items-center space-x-2 space-x-reverse;
+  @apply p-3 text-sm font-light rounded-lg  dark:text-blue-400 flex items-center space-x-2 space-x-reverse;
 }
 
 .alert-primary{

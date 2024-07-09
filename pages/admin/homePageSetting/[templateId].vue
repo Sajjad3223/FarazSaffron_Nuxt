@@ -4,7 +4,7 @@
       <Title>مدیریت محتوای صفحه اصلی</Title>
     </Head>
     <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+        class="mb-4 text-lg font-semibold text-gray-600 "
     >
       مدیریت محتوای صفحه اصلی
     </h4>
@@ -45,7 +45,7 @@
     </base-g-modal>
 
     <div class="flex flex-col space-y-5 mt-12" v-if="template">
-      <div class="dark:text-white grid grid-cols-4 gap-5">
+      <div class=" grid grid-cols-4 gap-5">
         <div class="flex flex-col gap-2">
           <span class="opacity-50 text-sm">عنوان</span>
           <strong class="text-lg">{{template.title}}</strong>

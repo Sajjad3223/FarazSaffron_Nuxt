@@ -19,7 +19,7 @@
       </div>
       <div v-if="!accountStore.initLoading">
         <ul class="flex flex-col space-y-4 w-full" v-if="!accountStore.initLoading">
-          <li class="flex bg-white rounded-xl p-4 min-h-[120px]"
+          <li class="flex bg-white border rounded-xl p-4 min-h-[120px]"
               v-for="a in accountStore.currentUser?.addresses" :key="a.id">
             <div class="w-1/12 grid place-items-center">
               <input type="radio" name="activeAddress" class="accent-primary my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">

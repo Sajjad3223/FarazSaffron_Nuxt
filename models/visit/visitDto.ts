@@ -10,10 +10,20 @@ export interface VisitDto extends BaseMongoDto{
     address: string;
     device: string;
     postType: EPostType;
+    from?:string | undefined | null;
 }
 
 export interface VisitFilterParams extends BaseFilterParams{
     search?:string | undefined | null;
 }
 
-export interface VisitFilterResult extends BaseFilterResult<VisitDto>{}
+export interface VisitFilterResult extends BaseFilterResult<VisitDto>{
+    totalVisits: number;
+    yearVisits: number;
+    lastYearVisits: number;
+    monthVisits: number;
+    lastMonthVisits: number;
+    dayVisits: number;
+    lastDayVisits: number;
+    torobVisits: number;
+}

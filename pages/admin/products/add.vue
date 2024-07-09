@@ -140,7 +140,7 @@
           </div>
           <div class="flex items-end">
             <base-f-select class="flex-1" label="دسته بندی اصلی" name="categoryId" id="categoryId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="categories" @update:modelValue="categorySelected" v-model="addProductData.categoryId" />
-            <button :class="['grid place-items-center h-10 w-10 origin-center dark:text-white',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
+            <button :class="['grid place-items-center h-10 w-10 origin-center ',{'animate-spin':loadingCategories}]" @click.prevent="refreshCategories">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -151,7 +151,7 @@
           <base-f-select label="دسته بندی فرعی" name="subCategoryId" id="subCategoryId" place-holder="دسته بندی فرعی را انتخاب کنید" :data="subCategories" v-model="addProductData.subCategoryId" />
           <div class="flex items-end">
             <base-f-select class="flex-1" label="کاتالوگ" name="catalogId" id="catalogId" place-holder="دسته بندی اصلی را انتخاب کنید" :data="catalogs" v-model="addProductData.catalogId" />
-            <button :class="['grid place-items-center h-10 w-10 origin-center dark:text-white',{'animate-spin':loadingCatalogs}]" @click.prevent="refreshCatalogs">
+            <button :class="['grid place-items-center h-10 w-10 origin-center ',{'animate-spin':loadingCatalogs}]" @click.prevent="refreshCatalogs">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -223,7 +223,7 @@
         </Form>
       </Transition>
 
-      <div class="absolute -inset-4 rounded-lg bg-dark/20 dark:bg-white/20 grid place-items-center dark:text-white backdrop-blur-[2px]" v-if="isLoading">
+      <div class="absolute -inset-4 rounded-lg bg-dark/20 dark:bg-white/20 grid place-items-center  backdrop-blur-[2px]" v-if="isLoading">
         <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"

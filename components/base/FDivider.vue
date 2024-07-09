@@ -4,8 +4,8 @@
     <img src="~/assets/images/en-GP-filled-white.png" alt="gp" class="w-9 bg-brandOrange px-2" v-else>
   </div>
   <div class="flex items-center w-full my-4" v-else>
-    <span class="dark:text-white font-thin">{{ title }}</span>
-    <div class="h-px bg-black flex-1 dark:bg-white opacity-50 mx-4"></div>
+    <span class="font-thin">{{ title }}</span>
+    <div class="h-px bg-black flex-1 opacity-50 mx-4"></div>
     <slot name="left"></slot>
   </div>
 </template>

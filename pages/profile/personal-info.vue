@@ -3,7 +3,7 @@
     <Head>
       <Title>اطلاعات کاربری</Title>
     </Head>
-    <div v-if="!utilStore.isMobile()">
+    <div class="hidden md:block">
       <div class="text-xl font-bold flex items-center gap-2 ">
         <span>اطلاعات کاربری</span>
       </div>
@@ -152,7 +152,7 @@
       </base-f-modal>
 
 
-      <div v-if="!accountStore.initLoading" class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite border rounded-xl">
+      <div v-if="!accountStore.initLoading" class="grid grid-cols-1 lg:grid-cols-2 p-4 bg-bgWhite rounded-xl">
         <div class="flex justify-between p-4 border-b lg:odd:border-l ">
           <div class="flex flex-col space-y-4">
             <span class="font-light text-sm opacity-70">نام و نام خانوادگی</span>
@@ -246,7 +246,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div class="md:hidden">
       <header class="w-full h-[80px] px-4 flex items-center justify-center relative">
         <NuxtLink to="/profile" class="absolute right-7">
           <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">

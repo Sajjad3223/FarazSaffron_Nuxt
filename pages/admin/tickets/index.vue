@@ -32,12 +32,8 @@ const getData = async ()=>{
     <Head>
       <Title>تیکت ها</Title>
     </Head>
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-    >
-      تیکت ها
-    </h4>
-    <hr class="my-4">
+    <base-f-divider :logo-divider="false" title="تیکت ها" />
+
     <div v-if="!loading">
       <div v-if="tickets.length > 0" class="w-full flex flex-col space-y-4">
         <NuxtLink :to="`/admin/tickets/${ticket.id}`" class="w-full flex flex-col space-y-4 p-4 bg-white rounded-xl border" v-for="ticket in tickets" :key="ticket.id">

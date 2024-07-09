@@ -3,15 +3,17 @@
     <Head>
       <Title>محصولات جی پی</Title>
     </Head>
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-    >
-      محصولات
-    </h4>
-    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
+    <base-f-divider :logo-divider="false" title="محصولات فروشگاه">
+      <template #left>
+        <base-f-button color="primary" is-link to="/admin/products/add" text-color="white">
+          افزودن محصول جدید
+        </base-f-button>
+      </template>
+    </base-f-divider>
+    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden" v-if="false">
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
-        <strong class="text-xl dark:text-white">فیلتر محصولات</strong>
-        <span class="dark:text-white">
+        <strong class="text-xl ">فیلتر محصولات</strong>
+        <span class="">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -24,7 +26,7 @@
         <Form class="grid grid-cols-4 mb-4 gap-4 items-end" v-if="showFilters">
           <base-f-input class="col-span-2" name="search" type="text" label="جستجو" place-holder="جستجو در نام، توضیحات و ..." id="search" />
           <div class="flex flex-col space-y-2 w-full col-span-2">
-            <label for="" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">انتخاب دسته بندی ها</label>
+            <label for="" class="flex items-center space-x-1 space-x-reverse font-light text-sm ">انتخاب دسته بندی ها</label>
             <select name="categories" id="categories" class="px-4 py-2 rounded-lg">
               <option selected>دسته بندی ها</option>
             </select>
@@ -40,7 +42,7 @@
             <base-f-input label="سریال نامبر" place-holder="1234-5678-9123"/>
             <div class="flex items-center gap-2">
               <input type="checkbox" name="" id="" class="w-11 h-11 opacity-50 checked:opacity-90">
-              <label for="" class="dark:text-white">فقط تخفیف دار ها</label>
+              <label for="" class="">فقط تخفیف دار ها</label>
             </div>
           </div>
           <base-f-button class="col-span-3" color="primary" text-color="white">
@@ -63,19 +65,13 @@
       </form>
     </base-g-modal>
 
-    <base-f-divider :logo-divider="false" title="محصولات فروشگاه">
-      <template #left>
-        <base-f-button color="primary" is-link to="/admin/products/add" text-color="white">
-          افزودن محصول جدید
-        </base-f-button>
-      </template>
-    </base-f-divider>
+
     <div class=" w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
-              class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">نام کالا</th>
             <th class="px-4 py-3">قیمت</th>
@@ -85,9 +81,9 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr :class="['text-gray-700 dark:text-gray-400',{'opacity-30':!i.isActive}]" v-for="(i) in products">
+          <tr :class="['text-gray-700 ',{'opacity-30':!i.isActive}]" v-for="(i) in products">
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <!-- Avatar with inset shadow -->
@@ -107,7 +103,7 @@
                 </div>
                 <div>
                   <p class="font-semibold text-nowrap">{{i.title}}</p>
-                  <p class="text-xs font-light text-gray-600 dark:text-gray-400 text-nowrap">
+                  <p class="text-xs font-light text-gray-600  text-nowrap">
                     ( <NuxtLink :to="`/product/${i.slug}`" class="text-primary hover:underline">مشاهده کالا در فروشگاه</NuxtLink> )
                   </p>
                 </div>
@@ -125,7 +121,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
                 <button title="تغییر بنر محصول" v-if="i.isActive"
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="ChangePicture" @click="showChangePictureModal = true,selectedProduct = i.id"
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +129,7 @@
                   </svg>
                 </button>
                 <NuxtLink :to="`/admin/products/edit/${i.id}`" title="ویرایش محصول"
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
                   <svg
@@ -148,7 +144,7 @@
                   </svg>
                 </NuxtLink>
                 <button title="حذف محصول"
-                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete" @click="ToggleActivity(i.id,i.isActive)"
                 >
                   <svg
@@ -173,7 +169,7 @@
       </div>
       <FPagination :pagination-data="paginationData" v-model="pageId" />
     </div>
-    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+    <div class="p-8 bg-gray-200  rounded-xl text-black/50 grid place-items-center" v-else>
       <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"

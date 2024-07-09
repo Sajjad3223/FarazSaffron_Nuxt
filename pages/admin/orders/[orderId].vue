@@ -4,7 +4,7 @@
       <Title>جزئیات سفارش #{{orderData.id}}</Title>
     </Head>
     <div
-        class="mb-4 text-lg flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-300"
+        class="mb-4 text-lg flex items-center gap-2 font-semibold text-gray-600 "
     >
       <NuxtLink to="/admin/orders">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

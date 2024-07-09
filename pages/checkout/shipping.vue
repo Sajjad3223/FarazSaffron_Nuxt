@@ -34,7 +34,7 @@
         </div>
 
         <!--  GP Peyk   -->
-        <div class="w-full rounded-xl border border-opacity-25 p-5">
+        <div class="w-full rounded-xl border border-opacity-25 p-5" v-if="false">
           <div class="w-3/4 mx-auto grid grid-cols-2 items-center">
             <div class="flex flex-col items-start space-y-4">
               <h3 class="text-3xl font-bold text-brandOrange">جی پی پیک</h3>

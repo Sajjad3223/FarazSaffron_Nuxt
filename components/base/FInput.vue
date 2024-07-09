@@ -25,7 +25,7 @@
                 :maxlength="maxLength"
       >{{inputValue}}</textarea>
 
-      <div v-if="type === 'number' && isPrice" class="dark:text-white absolute left-12 text-left w-1/2 opacity-50 flex gap-2 items-center pointer-events-none" dir="ltr">
+      <div v-if="type === 'number' && isPrice" class=" absolute left-12 text-left w-1/2 opacity-50 flex gap-2 items-center pointer-events-none" dir="ltr">
         <small class="font-light">ریال</small>
         <span>{{price ?? 0}}</span>
       </div>
@@ -63,8 +63,8 @@
       <div class="text-center h-full border hover:border-primary cursor-pointer rounded-xl border-transparent grid place-items-center" @click="$refs.photo.click()">
         <!-- Current Profile Photo -->
         <div class="bg-gray-200 dark:bg-gray-100/10 h-full w-full  rounded-xl flex items-center justify-center flex-col space-y-2" v-show="!photoData.photoPreview">
-          <span class="dark:text-white font-thin opacity-70 text-xl">هنوز تصویر ثبت نشده است</span>
-          <small class="dark:text-white font-thin opacity-70">برای افزودن تصویر جدید کلیک کنید</small>
+          <span class=" font-thin opacity-70 text-xl">هنوز تصویر ثبت نشده است</span>
+          <small class=" font-thin opacity-70">برای افزودن تصویر جدید کلیک کنید</small>
         </div>
         <!-- New Profile Photo Preview -->
         <div class="w-full mx-auto overflow-hidden" v-show="photoData.photoPreview">

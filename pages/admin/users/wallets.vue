@@ -3,19 +3,52 @@
     <Head>
       <Title>تراکنش ها</Title>
     </Head>
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-    >
-      تراکنش ها
-    </h4>
 
     <base-f-divider :logo-divider="false" title="تراکنش ها" />
-    <div class=" w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
-      <div class="w-full overflow-x-auto" >
+
+    <div class="grid grid-cols-3 gap-5">
+      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+        <div class="flex flex-col space-y-2">
+          <span class="text-sm font-light opacity-70">کل تراکنش ها</span>
+          <div class="flex gap-2">
+            <strong>{{(data?.totalTransactions / 10).toLocaleString()}}</strong>
+            <span>تومان</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+        <div class="flex flex-col space-y-2">
+          <span class="text-sm font-light opacity-70">تراکنش های این ماه</span>
+          <div class="flex gap-2">
+            <strong>{{(data?.monthTransactions / 10).toLocaleString()}}</strong>
+            <span>تومان</span>
+          </div>
+          <div class="flex items-center gap-4 text-sm font-light">
+            <span class="text-xs opacity-50"> تراکنش های ماه قبل</span>:
+            <div class="flex gap-2">
+              <strong>{{(data?.lastMonthTransactions / 10).toLocaleString()}}</strong>
+              <span>تومان</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+        <div class="flex flex-col space-y-2">
+          <span class="text-sm font-light opacity-70">تراکنش های امروز</span>
+          <div class="flex gap-2">
+            <strong>{{(data?.todayTransactions / 10).toLocaleString()}}</strong>
+            <span>تومان</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" w-full overflow-hidden rounded-lg shadow-xs mt-5" v-if="!isLoading">
+      <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
-              class="text-xs font-bold text-right text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">شماره سفارش</th>
             <th class="px-4 py-3">نام خریدار</th>
@@ -28,9 +61,9 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+              class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr :class="['text-gray-700 dark:text-gray-400']" v-for="(w) in wallets">
+          <tr :class="['text-gray-700 hover:opacity-100 transition-opacity duration-200',{'opacity-50':!w.isFinally}]" v-for="(w) in wallets">
             <td class="px-4 py-3 text-sm text-nowrap">
               {{w.id}}
             </td>
@@ -73,7 +106,7 @@
       </div>
       <FPagination :pagination-data="pagination" v-model="pageId" />
     </div>
-    <div class="p-8 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white grid place-items-center" v-else>
+    <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
           <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px"
                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
@@ -88,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import {EWalletType, type WalletDto, type WalletFilterParams} from "~/models/users/userDto";
+import {EWalletType, type WalletDto, type WalletFilterParams, type WalletFilterResult} from "~/models/users/userDto";
 import {GetWalletsByAdmin} from "~/services/user.service";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
@@ -115,6 +148,7 @@ const walletFilterParams:WalletFilterParams = reactive({
 })
 
 const isLoading = ref(false);
+const data:Ref<WalletFilterResult | undefined> = ref(undefined);
 const wallets:Ref<WalletDto[]> = ref([]);
 const pagination:Ref<PaginationData | null> = ref(null);
 
@@ -133,6 +167,7 @@ const getData = async ()=>{
   if(result.isSuccess){
     wallets.value = result.data?.data!;
     pagination.value = FillPaginationData(result.data!);
+    data.value = result.data;
   }
 
   isLoading.value = false;

@@ -4,7 +4,7 @@
     <span class="switch__wrapper">
       <span class="switch__toggle"></span>
     </span>
-    <span class="mr-2 dark:text-white">{{ label }}</span>
+    <span class="mr-2 ">{{ label }}</span>
   </label>
 </template>
 

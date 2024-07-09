@@ -55,7 +55,10 @@ export interface WalletFilterParams extends BaseFilterParams{
     search?: string | null | undefined;
 }
 export interface WalletFilterResult extends BaseFilterResult<WalletDto>{
-
+    lastMonthTransactions:number;
+    monthTransactions:number;
+    todayTransactions:number;
+    totalTransactions:number;
 }
 
 export enum EWalletType {

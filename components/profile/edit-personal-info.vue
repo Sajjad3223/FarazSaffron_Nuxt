@@ -1,6 +1,6 @@
 <template>
 <div>
-  <p class="font-light text-xs  dark:text-white lg:text-sm mt-4">لطفا اطلاعات شناسایی خود را وارد کنید. نام و نام خانوادگی شما باید با اطلاعاتی که وارد می‌کنید همخوانی داشته باشند.</p>
+  <p class="font-light text-xs   lg:text-sm mt-4">لطفا اطلاعات شناسایی خود را وارد کنید. نام و نام خانوادگی شما باید با اطلاعاتی که وارد می‌کنید همخوانی داشته باشند.</p>
   <Form @submit="EditInfo" class="mt-4 lg:p-4">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <base-g-input label="نام" name="name" id="name" is-required v-model="editUserCommand.firstName"/>

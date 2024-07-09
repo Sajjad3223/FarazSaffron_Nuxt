@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col space-y-2" >
-    <label v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm dark:text-white">
+    <label v-if="label" class="flex items-center space-x-1 space-x-reverse font-light text-sm ">
       <slot name="labelIcon" />
       <span>{{label}}</span>
     </label>
-    <div class="p-2 bg-bgWhite dark:bg-gray-800 h-max rounded-lg relative border dark:border-gray-700">
+    <div class="p-2 bg-bgWhite  h-max rounded-lg relative border ">
       <div @click.self="showOptions = !showOptions" class="cursor-pointer flex flex-col items-start">
-        <span v-if="multiSelect" class="pointer-events-none dark:text-gray-300">{{placeHolder}}</span>
-        <span v-else class="pointer-events-none dark:text-gray-300">{{selectedItem.title}}</span>
+        <span v-if="multiSelect" class="pointer-events-none ">{{placeHolder}}</span>
+        <span v-else class="pointer-events-none ">{{selectedItem.title}}</span>
         <ul v-if="multiSelect && selectedItems.length > 0" class=" mt-2 flex items-center gap-2 flex-wrap" >
           <li class="px-1 bg-danger text-white flex items-center w-max rounded-md flex-row-reverse" v-for="i in selectedItems">
             <span class="text-xs flex-1 font-thin">
@@ -19,7 +19,7 @@
             </button>
           </li>
         </ul>
-        <span class="dark:text-white absolute left-2">
+        <span class=" absolute left-2">
           <svg
               class="w-4 h-4"
               aria-hidden="true"
@@ -37,7 +37,7 @@
       <transition
           enter-active-class="transition-all duration-200" enter-from-class="max-h-0 opacity-0 -translate-y-6" enter-to-class="opacity-100 translate-y-0"
           leave-active-class="transition-all duration-200" leave-to-class="max-h-0 opacity-0 -translate-y-6" leave-from-class="opacity-100 translate-y-0">
-        <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96 dark:bg-gray-700 dark:text-gray-200 " v-show="showOptions" >
+        <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96  dark:text-gray-200 " v-show="showOptions" >
           <ul class="space-y-4">
             <li v-for="c in data">
               <base-f-checkbox v-if="multiSelect" @click="addToSelectedItems(c)" :label="c.title" :value="c.id" :isChecked="selectedData?.find(o=>o.id == c.id) != null"/>

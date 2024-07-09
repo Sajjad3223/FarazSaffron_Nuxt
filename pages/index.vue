@@ -22,7 +22,7 @@
             </NuxtLink>
           </li>
           <li  class="w-full h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg cursor-not-allowed opacity-50" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="29" viewBox="0 0 38 29" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="28.5" fill="url(#pattern0_1115_9692)" fill-opacity="0.4"/>
                 <defs>
@@ -39,7 +39,7 @@
             </NuxtLink>
           </li>
           <li  class="w-full h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg cursor-not-allowed opacity-50" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3664)" fill-opacity="0.4"/>
                 <defs>
@@ -56,7 +56,7 @@
             </NuxtLink>
           </li>
           <li class="w-full h-[80px] grid">
-            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
+            <NuxtLink to="/market" class="flex items-center text-[#8D8D8D] transition-colors duration-500 hover:text-[#4C4C4C] text-lg gap-6 w-full justify-center bg-white rounded-lg cursor-not-allowed opacity-50" style="box-shadow: 0 0 15px 0 #9A9A9A40;">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="38" height="38" fill="url(#pattern0_306_3665)" fill-opacity="0.4"/>
                 <defs>

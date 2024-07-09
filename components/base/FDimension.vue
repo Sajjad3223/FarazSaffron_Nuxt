@@ -20,27 +20,27 @@ const updateData = ()=>{
 
 <template>
 <div class="space-y-2">
-  <span class="dark:text-white text-sm">
+  <span class=" text-sm">
     ابعاد محصول
   </span>
   <div class="grid grid-cols-3 h-12">
     <div class="relative flex items-stretch w-full">
-      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none dark:text-white">طول</label>
+      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none ">طول</label>
       <input type="number" v-model="dimension.length" @input="updateData"
-             class=" outline-none px-16 rounded-r-lg w-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange dark:text-white" dir="ltr">
-      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none dark:text-white">سانتی متر</label>
+             class=" outline-none px-16 rounded-r-lg w-full bg-gray-200  hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange " dir="ltr">
+      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none ">سانتی متر</label>
     </div>
     <div class="relative flex items-stretch w-full">
-      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none dark:text-white">عرض</label>
+      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none ">عرض</label>
       <input type="number" v-model="dimension.width" @input="updateData"
-             class="border-x dark:border-gray-900 outline-none px-16 w-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange dark:text-white" dir="ltr">
-      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none dark:text-white">سانتی متر</label>
+             class="border-x dark:border-gray-900 outline-none px-16 w-full bg-gray-200  hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange " dir="ltr">
+      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none ">سانتی متر</label>
     </div>
     <div class="relative flex items-stretch w-full">
-      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none dark:text-white">ارتفاع</label>
+      <label for="" class="absolute right-4 self-center text-sm opacity-50 pointer-events-none ">ارتفاع</label>
       <input type="number" v-model="dimension.height" @input="updateData"
-             class=" outline-none px-16 rounded-l-lg w-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange dark:text-white" dir="ltr">
-      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none dark:text-white">سانتی متر</label>
+             class=" outline-none px-16 rounded-l-lg w-full bg-gray-200  hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200 focus:border focus:border-brandOrange " dir="ltr">
+      <label for="" class="absolute left-4 text-[10px] font-thin self-center opacity-50 pointer-events-none ">سانتی متر</label>
     </div>
   </div>
 </div>

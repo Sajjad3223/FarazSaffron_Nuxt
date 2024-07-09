@@ -78,13 +78,6 @@ const login = async ()=>{
     await toast.showToast('با موفقیت وارد شدید');
     authStore.isAuthModalOpen = false;
     await accountStore.initData();
-
-    toast.showToast('آیا مایلید به پنل کاربری منتقل شوید؟',ToastType.warning,0).then(async (result) => {
-      if(result.isConfirmed){
-        await router.push('/profile');
-      }
-    })
-
   }
   else{
     errorMessage.value = result.metaData.message ?? 'حساب کاربری با این مشخصات یافت نشد';
