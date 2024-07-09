@@ -11,7 +11,7 @@ const toast = useToast();
 const createTemplate = async ()=>{
   loading.value = true;
 
-  const result = await CreateTemplate(title.value);
+  const result = await CreateTemplate(title.value!);
   if(result.isSuccess){
     emits('templateCreated');
     await toast.showToast();

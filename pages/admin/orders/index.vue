@@ -195,7 +195,7 @@ const getData = async ()=>{
 }
 
 const toast = useToast();
-const setOrderStatus = (id:number,e)=>{
+const setOrderStatus = (id:number,e:any)=>{
   toast.showToast('آیا از تغییر وضعیت این سفارش اطمینان دارید؟',ToastType.warning)
       .then(async (res) =>{
         if(res.isConfirmed){

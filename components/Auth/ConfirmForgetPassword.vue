@@ -32,7 +32,7 @@ const forgetPass = async ()=>{
   console.log(verificationInput.value.getValue.value);
   console.log(code);
 
-  const result = await VerifyForgetPassword(phoneNumber.value,code);
+  const result = await VerifyForgetPassword(phoneNumber.value!,code);
   if(result.isSuccess){
     authStore.changeStep('changePasswordForgetPassword');
   }
@@ -41,7 +41,7 @@ const forgetPass = async ()=>{
 }
 
 const resendVerifyCode = async ()=>{
-  const res = await ForgetPassword(authStore.tempPhoneNumber);
+  const res = await ForgetPassword(authStore.tempPhoneNumber!);
   if(res.isSuccess){
     toast.showToast('کد تایید مجددا برای شما ارسال گردید');
   }

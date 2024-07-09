@@ -36,6 +36,7 @@ const editBanner = async () =>{
   formData.append('templateId',props.banner.templateId.toString())
   formData.append('bannerId',props.banner.id.toString())
   if (image.value != null)
+      //@ts-ignore
     formData.append('image',image.value.files[0])
   formData.append('imageAlt',imageAlt.value)
   formData.append('order',order.value.toString())

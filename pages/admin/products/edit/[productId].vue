@@ -418,7 +418,7 @@ onMounted(async ()=>{
   editProductData.dimensions.length = product.value.dimensions.length;
   editProductData.digiKalaData = {
     digikalaLink: product.value.digiKalaData?.digikalaLink ?? '',
-    digiKalaPrice: product.value.digiKalaData?.digiKalaPrice ?? 0
+    digiKalaPrice: product.value.digiKalaData?.digikalaPrice ?? 0
   } as DigikalaData;
 
   editProductData.basalamData = {

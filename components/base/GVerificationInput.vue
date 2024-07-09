@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
 const inputs = ref([]);
 const form = ref();
 
-const handleInput = (e) => {
+const handleInput = (e:any) => {
   const input = e.target
   const nextInput = input.nextElementSibling
   if (nextInput && input.value) {
@@ -21,15 +21,16 @@ const handleInput = (e) => {
   }
 }
 
-const handlePaste = (e) => {
+const handlePaste = (e:any) => {
   e.preventDefault()
   const paste = e.clipboardData.getData('text')
   inputs.value.forEach((input, i) => {
+    //@ts-ignore
     input.value = paste[i] || ''
   })
 }
 
-const handleBackspace = (e) => {
+const handleBackspace = (e:any) => {
   const input = e.target
   if (input.value) {
     input.value = ''
@@ -39,13 +40,13 @@ const handleBackspace = (e) => {
   input.previousElementSibling.focus()
 }
 
-const  handleArrowLeft = (e) => {
+const  handleArrowLeft = (e:any) => {
   const previousInput = e.target.previousElementSibling
   if (!previousInput) return
   previousInput.focus()
 }
 
-const handleArrowRight = (e)=> {
+const handleArrowRight = (e:any)=> {
   const nextInput = e.target.nextElementSibling
   if (!nextInput) return
   nextInput.focus()
@@ -60,16 +61,19 @@ const KEYBOARDS = {
 onMounted(()=>{
 
   form.value.addEventListener('input', handleInput)
+  //@ts-ignore
   inputs.value[0].addEventListener('paste', handlePaste)
 
   inputs.value.forEach(input => {
-    input.addEventListener('focus', e => {
+    //@ts-ignore
+    input.addEventListener('focus', (e:any) => {
       setTimeout(() => {
         e.target.select()
       }, 0)
     })
 
-    input.addEventListener('keydown', e => {
+    //@ts-ignore
+    input.addEventListener('keydown', (e:any) => {
       switch(e.keyCode) {
         case KEYBOARDS.backspace:
           handleBackspace(e)
@@ -89,6 +93,7 @@ onMounted(()=>{
 const getValue = computed(()=>{
   let value = '';
   inputs.value.forEach(input=>{
+    //@ts-ignore
     value += input.value;
   })
   return value;

@@ -28,7 +28,7 @@ const newPasswordConfirm = ref('');
 
 const changePasswordSchema = Yup.object().shape({
   newPassword:Yup.string().required('وارد کردن رمز عبور الزامی است').min(6,'رمز عبور باید حداقل 6 حرف باشد'),
-  newPasswordConfirm:Yup.string().oneOf([Yup.ref('newPassword'),null],'تکرار کلمه عبور یکسان نیست')
+  newPasswordConfirm:Yup.string().oneOf([Yup.ref('newPassword')],'تکرار کلمه عبور یکسان نیست')
 })
 
 const isLoading = ref(false);
@@ -36,7 +36,7 @@ const isLoading = ref(false);
 const login = async ()=>{
   isLoading.value = true;
 
-  const result = await ChangePasswordForgetPassword(authStore.tempPhoneNumber,newPassword.value);
+  const result = await ChangePasswordForgetPassword(authStore.tempPhoneNumber!,newPassword.value);
   if(result.isSuccess){
     toast.showToast('رمز عبور با موفقیت تغییر کرد');
     authStore.changeStep('login');

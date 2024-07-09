@@ -83,7 +83,7 @@ const sendMessageData:SendTicketMessageCommand = reactive({
   text:''
 });
 
-let interval;
+let interval:any;
 onMounted(()=>{
   interval = setInterval(async ()=>{
     await refreshTicket();

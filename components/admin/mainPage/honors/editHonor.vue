@@ -36,6 +36,7 @@ const editHonor = async () =>{
   formData.append('templateId',props.honor.templateId.toString())
   formData.append('honorId',props.honor.id.toString())
   if(image.value != null)
+    //@ts-ignore
     formData.append('image',image.value.files[0])
   formData.append('imageAlt',imageAlt.value)
   formData.append('description',description.value)

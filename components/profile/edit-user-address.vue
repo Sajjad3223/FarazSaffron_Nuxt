@@ -8,7 +8,9 @@
         <select name="city" id="city" @change="citySelected" class="border rounded-xl p-3" v-model="selectedCity">
           <option :value="s.id" v-for="s in cities">{{s.name}}</option>
         </select>
+        <div class="col-span-full">
         <base-g-input label="خیابان" name="street" id="street" class="col-span-full" v-model="editAddressData.street" required/>
+        </div>
         <div class="grid grid-cols-2 gap-2 lg:gap-4">
           <base-g-input type="number" label="پلاک" name="plaque" id="plaque" v-model="editAddressData.plaque" required/>
           <base-g-input type="number" label="واحد" name="unit" id="unit" v-model="editAddressData.unit" required/>
@@ -19,7 +21,9 @@
       <div class="grid grid-cols-2 gap-2 lg:gap-4">
         <base-g-input label="نام گیرنده" name="receiverFirstName" id="receiverFirstName" v-model="editAddressData.receiverFirstName" required/>
         <base-g-input label="نام خانوادگی گیرنده" name="receiverLastName" id="receiverLastName" v-model="editAddressData.receiverLastName" required/>
-        <base-g-input label="شماره موبایل" name="receiverPhoneNumber" id="receiverPhoneNumber" v-model="editAddressData.receiverPhoneNumber" class="col-span-full" required/>
+        <div class="col-span-full">
+          <base-g-input label="شماره موبایل" name="receiverPhoneNumber" id="receiverPhoneNumber" v-model="editAddressData.receiverPhoneNumber" class="col-span-full" required/>
+        </div>
       </div>
 
       <base-g-button color="primary" w-full @click="AddAddress" :isLoading="isLoading" >
@@ -62,22 +66,23 @@ const editAddressData:EditUserAddressCommand = reactive({
 const states:Ref<StateDto[]> = ref([]);
 const cities:Ref<CityDto[]> = ref([]);
 
-const selectedState = ref(0);
-const selectedCity = ref(0);
+const selectedState:Ref<number | undefined> = ref(0);
+const selectedCity:Ref<number | undefined> = ref(0);
 
 onMounted(async ()=>{
+  console.log(props.address)
   states.value = await $fetch<StateDto[]>('https://iran-locations-api.ir/api/v1/fa/states', {method: 'GET'});
   selectedState.value = states.value?.find(s=>s.name == props.address.state)?.id;
   cities.value = await $fetch<CityDto[]>('https://iran-locations-api.ir/api/v1/fa/cities?state_id='+selectedState.value, {method: 'GET'});
   selectedCity.value = cities.value?.find(c=>c.name == props.address.city)?.id;
 })
 
-const stateSelected = async ($event)=>{
+const stateSelected = async ($event:any)=>{
   const stateId = $event.target.value;
   editAddressData.state = states.value.find(s=>s.id == stateId)!.name;
   cities.value = await $fetch<CityDto[]>('https://iran-locations-api.ir/api/v1/fa/cities?state_id='+stateId, {method: 'GET'});
 }
-const citySelected = async ($event)=>{
+const citySelected = async ($event:any)=>{
   const cityId = $event.target.value;
   editAddressData.city = cities.value.find(c=>c.id == cityId)!.name;
 }

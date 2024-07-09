@@ -334,14 +334,14 @@ definePageMeta({
 })
 
 const route = useRoute();
-const templateId = parseInt(route.params.templateId);
+const templateId = parseInt(route.params.templateId[0] ?? '0');
 
 const template:Ref<DataTemplateDto | null> = ref(null);
 
 const loading = ref(true);
 
-const firstOrderBy:Ref<EOrderBy> = ref();
-const secondOrderBy:Ref<EOrderBy> = ref();
+const firstOrderBy:Ref<EOrderBy | undefined> = ref();
+const secondOrderBy:Ref<EOrderBy | undefined> = ref();
 
 const showSetTopBannerModal = ref(false);
 const showEditTopBannerModal = ref(false);
@@ -374,8 +374,8 @@ const getData = async ()=>{
   const result = await GetTemplateByAdmin(templateId);
   if(result.isSuccess){
     template.value = result.data ?? null;
-    firstOrderBy.value = template.value.firstItemSection
-    secondOrderBy.value = template.value.secondItemSection;
+    firstOrderBy.value = template.value?.firstItemSection
+    secondOrderBy.value = template.value?.secondItemSection;
     console.log(firstOrderBy.value,secondOrderBy.value)
   }
 

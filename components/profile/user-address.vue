@@ -10,7 +10,9 @@
         <select name="city" id="city" @change="citySelected" class="border rounded-xl p-3">
           <option :value="s.id" v-for="s in cities">{{s.name}}</option>
         </select>
-        <base-g-input label="خیابان" name="street" id="street" class="col-span-full" v-model="addAddressData.street" required/>
+        <div class="col-span-full">
+          <base-g-input label="خیابان" name="street" id="street" v-model="addAddressData.street" required/>
+        </div>
         <div class="grid grid-cols-2 gap-2 lg:gap-4">
           <base-g-input type="number" label="پلاک" name="plaque" id="plaque" v-model="addAddressData.plaque" required/>
           <base-g-input type="number" label="واحد" name="unit" id="unit" v-model="addAddressData.unit" required/>
@@ -21,7 +23,9 @@
       <div class="grid grid-cols-2 gap-2 lg:gap-4">
         <base-g-input label="نام گیرنده" name="receiverFirstName" id="receiverFirstName" v-model="addAddressData.receiverFirstName" required/>
         <base-g-input label="نام خانوادگی گیرنده" name="receiverLastName" id="receiverLastName" v-model="addAddressData.receiverLastName" required/>
-        <base-g-input label="شماره موبایل" name="receiverPhoneNumber" id="receiverPhoneNumber" v-model="addAddressData.receiverPhoneNumber" class="col-span-full" required/>
+        <div class="col-span-full">
+          <base-g-input label="شماره موبایل" name="receiverPhoneNumber" id="receiverPhoneNumber" v-model="addAddressData.receiverPhoneNumber" required/>
+        </div>
       </div>
 
       <base-g-button color="primary" w-full @click="AddAddress" :isLoading="isLoading" >
@@ -51,8 +55,8 @@ const addAddressData:AddUserAddressCommand = reactive({
   city: '',
   street: '',
   postCode: '',
-  plaque: 0,
-  unit: 0
+  plaque: null,
+  unit: null
 })
 
 const states:Ref<StateDto[]> = ref([]);

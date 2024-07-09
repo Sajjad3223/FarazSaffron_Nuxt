@@ -164,8 +164,8 @@
           <base-f-input label="کد محصول" name="productCode" id="productCode" place-holder="کد محصول مثال: SN0000" v-model="addProductData.productCode"/>
           <base-f-input label="شماره بارکد" name="barcodeNumber" id="barcodeNumber" place-holder="بارکد محصول" v-model="addProductData.barcodeNumber"/>
           <base-f-input label="شماره بهداشت" name="healthNumber" id="healthNumber" place-holder="شماره بهداشت" v-model="addProductData.healthNumber"/>
-          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digikalaData.digikalaLink" :rtl="false"/>
-          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digikalaData.digikalaPrice" is-price />
+          <base-f-input label="لینک دیجی کالا" name="digiKalaLink" id="digiKalaLink" class="font-thin" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaData.digikalaLink" :rtl="false"/>
+          <base-f-input type="number" label="قیمت در دیجی کالا" name="digikalaPrice" id="digikalaPrice" place-holder="لینک محصول در دیجی کالا در صورت موجود بودن" v-model="addProductData.digiKalaData.digikalaPrice" is-price />
           <base-f-input label="لینک باسلام" name="basalamLink" id="basalamLink" class="font-thin" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="addProductData.basalamData.basalamLink" :rtl="false"/>
           <base-f-input type="number" label="قیمت در باسلام" name="basalamPrice" id="basalamPrice" place-holder="لینک محصول در باسلام در صورت موجود بودن" v-model="addProductData.basalamData.basalamPrice" is-price />
           <base-f-button type="submit" color="primary" text-color="white" class="col-span-full" >
@@ -304,7 +304,7 @@ const addProductData:CreateProductCommand = reactive({
     height:0,
     length:0
   },
-  digikalaData:{
+  digiKalaData:{
     digikalaLink:'',
     digikalaPrice:0
   },
@@ -407,8 +407,8 @@ const AddProduct = async ()=>{
   productData.append('dimensions.Width',addProductData.dimensions.width.toString());
   productData.append('dimensions.Length',addProductData.dimensions.length.toString());
   productData.append('dimensions.Height',addProductData.dimensions.height.toString());
-  productData.append('digikalaData.digiKalaLink',addProductData.digikalaData?.digikalaLink ?? '');
-  productData.append('digikalaData.digiKalaPrice',addProductData.digikalaData?.digiKalaPrice?.toString() ?? '0');
+  productData.append('digikalaData.digiKalaLink',addProductData.digiKalaData?.digikalaLink ?? '');
+  productData.append('digikalaData.digiKalaPrice',addProductData.digiKalaData?.digikalaPrice?.toString() ?? '0');
   productData.append('basalamData.basalamLink',addProductData.basalamData?.basalamLink ?? '');
   productData.append('basalamData.basalamPrice',addProductData.basalamData?.basalamPrice?.toString() ?? '0');
   productData.append('quantity',addProductData.quantity.toString());

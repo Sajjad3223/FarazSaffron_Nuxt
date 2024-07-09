@@ -174,7 +174,7 @@ import {
 import {EOrderStatus, type OrderDto} from "~/models/cart/cartQueries";
 import {SITE_URL} from "~/utilities/api.config";
 import {ToastType} from "~/composables/useSwal";
-import type {FollowUpCommand, SetOrderStatusCommand} from "~/models/cart/cartCommands";
+import type {AdminSetOrderDiscountCommand, FollowUpCommand, SetOrderStatusCommand} from "~/models/cart/cartCommands";
 
 definePageMeta({
   layout:'admin'
@@ -182,7 +182,7 @@ definePageMeta({
 
 const route = useRoute();
 const router = useRouter();
-const orderId = Number(route.params.orderId ?? '0');
+const orderId:number = Number(route.params.orderId ?? '0');
 const toast = useToast();
 
 const {data,pending,refresh} = await useAsyncData("Order" + orderId.toString(),()=>GetOrderByAdminById(orderId));
@@ -195,19 +195,19 @@ if(!data.value){
   }
 }
 
-const orderData:Ref<OrderDto> = ref(data.value);
+const orderData:Ref<OrderDto | undefined> = ref(data.value?.data);
 const showFollowUpModal = ref(false);
-const followUpCode = ref(orderData.value.postFollowUpCode ?? '');
+const followUpCode = ref(orderData.value?.postFollowUpCode ?? '');
 const showDiscountModal = ref(false);
-const discountCode = ref(orderData.value.discount?.code ?? '');
+const discountCode = ref(orderData.value?.discount?.code ?? '');
 const showFinalizeModal = ref(false);
-const refCode = ref(orderData.value.referCode ?? '');
+const refCode = ref(orderData.value?.referCode ?? '');
 
-const setOrderStatus = (e)=>{
+const setOrderStatus = (e:any)=>{
   toast.showToast('آیا از تغییر وضعیت این سفارش اطمینان دارید؟',ToastType.warning)
       .then(async (res) =>{
         if(res.isConfirmed){
-          await changeOrderStatus(orderData.value.id,e.target.value);
+          await changeOrderStatus(orderData.value?.id ?? 0,e.target.value);
         }
       })
 }
@@ -222,7 +222,7 @@ const changeOrderStatus = async (id:number,newStatus:EOrderStatus) => {
 }
 
 const finalizeOrder = async ()=>{
-  const result = await FinalizeOrderByAdmin({orderId: orderData.value.id, refCode: refCode.value});
+  const result = await FinalizeOrderByAdmin({orderId: orderData.value?.id ?? 0, refCode: refCode.value});
   if (result.isSuccess) {
     toast.showToast();
     showFinalizeModal.value = false;
@@ -244,7 +244,7 @@ const setFollowUpCode = async ()=>{
 }
 
 const setDiscountCode = async ()=>{
-  const res = await SetDiscountByAdmin({orderId,discountCode:discountCode.value,userId:orderData.value.userId});
+  const res = await SetDiscountByAdmin({orderId,discountCode:discountCode.value,userId:orderData.value?.userId ?? 0} as AdminSetOrderDiscountCommand);
   if(res.isSuccess){
     toast.showToast();
     showDiscountModal.value = false;
@@ -254,7 +254,7 @@ const setDiscountCode = async ()=>{
   }
 }
 const removeDiscount = async ()=>{
-  const res = await RemoveDiscountByAdmin(orderData.value.userId);
+  const res = await RemoveDiscountByAdmin(orderData.value?.userId ?? 0);
   if(res.isSuccess){
     toast.showToast();
     await refresh();

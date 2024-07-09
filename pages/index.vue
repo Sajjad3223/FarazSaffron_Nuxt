@@ -711,8 +711,8 @@ import {EOrderBy} from "~/models/product/EOrderBy";
 
 const showSearchModal = ref(false);
 const loading = ref(true);
-const firstItemsSection:Ref<ProductFilterData[]> = ref([]);
-const secondItemsSection:Ref<ProductFilterData[]> = ref([]);
+const firstItemsSection:Ref<ProductFilterData[] | undefined> = ref([]);
+const secondItemsSection:Ref<ProductFilterData[] | undefined> = ref([]);
 
 const toast = useToast();
 const router = useRouter();

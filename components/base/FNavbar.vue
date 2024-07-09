@@ -418,7 +418,7 @@ import type {TopBanner} from "~/models/mainPage/dataTemplate";
 
 const loading = ref(false);
 const topBannerLoading = ref(true);
-const topBanner:Ref<TopBanner | null> = ref(null);
+const topBanner:Ref<TopBanner | null | undefined> = ref(null);
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();

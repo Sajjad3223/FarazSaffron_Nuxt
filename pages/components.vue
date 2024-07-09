@@ -306,7 +306,7 @@ const successValidationRtl = computed(() => {
   return textRtl.value.toLowerCase() === 'سجاد' && textRtl.value !== '';
 });
 
-const checkInput = (event)=>{
+const checkInput = (event:any)=>{
   const evt = event;
   let key = evt.keyCode >= 96 ? evt.keyCode - 48 : evt.keyCode;
   let res = (/[0123456789,.]/.test(String.fromCharCode(key))) || key == 8 || key == 46 || key == 37 || key == 39 || key == 35 || key == 36 || key == 17 || key == 65;
