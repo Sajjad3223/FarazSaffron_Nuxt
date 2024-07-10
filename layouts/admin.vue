@@ -1,7 +1,7 @@
 <template>
   <div class="hidden md:block mx-auto">
-    <div class="flex flex-col container mx-auto mt-[8rem]">
-      <h2 class="w-full text-center text-3xl font-bold">پنل مدیریت</h2>
+    <div class="flex flex-col container mx-auto mt-4 2xl:mt-[6rem]">
+      <h2 class="hidden 2xl:block w-full text-center text-3xl font-bold">پنل مدیریت</h2>
       <NuxtLink class="flex items-center gap-4 w-max p-2" to="/">
         <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.666016 1.33335L5.33268 6.00002L0.666016 10.6667" stroke="#070707" stroke-width="1.2"
@@ -9,7 +9,7 @@
         </svg>
         <span class="text-xs">بازگشت به جی پی</span>
       </NuxtLink>
-      <div class="w-full flex gap-5 items-start mt-12">
+      <div class="w-full flex gap-5 items-start mt-4 2xl:mt-12">
         <aside class="w-1/6 text-sm flex flex-col items-start bg-white border py-6 rounded-xl">
           <div class="w-full flex flex-col">
             <ul>
@@ -565,7 +565,7 @@
             </div>
             <input type="text" class="px-4 py-2 w-1/5 bg-[#FAFAFA] rounded-lg" placeholder="جستجو">
           </div>
-          <div class="bg-white border rounded-xl p-6 ">
+          <div class="bg-white border rounded-xl p-6 pt-2">
             <slot></slot>
           </div>
         </main>

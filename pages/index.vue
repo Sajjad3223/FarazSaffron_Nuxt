@@ -113,7 +113,7 @@
                 }"
               :breakpoints="breakpoints"
               class="rounded-xl py-4" dir="rtl">
-            <template v-slot:container-start>
+            <template #container-start>
               <div class="w-full flex flex-col items-end mb-4 -mt-20">
                 <SwiperControls class="self-end" />
               </div>
@@ -125,23 +125,17 @@
           </Swiper>
 
         </client-only>
-        <!--      <client-only v-if="!loading">
-                <Swiper ref="carousel1" :items-to-show="5.7" :breakpoints="breakpoints"  class="rounded-xl mt-4" dir="rtl">
-                  <SwiperSlide v-for="p in lastProducts" :key="p.id" >
-                    <GCard :product="p" />
-                  </SwiperSlide>
-                </Swiper>
-              </client-only>-->
-        <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
-          <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
-            <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
+
+        <div class="flex 2xl:grid overflow-x-auto grid-cols-5 gap-5 p-5 pt-0 mt-4" v-else style="scrollbar-width: none;">
+          <div class="relative skeleton min-h-[380px] flex flex-col justify-between space-y-4 min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
+            <div class="skeleton-el h-1/2 rounded-t-xl"></div>
             <div class="p-4 flex flex-col h-1/2 justify-between">
-              <div class="w-3/4 rounded-md bg-gray-300 h-4"></div>
-              <div class="w-1/2 rounded-full bg-gray-300 h-2"></div>
-              <div class="w-1/3 rounded-full bg-gray-200 h-1"></div>
+              <div class="w-3/4 rounded-md skeleton-el h-4"></div>
+              <div class="w-1/2 rounded-full skeleton-el h-2"></div>
+              <div class="w-1/3 rounded-full skeleton-el h-1"></div>
               <div class="flex items-center mt-4 gap-4">
-                <div class="flex-1 rounded-md bg-gray-300 h-8"></div>
-                <div class="w-1/4 rounded-full bg-gray-200 h-2"></div>
+                <div class="flex-1 rounded-md skeleton-el h-8"></div>
+                <div class="w-1/4 rounded-full skeleton-el h-2"></div>
               </div>
             </div>
           </div>
@@ -197,16 +191,16 @@
             <div class="flex w-full h-8"></div>
           </Swiper>
         </client-only>
-        <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-4" v-else>
-          <div class="relative min-h-[380px] flex flex-col justify-between space-y-4 animate-pulse min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
-            <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
+        <div class="flex 2xl:grid overflow-x-auto grid-cols-2 gap-5 p-5 pt-0 mt-4" v-else style="scrollbar-width: none;">
+          <div class="relative skeleton min-h-[380px] flex flex-col justify-between space-y-4 min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
+            <div class="skeleton-el h-1/2 rounded-t-xl"></div>
             <div class="p-4 flex flex-col h-1/2 justify-between">
-              <div class="w-3/4 rounded-md bg-gray-300 h-4"></div>
-              <div class="w-1/2 rounded-full bg-gray-300 h-2"></div>
-              <div class="w-1/3 rounded-full bg-gray-200 h-1"></div>
+              <div class="w-3/4 rounded-md skeleton-el h-4"></div>
+              <div class="w-1/2 rounded-full skeleton-el h-2"></div>
+              <div class="w-1/3 rounded-full skeleton-el h-1"></div>
               <div class="flex items-center mt-4 gap-4">
-                <div class="flex-1 rounded-md bg-gray-300 h-8"></div>
-                <div class="w-1/4 rounded-full bg-gray-200 h-2"></div>
+                <div class="flex-1 rounded-md skeleton-el h-8"></div>
+                <div class="w-1/4 rounded-full skeleton-el h-2"></div>
               </div>
             </div>
           </div>

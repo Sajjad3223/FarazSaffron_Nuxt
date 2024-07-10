@@ -10,6 +10,31 @@
         <auth-container />
       </base-g-modal>
     </ClientOnly>
+
+    <ClientOnly>
+      <Transition name="fade">
+        <div class="fixed inset-0 grid place-items-center z-40 bg-black/20 backdrop-blur-sm" @click.self="cartStore.showAddedToCartModal = false" v-if="cartStore.showAddedToCartModal">
+          <div class="w-1/3 2xl:w-1/5 bg-white rounded-xl addedToCartAnim flex flex-col px-2 pt-4 pb-8">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <img :src="`${SITE_URL}/product/images/${cartStore.currentAddedItemData.image.src}`" :alt="cartStore.currentAddedItemData.image.alt" class="w-[150px]">
+                <div class="flex flex-col space-y-2">
+                  <span>{{cartStore.currentAddedItemData.title}}</span>
+                  <span class="opacity-60 text-sm font-light text-green-600">با موفقیت به سبد خرید اضافه شد</span>
+                </div>
+              </div>
+            </div>
+            <NuxtLink to="/checkout/cart" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
+              <span>رفتن به سبد خرید</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </NuxtLink>
+          </div>
+        </div>
+      </Transition>
+    </ClientOnly>
+
   </div>
 </template>
 
@@ -17,6 +42,7 @@
 import {useAuthStore} from "~/stores/auth.store";
 import {useAccountStore} from "~/stores/account.store";
 import {useCartStore} from "~/stores/cart.store";
+import {SITE_URL} from "~/utilities/api.config";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
@@ -52,8 +78,7 @@ body{
 }
 
 .logo-rotate, .logo-rotate-always{
-  width: 50px;
-  height: 50px;
+  @apply w-[40px] 2xl:w-[50px] h-[40px] 2xl:h-[50px];
   transform-origin: center;
   transform-style: preserve-3d;
 

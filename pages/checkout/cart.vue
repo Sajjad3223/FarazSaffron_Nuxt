@@ -3,23 +3,23 @@
     <Head>
       <Title>سبد خرید</Title>
     </Head>
-    <div class="mt-12 hidden md:block">
+    <div class="mt-5 2xl:mt-12 hidden md:block">
       <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center"
            v-if="cartStore.PendingOrder && cartStore.cartItemsCount > 0">
 
         <!--  Steps   -->
-        <div class="flex items-center w-2/3 mb-12">
-          <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
+        <div class="flex items-center w-2/3 mb-5 2xl:mb-12">
+          <div class="relative grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full border border-brandOrange text-brandOrange">
             <span>1</span>
             <span class="absolute -bottom-full w-max">سبد خرید</span>
           </div>
           <div class="h-px bg-black/10 opacity-40 flex-1"></div>
-          <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <div class="relative opacity-40 grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full border">
             <span>2</span>
             <span class="absolute -bottom-full w-max">افزودن آدرس</span>
           </div>
           <div class="h-px bg-black/10 opacity-40 flex-1"></div>
-          <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <div class="relative opacity-40 grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full border">
             <span>3</span>
             <span class="absolute -bottom-full w-max">تکمیل پرداخت</span>
           </div>
@@ -52,11 +52,11 @@
         </div>
 
         <!--  Main   -->
-        <main class="flex items-start w-full relative gap-8 mt-10"
+        <main class="flex items-start w-full gap-5 mt-4 2xl:mt-10"
               v-if="!cartStore.cartLoading && cartStore.PendingOrder">
           <div class="flex flex-col flex-1">
             <!--  Items   -->
-            <div class="rounded-xl py-4 px-8 bg-white flex flex-col items-stretch">
+            <div class="rounded-xl py-4 px-8 bg-white border flex flex-col items-stretch">
               <div class="w-full flex items-center justify-between">
                 <strong>سبد خرید</strong>
                 <div class="relative">
@@ -83,14 +83,14 @@
                   </div>
                 </div>
               </div>
-              <ul class="mt-8 flex flex-col">
+              <ul class="mt-0 2xl:mt-8 flex flex-col">
                 <TransitionGroup name="none">
                   <li class="flex relative gap-5 items-center border-b last:border-none py-6 border-opacity-30"
                       v-for="i in cartStore.PendingOrder.orderItems" :key="i">
-                    <div class="flex flex-col w-2/5 max-w-[200px] mx-auto items-center">
+                    <div class="flex flex-col w-1/5 2xl:w-2/5 max-w-[200px] mx-auto items-center">
                       <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
                            :alt="i.itemInfo.productImage.alt" class="w-full mx-auto">
-                      <cart-counter :item="i" class="w-max"/>
+                      <cart-counter :item="i" class="scale-75 2xl:scale-100 w-max"/>
                     </div>
                     <base-g-button button-type="white" color="danger" class="absolute top-4 left-0"
                                    @click="cartStore.removeItem(i.id)" v-if="i.count > 1">
@@ -112,10 +112,10 @@
                     </base-g-button>
                     <div class="flex flex-col justify-between flex-1">
                       <NuxtLink :to="`/product/${i.itemInfo.productSlug}`"
-                                class="font-bold text-2xl hover:text-brandOrange duration-200 transition-colors">
+                                class="font-bold 2xl:text-2xl hover:text-brandOrange duration-200 transition-colors">
                         {{ i.itemInfo.productName }}
                       </NuxtLink>
-                      <ul class="flex flex-col space-y-4 my-12">
+                      <ul class="flex flex-col text-xs 2xl:text-base space-y-2 2xl:space-y-4 my-5 2xl:my-12">
                         <li class="pr-4 border-r-2 border-brandOrange/50">پروانه بهداشت: {{ i.itemInfo.healthNumber != null ? 'دارد' : 'ندارد' }}</li>
                         <li class="pr-4 border-r-2 border-brandOrange/50">
                           شکل ماده غذایی:
@@ -132,7 +132,7 @@
           </div>
 
           <!--  Prices   -->
-          <div class="w-1/4 sticky top-12 p-6 bg-white rounded-xl flex flex-col space-y-4 items-stretch">
+          <div class="w-1/3 2xl:w-1/4 sticky border top-0 h-[200px] p-6 bg-white text-sm 2xl:text-base rounded-xl flex flex-col space-y-4 items-stretch">
             <div class="w-full flex items-center justify-between">
               <span>قیمت کالاها ({{ cartStore.cartItemsCount }})</span>
               <div class="flex gap-1 items-center">
@@ -374,7 +374,9 @@ import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import type {ProductFilterData} from "~/models/product/productQueries";
 import {EPackingType} from "~/models/product/EPackingType";
+import {GetPendingOrder} from "~/services/cart.service";
 
+const {data,pending} = await useAsyncData("GetPendingCart",()=>GetPendingOrder());
 
 const cartStore = useCartStore();
 const authStore = useAuthStore();
@@ -385,6 +387,7 @@ const carousel = ref();
 const showCartOptions = ref(false);
 const loading = ref(true);
 const products:Ref<ProductFilterData[] | null> = ref([]);
+
 
 onMounted(async()=>{
   loading.value = true;

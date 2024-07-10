@@ -3,7 +3,7 @@
     <Head>
       <Title>افزودن آدرس</Title>
     </Head>
-    <div v-if="!utilStore.isMobile()" class="mt-12">
+    <div class="mt-5 2xl:mt-12 hidden md:block">
 
       <client-only>
         <base-g-modal v-model="showAddressModal" title="افزودن آدرس جدید">
@@ -14,20 +14,20 @@
       <div class="rounded-2xl p-8 bg-[#FAFAFA] flex flex-col items-center">
 
         <!--  Steps  -->
-        <div class="flex items-center w-2/3 mb-12">
-          <div class="relative grid place-items-center w-8 h-8 rounded-full bg-brandOrange text-brandOrange">
+        <div class="flex items-center w-2/3 mb-5 2xl:mb-12">
+          <div class="relative grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full bg-brandOrange text-brandOrange">
             <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 5.65546L5.23224 9.8877L14.1199 1" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span class="absolute -bottom-full w-max">سبد خرید</span>
           </div>
           <div class="h-px bg-brandOrange opacity-40 flex-1"></div>
-          <div class="relative grid place-items-center w-8 h-8 rounded-full border border-brandOrange text-brandOrange">
+          <div class="relative grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full border border-brandOrange text-brandOrange">
             <span>2</span>
             <span class="absolute -bottom-full w-max">افزودن آدرس</span>
           </div>
           <div class="h-px bg-black/10 opacity-40 flex-1"></div>
-          <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
+          <div class="relative opacity-40 grid place-items-center w-6 2xl:w-8 h-6 2xl:h-8 text-xs 2xl:text-base rounded-full border">
             <span>3</span>
             <span class="absolute -bottom-full w-max">تکمیل پرداخت</span>
           </div>
@@ -55,18 +55,18 @@
         </div>
 
         <!--  Main   -->
-        <main class="flex items-start w-full relative gap-8 mt-10">
+        <main class="flex items-start w-full gap-5 relative mt-4 2xl:mt-10">
 
-          <div class="flex-1 rounded-xl py-4 px-8 flex flex-col items-stretch">
+          <div class="flex-1 rounded-xl  flex flex-col items-stretch">
             <!--  Addresses   -->
             <ul class="2xl:hidden flex flex-col space-y-4 w-full">
-              <li class="flex bg-white border rounded-xl p-4 min-h-[120px]"
+              <li class="flex bg-white border rounded-xl p-4 2xl:min-h-[120px]"
                   v-for="a in accountStore.currentUser?.addresses" :key="a.id">
                 <div class="w-1/5 grid place-items-center">
                   <input type="radio" name="activeAddress" class="my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
                 </div>
                 <div class="flex-1 flex flex-col space-y-2">
-                  <span class="font-thin">آدرس تحویل</span>
+                  <span class="hidden 2xl:block font-thin">آدرس تحویل</span>
                   <div class="flex flex-col space-y-1">
                     <p>
                       {{ a.street }}
@@ -154,7 +154,7 @@
           </div>
 
           <!--  Prices   -->
-          <div class="w-1/4 sticky top-12 p-6 bg-white rounded-xl flex flex-col space-y-4 items-stretch">
+          <div class="w-1/3 2xl:w-1/4 p-6 bg-white border text-sm 2xl:text-base rounded-xl flex flex-col space-y-4 items-stretch">
             <div class="w-full flex items-center justify-between">
               <span>قیمت کالاها ({{cartStore.cartItemsCount}})</span>
               <div class="flex gap-1 items-center">
@@ -173,16 +173,21 @@
                 <base-g-price :price="(cartStore.PendingOrder?.getFinalPrice / 10)" />
               </div>
             </div>
-            <!--  Discount   -->
-            <form class="flex flex-col items-start" v-if="cartStore.PendingOrder?.discount.code == ''">
-              <div class="flex items-start gap-1 w-full mt-4">
-                <base-g-input v-model="discountCode" type="text" label="کد تخفیف" required/>
-                <base-g-button @click="applyDiscount" :is-loading="discountLoading">ثبت</base-g-button>
-              </div>
-            </form>
-            <base-g-button v-else w-full button-type="outline" @click="removeDiscount">
-              حذف کد تخفیف
-            </base-g-button>
+            <div v-if="showDiscount">
+              <!--  Discount   -->
+              <form class="flex-col items-start" v-if="cartStore.PendingOrder?.discount.code == ''">
+                <div class="flex items-start gap-1 w-full mt-4">
+                  <base-g-input v-model="discountCode" type="text" label="کد تخفیف" required/>
+                  <base-g-button @click="applyDiscount" :is-loading="discountLoading">ثبت</base-g-button>
+                </div>
+              </form>
+              <base-g-button v-else w-full button-type="outline" @click="removeDiscount">
+                حذف کد تخفیف
+              </base-g-button>
+            </div>
+            <div v-else>
+              <button class="font-light text-sm text-primary" @click="showDiscount = true">برای ثبت کد تخفیف کلیک کنید</button>
+            </div>
             <!--  Payment Method  -->
             <div>
               <span class="font-light opacity-70">روش پرداخت</span>
@@ -199,7 +204,6 @@
                 </div>
               </div>
             </div>
-            <hr class="my-2">
             <base-g-button w-full @click="payOrder" :disabled="!accountStore.hasActiveAddress" :is-loading="payLoading">
               تکمیل و پرداخت
             </base-g-button>
@@ -263,7 +267,7 @@
       </section>
     </div>
 
-    <div v-else class="mt-6 flex flex-col items-center pb-[50px]" v-if="cartStore.PendingOrder">
+    <div class="md:hidden mt-6 flex flex-col items-center pb-[50px]" v-if="cartStore.PendingOrder">
       <div class="flex items-center gap-1">
         <strong>
           سبد خرید
@@ -378,6 +382,7 @@ const carousel = ref();
 const router = useRouter();
 const paymentMethod = ref(EPaymentMethod.Gateway);
 
+const showDiscount = ref(false);
 const showAddressModal = ref(false);
 
 const toast = useToast();

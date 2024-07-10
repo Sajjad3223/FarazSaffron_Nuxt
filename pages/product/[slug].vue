@@ -15,7 +15,7 @@
 
     <div class="hidden md:block">
       <!--  Breadcrumb  -->
-      <div class="my-8">
+      <div class="my-4 2xl:my-8 text-xs 2xl:text-sm">
         <ul class="flex items-center gap-1">
           <li class="text-[#A5A5A5]">
             <NuxtLink to="/">جی پی زعفران</NuxtLink>
@@ -55,21 +55,23 @@
         </ul>
       </div>
 
-      <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-5 gap-8 mt-4 rounded-2xl" v-if="product">
+      <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-6 2xl:grid-cols-5 gap-8 rounded-2xl" v-if="product">
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
           <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
-            <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[450px] rounded-2xl"
-                    :mousewheel="{enabled:true}"
-                    :slides-per-view="3.5" :space-between="20">
-              <SwiperSinglePageControls />
-              <SwiperSlide v-for="i in product?.images">
-                <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
-              </SwiperSlide>
-            </Swiper>
+            <ClientOnly>
+              <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[450px] rounded-2xl"
+                      :mousewheel="{enabled:true}"
+                      :slides-per-view="3.5" :space-between="20">
+                <SwiperSinglePageControls />
+                <SwiperSlide v-for="i in product?.images">
+                  <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+                </SwiperSlide>
+              </Swiper>
+            </ClientOnly>
           </div>
           <div class="flex-1 bg-white rounded-xl grid relative place-items-center aspect-square">
-            <div class="aspect-square image-magnifier-container grid place-items-center">
+            <div class="aspect-square image-magnifier-container grid place-items-center max-h-[200px]">
               <img id="mainImage" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" @click="showBanner(`${SITE_URL}/product/images/${product.mainImage.src}`,product.mainImage.alt)">
             </div>
             <div class="flex flex-col space-y-4 absolute top-0 left-0 p-2 rounded-full bg-white">
@@ -101,12 +103,12 @@
         </div>
 
         <!--   Name & Price   -->
-        <div class="flex flex-col items-start h-auto col-span-3 mr-12 ">
-          <h2 class="text-3xl font-bold text-[#5E5E5E]">
+        <div class="flex flex-col items-start h-auto col-span-4 2xl:col-span-3 mr-12 ">
+          <h2 class="text-xl 2xl:text-3xl font-bold text-[#5E5E5E]">
             {{ product?.title }}
           </h2>
 
-          <ul class="my-auto flex flex-col space-y-3 text-lg">
+          <ul class="my-auto flex flex-col space-y-3 text-sm 2xl:text-lg">
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494] flex items-center gap-2">
               <span>
                 پروانه بهداشت: دارد
@@ -127,12 +129,12 @@
               <div class="flex justify-between items-center gap-4">
                 <!--   Price    -->
                 <div class="flex items-center gap-1">
-                  <strong class="text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
-                  <span class="flex flex-col items-center text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
+                  <strong class="text-3xl 2xl:text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
+                  <span class="flex flex-col items-center text-sm 2xl:text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
                 </div>
                 <!--   Discount    -->
                 <div class="flex items-center gap-2" v-if="product?.discount !== 0">
-                  <span class="line-through opacity-50 text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
+                  <span class="line-through opacity-50 text-lg 2xl:text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
                   <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
                     <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ product?.discount }}%</span>
                   </div>
@@ -184,28 +186,6 @@
           </div>
         </div>
       </div>
-
-      <Transition name="fade">
-        <div class="fixed inset-0 grid place-items-center z-40 bg-black/20 backdrop-blur-sm" @click.self="showAddedToCartModal = false" v-if="showAddedToCartModal">
-          <div class="w-1/5 bg-white rounded-xl addedToCartAnim flex flex-col px-2 pt-4 pb-8">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-4">
-                <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="w-[150px]">
-                <div class="flex flex-col space-y-2">
-                  <span>{{product.title}}</span>
-                  <span class="opacity-60 text-sm font-light text-green-600">با موفقیت به سبد خرید اضافه شد</span>
-                </div>
-              </div>
-            </div>
-            <NuxtLink to="/checkout/cart" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
-              <span>رفتن به سبد خرید</span>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </NuxtLink>
-          </div>
-        </div>
-      </Transition>
 
       <Transition name="fade">
         <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-30 grid place-items-center" v-if="showBannerModal" @click.self="showBannerModal = false">

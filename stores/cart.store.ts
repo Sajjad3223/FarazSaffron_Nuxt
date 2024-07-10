@@ -14,11 +14,19 @@ import type {ApiResponse} from "~/models/apiResponse";
 import {GetProduct} from "~/services/product.service";
 import {ApiStatusCode} from "~/models/metaData";
 import {EItemType} from "~/models/EPostType";
+import type {Img} from "~/models/image";
+
+export interface AddedItemData{
+    image:Img;
+    title:string;
+}
 
 export const useCartStore = defineStore("cart",()=>{
     const PendingOrder:Ref<OrderDto | null | undefined> = ref(null);
     const cartItemsCount = ref(0);
     const cartLoading = ref(false);
+    const showAddedToCartModal = ref(false);
+    const currentAddedItemData:Ref<AddedItemData | null | undefined> = ref(null);
 
     const toast = useToast();
     const authStore = useAuthStore();
@@ -29,7 +37,6 @@ export const useCartStore = defineStore("cart",()=>{
             //If user is logged in request to server for add to Cart
             const result = await AddToCart(id,count);
             if(result.isSuccess){
-                toast.showToast(result.metaData.message,ToastType.success,3000,true);
                 addResult = true;
             }else{
                 toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
@@ -99,14 +106,28 @@ export const useCartStore = defineStore("cart",()=>{
                     cartData.orderItems.push(itemToAdd);
 
                     cartCookie.value = JSON.stringify(cartData);
-                    toast.showToast('محصول با موفقیت به سبد اضافه شد',ToastType.success,3000,true);
                     addResult = true;
                 }
             }
         }
 
         await refreshCart();
+        if(addResult){
+            showAddedToCart(slug);
+        }
         return addResult;
+    }
+
+    const showAddedToCart = async (slug:string) =>{
+        const product = await GetProduct(slug);
+        if(product.isSuccess){
+            currentAddedItemData.value = {
+                image:product.data?.mainImage,
+                title:product.data?.title
+            } as AddedItemData;
+        }
+
+        showAddedToCartModal.value = true;
     }
 
     const refreshCart = async ()=>{
@@ -291,6 +312,8 @@ export const useCartStore = defineStore("cart",()=>{
         decreaseCount,
         removeItem,
         transferOrder,
-        removeAllItems
+        removeAllItems,
+        showAddedToCartModal,
+        currentAddedItemData
     };
 })

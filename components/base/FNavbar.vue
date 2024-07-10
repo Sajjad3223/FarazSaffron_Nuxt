@@ -1,39 +1,39 @@
 <template>
 
   <header v-if="topBanner != null">
-    <a :href="topBanner.url" class="h-[60px] bg-white w-full relative flex items-center justify-center" style="background: linear-gradient(90deg, #F04623 0%, #C82805 100%);">
+    <a :href="topBanner.url" class="h-[50px] 2xl:h-[60px] bg-white w-full relative flex items-center justify-center" style="background: linear-gradient(90deg, #F04623 0%, #C82805 100%);">
       <img :src="`${SITE_URL}/banners/${topBanner.image.src}`"
            :alt="topBanner.image.alt"
-           class="h-[60px]">
+           class="h-[50px] 2xl:h-[60px]">
     </a>
   </header>
   <nav class="w-full border-b pb-2 border-[#ECECEC] pt-2 bg-white relative" >
-    <div class=" container px-24 3xl:px-0 min-h-[125px] mx-auto mt-5">
+    <div class=" container px-24 3xl:px-0 min-h-[100px] 2xl:min-h-[125px] mx-auto mt-5 text-xs lg:text-sm 2xl:text-base">
       <div class="w-full flex items-center flex-wrap justify-between">
         <div class="flex items-center flex-wrap gap-4 flex-1 xl:gap-12">
           <NuxtLink to="/" class="flex items-center gap-4">
             <div class="w-max logo-rotate-always relative">
-              <div class="w-[50px] h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
+              <div class="w-[40px] 2xl:w-[50px] h-[40px] 2xl:h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
               >
-                <img src="~/assets/images/gp-alone-white.png" alt="gp alone white" class="w-8">
+                <img src="~/assets/images/gp-alone-white.png" alt="gp alone white" class="w-6 2xl:w-8">
               </div>
-              <div class="w-[50px] h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
+              <div class="w-[40px] 2xl:w-[50px] h-[40px] 2xl:h-[50px] rounded-full bg-brandOrange grid place-items-center logo-style"
                    style="transform: rotateY(180deg)"
               >
-                <img src="~/assets/images/GP-filled-white.png" alt="gp alone white" class="w-8">
+                <img src="~/assets/images/GP-filled-white.png" alt="gp alone white" class="w-6 2xl:w-8">
               </div>
             </div>
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start font-light">
               <strong>زعفران جی پی</strong>
               <span class="text-sm"><strong class="text-brandOrange text-base">gp</strong> Saffron</span>
             </div>
           </NuxtLink>
-          <form class="flex w-[20vw] items-center relative" action="/market">
+          <form class="flex w-[220px] 2xl:w-[20vw] max-w-[300px] items-center relative" action="/market">
             <input type="text" name="search" id="search"
-                   class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer"
+                   class="form-input w-full h-8 text-sm font-light 2xl:h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer"
                    required>
             <strong
-                class="absolute opacity-50 right-4 pointer-events-none transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی
+                class="absolute opacity-50 right-4 pointer-events-none text-xs 2xl:text-sm font-light transition-all duration-200 peer-focus:opacity-0 peer-checked:opacity-0 peer-valid:opacity-0">جستجوی
               محصول...</strong>
             <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg"
                  class="absolute opacity-50 left-4">
@@ -43,7 +43,7 @@
                   fill="currentColor"/>
             </svg>
           </form>
-          <ul class="flex items-center gap-9 font-bold">
+          <ul class="flex items-center gap-9 font-bold ">
             <li>
               <NuxtLink to="/" class="hover:text-brandOrange transition-colors duration-200"
                         exact-active-class="text-brandOrange">خانه
@@ -103,7 +103,7 @@
           </a>
         </div>
       </div>
-      <div class="mt-5 gap-4 flex flex-wrap items-center justify-between">
+      <div class="mt-3 2xl:mt-5 gap-4 flex flex-wrap items-center justify-between">
         <div class="flex items-center gap-4">
           <div class="bg-[#F6F6F6] rounded-lg w-7 h-8 relative flex items-center">
             <span class="bg-[#C3C3C3] absolute h-0.5 rounded-full inset-x-1 right-1/2 top-1/3"></span>
@@ -113,7 +113,7 @@
           <div class="flex items-center gap-10">
             <div class="relative">
               <button class="flex items-center gap-2" @click="showCategories = !showCategories" type="button">
-                <strong>دسته بندی</strong>
+                <span class="font-medium 2xl:font-bold">دسته بندی</span>
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"
                      :class="['transition-all duration-200',{'rotate-180':showCategories}]">
                   <path d="M1 1L5.00065 4.664L9 1" stroke="#3E3E3E" stroke-width="2" stroke-linecap="round"
@@ -156,13 +156,13 @@
               </Transition>
             </div>
             <NuxtLink :to="`/market?orderBy=${EOrderBy.محبوبیت}`"
-                      class="font-bold hover:text-brandOrange transition-colors duration-200">پرفروش ها
+                      class="font-medium 2xl:font-bold hover:text-brandOrange transition-colors duration-200">پرفروش ها
             </NuxtLink>
             <NuxtLink :to="`/market?orderBy=${EOrderBy.ارزان_ترین}`"
-                      class="font-bold hover:text-brandOrange transition-colors duration-200">تخفیف ها
+                      class="font-medium 2xl:font-bold hover:text-brandOrange transition-colors duration-200">تخفیف ها
             </NuxtLink>
             <NuxtLink :to="`/market?orderBy=${EOrderBy.جدیدترین}`"
-                      class="font-bold hover:text-brandOrange transition-colors duration-200">محصولات جدید
+                      class="font-medium 2xl:font-bold hover:text-brandOrange transition-colors duration-200">محصولات جدید
             </NuxtLink>
           </div>
         </div>
@@ -170,7 +170,7 @@
           <!-- User Account -->
           <div class="relative">
             <button type="button"
-                    class="h-10 px-3 rounded-lg text-brandOrange flex items-center gap-2 border border-brandOrange"
+                    class="h-8 2xl:h-10 px-3 rounded-lg text-brandOrange flex items-center gap-2 border border-brandOrange"
                     @click="showAccountOptions = !showAccountOptions">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -183,7 +183,7 @@
                          xlink:href="data:image/png;base64,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"/>
                 </defs>
               </svg>
-              <strong>حساب کاربری</strong>
+              <span class="font-medium 2xl:font-bold">حساب کاربری</span>
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"
                    :class="['transition-all duration-200',{'rotate-180':showAccountOptions}]">
                 <path d="M1 1L5.00065 4.664L9 1" stroke="currentColor" stroke-opacity="0.5" stroke-width="2"
@@ -284,7 +284,7 @@
           </div>
           <!-- Cart -->
           <div class="flex h-auto w-max items-stretch relative gap-2">
-            <button class=" h-auto grid place-items-center bg-brandOrange rounded-md rounded-b-xl"
+            <button class="h-8 2xl:h-10 grid place-items-center bg-brandOrange rounded-md rounded-b-xl"
                     style="box-shadow: 0 0 10px 0 #F0462380;"
                     @click="showCart = !showCart">
               <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -297,14 +297,14 @@
             <div class="flex flex-col items-start">
               <button class="flex items-center gap-2"
                       @click="showCart = !showCart">
-                <strong class="text-sm">سبد خرید</strong>
+                <span class="font-medium 2xl:font-bold text-sm">سبد خرید</span>
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"
                      :class="['transition-transform duration-200',{'rotate-180':showCart}]">
                   <path d="M1 1L5.00065 4.664L9 1" stroke="currentColor" stroke-opacity="0.5" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <small v-if="cartStore.cartItemsCount == 0">خالی</small>
+              <small class="font-thin 2xl:font-light" v-if="cartStore.cartItemsCount == 0">خالی</small>
               <span v-else class="bg-brandOrange/20 rounded-lg text-xs text-brandOrange px-4 py-1">
                   {{ cartStore.cartItemsCount }}
                 </span>
@@ -338,9 +338,9 @@
                   <ul class="h-[300px] overflow-y-auto py-2">
                     <li class="flex items-stretch gap-4 border-b last:border-none py-3"
                         v-for="i in cartStore.PendingOrder.orderItems">
-                      <div class="flex w-1/3 flex-col items-start gap-4">
+                      <div class="flex w-max flex-col items-center">
                         <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                             :alt="i.itemInfo.productImage.alt" class="w-full">
+                             :alt="i.itemInfo.productImage.alt" class="w-full max-w-[100px] 2xl:max-w-[150px]">
                         <cart-counter :item="i" class="scale-75"/>
                       </div>
                       <div class="flex flex-col justify-between flex-1 pb-2 pt-4">

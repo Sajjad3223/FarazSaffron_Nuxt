@@ -3,7 +3,7 @@
     <base-f-divider :logo-divider="false" title="گزارش بازدید ها" />
 
     <div class="grid grid-cols-4 gap-5">
-      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+      <div class="bg-white border rounded-2xl text-2xl p-5 2xl:p-12 flex flex-col space-y-5 justify-center">
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">بازدید کل</span>
           <div class="flex gap-2">
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+      <div class="bg-white border rounded-2xl text-2xl p-5 2xl:p-12 flex flex-col space-y-5 justify-center">
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">بازدید های امسال</span>
           <div class="flex gap-2">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+      <div class="bg-white border rounded-2xl text-2xl p-5 2xl:p-12 flex flex-col space-y-5 justify-center">
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">بازدید های ماه</span>
           <div class="flex gap-2">
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+      <div class="bg-white border rounded-2xl text-2xl p-5 2xl:p-12 flex flex-col space-y-5 justify-center">
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">بازدید های امروز</span>
           <div class="flex gap-2">
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white border rounded-2xl text-2xl p-12 flex flex-col space-y-5 justify-center">
+      <div class="bg-white border rounded-2xl text-2xl p-5 2xl:p-12 flex flex-col space-y-5 justify-center">
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">بازدید های آمده از تُرُب</span>
           <div class="flex gap-2">
@@ -97,6 +97,7 @@
         </tr>
       </tbody>
     </table>
+    <FPagination v-model="pageId" :pagination-data="paginationData" />
   </div>
 </template>
 
@@ -104,20 +105,31 @@
 import type {VisitDto, VisitFilterResult} from "~/models/visit/visitDto";
 import {GetVisits} from "~/services/visit.service";
 import {EPostType} from "~/models/EPostType";
+import type {PaginationData} from "~/models/baseFilterResult";
+import {FillPaginationData} from "~/utilities/fillPaginationData";
 
 definePageMeta({
   layout:'admin'
 })
 
 const data:Ref<VisitFilterResult | undefined> = ref(undefined);
+const paginationData:Ref<PaginationData | null> =ref(null);
 const visits:Ref<VisitDto[]> = ref([]);
+const pageId = ref(1);
+
+watch(pageId,async ()=> await getData());
 
 onMounted(async ()=>{
-  const result = await GetVisits({pageId:1,take:100});
+  await getData();
+})
+
+const getData = async()=>{
+  const result = await GetVisits({pageId:pageId.value,take:100});
   if(result.isSuccess){
     visits.value = result.data?.data ?? [];
     data.value = result.data;
+    paginationData.value = FillPaginationData(result.data);
   }
-})
+}
 
 </script>

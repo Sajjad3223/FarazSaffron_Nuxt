@@ -1,17 +1,17 @@
   <template>
   <div class="hidden md:block mx-auto">
-    <div class="flex flex-col container mx-auto mt-[8rem]">
-      <h2 class="w-full text-center text-3xl font-bold">پنل کاربری</h2>
+    <div class="flex flex-col container mx-auto mt-4 2xl:mt-[6rem]">
+      <h2 class="hidden 2xl:block w-full text-center text-3xl font-bold">پنل کاربری</h2>
       <NuxtLink class="flex items-center gap-4 w-max p-2" to="/">
         <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.666016 1.33335L5.33268 6.00002L0.666016 10.6667" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span class="text-xs">بازگشت به جی پی</span>
       </NuxtLink>
-      <div class="w-full flex gap-5 items-start mt-12">
+      <div class="w-full flex gap-3 2xl:gap-5 items-start mt-4 2xl:mt-12">
         <aside class="w-1/6 text-sm flex flex-col items-start bg-white border py-6 rounded-xl">
           <div class="w-full flex flex-col space-y-1">
-            <NuxtLink to="/profile" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g>
@@ -21,7 +21,7 @@
                 <span>داشبورد</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/orders" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/orders" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2.75 3.25L4.83 3.61L5.793 15.083C5.87 16.02 6.653 16.739 7.593 16.736H18.502C19.399 16.738 20.16 16.078 20.287 15.19L21.236 8.632C21.342 7.899 20.833 7.219 20.101 7.113C20.037 7.104 5.164 7.099 5.164 7.099" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -32,7 +32,7 @@
                 <span>سفارشات</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/comments" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/comments" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0714 19.0699C16.0152 22.1263 11.4898 22.7867 7.78642 21.074C7.23971 20.8539 6.79148 20.676 6.36537 20.676C5.17849 20.683 3.70117 21.8339 2.93336 21.067C2.16555 20.2991 3.31726 18.8206 3.31726 17.6266C3.31726 17.2004 3.14642 16.7602 2.92632 16.2124C1.21283 12.5096 1.87411 7.98269 4.93026 4.92721C8.8316 1.02443 15.17 1.02443 19.0714 4.9262C22.9797 8.83501 22.9727 15.1681 19.0714 19.0699Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -43,7 +43,7 @@
                 <span>دیدگاه ها</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/addresses" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/addresses" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 10.5005C14.5 9.11924 13.3808 8 12.0005 8C10.6192 8 9.5 9.11924 9.5 10.5005C9.5 11.8808 10.6192 13 12.0005 13C13.3808 13 14.5 11.8808 14.5 10.5005Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -52,7 +52,7 @@
                 <span>آدرس ها</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/notification" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/notification" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17.8476C17.6392 17.8476 20.2481 17.1242 20.5 14.2205C20.5 11.3188 18.6812 11.5054 18.6812 7.94511C18.6812 5.16414 16.0452 2 12 2C7.95477 2 5.31885 5.16414 5.31885 7.94511C5.31885 11.5054 3.5 11.3188 3.5 14.2205C3.75295 17.1352 6.36177 17.8476 12 17.8476Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -61,7 +61,7 @@
                 <span>پیغام ها</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/tickets" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/tickets" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.99983 11C4.99983 6.58172 8.58125 3 12.9992 3C17.4171 3 20.9985 6.58172 20.9985 11C20.9985 12.15 20.7558 13.2434 20.319 14.2316L21 18.9992L16.9146 17.9778C15.7572 18.6287 14.4215 19 12.9992 19M3.00095 16C3.00095 16.7188 3.15258 17.4021 3.4256 18.0198L3 20.9995L5.55315 20.3611C6.27643 20.768 7.11115 21 8.00005 21C10.761 21 12.9992 18.7614 12.9992 16C12.9992 13.2386 10.761 11 8.00005 11C5.23912 11 3.00095 13.2386 3.00095 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,7 +69,7 @@
                 <span>تیکت ها</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/favorites" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/favorites" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M2.87187 11.5983C1.79887 8.24832 3.05287 4.41932 6.56987 3.28632C8.41987 2.68932 10.4619 3.04132 11.9999 4.19832C13.4549 3.07332 15.5719 2.69332 17.4199 3.28632C20.9369 4.41932 22.1989 8.24832 21.1269 11.5983C19.4569 16.9083 11.9999 20.9983 11.9999 20.9983C11.9999 20.9983 4.59787 16.9703 2.87187 11.5983Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,7 +78,7 @@
                 <span>علاقه مندی ها</span>
               </div>
             </NuxtLink>
-            <NuxtLink to="/profile/user-history" v-if="false" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/user-history" v-if="false" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2.75 3.25L4.83 3.61L5.793 15.083C5.87 16.02 6.653 16.739 7.593 16.736H18.502C19.399 16.738 20.16 16.078 20.287 15.19L21.236 8.632C21.342 7.899 20.833 7.219 20.101 7.113C20.037 7.104 5.164 7.099 5.164 7.099" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -90,7 +90,7 @@
               </div>
             </NuxtLink>
             <hr>
-            <NuxtLink to="/profile/personal-info" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
+            <NuxtLink to="/profile/personal-info" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
               <div class="flex items-center gap-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M11.983 15.3457C8.11536 15.3457 4.8125 15.9305 4.8125 18.2724C4.8125 20.6143 8.0944 21.22 11.983 21.22C15.8506 21.22 19.1525 20.6343 19.1525 18.2933C19.1525 15.9524 15.8715 15.3457 11.983 15.3457Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -100,7 +100,7 @@
               </div>
             </NuxtLink>
             <NuxtLink to="/admin" v-if="accountStore.isAdmin"
-                      class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="bg-brandOrange/15 text-brandOrange border-l-4 border-brandOrange [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange">
+                      class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="bg-brandOrange/15 text-brandOrange border-l-4 border-brandOrange [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange">
               <div class="flex items-center gap-4">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <rect width="25" height="25" fill="url(#pattern0_438_2587)" fill-opacity="0.5"/>
@@ -114,7 +114,7 @@
                 <span>ورود به پنل ادمین</span>
               </div>
             </NuxtLink>
-            <button class="py-4 px-6 w-full hover:bg-[#F8F8F8] hover:text-danger transition-colors duration-200" @click="LogOut">
+            <button class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] hover:text-danger transition-colors duration-200" @click="LogOut">
             <span class="flex items-center gap-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.8144 12.0225H3.77344" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -126,13 +126,13 @@
             </button>
           </div>
         </aside>
-        <main class="flex-1 flex flex-col gap-5">
+        <main class="flex-1 flex flex-col gap-3 2xl:gap-5">
           <!--  User Avatar  -->
-          <div class="bg-white rounded-xl border p-6 flex items-center justify-between">
+          <div class="bg-white rounded-xl border p-4 2xl:p-6 flex items-center justify-between">
             <div class="flex items-center gap-3 pointer-events-none">
-              <img src="~/assets/images/avatar.png" alt="avatar" class="max-w-14 border-2 rounded-full">
+              <img src="~/assets/images/avatar.png" alt="avatar" class="max-w-10 2xL:max-w-14 border-2 rounded-full">
               <span class="flex flex-col items-start" v-if="!accountStore.initLoading">
-                <strong class="text-xl">{{ accountStore.currentUser?.fullName }}</strong>
+                <strong class="2xl:text-xl">{{ accountStore.currentUser?.fullName }}</strong>
                 <span class="text-sm font-light opacity-70">{{ accountStore.currentUser?.phoneNumber }}</span>
               </span>
               <div v-else class="flex flex-col space-y-2 skeleton">
@@ -140,7 +140,7 @@
                 <div class="w-24 h-2 rounded-full skeleton-el"></div>
               </div>
             </div>
-            <input type="text" class="px-4 py-2 w-1/5 bg-[#FAFAFA] rounded-lg" placeholder="جستجو">
+            <input type="text" class="px-4 py-2 w-1/5 bg-[#FAFAFA] font-light rounded-lg" placeholder="جستجو">
           </div>
           <div class="bg-white border rounded-xl p-6 ">
             <slot></slot>
