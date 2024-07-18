@@ -3,11 +3,6 @@
     <Head>
       <Title>سفارشات</Title>
     </Head>
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 "
-    >
-      سفارشات
-    </h4>
 <!--    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
       <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
         <strong class="text-xl ">فیلتر محصولات</strong>

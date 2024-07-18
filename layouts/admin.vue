@@ -291,6 +291,15 @@
                           سفارشات در انتظار
                         </NuxtLink>
                       </li>
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/orders/transmissions">
+                          هزینه های ارسال
+                        </NuxtLink>
+                      </li>
                     </ul>
                   </template>
                 </Transition>
@@ -355,6 +364,94 @@
                             exact-active-class="activeSubLink"
                             to="/admin/blog/drafts">
                           پیش نویس ها
+                        </NuxtLink>
+                      </li>
+                    </ul>
+                  </template>
+                </Transition>
+              </li>
+              <li class="relative w-full flex flex-col">
+                <button
+                    class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200 flex justify-between"
+                    @click="isCertificateMenuOpen = !isCertificateMenuOpen"
+                    @keydown.esc="isCertificateMenuOpen = false"
+                    aria-haspopup="true"
+                >
+                <span class="flex items-center gap-4">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.81 2L5.19 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.19 2L18.81 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path
+                        d="M2 7.85001C2 6.00001 2.99 5.85001 4.22 5.85001H19.78C21.01 5.85001 22 6.00001 22 7.85001C22 10 21.01 9.85001 19.78 9.85001H4.22C2.99 9.85001 2 10 2 7.85001Z"
+                        stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9.76001 14V17.55" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M14.36 14V17.55" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10"
+                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>اصالت سنجی</span>
+                </span>
+                  <svg
+                      class="w-4 h-4"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                  >
+                    <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <Transition enter-active-class="transition-all ease-in-out duration-300"
+                            enter-from-class="opacity-25 max-h-0"
+                            enter-to-class="opacity-100 max-h-48"
+                            leave-active-class="transition-all ease-in-out duration-300"
+                            leave-from-class="opacity-100 max-h-48"
+                            leave-to-class="opacity-0 max-h-0">
+                  <template v-if="isCertificateMenuOpen">
+                    <ul
+                        class="py-3 m-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100  "
+                        aria-label="submenu"
+                    >
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/certificate/authenticator">
+                          سریال های ثبت شده
+                        </NuxtLink>
+                      </li>
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/certificate/authenticator/properties">
+                          ویژگی های اصالت نامه ها
+                        </NuxtLink>
+                      </li>
+                      <li><hr></li>
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/certificate">
+                          شناسنامه ها
+                        </NuxtLink>
+                      </li>
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/certificate/properties">
+                          ویژگی های شناسنامه ها
                         </NuxtLink>
                       </li>
                     </ul>
@@ -586,6 +683,7 @@ const isSideMenuOpen = ref(false);
 const isProductMenuOpen = ref(false);
 const isUsersMenuOpen = ref(false);
 const isOrdersMenuOpen = ref(false);
+const isCertificateMenuOpen = ref(false);
 const isBlogMenuOpen = ref(false);
 const isProfileMenuOpen = ref(false);
 const isNotificationsMenuOpen = ref(false);

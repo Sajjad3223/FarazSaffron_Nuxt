@@ -1,7 +1,7 @@
 <template>
   <div class="w-full overflow-hidden">
     <Head>
-      <Title>سفارشات پرداخت شده</Title>
+      <Title>هزینه های ارسال</Title>
     </Head>
     <!--    <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden">
           <button class="w-full flex items-center justify-between" type="button" @click="showFilters = !showFilters">
@@ -48,7 +48,19 @@
           </Transition>
         </div>-->
 
-    <base-f-divider :logo-divider="false" title="سفارشات پرداخت شده" />
+    <base-f-divider :logo-divider="false" title="هزینه های ارسال جی پی">
+      <template #left>
+        <base-g-button button-type="white" color="info" custom-class="text-sm" is-icon
+                       @click="showAddTransmissionModal = true">
+          افزودن هزینه جدید
+        </base-g-button>
+      </template>
+    </base-f-divider>
+
+    <base-g-modal title="افزودن هزینه جدید" v-model="showAddTransmissionModal">
+      <cart-transmission-add @transmissionCreated="showAddTransmissionModal = false, getData()" />
+    </base-g-modal>
+
     <div class=" w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
@@ -56,66 +68,44 @@
           <tr
               class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
-            <th class="px-4 py-3">شماره سفارش</th>
-            <th class="px-4 py-3">نام خریدار</th>
-            <th class="px-4 py-3">قیمت سفارش</th>
-            <th class="px-4 py-3">تعداد محصولات</th>
-            <th class="px-4 py-3">وضعیت سفارش</th>
-            <th class="px-4 py-3">تاریخ ثبت</th>
+            <th class="px-4 py-3">استان</th>
+            <th class="px-4 py-3">شهر</th>
+            <th class="px-4 py-3">وزن</th>
+            <th class="px-4 py-3">هزینه ارسال</th>
+            <th class="px-4 py-3">وضعیت</th>
             <th class="px-4 py-3" width="10%">عملیات</th>
           </tr>
           </thead>
           <tbody
               class="bg-white divide-y dark:divide-gray-700 "
           >
-          <tr :class="['text-gray-700 ']" v-for="(o) in orders">
+          <tr :class="['text-gray-700 ']" v-for="(t) in transmissions">
             <td class="px-4 py-3 text-sm text-nowrap">
-              <NuxtLink :to="`/admin/orders/${o.id}`" class="text-indigo-600">
-                {{o.id}}
-              </NuxtLink>
+              {{t.state}}
             </td>
             <td class="px-4 py-3">
-              <div class="flex items-center text-sm">
-                <div>
-                  <p class="text-sm text-nowrap">{{o.fullName}}</p>
-                </div>
-              </div>
+              {{t.city}}
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              <base-g-price :price="o.finallyPrice / 10" />
+              {{t.weight}} گرم
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              {{o.itemsCount}} کالا
+              <base-g-price size="sm" mobile-size="xs" :price="(t.price / 10)" />
             </td>
-            <td class="px-4 py-3 text-xs">
-              <span v-if="o.orderStatus === EOrderStatus.Pending" class="text-[10px] px-2 rounded-full bg-gray-100"> جاری</span>
-              <span v-if="o.orderStatus === EOrderStatus.Paid" class="text-[10px] px-2 rounded-full bg-brandOrange/20 text-brandOrange"> پرداخت شده</span>
-              <span v-if="o.orderStatus === EOrderStatus.Canceled" class="text-[10px] px-2 rounded-full bg-gray-100"> لغو شده</span>
-              <span v-if="o.orderStatus === EOrderStatus.Returned" class="text-[10px] px-2 rounded-full bg-gray-100"> مرجوع شده</span>
-              <span v-if="o.orderStatus === EOrderStatus.Delivered" class="text-[10px] px-2 rounded-full bg-green-200 text-green-600"> تحویل شده</span>
-              <span v-if="o.orderStatus === EOrderStatus.Sending" class="text-[10px] px-2 rounded-full bg-indigo-200 text-indigo-600"> ارسال شده</span>
+            <td class="px-4 py-3 text-sm" v-if="t.isActive">
+              فعال
             </td>
-            <td class="px-4 py-3 text-sm">
-              {{ o.persianDate }}
+            <td class="px-4 py-3 text-sm" v-else>
+              غیر فعال
             </td>
             <td class="px-4 py-3">
-              <div class="flex items-center space-x-4 text-sm">
-                <NuxtLink :to="`/admin/orders/${o.id}`" title="مشاهده جزئیات" v-if="o.itemsCount > 0"
-                          class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-300 rounded-lg  focus:outline-none focus:shadow-outline-gray"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21.25 9.14999C18.94 5.51999 15.56 3.42999 12 3.42999C10.22 3.42999 8.49 3.94999 6.91 4.91999C5.33 5.89999 3.91 7.32999 2.75 9.14999C1.75 10.72 1.75 13.27 2.75 14.84C5.06 18.48 8.44 20.56 12 20.56C13.78 20.56 15.51 20.04 17.09 19.07C18.67 18.09 20.09 16.66 21.25 14.84C22.25 13.28 22.25 10.72 21.25 9.14999ZM12 16.04C9.76 16.04 7.96 14.23 7.96 12C7.96 9.76999 9.76 7.95999 12 7.95999C14.24 7.95999 16.04 9.76999 16.04 12C16.04 14.23 14.24 16.04 12 16.04Z" fill="currentColor"/>
-                    <path d="M11.9999 9.14001C10.4299 9.14001 9.1499 10.42 9.1499 12C9.1499 13.57 10.4299 14.85 11.9999 14.85C13.5699 14.85 14.8599 13.57 14.8599 12C14.8599 10.43 13.5699 9.14001 11.9999 9.14001Z" fill="currentColor"/>
-                  </svg>
-                </NuxtLink>
-              </div>
             </td>
           </tr>
 
           </tbody>
         </table>
       </div>
-      <FPagination :pagination-data="pagination" v-model="pageId" />
+      <FPagination :pagination-data="pagination" v-model="pageId"/>
     </div>
     <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
@@ -132,10 +122,15 @@
 </template>
 
 <script setup lang="ts">
-import {GetOrdersByAdmin} from "~/services/cart.service";
+import {GetAllTransmissions, GetOrdersByAdmin} from "~/services/cart.service";
 import {EOrderStatus, type OrderFilterData, type OrderFilterParams} from "~/models/cart/cartQueries";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
+import {
+  ETransmissionOrderBy,
+  type TransmissionDto,
+  type TransmissionFilterParams
+} from "~/models/cart/transmissionQueries";
 
 definePageMeta({
   layout:'admin'
@@ -143,28 +138,36 @@ definePageMeta({
 
 const pageId = ref(1);
 
-const orderFilterParams:OrderFilterParams = reactive({
+const filterParams:TransmissionFilterParams = reactive({
   search:'',
   take:10,
-  orderStatus:EOrderStatus.Paid,
-  userId:null,
   pageId:pageId.value,
+  orderBy:ETransmissionOrderBy.CreationDate,
+  minPrice:undefined,
+  maxPrice:undefined,
+  minWeight:undefined,
+  maxWeight:undefined
 })
 
+const showAddTransmissionModal = ref(false);
 const isLoading = ref(false);
-const orders:Ref<OrderFilterData[]> = ref([]);
+const transmissions:Ref<TransmissionDto[]> = ref([]);
 const pagination:Ref<PaginationData | null> = ref(null);
 
 onMounted(async ()=>{
   await getData();
 })
 
+watch(pageId,async()=>await getData())
+
 const getData = async ()=>{
   isLoading.value = true;
 
-  const result = await GetOrdersByAdmin(orderFilterParams);
+  filterParams.pageId = pageId.value;
+
+  const result = await GetAllTransmissions(filterParams);
   if(result.isSuccess){
-    orders.value = result.data?.data ?? [];
+    transmissions.value = result.data?.data ?? [];
     pagination.value = FillPaginationData(result.data!);
   }
 

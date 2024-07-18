@@ -429,8 +429,8 @@ const payOrder = async ()=>{
   payLoading.value = true;
 
   if(paymentMethod.value == EPaymentMethod.Gateway){
-    const result = await FetchApi<string>('/payment/payRequest',{
-      method:'POST'
+    const result = await FetchApi<string>(`/payment/payRequest`,{
+      method:'POST',
     });
 
     if(result.isSuccess && result.data != ''){

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="paginationData"
+  <div v-if="paginationData && paginationData.pageCount > 1"
       class="flex flex-col px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t bg-gray-50 sm:grid-cols-9 "
   >
         <span class="flex items-center col-span-3">

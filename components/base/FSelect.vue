@@ -37,11 +37,11 @@
       <transition
           enter-active-class="transition-all duration-200" enter-from-class="max-h-0 opacity-0 -translate-y-6" enter-to-class="opacity-100 translate-y-0"
           leave-active-class="transition-all duration-200" leave-to-class="max-h-0 opacity-0 -translate-y-6" leave-from-class="opacity-100 translate-y-0">
-        <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96  dark:text-gray-200 " v-show="showOptions" >
+        <div class="absolute z-10 top-full translate-y-2 bg-gray-100 inset-x-0 rounded-lg p-3 overflow-y-auto max-h-96" v-show="showOptions" >
           <ul class="space-y-4">
             <li v-for="c in data">
               <base-f-checkbox v-if="multiSelect" @click="addToSelectedItems(c)" :label="c.title" :value="c.id" :isChecked="selectedData?.find(o=>o.id == c.id) != null"/>
-              <div v-else class="w-full text-sm hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false,emits('update:modelValue',c.id)">
+              <div v-else class="w-full text-sm hover:bg-gray-200 cursor-pointer py-2 px-2 rounded-lg" @click="selectedItem = c,showOptions= false,emits('update:modelValue',c.id)">
                 {{ c.title }}
               </div>
             </li>

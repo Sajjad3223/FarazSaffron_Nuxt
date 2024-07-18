@@ -21,3 +21,15 @@ export interface AdminSetOrderDiscountCommand{
     userId:number;
     discountCode:string;
 }
+
+export interface SetAddressCommand{
+    receiverFirstName: string;
+    receiverLastName: string;
+    receiverPhoneNumber: string;
+    state: string;
+    city: string;
+    street: string;
+    postCode: string;
+    plaque: number;
+    unit: number;
+}

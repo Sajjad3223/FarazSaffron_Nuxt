@@ -11,6 +11,7 @@ export interface CategoryDto extends BaseDto{
     parentId:     number;
     title:        string;
     slug:         string;
+    imageName?:   string;
     children:     CategoryDto[];
 }
 

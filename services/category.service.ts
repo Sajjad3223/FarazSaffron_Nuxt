@@ -30,13 +30,13 @@ export const GetCategoryByAdmin = (categoryId:number):Promise<ApiResponse<Catego
 }
 
 
-export const CreateCategory = (command:CreateCategoryCommand):Promise<ApiResponse<undefined>> => {
+export const CreateCategory = (command:FormData):Promise<ApiResponse<undefined>> => {
     return FetchApi("/admin/category",{
         method:'POST',
         body:command
     });
 }
-export const EditCategory = (command:EditCategoryCommand):Promise<ApiResponse<undefined>> => {
+export const EditCategory = (command:FormData):Promise<ApiResponse<undefined>> => {
     return FetchApi("/admin/category",{
         method:'PUT',
         body:command

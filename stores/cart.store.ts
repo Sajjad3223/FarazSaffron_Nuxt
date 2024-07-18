@@ -26,6 +26,8 @@ export const useCartStore = defineStore("cart",()=>{
     const cartItemsCount = ref(0);
     const cartLoading = ref(false);
     const showAddedToCartModal = ref(false);
+    const showCartModal = ref(false);
+    const showShippingModal = ref(false);
     const currentAddedItemData:Ref<AddedItemData | null | undefined> = ref(null);
 
     const toast = useToast();
@@ -314,6 +316,8 @@ export const useCartStore = defineStore("cart",()=>{
         transferOrder,
         removeAllItems,
         showAddedToCartModal,
-        currentAddedItemData
+        currentAddedItemData,
+        showCartModal,
+        showShippingModal
     };
 })

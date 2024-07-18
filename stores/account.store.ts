@@ -25,6 +25,11 @@ export const useAccountStore = defineStore('account',()=> {
         return currentUser.value?.addresses.some(a=>a.isActiveAddress);
     })
 
+    const getActiveAddress = computed(()=>{
+        if(currentUser.value == null) return null;
+        return currentUser.value?.addresses.find(a=>a.isActiveAddress);
+    })
+
     const initData = async () => {
         initLoading.value = true;
 
@@ -64,6 +69,7 @@ export const useAccountStore = defineStore('account',()=> {
         myFavorites,
         myFavoritesCount,
         isFavorite,
-        hasActiveAddress
+        hasActiveAddress,
+        getActiveAddress
     }
 })

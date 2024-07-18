@@ -24,12 +24,12 @@
                 </div>
               </div>
             </div>
-            <NuxtLink to="/checkout/cart" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
+            <button @click="cartStore.showAddedToCartModal = false,cartStore.showCartModal = true" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
               <span>رفتن به سبد خرید</span>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </NuxtLink>
+            </button>
           </div>
         </div>
       </Transition>
@@ -62,19 +62,20 @@ onMounted(async ()=>{
 })
 </script>
 
-<style>
-body{
-  @apply bg-bgWhite dark:bg-gray-900;
-}
-
-</style>
-
 <style lang="scss">
 body{
-  @apply bg-white dark:bg-white;
+  @apply bg-[#FAFAFA] dark:bg-[#FAFAFA];
 }
 *{
   font-family: "Vazir FD",serif;
+}
+.container{
+  max-width: 1400px;
+}
+@media screen and (max-width: 1500px){
+  .container{
+    max-width: 1200px;
+  }
 }
 
 .logo-rotate, .logo-rotate-always{
@@ -84,7 +85,7 @@ body{
 
   .logo-style{
     position: absolute;
-    box-shadow: 0 0 15px 0 #F0462380;
+    //box-shadow: 0 0 15px 0 #F0462380;
     backface-visibility: hidden;
   }
 }
@@ -97,7 +98,7 @@ body{
 
   .logo-style{
     position: absolute;
-    box-shadow: 0 0 15px 0 #F0462380;
+    //box-shadow: 0 0 15px 0 #F0462380;
     backface-visibility: hidden;
     width: 100px;
     height: 100px;
@@ -110,7 +111,7 @@ body{
     height: 150px;
     .logo-style{
       position: absolute;
-      box-shadow: 0 0 15px 0 #F0462380;
+      //box-shadow: 0 0 15px 0 #F0462380;
       backface-visibility: hidden;
       width: 150px;
       height: 150px;
@@ -177,30 +178,22 @@ body{
 
 ::-webkit-scrollbar-track
 {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  //-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #F5F5F5;
-  border-radius: 10px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar
 {
-  width: 10px;
+  width: 5px;
   background-color: #F5F5F5;
-  border-radius: 10px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb
 {
-  border-radius: 10px;
-  background-color: #F04623;
-  background-image: -webkit-linear-gradient(45deg,
-      rgba(255, 255, 255, .2) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(255, 255, 255, .2) 50%,
-      rgba(255, 255, 255, .2) 75%,
-      transparent 75%,
-      transparent)
+  border-radius: 0;
+  @apply bg-[#171717]/40;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="h-[105vh] flex flex-col items-center justify-center -z-10 relative -mt-[125px]" style="background-image: url(/images/home-banner.jpg);background-size: cover;">
+  <div class="h-[105vh] flex flex-col items-center justify-center -z-10 relative " style="background-image: url(/images/home-banner.jpg);background-size: cover;">
     <div class="container mx-auto my-auto flex pt-[100px] flex-col items-center">
       <div class="flex flex-col items-center space-y-12 mr-auto">
         <div class="flex font-light text-5xl flex-col space-y-10 text-white items-center">

@@ -49,6 +49,7 @@
           <tr
               class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
+            <th class="px-4 py-3">تصویر</th>
             <th class="px-4 py-3">عنوان</th>
             <th class="px-4 py-3">اسلاگ</th>
             <th class="px-4 py-3">تاریخ ثبت</th>
@@ -60,6 +61,10 @@
           >
           <template v-for="c in categories">
             <tr class="text-gray-700 " >
+              <td class="px-4 py-3" v-if="c.imageName != null">
+                <img :src="`${SITE_URL}/category/${c.imageName}`" :alt="c.title" class="max-w-24 rounded-lg">
+              </td>
+              <td v-else></td>
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
                   <div>
@@ -111,6 +116,8 @@
               </td>
             </tr>
             <tr class="text-gray-700 " v-for="ch in c.children">
+            <td class="-translate-x-8 px-4 py-3">
+            </td>
             <td class="-translate-x-8 px-4 py-3">
               <div class="flex items-center text-sm">
                 <div class="relative before:absolute before:-right-5 before:opacity-60 before:w-2 before:h-2 before:bg-black before:dark:bg-white before:rounded-full flex items-center">
@@ -188,6 +195,7 @@ import {DeleteCategory, GetCategoriesByAdmin} from "~/services/category.service"
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {ToastType} from "~/composables/useSwal";
+import {SITE_URL} from "~/utilities/api.config";
 
 definePageMeta({
   layout:'admin'

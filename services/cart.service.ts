@@ -9,10 +9,20 @@ import type {
 } from "~/models/cart/cartQueries";
 import type {
     AdminSetOrderDiscountCommand,
-    FinalizeOrderCommand, FollowUpCommand,
+    FinalizeOrderCommand, FollowUpCommand, SetAddressCommand,
     SetOrderItemCountCommand,
     SetOrderStatusCommand
 } from "~/models/cart/cartCommands";
+import type {
+    CreateTransmissionCommand,
+    EditTransmissionCommand,
+    SetTransmissionPriceCommand
+} from "~/models/cart/transmissionCommands";
+import type {
+    GetSuitableTransmissionFilterParams, TransmissionDto,
+    TransmissionFilterParams,
+    TransmissionFilterResult
+} from "~/models/cart/transmissionQueries";
 
 export const GetOrders = (params:OrderFilterParams):Promise<ApiResponse<OrderFilterResult>> => {
     return FetchApi("/cart",{
@@ -137,5 +147,49 @@ export const SetOrderStatusByAdmin = (command:SetOrderStatusCommand):Promise<Api
 export const PayWithWallet = ():Promise<ApiResponse<PayWithWalletResult>> => {
     return FetchApi(`/payment/payWithWallet`,{
         method:'POST'
+    });
+}
+
+export const SetOrderAddress = (command:SetAddressCommand):Promise<ApiResponse<number>> => {
+    return FetchApi(`/user/setAddress`,{
+        method:'POST',
+        body:command
+    });
+}
+
+// Transmission
+export const CreateTransmission = (command:CreateTransmissionCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart/transmission`,{
+        method:'POST',
+        body:command
+    });
+}
+export const EditTransmission = (command:EditTransmissionCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart/transmission`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const SetOrderTransmissionPrice = (command:SetTransmissionPriceCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart/transmissionPrice`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const DeleteTransmission = (transmissionId:number):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/cart/transmission/${transmissionId}`,{
+        method:'DELETE'
+    });
+}
+export const GetAllTransmissions = (filterParams:TransmissionFilterParams):Promise<ApiResponse<TransmissionFilterResult>> => {
+    return FetchApi(`/cart/transmission/`,{
+        method:'GET',
+        params:filterParams
+    });
+}
+export const GetSuitableTransmission = (filterParams:GetSuitableTransmissionFilterParams):Promise<ApiResponse<TransmissionDto>> => {
+    return FetchApi(`/cart/transmission/suitable`,{
+        method:'GET',
+        params:filterParams
     });
 }

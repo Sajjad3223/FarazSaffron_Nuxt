@@ -111,7 +111,7 @@
               <div class="skeleton-el w-24 h-4 rounded-full"></div>
             </div>
             <div v-else>
-              <ul class="flex w-full flex-col space-y-4 mt-6" v-if="accountStore.currentUser?.wallets?.length > 0">
+              <ul class="flex w-full max-h-[200px] pl-4 overflow-y-auto flex-col space-y-4 mt-6" v-if="accountStore.currentUser?.wallets?.length > 0">
                 <li :class="['w-full grid grid-cols-4 gap-2',{'opacity-40':!wallet.isFinally}]" v-for="wallet in accountStore.currentUser?.wallets?.slice(0,5)">
                   <div class="flex items-center gap-4 col-span-2">
                     <div class="bg-danger bg-opacity-[8%] w-[50px] h-[50px] rounded-full grid place-items-center " v-if="!wallet.isFinally">
@@ -172,6 +172,7 @@
             <div v-if="!hasNoOrder">
               <div class="donut" ref="chart" v-show="!loading">
               </div>
+
               <div class="skeleton" v-show="loading">
                 <div class="skeleton-el w-[300px] aspect-square rounded-full"></div>
               </div>

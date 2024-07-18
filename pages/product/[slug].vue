@@ -58,11 +58,11 @@
       <div class="bg-[#F8F8F8] py-10 px-6 grid grid-cols-6 2xl:grid-cols-5 gap-8 rounded-2xl" v-if="product">
         <!--   Images   -->
         <div class="flex items-center gap-6 col-span-2">
-          <div class="flex w-1/5 flex-col items-center gap-2 max-h-[450px]">
+          <div class="flex w-1/5 flex-col items-center gap-2 max-h-[300px] 2xl:max-h-[400px]">
             <ClientOnly>
-              <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[450px] rounded-2xl"
+              <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[300px] 2xl:max-h-[400px] rounded-2xl"
                       :mousewheel="{enabled:true}"
-                      :slides-per-view="3.5" :space-between="20">
+                      :slides-per-view="3.5">
                 <SwiperSinglePageControls />
                 <SwiperSlide v-for="i in product?.images">
                   <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
@@ -170,11 +170,12 @@
               <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.digiKalaData?.digikalaLink">
                 <img src="~/assets/images/digikala-icon.png" alt="digikala icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-4 group-hover:shadow-md transition-all duration-200">
                 <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-100">دیجی کالا</small>
-                <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}}</small>
+                <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}} <span class="text-[10px]">تومان</span> </small>
               </a>
-              <a href="" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.basalamData?.basalamLink">
-                <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-3 group-hover:shadow-md transition-all duration-200">
-                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-2 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
+              <a :href="product.basalamData?.basalamLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.basalamData?.basalamLink">
+                <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-4 group-hover:shadow-md transition-all duration-200">
+                <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
+                <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}} <span class="text-[10px]">تومان</span> </small>
               </a>
             </div>
           </div>

@@ -8,7 +8,7 @@
         </svg>
         <span class="text-xs">بازگشت به جی پی</span>
       </NuxtLink>
-      <div class="w-full flex gap-3 2xl:gap-5 items-start mt-4 2xl:mt-12">
+      <div class="w-full flex gap-3 2xl:gap-5 my-4 2xl:my-12">
         <aside class="w-1/6 text-sm flex flex-col items-start bg-white border py-6 rounded-xl">
           <div class="w-full flex flex-col space-y-1">
             <NuxtLink to="/profile" class="py-4 px-6 w-full text-xs 2xl:text-base hover:bg-[#F8F8F8] transition-colors duration-200" exact-active-class="activeLink">
@@ -126,7 +126,7 @@
             </button>
           </div>
         </aside>
-        <main class="flex-1 flex flex-col gap-3 2xl:gap-5">
+        <main class="flex-1 flex flex-col items-stretch gap-3 2xl:gap-5">
           <!--  User Avatar  -->
           <div class="bg-white rounded-xl border p-4 2xl:p-6 flex items-center justify-between">
             <div class="flex items-center gap-3 pointer-events-none">
@@ -142,7 +142,7 @@
             </div>
             <input type="text" class="px-4 py-2 w-1/5 bg-[#FAFAFA] font-light rounded-lg" placeholder="جستجو">
           </div>
-          <div class="bg-white border rounded-xl p-6 ">
+          <div class="bg-white border rounded-xl p-6">
             <slot></slot>
           </div>
         </main>
