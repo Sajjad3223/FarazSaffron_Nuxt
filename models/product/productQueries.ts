@@ -100,3 +100,12 @@ export interface PropertyFilterParams extends BaseFilterParams{
 
 export interface PropertyFilterResult extends BaseFilterResult<PropertyDto>{
 }
+
+export interface SelectFilterParams extends BaseFilterParams{
+    search?:string | null | undefined;
+}
+
+export interface SelectTagDto{
+    id:number;
+    title:string;
+}

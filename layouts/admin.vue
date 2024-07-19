@@ -1,15 +1,17 @@
 <template>
   <div class="hidden md:block mx-auto">
-    <div class="flex flex-col container mx-auto mt-4 2xl:mt-[6rem]">
-      <h2 class="hidden 2xl:block w-full text-center text-3xl font-bold">پنل مدیریت</h2>
-      <NuxtLink class="flex items-center gap-4 w-max p-2" to="/">
-        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0.666016 1.33335L5.33268 6.00002L0.666016 10.6667" stroke="#070707" stroke-width="1.2"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="text-xs">بازگشت به جی پی</span>
-      </NuxtLink>
-      <div class="w-full flex gap-5 items-start mt-4 2xl:mt-12">
+    <div class="flex flex-col container mx-auto">
+      <div class="grid grid-cols-3 my-5">
+        <NuxtLink class="flex items-center gap-4 w-max p-2" to="/">
+          <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.666016 1.33335L5.33268 6.00002L0.666016 10.6667" stroke="#070707" stroke-width="1.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-xs">بازگشت به جی پی</span>
+        </NuxtLink>
+        <h2 class="hidden 2xl:block w-full text-center text-3xl font-bold self-center">پنل مدیریت</h2>
+      </div>
+      <div class="w-full flex gap-5 items-start">
         <aside class="w-1/6 text-sm flex flex-col items-start bg-white border py-6 rounded-xl">
           <div class="w-full flex flex-col">
             <ul>
@@ -378,18 +380,9 @@
                     aria-haspopup="true"
                 >
                 <span class="flex items-center gap-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.81 2L5.19 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15.19 2L18.81 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                    <path
-                        d="M2 7.85001C2 6.00001 2.99 5.85001 4.22 5.85001H19.78C21.01 5.85001 22 6.00001 22 7.85001C22 10 21.01 9.85001 19.78 9.85001H4.22C2.99 9.85001 2 10 2 7.85001Z"
-                        stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M9.76001 14V17.55" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M14.36 14V17.55" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10"
-                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.38 11L9.79 13.42L14.62 8.57999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.75 1.45001C10.44 0.860007 11.57 0.860007 12.27 1.45001L13.85 2.81001C14.15 3.07001 14.71 3.28001 15.11 3.28001H16.81C17.87 3.28001 18.74 4.15001 18.74 5.21001V6.91001C18.74 7.30001 18.95 7.87001 19.21 8.17001L20.57 9.75001C21.16 10.44 21.16 11.57 20.57 12.27L19.21 13.85C18.95 14.15 18.74 14.71 18.74 15.11V16.81C18.74 17.87 17.87 18.74 16.81 18.74H15.11C14.72 18.74 14.15 18.95 13.85 19.21L12.27 20.57C11.58 21.16 10.45 21.16 9.75 20.57L8.17 19.21C7.87 18.95 7.31 18.74 6.91 18.74H5.18C4.12 18.74 3.25 17.87 3.25 16.81V15.1C3.25 14.71 3.04 14.15 2.79 13.85L1.44 12.26C0.860005 11.57 0.860005 10.45 1.44 9.76001L2.79 8.17001C3.04 7.87001 3.25 7.31001 3.25 6.92001V5.20001C3.25 4.14001 4.12 3.27001 5.18 3.27001H6.91C7.3 3.27001 7.87 3.06001 8.17 2.80001L9.75 1.45001Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                   <span>اصالت سنجی</span>
                 </span>

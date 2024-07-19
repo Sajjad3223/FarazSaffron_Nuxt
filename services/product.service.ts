@@ -4,14 +4,15 @@ import type {
     ProductDto,
     ProductFilterParams,
     ProductFilterResult, PropertyFilterParams,
-    PropertyFilterResult
+    PropertyFilterResult, SelectFilterParams, SelectTagDto
 } from "~/models/product/productQueries";
 import type {
     CreatePropertyCommand,
-    EditProductCommand, EditPropertyCommand, SetMainImageCommand, SetMainImageFromImagesCommand,
+    EditProductCommand, EditPropertyCommand, SetMainImageFromImagesCommand,
     SetProductDiscountCommand, SetPropertiesCommand, SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import type {SetActivityCommand} from "~/models/setActivityCommand";
+import {BASE_URL} from "~/utilities/api.config";
 
 export const GetProducts = (params:ProductFilterParams):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi("/product",{
@@ -27,6 +28,15 @@ export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
 export const GetRelativeProducts = (categoryId:number):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi(`/product/relative/${categoryId}`,{
         method:'GET'
+    });
+}
+export const GetProductsForSelectTag = (filterParams:SelectFilterParams):Promise<SelectTagDto[]> => {
+    return $fetch(`/product/select`,{
+        baseURL:BASE_URL,
+        credentials:'include',
+        retry:1,
+        method:'GET',
+        params:filterParams
     });
 }
 

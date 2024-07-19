@@ -130,7 +130,7 @@
               <div class="relative" v-for="b in template.mainBanners" :key="b.id">
                 <img :src="`${SITE_URL}/banners/${b.image.src}`"
                      :alt="b.image.alt"
-                     class="w-full rounded-2xl">
+                     class="w-full rounded-2xl h-full object-cover">
                 <div class="absolute top-4 left-4 flex gap-2">
                   <!--  Edit Banner  -->
                   <button class="bg-warning/30 text-warning hover:bg-warning transition-colors duration-300 hover:text-white px-2 py-1 rounded-md top-2 left-2" @click="selectedBanner = b,showEditMainBannerModal = true">
