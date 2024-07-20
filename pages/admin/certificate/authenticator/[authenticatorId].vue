@@ -12,7 +12,7 @@
       </div>
       <div class="flex items-center gap-4">
         <span class="opacity-50 text-sm font-light">شماره سریال:</span>
-        <NuxtLink to="/">{{authenticator.serialNumber}}</NuxtLink>
+        <NuxtLink :to="`/inquiry?serial=${authenticator.serialNumber}`">{{authenticator.serialNumber}}</NuxtLink>
       </div>
     </div>
 
@@ -82,7 +82,21 @@ onMounted(async ()=>{
 
 const updateAuthenticator = async ()=>{
   setAPropertiesCommand.properties = setAPropertiesCommand.properties.filter(p=>p.value != null || p.file != null);
-  const result = await SetAProperties(setAPropertiesCommand);
+
+  const data = new FormData();
+  data.append('entityId',authenticatorId.toString());
+
+  setAPropertiesCommand.properties.forEach((p,i)=>{
+    data.append(`properties[${i}].propertyId`,p.propertyId.toString())
+    data.append(`properties[${i}].propertyType`,p.propertyType.toString())
+    if(p.value != null)
+      data.append(`properties[${i}].value`,p.value)
+    if(p.file != null)
+      data.append(`properties[${i}].file`,p.file)
+  })
+
+
+  const result = await SetAProperties(authenticatorId,data);
   if(result.isSuccess){
     toast.showToast();
   }else{

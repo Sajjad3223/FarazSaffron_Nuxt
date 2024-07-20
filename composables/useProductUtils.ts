@@ -1,4 +1,4 @@
-import {GetProducts} from "~/services/product.service";
+import {GetProducts, GetProductsForSelectTag} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 
 export const useProductUtils = ()=>{
@@ -10,9 +10,13 @@ export const useProductUtils = ()=>{
         const productResult = await GetProducts({pageId:1,take,minQuantity:5,orderBy:EOrderBy.جدیدترین});
         return productResult.data?.data;
     }
+    const GetForSelectTag = async (take:number = 50,search:string | undefined = undefined) => {
+        return await GetProductsForSelectTag({pageId: 1, take, search});
+    }
 
     return {
         GetPopularProducts,
-        GetNewestProducts
+        GetNewestProducts,
+        GetForSelectTag
     };
 }

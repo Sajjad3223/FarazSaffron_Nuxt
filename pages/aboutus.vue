@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center mt-12">
+  <div class="container mx-auto flex flex-col items-center mt-12">
 
     <Head>
       <Title>درباره جی پی</Title>
@@ -96,7 +96,7 @@
     </div>
 
     <!-- Honors -->
-    <section class="w-full mt-16">
+    <section class="w-full mt-16" v-if="false">
       <div class="flex items-center justify-between">
         <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
           افتخارات

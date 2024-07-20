@@ -13,7 +13,7 @@
                class="w-full  object-cover">
         </NuxtLink>
       </SwiperSlide>
-      <SwiperControls class="absolute left-8 bottom-8 z-20" />
+      <SwiperControls class="absolute left-8 bottom-8 z-20" v-if="showArrows"/>
     </Swiper>
 
   </div>
@@ -21,10 +21,14 @@
 <script setup lang="ts">
 import type {Banner} from "~/models/mainPage/dataTemplate";
 import {SITE_URL} from "~/utilities/api.config";
+import {bool} from "yup";
 
-const props = defineProps<{
-  banners:Banner[]
-}>();
+const props = withDefaults(defineProps<{
+  banners:Banner[],
+  showArrows?:boolean
+}>(),{
+  showArrows:true
+});
 
 </script>
 

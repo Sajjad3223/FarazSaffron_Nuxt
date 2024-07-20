@@ -85,8 +85,8 @@ export const SetCProperties = (command:SetPropertiesCommand):Promise<ApiResponse
         body:command
     });
 }
-export const SetAProperties = (command:SetPropertiesCommand):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/admin/certificate/authenticator/${command.entityId}`,{
+export const SetAProperties = (id:number,command:FormData):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/certificate/authenticator/${id}`,{
         method:'PUT',
         body:command
     });

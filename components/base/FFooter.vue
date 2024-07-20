@@ -399,7 +399,14 @@
               <img src="~/assets/images/salamat.png" alt="salamat" class="w-2/3">
             </div>
             <div class="h-[75px] w-[75px] rounded-xl grid place-items-center border border-[#818c92]/20">
-              <img src="~/assets/images/enamad.png" alt="enamad" class="w-2/3">
+              <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn'
+                 class="relative aspect-square grid place-items-center w-full">
+                <img referrerpolicy='origin'
+                     src='https://trustseal.enamad.ir/logo.aspx?id=479170&Code=WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
+                     alt='Enamad' style='cursor:pointer' Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'
+                     class="w-3/4 opacity-0 absolute">
+                <img src="~/assets/images/enamad.png" alt="enamad" class="w-3/4" Code='WVFCiesdEuQgDFJzHNFz2DyAJhkoExWQ'>
+              </a>
             </div>
             <div class="h-[75px] w-[75px] rounded-xl grid place-items-center border border-[#818c92]/20">
               <img src="~/assets/images/standard.png" alt="standard" class="w-1/3">

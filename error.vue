@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+const router = useRouter();
+onMounted(async ()=>{
+  await router.push('/404');
+})
 </script>
 
 <template>

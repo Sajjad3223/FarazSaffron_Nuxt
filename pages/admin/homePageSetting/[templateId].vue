@@ -324,7 +324,7 @@ import {
   DeleteSpecialComment,
   GetTemplateByAdmin, SetTemplateOrderBySections
 } from "~/services/mainPage.service";
-import {EOrderBy} from "../../../models/product/EOrderBy";
+import {EOrderBy} from "~/models/product/EOrderBy";
 import {SITE_URL} from "~/utilities/api.config";
 import {ToastType} from "~/composables/useSwal";
 import type {SetOrderBySectionsCommand} from "~/models/mainPage/mainPageCommands";

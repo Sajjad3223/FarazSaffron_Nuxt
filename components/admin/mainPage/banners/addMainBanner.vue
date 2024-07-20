@@ -4,7 +4,7 @@
     <base-g-input v-model="imageAlt" name="imageAlt" label="متن جایگزین" required />
     <base-g-input type="number" v-model="order" name="order" label="ترتیب" required />
     <base-g-input v-model="url" name="url" label="لینک" required />
-    <base-g-button w-full type="submit">
+    <base-g-button w-full type="submit" :is-loading="loading" :disabled="loading">
       ثبت بنر
     </base-g-button>
   </form>

@@ -8,7 +8,7 @@
       <input type="text" class="px-3 py-2 rounded-md border font-light" placeholder="Latitude" dir="ltr">
       <input type="text" class="px-3 py-2 rounded-md border font-light" placeholder="Longitude" dir="ltr">
     </div>
-    <input v-else
+    <input ref="input" v-else
         :type="getInputType()" :name="`property-${property.propertyId}`" :id="`property-${property.propertyId}`"
            v-model="value" @change="updateData" class="px-3 py-2 rounded-md border" :placeholder="property.hintValue">
   </div>
@@ -26,11 +26,12 @@ const props = defineProps<{
 const emits = defineEmits(['update:modelValue','valueUpdated'])
 
 const value = ref(props.modelValue?.value ?? null);
+const input = ref();
 
 const updateData = ()=>{
   emits('update:modelValue',{
     propertyId:props.property.id,
-    file: getInputType() == 'file' ? value.value : null,
+    file: getInputType() == 'file' ? input.value.files[0] : null,
     value:getInputType() == 'file' ? null :value.value,
     propertyType:props.property.propertyType
   } as AddPropertyCommand);

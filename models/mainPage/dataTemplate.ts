@@ -27,9 +27,12 @@ export interface DataTemplateFilterParams extends BaseFilterParams{
 export interface DataTemplateFilterResult extends BaseFilterResult<DataTemplateFilterData>{}
 
 export interface TopBanner extends BaseDto{
-    templateId: number
-    image: Img
-    url: string
+    templateId: number;
+    image: Img;
+    url: string;
+    width:number;
+    customStyle:string;
+    text:string;
 }
 export interface Banner extends BaseDto{
     templateId: number

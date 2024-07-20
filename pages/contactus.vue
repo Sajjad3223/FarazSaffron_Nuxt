@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center mt-16">
+  <div class="container mx-auto flex flex-col items-center mt-16">
 
     <Head>
       <Title>ارتباط با چی پی</Title>

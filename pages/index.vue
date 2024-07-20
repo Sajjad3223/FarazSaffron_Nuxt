@@ -239,7 +239,7 @@
         <!--      <GPSaffronCard class="mx-auto mt-6" />-->
 
         <!--  Blog Posts  -->
-        <!--      <section class="w-full mt-16">
+              <section class="w-full mt-16">
                 <div class="flex items-center justify-between">
                   <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
                     مقالات
@@ -296,7 +296,7 @@
                     </li>
                   </ul>
                 </div>
-              </section>-->
+              </section>
 
         <!--  Instagram  -->
         <section class="w-full mt-24">
@@ -317,7 +317,7 @@
         </section>
 
         <!-- Honors -->
-        <section class="w-full mt-16">
+        <section class="w-full mt-16" v-if="false">
           <div class="flex  items-center justify-between">
             <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
               افتخارات
@@ -344,7 +344,7 @@
         </section>
 
         <!-- Your Trust -->
-        <section class="w-full mt-16">
+        <section class="w-full mt-16" v-if="false">
           <div class="w-full bg-[#F8F8F8] py-12 flex flex-col space-y-12 items-center">
             <strong class="text-4xl">اعتماد شما  افتخارات ماست</strong>
             <span>
@@ -485,15 +485,23 @@
         </div>
       </Transition>
 
-      <!--  Banner  -->
+<!--      &lt;!&ndash;  Banner  &ndash;&gt;
       <div class="mobileBanner" dir="ltr" ref="banners">
         <img src="~/assets/images/05.jpg" alt="banner" >
         <img src="~/assets/images/03.png" alt="banner" >
         <img src="~/assets/images/04.jpg" alt="banner" >
+      </div>-->
+
+      <div class="my-2"></div>
+
+      <div class="rounded-lg overflow-hidden">
+        <!--  Banner   -->
+        <GCarousel :banners="activeTemp.mainBanners" :show-arrows="false"/>
       </div>
 
+
       <!--  Categories  -->
-      <div class="mt-12 grid grid-cols-4 gap-4">
+<!--      <div class="mt-12 grid grid-cols-4 gap-4">
         <div class="flex flex-col items-center relative bg-[#F5F5F5] py-2 rounded-xl">
           <img src="~/assets/images/saffronIcon.png" alt="saffron" class="w-[38px]">
           <span class="absolute top-full translate-y-1"> زعفران</span>
@@ -534,7 +542,27 @@
           </svg>
           <span class="absolute top-full translate-y-1"> آجیل</span>
         </div>
+      </div>-->
+
+      <div class="w-full grid grid-cols-4 mt-10 gap-4">
+        <div class="rounded-xl border-b-2 border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+          <img src="~/assets/images/categories/saffron.png" alt="saffron" class="max-w-[35px]">
+          <span class="text-xs font-light">زعفران</span>
+        </div>
+        <div class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+          <img src="~/assets/images/categories/pistachu.png" alt="pistachu" class="max-w-[35px]">
+          <span class="text-xs font-light">پسته</span>
+        </div>
+        <div class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+          <img src="~/assets/images/categories/advieh.png" alt="advieh" class="max-w-[35px]">
+          <span class="text-xs font-light">ادویه</span>
+        </div>
+        <div class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+          <img src="~/assets/images/categories/dried-fruit.png" alt="dried-fruit" class="max-w-[35px]">
+          <span class="text-xs font-light">میوه خشک</span>
+        </div>
       </div>
+
 
       <!--  Discounts  -->
       <div class="mt-16 flex flex-col items-stretch overflow-hidden">

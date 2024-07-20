@@ -200,9 +200,9 @@ body{
 
 <style>
 :root {
-  --primary: #F04623;
+  --primary: #FB7511;
   --primary-hover: #CE3415;
-  --primary-text: #F04623;
+  --primary-text: #FB7511;
 
   --secondary: #E0E0E0;
   --secondary-hover: #C6BFBF;
