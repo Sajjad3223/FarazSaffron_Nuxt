@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import type {Form} from "vee-validate";
 import {ToastType, useToast} from "~/composables/useSwal";
-import {CreateQuestion} from "~/services/faq.service";
+import {CreateQuestion, EditQuestion} from "~/services/faq.service";
 import type {CreateQuestionCommand, EditQuestionCommand} from "~/models/faq/questionCommands";
 import type {QuestionDto} from "~/models/faq/questionDto";
 
@@ -34,7 +34,7 @@ const isLoading = ref(false);
 const AddQuestion = async ()=>{
   isLoading.value = true;
 
-  const result = await CreateQuestion(editQuestionCommand);
+  const result = await EditQuestion(editQuestionCommand);
   if(result.isSuccess){
     await useToast().showToast('سوال با موفقیت افزوده شد',ToastType.success,3000);
   }

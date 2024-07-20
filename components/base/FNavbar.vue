@@ -498,15 +498,37 @@
       </NuxtLink>
       <ul class="flex items-center gap-10 font-light text-black text-xs lg:text-sm 2xl:text-base">
         <li class="relative group">
-          <NuxtLink to="/market" class="flex items-center gap-2">
+          <button class="flex items-center gap-2" @click="showCategories = !showCategories">
             <span>محصولات</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.5">
                 <path d="M11.0832 4.95831L6.99984 9.04165L2.9165 4.95831" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </svg>
-          </NuxtLink>
-          <div class="group-hover:opacity-100 hover:opacity-100 pointer-events-none group-hover:pointer-events-auto hover:pointer-events-auto flex flex-col group-hover:translate-y-2 absolute p-4 rounded-lg bg-white min-w-[150px] border right-0 -translate-y-2 opacity-0 transition-all duration-200">
+          </button>
+          <Transition name="slide-fade">
+            <div v-if="showCategories" v-click-outside="closeCategories"
+                 class="absolute flex items-stretch bg-white p-4 top-12 gap-4 min-w-[600px] rounded-xl border border-[#818C92]/20">
+              <div class="w-1/4 flex flex-col space-y-3 p-2">
+                <NuxtLink :to="`/market?categories=${c.id}`" class="w-full flex items-center justify-between" v-for="c in categories" :key="c.id" @mouseenter="categoryHovered(c)">
+                  <span>{{c.title}}</span>
+                  <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.04297 9.08268L0.959635 4.99935L5.04297 0.916016" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </NuxtLink>
+              </div>
+              <div class="flex-1 flex items-start gap-2 bg-[#FAFAFA] rounded-lg p-2">
+                <ul class="flex flex-col space-y-1 w-1/2">
+                  <li v-for="s in subCategories">
+                    <NuxtLink :to="`/market?categories=${s.id}`" class="text-xs">{{s.title}}</NuxtLink>
+                  </li>
+                </ul>
+                <img class="w-1/2 rounded-lg"
+                     :src="`${SITE_URL}/category/${selectedCategory.imageName}`" :alt="selectedCategory.title" v-if="selectedCategory.imageName != null">
+              </div>
+            </div>
+          </Transition>
+          <div v-if="false" class="group-hover:opacity-100 hover:opacity-100 pointer-events-none group-hover:pointer-events-auto hover:pointer-events-auto flex flex-col group-hover:translate-y-2 absolute p-4 rounded-lg bg-white min-w-[150px] border right-0 -translate-y-2 opacity-0 transition-all duration-200">
             <ul class="text-black font-light space-y-4 flex flex-col text-sm relative">
               <li v-for="c in categories" :key="c.id">
                 <NuxtLink :to="`/market?categories=${c.id}`" class="peer w-full flex items-center justify-between">
@@ -794,62 +816,6 @@
                 <path d="M18.0183 18.4851L21.5423 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </svg>
-          </button>
-        </form>
-      </div>
-    </div>
-  </Transition>
-
-  <Transition name="slideUp">
-    <div class="fixed z-20 inset-0 bg-black/20 flex items-center justify-center backdrop-blur-sm" v-if="showCertificateModal" @click.self="showCertificateModal = false">
-      <div class="w-1/3 flex flex-col space-y-4 bg-[#FAFAFA] p-10 rounded-2xl">
-        <div class="flex flex-col items-center space-y-2">
-          <span class="text-xl">استعلام محصول</span>
-          <span class="text-sm font-light">با استفاده از فرم زیر از اصالت محصول استعلام بگیرید</span>
-        </div>
-        <form class="w-full p-5 border bg-white rounded-lg relative flex flex-col space-y-4 items-center" method="GET">
-          <div class="flex flex-col w-full space-y-2">
-            <label class="text-sm font-light">کد استعلام</label>
-            <input type="text" name="serialNumber" id="serialNumber" placeholder="شماره سریال پشت محصول را وارد کنید" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-          </div>
-          <div class="flex flex-col w-full space-y-2">
-            <label class="text-sm font-light">تاریخ اعتبار کالا</label>
-            <div class="grid grid-cols-3 gap-4 w-full">
-              <div class="relative" v-if="false">
-                <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                  <option value="" selected>روز</option>
-                </select>
-              </div>
-              <input type="text" name="serialNumber" id="serialNumber" placeholder="روز" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-              <div class="relative" v-if="false">
-                <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                  <option value="" selected>ماه</option>
-                </select>
-              </div>
-              <input type="text" name="serialNumber" id="serialNumber" placeholder="ماه" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-              <div class="relative" v-if="false">
-                <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                  <option value="" selected>سال</option>
-                </select>
-              </div>
-              <input type="text" name="serialNumber" id="serialNumber" placeholder="سال" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-            </div>
-          </div>
-          <div class="flex flex-col w-full space-y-2">
-            <label class="text-sm font-light">نوع محصول</label>
-            <div class="relative">
-              <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                <option value="" selected>نوع محصول را انتخاب کنید</option>
-                <option v-for="p in productOptions" :value="p.id">{{p.title}}</option>
-              </select>
-            </div>
-          </div>
-          <button class="bg-[#FB7511] text-white w-full rounded-lg py-4">
-            استعلام
           </button>
         </form>
       </div>
@@ -1156,6 +1122,7 @@ const paymentMethod = ref(EPaymentMethod.Gateway);
 const payLoading = ref(false);
 const isCategoryHovered = ref(false);
 const categories: Ref<CategoryDto[]> = ref([]);
+const selectedCategory: Ref<CategoryDto> = ref([]);
 const subCategories: Ref<CategoryDto[]> = ref([]);
 
 const addressSchema = Yup.object().shape({
@@ -1288,6 +1255,7 @@ const categoryHovered = (category: CategoryDto) => {
     return;
   }
   isCategoryHovered.value = true;
+  selectedCategory.value = category;
   subCategories.value = category.children ?? [];
 }
 

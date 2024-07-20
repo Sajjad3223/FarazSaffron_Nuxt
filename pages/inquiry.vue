@@ -3,7 +3,7 @@
     <Title>استعلام محصول</Title>
   </Head>
   <div class="container mx-auto">
-    <div class="w-1/3 flex mx-auto flex-col space-y-8 rounded-2xl my-8" v-if="authenticator == null">
+    <div class="w-1/3 max-w-[400px] flex mx-auto flex-col space-y-8 rounded-2xl my-12" v-if="authenticator == null">
       <div class="flex flex-col items-center space-y-2">
         <span class="text-xl">استعلام محصول</span>
         <span class="text-sm font-light">با استفاده از فرم زیر از اصالت محصول استعلام بگیرید</span>
@@ -14,7 +14,7 @@
           <label class="text-sm font-light">کد استعلام</label>
           <input v-model="serial" required
                  type="text" name="serialNumber" id="serialNumber" placeholder="شماره سریال پشت محصول را وارد کنید" dir="ltr"
-                 class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
+                 class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
         </div>
         <div class="flex flex-col w-full space-y-2">
           <label class="text-sm font-light">تاریخ اعتبار کالا</label>
@@ -25,21 +25,21 @@
               </select>
             </div>
             <input type="text" name="serialNumber" id="serialNumber" placeholder="روز" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
+                   class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
             <div class="relative" v-if="false">
               <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
                 <option value="" selected>ماه</option>
               </select>
             </div>
             <input type="text" name="serialNumber" id="serialNumber" placeholder="ماه" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
+                   class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
             <div class="relative" v-if="false">
               <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
                 <option value="" selected>سال</option>
               </select>
             </div>
             <input type="text" name="serialNumber" id="serialNumber" placeholder="سال" dir="ltr"
-                   class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
+                   class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
           </div>
         </div>
         <div class="flex flex-col w-full space-y-2">

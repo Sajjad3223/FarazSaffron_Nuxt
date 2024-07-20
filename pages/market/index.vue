@@ -4,7 +4,7 @@
       <Title>محصولات جی پی زعفران</Title>
     </Head>
 
-    <div v-if="!utilStore.isMobile()">
+    <div class="hidden md:block container mx-auto">
       <!--  Breadcrumb  -->
       <div class="my-8">
         <ul class="flex items-center gap-1">
@@ -196,7 +196,7 @@
       </main>
     </div>
 
-    <div v-else>
+    <div class="md:hidden">
       <!--  Search  -->
       <div class="flex mt-3 items-center relative">
         <input type="text" class="form-input w-full h-12 p-4 border-none focus:ring-[#9b9a9a] bg-[#F4F4F4] rounded-lg peer" required>

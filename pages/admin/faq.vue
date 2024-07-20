@@ -26,8 +26,7 @@
               class="text-xs font-bold text-right text-gray-500 uppercase border-b  bg-gray-50  "
           >
             <th class="px-4 py-3">عنوان</th>
-            <th class="px-4 py-3">پاسخ</th>
-            <th class="px-4 py-3">تاریخ ثبت</th>
+            <th class="px-4 py-3" width="50%">پاسخ</th>
             <th class="px-4 py-3" width="10%">عملیات</th>
           </tr>
           </thead>
@@ -43,11 +42,8 @@
                   </div>
                 </div>
               </td>
-              <td class="px-4 py-3 text-sm text-nowrap">
+              <td class="px-4 py-3 text-sm text-nowrap max-w-[200px] truncate">
                 {{ q.answer }}
-              </td>
-              <td class="px-4 py-3 text-sm">
-                {{ q.persianDate }}
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
