@@ -14,7 +14,7 @@ export const useAuthStore = defineStore("auth",()=>{
 
     const isLoggedIn = computed(() => {
         const cookie = getAccessToken();
-        return cookie != null && cookie != "";
+        return cookie != null && cookie != "" && cookie != undefined;
     });
     const getAccessToken = () => {
         const cookie = useCookie("c-access-token", {

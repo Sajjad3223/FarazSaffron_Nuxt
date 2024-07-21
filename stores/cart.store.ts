@@ -32,6 +32,7 @@ export const useCartStore = defineStore("cart",()=>{
 
     const toast = useToast();
     const authStore = useAuthStore();
+    const cartCookie = useCookie('g-cart');
 
     const addToCart = async (id:number,slug:string,count:number = 1):Promise<boolean> =>{
         let addResult = false;
@@ -44,52 +45,45 @@ export const useCartStore = defineStore("cart",()=>{
                 toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
             }
         }
-        else{
+        else {
+
             // If user is not logged in save items in cookie
+            let cartData: OrderDto = cartCookie.value;
 
-            const cartCookie = useCookie("g-cart", {
-                watch:true,
-                expires: new Date(new Date().setDate(new Date().getDate() + 30)),
-            });
-
-            let cartData:OrderDto = cartCookie.value;
-
-            if(cartData === null || cartData === undefined){
+            if (cartData === null || cartData === undefined) {
                 cartData = {
-                    id:1,
-                    orderItems:[],
-                    creationDate:new Date(),
-                    totalPrice:0,
-                    discount:{
-                        amount:0,
-                        code:''
+                    id: 1,
+                    orderItems: [],
+                    creationDate: new Date(),
+                    totalPrice: 0,
+                    discount: {
+                        amount: 0,
+                        code: ''
                     },
-                    finallyDate:null,
-                    finallyPrice:0,
-                    fullName:'',
-                    getFinalPrice:0,
-                    isActive:true,
-                    itemsCount:0,
-                    isFinally:false,
-                    orderStatus:EOrderStatus.Pending,
-                    userId:0,
-                    referCode:null,
-                    persianDate:'',
-                    persianTime:''
+                    finallyDate: null,
+                    finallyPrice: 0,
+                    fullName: '',
+                    getFinalPrice: 0,
+                    isActive: true,
+                    itemsCount: 0,
+                    isFinally: false,
+                    orderStatus: EOrderStatus.Pending,
+                    userId: 0,
+                    referCode: null,
+                    persianDate: '',
+                    persianTime: ''
                 } as OrderDto;
             }
 
-            const item = cartData.orderItems.find(i=>i.itemInfo.productId === id);
-            if(item != undefined){
+            const item = cartData.orderItems.find(i => i.itemInfo.productId === id);
+            if (item != undefined) {
                 item.count++;
                 item.totalPrice = item.count * item.price;
-            }
-            else{
+            } else {
                 const product = await GetProduct(slug);
-                if(!product.isSuccess) {
-                    await toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد',ToastType.error,0);
-                }
-                else {
+                if (!product.isSuccess) {
+                    await toast.showToast('در افزودن محصول به سبد خرید مشکلی پیش آمد', ToastType.error, 0);
+                } else {
                     const itemToAdd: OrderItem = {
                         id: cartData.orderItems.length + 1,
                         itemInfo: {
@@ -97,7 +91,10 @@ export const useCartStore = defineStore("cart",()=>{
                             productImage: product.data!.mainImage!,
                             eItemType: EItemType.Saffron,
                             productSlug: product.data!.slug!,
-                            productId: product.data!.id!
+                            productId: product.data!.id!,
+                            packingType: product.data?.packingType!,
+                            weight: product.data?.weight!,
+                            healthNumber: product.data?.healthNumber!
                         },
                         count: 1,
                         price: product.data!.price!,
@@ -107,8 +104,9 @@ export const useCartStore = defineStore("cart",()=>{
                     };
                     cartData.orderItems.push(itemToAdd);
 
-                    cartCookie.value = JSON.stringify(cartData);
+                    cartCookie.value = cartData;
                     addResult = true;
+
                 }
             }
         }
@@ -141,10 +139,10 @@ export const useCartStore = defineStore("cart",()=>{
                 PendingOrder.value = result.data;
                 cartItemsCount.value = result.data?.itemsCount ?? 0;
             }
-        }else{
-            const cartData:OrderDto = getCookieCart(true);
-
-            if(cartData === undefined || cartData === null) return;
+        }
+        else{
+            if(!cartCookie.value) return;
+            const cartData:OrderDto = cartCookie.value;
 
             cartData.itemsCount = cartData.orderItems.length;
             let cartTotalPrice = 0;
@@ -213,14 +211,6 @@ export const useCartStore = defineStore("cart",()=>{
                 return handleResult({isSuccess:false,metaData:{appStatusCode:ApiStatusCode.Success,message:'محصول یافت نشد'}})
             }
         }
-    }
-
-    const getCookieCart = (watch:boolean = true)=>{
-        const cartCookie = useCookie("g-cart", {
-            watch,
-            expires: new Date(new Date().setDate(new Date().getDate() + 30)),
-        });
-        return cartCookie.value;
     }
 
     const handleResult = async (result:ApiResponse<any>):Promise<boolean> => {

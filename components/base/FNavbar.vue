@@ -943,42 +943,30 @@
             <div class="flex-1"></div>
             <div class="absolute top-4 2xl:top-10 container flex py-5 pr-5 max-h-[420px] 2xl:max-h-[70vh] overflow-y-auto" dir="ltr">
               <div class="flex items-start justify-between w-full" dir="rtl">
-                <form @submit.prevent="payOrder" class="w-2/5 flex flex-col space-y-3 2xl:space-y-6">
+                <form @submit.prevent="payOrder" class="w-2/5 flex flex-col space-y-4 mb-5">
                   <strong>آدرس ارسال مرسوله:</strong>
-                  <div class="grid grid-cols-2 gap-3 2xl:gap-6 w-full">
+                  <div class="grid grid-cols-2 gap-4 w-full">
                     <input type="text" placeholder="نام" name="receiverFirstName" id="receiverFirstName" required v-model="addressCommand.receiverFirstName"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <input type="text" placeholder="نام خانوادگی" name="receiverLastName" id="receiverLastName" required v-model="addressCommand.receiverLastName"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <BaseGStateCityPicker class="col-span-full" @valueUpdated="valueUpdated" :state="accountStore.getActiveAddress?.state" :city="accountStore.getActiveAddress?.city" />
                     <input type="text" placeholder="آدرس" name="street" id="street" required v-model="addressCommand.street"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
                     <input type="text" placeholder="شماره تلفن" name="receiverPhoneNumber" id="receiverPhoneNumber" required v-model="addressCommand.receiverPhoneNumber"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
                     <input type="text" placeholder="کد پستی" name="postCode" id="postCode" required v-model="addressCommand.postCode"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
                     <input type="number" placeholder="پلاک" name="plaque" id="plaque" required v-model="addressCommand.plaque"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <input type="number" placeholder="واحد" name="unit" id="unit" required v-model="addressCommand.unit"
                            class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 2xl:py-3 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
-                  </div>
-                  <hr class="w-full" v-if="false">
-                  <div class="p-4 rounded-lg border w-full flex items-center gap-4" v-if="false">
-                    <div class="relative">
-                      <input type="checkbox" name="save" id="save" class="rounded-md accent-primary w-5 h-5 appearance-none border bg-[#FAFAFA] peer cursor-pointer">
-                      <div class="bg-transparent peer-checked:bg-primary peer-checked:text-white w-5 h-5 rounded-md absolute inset-0 pointer-events-none duration-200 transition-colors grid place-items-center text-transparent">
-                        <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3">
-                          <path d="M17 1L6 12L1 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <label for="save" class="font-light">برای پرداخت سریع ، اطلاعاتم را ذخیره کن</label>
                   </div>
                   <base-g-button is-icon :is-loading="payLoading" type="submit" custom-class="w-full py-3 rounded-lg text-white bg-[#FB7511]" >
                     پرداخت
                   </base-g-button>
                 </form>
-                <div class="flex flex-col items-end w-2/5 2xl:space-y-7">
+                <div class="flex flex-col items-end w-2/5 2xl:space-y-7 mb-5">
                   <div class="w-full">
                     <ul class="w-full max-h-[250px] 2xl:max-h-[400px] overflow-y-auto py-4 pr-4" dir="ltr">
                       <li class="w-full flex flex-wrap items-stretch gap-x-8 py-3 first:pt-0" v-for="(i,n) in cartStore.PendingOrder.orderItems" :key="i.id" dir="rtl">
