@@ -22,3 +22,8 @@ logs
 .env
 .env.*
 !.env.example
+
+# Pages
+pages/components.vue
+pages/newIndex.vue
+layouts/newLayout.vue

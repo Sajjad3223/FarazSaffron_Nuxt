@@ -33,7 +33,7 @@
     </label>
   </div>-->
   <NuxtLink :to="`/product/${product.slug}`" class="md:hidden flex flex-col items-center bg-white rounded-xl p-5 space-y-4">
-    <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-w-[50%]">
+    <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="h-[100px]">
     <span class="text-sm text-center font-light">{{product.title}}</span>
     <div class="flex items-center gap-2">
       <span class="text-brandOrange">{{(product.price / 10).toLocaleString()}}</span>

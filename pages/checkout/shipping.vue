@@ -353,7 +353,7 @@
           <small>مجموع سبد خرید</small>
           <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
         </div>
-        <base-g-button is-link @click="payOrder" w-full :disabled="!accountStore.hasActiveAddress">
+        <base-g-button @click="payOrder" w-full :disabled="!accountStore.hasActiveAddress || payLoading" :is-loading="payLoading">
           تکمیل سفارش
         </base-g-button>
       </div>
@@ -426,11 +426,15 @@ const applyDiscount = async () => {
 }
 
 const payOrder = async ()=>{
+
   payLoading.value = true;
 
   if(paymentMethod.value == EPaymentMethod.Gateway){
     const result = await FetchApi<string>(`/payment/payRequest`,{
       method:'POST',
+      body:{
+        userId:accountStore.currentUser?.id
+      }
     });
 
     if(result.isSuccess && result.data != ''){

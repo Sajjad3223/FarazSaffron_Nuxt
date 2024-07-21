@@ -57,16 +57,16 @@
               <strong class="text-xl text-[#7E7E7E] ">دفتر مرکزی</strong>
             </div>
             <span class="text-[#8D8D8D]">استان خراسان رضوی - شهرستان تربت حیدریه - کیلومتر 2 جاده بایگ</span>
-            <span class="text-[#8D8D8D]">ساعت کاری :   <strong class="text-[#6D6D6D] mr-2">شنبه تا پنج شنبه از ساعت 8:00 تا 14:00  </strong></span>
-            <a href="tel:05152329059" class="text-[#8D8D8D]">شماره تماس :    <strong class="text-brandOrange mr-2">52329059-051</strong></a>
-            <a href="mailto:info@gpsaffron.com" class="text-[#8D8D8D]">ایمیل :    <strong class="text-brandOrange mr-2">info@gpsaffron.com</strong></a>
+            <span class="text-[#8D8D8D]">ساعت کاری :   <strong class="text-[#8D8D8D] mr-2">شنبه تا پنج شنبه از ساعت 8:00 تا 14:00  </strong></span>
+            <a href="tel:05152329059" class="text-[#8D8D8D]">شماره تماس :    <strong class="text-[#8D8D8D] mr-2">52329059-051</strong></a>
+            <a href="mailto:info@gpsaffron.com" class="text-[#8D8D8D]">ایمیل :    <strong class="text-[#8D8D8D] mr-2">info@gpsaffron.com</strong></a>
           </div>
           <div class="flex flex-col items-start space-y-4 mt-8">
             <strong class="text-xl text-[#7E7E7E] ">خدمات پس از فروش</strong>
-            <p class="text-[#8D8D8D] leading-8">
-              لطفاً کالا را برای بازگرداندن و ارسال آن به خدمات پس از فروش جی پی از طریق پست، تنها به صندوق پستی 1234-5678 ارسال کنید.(شما می‌توانید از طریق بخش سفارش‌های من اقدام به بازگردانی کالا کنید)
+            <p class="text-[#8D8D8D] leading-8 font-light">
+              برای بازگردانی به خدمات پس از فروش جی پی از طریق پست، تنها به صندوق پستی <span dir="ltr">95189-55620</span> ارسال کنید. br (شما می‌توانید از طریق تماس با پشتیبان اقدام به بازگردانی کالا کنید)
               <br>
-              <span class="font-semibold text-[#727272]">توجه داشته باشید شما فقط می توانید برای کالا های پایین تر از 5 گرم بازگردانی را انجام دهید.</span>
+              <span class="font-medium">لطفا توجه داشته باشید بازگرداندن کالا ، تنها منحصر به کالاهای کمتر از 0/5 مثقال می باشد.</span>
             </p>
           </div>
         </div>

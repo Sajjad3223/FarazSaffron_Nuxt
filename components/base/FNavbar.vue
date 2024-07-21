@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="flex flex-col items-start font-light">
-              <strong>زعفران جی پی</strong>
+              <strong>زعفران جی‌پی</strong>
               <span class="text-sm"><strong class="text-brandOrange text-base">gp</strong> Saffron</span>
             </div>
           </NuxtLink>
@@ -492,7 +492,7 @@
           <img src="~/assets/images/GP-filled-white.png" alt="logo" class="w-12">
         </div>
         <div class="flex flex-col">
-          <span class="text-lg">زعفران جی پی</span>
+          <span class="text-lg">زعفران جی‌پی</span>
           <span class="text-sm font-cinzel uppercase">GP Saffron</span>
         </div>
       </NuxtLink>
@@ -520,7 +520,7 @@
               <div class="flex-1 flex items-start gap-2 bg-[#FAFAFA] rounded-lg p-2">
                 <ul class="flex flex-col space-y-1 w-1/2">
                   <li v-for="s in subCategories">
-                    <NuxtLink :to="`/market?categories=${s.id}`" class="text-xs">{{s.title}}</NuxtLink>
+                    <NuxtLink :to="`/market?categories=${s.id}`" class="text-xs 2xl:text-sm 3xl:text-base">{{s.title}}</NuxtLink>
                   </li>
                 </ul>
                 <img class="w-1/2 rounded-lg"
@@ -560,7 +560,7 @@
         </li>
         <li>
           <NuxtLink to="/aboutus" class="flex gap-2">
-            <span>درباره ما</span>
+            <span>درباره‌ما</span>
           </NuxtLink>
         </li>
         <li>
@@ -824,7 +824,7 @@
 
   <Transition name="slideUp">
     <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-20" @click.self="cartStore.showCartModal = false" v-if="cartStore.showCartModal">
-      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[10%] 3xl:top-[20%] rounded-t-[60px] flex flex-col items-center">
+      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[10%] rounded-t-[60px] flex flex-col items-center">
         <button class="absolute bg-[#FAFAFA] w-[50px] h-[50px] rounded-full border grid place-items-center -translate-y-1/2" @click="cartStore.showCartModal = false">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.375 6.83333L6 11M6 11L1.625 6.83333M6 11L6 1" stroke="#09090B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -914,7 +914,7 @@
   </Transition>
   <Transition name="slideUp">
     <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-20" @click.self="cartStore.showShippingModal = false" v-if="cartStore.showShippingModal">
-      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[10%] 3xl:top-[15%] rounded-t-[60px] flex flex-col items-center">
+      <div class="bg-[#FAFAFA] absolute inset-x-0 bottom-0 top-[10%] rounded-t-[60px] flex flex-col items-center">
         <button class="absolute bg-[#FAFAFA] w-[50px] h-[50px] rounded-full border grid place-items-center -translate-y-1/2" @click="cartStore.showShippingModal = false">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.375 6.83333L6 11M6 11L1.625 6.83333M6 11L6 1" stroke="#09090B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

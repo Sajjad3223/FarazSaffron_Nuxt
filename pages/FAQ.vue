@@ -4,7 +4,6 @@
     <div class="container mx-auto">
       <div class="flex flex-col items-center space-y-14">
         <h3 class="text-4xl font-bold">سوالات پر تکرار</h3>
-
         <ul class="w-5/6 flex flex-col space-y-5">
           <faq-question v-for="q in questions" :key="q.id" :question="q"/>
         </ul>

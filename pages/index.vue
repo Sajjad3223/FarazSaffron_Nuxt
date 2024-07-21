@@ -79,21 +79,45 @@
         <div class="max-w-[800px] mx-auto mt-16 mb-10 flex flex-col items-center space-y-5">
           <h4 class="relative text-2xl font-black/30">دسته بندی ها</h4>
           <div class="w-full grid grid-cols-4  gap-4">
-            <NuxtLink to="/market" class="rounded-xl border-b-2 border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+            <NuxtLink to="/market?categories=2" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
               <img src="~/assets/images/categories/saffron.png" alt="saffron" class="max-w-[100px]">
-              <span class="text-xs font-light">زعفران</span>
+              <span class="text-xs 2xl:text-base font-light">زعفران</span>
             </NuxtLink>
-            <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+            <NuxtLink to="/market?categories=3" class="group relative overflow-hidden rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
               <img src="~/assets/images/categories/pistachu.png" alt="pistachu" class="max-w-[100px]">
-              <span class="text-xs font-light">پسته</span>
+              <span class="text-xs 2xl:text-base font-light">پسته</span>
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute z-10 inset-0 bg-black/20 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+                <div class="flex items-center gap-2">
+                  <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.625 12.25L10.25 11.125V6.42087M19.25 10C19.25 5.02944 15.2206 1 10.25 1C5.27944 1 1.25 5.02944 1.25 10C1.25 14.9706 5.27944 19 10.25 19C13.5813 19 16.4898 17.1901 18.046 14.5M16.7811 9.01234L19.0311 11.2623L21.2811 9.01234" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="text-xl drop-shadow font-light">به زودی...</span>
+                </div>
+              </div>
             </NuxtLink>
-            <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+            <NuxtLink to="/market?categories=16" class="group relative overflow-hidden rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
               <img src="~/assets/images/categories/advieh.png" alt="advieh" class="max-w-[100px]">
-              <span class="text-xs font-light">ادویه</span>
+              <span class="text-xs 2xl:text-base font-light">ادویه</span>
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute z-10 inset-0 bg-black/20 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+                <div class="flex items-center gap-2">
+                  <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.625 12.25L10.25 11.125V6.42087M19.25 10C19.25 5.02944 15.2206 1 10.25 1C5.27944 1 1.25 5.02944 1.25 10C1.25 14.9706 5.27944 19 10.25 19C13.5813 19 16.4898 17.1901 18.046 14.5M16.7811 9.01234L19.0311 11.2623L21.2811 9.01234" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="text-xl drop-shadow font-light">به زودی...</span>
+                </div>
+              </div>
             </NuxtLink>
-            <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+            <NuxtLink to="/market?categories=14" class="group relative overflow-hidden rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
               <img src="~/assets/images/categories/dried-fruit.png" alt="dried-fruit" class="max-w-[100px]">
-              <span class="text-xs font-light">میوه خشک</span>
+              <span class="text-xs 2xl:text-base font-light">میوه خشک</span>
+              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute z-10 inset-0 bg-black/20 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+                <div class="flex items-center gap-2">
+                  <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.625 12.25L10.25 11.125V6.42087M19.25 10C19.25 5.02944 15.2206 1 10.25 1C5.27944 1 1.25 5.02944 1.25 10C1.25 14.9706 5.27944 19 10.25 19C13.5813 19 16.4898 17.1901 18.046 14.5M16.7811 9.01234L19.0311 11.2623L21.2811 9.01234" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="text-xl drop-shadow font-light">به زودی...</span>
+                </div>
+              </div>
             </NuxtLink>
           </div>
         </div>
@@ -171,7 +195,9 @@
               </svg>
             </button>
           </div>-->
-          <index-products-slider :products="firstItemsSection" v-if="!loading" />
+
+          <index-products-slider v-if="!loading" :products="firstItemsSection"/>
+
 
           <div class="flex 2xl:grid overflow-x-auto grid-cols-5 gap-5 p-5 pt-0 mt-4" v-else style="scrollbar-width: none;">
             <div class="relative skeleton min-h-[380px] flex flex-col justify-between space-y-4 min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
@@ -240,7 +266,9 @@
             </Swiper>
           </client-only>-->
 
-          <index-products-slider :products="secondItemsSection" v-if="!loading" />
+
+            <index-products-slider v-if="!loading" :products="secondItemsSection" />
+
 
           <div class="flex 2xl:grid overflow-x-auto grid-cols-5 gap-5 p-5 pt-0 mt-4" v-else style="scrollbar-width: none;">
             <div class="relative skeleton min-h-[380px] flex flex-col justify-between space-y-4 min-w-[250px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 5" :key="i">
@@ -663,19 +691,19 @@
       </div>-->
 
       <div class="w-full grid grid-cols-4 mt-10 gap-4">
-        <NuxtLink to="/market" class="rounded-xl border-b-2 border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+        <NuxtLink to="/market" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
           <img src="~/assets/images/categories/saffron.png" alt="saffron" class="max-w-[35px]">
           <span class="text-xs font-light">زعفران</span>
         </NuxtLink>
-        <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+        <NuxtLink to="/market" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
           <img src="~/assets/images/categories/pistachu.png" alt="pistachu" class="max-w-[35px]">
           <span class="text-xs font-light">پسته</span>
         </NuxtLink>
-        <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+        <NuxtLink to="/market" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
           <img src="~/assets/images/categories/advieh.png" alt="advieh" class="max-w-[35px]">
           <span class="text-xs font-light">ادویه</span>
         </NuxtLink>
-        <NuxtLink to="/market" class="rounded-xl border w-full h-full flex flex-col items-center justify-around gap-2 py-4">
+        <NuxtLink to="/market" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
           <img src="~/assets/images/categories/dried-fruit.png" alt="dried-fruit" class="max-w-[35px]">
           <span class="text-xs font-light">میوه خشک</span>
         </NuxtLink>
@@ -710,7 +738,9 @@
           </Swiper>
         </client-only>-->
         <div class="grid grid-cols-2 gap-4 mt-5" v-if="!loading">
-          <GCard2Mobile v-for="product in firstItemsSection.slice(0,4)" :product="product" :key="product.id" />
+
+            <GCard2Mobile v-for="product in firstItemsSection.slice(0,4)" :product="product" :key="product.id" />
+
         </div>
         <div class="flex gap-4 my-4" v-else>
           <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[150px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 3" :key="i">
@@ -756,7 +786,9 @@
         </client-only>-->
 
         <div class="grid grid-cols-2 gap-4 mt-5" v-if="!loading">
-          <GCard2Mobile v-for="product in secondItemsSection.slice(0,6)" :product="product" :key="product.id" />
+
+            <GCard2Mobile v-for="product in secondItemsSection.slice(0,6)" :product="product" :key="product.id" />
+
         </div>
         <div class="flex gap-4 my-4" v-else>
           <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[150px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 3" :key="i">
@@ -867,19 +899,15 @@
 
 <script setup lang="ts">
 import type {ProductFilterData} from "~/models/product/productQueries";
-import {FreeMode} from "swiper/modules";
-import {BLOGS_URL, SITE_URL} from "~/utilities/api.config";
-import {GetProduct, GetProducts} from "~/services/product.service";
+import {BLOGS_URL} from "~/utilities/api.config";
+import {GetProducts} from "~/services/product.service";
 import {GetActiveTemplate} from "~/services/mainPage.service";
 import type {DataTemplateDto} from "~/models/mainPage/dataTemplate";
-import {ToastType} from "~/composables/useSwal";
-import {EOrderBy} from "~/models/product/EOrderBy";
 import InstagramHero from "~/components/InstagramHero.vue";
 
 const showSearchModal = ref(false);
 const loading = ref(true);
 const firstItemsSection:Ref<ProductFilterData[] | undefined> = ref([]);
-const firstItemsSectionForMobile:Ref<ProductFilterData[] | undefined> = ref(firstItemsSection.value?.slice(0,4));
 const secondItemsSection:Ref<ProductFilterData[] | undefined> = ref([]);
 
 const toast = useToast();
@@ -962,7 +990,7 @@ const mobileBreakpoints = ref({
 onMounted(async ()=>{
   loading.value = true;
 
-  const firstResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.firstItemSection});
+  const firstResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.firstItemSection,justWithDiscount:true});
   firstItemsSection.value = firstResult.data?.data;
   const secondResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.secondItemSection});
   secondItemsSection.value = secondResult.data?.data;

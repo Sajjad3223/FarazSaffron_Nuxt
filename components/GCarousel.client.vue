@@ -4,7 +4,7 @@
     <Swiper :modules="[SwiperAutoplay]" dir="rtl"
         :slides-per-view="1" loop :space-between="20"
         class=" overflow-hidden imagesCarousel" :autoplay="{
-          delay:5000
+          delay:3000
         }">
       <SwiperSlide v-for="b in banners.sort((a,b)=>a.order - b.order)" :key="b.id">
         <NuxtLink :to="b.url" class="w-full shrink-0 relative">

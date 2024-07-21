@@ -10,38 +10,38 @@
     </h4>
 
     <base-g-modal title="تنظیم بنر بالا" v-model="showSetTopBannerModal">
-      <admin-main-page-banners-set-top-banner :template-id="templateId"/>
+      <admin-main-page-banners-set-top-banner @banner-updated="showSetTopBannerModal = false,getData()" :template-id="templateId"/>
     </base-g-modal>
     <base-g-modal title="ویرایش بنر بالا" v-model="showEditTopBannerModal">
-      <admin-main-page-banners-edit-top-banner :top-banner="template.topBanner"/>
+      <admin-main-page-banners-edit-top-banner @banner-updated="showEditTopBannerModal = false,getData()" :top-banner="template.topBanner"/>
     </base-g-modal>
 
     <base-g-modal title="افزودن بنر" v-model="showAddMainBannerModal">
-      <admin-main-page-banners-add-main-banner :template-id="templateId"/>
+      <admin-main-page-banners-add-main-banner @banner-added="showAddMainBannerModal = false,getData()" :template-id="templateId"/>
     </base-g-modal>
     <base-g-modal title="ویرایش بنر" v-model="showEditMainBannerModal">
-      <admin-main-page-banners-edit-main-banner :banner="selectedBanner"/>
+      <admin-main-page-banners-edit-main-banner @banner-edited="showEditMainBannerModal = false,getData()" :banner="selectedBanner"/>
     </base-g-modal>
 
     <base-g-modal title="افزودن افتخار" v-model="showAddHonorModal">
-      <admin-main-page-honors-add-honor :template-id="templateId"/>
+      <admin-main-page-honors-add-honor @honor-added="showAddHonorModal = false,getData()" :template-id="templateId"/>
     </base-g-modal>
     <base-g-modal title="ویرایش افتخار" v-model="showEditHonorModal">
-      <admin-main-page-honors-edit-honor :honor="selectedHonor"/>
+      <admin-main-page-honors-edit-honor @honor-edited="showEditHonorModal = false,getData()" :honor="selectedHonor"/>
     </base-g-modal>
 
     <base-g-modal title="افزودن دیدگاه" v-model="showAddCommentModal">
-      <admin-main-page-special-comment-add-comment :template-id="templateId"/>
+      <admin-main-page-special-comment-add-comment @comment-added="showAddCommentModal = false,getData()" :template-id="templateId"/>
     </base-g-modal>
     <base-g-modal title="ویرایش دیدگاه" v-model="showEditCommentModal">
-      <admin-main-page-special-comment-edit-comment :comment="selectedComment"/>
+      <admin-main-page-special-comment-edit-comment @comment-edited="showEditCommentModal = false,getData()" :comment="selectedComment"/>
     </base-g-modal>
 
     <base-g-modal title="افزودن مقاله" v-model="showAddBlogModal">
-      <admin-main-page-blog-previews-add-blog-preview :template-id="templateId"/>
+      <admin-main-page-blog-previews-add-blog-preview @blog-added="showAddBlogModal = false,getData()" :template-id="templateId"/>
     </base-g-modal>
     <base-g-modal title="ویرایش مقاله" v-model="showEditBlogModal">
-      <admin-main-page-blog-previews-edit-blog-preview :post="selectedBlog"/>
+      <admin-main-page-blog-previews-edit-blog-preview @blog-edited="showEditBlogModal = false,getData()" :post="selectedBlog"/>
     </base-g-modal>
 
     <div class="flex flex-col space-y-5 mt-12" v-if="template">
@@ -249,7 +249,7 @@
               </div>
             </div>
             <button class="border min-h-40 border-white/20 rounded-2xl grid place-items-center"
-                    @click="showAddHonorModal = true">
+                    @click="showAddCommentModal = true">
                 <span class="text-xl opacity-50">
                   + افزودن دیدگاه
                 </span>
@@ -297,7 +297,7 @@
               </div>
             </div>
             <button class="border min-h-40 border-white/20 rounded-2xl grid place-items-center"
-                    @click="showAddHonorModal = true">
+                    @click="showAddBlogModal = true">
                 <span class="text-xl opacity-50">
                   + افزودن مقاله
                 </span>

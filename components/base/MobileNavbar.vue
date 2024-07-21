@@ -86,7 +86,7 @@
                         leave-active-class="transition-all duration-200 overflow-hidden" leave-from-class="max-h-[300px]" leave-to-class="max-h-[0px]">
               <ul class="bg-gray-100 p-2 rounded-b-xl mt-2" v-if="hoveredCategory != 0 && hoveredCategory === c.id">
                 <li class="w-full flex items-center justify-between p-2 text-xs" v-for="s in c.children">
-                  <span>{{ s.title }}</span>
+                  <NuxtLink :to="`/market?categories=${s.id}`" >{{ s.title }}</NuxtLink>
                   <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-90">
                     <path opacity="0.8" d="M1 1L4.5 4L8 1" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>

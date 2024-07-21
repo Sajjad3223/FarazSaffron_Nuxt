@@ -24,10 +24,24 @@
         <span class="w-2/3">با موفقیت به سبد خرید اضافه شد</span>
       </div>
     </transition>
-    <NuxtLink :to="`/product/${product.slug}`">
+    <NuxtLink :to="`/product/${product.slug}`" class="relative">
       <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+      <Transition name="fade-smooth" duration="1000">
+        <div v-if="showDigikalaPrice"
+            class="absolute inset-0 bg-black/30 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+          <span class="text-sm font-light">قیمت در دیجی کالا</span>
+          <strong class="text-lg font-light">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}} تومان</strong>
+        </div>
+      </Transition>
+      <Transition name="fade-smooth" duration="1000">
+        <div v-if="showBasalamPrice"
+             class="absolute inset-0 bg-black/30 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+          <span class="text-sm font-light">قیمت در باسلام</span>
+          <strong class="text-lg font-light">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}} تومان</strong>
+        </div>
+      </Transition>
     </NuxtLink>
-    <div class="absolute top-0 right-0">
+    <div class="absolute top-0 right-0" v-if="!showBasalamPrice && !showDigikalaPrice">
       <label class="border cursor-pointer grid place-items-center rounded-lg border-[#D0D0D0] w-[30px] h-[30px] absolute top-4 right-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 text-danger">
         <input type="checkbox" :name="`favorite-${product.id}`" class="appearance-none opacity-0" v-model="isFavorite" @change="changeFavorite">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-75 " v-if="isFavorite">
@@ -85,15 +99,17 @@
           </div>
         </div>
         <div class="flex absolute left-0 items-center gap-1 -mt-8">
-          <a :href="product.basalamData?.basalamLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-             title="محصول در باسلام"
+          <a :href="product.basalamData?.basalamLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+             title="محصول در باسلام" @mouseenter="showBasalamPrice = true" @mouseleave="showBasalamPrice = false"
              v-if="product.basalamData?.basalamLink">
             <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
+            <small v-if="false" class="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full bg-brandOrange text-white rounded px-2 py-0.5 font-light text-[10px]">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}}</small>
           </a>
-          <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-             title="محصول در دیجی کالا"
+          <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+             title="محصول در دیجی کالا" @mouseenter="showDigikalaPrice = true" @mouseleave="showDigikalaPrice = false"
              v-if="product.digiKalaData?.digikalaLink">
             <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
+            <small v-if="false" class="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full bg-brandOrange text-white rounded px-2 py-0.5 font-light text-[10px]">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}}</small>
           </a>
         </div>
       </div>
@@ -138,6 +154,8 @@ const cartStore = useCartStore();
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
 const toast = useToast();
+const showDigikalaPrice = ref(false);
+const showBasalamPrice = ref(false);
 const addedToCart = ref(false);
 const loading = ref(false);
 const favoriteLoading = ref(false);
@@ -219,6 +237,16 @@ const removeFavorite = async () => {
     transform:translateY(-25px);
     scale: 170%;
   }
+}
+
+.fade-smooth-enter-active,
+.fade-smooth-leave-active{
+  @apply transition-all duration-300 [&>*]:transition-opacity [&>*]:duration-300 [&>*]:delay-300;
+}
+
+.fade-smooth-enter-from,
+.fade-smooth-leave-to{
+  @apply opacity-0 [&>*]:opacity-0;
 }
 
 </style>

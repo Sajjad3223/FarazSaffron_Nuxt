@@ -354,8 +354,8 @@
             برای محصولاتی که پیش تر به سبد خرید خود اضافه کرده اید وارد شوید.
           </p>
         </NuxtLink>
-        <div class="flex flex-col items-center space-y-4 mt-8">
-          <img src="../../assets/images/empty-cart.png" alt="empty cart" class="w-2/3">
+        <div class="flex flex-col items-center space-y-8 mt-8">
+          <img src="~/assets/images/empty-cart2.png" alt="empty cart" class="w-3/5">
           <strong class="text-lg">سبد خرید شما خالی است !</strong>
           <span class="text-xs">
         می توانید برای مشاهده بیشتر کالا ها به صفحه دسته بندی بروید.

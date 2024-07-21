@@ -1,6 +1,7 @@
 <template>
   <div class="relative overflow-x-visible mt-5" >
-    <div class="relative flex item-start overflow-x-auto gap-4 cartsContainer" style="scrollbar-width: none">
+    <div
+        :class="['relative flex item-start overflow-x-auto gap-4']" :id="containerId" style="scrollbar-width: none">
       <!--                <GCard :product="product" />-->
       <GCard2 v-for="(product,i) in products" :key="product.id" :product="product" class="min-w-[280px]"/>
     </div>
@@ -28,20 +29,28 @@ const props = defineProps<{
   products:ProductFilterData[]
 }>()
 
+
+const containerId = "cartsContainer" + Math.random().toString(16).slice(2);
+const container = ref();
 const shouldMove = ref(false);
 const targetScrollValue = ref(0);
 let interval:any;
 const scrollAmount = 450;
 const scrollCount = ref(0);
-const maxScrollCount = 2;
+const maxScrollCount = ref();
+
+onMounted(()=>{
+  container.value = document.getElementById(containerId);
+  maxScrollCount.value = Math.floor((container.value?.scrollWidth - container.value?.clientWidth) / scrollAmount) + 1;
+})
 const scrollNext = ($event) =>{
   /*const container = $event.target.parentElement?.querySelector('.cartsContainer');
   if(targetScrollValue.value - scrollAmount <= (-container.scrollWidth / 3))
     targetScrollValue.value = -container.scrollWidth / 3;
   else*/
   if(scrollCount.value >= maxScrollCount) return;
-
-  targetScrollValue.value = Math.max(targetScrollValue.value - scrollAmount,-655);
+  const maxScrollAmount = container.value.scrollWidth - container.value.clientWidth;
+  targetScrollValue.value = Math.max(targetScrollValue.value - scrollAmount,-maxScrollAmount);
   scrollCount.value++;
   shouldMove.value = true;
   interval = setInterval(()=>moveTo($event.target),10);
@@ -61,14 +70,14 @@ const scrollPrev = ($event) =>{
 
 const moveTo = (target:any)=>{
   if(!shouldMove.value) return;
-  const container = target.parentElement?.querySelector('.cartsContainer');
+  //const container = target.parentElement?.querySelector('.cartsContainer');
 
-  if(targetScrollValue.value > container.scrollLeft)
-    container.scrollLeft += 10;
-  if(targetScrollValue.value < container.scrollLeft)
-    container.scrollLeft -= 10;
+  if(targetScrollValue.value > container.value.scrollLeft)
+    container.value.scrollLeft += 10;
+  if(targetScrollValue.value < container.value.scrollLeft)
+    container.value.scrollLeft -= 10;
 
-  if(Math.abs(Math.abs(container.scrollLeft) - Math.abs(targetScrollValue.value)) < 10) {
+  if(Math.abs(Math.abs(container.value.scrollLeft) - Math.abs(targetScrollValue.value)) < 10) {
     shouldMove.value = false;
     clearInterval(interval);
   }
