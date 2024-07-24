@@ -61,7 +61,7 @@
       </button>
     </Transition>
     <div class="absolute left-4 top-4 grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8" v-if="product.discount !== 0">
-      <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">{{ product.discount }}%</span>
+      <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif">{{ Math.floor(product.discount) }}%</span>
     </div>
     <hr>
     <div class="p-4 flex flex-col w-full items-stretch">
@@ -89,11 +89,11 @@
           </ul>
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-1">
-              <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (product.totalPrice / 10).toLocaleString() }}</strong>
+              <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (Math.ceil(product.totalPrice / 10)).toLocaleString() }}</strong>
               <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
             </div>
             <div class="flex items-center gap-1 opacity-50 line-through scale-75" v-if="product.discount !== 0">
-              <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (product.price / 10).toLocaleString() }}</strong>
+              <strong class="text-lg" style="font-family: 'Vazir FD',serif">{{ (Math.ceil(product.price / 10)).toLocaleString() }}</strong>
               <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تــــــو <br> مــان</span>
             </div>
           </div>

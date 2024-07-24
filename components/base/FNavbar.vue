@@ -954,9 +954,9 @@
                     <input type="text" placeholder="آدرس" name="street" id="street" required v-model="addressCommand.street"
                            class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
                     <input type="text" placeholder="شماره تلفن" name="receiverPhoneNumber" id="receiverPhoneNumber" required v-model="addressCommand.receiverPhoneNumber"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <input type="text" placeholder="کد پستی" name="postCode" id="postCode" required v-model="addressCommand.postCode"
-                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base col-span-full font-light focus:ring-none focus:outline-black/20">
+                           class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <input type="number" placeholder="پلاک" name="plaque" id="plaque" required v-model="addressCommand.plaque"
                            class="w-full rounded-md 2xl:rounded-lg bg-[#FAFAFA] border px-2 2xl:px-4 py-2 text-sm 2xl:text-base font-light focus:ring-none focus:outline-black/20">
                     <input type="number" placeholder="واحد" name="unit" id="unit" required v-model="addressCommand.unit"

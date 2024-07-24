@@ -13,13 +13,13 @@
       </div>
       <div class="w-full flex gap-5 items-start">
         <aside class="w-1/6 text-sm flex flex-col items-start bg-white border py-6 rounded-xl">
-          <div class="w-full flex flex-col">
+          <div class="w-full flex flex-col text-xs font-light">
             <ul>
               <li class="relative w-full flex">
                 <NuxtLink to="/admin" class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           exact-active-class="activeLink">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 18V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"/>
                       <path
@@ -35,7 +35,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/homePageSetting">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M20.8064 7.62361L20.184 6.54352C19.6574 5.6296 18.4905 5.31432 17.5753 5.83872V5.83872C17.1397 6.09534 16.6198 6.16815 16.1305 6.04109C15.6411 5.91402 15.2224 5.59752 14.9666 5.16137C14.8021 4.88415 14.7137 4.56839 14.7103 4.24604V4.24604C14.7251 3.72922 14.5302 3.2284 14.1698 2.85767C13.8094 2.48694 13.3143 2.27786 12.7973 2.27808H11.5433C11.0367 2.27807 10.5511 2.47991 10.1938 2.83895C9.83644 3.19798 9.63693 3.68459 9.63937 4.19112V4.19112C9.62435 5.23693 8.77224 6.07681 7.72632 6.0767C7.40397 6.07336 7.08821 5.98494 6.81099 5.82041V5.82041C5.89582 5.29601 4.72887 5.61129 4.20229 6.52522L3.5341 7.62361C3.00817 8.53639 3.31916 9.70261 4.22975 10.2323V10.2323C4.82166 10.574 5.18629 11.2056 5.18629 11.8891C5.18629 12.5725 4.82166 13.2041 4.22975 13.5458V13.5458C3.32031 14.0719 3.00898 15.2353 3.5341 16.1454V16.1454L4.16568 17.2346C4.4124 17.6798 4.82636 18.0083 5.31595 18.1474C5.80554 18.2866 6.3304 18.2249 6.77438 17.976V17.976C7.21084 17.7213 7.73094 17.6516 8.2191 17.7822C8.70725 17.9128 9.12299 18.233 9.37392 18.6717C9.53845 18.9489 9.62686 19.2646 9.63021 19.587V19.587C9.63021 20.6435 10.4867 21.5 11.5433 21.5H12.7973C13.8502 21.5001 14.7053 20.6491 14.7103 19.5962V19.5962C14.7079 19.088 14.9086 18.6 15.2679 18.2407C15.6272 17.8814 16.1152 17.6807 16.6233 17.6831C16.9449 17.6917 17.2594 17.7798 17.5387 17.9394V17.9394C18.4515 18.4653 19.6177 18.1544 20.1474 17.2438V17.2438L20.8064 16.1454C21.0615 15.7075 21.1315 15.186 21.001 14.6964C20.8704 14.2067 20.55 13.7894 20.1108 13.5367V13.5367C19.6715 13.284 19.3511 12.8666 19.2206 12.3769C19.09 11.8873 19.16 11.3658 19.4151 10.928C19.581 10.6383 19.8211 10.3982 20.1108 10.2323V10.2323C21.0159 9.70289 21.3262 8.54349 20.8064 7.63277V7.63277V7.62361Z"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -54,7 +54,7 @@
                     aria-haspopup="true"
                 >
                   <span class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3.17004 7.44L12 12.55L20.77 7.46997" stroke="currentColor" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M12 21.61V12.54" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -88,7 +88,7 @@
                             leave-to-class="opacity-0 max-h-0">
                   <template v-if="isProductMenuOpen">
                     <ul
-                        class="py-3 m-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100"
+                        class="py-3 m-2 space-y-2 overflow-hidden text-xs font-light text-gray-500 rounded-md shadow-inner bg-gray-100"
                         aria-label="submenu"
                     >
                       <li
@@ -139,7 +139,7 @@
                     aria-haspopup="true"
                 >
                 <span class="flex items-center gap-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M18.0001 7.16C17.9401 7.15 17.8701 7.15 17.8101 7.16C16.4301 7.11 15.3301 5.98 15.3301 4.58C15.3301 3.15 16.4801 2 17.9101 2C19.3401 2 20.4901 3.16 20.4901 4.58C20.4801 5.98 19.3801 7.11 18.0001 7.16Z"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -182,7 +182,7 @@
                             leave-to-class="opacity-0 max-h-0">
                   <template v-if="isUsersMenuOpen">
                     <ul
-                        class="py-3 m-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100  "
+                        class="py-3 m-2 space-y-2 overflow-hidden text-xs font-light text-gray-500 rounded-md shadow-inner bg-gray-100  "
                         aria-label="submenu"
                     >
                       <li
@@ -236,7 +236,7 @@
                     aria-haspopup="true"
                 >
                 <span class="flex items-center gap-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.81 2L5.19 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
                           stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M15.19 2L18.81 5.63" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
@@ -272,7 +272,7 @@
                             leave-to-class="opacity-0 max-h-0">
                   <template v-if="isOrdersMenuOpen">
                     <ul
-                        class="py-3 m-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100  "
+                        class="py-3 m-2 space-y-2 overflow-hidden text-xs font-light text-gray-500 rounded-md shadow-inner bg-gray-100  "
                         aria-label="submenu"
                     >
                       <li
@@ -314,7 +314,7 @@
                     aria-haspopup="true"
                 >
                 <span class="inline-flex items-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke="currentColor"
                           stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path
@@ -347,7 +347,7 @@
                             leave-to-class="opacity-0 max-h-0">
                   <template v-if="isBlogMenuOpen">
                     <ul
-                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100  "
+                        class="p-2 mt-2 space-y-2 overflow-hidden text-xs font-light text-gray-500 rounded-md shadow-inner bg-gray-100  "
                         aria-label="submenu"
                     >
                       <li
@@ -380,7 +380,7 @@
                     aria-haspopup="true"
                 >
                 <span class="flex items-center gap-4">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 opacity-70" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.38 11L9.79 13.42L14.62 8.57999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M9.75 1.45001C10.44 0.860007 11.57 0.860007 12.27 1.45001L13.85 2.81001C14.15 3.07001 14.71 3.28001 15.11 3.28001H16.81C17.87 3.28001 18.74 4.15001 18.74 5.21001V6.91001C18.74 7.30001 18.95 7.87001 19.21 8.17001L20.57 9.75001C21.16 10.44 21.16 11.57 20.57 12.27L19.21 13.85C18.95 14.15 18.74 14.71 18.74 15.11V16.81C18.74 17.87 17.87 18.74 16.81 18.74H15.11C14.72 18.74 14.15 18.95 13.85 19.21L12.27 20.57C11.58 21.16 10.45 21.16 9.75 20.57L8.17 19.21C7.87 18.95 7.31 18.74 6.91 18.74H5.18C4.12 18.74 3.25 17.87 3.25 16.81V15.1C3.25 14.71 3.04 14.15 2.79 13.85L1.44 12.26C0.860005 11.57 0.860005 10.45 1.44 9.76001L2.79 8.17001C3.04 7.87001 3.25 7.31001 3.25 6.92001V5.20001C3.25 4.14001 4.12 3.27001 5.18 3.27001H6.91C7.3 3.27001 7.87 3.06001 8.17 2.80001L9.75 1.45001Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -407,7 +407,7 @@
                             leave-to-class="opacity-0 max-h-0">
                   <template v-if="isCertificateMenuOpen">
                     <ul
-                        class="py-3 m-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-100  "
+                        class="py-3 m-2 space-y-2 overflow-hidden text-xs font-light text-gray-500 rounded-md shadow-inner bg-gray-100  "
                         aria-label="submenu"
                     >
                       <li
@@ -456,7 +456,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/categories">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M22 8.27V4.23C22 2.64 21.36 2 19.77 2H15.73C14.14 2 13.5 2.64 13.5 4.23V8.27C13.5 9.86 14.14 10.5 15.73 10.5H19.77C21.36 10.5 22 9.86 22 8.27Z"
                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -478,7 +478,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/catalogs">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M22 8.27V4.23C22 2.64 21.36 2 19.77 2H15.73C14.14 2 13.5 2.64 13.5 4.23V8.27C13.5 9.86 14.14 10.5 15.73 10.5H19.77C21.36 10.5 22 9.86 22 8.27Z"
                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -500,7 +500,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/contactUs">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M21.97 18.33C21.97 18.69 21.89 19.06 21.72 19.42C21.55 19.78 21.33 20.12 21.04 20.44C20.55 20.98 20.01 21.37 19.4 21.62C18.8 21.87 18.15 22 17.45 22C16.43 22 15.34 21.76 14.19 21.27C13.04 20.78 11.89 20.12 10.75 19.29C9.6 18.45 8.51 17.52 7.47 16.49C6.44 15.45 5.51 14.36 4.68 13.22C3.86 12.08 3.2 10.94 2.72 9.81C2.24 8.67 2 7.58 2 6.54C2 5.86 2.12 5.21 2.36 4.61C2.6 4 2.98 3.44 3.51 2.94C4.15 2.31 4.85 2 5.59 2C5.87 2 6.15 2.06 6.4 2.18C6.66 2.3 6.89 2.48 7.07 2.74L9.39 6.01C9.57 6.26 9.7 6.49 9.79 6.71C9.88 6.92 9.93 7.13 9.93 7.32C9.93 7.56 9.86 7.8 9.72 8.03C9.59 8.26 9.4 8.5 9.16 8.74L8.4 9.53C8.29 9.64 8.24 9.77 8.24 9.93C8.24 10.01 8.25 10.08 8.27 10.16C8.3 10.24 8.33 10.3 8.35 10.36C8.53 10.69 8.84 11.12 9.28 11.64C9.73 12.16 10.21 12.69 10.73 13.22C11.27 13.75 11.79 14.24 12.32 14.69C12.84 15.13 13.27 15.43 13.61 15.61C13.66 15.63 13.72 15.66 13.79 15.69C13.87 15.72 13.95 15.73 14.04 15.73C14.21 15.73 14.34 15.67 14.45 15.56L15.21 14.81C15.46 14.56 15.7 14.37 15.93 14.25C16.16 14.11 16.39 14.04 16.64 14.04C16.83 14.04 17.03 14.08 17.25 14.17C17.47 14.26 17.7 14.39 17.95 14.56L21.26 16.91C21.52 17.09 21.7 17.3 21.81 17.55C21.91 17.8 21.97 18.05 21.97 18.33Z"
                           stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/>
@@ -518,7 +518,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/tickets">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M22 6.25V11.35C22 12.62 21.58 13.69 20.83 14.43C20.09 15.18 19.02 15.6 17.75 15.6V17.41C17.75 18.09 16.99 18.5 16.43 18.12L15.46 17.48C15.55 17.17 15.59 16.83 15.59 16.47V12.4C15.59 10.36 14.23 9 12.19 9H5.39999C5.25999 9 5.13 9.01002 5 9.02002V6.25C5 3.7 6.7 2 9.25 2H17.75C20.3 2 22 3.7 22 6.25Z"
                           stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
@@ -540,7 +540,7 @@
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                           to="/admin/faq">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M22 6.25V11.35C22 12.62 21.58 13.69 20.83 14.43C20.09 15.18 19.02 15.6 17.75 15.6V17.41C17.75 18.09 16.99 18.5 16.43 18.12L15.46 17.48C15.55 17.17 15.59 16.83 15.59 16.47V12.4C15.59 10.36 14.23 9 12.19 9H5.39999C5.25999 9 5.13 9.01002 5 9.02002V6.25C5 3.7 6.7 2 9.25 2H17.75C20.3 2 22 3.7 22 6.25Z"
                           stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
@@ -558,7 +558,7 @@
                 <NuxtLink to="/admin/visits" exact-active-class="activeLink"
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M15.1614 12.0531C15.1614 13.7991 13.7454 15.2141 11.9994 15.2141C10.2534 15.2141 8.83838 13.7991 8.83838 12.0531C8.83838 10.3061 10.2534 8.89111 11.9994 8.89111C13.7454 8.89111 15.1614 10.3061 15.1614 12.0531Z"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -574,7 +574,7 @@
                 <NuxtLink to="/admin/modifications" exact-active-class="activeLink"
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                           d="M11.4925 2.78894H7.75349C4.67849 2.78894 2.75049 4.96594 2.75049 8.04794V16.3619C2.75049 19.4439 4.66949 21.6209 7.75349 21.6209H16.5775C19.6625 21.6209 21.5815 19.4439 21.5815 16.3619V12.3339"
                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -592,7 +592,7 @@
                 <NuxtLink to="/admin/log" exact-active-class="activeLink"
                           class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200">
                   <div class="flex items-center gap-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.7161 16.2234H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"/>
                       <path d="M15.7161 12.0369H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -613,7 +613,7 @@
                       class="py-4 px-6 w-full hover:bg-[#F8F8F8] transition-colors duration-200"
                       exact-active-class="activeLink">
               <div class="flex items-center gap-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M11.983 15.3457C8.11536 15.3457 4.8125 15.9305 4.8125 18.2724C4.8125 20.6143 8.0944 21.22 11.983 21.22C15.8506 21.22 19.1525 20.6343 19.1525 18.2933C19.1525 15.9524 15.8715 15.3457 11.983 15.3457Z"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -644,7 +644,7 @@
             <button class="py-4 px-6 w-full hover:bg-[#F8F8F8] hover:text-danger transition-colors duration-200"
                     @click="LogOut">
             <span class="flex items-center gap-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-5 opacity-70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.8144 12.0225H3.77344" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                       stroke-linejoin="round"/>
                 <path d="M12.8867 9.10645L15.8147 12.0224L12.8867 14.9384" stroke="currentColor" stroke-width="1.5"
@@ -785,7 +785,7 @@ const LogOut = async () => {
 
 <style scoped>
 .activeLink {
-  @apply border-r-4 border-[#FB7511] [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange;
+  @apply border-r-4 font-medium border-[#FB7511] [&>div>svg]:fill-brandOrange/50 [&>div>svg]:text-brandOrange;
 }
 .activeSubLink{
   @apply pr-2 text-gray-800  before:absolute before:inset-y-0 before:right-0 before:w-1 before:bg-[#FB7511] before:rounded-l-lg;

@@ -61,7 +61,7 @@ const props = withDefaults(defineProps<{
     multiLine:false
   });
 
-  const emits = defineEmits(['update:modelValue']);
+  const emits = defineEmits(['update:modelValue','input']);
 
   const showPassword = ref(false);
 
@@ -84,6 +84,7 @@ watch(
 const onChanged = (e: any) => {
   handleChange(e, true);
   emits('update:modelValue', e.target.value);
+  emits('input');
 }
 
 </script>

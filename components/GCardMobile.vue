@@ -37,7 +37,7 @@
     </Transition>
     <!-- Discount  -->
     <div class="absolute left-4 top-4 grid place-items-center bg-brandOrange rounded-md rounded-b-lg w-6 h-6" v-if="product.discount !== 0">
-      <span class="text-[10px] font-light text-white" style="font-family: 'Vazir FD',serif">{{ product.discount }}%</span>
+      <span class="text-[10px] font-light text-white" style="font-family: 'Vazir FD',serif">{{ Math.floor(product.discount) }}%</span>
     </div>
     <hr>
     <div class="px-4 py-2 flex flex-col w-full items-stretch">
@@ -59,8 +59,8 @@
         </div>
       </div>
       <div class="flex flex-col mt-2 " >
-        <base-g-price v-if="product.discount != 0" :price="((product.price + product.price * product.discount / 100) / 10)" class="opacity-40 scale-75 relative after:absolute after:inset-x-0 after:h-0.5 after:bg-black/50 self-end"/>
-        <base-g-price :price="(product.price / 10)" class="text-sm"/>
+        <base-g-price v-if="product.discount != 0" :price="Math.ceil((product.price + product.price * product.discount / 100) / 10)" class="opacity-40 scale-75 relative after:absolute after:inset-x-0 after:h-0.5 after:bg-black/50 self-end"/>
+        <base-g-price :price="(Math.ceil(product.totalPrice / 10))" class="text-sm"/>
       </div>
     </div>
   </div>

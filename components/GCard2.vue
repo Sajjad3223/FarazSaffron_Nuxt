@@ -1,35 +1,65 @@
 <template>
   <div class="flex group max-w-[280px] flex-col relative gap-4">
-    <div class="w-full aspect-square rounded-xl grid place-items-center bg-white border relative overflow-hidden">
+    <div class="w-full relative aspect-square rounded-xl grid place-items-center bg-white border relative overflow-hidden">
       <NuxtLink :to="`/product/${product.slug}`">
         <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-h-[200px]">
       </NuxtLink>
-      <button @click="addToCart(product.id,product.slug)" :disabled="loading"
-              class="absolute inset-x-3 bottom-3 translate-y-[150%] transition-transform duration-200 group-hover:translate-y-0 bg-brandOrange flex items-center gap-4 text-white justify-center py-2 rounded-lg">
-        <span class="flex items-center gap-4" v-if="!loading">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.0625 1.43738L2.6225 1.70738L3.34475 10.3121C3.4025 11.0149 3.98975 11.5541 4.69475 11.5519H12.8765C13.5492 11.5534 14.12 11.0584 14.2153 10.3924L14.927 5.47388C15.0065 4.92413 14.6247 4.41413 14.0757 4.33463C14.0277 4.32788 2.873 4.32413 2.873 4.32413" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9.59375 7.09607H11.6735" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.36503 14.1519C4.59078 14.1519 4.77303 14.3349 4.77303 14.5599C4.77303 14.7856 4.59078 14.9686 4.36503 14.9686C4.13928 14.9686 3.95703 14.7856 3.95703 14.5599C3.95703 14.3349 4.13928 14.1519 4.36503 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.826 14.1519C13.0517 14.1519 13.2347 14.3349 13.2347 14.5599C13.2347 14.7856 13.0517 14.9686 12.826 14.9686C12.6002 14.9686 12.418 14.7856 12.418 14.5599C12.418 14.3349 12.6002 14.1519 12.826 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="text-sm font-light">افزودن به سبد خرید</span>
+      <Transition name="fade-smooth" duration="1000">
+        <div v-if="showDigikalaPrice"
+             class="absolute inset-0 bg-black/30 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+          <span class="text-sm font-light">قیمت در دیجی کالا</span>
+          <strong class="text-lg font-light">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}} تومان</strong>
+        </div>
+      </Transition>
+      <Transition name="fade-smooth" duration="1000">
+        <div v-if="showBasalamPrice"
+             class="absolute inset-0 bg-black/30 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+          <span class="text-sm font-light">قیمت در باسلام</span>
+          <strong class="text-lg font-light">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}} تومان</strong>
+        </div>
+      </Transition>
+      <button :disabled="loading"
+              class="absolute inset-x-3 bottom-3 translate-y-[150%] transition-transform duration-200 group-hover:translate-y-0">
+        <span @click="addToCart(product.id,product.slug)" class="bg-brandOrange flex items-center gap-4 text-white justify-center py-2 rounded-lg">
+          <span class="relative z-0 flex items-center gap-4" v-if="!loading">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.0625 1.43738L2.6225 1.70738L3.34475 10.3121C3.4025 11.0149 3.98975 11.5541 4.69475 11.5519H12.8765C13.5492 11.5534 14.12 11.0584 14.2153 10.3924L14.927 5.47388C15.0065 4.92413 14.6247 4.41413 14.0757 4.33463C14.0277 4.32788 2.873 4.32413 2.873 4.32413" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.59375 7.09607H11.6735" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.36503 14.1519C4.59078 14.1519 4.77303 14.3349 4.77303 14.5599C4.77303 14.7856 4.59078 14.9686 4.36503 14.9686C4.13928 14.9686 3.95703 14.7856 3.95703 14.5599C3.95703 14.3349 4.13928 14.1519 4.36503 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.826 14.1519C13.0517 14.1519 13.2347 14.3349 13.2347 14.5599C13.2347 14.7856 13.0517 14.9686 12.826 14.9686C12.6002 14.9686 12.418 14.7856 12.418 14.5599C12.418 14.3349 12.6002 14.1519 12.826 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-sm font-light">افزودن به سبد خرید</span>
+          </span>
+          <span v-else class="relative z-0 animate-spin">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5"
+                 viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+                 style="display:block;background-color:transparent;"><circle
+                cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
+                stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
+                style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
+            </svg>
+          </span>
         </span>
-        <span v-else class="animate-spin">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"
-             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
-             style="display:block;background-color:transparent;"><circle
-            cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35"
-            stroke-dasharray="164.93361431346415 56.97787143782138" transform="matrix(1,0,0,1,0,0)"
-            style="transform:matrix(1, 0, 0, 1, 0, 0);"></circle>
-        </svg>
-      </span>
+        <span class="flex absolute left-0.5 -z-10 bottom-0.5 group-hover:-translate-y-[120%] scale-0 group-hover:scale-100 transition-transform duration-200 delay-0 group-hover:delay-200 items-center gap-1 -mt-8">
+            <a :href="product.basalamData?.basalamLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+               title="محصول در باسلام" @mouseenter="showBasalamPrice = true" @mouseleave="showBasalamPrice = false"
+               v-if="product.basalamData?.basalamLink">
+              <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
+              <small v-if="false" class="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full bg-brandOrange text-white rounded px-2 py-0.5 font-light text-[10px]">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}}</small>
+            </a>
+            <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+               title="محصول در دیجی کالا" @mouseenter="showDigikalaPrice = true" @mouseleave="showDigikalaPrice = false"
+               v-if="product.digiKalaData?.digikalaLink">
+              <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
+              <small v-if="false" class="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full bg-brandOrange text-white rounded px-2 py-0.5 font-light text-[10px]">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}}</small>
+            </a>
+        </span>
       </button>
     </div>
     <NuxtLink :to="`/product/${product.slug}`" class="font-light w-10/12 truncate" :title="product.title">{{product.title}}</NuxtLink>
-    <base-g-price :price="(product.price / 10)"/>
+    <base-g-price :price="(Math.ceil(product.totalPrice / 10))"/>
     <span class="text-sm font-light absolute top-4 right-4 bg-danger rounded-full px-3 py-1 text-white" v-if="product.discount !== 0">
-      {{ product.discount }}%
+      {{ Math.floor(product.discount) }}%
     </span>
     <label class="cursor-pointer grid place-items-center absolute top-4 left-4 hover:-translate-y-1 transition-all duration-200 text-danger">
       <input type="checkbox" :name="`favorite-${product.id}`" class="appearance-none opacity-0" v-model="isFavorite" @change="changeFavorite">
@@ -68,6 +98,9 @@ const addedToCart = ref(false);
 const loading = ref(false);
 const favoriteLoading = ref(false);
 const isFavorite = ref(false);
+
+const showBasalamPrice = ref(false);
+const showDigikalaPrice = ref(false);
 
 onMounted(async ()=>{
   isFavorite.value = accountStore.isFavorite(props.product.id,EPostType.Product);
@@ -142,6 +175,17 @@ const removeFavorite = async () => {
     transform:translateY(-25px);
     scale: 170%;
   }
+}
+
+
+.fade-smooth-enter-active,
+.fade-smooth-leave-active{
+  @apply transition-all duration-300 [&>*]:transition-opacity [&>*]:duration-300 [&>*]:delay-300;
+}
+
+.fade-smooth-enter-from,
+.fade-smooth-leave-to{
+  @apply opacity-0 [&>*]:opacity-0;
 }
 
 </style>

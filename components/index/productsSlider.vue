@@ -6,15 +6,15 @@
       <GCard2 v-for="(product,i) in products" :key="product.id" :product="product" class="min-w-[280px]"/>
     </div>
     <button @click="scrollNext" :disabled="scrollCount == maxScrollCount"
-            class="absolute left-0 top-1/3 -translate-x-2/3 bg-[#FAFAFA] scroll-smooth disabled:opacity-50
-            w-10 h-10 rounded-full border border-black/50 hover:bg-gray-200 text-black/50 hover:text-black transition-colors duration-200 grid place-items-center">
+            class="absolute left-0 top-1/3 -translate-x-2/3 bg-[#FFD29DB2] scroll-smooth disabled:opacity-50
+            w-10 h-10 rounded-full border-black/50 hover:bg-brandOrange text-black/50 hover:text-white transition-colors duration-200 grid place-items-center">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180 pointer-events-none">
         <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
     <button @click="scrollPrev" :disabled="scrollCount == 0"
-            class="absolute right-0 top-1/3 translate-x-2/3 bg-[#FAFAFA] scroll-smooth disabled:opacity-50
-            w-10 h-10 rounded-full border border-black/50 hover:bg-gray-200 text-black/50 hover:text-black transition-colors duration-200 grid place-items-center">
+            class="absolute right-0 top-1/3 translate-x-2/3 bg-[#FFD29DB2] scroll-smooth disabled:opacity-50
+            w-10 h-10 rounded-full border-black/50 hover:bg-brandOrange text-black/50 hover:text-white transition-colors duration-200 grid place-items-center">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
         <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>

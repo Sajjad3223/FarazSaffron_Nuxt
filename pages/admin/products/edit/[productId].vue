@@ -123,14 +123,13 @@
             </div>
           </div>
           <div class="grid grid-cols-3 gap-4 place-items-center">
-            <base-f-input  type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount" no-validation :float-step="0.01" :rtl="false"/>
+            <base-f-input  type="number" name="discount" id="discount" label="تخفیف محصول (%)" place-holder="تخفیف محصول را بین 0 تا 100 وارد کنید" v-model="editProductData.discount" no-validation :float-step="0.01" :rtl="false" @input="updateDiscountValue"/>
             <div class="flex flex-col space-y-1 justify-self-start">
               <small class="font-light">مبلغ تخفیف</small>
               <base-g-price :price="Number(((editProductData.price / 10) * editProductData.discount / 100))" class="justify-self-start"/>
             </div>
             <div class="flex flex-col space-y-1 justify-self-start">
-              <small class="font-light">قیمت با تخفیف</small>
-              <base-g-price :price="Number((editProductData.price / 10) - ((editProductData.price / 10) * editProductData.discount / 100))" class="justify-self-start"/>
+              <base-f-input  type="number" name="discountValue" id="discountValue" label="قیمت با تخفیف (ریال)" place-holder="قیمت با تخفیف" v-model="discountValue" no-validation :rtl="false" @input="updateDiscount"/>
             </div>
           </div>
           <base-f-input type="number" name="quantity" id="quantity" label="موجودی انبار" place-holder="تعداد موجود در انبار" v-model="editProductData.quantity"/>
@@ -373,7 +372,7 @@ const editProductSchema = Yup.object().shape({
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
   weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
 })
-
+const discountValue = ref(0);
 
 const packingTypes = Object.entries(EPackingType).map(t=>{
   return{
@@ -441,6 +440,9 @@ onMounted(async ()=>{
     } as CreateSpecificationViewModel
   })
 
+  if(editProductData.discount != null)
+    discountValue.value = Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100));
+
   const propertiesResult = await GetProperties({pageId:1,take:100});
   if(propertiesResult.isSuccess){
     properties.value = propertiesResult.data?.data ?? [];
@@ -455,6 +457,15 @@ onMounted(async ()=>{
 
   isLoading.value = false;
 })
+
+const updateDiscountValue = ()=>{
+  discountValue.value = Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100));
+}
+const updateDiscount = ()=>{
+  const price =100 - (Number(discountValue.value) * 100) / editProductData.price;
+  editProductData.discount = price;
+  console.log(editProductData)
+}
 
 const refreshCategories = async ()=>{
   loadingCategories.value = true;

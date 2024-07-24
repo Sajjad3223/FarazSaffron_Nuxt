@@ -395,9 +395,9 @@
             </div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="h-[75px] w-[75px] rounded-xl grid place-items-center border border-[#818c92]/20">
+            <a href="https://www.fdacrm.ir/show?pavanenum=57/1018-1" class="h-[75px] w-[75px] rounded-xl grid place-items-center border border-[#818c92]/20">
               <img src="~/assets/images/salamat.png" alt="salamat" class="w-2/3">
-            </div>
+            </a>
             <div class="h-[75px] w-[75px] rounded-xl grid place-items-center border border-[#818c92]/20">
               <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=481420&Code=cCu16exHbafArcoXSU1XBlvGhdU7Fkzn'
                  class="relative aspect-square grid place-items-center w-full">

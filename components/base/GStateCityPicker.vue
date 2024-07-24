@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import type {CityDto, StateDto} from "~/models/stateDto";
+import statesData from '~/assets/data/iran_cities_with_coordinates.json';
 
 const props = withDefaults(defineProps<{
   state?:string,
@@ -48,11 +49,11 @@ const selectedCity:Ref<string | null> = ref('');
 const emits = defineEmits(['valueUpdated']);
 
 onMounted(async ()=>{
-  states.value = await $fetch<StateDto[]>('https://iran-locations-api.ir/api/v1/fa/states', {method: 'GET'});
+  setStates();
   if(props.state != ''){
     const stateId = states.value?.find(s=>s.name == props.state)?.id;
     state.value = stateId;
-    cities.value = await $fetch<CityDto[]>('https://iran-locations-api.ir/api/v1/fa/cities?state_id='+stateId, {method: 'GET'});
+    setCities(stateId!);
     if(props.city != ''){
       const cityId = cities.value?.find(c=>c.name == props.city)?.id;
       city.value = cityId;
@@ -60,11 +61,35 @@ onMounted(async ()=>{
   }
 })
 
+const setCities = (stateId:number)=>{
+  cities.value = states.value!.find(s=>s.id == stateId)!.cities;
+}
+const setStates = ()=>{
+  states.value = statesData.map((s)=>{
+    return {
+      id:s.id,
+      center:s.center,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      name:s.name,
+      cities:s.cities.map(c=>{
+        return {
+          id:c.id,
+          name:c.name,
+          latitude:c.latitude,
+          longitude:c.longitude
+        } as CityDto
+      })
+    } as StateDto
+  });
+}
+
 const stateSelected = async ($event)=>{
   const stateId = $event.target.value;
-  cities.value = await $fetch<CityDto[]>('https://iran-locations-api.ir/api/v1/fa/cities?state_id='+stateId, {method: 'GET'});
+  setCities(stateId!);
   selectedState.value = $event.target.selectedOptions[0].text;
   selectedCity.value = cities.value[0].name;
+  city.value = cities.value[0].id;
   emits('valueUpdated',{state:selectedState.value,city:selectedCity.value})
 }
 const citySelected = async ($event)=>{

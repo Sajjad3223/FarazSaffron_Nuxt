@@ -5,7 +5,7 @@
   </div>
   <div class="flex items-center w-full my-4" v-else>
     <span class="font-thin">{{ title }}</span>
-    <div class="h-px bg-black flex-1 opacity-50 mx-4"></div>
+    <div class="h-px flex-1 opacity-50 mx-4"></div>
     <slot name="left"></slot>
   </div>
 </template>

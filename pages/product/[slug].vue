@@ -129,14 +129,14 @@
               <div class="flex justify-between items-center gap-4">
                 <!--   Price    -->
                 <div class="flex items-center gap-1">
-                  <strong class="text-3xl 2xl:text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ (product?.totalPrice / 10).toLocaleString() }}</strong>
+                  <strong class="text-3xl 2xl:text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ Math.ceil(product.totalPrice / 10).toLocaleString() }}</strong>
                   <span class="flex flex-col items-center text-sm 2xl:text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
                 </div>
                 <!--   Discount    -->
                 <div class="flex items-center gap-2" v-if="product?.discount !== 0">
-                  <span class="line-through opacity-50 text-lg 2xl:text-2xl" style="font-family: 'Vazir FD',serif">{{ (product?.price / 10).toLocaleString() }}</span>
+                  <span class="line-through opacity-50 text-lg 2xl:text-2xl" style="font-family: 'Vazir FD',serif">{{ Math.ceil(product.price / 10).toLocaleString() }}</span>
                   <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
-                    <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ product?.discount }}%</span>
+                    <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ Math.floor(product?.discount) }}%</span>
                   </div>
                 </div>
               </div>
@@ -563,7 +563,7 @@
         <div class="w-full fixed inset-x-0 place-items-center bottom-[75px] border-b bg-white h-[60px] z-20 px-4 grid grid-cols-2 items-center" style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
           <div class="flex flex-col items-start">
 <!--            <small>قیمت محصول:</small>-->
-            <base-g-price :price="(product.price / 10)" class="scale-150"/>
+            <base-g-price :price="(Math.ceil(product.totalPrice / 10))" class="scale-150"/>
           </div>
           <base-g-button @click="addToCart" w-full class="w-full" :py="0" :is-loading="addToCartLoading">
             افزودن به سبد خرید

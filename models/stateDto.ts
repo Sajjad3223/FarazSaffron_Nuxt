@@ -4,6 +4,7 @@ export interface StateDto{
     center:string;
     latitude:string;
     longitude:string;
+    cities:CityDto[];
 }
 
 export interface CityDto{

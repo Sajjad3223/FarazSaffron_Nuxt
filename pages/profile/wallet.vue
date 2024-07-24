@@ -3,7 +3,7 @@
     <Head>
       <Title>کیف پول</Title>
     </Head>
-    <div v-if="!utilStore.isMobile()">
+    <div class="hidden md:block">
       <div>
         <div>
           <div class="text-xl font-bold flex justify-between items-center gap-2 ">
@@ -34,8 +34,8 @@
               </div>
               <base-g-input label="مبلغ (تومان)" name="price" v-model="price" required type="number" />
               <Transition name="fade">
-                <base-f-alert color="warning" v-if="price != '' && price < 100000">
-                  حداقل مبلغ پرداختی 100,000 تومان می باشد
+                <base-f-alert color="warning" v-if="price == '' || price < minimumPriceToCharge">
+                  حداقل مبلغ پرداختی {{ minimumPriceToCharge.toLocaleString() }} تومان می باشد
                 </base-f-alert>
               </Transition>
               <div class="grid grid-cols-4 gap-4">
@@ -52,7 +52,7 @@
                   800ت
                 </base-g-button>
               </div>
-              <base-g-button color="info" @click="charge" :is-loading="loading || accountStore.initLoading" :disabled="price == '' || price < 1000">
+              <base-g-button color="info" @click="charge" :is-loading="loading || accountStore.initLoading" :disabled="price == '' || price < minimumPriceToCharge">
                 پرداخت
               </base-g-button>
             </div>
@@ -131,7 +131,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="relative">
+    <div class="md:hidden relative">
       <header class="w-full h-[80px] px-4 flex items-center justify-center relative">
         <NuxtLink to="/profile" class="absolute right-7">
           <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -291,9 +291,11 @@ const loading = ref(false);
 const accountStore = useAccountStore();
 const toast = useToast();
 const utilStore = useUtilStore();
+const minimumPriceToCharge = 100000;
 
 const charge = async ()=>{
   if(price.value == '') return;
+  if(Number(price.value) < 100000) return;
 
   loading.value = true;
   const result = await ChargeWallet(price.value * 10);
