@@ -214,10 +214,10 @@
       </Transition>
       <Transition enter-active-class="transition-all duration-300" enter-from-class=" opacity-0" enter-to-class=" opacity-100"
                   leave-active-class="transition-all duration-300 " leave-from-class=" opacity-100" leave-to-class=" opacity-0" :duration="300" mode="out-in">
-        <Form class="grid grid-cols-1 my-4 space-y-4" v-show="step === 2">
+        <Form class="grid grid-cols-2 gap-4 my-4" v-show="step === 2">
           <product-specification-add v-for="(s,i) in specifications" v-model="specifications[i]" :number="i" v-if="false"/>
           <product-properties-add v-for="(p,i) in properties" :key="p.id" v-model="propertiesViewModels[i]" :property="p"/>
-          <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="white">
+          <base-f-button type="button" @clicked="specifications.push({key:'',value:''})" bordered color="primary" text-color="black" v-if="false">
             افزودن ویژگی جدید
           </base-f-button>
           <div class="grid grid-cols-3 gap-4 col-span-full">
@@ -270,7 +270,8 @@
 import {Form} from "vee-validate";
 import type {
   CreateSpecificationViewModel,
-  EditProductCommand, ProductPropertyViewModel,
+  EditProductCommand,
+  ProductPropertyViewModel, SetPropertiesCommand,
   SetSeoDataCommand,
   SetSpecificationsCommand
 } from "~/models/product/productCommands";
@@ -279,9 +280,10 @@ import FMultiFileInput from "~/components/base/FMultiFileInput.vue";
 import FSeoData from "~/components/base/FSeoData.vue";
 import {
   EditProduct,
-  GetProductById, GetProperties,
+  GetProductById,
+  GetProperties,
   RemoveImage,
-  SetImages,
+  SetImages, SetProperties,
   SetSeoData,
   SetSpecifications
 } from "~/services/product.service";
@@ -294,7 +296,8 @@ import type {BasalamData, CatalogDto, DigikalaData, ProductDto, PropertyDto} fro
 import {GetCatalogs} from "~/services/catalog.service";
 import {SITE_URL} from "~/utilities/api.config";
 import {ApiStatusCode} from "~/models/metaData";
-import {FillPaginationData} from "~/utilities/fillPaginationData";
+import type {AddPropertyCommand} from "~/models/certificate/authenticatorCommands";
+import {EPropertyType} from "~/models/certificate/authenticatorDto";
 
 definePageMeta({
   layout:'admin'
@@ -315,13 +318,13 @@ if(!result.value?.isSuccess){
   }
 }
 const productResult = result.value!;
+const product:Ref<ProductDto> = ref(productResult.data!);
 
 const step = ref(0);
 const customSlug = ref(false);
 const isLoading = ref(false);
 const loadingCategories = ref(false);
 const loadingCatalogs = ref(false);
-const product:Ref<ProductDto> = ref(productResult.data!);
 const properties:Ref<PropertyDto[]> = ref([]);
 
 
@@ -396,7 +399,7 @@ const imagesAlt = ref('');
 const specifications:Ref<CreateSpecificationViewModel[]> = ref([
   {key:'',value:''}
 ]);
-const propertiesViewModels:Ref<ProductPropertyViewModel[]> = ref([]);
+const propertiesViewModels:Ref<AddPropertyCommand[]> = ref([]);
 
 onMounted(async ()=>{
   isLoading.value = true;
@@ -441,15 +444,19 @@ onMounted(async ()=>{
   })
 
   if(editProductData.discount != null)
-    discountValue.value = Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100));
+    discountValue.value = Math.round(Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100)));
 
   const propertiesResult = await GetProperties({pageId:1,take:100});
   if(propertiesResult.isSuccess){
     properties.value = propertiesResult.data?.data ?? [];
-    propertiesViewModels.value = properties.value.map(p=>{
-      return {propertyId:p.id,value:''} as ProductPropertyViewModel;
+    propertiesViewModels.value = properties.value?.map(p=>{
+      return {
+        propertyId:p.id,
+        propertyType:EPropertyType.متن,
+        value:product.value.properties.find(pp=>pp.propertyId == p.id)?.value,
+        file:null
+      } as AddPropertyCommand
     });
-    console.log(propertiesViewModels.value)
   }
 
   await refreshCategories();
@@ -459,12 +466,11 @@ onMounted(async ()=>{
 })
 
 const updateDiscountValue = ()=>{
-  discountValue.value = Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100));
+  discountValue.value = Math.round(Number((editProductData.price) - ((editProductData.price) * editProductData.discount / 100)));
 }
 const updateDiscount = ()=>{
   const price =100 - (Number(discountValue.value) * 100) / editProductData.price;
   editProductData.discount = price;
-  console.log(editProductData)
 }
 
 const refreshCategories = async ()=>{
@@ -537,10 +543,12 @@ const AddImages = async ()=>{
 const AddSpecifications = async ()=>{
   isLoading.value = true;
 
-  const result:ApiResponse<undefined> = await SetSpecifications({
-    productId:productId,
-    specifications:specifications.value
-  } as SetSpecificationsCommand);
+  const propertiesCommand = propertiesViewModels.value.filter(p=>p.value != null && p.value != '');
+
+  const result:ApiResponse<undefined> = await SetProperties({
+    entityId:productId,
+    properties:propertiesCommand
+  } as SetPropertiesCommand);
 
   if(result.isSuccess){
     await toast.showToast(result.metaData.message);

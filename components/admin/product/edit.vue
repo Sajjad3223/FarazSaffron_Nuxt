@@ -1,12 +1,12 @@
 <template>
-  <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4" @submit="AddProduct">
+  <Form class="grid grid-cols-1 lg:grid-cols-2 gap-4" @submit="UpdateProduct">
     <div class="flex flex-col gap-4 row-span-2 relative">
-      <base-inputs-text-input label="عنوان محصول" v-model="addProductData.title" @update:modelValue="generateSlug" side-slot>
+      <base-inputs-text-input name="title" label="عنوان محصول" v-model="editProductData.title" @update:modelValue="generateSlug" side-slot>
         <button @click="autoGenerateSlug = !autoGenerateSlug,generateSlug()" class="text-sm font-light opacity-20 absolute left-3 border rounded-full border-black w-4 h-4 flex items-center justify-center">
           <span class="w-1 h-1 rounded-full bg-black"></span>
         </button>
       </base-inputs-text-input>
-      <base-inputs-text-input label="عنوان یکتا" v-model="addProductData.slug" side-slot>
+      <base-inputs-text-input name="slug" label="عنوان یکتا" v-model="editProductData.slug" side-slot>
         <button @click="autoGenerateSlug = !autoGenerateSlug,generateSlug()" class="text-sm font-light opacity-20 absolute left-3 border rounded-full border-black w-4 h-4 flex items-center justify-center">
           <span class="w-1 h-1 rounded-full bg-black"></span>
         </button>
@@ -15,20 +15,18 @@
         <div v-if="autoGenerateSlug" class="h-[70px] pointer-events-none w-1 border-l border-dashed border-black opacity-20 absolute left-5 top-1/2 -translate-y-1/3 z-10"></div>
       </Transition>
     </div>
-    <base-inputs-file-input class="row-span-3" v-model="addProductData.mainImage" label="تصویر اصلی" />
 
-    <base-inputs-text-input label="کد محصول" v-model="addProductData.productCode" />
-    <base-inputs-text-input label="بارکد محصول" v-model="addProductData.barcodeNumber" />
-    <base-inputs-text-input label="توضیحات تصویر" v-model="addProductData.mainImageAlt" />
+    <base-inputs-text-input name="code" label="کد محصول" v-model="editProductData.productCode" />
+    <base-inputs-text-input name="barcode" label="بارکد محصول" v-model="editProductData.barcodeNumber" />
 
     <hr class="col-span-full my-4">
 
-    <base-inputs-price-input v-model="addProductData.price" label="قیمت محصول" unit="تومان" @update:modelValue="calculateFinalPrice"/>
+    <base-inputs-price-input name="price" v-model="editProductData.price" label="قیمت محصول" unit="تومان" @update:modelValue="calculateFinalPrice"/>
 
     <div class="grid grid-cols-3 gap-4">
       <div class="flex items-center gap-4">
         <div class="flex items-center">
-          <base-inputs-text-input label="تخفیف" decimal type="number" v-model="addProductData.discount" @update:modelValue="calculateFinalPrice" side-text="%" />
+          <base-inputs-text-input name="discount" label="تخفیف" decimal type="number" v-model="editProductData.discount" @update:modelValue="calculateFinalPrice" side-text="%" />
         </div>
         <button class="opacity-50 grid place-items-center text-black/50 translate-y-3" @click="autoCalculateDiscount = !autoCalculateDiscount">
           <svg v-if="autoCalculateDiscount" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,34 +39,34 @@
         </button>
       </div>
 
-      <base-inputs-price-input class="col-span-2" v-model="finalPrice" label="قیمت نهایی" unit="تومان" @update:modelValue="setFinalPrice" />
+      <base-inputs-price-input name="finalPrice" class="col-span-2" v-model="finalPrice" label="قیمت نهایی" unit="تومان" @update:modelValue="setFinalPrice" />
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <base-inputs-text-input label="موجود در انبار" type="number" v-model="addProductData.quantity" side-text="عدد" />
-      <base-inputs-text-input label="وزن بسته بندی" type="number" v-model="addProductData.weight" side-text="گرم" />
+      <base-inputs-text-input name="quantity" label="موجود در انبار" type="number" v-model="editProductData.quantity" side-text="عدد" />
+      <base-inputs-text-input name="weight" label="وزن بسته بندی" type="number" v-model="editProductData.weight" side-text="گرم" />
     </div>
 
     <div class="grid grid-cols-3 gap-4" >
-      <BaseGSelect v-model="addProductData.categoryId" :options="selectCategories" @update:modelValue="categorySelected" label="دسته بندی اصلی"/>
-      <BaseGSelect v-model="addProductData.subCategoryId" :options="selectSubCategories" label="دسته بندی فرعی"/>
-      <BaseGSelect v-model="addProductData.packingType" :options="getEnumValuesForSelect<EPackingType>(EPackingType)" label="نوع بسته بندی"/>
+      <BaseGSelect v-if="!dataLoading" v-model="editProductData.categoryId" :options="selectCategories" @update:modelValue="categorySelected" label="دسته بندی اصلی"/>
+      <BaseGSelect v-if="!dataLoading" v-model="editProductData.subCategoryId" :options="selectSubCategories" label="دسته بندی فرعی"/>
+      <BaseGSelect v-model="editProductData.packingType" :options="getEnumValuesForSelect<EPackingType>(EPackingType)" label="نوع بسته بندی"/>
     </div>
 
     <div class="grid grid-cols-2 gap-4">
 
-      <base-inputs-text-input label="کد بهداشت" v-model="addProductData.healthNumber"/>
-      <BaseGSelect v-model="addProductData.catalogId" :options="selectCatalogs" label="کاتالوگ محصول"/>
+      <base-inputs-text-input name="healthNumber" label="کد بهداشت" v-model="editProductData.healthNumber"/>
+      <BaseGSelect v-if="!dataLoading" v-model="editProductData.catalogId" :options="selectCatalogs" label="کاتالوگ محصول"/>
     </div>
-    <base-g-dimension v-model="addProductData.dimensions" />
+    <base-g-dimension v-model="editProductData.dimensions" />
 
     <hr class="col-span-full my-4">
 
-    <base-inputs-text-input label="لینک دیجی کالا" v-model="addProductData.digiKalaData.digikalaLink"/>
-    <base-inputs-price-input v-model="addProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="تومان"/>
+    <base-inputs-text-input name="digikalaLink" label="لینک دیجی کالا" v-model="editProductData.digiKalaData.digikalaLink"/>
+    <base-inputs-price-input name="digikalaPrice" v-model="editProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="تومان"/>
 
-    <base-inputs-text-input label="لینک باسلام" v-model="addProductData.basalamData.basalamLink"/>
-    <base-inputs-price-input v-model="addProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="تومان"/>
+    <base-inputs-text-input name="basalamLink" label="لینک باسلام" v-model="editProductData.basalamData.basalamLink"/>
+    <base-inputs-price-input name="basalamPrice" v-model="editProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="تومان"/>
 
     <base-g-button :is-loading="isLoading" type="submit" color="info" is-icon text-color="white" class="col-span-full w-max mr-auto text-sm font-light" >
       ثبت و ادامه
@@ -80,62 +78,62 @@
 import {Form} from "vee-validate";
 import * as Yup from'yup';
 import {EPackingType} from "~/models/product/EPackingType";
-import type {CreateProductCommand} from "~/models/product/productCommands";
+import type {EditProductCommand} from "~/models/product/productCommands";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
-import type {CatalogDto} from "~/models/product/productQueries";
+import type {CatalogDto, ProductDto} from "~/models/product/productQueries";
 import {GetCategories} from "~/services/category.service";
 import {GetCatalogs} from "~/services/catalog.service";
-import {CreateProduct} from "~/services/product.service";
+import {EditProduct} from "~/services/product.service";
 import {ToastType, useToast} from "~/composables/useSwal";
 import {getEnumValuesForSelect} from "~/utilities/customUtilities";
 import type {GSelectData} from "~/models/gSelectData";
 
 const props = defineProps<{
-  step:number
+  step:number,
+  product:ProductDto
 }>();
 
-const emits = defineEmits(['productCreated','updateProgress']);
+const emits = defineEmits(['productEdited','updateProgress']);
 
-//@ts-ignore
-const addProductData:CreateProductCommand = reactive({
-  title: '',
-  slug: '',
-  price: null,
-  discount: 0,
-  weight:null,
-  healthNumber:null,
-  packingType: EPackingType.کیفی,
-  mainImage: null,
-  quantity: 0,
-  mainImageAlt: '',
-  productCode: '',
-  barcodeNumber: '',
-  categoryId: null,
-  subCategoryId: null,
-  catalogId: null,
+// @ts-ignore
+const editProductData:EditProductCommand = reactive({
+  productId:props.product.id,
+  title:props.product.title,
+  slug:props.product.slug,
+  price:props.product.price,
+  discount:props.product.discount,
+  weight:props.product.weight,
+  healthNumber:props.product.healthNumber,
+  packingType:props.product.packingType,
+  quantity:props.product.quantity,
+  productCode:props.product.productCode,
+  barcodeNumber:props.product.barcodeNumber,
+  categoryId:props.product.category.id,
+  subCategoryId:props.product.subCategory?.id,
+  catalogId:props.product.catalog?.id,
   dimensions: {
-    width:0,
-    height:0,
-    length:0
+    width:props.product.dimensions.width,
+    height:props.product.dimensions.height,
+    length:props.product.dimensions.length
   },
   digiKalaData:{
-    digikalaLink:'',
-    digikalaPrice:0
+    digikalaLink:props.product.digiKalaData?.digikalaLink,
+    digikalaPrice:props.product.digiKalaData?.digikalaPrice
   },
   basalamData:{
-    basalamLink:'',
-    basalamPrice:0
+    basalamLink:props.product.basalamData?.basalamLink,
+    basalamPrice:props.product.basalamData?.basalamPrice
   },
   seoData: {
-    metaTitle:'',
-    metaDescription:'',
-    canonical:'',
-    indexPage:false,
-    metaKeyWords:'',
-    schema:''
+    metaTitle: props.product.seoData?.metaTitle,
+    metaDescription: props.product.seoData?.metaDescription,
+    canonical: props.product.seoData?.canonical,
+    indexPage: props.product.seoData?.indexPage,
+    metaKeyWords: props.product.seoData?.metaKeyWords,
+    schema: props.product.seoData?.schema
   },
 })
-const addProductSchema = Yup.object().shape({
+const editProductSchema = Yup.object().shape({
   title:Yup.string().required('وارد کردن عنوان ضروری است'),
   slug:Yup.string().required('وارد کردن لینک یکتا ضروری است'),
   price:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 باشد').required('وارد کردن مبلغ ضروری است'),
@@ -146,14 +144,16 @@ const addProductSchema = Yup.object().shape({
   weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
 })
 
+
 watch(
-    addProductData,
+    editProductData,
     ()=>{
-      const properties = Object.keys(addProductData);
+      const properties = Object.keys(editProductData);
       properties.pop();
       let filledProps = 0;
-      properties.forEach(p=>{
-        if(addProductData[p] != null && addProductData[p] != '' && addProductData[p] != 0) {
+      properties.forEach((p:any)=>{
+        //@ts-ignore
+        if(editProductData[p] != null && editProductData[p] != '' && editProductData[p] != 0) {
           filledProps++;
         }
       })
@@ -165,10 +165,10 @@ watch(
 const finalPrice = ref(0);
 const calculateFinalPrice = ()=>{
   if(!autoCalculateDiscount.value) return;
-  finalPrice.value = addProductData.price - (addProductData.price * (addProductData.discount / 100));
+  finalPrice.value = Math.round(editProductData.price - (editProductData.price * (editProductData.discount / 100)));
 }
 const setFinalPrice = ()=>{
-  addProductData.discount = 100 - (Number(finalPrice.value) * 100) / addProductData.price;
+  editProductData.discount = 100 - (Number(finalPrice.value) * 100) / editProductData.price;
 }
 
 const isLoading = ref(false);
@@ -178,6 +178,7 @@ const loadingCategories = ref(false);
 const loadingCatalogs = ref(false);
 
 const toast = useToast();
+const dataLoading = ref(false);
 const selectCategories:Ref<GSelectData[]> = ref([]);
 const categories:Ref<CategoryDto[]> = ref([]);
 const catalogs:Ref<CatalogDto[]> = ref([]);
@@ -196,10 +197,12 @@ const categorySelected = (id:Number) => {
   }) ?? [];
 }
 
-const mainImage = ref();
 onMounted(async ()=>{
+  dataLoading.value = true;
   await refreshCategories();
   await refreshCatalogs();
+  calculateFinalPrice();
+  dataLoading.value = false;
 })
 
 const refreshCategories = async ()=>{
@@ -215,8 +218,8 @@ const refreshCategories = async ()=>{
       } as GSelectData
     }) ?? [];
   }
-  if(addProductData.categoryId != null)
-    categorySelected(addProductData.categoryId);
+  if(editProductData.categoryId != null)
+    categorySelected(editProductData.categoryId);
 
   loadingCategories.value = false;
 }
@@ -237,38 +240,13 @@ const refreshCatalogs = async ()=>{
   loadingCatalogs.value = false;
 }
 
-const AddProduct = async ()=>{
+const UpdateProduct = async ()=>{
   isLoading.value = true;
 
-  const productData = new FormData();
-  productData.append('title',addProductData.title);
-  productData.append('slug',addProductData.slug);
-  productData.append('price',addProductData.price.toString());
-  productData.append('discount',addProductData.discount.toString());
-  productData.append('weight',addProductData.weight.toString());
-  productData.append('healthNumber',addProductData.healthNumber ?? '');
-  productData.append('packingType',addProductData.packingType.toString());
-  if(addProductData.mainImage)
-    productData.append('mainImage',addProductData.mainImage);
-  productData.append('mainImageAlt',addProductData.mainImageAlt);
-  productData.append('productCode',addProductData.productCode);
-  productData.append('barcodeNumber',addProductData.barcodeNumber);
-  productData.append('categoryId',addProductData.categoryId.toString());
-  productData.append('subCategoryId',addProductData.subCategoryId?.toString() ?? '');
-  productData.append('catalogId',addProductData.catalogId?.toString() ?? '');
-  productData.append('dimensions.Width',addProductData.dimensions.width.toString());
-  productData.append('dimensions.Length',addProductData.dimensions.length.toString());
-  productData.append('dimensions.Height',addProductData.dimensions.height.toString());
-  productData.append('digikalaData.digiKalaLink',addProductData.digiKalaData?.digikalaLink ?? '');
-  productData.append('digikalaData.digiKalaPrice',addProductData.digiKalaData?.digikalaPrice?.toString() ?? '0');
-  productData.append('basalamData.basalamLink',addProductData.basalamData?.basalamLink ?? '');
-  productData.append('basalamData.basalamPrice',addProductData.basalamData?.basalamPrice?.toString() ?? '0');
-  productData.append('quantity',addProductData.quantity.toString());
-
-  const productResult = await CreateProduct(productData);
+  const productResult = await EditProduct(editProductData);
   if(productResult.isSuccess){
     await toast.showToast(productResult.metaData.message,ToastType.success);
-    emits('productCreated',productResult.data);
+    emits('productEdited',productResult.data);
   }else{
     await toast.showToast(productResult.metaData.message,ToastType.error,0);
   }
@@ -278,7 +256,7 @@ const AddProduct = async ()=>{
 
 const generateSlug = ()=>{
   if(!autoGenerateSlug.value) return;
-  addProductData.slug = addProductData.title.replaceAll(' ','-');
+  editProductData.slug = editProductData.title.replaceAll(' ','-');
 }
 
 </script>

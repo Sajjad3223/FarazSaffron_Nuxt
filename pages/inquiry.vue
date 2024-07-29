@@ -18,38 +18,22 @@
         </div>
         <div class="flex flex-col w-full space-y-2">
           <label class="text-sm font-light">تاریخ اعتبار کالا</label>
-          <div class="grid grid-cols-3 gap-4 w-full">
-            <div class="relative" v-if="false">
-              <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                <option value="" selected>روز</option>
-              </select>
-            </div>
-            <input type="text" name="serialNumber" id="serialNumber" placeholder="روز" dir="ltr"
-                   class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-            <div class="relative" v-if="false">
-              <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                <option value="" selected>ماه</option>
-              </select>
-            </div>
+          <div class="grid grid-cols-2 gap-4 w-full">
             <input type="text" name="serialNumber" id="serialNumber" placeholder="ماه" dir="ltr"
                    class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-            <div class="relative" v-if="false">
-              <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-                <option value="" selected>سال</option>
-              </select>
-            </div>
             <input type="text" name="serialNumber" id="serialNumber" placeholder="سال" dir="ltr"
                    class="w-full text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
           </div>
         </div>
         <div class="flex flex-col w-full space-y-2">
-          <label class="text-sm font-light">نوع محصول</label>
-          <div class="relative">
-            <select name="" id="" class="w-full text-sm placeholder-black/20 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
-              <option value="" selected>نوع محصول را انتخاب کنید</option>
-              <option v-for="p in productOptions" :value="p.id">{{p.title}}</option>
-            </select>
-          </div>
+          <base-g-select label="نوع محصول" :options="productOptions.map(o=>{
+            return {
+              title:o.title,
+              value:o.id,
+              image:`${SITE_URL}/product/images/${o.imageName}`
+            } as GSelectData;
+          })">
+          </base-g-select>
         </div>
         <button class="bg-[#FB7511] text-white w-full rounded-lg py-2" type="submit">
           استعلام
@@ -79,11 +63,31 @@
           <div v-for="p in authenticator.properties" :key="p.id"
                class="flex items-center justify-between">
             <span class="w-max text-sm opacity-70 font-light">{{p.title}}</span>
-            <div class="w-2/3">
-              <div class="mr-auto w-max">
+            <div class="flex">
+              <div class="flex">
                 <span class="font-light" v-if="p.propertyType == EPropertyType.تاریخ || p.propertyType == EPropertyType.تاریخ_زمان">
-                {{new Date(p.value).toLocaleDateString('fa-IR')}}
-              </span>
+                  {{new Date(p.value).toLocaleDateString('fa-IR')}}
+                </span>
+                <div v-else-if="p.propertyType == EPropertyType.رنج" class="relative min-w-[300px]" >
+                  <div class="h-2 w-full" :style="{
+                    backgroundImage: `linear-gradient(to right, ${JSON.parse(p.value).leftColor},${JSON.parse(p.value).centerColor}, ${JSON.parse(p.value).rightColor})`
+                    , maskImage:'url(/images/range-mask.png)',maskRepeat:'no-repeat',maskSize:'100%'}">
+                  </div>
+                  <span class="absolute -left-6 -top-1 text-xs font-thin">
+                      {{JSON.parse(p.value).min}}
+                    </span>
+                  <span class="absolute text-xs text-center -translate-x-1/2 font-light top-3" :style="{left: `${(JSON.parse(p.value).value * 100) / JSON.parse(p.value).max}%`}">
+                      {{JSON.parse(p.value).value}}
+                    </span>
+                  <span class="absolute text-xs -translate-x-1/2 font-light bottom-4" :style="{left: `${(JSON.parse(p.value).value * 100) / JSON.parse(p.value).max}%`}">
+                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path opacity="0.8" d="M4 6L0.535898 0.75L7.4641 0.75L4 6Z" fill="#070707"/>
+                    </svg>
+                  </span>
+                  <span class="absolute -right-6 -top-1 text-xs font-thin">
+                      {{JSON.parse(p.value).max}}
+                    </span>
+                </div>
                 <img class="w-full"
                      :src="`${SITE_URL}/properties/authenticator/${p.value}`" alt="" v-else-if="p.propertyType == EPropertyType.تصویر">
                 <span class="font-light" v-else>{{p.value}}</span>
@@ -114,9 +118,10 @@
 import {Form} from "vee-validate";
 import type {SelectTagDto} from "~/models/product/productQueries";
 import {GetCertificate} from "~/services/certificate.service";
-import {type AuthenticatorDto, EPropertyType} from "~/models/certificate/authenticatorDto";
+import {type AuthenticatorDto, type CAPropertyDto, EPropertyType} from "~/models/certificate/authenticatorDto";
 import {ApiStatusCode} from "~/models/metaData";
 import {SITE_URL} from "~/utilities/api.config";
+import type {GSelectData} from "~/models/gSelectData";
 
 
 const route = useRoute();
@@ -141,6 +146,10 @@ const findCertificate = async ()=>{
   else{
     await toast.showError({message:'سریال وارد شده نامعتبر است',appStatusCode:ApiStatusCode.NotFound});
   }
+}
+
+const linearBackground = (p:CAPropertyDto) => {
+  return `linear-gradient(to left,${JSON.parse(p.value).leftColor} 30%,${JSON.parse(p.value).centerColor} 30%, ${JSON.parse(p.value).rightColor}30%)`;
 }
 
 </script>

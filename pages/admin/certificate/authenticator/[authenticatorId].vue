@@ -62,15 +62,7 @@ const aProperties:Ref<CAPropertyDto[]> = ref([]);
 
 const setAPropertiesCommand:SetPropertiesCommand = reactive({
   entityId:authenticatorId,
-  properties:
-      [...aProperties.value].map(p=>{
-        return {
-          propertyId:p.id,
-          propertyType:p.propertyType,
-          value:authenticator.value?.properties.find(cp=>cp.propertyId == p.id)?.value,
-          file:null
-        } as AddPropertyCommand
-      })
+  properties: authenticator.value?.properties
 })
 
 onMounted(async ()=>{
@@ -81,8 +73,9 @@ onMounted(async ()=>{
 });
 
 const updateAuthenticator = async ()=>{
+  console.log(setAPropertiesCommand)
   setAPropertiesCommand.properties = setAPropertiesCommand.properties.filter(p=>p.value != null || p.file != null);
-
+  console.log(setAPropertiesCommand)
   const data = new FormData();
   data.append('entityId',authenticatorId.toString());
 

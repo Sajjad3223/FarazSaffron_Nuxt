@@ -9,6 +9,7 @@ import type {SeoData} from "~/models/seoData";
 import type {ProductImageDto} from "~/models/product/productImageDto";
 import type {SpecificationDto} from "~/models/product/specificationDto";
 import type {DimensionDto} from "~/models/product/dimensionDto";
+import type {EPropertyType} from "~/models/certificate/authenticatorDto";
 
 export interface ProductFilterParams extends BaseFilterParams{
     search?:             string | null | undefined;
@@ -85,14 +86,24 @@ export interface ProductDto extends BaseDto{
     visits:         number;
     images:         ProductImageDto[];
     specifications: SpecificationDto[];
+    properties: ProductPropertyDto[];
     catalog?:CatalogDto | null;
 }
 
 export interface ProductFilterResult extends BaseFilterResult<ProductFilterData>{}
 
+export interface ProductPropertyDto extends BaseDto{
+    productId:number;
+    propertyId:number;
+    propertyType:EPropertyType;
+    title:string;
+    value: string;
+}
+
 export interface PropertyDto extends BaseDto{
     title:string;
     hintValue?: string | null;
+    propertyType:EPropertyType;
 }
 export interface PropertyFilterParams extends BaseFilterParams{
     search?: string | null | undefined;
@@ -108,4 +119,5 @@ export interface SelectFilterParams extends BaseFilterParams{
 export interface SelectTagDto{
     id:number;
     title:string;
+    imageName?:string | null;
 }

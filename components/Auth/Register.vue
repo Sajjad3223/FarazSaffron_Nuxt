@@ -1,10 +1,8 @@
 <template>
   <Form :validation-schema="registerSchema" @submit="register" class="flex flex-col mt-6">
-    <div class="grid grid-cols-2 gap-4">
-      <div class="grid grid-cols-2 gap-4 col-span-full">
-        <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="registerData.firstName"/>
-        <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="registerData.lastName"/>
-      </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
+      <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="registerData.firstName"/>
+      <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="registerData.lastName"/>
       <base-g-input label="شماره تلفن *"  required v-model="registerData.phoneNumber" name="phoneNumber" id="phoneNumber" class="col-span-full"/>
       <base-g-input label="رمز عبور *"  type="password" required v-model="registerData.password" name="password" id="password" class="col-span-full"/>
     </div>
@@ -33,10 +31,10 @@
     <hr class="my-4">
     <div class="w-full flex items-center justify-center gap-2 text-sm">
       <span class="font-light">قبلا ثبت نام کرده اید؟</span>
-      <NuxtLink to="/auth/login" class="text-brandOrange" v-if="utilStore.isMobile()">
+      <NuxtLink to="/auth/login" class="text-brandOrange md:hidden">
         وارد شوید
       </NuxtLink>
-      <button class="text-brandOrange" v-else @click="authStore.changeStep('login')">
+      <button class="text-brandOrange hidden md:block" @click="authStore.changeStep('login')">
         وارد شوید
       </button>
     </div>

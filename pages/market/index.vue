@@ -271,7 +271,7 @@
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4 mt-5" v-else>
-          <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[150px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 4" :key="i">
+          <div class="relative min-h-[150px] flex flex-col justify-between animate-pulse min-w-[120px] rounded-xl transition-shadow duration-300 shadow-xl" v-for="i in 4" :key="i">
             <div class="bg-gray-200 h-1/2 rounded-t-xl"></div>
             <div class="p-3 flex flex-col h-1/2 justify-between">
               <div class="w-3/4 rounded-md bg-gray-300 h-1"></div>

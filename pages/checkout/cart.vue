@@ -273,7 +273,7 @@
             سبد خرید
           </strong>
           <span
-              class="bg-brandOrange/20 aspect-square text-brandOrange rounded-full px-1 text-[10px]">{{ cartStore.cartItemsCount }}</span>
+              class="bg-brandOrange/20 w-4 h-4 grid place-items-center aspect-square text-brandOrange rounded-full px-1 text-[10px] leading-[1]">{{ cartStore.cartItemsCount }}</span>
         </div>
         <!--  Steps   -->
         <div class="flex items-center w-2/3 mt-4 mb-6">
@@ -318,10 +318,10 @@
             <small>مجموع سبد خرید</small>
             <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)"/>
           </div>
-          <base-g-button is-link to="/checkout/shipping" w-full v-if="authStore.isLoggedIn">
+          <base-g-button is-link to="/checkout/shipping" w-full v-if="authStore.isLoggedIn" is-icon custom-class="!rounded-lg">
             تکمیل سفارش
           </base-g-button>
-          <base-g-button is-link to="/auth/login" w-full v-else>
+          <base-g-button is-link to="/auth/login" button-type="white" w-full v-else is-icon custom-class="text-[10px] leading-[1.4] text-center">
             برای تکمیل سفارش باید وارد حساب کاربری خود شوید
           </base-g-button>
         </aside>

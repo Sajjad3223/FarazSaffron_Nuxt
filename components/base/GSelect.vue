@@ -2,7 +2,7 @@
 <div class="relative">
   <div class="flex flex-col gap-1">
     <label for="title" class="font-light text-sm">{{ label }}</label>
-    <button @click="showOptions = !showOptions"
+    <button @click="showOptions = !showOptions" type="button"
         class="flex items-center w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light bg-[#F2F4F7]">
       <span class="text-sm">{{ getSelectedOption.title }}</span>
       <span class="text-sm font-light opacity-70 absolute left-3 pointer-events-none select-none">
@@ -17,8 +17,10 @@
          class="bg-[#F2F4F7] p-2 rounded-lg absolute inset-x-0 -bottom-1 translate-y-full z-20" style="box-shadow:0 4px 8px 0 #b7b7b738;">
       <input v-model="search" placeholder="جستجو" type="text" class="bg-black/5 rounded px-2 py-1 focus:outline-none w-full mb-2 text-xs font-light">
       <div class=" flex flex-col gap-1 text-sm font-light max-h-[200px] overflow-y-auto">
-        <span v-for="(o,i) in filteredOptions" @click="select(i)"
-              class="cursor-pointer p-2 w-full rounded-md hover:bg-black/10">{{ o.title }}</span>
+        <div v-for="(o,i) in filteredOptions" class="cursor-pointer flex gap-3 p-2 w-full rounded-md hover:bg-black/10" @click="select(i)">
+          <img :src="o.image" :alt="o.title" class="w-16 rounded-lg" v-if="o.image">
+          <span>{{ o.title }}</span>
+        </div>
       </div>
     </div>
   </Transition>
@@ -42,7 +44,7 @@ const emits = defineEmits(['update:modelValue']);
 const selectedOption:Ref<number | null> = ref(null);
 const getSelectedOption = computed(():GSelectData=>{
   if(selectedOption.value != null)
-  return props.options[selectedOption.value];
+    return props.options[selectedOption.value];
   else return {
     title:'انتخاب کنید...',
     value:null
@@ -64,6 +66,12 @@ const select = (index:number)=>{
 const closeOptions = ()=>{
   showOptions.value = false;
 }
+
+onMounted(()=>{
+  if(props.options.length > 0 && props.modelValue != null){
+    selectedOption.value = props.options.findIndex(o=>o.value == props.modelValue)
+  }
+})
 
 </script>
 

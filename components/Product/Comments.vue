@@ -64,7 +64,7 @@ const loadComments = async ()=>{
 <template>
   <div class="flex items-start w-full mt-5" v-if="!loading">
     <!--   Add Comment   -->
-    <div class="w-1/5 border p-3 rounded-xl flex flex-col">
+    <div class="w-1/4 2xl:w-1/5 border p-3 rounded-xl flex flex-col">
       <div class="text-2xl flex gap-2 items-end">
         <strong>{{ totalScore }}</strong> <span class="text-base text-[#ABABAB]">  از ۵ </span>
       </div>

@@ -1,6 +1,7 @@
 <template>
-  <div class="relative flex items-center gap-4" >
-    <base-f-input :label="property.title" :place-holder="property.hintValue" :name="`key${property.id}`" :id="`key${property.id}`" v-model="properties.value"/>
+  <div class="relative w-full" >
+<!--    <base-f-input :label="property.title" :place-holder="property.hintValue" :name="`key${property.id}`" :id="`key${property.id}`" v-model="propertyCommand.value"/>-->
+    <base-inputs-text-input :name="`property-${property.id}`" :label="property.title" v-model="propertyCommand.value" :place-holder="property.hintValue" />
   </div>
 </template>
 
@@ -8,22 +9,26 @@
 <script setup lang="ts">
 import type {ProductPropertyViewModel} from "~/models/product/productCommands";
 import type {PropertyDto} from "~/models/product/productQueries";
+import type {AddPropertyCommand} from "~/models/certificate/authenticatorCommands";
+import {EPropertyType} from "~/models/certificate/authenticatorDto";
 
 const props = defineProps<{
-  modelValue:ProductPropertyViewModel,
+  modelValue:AddPropertyCommand,
   property:PropertyDto
 }>();
 
 const emit = defineEmits(['update:modelValue'])
 
-const properties:ProductPropertyViewModel = reactive({
+const propertyCommand:AddPropertyCommand = reactive({
   propertyId:props.modelValue.propertyId,
-  value:props.modelValue.value
+  value:props.modelValue.value,
+  propertyType:EPropertyType.متن,
+  file:null
 })
 
 watch(
-    properties,
-    ()=>emit('update:modelValue', {propertyId:properties.propertyId,value:properties.value} as ProductPropertyViewModel)
+    propertyCommand,
+    ()=>emit('update:modelValue', propertyCommand)
 );
 
 </script>

@@ -14,17 +14,23 @@
     <ClientOnly>
       <Transition name="fade">
         <div class="fixed inset-0 grid place-items-center z-40 bg-black/20 backdrop-blur-sm" @click.self="cartStore.showAddedToCartModal = false" v-if="cartStore.showAddedToCartModal">
-          <div class="w-1/3 2xl:w-1/5 bg-white rounded-xl addedToCartAnim flex flex-col px-2 pt-4 pb-8">
+          <div class="w-5/6 lg:w-1/2 xl:w-1/3 2xl:w-1/4 bg-white rounded-xl addedToCartAnim flex flex-col items-center lg:items-start space-y-2 lg:space-y-0 px-2 pt-4 pb-8">
             <div class="flex items-center justify-between">
-              <div class="flex items-center gap-4">
+              <div class="flex flex-col lg:flex-row items-center gap-4">
                 <img :src="`${SITE_URL}/product/images/${cartStore.currentAddedItemData.image.src}`" :alt="cartStore.currentAddedItemData.image.alt" class="w-[150px]">
-                <div class="flex flex-col space-y-2">
-                  <span>{{cartStore.currentAddedItemData.title}}</span>
+                <div class="flex flex-col items-center lg:items-start space-y-2">
+                  <span class="text-center lg:text-right">{{cartStore.currentAddedItemData.title}}</span>
                   <span class="opacity-60 text-sm font-light text-green-600">با موفقیت به سبد خرید اضافه شد</span>
                 </div>
               </div>
             </div>
-            <button @click="cartStore.showAddedToCartModal = false,cartStore.showCartModal = true" class="text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
+            <button @click="cartStore.showAddedToCartModal = false,cartStore.showCartModal = true" class="hidden md:flex text-[#070707] text-sm font-light items-center gap-2 mx-auto">
+              <span>رفتن به سبد خرید</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button @click="cartStore.showAddedToCartModal = false,navigateTo('/checkout/cart')" class="md:hidden text-[#070707] text-sm font-light flex items-center gap-2 mx-auto">
               <span>رفتن به سبد خرید</span>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.46027 7.67594L1.60758 1.63607M1.60758 1.63607L7.64745 1.48876M1.60758 1.63607L8.67865 8.70714" stroke="#070707" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>

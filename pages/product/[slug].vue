@@ -62,7 +62,7 @@
             <ClientOnly>
               <Swiper ref="swiperRef" direction="vertical" :modules="[Mousewheel]" class="max-h-[300px] 2xl:max-h-[400px] rounded-2xl"
                       :mousewheel="{enabled:true}"
-                      :slides-per-view="3.5">
+                      :slides-per-view="3.2">
                 <SwiperSinglePageControls />
                 <SwiperSlide v-for="i in product?.images">
                   <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="cursor-pointer aspect-square object-contain rounded-xl" :key="i.id" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
@@ -117,10 +117,10 @@
               <img src="~/assets/images/standard-notext.png" alt="standard" class="w-6">
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              شکل بسته بندی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
+              بسته بندی : {{ product.packingType == EPackingType.کیفی ? 'کیفی' : 'شیشه ای' }}
             </li>
             <li class="pr-3 border-r-[3px] border-[#F0462380] text-[#949494]">
-              وزن بسته بندی : {{ product.weight }} گرم
+              وزن خالص زعفران : {{ product?.properties?.find(p=>p.propertyId == 7)?.value }}
             </li>
           </ul>
 
@@ -344,44 +344,44 @@
         <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
           <strong class="text-xl text-[#7D7D7D] pr-2 border-r-2 border-brandOrange">مشخصات</strong>
           <ul class="flex flex-col mt-5 w-full">
-            <li class="w-full flex items-center py-4 border-b" v-for="s in product?.specifications">
+            <li class="w-full flex items-center py-4 border-b">
+            <span class="w-1/4 text-[#9D9D9D]">
+              کد محصول :
+            </span>
+              <strong class="flex-1 text-[#707070]  font-light uppercase" style="font-family: 'Montserrat'">
+                {{product?.productCode}}
+              </strong>
+            </li>
+            <li class="w-full flex items-center py-4 border-b" v-for="s in product?.properties.sort((a,b)=>a.propertyId - b.propertyId)">
             <span class="w-1/4 text-[#9D9D9D]">
               {{s.title}} :
             </span>
-              <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+              <strong class="flex-1 text-[#707070] font-light" style="font-family: 'Vazir FD'">
                 {{s.value}}
+              </strong>
+            </li>
+            <li class="w-full flex items-center py-4 border-b">
+            <span class="w-1/4 text-[#9D9D9D]">
+              ابعاد :
+            </span>
+              <strong class="flex-1 text-[#707070] font-light " style="font-family: 'Montserrat'" dir="ltr">
+                {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
               </strong>
             </li>
             <li class="w-full flex items-center py-4 border-b">
             <span class="w-1/4 text-[#9D9D9D]">
               نوع بسته بندی :
             </span>
-              <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+              <strong class="flex-1 text-[#707070] font-light " style="font-family: 'Vazir FD'">
                 {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
-              </strong>
-            </li>
-            <li class="w-full flex items-center py-4 border-b">
-            <span class="w-1/4 text-[#9D9D9D]">
-              کد محصول :
-            </span>
-              <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
-                {{product?.productCode}}
-              </strong>
-            </li>
-            <li class="w-full flex items-center py-4 border-b">
-            <span class="w-1/4 text-[#9D9D9D]">
-              شماره بارکد :
-            </span>
-              <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
-                {{product?.barcodeNumber}}
               </strong>
             </li>
             <li class="w-full flex items-center py-4">
             <span class="w-1/4 text-[#9D9D9D]">
-              ابعاد :
+              شماره بارکد :
             </span>
-              <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
-                {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
+              <strong class="flex-1 text-[#707070]  font-light uppercase" style="font-family: 'Montserrat'">
+                {{product?.barcodeNumber}}
               </strong>
             </li>
           </ul>
@@ -468,39 +468,6 @@
             <span class="w-max px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin">
               {{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}
             </span>
-            <div class="flex gap-3 items-stretch">
-              <div class="flex flex-col space-y-1 items-center">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.8">
-                    <path d="M5.83464 3.50033H8.16797C9.33464 3.50033 9.33464 2.91699 9.33464 2.33366C9.33464 1.16699 8.7513 1.16699 8.16797 1.16699H5.83464C5.2513 1.16699 4.66797 1.16699 4.66797 2.33366C4.66797 3.50033 5.2513 3.50033 5.83464 3.50033Z" stroke="#0A0A0A" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9.33333 2.34473C11.2758 2.44973 12.25 3.16723 12.25 5.83306V9.33306C12.25 11.6664 11.6667 12.8331 8.75 12.8331H5.25C2.33333 12.8331 1.75 11.6664 1.75 9.33306V5.83306C1.75 3.17306 2.72417 2.44973 4.66667 2.34473" stroke="#0A0A0A" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.73313 5.664C6.93313 5.664 7.11313 5.704 7.27313 5.784C7.43313 5.864 7.56913 5.984 7.68113 6.144H7.70513L7.77713 5.724H8.53313V9.006C8.53313 9.318 8.47113 9.58 8.34713 9.792C8.22713 10.004 8.04513 10.164 7.80113 10.272C7.55713 10.384 7.25513 10.44 6.89513 10.44C6.66313 10.44 6.44713 10.426 6.24713 10.398C6.05113 10.37 5.85913 10.32 5.67113 10.248V9.534C5.80713 9.59 5.94313 9.636 6.07913 9.672C6.21913 9.712 6.36113 9.74 6.50513 9.756C6.65313 9.776 6.80113 9.786 6.94913 9.786C7.18113 9.786 7.35313 9.724 7.46513 9.6C7.58113 9.476 7.63913 9.29 7.63913 9.042V8.976C7.63913 8.908 7.64113 8.838 7.64513 8.766C7.65313 8.694 7.65913 8.63 7.66313 8.574H7.63913C7.52713 8.746 7.39313 8.87 7.23713 8.946C7.08113 9.022 6.90513 9.06 6.70913 9.06C6.32113 9.06 6.01713 8.912 5.79713 8.616C5.58113 8.316 5.47313 7.9 5.47313 7.368C5.47313 7.008 5.52313 6.702 5.62313 6.45C5.72313 6.194 5.86713 6 6.05513 5.868C6.24713 5.732 6.47313 5.664 6.73313 5.664ZM7.01513 6.39C6.87513 6.39 6.75713 6.428 6.66113 6.504C6.56913 6.576 6.49913 6.686 6.45113 6.834C6.40713 6.978 6.38513 7.16 6.38513 7.38C6.38513 7.708 6.43713 7.954 6.54113 8.118C6.64513 8.278 6.80713 8.358 7.02713 8.358C7.14313 8.358 7.24313 8.344 7.32713 8.316C7.41113 8.284 7.47913 8.234 7.53113 8.166C7.58713 8.094 7.62913 8.002 7.65713 7.89C7.68513 7.778 7.69913 7.642 7.69913 7.482V7.374C7.69913 7.138 7.67513 6.948 7.62713 6.804C7.57913 6.66 7.50513 6.556 7.40513 6.492C7.30513 6.424 7.17513 6.39 7.01513 6.39Z" fill="black"/>
-                  </g>
-                </svg>
-                <small>23</small>
-              </div>
-              <div class="w-px bg-black/10"></div>
-              <div class="flex flex-col space-y-1 items-center">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.8">
-                    <path d="M4.88672 6.99956L6.29255 8.41122L9.11005 5.58789" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.26922 1.42902C6.67172 1.08486 7.33089 1.08486 7.73922 1.42902L8.66089 2.22236C8.83589 2.37402 9.16255 2.49652 9.39589 2.49652H10.3876C11.0059 2.49652 11.5134 3.00402 11.5134 3.62236V4.61402C11.5134 4.84152 11.6359 5.17402 11.7876 5.34902L12.5809 6.27069C12.9251 6.67319 12.9251 7.33236 12.5809 7.74069L11.7876 8.66236C11.6359 8.83736 11.5134 9.16402 11.5134 9.39736V10.389C11.5134 11.0074 11.0059 11.5149 10.3876 11.5149H9.39589C9.16839 11.5149 8.83589 11.6374 8.66089 11.789L7.73922 12.5824C7.33672 12.9265 6.67755 12.9265 6.26922 12.5824L5.34755 11.789C5.17255 11.6374 4.84589 11.5149 4.61255 11.5149H3.60339C2.98505 11.5149 2.47755 11.0074 2.47755 10.389V9.39152C2.47755 9.16402 2.35505 8.83736 2.20922 8.66236L1.42172 7.73486C1.08339 7.33236 1.08339 6.67902 1.42172 6.27652L2.20922 5.34902C2.35505 5.17402 2.47755 4.84736 2.47755 4.61986V3.61652C2.47755 2.99819 2.98505 2.49069 3.60339 2.49069H4.61255C4.84005 2.49069 5.17255 2.36819 5.34755 2.21652L6.26922 1.42902Z" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-                  </g>
-                </svg>
-                <small>۵۰/۱۱۵۰۰</small>
-              </div>
-              <div class="w-px bg-black/10"></div>
-              <div class="flex flex-col space-y-1 items-center">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.8">
-                    <path d="M7.53536 1.31824L11.3329 3.36574C11.7762 3.60491 11.7762 4.28741 11.3329 4.52658L7.53536 6.57408C7.19703 6.75491 6.80036 6.75491 6.46203 6.57408L2.66453 4.52658C2.2212 4.28741 2.2212 3.60491 2.66453 3.36574L6.46203 1.31824C6.80036 1.13741 7.19703 1.13741 7.53536 1.31824Z" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.10714 5.90882L5.6363 7.67632C6.0738 7.89799 6.3538 8.34715 6.3538 8.83715V12.1738C6.3538 12.658 5.8463 12.9672 5.41464 12.7513L1.88547 10.9838C1.44797 10.7622 1.16797 10.313 1.16797 9.82299V6.48632C1.16797 6.00215 1.67547 5.69299 2.10714 5.90882Z" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M11.8951 5.90882L8.36594 7.67632C7.92844 7.89799 7.64844 8.34715 7.64844 8.83715V12.1738C7.64844 12.658 8.15594 12.9672 8.5876 12.7513L12.1168 10.9838C12.5543 10.7622 12.8343 10.313 12.8343 9.82299V6.48632C12.8343 6.00215 12.3268 5.69299 11.8951 5.90882Z" stroke="#0A0A0A" stroke-linecap="round" stroke-linejoin="round"/>
-                  </g>
-                </svg>
-                <small>۱۷ × ۹.۸ × ۰.۸ </small>
-              </div>
-            </div>
           </div>
           <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-w-[170px]">
         </div>
@@ -513,7 +480,7 @@
             <div class="flex flex-col bg-white rounded-xl">
               <strong >مشخصات</strong>
               <ul class="flex flex-col mt-2 w-full">
-                <li class="w-full flex items-center py-4 border-b" v-for="s in product?.specifications">
+                <li class="w-full flex items-center py-4 border-b" v-for="s in product?.properties">
                 <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                   {{s.title}} :
                 </span>
@@ -522,33 +489,33 @@
                   </strong>
                 </li>
                 <li class="w-full flex items-center py-4 border-b">
-            <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
-              نوع بسته بندی :
-            </span>
+                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                    نوع بسته بندی :
+                  </span>
                   <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
                     {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
                   </strong>
                 </li>
                 <li class="w-full flex items-center py-4 border-b">
-            <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
-              کد محصول :
-            </span>
+                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                    کد محصول :
+                  </span>
                   <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
                     {{product?.productCode}}
                   </strong>
                 </li>
                 <li class="w-full flex items-center py-4 border-b">
-            <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
-              شماره بارکد :
-            </span>
+                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                    شماره بارکد :
+                  </span>
                   <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
                     {{product?.barcodeNumber}}
                   </strong>
                 </li>
                 <li class="w-full flex items-center py-4">
-            <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
-              ابعاد :
-            </span>
+                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                    ابعاد :
+                  </span>
                   <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
                     {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
                   </strong>
@@ -632,11 +599,11 @@ const carouselBreakpoints = ref({
   },
   // 1024 and up
   1024: {
-    itemsToShow: 3.3,
+    itemsToShow: 3,
   },
   // 1366 and up
   1600: {
-    itemsToShow: 3.7,
+    itemsToShow: 3.5,
   },
 });
 

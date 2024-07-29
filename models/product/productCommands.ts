@@ -2,6 +2,7 @@ import type {DimensionDto} from "~/models/product/dimensionDto";
 import type {SeoData} from "~/models/seoData";
 import type {EPackingType} from "~/models/product/EPackingType";
 import type {BasalamData, DigikalaData} from "~/models/product/productQueries";
+import type {AddPropertyCommand} from "~/models/certificate/authenticatorCommands";
 
 export interface CreateProductCommand {
     title: string;
@@ -78,8 +79,8 @@ export interface SetSpecificationsCommand {
 }
 
 export interface SetPropertiesCommand {
-    productId: string;
-    properties: ProductPropertyViewModel[];
+    entityId: number;
+    properties: AddPropertyCommand[];
 }
 export interface ProductPropertyViewModel{
     propertyId:number;
