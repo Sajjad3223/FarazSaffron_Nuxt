@@ -28,12 +28,13 @@ const props = defineProps({
 
 const id = "id" + Math.random().toString(16).slice(2)
 
-const emits = defineEmits(['valueChanged'])
+const emits = defineEmits(['update:modelValue','valueChanged'])
 
 const checked = ref(props.isChecked);
 const chValue = props.value;
 
 const update = ()=>{
+  emits('update:modelValue', checked.value)
   emits('valueChanged', checked.value, props.value)
 }
 

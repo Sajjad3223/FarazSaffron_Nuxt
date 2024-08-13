@@ -21,7 +21,7 @@
 
     <hr class="col-span-full my-4">
 
-    <base-inputs-price-input name="price" v-model="editProductData.price" label="قیمت محصول" unit="تومان" @update:modelValue="calculateFinalPrice"/>
+    <base-inputs-price-input name="price" v-model="editProductData.price" label="قیمت محصول" unit="ریال" @update:modelValue="calculateFinalPrice"/>
 
     <div class="grid grid-cols-3 gap-4">
       <div class="flex items-center gap-4">
@@ -39,7 +39,7 @@
         </button>
       </div>
 
-      <base-inputs-price-input name="finalPrice" class="col-span-2" v-model="finalPrice" label="قیمت نهایی" unit="تومان" @update:modelValue="setFinalPrice" />
+      <base-inputs-price-input name="finalPrice" class="col-span-2" v-model="finalPrice" label="قیمت نهایی" unit="ریال" @update:modelValue="setFinalPrice" />
     </div>
 
     <div class="grid grid-cols-2 gap-4">
@@ -63,10 +63,10 @@
     <hr class="col-span-full my-4">
 
     <base-inputs-text-input name="digikalaLink" label="لینک دیجی کالا" v-model="editProductData.digiKalaData.digikalaLink"/>
-    <base-inputs-price-input name="digikalaPrice" v-model="editProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="تومان"/>
+    <base-inputs-price-input name="digikalaPrice" v-model="editProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="ریال"/>
 
     <base-inputs-text-input name="basalamLink" label="لینک باسلام" v-model="editProductData.basalamData.basalamLink"/>
-    <base-inputs-price-input name="basalamPrice" v-model="editProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="تومان"/>
+    <base-inputs-price-input name="basalamPrice" v-model="editProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="ریال"/>
 
     <base-g-button :is-loading="isLoading" type="submit" color="info" is-icon text-color="white" class="col-span-full w-max mr-auto text-sm font-light" >
       ثبت و ادامه

@@ -21,6 +21,8 @@ const props = defineProps<{
 /* Badges */
 .badge {
   @apply grid place-items-center rounded-full px-3 py-[2px] w-max relative overflow-hidden;
+  font-size: 12px;
+  color: var(--primary-text);
   &:before{
     @apply absolute inset-0 z-0;
     content: '';
@@ -29,7 +31,6 @@ const props = defineProps<{
     z-index: 1;
   }
 
-  font-size: 12px;
 
   &-square {
     padding: 0;
@@ -42,47 +43,46 @@ const props = defineProps<{
       background-color: var(--primary);
       opacity: 0.2;
     }
-    color: var(--primary-text)
   }
 
   &-danger {
+    color: var(--danger-text);
     &:before{
       background-color: var(--danger);
       opacity: 0.2;
     }
-    color: var(--danger-text)
   }
 
   &-secondary {
+    color: var(--secondary-text);
     &:before{
       background-color: var(--secondary);
       opacity: 0.2;
     }
-    color: var(--secondary-text)
   }
 
   &-success {
+    color: var(--success-text);
     &:before{
       background-color: var(--success);
       opacity: 0.2;
     }
-    color: var(--success-text)
   }
 
   &-info {
+    color: var(--info-text);
     &:before{
       background-color: var(--info);
       opacity: 0.2;
     }
-    color: var(--info-text)
   }
 
   &-warning {
+    color: var(--warning-text);
     &:before{
       background-color: var(--warning);
       opacity: 0.2;
     }
-    color: var(--warning-text)
   }
 }
 

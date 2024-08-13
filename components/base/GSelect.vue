@@ -1,7 +1,7 @@
 <template>
 <div class="relative">
   <div class="flex flex-col gap-1">
-    <label for="title" class="font-light text-sm">{{ label }}</label>
+    <label for="title" class="font-light text-sm" v-if="props.label">{{ label }}</label>
     <button @click="showOptions = !showOptions" type="button"
         class="flex items-center w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light bg-[#F2F4F7]">
       <span class="text-sm">{{ getSelectedOption.title }}</span>
@@ -31,7 +31,7 @@
 import type {GSelectData} from "~/models/gSelectData";
 
 const props = withDefaults(defineProps<{
-  label:string,
+  label?:string | null,
   modelValue:any,
   options:GSelectData[]
 }>(),{

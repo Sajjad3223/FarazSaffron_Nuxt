@@ -9,9 +9,18 @@ export interface AuthenticatorDto extends BaseDto{
     certificateId: number;
     properties: CAPropertyDto[];
     certificate: CertificateDto;
+    products:CertificateProductDto[];
+}
+
+export interface CertificateProductDto{
+    authenticatorId:number;
+    serialNumber:string;
+    productId:number;
+    count:number;
 }
 
 export interface AuthenticatorFilterData extends BaseDto{
+    certificateId:number;
     serialNumber: string;
     title: string;
 }
@@ -43,6 +52,7 @@ export interface CertificateDto extends BaseDto{
 }
 export interface CertificateFilterData extends BaseDto{
     title: string;
+    productId:number;
 }
 export interface CertificateFilterParams extends BaseFilterParams{
     search?: string | null | undefined;

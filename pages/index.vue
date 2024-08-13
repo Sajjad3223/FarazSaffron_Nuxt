@@ -2,7 +2,22 @@
   <div v-if="!pending">
     <Head>
       <Title>جی پی زعفران | GP Saffron</Title>
+      <Meta name="description" content="به دنیای خاص و شگفت‌انگیز زعفران وارد شوید، از زمین‌های حاصلخیز تا سفره شما، جایی که خلوص با اصالت برابر می‌شود." />
+      <Meta content="index , follow" name="robots" />
+      <Meta name="og:title" content="جی پی زعفران، طعم واقعی زعفران اصیل ایرانی" />
+      <Meta name="og:image" content="https://gpsaffron.com/images/logo/192.png" />
+      <Meta name="og:description" content="به دنیای خاص و شگفت‌انگیز زعفران وارد شوید، از زمین‌های حاصلخیز تا سفره شما، جایی که خلوص با اصالت برابر می‌شود." />
+      <Meta name="twitter:title" content="جی پی زعفران | GP Saffron" />
+      <meta rel="canonical" href="https://gpsaffron.com/">
+      <Meta name="keywords" content="زعفران,خرید زعفران,زعفران نگین,زعفران 100% طبیعی,زعفران اصیل,زعفران خالص,زعفران درجه یک,saffron,premium saffron,زعفران بومی,تولیدی زعفران,زعفران بدون رنگ افزوده,زعفران خوش رنگ,زعفران عالی" />
     </Head>
+
+    <h1 class="sr-only">جی پی زعفران، طعم واقعی زعفران اصیل ایرانی</h1>
+    <h2 class="sr-only">
+      به دنیای خاص و شگفت‌انگیز زعفران وارد شوید، از زمین‌های حاصلخیز گرفته تا سفره شما، جایی که خلوص با اصالت برابر می‌شود به‌وسیله زعفران باکیفیت، نماد تجمل و طعم را تضمین می‌کنیم.
+      تمام سعی جی پی بر این است که سفارش‌های شما در خراسان رضوی و خارج از آن، بین 24 تا حداکثر 48 ساعت کاری ساعت به دستتان برسد و همیشه راضی از خرید باشید.
+    </h2>
+
     <div class="hidden md:block" >
 
       <!--  Banner   -->
@@ -466,7 +481,8 @@
             <h5 class="text-2xl opacity-70 font-bold">نظرات مشتریان</h5>
             <span class="opacity-70 font-light">نظرات شما اعتبار ما را می سازد</span>
           </div>
-          <div class="container mx-auto grid grid-cols-3 gap-4 grid-rows-10 min-h-[500px]" v-if="activeTemp.specialComments.length > 0">
+          <ClientOnly v-if="activeTemp.specialComments.length > 0">
+          <div class="container mx-auto grid grid-cols-3 gap-4 grid-rows-10 min-h-[500px]">
             <index-special-comment :comment="activeTemp.specialComments[0]" class="row-span-6" />
             <index-special-comment :comment="activeTemp.specialComments[1]" class="row-span-4" v-if="activeTemp.specialComments.length > 1"/>
             <index-special-comment :comment="activeTemp.specialComments[2]" class="row-span-6" v-if="activeTemp.specialComments.length > 2"/>
@@ -474,6 +490,7 @@
             <index-special-comment :comment="activeTemp.specialComments[4]" class="row-span-4" v-if="activeTemp.specialComments.length > 4"/>
             <index-special-comment :comment="activeTemp.specialComments[5]" class="row-span-4" v-if="activeTemp.specialComments.length > 5"/>
           </div>
+          </ClientOnly>
         </div>
 
         <!-- Support -->
@@ -575,7 +592,7 @@
 
       </div>
     </div>
-    <div class="md:hidden pb-8">
+    <div class="md:hidden">
 
       <!--  Search  -->
       <button class="flex w-full mt-3 items-center relative" @click="showSearchModal = true">
@@ -915,11 +932,8 @@ const router = useRouter();
 
 const { data: result, pending,error } = await useAsyncData("GetActiveTemplate", () => GetActiveTemplate());
 if(!result.value?.isSuccess){
-  if(process.server){
-    throw createError({statusCode:500,message:'Server Error'})
-  }else{
-    router.push('/500');
-  }
+  if(process.server)
+    throw createError({statusCode: 500, statusMessage: 'Server Error'});
 }
 
 const activeTemp:Ref<DataTemplateDto> = ref(result.value?.data!);
@@ -1019,9 +1033,6 @@ const moveBanner = ()=>{
     banner.className = "";
   },700);
 }
-
-
-
 
 </script>
 

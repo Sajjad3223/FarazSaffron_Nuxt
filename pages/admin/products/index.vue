@@ -5,9 +5,14 @@
     </Head>
     <base-f-divider :logo-divider="false" title="محصولات فروشگاه">
       <template #left>
-        <base-f-button color="primary" is-link to="/admin/products/newAdd" text-color="white">
-          افزودن محصول جدید
-        </base-f-button>
+        <div class="flex items-center gap-4">
+          <base-g-button color="info" is-icon button-type="white" @click="showGroupEditModal = true" text-color="white">
+            ویرایش گروهی محصولات
+          </base-g-button>
+          <base-g-button color="info" is-icon is-link to="/admin/products/newAdd" text-color="white">
+            افزودن محصول جدید
+          </base-g-button>
+        </div>
       </template>
     </base-f-divider>
     <div class="p-4 rounded-xl border dark:border-white/30 border-black/30 overflow-hidden" v-if="false">
@@ -65,8 +70,11 @@
       </form>
     </base-g-modal>
 
+    <base-g-modal width="fit-content" title="ویرایش گروهی محصولات" v-model="showGroupEditModal">
+      <admin-product-group-edit @changesDone="showGroupEditModal = false,getData()" />
+    </base-g-modal>
 
-    <div class=" w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
+    <div class="mt-8 w-full overflow-hidden rounded-lg shadow-xs" v-if="!isLoading">
       <div class="w-full overflow-x-auto" >
         <table class="w-full whitespace-no-wrap">
           <thead>
@@ -81,7 +89,7 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 "
+              class="bg-white divide-y dark:divide-black/10 "
           >
           <tr :class="['text-gray-700 ',{'opacity-30':!i.isActive}]" v-for="(i) in products">
             <td class="px-4 py-3">
@@ -206,6 +214,7 @@ const paginationData:Ref<PaginationData | null> = ref(null);
 
 const changePictureLoading = ref(false);
 const showChangePictureModal = ref(false);
+const showGroupEditModal = ref(false);
 const selectedProduct = ref(0);
 const newPicture = ref(null);
 const newPictureAlt = ref('');

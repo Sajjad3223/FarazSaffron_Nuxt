@@ -83,10 +83,10 @@ const buttonColor = computed(()=>{
 .primary{
   border-radius: 10px;
   background-color: var(--primary);
+  color:white;
   &:hover{
     background-color: var(--primary-hover);
   }
-  color:white;
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--primary);
@@ -109,10 +109,10 @@ const buttonColor = computed(()=>{
 .secondary{
   border-radius: 10px;
   background-color: var(--secondary);
+  color:var(--secondary-text);
   &:hover{
     background-color: var(--secondary-hover);
   }
-  color:var(--secondary-text);
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--secondary);
@@ -134,10 +134,10 @@ const buttonColor = computed(()=>{
 .success{
   border-radius: 10px;
   background-color: var(--success);
+  color:white;
   &:hover{
     background-color: var(--success-hover);
   }
-  color:white;
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--success);
@@ -160,10 +160,10 @@ const buttonColor = computed(()=>{
 .danger{
   border-radius: 10px;
   background-color: var(--danger);
+  color:white;
   &:hover{
     background-color: var(--danger-hover);
   }
-  color:white;
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--danger);
@@ -186,10 +186,10 @@ const buttonColor = computed(()=>{
 .info{
   border-radius: 10px;
   background-color: var(--info);
+  color:white;
   &:hover{
     background-color: var(--info-hover);
   }
-  color:white;
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--info);
@@ -212,10 +212,10 @@ const buttonColor = computed(()=>{
 .warning{
   border-radius: 10px;
   background-color: var(--warning);
+  color:var(--warning-text);
   &:hover{
     background-color: var(--warning-hover);
   }
-  color:var(--warning-text);
   &-stroke{
     background-color: transparent;
     border: 1px solid var(--warning);

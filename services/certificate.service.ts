@@ -8,7 +8,7 @@ import type {
 import type {
     CreateAuthenticatorCommand,
     CreateCertificateCommand, CreatePropertyCommand, EditAuthenticatorCommand,
-    EditCertificateCommand, EditPropertyCommand
+    EditCertificateCommand, EditPropertyCommand, SetCertificateProductsCommand
 } from "~/models/certificate/authenticatorCommands";
 import type {SetPropertiesCommand} from "~/models/certificate/authenticatorCommands";
 
@@ -36,8 +36,8 @@ export const GetCertificateById = (id:number):Promise<ApiResponse<CertificateDto
         method:'GET'
     });
 }
-export const GetAuthenticatorById = (id:number):Promise<ApiResponse<AuthenticatorDto>> => {
-    return FetchApi(`/admin/certificate/authenticator/${id}`,{
+export const GetAuthenticatorById = (id:number,date?:string):Promise<ApiResponse<AuthenticatorDto>> => {
+    return FetchApi(`/admin/certificate/authenticator/${id}?persianDate=${date}`,{
         method:'GET'
     });
 }
@@ -87,6 +87,12 @@ export const SetCProperties = (command:SetPropertiesCommand):Promise<ApiResponse
 }
 export const SetAProperties = (id:number,command:FormData):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/certificate/authenticator/${id}`,{
+        method:'PUT',
+        body:command
+    });
+}
+export const SetCertificateProducts = (command:SetCertificateProductsCommand):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/certificate/authenticator/products`,{
         method:'PUT',
         body:command
     });

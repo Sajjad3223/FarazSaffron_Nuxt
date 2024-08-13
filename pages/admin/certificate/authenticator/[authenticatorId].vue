@@ -75,7 +75,7 @@ onMounted(async ()=>{
 const updateAuthenticator = async ()=>{
   console.log(setAPropertiesCommand)
   setAPropertiesCommand.properties = setAPropertiesCommand.properties.filter(p=>p.value != null || p.file != null);
-  console.log(setAPropertiesCommand)
+
   const data = new FormData();
   data.append('entityId',authenticatorId.toString());
 

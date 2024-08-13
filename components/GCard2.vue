@@ -41,13 +41,13 @@
           </span>
         </span>
         <span class="flex absolute left-0.5 -z-10 bottom-0.5 group-hover:-translate-y-[120%] scale-0 group-hover:scale-100 transition-transform duration-200 delay-0 group-hover:delay-200 items-center gap-1 -mt-8">
-            <a :href="product.basalamData?.basalamLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+            <a rel="noopener nofollow" :href="product.basalamData?.basalamLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
                title="محصول در باسلام" @mouseenter="showBasalamPrice = true" @mouseleave="showBasalamPrice = false"
                v-if="product.basalamData?.basalamLink">
               <img src="~/assets/images/basalam.png" alt="basalam" class="w-full object-cover">
               <small v-if="false" class="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full bg-brandOrange text-white rounded px-2 py-0.5 font-light text-[10px]">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}}</small>
             </a>
-            <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+            <a rel="noopener nofollow" :href="product.digiKalaData?.digikalaLink" target="_blank" class="relative rounded-md cursor-pointer rounded-b-xl border border-[#E6E6E6] w-8 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
                title="محصول در دیجی کالا" @mouseenter="showDigikalaPrice = true" @mouseleave="showDigikalaPrice = false"
                v-if="product.digiKalaData?.digikalaLink">
               <img src="~/assets/images/digikala.png" alt="digikala" class="w-full object-cover">
@@ -57,7 +57,13 @@
       </button>
     </div>
     <NuxtLink :to="`/product/${product.slug}`" class="font-light w-10/12 truncate" :title="product.title">{{product.title}}</NuxtLink>
-    <base-g-price :price="(Math.ceil(product.totalPrice / 10))"/>
+    <div class="flex items-center justify-between gap-5">
+      <base-g-price :price="(Math.ceil(product.totalPrice / 10))"/>
+      <div class="flex items-center gap-1 opacity-50 line-through scale-90" v-if="product.discount !== 0">
+        <span class="text-lg" style="font-family: 'Vazir FD',serif">{{ (Math.ceil(product.price / 10)).toLocaleString() }}</span>
+        <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تومان</span>
+      </div>
+    </div>
     <span class="text-sm font-light absolute top-4 right-4 bg-danger rounded-full px-3 py-1 text-white" v-if="product.discount !== 0">
       {{ Math.floor(product.discount) }}%
     </span>

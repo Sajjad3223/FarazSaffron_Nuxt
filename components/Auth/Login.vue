@@ -16,7 +16,8 @@
           </span>
       <div class="flex-1 h-px rounded-full bg-gray-300"></div>
     </div>
-    <base-g-button button-type="outline" color="secondary" w-full :py="0" v-if="false" > <!-- TODO implement Login with Google -->
+    <base-g-button v-if="false"
+       button-type="outline" color="secondary" w-full :py="0" :disabled="!isReady" @click="()=> googleLogin()">
       <div class="flex items-center justify-center gap-2">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 ">
           <g clip-path="url(#clip0_569_2169)">
@@ -47,7 +48,27 @@ import {Form} from 'vee-validate';
 import type {LoginCommand} from "~/models/users/userCommands";
 import {Login} from "~/services/auth.service";
 import * as Yup from 'yup'
-import {ToastType} from "~/composables/useSwal";
+import {
+  useCodeClient,
+  type ImplicitFlowSuccessResponse,
+  type ImplicitFlowErrorResponse,
+} from "vue3-google-signin";
+
+// handle success event
+const handleOnSuccess = (response: ImplicitFlowSuccessResponse) => {
+  console.log("Code: ", response.code);
+};
+
+// handle an error event
+const handleOnError = (errorResponse: ImplicitFlowErrorResponse) => {
+  console.log("Error: ", errorResponse);
+};
+
+const { isReady, login: googleLogin } = useCodeClient({
+  onSuccess: handleOnSuccess,
+  onError: handleOnError,
+  // other options
+});
 
 const router = useRouter();
 const authStore = useAuthStore();

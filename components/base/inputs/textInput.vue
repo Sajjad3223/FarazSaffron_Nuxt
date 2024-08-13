@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-1">
-    <label :for="name" class="font-light text-sm">{{ label }}</label>
+    <label :for="name" class="font-light text-sm" v-if="label">{{ label }}</label>
     <div class="flex items-center relative">
       <input v-model="text" @input="onChange" :placeholder="placeHolder" :name="name" :id="name"
              :type="type" class="w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light" style="background-color: #F2F4F7">
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  label:string,
+  label?:string | null,
   modelValue:any,
   name:string,
   placeHolder?:string | null | undefined,
@@ -45,7 +45,10 @@ const setValue = (val:any)=>{
 }
 
 const onChange = (e:any)=>{
-  emits('update:modelValue',e.target.value);
+  if(props.type == 'number')
+    emits('update:modelValue',Number(e.target.value));
+  else
+    emits('update:modelValue',e.target.value);
 }
 </script>
 

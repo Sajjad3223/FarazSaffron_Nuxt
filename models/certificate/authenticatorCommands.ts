@@ -36,6 +36,16 @@ export interface SetPropertiesCommand{
     properties:AddPropertyCommand[];
 }
 
+export interface AddCertificateProductCommand{
+    productId:number;
+    count:number;
+}
+export interface SetCertificateProductsCommand{
+    authenticatorId:number;
+    products:AddCertificateProductCommand[];
+    persianDate:string;
+}
+
 export interface CreatePropertyCommand{
     title:string;
     placeHolder?:string | null | undefined;

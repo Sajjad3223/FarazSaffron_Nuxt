@@ -15,12 +15,16 @@
           <input type="number" placeholder="حداکثر" class="p-2 rounded border font-light" v-model="rangeValue.max">
           <input type="number" placeholder="مقدار" class="p-2 rounded border font-light" v-model="rangeValue.value">
         </div>
-        <div class="grid grid-cols-3 gap-1">
+        <div class="grid grid-cols-3 gap-1" v-if="false">
           <input type="color" class="w-full" v-model="rangeValue.rightColor">
           <input type="color" class="w-full" v-model="rangeValue.centerColor">
           <input type="color" class="w-full" v-model="rangeValue.leftColor">
         </div>
       </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4" v-else-if="property.propertyType == EPropertyType.تاریخ">
+      <base-g-select :options="monthOptions" v-model="dateValue.month"/>
+      <base-inputs-text-input type="number" name="year" v-model="dateValue.year" place-holder="سال"/>
     </div>
     <input ref="input" v-else
         :type="getInputType()" :name="`property-${property.propertyId}`" :id="`property-${property.propertyId}`"
@@ -31,6 +35,7 @@
 <script setup lang="ts">
 import {type CAPropertyDto, EPropertyType} from "~/models/certificate/authenticatorDto";
 import type {AddPropertyCommand} from "~/models/certificate/authenticatorCommands";
+import {monthOptions} from "~/utilities/dateUtils";
 
 const props = defineProps<{
   property:CAPropertyDto,
@@ -45,10 +50,16 @@ const rangeValue = reactive({
   min:null,
   max:null,
   value:null,
-  leftColor:'#F00',
-  centerColor:'#0F0',
-  rightColor:'#00F',
+  leftColor:'#FB1624',
+  centerColor:'#FFDE30',
+  rightColor:'#07D263',
 });
+const dateValue = reactive({
+  day:1,
+  month:1,
+  year:1400
+});
+
 
 onMounted(()=>{
   if(props.property.propertyType == EPropertyType.رنج){
@@ -61,6 +72,19 @@ onMounted(()=>{
     rangeValue.centerColor = data.centerColor;
     rangeValue.rightColor = data.rightColor;
   }
+  if(props.property.propertyType == EPropertyType.تاریخ){
+    if(!props.modelValue?.value) return;
+    try {
+      const date = JSON.parse(props.modelValue!.value!);
+      if(!date) return;
+      dateValue.day = date.day;
+      dateValue.month = date.month;
+      dateValue.year = date.year;
+    }
+    catch{
+      console.log("Couldn't parse Date value");
+    }
+  }
 })
 
 watch(
@@ -72,6 +96,20 @@ watch(
     rangeValue,
     ()=>{
       const json = JSON.stringify(rangeValue);
+      const data = {
+        propertyId:props.property.id,
+        file:null,
+        value:json,
+        propertyType:props.property.propertyType
+      } as AddPropertyCommand;
+      emits('update:modelValue',data)
+    }
+)
+
+watch(
+    dateValue,
+    ()=>{
+      const json = JSON.stringify(dateValue);
       const data = {
         propertyId:props.property.id,
         file:null,

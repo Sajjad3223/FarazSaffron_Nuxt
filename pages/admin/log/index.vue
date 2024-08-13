@@ -2,8 +2,8 @@
   <div>
     <base-f-divider :logo-divider="false" title="گزارش ها" />
 
-    <base-g-modal title="متن کامل گزارش" v-model="showCompleteTextModal">
-      <p class="w-full p-5 overflow-auto max-h-[60vh]" dir="ltr">
+    <base-g-modal title="متن کامل گزارش" v-model="showCompleteTextModal" width="70%">
+      <p class="w-full p-5 overflow-auto max-h-[60vh] code" dir="ltr">
         {{ textToShow }}
       </p>
     </base-g-modal>
@@ -81,3 +81,9 @@ const showText = (text: string) => {
 }
 
 </script>
+
+<style>
+.code{
+  font-family: "Cascadia Code",serif;
+}
+</style>

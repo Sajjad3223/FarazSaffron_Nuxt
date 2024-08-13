@@ -110,3 +110,9 @@ export interface EditCatalogCommand {
     title: string;
     description?: string | null;
 }
+
+export interface GroupEditDigikalaBasalamPriceData{
+    productId:number,
+    digikalaPrice:number,
+    basalamPrice:number
+}

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!pending">
+  <div>
     <Head>
       <Title>{{product?.title}}</Title>
       <Meta title="title" :content="product?.title" />
@@ -167,12 +167,12 @@
               </base-g-button>
             </div>
             <div class="col-span-2 flex gap-4 self-end justify-end">
-              <a :href="product.digiKalaData?.digikalaLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.digiKalaData?.digikalaLink">
+              <a rel="noopener nofollow" :href="product.digiKalaData?.digikalaLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.digiKalaData?.digikalaLink">
                 <img src="~/assets/images/digikala-icon.png" alt="digikala icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-4 group-hover:shadow-md transition-all duration-200">
                 <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-100">دیجی کالا</small>
                 <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.digiKalaData?.digikalaPrice / 10).toLocaleString()}} <span class="text-[10px]">تومان</span> </small>
               </a>
-              <a :href="product.basalamData?.basalamLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.basalamData?.basalamLink">
+              <a rel="noopener nofollow" :href="product.basalamData?.basalamLink" target="_blank" class="bg-white rounded-2xl w-[100px] justify-self-center h-[50px] relative flex flex-col items-center group" v-if="product.basalamData?.basalamLink">
                 <img src="~/assets/images/basalam-icon.png" alt="basalam icon" class="rounded-full w-[50px] -mt-5 group-hover:-translate-y-4 group-hover:shadow-md transition-all duration-200">
                 <small class="font-light scale-0 -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-100">با سلام</small>
                 <small class="font-light scale-0 text-xs -translate-y-4 group-hover:scale-100 group-hover:-translate-y-4 transition-all duration-200 opacity-0 group-hover:opacity-70">{{(product.basalamData?.basalamPrice / 10).toLocaleString()}} <span class="text-[10px]">تومان</span> </small>
@@ -360,7 +360,7 @@
                 {{s.value}}
               </strong>
             </li>
-            <li class="w-full flex items-center py-4 border-b">
+            <li class="w-full flex items-center py-4 border-b" v-if="false">
             <span class="w-1/4 text-[#9D9D9D]">
               ابعاد :
             </span>
@@ -376,7 +376,7 @@
                 {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
               </strong>
             </li>
-            <li class="w-full flex items-center py-4">
+            <li class="w-full flex items-center py-4" v-if="false">
             <span class="w-1/4 text-[#9D9D9D]">
               شماره بارکد :
             </span>
@@ -504,7 +504,7 @@
                     {{product?.productCode}}
                   </strong>
                 </li>
-                <li class="w-full flex items-center py-4 border-b">
+                <li class="w-full flex items-center py-4 border-b" v-if="false">
                   <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                     شماره بارکد :
                   </span>
@@ -512,7 +512,7 @@
                     {{product?.barcodeNumber}}
                   </strong>
                 </li>
-                <li class="w-full flex items-center py-4">
+                <li class="w-full flex items-center py-4" v-if="false">
                   <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                     ابعاد :
                   </span>
@@ -540,8 +540,6 @@
       </div>
     </div>
 
-  </div>
-  <div>
   </div>
 </template>
 
@@ -578,7 +576,11 @@ const product:Ref<ProductDto> = ref(result.value?.data!);
 const relativeProducts:Ref<ProductFilterData[]> = ref([]);
 
 definePageMeta({
-  layout:'mobile-layout-just-footer'
+  layout:'mobile-layout-just-footer',
+  pageTransition:{
+    name:'page',
+    mode:'out-in'
+  }
 })
 
 const cartStore = useCartStore();
@@ -618,11 +620,6 @@ const addToCartLoading = ref(false);
 const isLoading = ref(false);
 const pageId = ref(1);
 const quantity = ref(1);
-const swiper = useSwiper();
-
-const nextSlide=()=>{
-  swiperRef.value.slideNext(200);
-}
 
 const magnify = (imgID:string, zoom:number) => {
   let img:any, glass:any, w:number, h:number, bw:number;

@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-[100vw] overflow-x-hidden">
+    <VitePwaManifest />
     <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />
@@ -41,6 +42,10 @@
       </Transition>
     </ClientOnly>
 
+    <ClientOnly v-if="noFeedback">
+      <GFeedback v-model="showFeedbackPanel" class="fixed right-8 bottom-8 z-10"/>
+    </ClientOnly>
+
   </div>
 </template>
 
@@ -49,22 +54,41 @@ import {useAuthStore} from "~/stores/auth.store";
 import {useAccountStore} from "~/stores/account.store";
 import {useCartStore} from "~/stores/cart.store";
 import {SITE_URL} from "~/utilities/api.config";
+import {DoesFeedbackExist} from "~/services/feedback.service";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
 const cartStore = useCartStore();
 
+const showFeedbackPanel = ref(false);
+const noFeedback = ref(false);
+
 useHead({
   link:[
     {rel:"stylesheet",href:"https://v1.fontapi.ir/css/Estedad"},
   ]
-})
+});
+
+useSchemaOrg([
+    defineWebSite({
+      name:'زعفران جی‌پی',
+      description:'زعفران نگین 100% طبیعی'
+    }),
+]);
 
 onMounted(async ()=>{
   if (authStore.isLoggedIn) {
     await accountStore.initData();
   }
   await cartStore.refreshCart();
+
+  const result = await DoesFeedbackExist();
+  if(!result.isSuccess){
+    noFeedback.value = true;
+    setTimeout(()=>{
+      showFeedbackPanel.value = true;
+    },5000);
+  }
 })
 </script>
 
@@ -135,6 +159,24 @@ body{
   100%{
     transform: rotateY(360deg);
   }
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  @apply transition-all duration-300;
+}
+.layout-enter-from,
+.layout-leave-to{
+  @apply opacity-0;
+}
+
+.page-enter-active,
+.page-leave-active {
+  @apply transition-all duration-300;
+}
+.page-enter-from,
+.page-leave-to{
+  @apply opacity-0;
 }
 
 .slide-fade-enter-active,

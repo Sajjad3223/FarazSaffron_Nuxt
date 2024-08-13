@@ -8,7 +8,7 @@ import type {
 } from "~/models/product/productQueries";
 import type {
     CreatePropertyCommand,
-    EditProductCommand, EditPropertyCommand, SetMainImageFromImagesCommand,
+    EditProductCommand, EditPropertyCommand, GroupEditDigikalaBasalamPriceData, SetMainImageFromImagesCommand,
     SetProductDiscountCommand, SetPropertiesCommand, SetSeoDataCommand, SetSpecificationsCommand
 } from "~/models/product/productCommands";
 import type {SetActivityCommand} from "~/models/setActivityCommand";
@@ -17,7 +17,8 @@ import {BASE_URL} from "~/utilities/api.config";
 export const GetProducts = (params:ProductFilterParams):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi("/product",{
         method:'GET',
-        params
+        params,
+        cache:'default'
     });
 }
 export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
@@ -144,5 +145,25 @@ export const SetSeoData = (command:SetSeoDataCommand):Promise<ApiResponse<undefi
     return FetchApi(`/admin/Product/seoData`,{
         method:'PUT',
         body:command
+    });
+}
+
+export const GroupEditPrices = (command:Object):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/groupEdit/price`,{
+        method:'PUT',
+        body:{data:command}
+    });
+}
+
+export const GroupEditDigikalaBasalamPrices = (command:GroupEditDigikalaBasalamPriceData[]):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/groupEdit/dgkala-basalam`,{
+        method:'PUT',
+        body:{data:command}
+    });
+}
+export const GroupEditQuantities = (command:Object):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/Product/groupEdit/quantity`,{
+        method:'PUT',
+        body:{data:command}
     });
 }

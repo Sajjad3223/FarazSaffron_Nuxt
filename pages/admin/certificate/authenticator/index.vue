@@ -16,7 +16,11 @@
     </base-g-modal>
 
     <base-g-modal title="ویرایش سریال" v-model="showEditAuthenticatorModal">
-      <admin-properties-edit-c-property :property="selectedAuthenticator" @propertyEdited="showEditAuthenticatorModal = false,getData()" />
+      <admin-certificates-edit-authenticator :authenticator="selectedAuthenticator" @authenticatorEdited="showEditAuthenticatorModal = false,getData()" />
+    </base-g-modal>
+
+    <base-g-modal title="انتخاب تاریخ" v-model="showSelectDateModal">
+      <GDatePicker @dateSelected="dateSelected" />
     </base-g-modal>
 
     <table class=" mt-12 w-full" v-if="authenticators.length > 0">
@@ -26,7 +30,7 @@
         <th class="px-4 text-right py-5">سریال</th>
         <th class="px-4 text-right py-5">وضعیت</th>
         <th class="px-4 text-right py-5">تاریخ ثبت</th>
-        <th class="px-4 text-right py-5">عملیات</th>
+        <th class="px-4 text-right py-5" width="15%">عملیات</th>
       </tr>
       </thead>
       <tbody>
@@ -36,11 +40,20 @@
             {{a.title}}
           </NuxtLink>
         </td>
-        <td class="px-4 py-5">{{a.serialNumber}}</td>
+        <td class="px-4 py-5">
+          <NuxtLink :to="`/inquiry?serial=${a.serialNumber}`" class="uppercase font-[montserrat]">
+            {{a.serialNumber}}
+          </NuxtLink>
+        </td>
         <td class="px-4 py-5">{{a.isActive ? 'فعال' : 'غیر فعال'}}</td>
         <td class="px-4 py-5">{{a.persianDate}}</td>
         <td class="px-4 py-5">
           <div class="flex gap-2">
+            <!--  Edit Property  -->
+            <button @click="SelectDate(a)"
+                    class="border-2 border-warning/30 text-xs text-nowrap font-light text-black hover:bg-warning transition-colors duration-300 hover:text-white px-2 py-1 rounded-md flex items-center">
+              ثبت محصولات
+            </button>
             <!--  Edit Property  -->
             <button class="bg-warning/30 text-warning hover:bg-warning transition-colors duration-300 hover:text-white px-2 py-1 rounded-md top-2 left-2" @click="editAuthenticator(a)">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,10 +80,12 @@
 
 <script setup lang="ts">
 import type {CAPropertyDto, AuthenticatorFilterData} from "~/models/certificate/authenticatorDto";
-import {DeleteCProperty, GetAllAuthenticators} from "~/services/certificate.service";
+import {DeleteAuthenticator, DeleteCProperty, GetAllAuthenticators} from "~/services/certificate.service";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import {ToastType} from "~/composables/useSwal";
+import {monthOptions} from "~/utilities/dateUtils";
+import GDatePicker from "~/components/GDatePicker.vue";
 
 definePageMeta({
   layout:'admin'
@@ -78,8 +93,9 @@ definePageMeta({
 
 const showCreateAuthenticatorModal = ref(false);
 const showEditAuthenticatorModal = ref(false);
+const showSelectDateModal = ref(false);
 
-const selectedAuthenticator:Ref<CAPropertyDto | null> = ref(null);
+const selectedAuthenticator:Ref<AuthenticatorFilterData | null> = ref(null);
 
 const toast = useToast();
 
@@ -105,16 +121,29 @@ const getData = async ()=>{
   loading.value = false;
 }
 
-const editAuthenticator = (property:CAPropertyDto) =>{
-  selectedAuthenticator.value = property;
+const selectedItem:Ref<AuthenticatorFilterData | null> = ref(null);
+const SelectDate = (item:AuthenticatorFilterData)=>{
+  selectedItem.value = item;
+  showSelectDateModal.value = true;
+}
+
+const router = useRouter();
+const dateSelected = async (date:Date)=>{
+  const dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const url = `/admin/certificate/authenticator/setProducts/${selectedItem.value?.id}?date=${dateString}`;
+  await router.push(url);
+}
+
+const editAuthenticator = (authenticator:AuthenticatorFilterData) =>{
+  selectedAuthenticator.value = authenticator;
   showEditAuthenticatorModal.value = true;
 }
 
-const deleteAuthenticator = (propertyId:number) =>{
+const deleteAuthenticator = (authenticatorId:number) =>{
   toast.showToast("آیا از حذف ویژگی اطمینان دارید؟",ToastType.warning,0)
       .then(async res=>{
         if(res.isConfirmed){
-          const result = await DeleteCProperty(propertyId);
+          const result = await DeleteAuthenticator(authenticatorId);
           if(result.isSuccess){
             toast.showToast()
             await getData();

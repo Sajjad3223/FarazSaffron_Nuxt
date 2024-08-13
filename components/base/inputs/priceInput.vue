@@ -14,11 +14,12 @@
 const props = defineProps<{
   label:string,
   modelValue:number,
-  unit:'تومان'|'ریال'
+  unit:'تومان'|'ریال',
+  value?:number|null
 }>();
 
 const emits = defineEmits(['update:modelValue']);
-const price = ref(props.modelValue);
+const price = ref(props.value ?? props.modelValue);
 
 watch(
     () => props.modelValue,
@@ -30,7 +31,7 @@ const setValue = (val:any)=>{
 }
 
 const onChange = (e:any)=>{
-  emits('update:modelValue',e.target.value);
+  emits('update:modelValue',Number(e.target.value));
 }
 </script>
 

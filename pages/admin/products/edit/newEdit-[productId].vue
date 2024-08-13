@@ -16,7 +16,7 @@
               <svg v-if="step > i" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 7.76191L7.16129 13L18 2" stroke="white" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span v-if="step == i" class="absolute border-4 border-white w-9 h-9 rounded-full"></span>
+              <span v-if="step == i" class="absolute border-4 border-white w-9 h-9 rounded-full "></span>
             </div>
             <div class="flex-1 h-1 bg-brandOrange/20 rounded-full relative overflow-hidden">
               <span :class="['h-1 rounded-full absolute right-0 origin-center transition-all duration-200',

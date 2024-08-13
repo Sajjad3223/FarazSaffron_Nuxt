@@ -13,7 +13,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         }
 
         if (!user?.roles.some(r => r.title === 'ادمین' || r.title === 'مدیر محصولات')) {
-            return navigateTo('/profile');
+            throw createError({
+                statusCode: 403,
+                statusMessage: 'Access Denied',
+            })
         }
     }
 })

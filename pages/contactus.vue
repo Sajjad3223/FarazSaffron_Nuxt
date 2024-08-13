@@ -64,9 +64,9 @@
           <div class="flex flex-col items-start space-y-4 mt-8">
             <strong class="text-xl text-[#7E7E7E] ">خدمات پس از فروش</strong>
             <p class="text-[#8D8D8D] leading-8 font-light">
-              برای بازگردانی به خدمات پس از فروش جی پی از طریق پست، تنها به صندوق پستی <span dir="ltr">95189-55620</span> ارسال کنید. br (شما می‌توانید از طریق تماس با پشتیبان اقدام به بازگردانی کالا کنید)
+              برای بازگردانی به خدمات پس از فروش جی پی از طریق پست، تنها به صندوق پستی <span dir="ltr">95189-55620</span> ارسال کنید. (شما می‌توانید از طریق تماس با پشتیبان اقدام به بازگردانی کالا کنید)
               <br>
-              <span class="font-medium">لطفا توجه داشته باشید بازگرداندن کالا ، تنها منحصر به کالاهای کمتر از 0/5 مثقال می باشد.</span>
+              <span class="font-bold">لطفا توجه داشته باشید بازگرداندن کالا ، تنها منحصر به کالاهای کمتر از 0/5 مثقال می باشد.</span>
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@
             </svg>
             <div class="flex flex-col items-start">
               <strong class="text-xl opacity-70">آدرس</strong>
-              <span class="opacity-60">خراسان رضوی - تربت حیدریه کیلومتر 2 جاده بایگ</span>
+              <span class="opacity-60">خراسان رضوی <br> تربت حیدریه کیلومتر 2 جاده بایگ</span>
             </div>
           </div>
           <div class="bg-[#F8F8F8] border rounded-3xl border-[#DFDFDF] p-4 flex items-center gap-6">
@@ -108,7 +108,7 @@
             </svg>
             <div class="flex flex-col items-start">
               <strong class="text-xl opacity-70">اینستاگرام</strong>
-              <span class="opacity-60">GP_Saffron</span>
+              <span class="opacity-60">GP_Saffron@</span>
             </div>
           </div>
           <div class="bg-[#F8F8F8] border rounded-3xl border-[#DFDFDF] p-4 flex items-center gap-6">
