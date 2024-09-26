@@ -2,8 +2,15 @@ import type {ApiResponse} from "~/models/apiResponse";
 import {FetchApi} from "~/utilities/CustomApiFetch";
 import type {
     AuthenticatorDto,
-    AuthenticatorFilterParams, AuthenticatorFilterResult, CertificateDto,
-    CertificateFilterParams, CertificateFilterResult, PropertyFilterParams, PropertyFilterResult
+    AuthenticatorFilterParams,
+    AuthenticatorFilterResult,
+    CertificateDto,
+    CertificateFilterParams,
+    CertificateFilterResult,
+    CertificateProductFilterParams, CertificateProductFilterResult,
+    GetCertificateCommand,
+    PropertyFilterParams,
+    PropertyFilterResult
 } from "~/models/certificate/authenticatorDto";
 import type {
     CreateAuthenticatorCommand,
@@ -12,9 +19,10 @@ import type {
 } from "~/models/certificate/authenticatorCommands";
 import type {SetPropertiesCommand} from "~/models/certificate/authenticatorCommands";
 
-export const GetCertificate = (serial:string):Promise<ApiResponse<AuthenticatorDto | null>> => {
-    return FetchApi(`/certificate/${serial}`,{
-        method:'GET'
+export const GetCertificate = (query:GetCertificateCommand):Promise<ApiResponse<AuthenticatorDto | null>> => {
+    return FetchApi(`/certificate`,{
+        method:'GET',
+        params:query
     });
 }
 
@@ -49,6 +57,12 @@ export const GetCProperties = (id:number,params:PropertyFilterParams):Promise<Ap
 }
 export const GetAProperties = (id:number,params:PropertyFilterParams):Promise<ApiResponse<PropertyFilterResult>> => {
     return FetchApi(`/admin/certificate/aproperties/${id}`,{
+        method:'GET',
+        params:params
+    });
+}
+export const GetCertificateProducts = (params:CertificateProductFilterParams):Promise<ApiResponse<CertificateProductFilterResult>> => {
+    return FetchApi(`/admin/certificate/products`,{
         method:'GET',
         params:params
     });

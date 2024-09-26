@@ -1,11 +1,14 @@
 <template>
   <div class="flex flex-col gap-1">
     <label :for="name" class="font-light text-sm" v-if="label">{{ label }}</label>
-    <div class="flex items-center relative">
-      <input v-model="text" @input="onChange" :placeholder="placeHolder" :name="name" :id="name"
-             :type="type" class="w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light" style="background-color: #F2F4F7">
+    <div class="flex items-center relative ">
+      <input v-model="text" @input="onChange" :placeholder="placeHolder" :name="name" :id="name" @click="(e)=>e.target.select()"
+             :type="type"
+             :required="required"
+             :class="['w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light placeholder:font-vazir',`text-${textAlign}`,customClasses]"
+             style="background-color: #F2F4F7">
       <slot v-if="sideSlot"></slot>
-      <span v-else class="text-sm font-light opacity-70 absolute left-3 pointer-events-none select-none">
+      <span v-else :class="['text-sm font-light opacity-70 absolute left-3 pointer-events-none select-none',sideTextClasses]">
         {{ sideText }}
       </span>
     </div>
@@ -13,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+
 const props = withDefaults(defineProps<{
   label?:string | null,
   modelValue:any,
@@ -21,13 +25,18 @@ const props = withDefaults(defineProps<{
   type?:string,
   sideSlot?:boolean,
   sideText?:string | null | undefined,
-  decimal?:boolean
+  decimal?:boolean,
+  required?:boolean,
+  textAlign?:'left'|'center'|'right',
+  customClasses?:string | null | undefined,
+  sideTextClasses?:string | null | undefined
 }>(),{
   placeHolder:undefined,
   type:'text',
   sideSlot:false,
   sideText:undefined,
-  decimal:false
+  decimal:false,
+  textAlign:"right"
 });
 
 const emits = defineEmits(['update:modelValue']);

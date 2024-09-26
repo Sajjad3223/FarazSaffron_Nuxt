@@ -17,7 +17,7 @@
          class="bg-[#F2F4F7] p-2 rounded-lg absolute inset-x-0 -bottom-1 translate-y-full z-20" style="box-shadow:0 4px 8px 0 #b7b7b738;">
       <input v-model="search" placeholder="جستجو" type="text" class="bg-black/5 rounded px-2 py-1 focus:outline-none w-full mb-2 text-xs font-light">
       <div class=" flex flex-col gap-1 text-sm font-light max-h-[200px] overflow-y-auto">
-        <div v-for="(o,i) in filteredOptions" class="cursor-pointer flex gap-3 p-2 w-full rounded-md hover:bg-black/10" @click="select(i)">
+        <div v-for="(o,i) in filteredOptions" class="cursor-pointer flex gap-3 p-2 w-full rounded-md hover:bg-black/10" @click="select(o.value)">
           <img :src="o.image" :alt="o.title" class="w-16 rounded-lg" v-if="o.image">
           <span>{{ o.title }}</span>
         </div>
@@ -33,7 +33,9 @@ import type {GSelectData} from "~/models/gSelectData";
 const props = withDefaults(defineProps<{
   label?:string | null,
   modelValue:any,
-  options:GSelectData[]
+  options:GSelectData[],
+  placeholder?:string | undefined | null,
+  name:string
 }>(),{
 })
 
@@ -41,12 +43,19 @@ const showOptions = ref(false);
 
 const emits = defineEmits(['update:modelValue']);
 
+watch(
+    ()=>props.modelValue,
+    ()=>{
+      selectedOption.value = props.options.findIndex(o=>o.value == props.modelValue)
+    }
+)
+
 const selectedOption:Ref<number | null> = ref(null);
 const getSelectedOption = computed(():GSelectData=>{
   if(selectedOption.value != null)
     return props.options[selectedOption.value];
   else return {
-    title:'انتخاب کنید...',
+    title:props.placeholder ?? 'انتخاب کنید...',
     value:null
   } as GSelectData;
 });
@@ -57,8 +66,8 @@ const filteredOptions = computed(()=>{
   }
   return props.options;
 })
-const select = (index:number)=>{
-  selectedOption.value = index;
+const select = (value:any)=>{
+  selectedOption.value = props.options.findIndex(o=>o.value == value);
   emits('update:modelValue',getSelectedOption.value.value)
   closeOptions();
 }

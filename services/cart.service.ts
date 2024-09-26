@@ -9,7 +9,7 @@ import type {
 } from "~/models/cart/cartQueries";
 import type {
     AdminSetOrderDiscountCommand,
-    FinalizeOrderCommand, FollowUpCommand, SetAddressCommand,
+    FinalizeOrderCommand, FollowUpCommand, SetAddressCommand, SetOrderDiscountCommand,
     SetOrderItemCountCommand,
     SetOrderStatusCommand
 } from "~/models/cart/cartCommands";
@@ -23,6 +23,7 @@ import type {
     TransmissionFilterParams,
     TransmissionFilterResult
 } from "~/models/cart/transmissionQueries";
+import type {DiscountDto} from "~/models/discount/discountQueries";
 
 export const GetOrders = (params:OrderFilterParams):Promise<ApiResponse<OrderFilterResult>> => {
     return FetchApi("/cart",{
@@ -80,9 +81,10 @@ export const RemoveAllItems = ():Promise<ApiResponse<undefined>> => {
         method:'DELETE',
     });
 }
-export const SetDiscount = (discountCode:string):Promise<ApiResponse<undefined>> => {
-    return FetchApi(`/cart/setDiscount/${discountCode}`,{
+export const SetDiscount = (command:SetOrderDiscountCommand):Promise<ApiResponse<DiscountDto>> => {
+    return FetchApi(`/cart/setDiscount`,{
         method:'PUT',
+        body:command
     });
 }
 export const RemoveDiscount = ():Promise<ApiResponse<undefined>> => {

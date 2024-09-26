@@ -22,7 +22,7 @@
           <li class="flex bg-white border rounded-xl p-4 min-h-[120px]"
               v-for="a in accountStore.currentUser?.addresses" :key="a.id">
             <div class="w-1/12 grid place-items-center">
-              <input type="radio" name="activeAddress" class="accent-primary my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" :checked="a.isActiveAddress">
+              <input type="radio" name="activeAddress" class="accent-primary my-4 w-6 h-6 mx-auto" @change="setAsActive(a.id)" placeholder="active address" title="ثبت به عنوان آدرس اصلی" :checked="a.isActiveAddress">
             </div>
             <div class="flex-1 flex flex-col space-y-2">
               <span class="font-normal text-xl hidden">آدرس تحویل</span>

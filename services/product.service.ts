@@ -26,6 +26,11 @@ export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
         method:'GET'
     });
 }
+export const GetProductById2 = (id:number):Promise<ApiResponse<ProductDto>> => {
+    return FetchApi(`/product/id/${id}`,{
+        method:'GET'
+    });
+}
 export const GetRelativeProducts = (categoryId:number):Promise<ApiResponse<ProductFilterResult>> => {
     return FetchApi(`/product/relative/${categoryId}`,{
         method:'GET'

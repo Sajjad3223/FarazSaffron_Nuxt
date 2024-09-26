@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-1">
     <label for="title" class="font-light text-sm">{{ label + `(${unit})` }}</label>
     <div class="flex items-center relative">
-      <input v-model="price" @input="onChange" type="number" class="w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light" style="background-color: #F2F4F7">
+      <input v-model="price" @input="onChange" type="number" class="w-full px-3 py-2 rounded-md focus:outline-none text-sm font-light" @click="(e)=>e.target.select()" style="background-color: #F2F4F7">
       <span v-if="price" class="text-sm font-light opacity-70 absolute left-3 pointer-events-none select-none">
               {{Number(price).toLocaleString()}} <span class="text-[10px] font-thin">{{ unit }}</span>
             </span>

@@ -23,7 +23,10 @@ const props = defineProps({
   },
   value:{
     type:Number
-  }
+  },
+  name:{
+    type:String
+  },
 })
 
 const id = "id" + Math.random().toString(16).slice(2)

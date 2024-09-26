@@ -125,7 +125,7 @@
               <span>تعداد کالا:</span>
               <strong>{{order.itemsCount}}</strong>
               <span>جمع کل:</span>
-              <base-g-price :price="order.totalPrice /10" />
+              <base-g-price :price="order.totalPrice" />
             </div>
             <div :class="['grid place-items-center',order.itemsCount > 1 ? 'grid-cols-2' : 'grid-cols-1']" class="max-w-[120px]" dir="ltr">
               <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" v-for="i in [...order.orderItems].slice(0,3)" :key="i.id"

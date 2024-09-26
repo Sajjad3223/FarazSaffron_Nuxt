@@ -17,8 +17,8 @@ const closeOptions = ()=>{
 
 const toast = useToast();
 const deleteComment = async (id:number)=>{
-  toast.showToast("آیا از حذف این نظر مطمئن هستید؟",ToastType.warning,0).then(async (res)=>{
-    if(res.isConfirmed){
+  toast.showToast("آیا از حذف این نظر مطمئن هستید؟",ToastType.warning,0,false,async ()=>{
+
       const result = await DeleteComment(id);
       if(result.isSuccess){
         emits('commentDeleted');
@@ -27,7 +27,7 @@ const deleteComment = async (id:number)=>{
       else{
         await toast.showToast(result.metaData.message,ToastType.error,3000);
       }
-    }
+
   })
 }
 

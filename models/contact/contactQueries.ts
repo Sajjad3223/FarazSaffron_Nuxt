@@ -12,6 +12,7 @@ export interface ContactFormDto extends BaseDto{
     email:       string;
     subject:       string;
     text:        string;
+    isSeen:        boolean;
 }
 
 export interface ContactFilterResult extends BaseFilterResult<ContactFormDto>{}

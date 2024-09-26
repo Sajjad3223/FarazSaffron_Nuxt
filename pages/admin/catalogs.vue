@@ -16,16 +16,22 @@
         <strong class="text-xl ">فیلتر محصولات</strong>
         <span class="">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19.9201 8.95L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.95"
+                  stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                  stroke-linejoin="round"/>
           </svg>
         </span>
       </button>
-      <Transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0" enter-to-class="opacity-70" leave-active-class="transition-opacity duration-300" leave-from-class="opacity-70" leave-to-class="opacity-0">
+      <Transition enter-active-class="transition-opacity duration-300" enter-from-class="opacity-0"
+                  enter-to-class="opacity-70" leave-active-class="transition-opacity duration-300"
+                  leave-from-class="opacity-70" leave-to-class="opacity-0">
         <hr class="my-4" v-if="showFilters">
       </Transition>
-      <Transition enter-active-class="transition-all duration-300" enter-from-class="max-h-0" enter-to-class="max-h-96" leave-active-class="transition-all duration-300" leave-from-class="max-h-96" leave-to-class="max-h-0">
+      <Transition enter-active-class="transition-all duration-300" enter-from-class="max-h-0" enter-to-class="max-h-96"
+                  leave-active-class="transition-all duration-300" leave-from-class="max-h-96" leave-to-class="max-h-0">
         <Form class="grid grid-cols-3 mb-4 gap-4 items-end" v-if="showFilters">
-          <base-f-input class="col-span-3" name="search" type="text" label="جستجو" place-holder="جستجو در عنوان یا اسلاگ" id="search" />
+          <base-f-input class="col-span-3" name="search" type="text" label="جستجو"
+                        place-holder="جستجو در عنوان یا اسلاگ" id="search"/>
           <base-f-button class="col-span-2" color="primary" text-color="white">
             اعمال فیلتر
           </base-f-button>
@@ -37,11 +43,11 @@
     </div>
 
     <f-modal title="افزودن کاتالوگ جدید" v-model="showAddModal">
-      <admin-catalogs-add @catalog-added="showAddModal = false,getData" />
+      <admin-catalogs-add @catalog-added="showAddModal = false,getData"/>
     </f-modal>
 
     <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">
-      <div class="w-full overflow-x-auto" >
+      <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
@@ -57,11 +63,11 @@
               class="bg-white divide-y dark:divide-gray-700 "
           >
           <template v-for="c in catalogs">
-            <tr class="text-gray-700 " >
+            <tr class="text-gray-700 ">
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
                   <div>
-                    <p class="font-semibold text-nowrap">{{c.title}}</p>
+                    <p class="font-semibold text-nowrap">{{ c.title }}</p>
                   </div>
                 </div>
               </td>
@@ -114,7 +120,7 @@
           </tbody>
         </table>
       </div>
-      <FPagination v-model="pageId" :pagination-data="paginationData" />
+      <FPagination v-model="pageId" :pagination-data="paginationData"/>
     </div>
     <div class="p-8 bg-gray-200  rounded-xl text-black  grid place-items-center" v-else>
       <span class="animate-spin">
@@ -140,30 +146,30 @@ import {SITE_URL} from "~/utilities/api.config";
 import {ToastType} from "~/composables/useSwal";
 
 definePageMeta({
-  layout:'admin'
+  layout: 'admin'
 })
 
 const isLoading = ref(true)
 const showFilters = ref(false)
 const showAddModal = ref(false)
 const pageId = ref(1);
-const catalogs:Ref<CatalogDto[]> = ref([]);
-const paginationData:Ref<PaginationData | undefined> = ref(undefined);
+const catalogs: Ref<CatalogDto[]> = ref([]);
+const paginationData: Ref<PaginationData | undefined> = ref(undefined);
 
-const filterParams:CatalogFilterParams = reactive({
-  pageId:pageId.value,
-  search:'',
-  take:10
+const filterParams: CatalogFilterParams = reactive({
+  pageId: pageId.value,
+  search: '',
+  take: 10
 })
 
 const toast = useToast();
 
 watch(
     pageId,
-    async ()=>await getData()
+    async () => await getData()
 );
 
-onMounted(async ()=>{
+onMounted(async () => {
   await getData();
 })
 
@@ -172,7 +178,7 @@ const getData = async () => {
 
   filterParams.pageId = pageId.value;
   const result = await GetCatalogs(filterParams);
-  if(result.isSuccess){
+  if (result.isSuccess) {
     catalogs.value = result.data?.data!;
     paginationData.value = FillPaginationData(result.data!);
   }
@@ -180,20 +186,20 @@ const getData = async () => {
   isLoading.value = false;
 }
 
-const RemoveCatalog = async (catalogId:number) => {
-  toast.showToast("آیا از حذف کاتالوگ اطمینان دارید؟",ToastType.warning,0)
-      .then(async result=>{
-        if (result.isConfirmed){
-          isLoading.value = true;
+const RemoveCatalog = async (catalogId: number) => {
+  toast.showToast("آیا از حذف کاتالوگ اطمینان دارید؟", ToastType.warning, 0, false,
+      async () => {
 
-          const result = await DeleteCatalog(catalogId);
-          if(result.isSuccess){
-            await toast.showToast();
-            await getData();
-          }
+        isLoading.value = true;
 
-          isLoading.value = false;
+        const result = await DeleteCatalog(catalogId);
+        if (result.isSuccess) {
+          await toast.showToast();
+          await getData();
         }
+
+        isLoading.value = false;
+
       })
 }
 

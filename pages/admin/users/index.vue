@@ -60,7 +60,7 @@
           </tr>
           </thead>
           <tbody
-              class="bg-white divide-y dark:divide-gray-700 "
+              class="bg-white divide-y dark:black/20"
           >
           <tr class="text-gray-700 " v-for="u in users" :key="u">
             <td class="px-4 py-3 text-sm text-nowrap">

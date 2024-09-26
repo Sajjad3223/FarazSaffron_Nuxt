@@ -1,17 +1,17 @@
 <template>
-  <div class="container mx-auto flex flex-col items-center mt-12">
+  <div class="container mx-auto flex flex-col items-center mt-8 md:mt-12">
 
     <Head>
       <Title>درباره جی پی</Title>
     </Head>
 
-    <h2 class="text-5xl font-semibold">آشنایی مختصر با <span class="text-brandOrange">جی پی</span></h2>
-    <div class="mt-12 p-8 bg-[#F8F8F8] rounded-2xl">
-      <div class="flex mt-12 items-center justify-between">
+    <h1 class="text-xl md:text-2xl xl:text-5xl font-semibold">آشنایی مختصر با <span class="text-brandOrange">جی پی</span></h1>
+    <div class=" mt-4md:mt-12 md:p-8 md:bg-[#F8F8F8] rounded-2xl">
+      <div class="hidden md:flex mt-12 items-center justify-between">
         <strong class="text-2xl opacity-70">به جی پی خوش آمدید</strong>
         <NuxtLink to="/" class="text-brandOrange font-semibold">جهت رفتن به صفحه اول جی پی کلیک کنید</NuxtLink>
       </div>
-      <div class="bg-white mt-10 p-8 rounded-xl">
+      <div class="md:bg-white mt-10 md:p-8 px-4 text-sm text-justify rounded-xl">
         <p class="text-[#8D8D8D]">
           ورود شما را به جی پی، فروشگاه آنلاین خرید زعفران خوش‌آمد می‌گوییم. <br>
           خوشحالیم که هم اکنون در جی پی، دارنده نماد اعتماد الکترونیکی و ارائه دهنده‌ی <span class="text-brandOrange font-bold">ضمانت هفت روزه</span> حضور دارید <br>
@@ -20,7 +20,7 @@
           تمام سعی جی پی بر این است که سفارش‌های شما در خراسان رضوی و خارج از آن، بین 24 تا حداکثر 48 ساعت کاری ساعت به دستتان برسد و همیشه راضی از خرید باشید.
           <br>
         </p>
-        <ul class="mt-8 grid grid-cols-3 gap-12">
+        <ul class="mt-8 flex flex-col md:grid grid-cols-3 gap-12">
           <li class="flex flex-col items-start space-y-4">
             <strong class="text-2xl flex items-center text-[#7E7E7E] relative pr-8
             before:w-4 before:h-4 before:bg-brandOrange before:rounded-full before:absolute before:right-0
@@ -28,7 +28,7 @@
             ">
               اهداف جی پی
             </strong>
-            <p class="text-[#8D8D8D] text-justify px-8">
+            <p class="text-[#8D8D8D] text-justify md:px-8">
               اعتقاد و اعتمادی که شما  در هر خرید به ما دارید را ارج می‌نهیم , به همین دلیل است که ما فقط فروشنده نیستیم بلکه نگهبان یک میراث غنی هستیم , وعده ما به شما فقط ارائه زعفران درجه‌یک نیست , بلکه طعم و عطر و رنگی است که شمارا به همان مزارعی می‌رساند که سفر ما ازآنجا آغاز می‌شود . 
               <br>
               با حرکت به‌سوی آینده و بهره‌گیری از استانداردهای جهانی و طلایی و استفاده از نوآوری‌های و شیوه‌های پایدار در تجارت و تعهد و تضمین بدون قید و شرط به مشتریان در جهت شناساندن و عرضه زعفران ناب در مسیر چشم‌انداز روان هستیم.
@@ -41,7 +41,7 @@
             ">
               دلایل اعتماد
             </strong>
-            <p class="text-[#8D8D8D] text-justify px-8">
+            <p class="text-[#8D8D8D] text-justify md:px-8">
               بدون هیچ‌شکی، اعتماد لازمه پیشرفت و تداوم هر کسب و کاری است. جی پی با کسب مجوزهای معتبری مثل نماد اعتماد الکترونیکی با نشان ۵ ستاره، عضویت در سازمان صنفی کشور، عضویت در اتحادیه کشوری و کسب‌وکارهای مجازی، عضویت در انجمن صنفی کارفرمایی فروشگاه‌های اینترنتی توانسته است تا تاییدیه‌های لازم برای جلب رضایت کاربرانش را فراهم کند. اطلاعات مربوط به این مجوزها را می‌توانید از لینک <NuxtLink to="/" class="text-brandOrange">مجوز های جی پی</NuxtLink> مشاهده نمایید. در ادامه لازم است به این مورد هم اشاره کنیم که جی پی برگزیده آرای مردمی دوازدهمین جشنوار زعفران  ایران شده است
             </p>
           </li>
@@ -52,7 +52,7 @@
             ">
               ضمانت <span class="text-brandOrange mx-1">هفت روزه</span> کالا
             </strong>
-            <p class="text-[#8D8D8D] text-justify px-8">
+            <p class="text-[#8D8D8D] text-justify md:px-8">
               لطفاً کالا را برای بازگرداندن و ارسال آن به خدمات پس از فروش جی پی از طریق پست، تنها به صندوق پستی 1234-5678 ارسال کنید.(شما می‌توانید از طریق بخش سفارش‌های من اقدام به بازگردانی کالا کنید)
               توجه داشته باشید شما فقط می توانید برای کالا های پایین تر از 5 گرم بازگردانی را انجام دهید.
             </p>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="mt-16 flex flex-col items-center">
-        <span>
+        <span class="text-sm font-light text-center opacity-70">
           جهت مشاهده‌ی فعالیت‌های جی پی و آشنایی بیشتر با ما ، به حساب‌ کاربری جی پی در اینستاگرام مراجعه فرمایید.
         </span>
         <a href="https://www.instagram.com/gp_saffron" class="flex items-center gap-6 text-white bg-brandOrange px-8 py-1 rounded-xl font-bold text-lg mt-6" style="box-shadow: 0 10px 25px 0 #F1482333">
@@ -81,46 +81,20 @@
         </a>
       </div>
 
-      <ul class="grid grid-cols-3 gap-6 mt-12 px-12">
-        <li class="w-full overflow-hidden rounded-xl">
+      <ul class="flex md:grid grid-cols-3 gap-6 mt-12 px-12 overflow-x-auto">
+        <li class="w-full overflow-hidden rounded-xl shrink-0">
           <img src="~/assets/images/aboutUs1.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
         </li>
-        <li class="w-full overflow-hidden rounded-xl">
+        <li class="w-full overflow-hidden rounded-xl shrink-0">
           <img src="~/assets/images/aboutUs2.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
         </li>
-        <li class="w-full overflow-hidden rounded-xl">
+        <li class="w-full overflow-hidden rounded-xl shrink-0">
           <img src="~/assets/images/aboutUs3.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
         </li>
       </ul>
 
     </div>
 
-    <!-- Honors -->
-    <section class="w-full mt-16" v-if="false">
-      <div class="flex items-center justify-between">
-        <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
-          افتخارات
-        </h3>
-      </div>
-      <div class="flex items-center justify-between mt-4">
-        <div class="text-[#8F8F8F] flex flex-col gap-2">
-            <span class="text-sm text-[#8D8D8D] font-light">
-              گواهینامه و افتخارات
-            </span>
-        </div>
-      </div>
-
-      <div class="w-full flex items-end justify-between -translate-y-12">
-        <p class="w-[600px] -translate-y-6 text-[#828282] font-thin">
-          شرکت زعفران جی پی به مدت 7 سال مفتخر به دریافت عنوان “واحد نمونه صنعتی” شده است. شرکت ما با بهره مندی از سیستم مدیریت کیفیت عالی توانسته است گواهینامه های ISO 9001 و نیز 22000 ISO را به دست بیاورد.
-        </p>
-        <div class="flex">
-          <img src="~/assets/images/honor1.png" alt="honor" class="max-w-[170px]">
-          <img src="~/assets/images/honor2.png" alt="honor" class="max-w-[170px]">
-          <img src="~/assets/images/honor1.png" alt="honor" class="max-w-[170px]">
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 

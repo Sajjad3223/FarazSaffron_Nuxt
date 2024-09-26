@@ -58,16 +58,16 @@
     </div>
     <NuxtLink :to="`/product/${product.slug}`" class="font-light w-10/12 truncate" :title="product.title">{{product.title}}</NuxtLink>
     <div class="flex items-center justify-between gap-5">
-      <base-g-price :price="(Math.ceil(product.totalPrice / 10))"/>
+      <base-g-price :price="product.totalPrice"/>
       <div class="flex items-center gap-1 opacity-50 line-through scale-90" v-if="product.discount !== 0">
-        <span class="text-lg" style="font-family: 'Vazir FD',serif">{{ (Math.ceil(product.price / 10)).toLocaleString() }}</span>
+        <span class="text-lg" style="font-family: 'Vazir FD',serif">{{ roundPrice(product.price).toLocaleString() }}</span>
         <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تومان</span>
       </div>
     </div>
     <span class="text-sm font-light absolute top-4 right-4 bg-danger rounded-full px-3 py-1 text-white" v-if="product.discount !== 0">
       {{ Math.floor(product.discount) }}%
     </span>
-    <label class="cursor-pointer grid place-items-center absolute top-4 left-4 hover:-translate-y-1 transition-all duration-200 text-danger">
+    <label v-if="authStore.isLoggedIn" class="cursor-pointer grid place-items-center absolute top-4 left-4 hover:-translate-y-1 transition-all duration-200 text-danger">
       <input type="checkbox" :name="`favorite-${product.id}`" class="appearance-none opacity-0" v-model="isFavorite" @change="changeFavorite">
       <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="isFavorite">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.871865 8.59832C-0.201135 5.24832 1.05287 1.41932 4.56987 0.286322C6.41987 -0.310678 8.46187 0.0413219 9.99987 1.19832C11.4549 0.0733218 13.5719 -0.306678 15.4199 0.286322C18.9369 1.41932 20.1989 5.24832 19.1269 8.59832C17.4569 13.9083 9.99987 17.9983 9.99987 17.9983C9.99987 17.9983 2.59787 13.9703 0.871865 8.59832Z" fill="#FE143E"/>
@@ -91,6 +91,7 @@ import {EPostType} from "~/models/EPostType";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import {ToastType} from "~/composables/useSwal";
 import {EPackingType} from "~/models/product/EPackingType";
+import {roundPrice} from "../utilities/priceUtils";
 
 const props = defineProps<{
   product:ProductFilterData
@@ -122,6 +123,7 @@ const addToCart = (id:number,slug:string)=>{
       },3000)
     }
   }).catch(async (e)=>{
+    console.log(e)
     await toast.showToast('مشکلی رخ داد',ToastType.error,3000,true);
   }).finally(()=>{
     loading.value = false;

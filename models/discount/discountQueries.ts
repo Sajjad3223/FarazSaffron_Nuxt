@@ -14,6 +14,13 @@ export interface DiscountFilterParams extends BaseFilterParams {
     justActives?: boolean | null;
 }
 
+export enum EDiscountType
+{
+    همه,
+    ارسال_رایگان,
+    سفارش_اول
+}
+
 export interface DiscountDto extends BaseDto {
     code: string;
     amountInPercent: number;
@@ -22,6 +29,8 @@ export interface DiscountDto extends BaseDto {
     usedCount: number;
     justForUser: number;
     getAvailableCount: number;
+    discountType:EDiscountType;
+    customCode?: string | null;
 }
 
 export interface DiscountFilterResult extends BaseFilterResult<DiscountDto> {

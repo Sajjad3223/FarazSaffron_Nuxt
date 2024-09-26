@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-1 row-span-3">
     <label for="title" class="font-light text-sm">{{ label }}</label>
     <label for="image" class="relative overflow-hidden w-full flex-1 flex items-center justify-center border border-dashed rounded-lg cursor-pointer">
-      <input @change="imageSelected" type="file" name="image" id="image" class="opacity-0 hidden" :multiple="multiple" accept="image/*">
+      <input @change="imageSelected" type="file" :name="name" :id="name" class="opacity-0 hidden" :multiple="multiple" accept="image/*">
       <span v-if="selectedImage == null && selectedImagesPreviews.length <= 0" class="w-full flex flex-col items-center gap-4">
                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M18.45 8.19805C17.19 8.10805 15.8624 8.06325 14.4787 8.052H12.7912C11.4299 8.06325 10.0125 8.1193 8.55 8.19805H8.5275C3.99375 8.6143 2.53125 10.673 2.53125 16.6355C2.53125 25.1855 5.7375 25.1855 13.5 25.1855C21.2625 25.1855 24.4688 25.1855 24.4688 16.6355C24.4688 10.673 23.0063 8.6143 18.45 8.19805Z" fill="#9A9A9A"/>
@@ -33,6 +33,7 @@
 const props = defineProps<{
   modelValue:any,
   label:string,
+  name:string,
   multiple?:boolean
 }>();
 

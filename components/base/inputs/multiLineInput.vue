@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-1">
     <label for="title" class="font-light text-sm">{{ label }}</label>
     <div class="flex items-center relative">
-      <textarea v-model="text" @input="onChange" :placeholder="placeHolder" rows="5"
+      <textarea :dir="dir" v-model="text" @input="onChange" :placeholder="placeHolder" rows="5"
                 class="w-full h-full px-3 py-2 rounded-md focus:outline-none text-sm font-light" style="background-color: #F2F4F7"></textarea>
       <slot v-if="sideSlot"></slot>
       <span v-else class="text-sm font-light opacity-70 absolute left-3 pointer-events-none select-none">
@@ -15,18 +15,21 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   label:string,
+  name:string,
   modelValue:any,
   placeHolder?:string | null | undefined,
   type?:string,
   sideSlot?:boolean,
   sideText?:string | null | undefined,
-  decimal?:boolean
+  decimal?:boolean,
+  dir?:'rtl'|'ltr'| null |undefined
 }>(),{
   placeHolder:undefined,
   type:'text',
   sideSlot:false,
   sideText:undefined,
-  decimal:false
+  decimal:false,
+  dir:"rtl"
 });
 
 const emits = defineEmits(['update:modelValue']);

@@ -13,3 +13,9 @@ export interface DashboardData{
     lowQuantityItems: ProductFilterData[]
     mostSoldItems: ProductFilterData[]
 }
+export interface AdminSidePanelData{
+    pendingComments: number
+    pendingOrders: number
+    pendingContacts: number
+    pendingTickets: number
+}

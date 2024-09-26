@@ -2,7 +2,7 @@
   <Form @submit="addCertificate" class="mt-5 flex flex-col">
     <base-g-input type="text" name="title" label="عنوان" required id="title" v-model="createAuthenticatorCommand.title" />
     <base-g-input type="text" name="serialNumber" label="سریال" required id="serialNumber" v-model="createAuthenticatorCommand.serialNumber" />
-    <select name="certificateId" id="certificateId" v-model="createAuthenticatorCommand.certificateId">
+    <select class="hidden" name="certificateId" id="certificateId" v-model="createAuthenticatorCommand.certificateId">
       <option v-for="o in certificates" :value="o.id">{{o.title}}</option>
     </select>
     <base-g-button type="submit" w-full :is-loading="loading">
@@ -25,7 +25,7 @@ const loading = ref(false);
 const createAuthenticatorCommand:CreateAuthenticatorCommand = reactive({
   title:"",
   serialNumber:'',
-  certificateId:0
+  certificateId:1
 });
 const toast = useToast();
 

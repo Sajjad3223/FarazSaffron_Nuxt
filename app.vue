@@ -43,7 +43,11 @@
     </ClientOnly>
 
     <ClientOnly v-if="noFeedback">
-      <GFeedback v-model="showFeedbackPanel" class="fixed right-8 bottom-8 z-10"/>
+      <GFeedback v-model="showFeedbackPanel" class="fixed inset-x-0 md:right-8 md:left-auto bottom-[75px] md:bottom-8 z-10"/>
+    </ClientOnly>
+
+    <ClientOnly>
+      <GToast class="fixed z-20 inset-0 grid items-end justify-start p-5" />
     </ClientOnly>
 
   </div>
@@ -55,10 +59,13 @@ import {useAccountStore} from "~/stores/account.store";
 import {useCartStore} from "~/stores/cart.store";
 import {SITE_URL} from "~/utilities/api.config";
 import {DoesFeedbackExist} from "~/services/feedback.service";
+import {useToastStore} from "~/stores/toast.store";
+import {ToastType} from "~/composables/useSwal";
 
 const authStore = useAuthStore();
 const accountStore = useAccountStore();
 const cartStore = useCartStore();
+
 
 const showFeedbackPanel = ref(false);
 const noFeedback = ref(false);
@@ -77,6 +84,7 @@ useSchemaOrg([
 ]);
 
 onMounted(async ()=>{
+
   if (authStore.isLoggedIn) {
     await accountStore.initData();
   }

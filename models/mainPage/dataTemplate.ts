@@ -31,6 +31,8 @@ export interface TopBanner extends BaseDto{
     image: Img;
     url: string;
     width:number;
+    backColor?:string | null;
+    foreColor?:string | null;
     customStyle:string;
     text:string;
 }

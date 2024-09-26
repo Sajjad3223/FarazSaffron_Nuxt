@@ -44,6 +44,14 @@ export interface PropertyFilterParams extends BaseFilterParams{
 export interface PropertyFilterResult extends BaseFilterResult<CAPropertyDto>{
 }
 
+export interface GetCertificateCommand{
+    serial:string;
+    year:number;
+    month:number;
+    day:number;
+    productId:number;
+}
+
 export interface CertificateDto extends BaseDto{
     productId: number;
     title: string;
@@ -76,4 +84,35 @@ export enum EPropertyType
     متن_چند_خطی,
     موقعیت_مکانی,
     Html
+}
+
+export interface CertificateProductDto extends BaseDto{
+    serialNumber:string;
+    authenticatorId:number;
+    productId:number;
+    count:number;
+    productionDate:Date;
+    persianProductionDate:string;
+    product:ProductFilterData;
+}
+
+export interface CertificateProductFilterParams extends BaseFilterParams{
+    search?:string | undefined;
+    fromDate?:Object | undefined;
+    toDate?:Object | undefined;
+}
+
+export interface CertificateProductData{
+    count:number;
+    product:ProductFilterData;
+}
+export interface CertificateSerialData{
+    count:number;
+    serialNumber:string;
+}
+
+export interface CertificateProductFilterResult extends BaseFilterResult<CertificateProductDto>{
+    productsData:CertificateProductData[];
+    serialsData:CertificateSerialData[];
+    totalProductionCount:number;
 }

@@ -114,15 +114,6 @@
                       >
                         <NuxtLink
                             exact-active-class="activeSubLink"
-                            to="/admin/products/images">
-                          تصاویر
-                        </NuxtLink>
-                      </li>
-                      <li
-                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
-                      >
-                        <NuxtLink
-                            exact-active-class="activeSubLink"
                             to="/admin/products/specifications">
                           ویژگی ها
                         </NuxtLink>
@@ -212,7 +203,7 @@
                           <span>نظرات</span>
                           <span
                               class="aspect-square mr-1 px-2 grid place-items-center font-light w-max text-xs rounded-full bg-warning text-black"
-                              v-if="pendingComments > 0">{{ pendingComments }}</span>
+                              v-if="sidePanelData?.pendingComments > 0">{{ sidePanelData?.pendingComments }}</span>
                         </NuxtLink>
                       </li>
                       <li
@@ -250,6 +241,9 @@
                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                   </svg>
                   <span>سفارشات</span>
+                  <span
+                      class="aspect-square mr-1 px-2 grid place-items-center font-light text-xs rounded-full bg-warning text-black"
+                      v-if="sidePanelData?.pendingOrders > 0">{{ sidePanelData?.pendingOrders }}</span>
                 </span>
                   <svg
                       class="w-4 h-4"
@@ -428,6 +422,15 @@
                           ویژگی های اصالت نامه ها
                         </NuxtLink>
                       </li>
+                      <li
+                          class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
+                      >
+                        <NuxtLink
+                            exact-active-class="activeSubLink"
+                            to="/admin/certificate/authenticator/products">
+                          محصولات ثبت شده
+                        </NuxtLink>
+                      </li>
                       <li><hr></li>
                       <li
                           class="relative px-4 py-1 transition-colors duration-150 hover:text-gray-800 "
@@ -510,6 +513,9 @@
                             stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>تماس با ما</span>
+                    <span
+                        class="aspect-square mr-1 px-2 grid place-items-center font-light text-xs rounded-full bg-warning text-black"
+                        v-if="sidePanelData?.pendingContacts > 0">{{ sidePanelData?.pendingContacts }}</span>
                   </div>
                 </NuxtLink>
               </li>
@@ -531,7 +537,7 @@
                     <span>تیکت ها</span>
                     <span
                         class="aspect-square mr-1 px-2 grid place-items-center font-light text-xs rounded-full bg-warning text-black"
-                        v-if="pendingTickets > 0">{{ pendingTickets }}</span>
+                        v-if="sidePanelData?.pendingTickets > 0">{{ sidePanelData?.pendingTickets }}</span>
                   </div>
                 </NuxtLink>
               </li>
@@ -685,45 +691,25 @@
 </template>
 
 <script setup lang="ts">
-
-import {GetPendingCommentsCount} from "~/services/comment.service";
-import {CloseTicket, GetPendingTicketsCount} from "~/services/ticket.service";
 import {ToastType} from "~/composables/useSwal";
+import {GetAdminSidePanelData} from "~/services/admin.service";
+import type {AdminSidePanelData} from "~/models/admin/dashboardData";
 
 const route = useRoute();
-const isSideMenuOpen = ref(false);
 const isProductMenuOpen = ref(false);
 const isUsersMenuOpen = ref(false);
 const isOrdersMenuOpen = ref(false);
 const isCertificateMenuOpen = ref(false);
 const isBlogMenuOpen = ref(false);
-const isProfileMenuOpen = ref(false);
-const isNotificationsMenuOpen = ref(false);
-const pendingComments = ref(0);
-const pendingTickets = ref(0);
 const dark = ref(false);
 const accountStore = useAccountStore();
 
+const sidePanelData:Ref<AdminSidePanelData | null> = ref(null);
+
 onMounted(async () => {
-  const result = await GetPendingCommentsCount();
-  if (result.isSuccess) {
-    pendingComments.value = result.data ?? 0;
-  }
-  const ticketsResult = await GetPendingTicketsCount();
-  if (ticketsResult.isSuccess) {
-    pendingTickets.value = ticketsResult.data ?? 0;
-  }
+  const result = await GetAdminSidePanelData();
+  sidePanelData.value = result.data ?? null;
 })
-
-const toggleSideMenu = () => isSideMenuOpen.value = !isSideMenuOpen.value;
-const closeSideMenu = () => isSideMenuOpen.value = false;
-
-const toggleProfileMenu = () => isProfileMenuOpen.value = !isProfileMenuOpen.value;
-const closeProfileMenu = () => isProfileMenuOpen.value = false;
-const toggleNotificationsMenu = () => isNotificationsMenuOpen.value = !isNotificationsMenuOpen.value;
-const closeNotificationsMenu = () => isNotificationsMenuOpen.value = false;
-const toggleTheme = () => dark.value = !dark.value;
-
 
 const page = ref(route.path.split('/').length > 2 ? route.path.split('/')[2] : 'dashboard');
 
@@ -775,11 +761,11 @@ const LogOut = async () => {
   toast.showToast(
       'آیا مایلید از حساب کاربری خود خارج شوید؟',
       ToastType.warning,
-      0).then(async result => {
-    if (result.isConfirmed) {
-      await authStore.logOut();
-    }
-  })
+      0,
+      false,
+      async () => {
+        await authStore.logOut();
+      });
 }
 </script>
 

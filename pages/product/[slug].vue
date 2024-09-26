@@ -129,12 +129,12 @@
               <div class="flex justify-between items-center gap-4">
                 <!--   Price    -->
                 <div class="flex items-center gap-1">
-                  <strong class="text-3xl 2xl:text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ Math.ceil(product.totalPrice / 10).toLocaleString() }}</strong>
+                  <strong class="text-3xl 2xl:text-5xl text-[#626262]" style="font-family: 'Vazir FD',serif">{{ roundPrice(product.totalPrice).toLocaleString() }}</strong>
                   <span class="flex flex-col items-center text-sm 2xl:text-lg font-light opacity-70 leading-[15px]">تــــــو <br> مــان</span>
                 </div>
                 <!--   Discount    -->
                 <div class="flex items-center gap-2" v-if="product?.discount !== 0">
-                  <span class="line-through opacity-50 text-lg 2xl:text-2xl" style="font-family: 'Vazir FD',serif">{{ Math.ceil(product.price / 10).toLocaleString() }}</span>
+                  <span class="line-through opacity-50 text-lg 2xl:text-2xl" style="font-family: 'Vazir FD',serif">{{ roundPrice(product.price).toLocaleString() }}</span>
                   <div class="grid place-items-center bg-brandOrange rounded-md rounded-b-xl w-8 h-8">
                     <span class="text-xs font-light text-white" style="font-family: 'Vazir FD',serif" >{{ Math.floor(product?.discount) }}%</span>
                   </div>
@@ -189,7 +189,7 @@
       </div>
 
       <Transition name="fade">
-        <div class="fixed inset-0 backdrop-blur-sm bg-black/20 z-30 grid place-items-center" v-if="showBannerModal" @click.self="showBannerModal = false">
+        <div class="hidden fixed inset-0 backdrop-blur-sm bg-black/20 z-30 md:grid place-items-center" v-if="showBannerModal" @click.self="showBannerModal = false">
           <div class="w-2/5">
             <img :src="bannerImage" :alt="bannerImageAlt" class="w-full rounded-3xl">
           </div>
@@ -293,7 +293,7 @@
                   </NuxtLink>
                   <div class="flex-1 flex flex-col items-start space-y-4">
                     <NuxtLink :to="`/product/${p.slug}`" class="text-right">
-                      <strong class="text-lg text-right">{{p.title}}</strong>
+                      <span class="font-light text-right">{{p.title}}</span>
                     </NuxtLink>
                     <ul class="flex items-center gap-0.5">
                       <li v-for="i in 5" :key="i">
@@ -309,7 +309,7 @@
                       </li>
                     </ul>
                     <div class="flex items-center gap-1">
-                      <base-g-price :price="p.price / 10" />
+                      <base-g-price :price="p.price" />
                     </div>
                     <button @click="cartStore.addToCart(p.id,p.slug)" class="border text-xs rounded-lg border-[#E8E8E8] py-2 flex gap-2 px-3 items-center justify-center w-full text-[#939393] hover:bg-[#F3F3F3] transition-colors duration-200">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -336,9 +336,9 @@
       <div class="bg-[#F8F8F8] rounded-xl p-9 mt-9 flex flex-col" v-if="product">
         <!--  Buttons  -->
         <div class="flex gap-4">
-          <button class="bg-brandOrange rounded-lg py-2 px-8 text-white font-bold">مشخصات</button>
-          <a href="#catalog" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">دانلود کاتالوگ </a>
-          <a href="#comments" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-bold">نظرات </a>
+          <button class="bg-brandOrange rounded-lg py-2 px-8 text-white font-light text-sm">مشخصات</button>
+          <a href="#catalog" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-light text-sm">دانلود کاتالوگ </a>
+          <a href="#comments" class="bg-white rounded-lg py-2 px-8 text-brandOrange font-light text-sm">نظرات </a>
         </div>
         <!--  Details  -->
         <div class="mt-7 py-8 px-9 flex flex-col bg-white rounded-xl">
@@ -435,90 +435,101 @@
     </div>
 
     <div class="md:hidden">
-      <div v-if="product" class="flex py-4 flex-col pb-[70px]">
-        <div class="flex items-center justify-between w-full">
-          <NuxtLink to="/">
-            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path opacity="0.8" d="M1 10L5 5.5L1 1" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </NuxtLink>
-          <button>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g opacity="0.8">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.87187 11.5983C1.79887 8.24832 3.05287 4.41932 6.56987 3.28632C8.41987 2.68932 10.4619 3.04132 11.9999 4.19832C13.4549 3.07332 15.5719 2.69332 17.4199 3.28632C20.9369 4.41932 22.1989 8.24832 21.1269 11.5983C19.4569 16.9083 11.9999 20.9983 11.9999 20.9983C11.9999 20.9983 4.59787 16.9703 2.87187 11.5983Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M16 6.7002C17.07 7.0462 17.826 8.0012 17.917 9.1222" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-            </svg>
-          </button>
+      <div v-if="product" class="flex py-4 flex-col">
+        <div class="relative bg-white rounded-b-[36px] p-5 flex flex-col items-center -mx-4 -mt-4" style="box-shadow: 0 4px 36px 0 #00000014;">
+          <div class="flex items-center justify-between w-full p-2">
+            <NuxtLink to="/">
+              <svg class="w-2" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.8" d="M1 10L5 5.5L1 1" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </NuxtLink>
+            <div class="flex gap-4">
+              <button @click="removeFavorite" v-if="isFavorite">
+                <svg class="w-6 text-danger" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button @click="addFavorite" v-else>
+                <svg class="w-6 text-danger" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.85481 4.6547C3.52991 3.97981 4.44542 3.60067 5.40001 3.60067C6.3546 3.60067 7.27011 3.97981 7.94521 4.6547L9.00001 5.7086L10.0548 4.6547C10.3869 4.31086 10.7841 4.03661 11.2234 3.84794C11.6626 3.65926 12.135 3.55995 12.613 3.5558C13.091 3.55165 13.565 3.64273 14.0074 3.82374C14.4499 4.00475 14.8518 4.27207 15.1898 4.61008C15.5278 4.94809 15.7952 5.35004 15.9762 5.79247C16.1572 6.23489 16.2483 6.70894 16.2441 7.18695C16.24 7.66495 16.1406 8.13734 15.952 8.57656C15.7633 9.01577 15.489 9.41301 15.1452 9.7451L9.00001 15.8912L2.85481 9.7451C2.17992 9.07 1.80078 8.15449 1.80078 7.1999C1.80078 6.24531 2.17992 5.3298 2.85481 4.6547V4.6547Z" stroke="#808080" stroke-width="1.5" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button @click="copyShareLink">
+                <svg class="w-6" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.8008 1.7998C13.1643 1.7998 12.5538 2.05266 12.1037 2.50275C11.6536 2.95284 11.4008 3.56328 11.4008 4.1998C11.4019 4.3685 11.4207 4.53662 11.457 4.70137L6.00781 7.42598C5.78306 7.16723 5.50551 6.95961 5.19381 6.81711C4.88211 6.6746 4.54351 6.6005 4.20078 6.5998C3.56426 6.5998 2.95381 6.85266 2.50372 7.30275C2.05364 7.75284 1.80078 8.36328 1.80078 8.9998C1.80078 9.63632 2.05364 10.2468 2.50372 10.6969C2.95381 11.1469 3.56426 11.3998 4.20078 11.3998C4.54362 11.3994 4.88239 11.3256 5.1943 11.1833C5.5062 11.041 5.784 10.8335 6.00898 10.5748L11.4547 13.2982C11.4191 13.4631 11.4011 13.6312 11.4008 13.7998C11.4008 14.4363 11.6536 15.0468 12.1037 15.4969C12.5538 15.9469 13.1643 16.1998 13.8008 16.1998C14.4373 16.1998 15.0477 15.9469 15.4978 15.4969C15.9479 15.0468 16.2008 14.4363 16.2008 13.7998C16.2008 13.1633 15.9479 12.5528 15.4978 12.1027C15.0477 11.6527 14.4373 11.3998 13.8008 11.3998C13.4579 11.4002 13.1192 11.474 12.8073 11.6163C12.4954 11.7586 12.2176 11.9661 11.9926 12.2248L6.54687 9.50137C6.58241 9.33654 6.60048 9.16842 6.60078 8.9998C6.59963 8.8315 6.58078 8.66378 6.54453 8.49941L11.9937 5.7748C12.2186 6.03334 12.4962 6.24073 12.8079 6.38304C13.1196 6.52534 13.4581 6.59925 13.8008 6.5998C14.4373 6.5998 15.0477 6.34695 15.4978 5.89686C15.9479 5.44677 16.2008 4.83632 16.2008 4.1998C16.2008 3.56328 15.9479 2.95284 15.4978 2.50275C15.0477 2.05266 14.4373 1.7998 13.8008 1.7998Z" fill="#808080"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt"  class="w-full">
+            <div class="flex items-center overflow-x-auto gap-2 w-full">
+              <img v-for="i in product?.images" :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" class="w-full shrink-0 max-w-[100px] rounded-lg" @click="showBanner(`${SITE_URL}/product/images/${product.id}/${i.image.src}`,i.image.alt)">
+            </div>
+          </div>
+
         </div>
-        <div class="flex items-center mt-4">
+        <div class="flex items-center mt-8">
           <div class="flex flex-col flex-1 space-y-4">
             <div class="flex items-start justify-between">
-              <strong>
+              <span class="text-lg">
                 {{product.title}}
-              </strong>
+              </span>
               <div class="flex items-center gap-1">
-                <small>4.4</small>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span class="font-light">4.4</span>
+                <svg class="w-5" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3.13481 9.32439C3.19477 9.0573 3.08575 8.67575 2.89497 8.48497L1.57045 7.16045C1.15619 6.74619 0.992668 6.30468 1.11258 5.92313C1.23795 5.54158 1.62495 5.27994 2.20273 5.18183L3.90336 4.89839C4.14864 4.85479 4.44843 4.63676 4.5629 4.41328L5.50043 2.53277C5.77296 1.99315 6.14361 1.69336 6.54697 1.69336C6.95032 1.69336 7.32097 1.99315 7.59351 2.53277L8.53103 4.41328C8.60189 4.55499 8.74906 4.69126 8.90713 4.78393L3.03669 10.6544C2.96038 10.7307 2.82957 10.6598 2.85137 10.5508L3.13481 9.32439Z" fill="#FFD234"/>
                   <path d="M10.1903 8.48568C9.99403 8.68191 9.88501 9.05801 9.95042 9.3251L10.3265 10.9658C10.4846 11.6471 10.3865 12.1595 10.0485 12.4048C9.91227 12.5029 9.74874 12.5519 9.55797 12.5519C9.27998 12.5519 8.95294 12.4484 8.59319 12.2358L6.99612 11.2874C6.74539 11.1402 6.33113 11.1402 6.0804 11.2874L4.48333 12.2358C3.8783 12.5901 3.36048 12.65 3.02799 12.4048C2.90262 12.3121 2.80996 12.1867 2.75 12.0232L9.37809 5.39512C9.62883 5.14438 9.98313 5.02992 10.3265 5.08988L10.877 5.18254C11.4548 5.28065 11.8418 5.54229 11.9672 5.92384C12.0871 6.30539 11.9236 6.7469 11.5093 7.16115L10.1903 8.48568Z" fill="#FFD234"/>
                 </svg>
               </div>
             </div>
-            <span class="w-max px-3 py-0.5 rounded-full bg-[#F5F5F5] border-b border-black/40 text-xs font-thin">
-              {{ EPackingType[product.packingType].toString().replaceAll('_',' ') }}
-            </span>
           </div>
-          <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-w-[170px]">
         </div>
-        <div class="w-full bg-[#F6F6F6] rounded-lg p-2 mt-4 flex h-[60px] overflow-x-auto gap-4" v-if="product?.images.length > 0">
-          <img :src="`${SITE_URL}/product/images/${product.id}/${i.image.src}`" :alt="i.image.alt" v-for="i in product?.images" class="rounded-lg">
-        </div>
-        <hr class="my-6">
-          <div class="relative">
+        <div class="relative mt-6">
             <!--  Details  -->
-            <div class="flex flex-col bg-white rounded-xl">
-              <strong >مشخصات</strong>
-              <ul class="flex flex-col mt-2 w-full">
-                <li class="w-full flex items-center py-4 border-b" v-for="s in product?.properties">
-                <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
-                  {{s.title}} :
-                </span>
-                  <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+            <div class="flex flex-col rounded-xl">
+              <span class="font-light opacity-70">مشخصات</span>
+              <ul class="flex flex-col w-full">
+                <li class="w-full flex items-center justify-between py-4 border-b" v-for="s in product?.properties">
+                  <span class="w-2/5 text-[#9D9D9D] font-light text-sm">
+                    {{s.title}} :
+                  </span>
+                  <span class="w-max text-center mr-auto text-[#707070]" style="font-family: 'Vazir FD'">
                     {{s.value}}
-                  </strong>
+                  </span>
                 </li>
                 <li class="w-full flex items-center py-4 border-b">
-                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                  <span class="w-2/5 text-[#9D9D9D] font-light text-sm">
                     نوع بسته بندی :
                   </span>
-                  <strong class="flex-1 text-[#707070]" style="font-family: 'Vazir FD'">
+                  <span class="w-max mr-auto text-[#707070]" style="font-family: 'Vazir FD'">
                     {{EPackingType[product?.packingType]?.toString().replaceAll('_',' ')}}
-                  </strong>
+                  </span>
                 </li>
                 <li class="w-full flex items-center py-4 border-b">
-                  <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
+                  <span class="w-2/5 text-[#9D9D9D] font-light text-sm">
                     کد محصول :
                   </span>
-                  <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+                  <span class="w-max mr-auto text-[#707070] uppercase" style="font-family: 'Montserrat'">
                     {{product?.productCode}}
-                  </strong>
+                  </span>
                 </li>
                 <li class="w-full flex items-center py-4 border-b" v-if="false">
                   <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                     شماره بارکد :
                   </span>
-                  <strong class="flex-1 text-[#707070] uppercase" style="font-family: 'Montserrat'">
+                  <span class="w-max mr-auto text-[#707070] uppercase" style="font-family: 'Montserrat'">
                     {{product?.barcodeNumber}}
-                  </strong>
+                  </span>
                 </li>
                 <li class="w-full flex items-center py-4" v-if="false">
                   <span class="w-1/3 text-[#9D9D9D] font-light text-sm">
                     ابعاد :
                   </span>
-                  <strong class="flex-1 text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
+                  <span class="w-max mr-auto text-[#707070]" style="font-family: 'Montserrat'" dir="ltr">
                     {{product?.dimensions.width}} X {{product?.dimensions.length}} X {{product?.dimensions.height}}
-                  </strong>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -530,15 +541,26 @@
         <div class="w-full fixed inset-x-0 place-items-center bottom-[75px] border-b bg-white h-[60px] z-20 px-4 grid grid-cols-2 items-center" style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
           <div class="flex flex-col items-start">
 <!--            <small>قیمت محصول:</small>-->
-            <base-g-price :price="(Math.ceil(product.totalPrice / 10))" class="scale-150"/>
+            <base-g-price :price="product.totalPrice" class="scale-125"/>
           </div>
-          <base-g-button @click="addToCart" w-full class="w-full" :py="0" :is-loading="addToCartLoading">
+          <base-g-button @click="addToCart" w-full class="w-full" is-icon :py="3" custom-class="!rounded-md text-xs" :is-loading="addToCartLoading">
             افزودن به سبد خرید
           </base-g-button>
         </div>
 
       </div>
     </div>
+
+    <Transition name="fade">
+      <div v-if="showMobileModal" class="md:hidden fixed bg-black/10 inset-0 z-20 backdrop-blur-sm grid place-items-center" @click.self="showMobileModal = false">
+        <div class="bg-white p-3 rounded-xl flex flex-col items-center w-5/6 gap-3">
+          <button class="font-light w-full py-1 hover:bg-gray-200 rounded-lg transition-all duration-300" @click="showMobileModal = false">
+            بستن تصویر
+          </button>
+          <img :src="bannerImage" :alt="bannerImageAlt" class="w-full rounded-lg">
+        </div>
+      </div>
+    </Transition>
 
   </div>
 </template>
@@ -555,6 +577,7 @@ import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.servic
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import SwiperSinglePageControls from "~/components/SwiperSinglePageControls.vue";
 import {Mousewheel} from "swiper/modules";
+import {roundPrice} from "../../utilities/priceUtils";
 
 
 const route = useRoute();
@@ -588,10 +611,12 @@ const cartStore = useCartStore();
 const bannerImage = ref('');
 const bannerImageAlt = ref('');
 const showBannerModal = ref(false);
+const showMobileModal = ref(false);
 const showBanner = (src:string,alt:string) => {
   bannerImage.value = src;
   bannerImageAlt.value = alt;
   showBannerModal.value = true;
+  showMobileModal.value = true;
 }
 
 const carouselBreakpoints = ref({

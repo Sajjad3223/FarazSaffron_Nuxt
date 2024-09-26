@@ -17,6 +17,10 @@ export interface SetOrderStatusCommand{
     orderId:number;
     orderStatus:EOrderStatus;
 }
+export interface SetOrderDiscountCommand{
+    discountCode:string;
+    phoneNumber:string;
+}
 export interface AdminSetOrderDiscountCommand{
     userId:number;
     discountCode:string;

@@ -12,14 +12,14 @@
     </base-f-divider>
 
     <f-modal title="افزودن سوال جدید" v-model="showAddModal">
-      <admin-faq-add @question-added="showAddModal = false,getData()" />
+      <admin-faq-add @question-added="showAddModal = false,getData()"/>
     </f-modal>
     <f-modal title="ویرایش سوال" v-model="showEditModal">
       <admin-faq-edit @question-updated="showEditModal = false,getData()" :question="selectedQuestion"/>
     </f-modal>
 
     <div v-if="!isLoading" class=" w-full overflow-hidden rounded-lg shadow-xs">
-      <div class="w-full overflow-x-auto" >
+      <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr
@@ -34,11 +34,11 @@
               class="bg-white divide-y dark:divide-gray-700 "
           >
           <template v-for="q in questions">
-            <tr class="text-gray-700 " >
+            <tr class="text-gray-700 ">
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
                   <div>
-                    <p class="font-semibold text-nowrap">{{q.title}}</p>
+                    <p class="font-semibold text-nowrap">{{ q.title }}</p>
                   </div>
                 </div>
               </td>
@@ -113,21 +113,21 @@ import type {QuestionDto} from "~/models/faq/questionDto";
 import {DeleteQuestion, GetQuestions} from "~/services/faq.service";
 
 definePageMeta({
-  layout:'admin'
+  layout: 'admin'
 })
 
 const isLoading = ref(true)
 const showAddModal = ref(false)
 const showEditModal = ref(false)
 const toast = useToast();
-const questions:Ref<QuestionDto[]> = ref([]);
-const selectedQuestion:Ref<QuestionDto | null> = ref(null);
+const questions: Ref<QuestionDto[]> = ref([]);
+const selectedQuestion: Ref<QuestionDto | null> = ref(null);
 
-onMounted(async ()=>{
+onMounted(async () => {
   await getData();
 })
 
-const editQuestion = (question:QuestionDto)=>{
+const editQuestion = (question: QuestionDto) => {
   selectedQuestion.value = question;
   showEditModal.value = true;
 }
@@ -136,25 +136,22 @@ const getData = async () => {
   isLoading.value = true;
 
   const result = await GetQuestions();
-  if(result.isSuccess){
+  if (result.isSuccess) {
     questions.value = result.data ?? [];
   }
 
   isLoading.value = false;
 }
 
-const deleteQuestion = (id:number)=>{
-  toast.showToast("آیا از حذف این سوال اطمینان دارید؟",ToastType.warning,0)
-      .then(async (res)=>{
-        if(res.isConfirmed){
-          const result = await DeleteQuestion(id);
-          if(result.isSuccess){
-            toast.showToast();
-            await getData();
-          }
-          else{
-            await toast.showToast(result.metaData.message,ToastType.error,0);
-          }
+const deleteQuestion = (id: number) => {
+  toast.showToast("آیا از حذف این سوال اطمینان دارید؟", ToastType.warning, 0, false,
+      async () => {
+        const result = await DeleteQuestion(id);
+        if (result.isSuccess) {
+          toast.showToast();
+          await getData();
+        } else {
+          await toast.showToast(result.metaData.message, ToastType.error, 0);
         }
       })
 }

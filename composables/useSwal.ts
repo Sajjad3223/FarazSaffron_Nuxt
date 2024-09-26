@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import type {MetaData} from "~/models/metaData";
+import {useToastStore} from "~/stores/toast.store";
 
 export class Toast {
     constructor(
@@ -18,14 +19,23 @@ export enum ToastType {
     warning = "warning",
     error = "error",
 }
-
 export const useToast = () => {
     const showToast = (
         message: string="عملیات با موفقیت انجام شد",
         type: ToastType = ToastType.success,
         duration: number = 3000,
-        toast:boolean = false
+        toast:boolean = false,
+        confirmedFunc?:Function | null
     ) => {
+        useToastStore().addToastMessage({
+            id:0,
+            message,
+            type:type,
+            duration,
+            func:confirmedFunc
+        });
+        return ;
+
         switch (type) {
             case ToastType.success: {
                 return Swal.fire({

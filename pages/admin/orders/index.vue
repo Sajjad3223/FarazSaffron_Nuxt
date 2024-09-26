@@ -85,7 +85,7 @@
               </div>
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              <base-g-price :price="o.finallyPrice / 10" />
+              <base-g-price :price="o.finallyPrice" />
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
               {{o.itemsCount}} کالا

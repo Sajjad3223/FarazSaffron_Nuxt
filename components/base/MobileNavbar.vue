@@ -38,7 +38,7 @@
   </header>
   <Transition enter-active-class="transition-all duration-300" enter-from-class="translate-x-full opacity-0" enter-to-class="transition-x-0 opacity-100"
               leave-active-class="transition-all duration-300" leave-to-class="translate-x-full opacity-0" leave-from-class="transition-x-0 opacity-100">
-    <div v-if="showSidebar" class="fixed bg-black/10 flex inset-0 z-20" @click.self="showSidebar = false">
+    <div v-if="showSidebar" class="fixed bg-black/10 flex inset-0 z-50" @click.self="showSidebar = false">
       <div class="w-2/3 bg-white h-full rounded-l-3xl flex flex-col px-4 py-8 items-stretch">
         <NuxtLink to="/" class="flex items-center gap-4">
           <div class="w-max relative">
@@ -109,6 +109,20 @@
             <path d="M4 1L1 4.5L4 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>-->
+        <hr class="my-4">
+
+        <NuxtLink to="/inquiry" @click="showSidebar = false" class="group flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-3 text-brandOrange group-hover:[&>path]:fill-brandOrange" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="transition-all duration-300" d="M7.49015 1.09041L9.08015 4.30041C9.11632 4.38189 9.1732 4.45246 9.24514 4.5051C9.31708 4.55773 9.40156 4.5906 9.49015 4.60041L13.0001 5.12041C13.1018 5.13347 13.1976 5.17518 13.2764 5.24067C13.3552 5.30615 13.4138 5.39271 13.4452 5.49022C13.4767 5.58774 13.4797 5.6922 13.454 5.79139C13.4284 5.89059 13.375 5.98042 13.3001 6.05041L10.7701 8.56041C10.7056 8.62074 10.6571 8.69625 10.6292 8.78009C10.6012 8.86392 10.5947 8.95341 10.6101 9.04041L11.2201 12.5704C11.2378 12.6719 11.2266 12.7762 11.1879 12.8716C11.1492 12.967 11.0845 13.0496 11.0011 13.1101C10.9178 13.1705 10.8191 13.2063 10.7164 13.2135C10.6137 13.2206 10.511 13.1988 10.4201 13.1504L7.26015 11.4804C7.17924 11.4407 7.09029 11.4201 7.00015 11.4201C6.91001 11.4201 6.82107 11.4407 6.74015 11.4804L3.58015 13.1504C3.48924 13.1988 3.38659 13.2206 3.28388 13.2135C3.18117 13.2063 3.08252 13.1705 2.99917 13.1101C2.91581 13.0496 2.85109 12.967 2.81237 12.8716C2.77366 12.7762 2.76249 12.6719 2.78015 12.5704L3.39015 9.00041C3.40561 8.91341 3.39907 8.82392 3.37113 8.74009C3.34319 8.65625 3.29472 8.58074 3.23015 8.52041L0.670155 6.05041C0.594418 5.97851 0.541155 5.88618 0.516819 5.78463C0.492483 5.68307 0.498119 5.57663 0.533042 5.47821C0.567966 5.37979 0.630679 5.29361 0.713586 5.2301C0.796493 5.1666 0.896035 5.12849 1.00015 5.12041L4.51015 4.60041C4.59875 4.5906 4.68323 4.55773 4.75517 4.5051C4.82711 4.45246 4.88399 4.38189 4.92015 4.30041L6.51015 1.09041C6.55345 0.996916 6.62259 0.917763 6.70942 0.862291C6.79624 0.806819 6.89712 0.777344 7.00015 0.777344C7.10318 0.777344 7.20407 0.806819 7.29089 0.862291C7.37771 0.917763 7.44685 0.996916 7.49015 1.09041Z" fill="transparent" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>استعلام محصول</span>
+          </div>
+          <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 1L1 4.5L4 8" stroke="#F04825" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
+
         <hr class="my-4">
         <button class="flex items-center gap-2 text-danger">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -32,6 +32,8 @@
     "click-outside-vue3": "^4.0.1",
     "create-file-list": "^1.1.0",
     "filepond": "^4.30.6",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "loadash": "^1.0.0",
     "nuxt-precompress": "^0.5.9",
     "nuxt-swiper": "^1.2.2",

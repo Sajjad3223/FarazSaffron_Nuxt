@@ -297,17 +297,17 @@
         <ul>
           <li class="flex items-center gap-6 py-2 border-b last:border-none"
               v-for="i in cartStore.PendingOrder.orderItems" :key="i.id">
-            <div class=" flex-1 flex flex-col items-start ">
-              <strong>{{ i.itemInfo.productName }}</strong>
-              <small>دارای پروانه بهداشت</small>
-              <div class="mt-4 py-3 self-end flex flex-col items-end space-y-2">
-                <base-g-price :price="i.price / 10"/>
-              </div>
-            </div>
             <div class="flex flex-col w-2/5 items-center">
               <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
                    :alt="i.itemInfo.productImage.alt">
               <cart-counter :item="i" class="w-max scale-75 -mt-2"/>
+            </div>
+            <div class=" flex-1 flex flex-col items-start ">
+              <strong>{{ i.itemInfo.productName }}</strong>
+              <small>دارای پروانه بهداشت</small>
+              <div class="mt-4 py-3 self-end flex flex-col items-end space-y-2">
+                <base-g-price :price="i.price"/>
+              </div>
             </div>
           </li>
         </ul>
@@ -316,7 +316,7 @@
                style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
           <div class="flex flex-col items-start">
             <small>مجموع سبد خرید</small>
-            <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)"/>
+            <base-g-price :price="cartStore.PendingOrder.totalPrice"/>
           </div>
           <base-g-button is-link to="/checkout/shipping" w-full v-if="authStore.isLoggedIn" is-icon custom-class="!rounded-lg">
             تکمیل سفارش

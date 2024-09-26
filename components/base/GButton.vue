@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="[{'w-full':wFull}]">
     <button v-if="!isLink" :class="['flex items-center justify-center gap-2 rounded-md transition-colors duration-200',{'min-h-[50px] rounded-xl':!isIcon},`px-${px} py-${py}`,
                     buttonColor,{'w-full':wFull},customClass]" :dir="ltr ? 'ltr' : 'rtl'" :disabled="disabled || isLoading" @click="emits('click')" :type="type">
       <slot v-if="!isLoading"></slot>

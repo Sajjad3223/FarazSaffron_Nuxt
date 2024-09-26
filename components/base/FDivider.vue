@@ -1,7 +1,6 @@
 <template>
   <div :class="['h-px w-full flex items-center justify-center opacity-50',color,`my-${verticalMargin}`]" v-if="logoDivider">
-    <img src="~/assets/images/en-GP-filled.png" alt="gp" class="w-9 bg-bgWhite px-2" v-if="color != 'white' ">
-    <img src="~/assets/images/en-GP-filled-white.png" alt="gp" class="w-9 bg-brandOrange px-2" v-else>
+
   </div>
   <div class="flex items-center w-full my-4" v-else>
     <span class="font-thin">{{ title }}</span>

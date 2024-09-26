@@ -12,6 +12,7 @@ const props = defineProps<{
   postType:EPostType
 }>();
 
+const authStore = useAuthStore();
 const selectedComment:Ref<Number | null> = ref(null);
 const pageId = ref(1);
 const loading = ref(true);
@@ -83,8 +84,9 @@ const loadComments = async ()=>{
       </ul>
       <span class="text-sm text-[#B3B3B3] mt-3 font-light">  (امتیاز {{ totalConsumersCount }} خریدار)</span>
       <small class="text-xs font-light text-[#B3B3B3] mt-6">شما هم درباره این کالا دیدگاه ثبت کنید</small>
-      <button class="w-full text-center py-2 rounded-xl border border-brandOrange text-brandOrange mt-4 hover:bg-brandOrange/10 transition-colors duration-200" @click="showAddCommentModal = true">
-        ثبت دیدگاه
+      <button :disabled="!authStore.isLoggedIn" class="w-full text-center py-2 rounded-xl border border-brandOrange disabled:border-black/20 mt-4 hover:bg-brandOrange/10 transition-colors duration-200" @click="showAddCommentModal = true">
+        <span class="text-brandOrange" v-if="authStore.isLoggedIn">ثبت دیدگاه</span>
+        <span class="text-xs opacity-50" v-else>برای ثبت نظر باید <button class="text-brandOrange font-semibold" @click="authStore.isAuthModalOpen = true">وارد</button> شوید</span>
       </button>
     </div>
     <base-g-modal title="ثبت دیدگاه" v-model="showAddCommentModal">
@@ -114,7 +116,8 @@ const loadComments = async ()=>{
         </defs>
       </svg>
       <strong class="text-xl font-light opacity-70" >هیچ نظری برای این محصول وجود ندارد</strong>
-      <base-g-button button-type="white" custom-class="mt-4" @click="showAddCommentModal = true">شما اولین نظر را ثبت کنید</base-g-button>
+      <base-g-button v-if="authStore.isLoggedIn" button-type="white" custom-class="mt-4" @click="showAddCommentModal = true">شما اولین نظر را ثبت کنید</base-g-button>
+      <base-g-button v-else button-type="outline" color="info" custom-class="mt-4" @click="authStore.isAuthModalOpen = true">برای ثبت نظر باید ابتدا وارد شوید</base-g-button>
     </div>
   </div>
   <div class="w-full flex gap-4 animate-pulse mt-5" v-else>

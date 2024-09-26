@@ -53,6 +53,7 @@ import {
   type ImplicitFlowSuccessResponse,
   type ImplicitFlowErrorResponse,
 } from "vue3-google-signin";
+import {toEnglishDigits} from "~/utilities/textUtils";
 
 // handle success event
 const handleOnSuccess = (response: ImplicitFlowSuccessResponse) => {
@@ -93,12 +94,14 @@ const login = async ()=>{
   isLoading.value = true;
   errorMessage.value = '';
 
+  loginData.phoneNumber = toEnglishDigits(loginData.phoneNumber);
+
   const result = await Login(loginData);
   if(result.isSuccess){
     await authStore.setToken(result.data!);
     await toast.showToast('با موفقیت وارد شدید');
     authStore.isAuthModalOpen = false;
-    await accountStore.initData();
+    setTimeout(async ()=>await accountStore.initData(),300);
   }
   else{
     errorMessage.value = result.metaData.message ?? 'حساب کاربری با این مشخصات یافت نشد';

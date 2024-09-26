@@ -185,11 +185,13 @@ const LogOut = async () => {
   toast.showToast(
       'آیا مایلید از حساب کاربری خود خارج شوید؟',
       ToastType.warning,
-      0).then( async result=>{
-        if(result.isConfirmed){
-          await authStore.logOut();
-        }
-  })
+      0,
+  true,
+      singOut)
+}
+
+const singOut = async ()=>{
+  await authStore.logOut();
 }
 </script>
 

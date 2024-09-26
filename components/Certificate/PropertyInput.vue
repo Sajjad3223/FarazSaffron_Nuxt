@@ -46,7 +46,7 @@ const emits = defineEmits(['update:modelValue','valueUpdated'])
 
 const value = ref(props.modelValue?.value);
 const input = ref();
-const rangeValue = reactive({
+let rangeValue = reactive({
   min:null,
   max:null,
   value:null,

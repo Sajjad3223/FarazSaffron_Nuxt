@@ -83,19 +83,21 @@
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <button
+                <button v-if="!c.isSeen"
+                    @click="setAsSeen(c.id)" title="علامت به عنوان خوانده شده"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
-                    aria-label="Edit"
+                    aria-label="Seen"
                 >
-                  <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                  >
-                    <path
-                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                    ></path>
+                  <svg class="w-4" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_5_477)">
+                      <path d="M10.5 0.5H3.5C1.84315 0.5 0.5 1.84315 0.5 3.5V10.5C0.5 12.1569 1.84315 13.5 3.5 13.5H10.5C12.1569 13.5 13.5 12.1569 13.5 10.5V3.5C13.5 1.84315 12.1569 0.5 10.5 0.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.91699 4.75L5.91699 9.75L3.91699 8.25" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_5_477">
+                        <rect width="14" height="14" fill="white"/>
+                      </clipPath>
+                    </defs>
                   </svg>
                 </button>
                 <button
@@ -103,7 +105,7 @@
                     aria-label="Delete"
                 >
                   <svg
-                      class="w-5 h-5"
+                      class="w-4"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -143,7 +145,7 @@
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
 import type {ContactFilterParams, ContactFormDto} from "~/models/contact/contactQueries";
-import {GetContactForms} from "~/services/contact.service";
+import {GetContactForms, SetContactAsSeen} from "~/services/contact.service";
 
 definePageMeta({
   layout:'admin'
@@ -178,6 +180,15 @@ const getData = async ()=>{
   }
 
   isLoading.value = false;
+}
+
+const toast = useToast();
+const setAsSeen = async (id:number) => {
+  const result = await SetContactAsSeen(id);
+  if(result.isSuccess){
+    toast.showToast();
+    contactForms.value.find(c=>c.id == id)!.isSeen = true;
+  }
 }
 
 </script>

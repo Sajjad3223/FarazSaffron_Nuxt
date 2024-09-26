@@ -4,59 +4,61 @@
       <Title>استعلام محصول</Title>
     </Head>
     <div class="container mx-auto py-10">
-      <div v-if="authenticator == null" class="w-1/3 max-w-[400px] flex mx-auto flex-col space-y-8 rounded-2xl transition-all duration-300">
+      <div v-if="authenticator == null" class="w-full md:w-1/3 max-w-[400px] flex mx-auto flex-col space-y-8 rounded-2xl transition-all duration-300">
           <div class="flex flex-col items-center space-y-2">
-            <span class="text-xl">استعلام محصول</span>
-            <span class="text-sm font-light">با استفاده از فرم زیر از اصالت محصول استعلام بگیرید</span>
+            <span class="text-lg md:text-xl">استعلام محصول</span>
+            <span class="text-xs md:text-sm font-light">با استفاده از فرم زیر از اصالت محصول استعلام بگیرید</span>
           </div>
           <form @submit.prevent="findCertificate"
                 class="w-full p-8 border bg-white rounded-lg relative flex flex-col space-y-4 items-center" method="GET">
             <div class="flex flex-col w-full space-y-2">
-              <label for="serialNumber" class="text-sm font-light">کد استعلام</label>
-              <input v-model="serial" required
-                     type="text" name="serialNumber" id="serialNumber" placeholder="شماره سریال پشت محصول را وارد کنید" dir="ltr"
-                     class="w-full font-[montserrat] text-center text-sm placeholder-black/50 px-4 py-3 bg-[#FAFAFA] border border-[#818C92]/10 rounded-xl font-light focus:outline-none focus:border-[#818C92]/20">
+              <base-inputs-text-input type="number" label="کد استعلام" name="serialNumber" v-model="serial" required side-text=" - ZC" text-align="center" custom-classes="font-[montserrat]" side-text-classes="font-[montserrat]" place-holder="شماره سریال پشت محصول را وارد کنید"/>
+            </div>
+            <div class="flex flex-col w-full space-y-2">
+              <!--              <base-g-select label="نوع محصول" v-model="productId" :options="productOptions.map(o=>{
+                                return {
+                                  title:o.title,
+                                  value:o.id,
+                                  image:`${SITE_URL}/product/images/${o.imageName}`
+                                } as GSelectData;
+                              })" />-->
+              <label class="text-sm font-light">نوع محصول</label>
+              <base-g-button @click="showSelectProduct = true"
+                             color="secondary" button-type="white" is-icon w-full custom-class="font-light text-xs !rounded-md">
+                {{selectedProduct}}
+              </base-g-button>
+              <span v-if="showProductError" class="text-xs font-light text-danger">• لطفا یک محصول را انتخاب کنید</span>
             </div>
             <div class="flex flex-col w-full space-y-2">
               <label class="text-sm font-light">تاریخ تولید کالا <span class="text-xs font-light opacity-50">(درج شده روی بسته بندی)</span></label>
-              <div class="grid grid-cols-2 gap-4 w-full" >
+              <div class="grid grid-cols-3 gap-4 w-full" >
+                <base-g-select :options="dayOptions" v-model="dateValue.day" placeholder="1"/>
+<!--                <base-inputs-text-input type="number" name="day" v-model="dateValue.day" place-holder="روز"/>-->
                 <base-g-select :options="monthOptions" v-model="dateValue.month"/>
                 <base-inputs-text-input type="number" name="year" v-model="dateValue.year" place-holder="سال"/>
               </div>
             </div>
-            <div class="flex flex-col w-full space-y-2">
-<!--              <base-g-select label="نوع محصول" v-model="productId" :options="productOptions.map(o=>{
-                  return {
-                    title:o.title,
-                    value:o.id,
-                    image:`${SITE_URL}/product/images/${o.imageName}`
-                  } as GSelectData;
-                })" />-->
-              <label class="text-sm font-light">نوع محصول</label>
-              <base-g-button @click="showSelectProduct = true"
-                  color="secondary" button-type="white" is-icon w-full custom-class="font-light text-xs !rounded-md">
-                {{selectedProduct}}
-              </base-g-button>
+            <div class="flex w-full">
+              <BaseGButton type="submit" w-full :is-loading="loading" is-icon custom-class="font-light text-sm !rounded-md">
+                استعلام
+              </BaseGButton>
             </div>
-            <button class="bg-[#FB7511] text-white w-full rounded-lg py-2" type="submit">
-              استعلام
-            </button>
           </form>
         </div>
-      <div v-else class="w-2/3 mx-auto flex flex-col items-start my-8 space-y-4">
+      <div v-else class="w-full md:w-2/3 mx-auto flex flex-col items-start my-8 space-y-4">
         <span class="self-center">شناسنامه محصول</span>
         <div class="w-full flex flex-col bg-white border border-[#818C92]/10 rounded-xl p-14">
-          <div class="flex items-start gap-5">
-            <div class="w-1/3 aspect-square border border-[#818C92]/10 rounded-lg grid place-items-center">
-              <img class="w-2/3"
+          <div class="flex flex-col md:flex-row items-start gap-5">
+            <div class="w-full md:w-1/3 aspect-square border border-[#818C92]/20 rounded-lg grid place-items-center">
+              <img class="w-[90%]"
                    :src="`${SITE_URL}/product/images/${authenticator.certificate.product.mainImage.src}`"
                    :alt="authenticator.certificate.product.mainImage.alt">
             </div>
             <div class="flex-1 flex flex-col space-y-4">
               <div v-for="p in authenticator.certificate.product.properties" :key="p.id"
-                   class="flex items-center justify-between">
+                   class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-0">
                 <span class="text-sm opacity-70 font-light">{{p.title}}</span>
-                <span class="font-light">{{p.value}}</span>
+                <span class="font-light self-end md:self-center">{{p.value}}</span>
               </div>
             </div>
           </div>
@@ -64,8 +66,8 @@
           <span class="text-lg">مشخصات محصول</span>
           <div class="flex flex-col w-full space-y-4 mt-5">
             <div v-for="p in authenticator.properties.sort((a,b)=>a.propertyType - b.propertyType)" :key="p.id"
-                 class="flex items-center justify-between">
-              <span class="w-max text-sm opacity-70 font-light">{{p.title}}</span>
+                 class="flex flex-col md:flex-row items-end md:items-center md:justify-between">
+              <span class="w-max self-start md:self-center text-sm opacity-70 font-light">{{p.title}}</span>
               <div class="flex">
                 <div class="flex">
                 <span class="font-light" v-if="!getDateObject(p.value) && p.propertyType == EPropertyType.تاریخ || p.propertyType == EPropertyType.تاریخ_زمان">
@@ -79,7 +81,7 @@
                     {{getDateObject(p.value).year}}
                   </span>
                 </span>
-                  <div v-else-if="p.propertyType == EPropertyType.رنج" class="relative min-w-[300px]" >
+                  <div v-else-if="p.propertyType == EPropertyType.رنج" class="relative mt-6 mb-3 md:mt-0 md:mb-0 min-w-[200px] xl:min-w-[300px]" >
                     <div class="h-2 w-full" :style="{
                     backgroundImage: `linear-gradient(to right, ${true ? '#FB1624' : JSON.parse(p.value).leftColor},${true ? '#FFDE30' : JSON.parse(p.value).centerColor}, ${true ? '#07D263' : JSON.parse(p.value).rightColor})`
                     , maskImage:'url(/images/range-mask.png)',maskRepeat:'no-repeat',maskSize:'100%'}">
@@ -105,9 +107,18 @@
                 </div>
               </div>
             </div>
+            <div class="flex flex-col md:flex-row items-end md:items-center md:justify-between">
+              <span class="w-max self-start md:self-center text-sm opacity-70 font-light">بهترین تاریخ مصرف</span>
+              <div class="flex gap-1 font-light">
+                <span>تا قبل از </span>
+                <span>{{months[dateValue.month - 1]}}</span> ماه
+                <span>{{dateValue.year + 2}}</span>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="bg-[#FB7511] font-light text-sm text-white rounded-lg px-4 mx-auto py-3 flex gap-2">
+        <button @click="openPrintWindow"
+            class="bg-[#FB7511] font-light text-sm text-white rounded-lg px-4 mx-auto py-3 flex gap-2">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="18" height="18" fill="url(#pattern0_2245_15721)"/>
             <defs>
@@ -123,15 +134,15 @@
       </div>
     </div>
 
-    <base-g-modal title="انتخاب محصول" v-model="showSelectProduct" width="80%">
+    <base-g-modal title="انتخاب محصول" v-model="showSelectProduct" width="85%">
       <div
-           class="flex-1 bg-white rounded-xl p-5 transition-all duration-300">
-        <div class="w-full grid grid-cols-5 gap-4 max-h-screen overflow-y-auto pl-4">
+           class="flex-1 bg-white rounded-xl md:p-5 transition-all duration-300">
+        <div class="w-full grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4 max-h-[65vh] md:max-h-screen overflow-y-auto pl-4">
           <div @click="productSelected(p)"
                class="flex flex-col items-center gap-2 p-2 rounded-xl border border-transparent hover:border-black/10 cursor-pointer"
                v-for="p in productOptions" :key="p.id">
-            <img :src="`${SITE_URL}/product/images/${p.imageName}`" :alt="p.title" class="max-h-[100px] w-fit">
-            <span class="text-xs text-center font-light">{{p.title}}</span>
+            <img :src="`${SITE_URL}/product/images/${p.imageName}`" :alt="p.title" class="max-h-[60px] md:max-h-[100px] w-fit">
+            <span class="text-[10px] md:text-xs text-center font-light">{{p.title}}</span>
           </div>
         </div>
       </div>
@@ -142,33 +153,61 @@
 
 <script setup lang="ts">
 import {Form} from "vee-validate";
-import type {ProductFilterData, SelectTagDto} from "~/models/product/productQueries";
+import type {SelectTagDto} from "~/models/product/productQueries";
 import {GetCertificate} from "~/services/certificate.service";
-import {type AuthenticatorDto, type CAPropertyDto, EPropertyType} from "~/models/certificate/authenticatorDto";
-import {ApiStatusCode} from "~/models/metaData";
+import {
+  type AuthenticatorDto,
+  type CAPropertyDto,
+  EPropertyType,
+  type GetCertificateCommand
+} from "~/models/certificate/authenticatorDto";
 import {SITE_URL} from "~/utilities/api.config";
 import type {GSelectData} from "~/models/gSelectData";
 import {monthOptions, months} from "~/utilities/dateUtils";
-import {GetProductById} from "~/services/product.service";
-
+import {GetProductById2} from "~/services/product.service";
+import {ToastType} from "~/composables/useSwal";
 
 const route = useRoute();
 const router = useRouter();
 const toast = useToast();
 const dateValue = reactive({
-  month:5,
+  day:1,
+  month:6,
   year:1403
 });
+watch(
+    dateValue,
+    ()=>{
+      if(dateValue.month > 6 && dateValue.day == 31)
+        dateValue.day = 30;
+      setDayOptions();
+    }
+)
+
+const dayOptions:Ref<GSelectData[]> = ref([]);
+
+const setDayOptions = ()=>{
+  const monthDaysCount = dateValue.month > 6 ? 30 : 31;
+  let options:GSelectData[] = [];
+  for (let i = 1; i <= monthDaysCount; i++){
+    const data = {title:i.toString(),value:i,image:null} as GSelectData;
+    options.push(data);
+  }
+  dayOptions.value = options;
+}
+const loading = ref(false);
 const showSelectProduct = ref(false);
-const productId = ref(0);
+const productId = ref();
 const selectedProduct = ref('انتخاب محصول');
 const serial:Ref<string | null> = ref(route.query.serial?.toString());
 const authenticator:Ref<AuthenticatorDto | null> = ref(null);
+const showProductError = ref();
 
 const productUtils = useProductUtils();
 const productOptions:Ref<SelectTagDto[]> = ref([]);
 onMounted(async ()=>{
   productOptions.value = await productUtils.GetForSelectTag();
+  setDayOptions();
 })
 
 const productSelected = (p:SelectTagDto)=>{
@@ -187,37 +226,64 @@ const getDateObject = (dateJson:string)=>{
 }
 
 const findCertificate = async ()=>{
-  const result = await GetCertificate(serial.value!);
-  if(result.isSuccess){
-    const productResult = await GetProductById(productId.value);
-    authenticator.value = result.data!;
-    if(productResult.isSuccess){
-      authenticator.value!.certificate.product = {
-        id:productResult.data!.id,
-        creationDate:productResult.data!.creationDate,
-        title: productResult.data!.title,
-        slug: productResult.data!.slug,
-        price: productResult.data!.price,
-        discount: productResult.data!.discount,
-        weight: productResult.data!.weight,
-        healthNumber: productResult.data!.healthNumber,
-        totalPrice: productResult.data!.totalPrice,
-        packingType: productResult.data!.packingType,
-        mainImage: productResult.data!.mainImage,
-        quantity: productResult.data!.quantity,
-        score: productResult.data!.score,
-        visits: productResult.data!.visits,
-        digiKalaData: productResult.data!.digiKalaData,
-        basalamData: productResult.data!.basalamData,
-        persianDate:productResult.data!.persianDate,
-        persianTime:productResult.data!.persianTime,
-        properties:productResult.data!.properties
+
+  if(!productId.value) {
+    showProductError.value = true;
+    return;
+  }
+
+  try {
+    loading.value = true;
+
+    const command = {
+      serial:`ZC${serial.value}`,
+      year:dateValue.year,
+      month:dateValue.month,
+      day:dateValue.day,
+      productId:productId.value
+    } as GetCertificateCommand;
+
+    const result = await GetCertificate(command);
+    if(result.isSuccess){
+      const productResult = await GetProductById2(productId.value);
+      authenticator.value = result.data!;
+      if(productResult.isSuccess){
+        authenticator.value!.certificate.product = {
+          id:productResult.data!.id,
+          creationDate:productResult.data!.creationDate,
+          title: productResult.data!.title,
+          slug: productResult.data!.slug,
+          price: productResult.data!.price,
+          discount: productResult.data!.discount,
+          weight: productResult.data!.weight,
+          healthNumber: productResult.data!.healthNumber,
+          totalPrice: productResult.data!.totalPrice,
+          packingType: productResult.data!.packingType,
+          mainImage: productResult.data!.mainImage,
+          quantity: productResult.data!.quantity,
+          score: productResult.data!.score,
+          visits: productResult.data!.visits,
+          digiKalaData: productResult.data!.digiKalaData,
+          basalamData: productResult.data!.basalamData,
+          persianDate:productResult.data!.persianDate,
+          persianTime:productResult.data!.persianTime,
+          properties:productResult.data!.properties
+        }
       }
     }
+    else{
+      await toast.showError(result.metaData);
+    }
+    loading.value = false;
   }
-  else{
-    await toast.showError({message:'سریال وارد شده نامعتبر است',appStatusCode:ApiStatusCode.NotFound});
+  catch(exception){
+    loading.value = false;
+    toast.showToast(exception,ToastType.error)
   }
+}
+
+const openPrintWindow = ()=>{
+  window.open(`/printCertificate?serial=ZC${serial.value}&productId=${productId.value}&year=${dateValue.year}&month=${dateValue.month}&day=${dateValue.day}`,"popup",'width=200,height=400');
 }
 
 const linearBackground = (p:CAPropertyDto) => {

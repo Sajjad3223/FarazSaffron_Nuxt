@@ -32,11 +32,15 @@ export const UnSubscribeNewsletter = (command:UnSubscribeNewsletterCommand):Prom
     });
 }
 
-//TODO move to admin service
 export const GetContactForms = (params:ContactFilterParams):Promise<ApiResponse<ContactFilterResult>> => {
     return FetchApi("/admin/contact",{
         method:'GET',
         params
+    });
+}
+export const SetContactAsSeen = (contactId:number):Promise<ApiResponse<ContactFilterResult>> => {
+    return FetchApi(`/admin/contact/${contactId}`,{
+        method:'PUT'
     });
 }
 export const GetNewsletters = (params:NewsletterFilterParams):Promise<ApiResponse<NewsletterFilterResult>> => {

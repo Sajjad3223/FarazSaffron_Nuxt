@@ -1,11 +1,13 @@
 <template>
 <div class="flex gap-1 items-center">
-  <strong :class="[`priceSize-${mobileSize} lg-priceSize-${size}`]">{{price.toLocaleString()}}</strong>
+  <strong :class="[`priceSize-${mobileSize} lg-priceSize-${size}`]">{{roundPrice(price).toLocaleString()}}</strong>
   <base-g-tooman/>
 </div>
 </template>
 
 <script setup lang="ts">
+import {roundPrice} from "~/utilities/priceUtils";
+
 withDefaults(defineProps<{
   price:number,
   size?:'xs' | 'sm' | 'base' | 'lg' | 'xl',

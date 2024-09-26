@@ -36,7 +36,7 @@
     <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="h-[100px]">
     <span class="text-sm text-center font-light">{{product.title}}</span>
     <div class="flex items-center gap-2">
-      <span class="text-brandOrange">{{(Math.ceil(product.totalPrice / 10)).toLocaleString()}}</span>
+      <span class="text-brandOrange">{{roundPrice(product.totalPrice).toLocaleString()}}</span>
       <span class="text-xs">تومان</span>
     </div>
   </NuxtLink>
@@ -50,6 +50,7 @@ import {EPostType} from "~/models/EPostType";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import {ToastType} from "~/composables/useSwal";
 import {EPackingType} from "~/models/product/EPackingType";
+import {roundPrice} from "~/utilities/priceUtils";
 
 const props = defineProps<{
   product:ProductFilterData

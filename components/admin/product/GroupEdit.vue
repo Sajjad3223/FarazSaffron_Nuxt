@@ -46,15 +46,15 @@
               </div>
               <div class="flex-1 flex flex-col gap-2">
                 <span class="text-sm select-none">{{p.title}}</span>
-                <BaseGPrice :price="p.price / 10" v-if="editSubject == 'price'"/>
+                <BaseGPrice :price="p.price" v-if="editSubject == 'price'"/>
                 <div class="w-full flex flex-col" v-else-if="editSubject == 'dgkala-basalam'">
                   <div class="w-full flex items-center gap-2">
                     <span class="text-xs opacity-70">قیمت دیجی کالا:</span>
-                    <BaseGPrice :price="p.digiKalaData.digikalaPrice / 10" size="sm"/>
+                    <BaseGPrice :price="p.digiKalaData.digikalaPrice" size="sm"/>
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-xs opacity-70">قیمت باسلام:</span>
-                    <BaseGPrice :price="p.basalamData.basalamPrice / 10" size="sm"/>
+                    <BaseGPrice :price="p.basalamData.basalamPrice" size="sm"/>
                   </div>
                 </div>
                 <div class="w-full flex items-center gap-2" v-else-if="editSubject == 'quantity'">
@@ -276,7 +276,7 @@ const editPrices = async ()=>{
     let price = Number(p.price);
     if(changeEqual){
       if(editType.value == 'percent') {
-        price = price + (price * (Number(percentToAdd.value) / 100))
+        price = price + (price * (Number(percentToAdd.value)))
       }else{
         price = price + Number(valueToAdd.value);
       }
@@ -298,8 +298,8 @@ const editDigikalaBasalamPrices = async ()=>{
       let digikalaPrice = p.digikalaPrice;
       let basalamPrice = p.basalamPrice;
       if(editType.value == 'percent'){
-        digikalaPrice += (digikalaPrice * (percentToAdd.value / 100));
-        basalamPrice += (basalamPrice * (percentToAdd.value / 100));
+        digikalaPrice += (digikalaPrice * (percentToAdd.value0));
+        basalamPrice += (basalamPrice * (percentToAdd.value0));
       }
       else{
         digikalaPrice += valueToAdd.value;

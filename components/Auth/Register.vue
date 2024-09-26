@@ -47,6 +47,7 @@ import type {RegisterCommand} from "~/models/users/userCommands";
 import {Register} from "~/services/auth.service";
 import Swal from "sweetalert2";
 import * as Yup from 'yup'
+import {toEnglishDigits} from "~/utilities/textUtils";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -71,6 +72,8 @@ const errorMessage = ref('');
 const register = async ()=>{
   isLoading.value = true;
   errorMessage.value = '';
+
+  registerData.phoneNumber = toEnglishDigits(registerData.phoneNumber);
 
   const result = await Register(registerData);
   if(result.isSuccess){

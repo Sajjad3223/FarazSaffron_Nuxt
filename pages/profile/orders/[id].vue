@@ -224,11 +224,11 @@
                 <div class="mt-4 flex flex-col space-y-1">
                   <div class="flex items-center gap-2 origin-right scale-75">
                     <small class="font-thin">جمع واحد:</small>
-                    <base-g-price :price="i.price / 10"/>
+                    <base-g-price :price="i.price"/>
                   </div>
                   <div class="flex items-center gap-2">
                     <small class="font-thin">جمع کل:</small>
-                    <base-g-price :price="i.totalPrice / 10"/>
+                    <base-g-price :price="i.totalPrice"/>
                   </div>
                 </div>
 
@@ -250,7 +250,7 @@
         </span>
       </header>
       <div class="flex flex-col space-y-6" v-if="!isLoading">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-4">
           <div class="flex flex-col space-y-2">
             <span class="opacity-70">کد پیگیری سفارش:</span>
             <span>{{order?.referCode}}</span>
@@ -286,11 +286,12 @@
           <div class="flex flex-col space-y-4 my-4">
             <div class="flex items-center justify-between w-full">
               <span class="opacity-70">قیمت:</span>
-              <base-g-price :price="618000" />
+              <base-g-price :price="order.totalPrice" />
             </div>
             <div class="flex items-center justify-between w-full">
               <span class="opacity-70">تخفیف:</span>
-              <base-g-price :price="25000" />
+              <base-g-price :price="getDiscountValue(order.totalPrice,order.discount.amountInPercent)" v-if="order.discount.amountInPercent > 0"/>
+              <span v-else> بدون تخفیف</span>
             </div>
             <div class="flex items-center justify-between w-full">
               <span class="opacity-70">هزینه پست:</span>
@@ -300,7 +301,7 @@
           <hr>
           <div class="flex items-center justify-between w-full mt-4">
             <span class="opacity-80">قیمت نهایی:</span>
-            <base-g-price :price="593000" />
+            <base-g-price :price="order.finallyPrice" />
           </div>
         </div>
 
@@ -350,6 +351,7 @@ import {EOrderStatus, type OrderDto} from "~/models/cart/cartQueries";
 import {SITE_URL} from "~/utilities/api.config";
 import {EItemType} from "~/models/EPostType";
 import {EPackingType} from "../../../models/product/EPackingType";
+import {getDiscountValue} from "~/utilities/priceUtils";
 
 definePageMeta({
   layout: 'profile',

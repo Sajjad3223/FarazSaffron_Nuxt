@@ -398,64 +398,57 @@ const setOrderBySections = async () => {
 }
 
 const removeBanner = async (id:number) =>{
-  toast.showToast('آیا از حذف این بنر مطمئن هستید؟',ToastType.warning,0)
-      .then(async (res) => {
-        if(res.isConfirmed){
-          const result = await DeleteBanner(templateId,id);
-          if(result.isSuccess){
-            await getData();
-            toast.showToast();
-          }
-          else{
-            toast.showError(result.metaData);
-          }
-        }
-      })
+  toast.showToast('آیا از حذف این بنر مطمئن هستید؟',ToastType.warning,0,true,
+      async () => {
+      const result = await DeleteBanner(templateId,id);
+      if(result.isSuccess){
+        await getData();
+        toast.showToast();
+      }
+      else{
+        toast.showError(result.metaData);
+      }
+  })
 }
 const removeHonor = async (id:number) =>{
-  toast.showToast('آیا از حذف این افتخار مطمئن هستید؟',ToastType.warning,0)
-      .then(async (res) => {
-        if(res.isConfirmed){
-          const result = await DeleteHonor(templateId,id);
-          if(result.isSuccess){
-            await getData();
-            toast.showToast();
-          }
-          else{
-            toast.showError(result.metaData);
-          }
+  toast.showToast('آیا از حذف این افتخار مطمئن هستید؟',ToastType.warning,0,true,
+      async () => {
+        const result = await DeleteHonor(templateId,id);
+        if(result.isSuccess){
+          await getData();
+          toast.showToast();
         }
-      })
+        else {
+          toast.showError(result.metaData);
+        }
+      });
 }
 const removeBlog = async (id:number) =>{
-  toast.showToast('آیا از حذف این مقاله مطمئن هستید؟',ToastType.warning,0)
-      .then(async (res) => {
-        if(res.isConfirmed){
-          const result = await DeleteBlogPreview(templateId,id);
-          if(result.isSuccess){
-            await getData();
-            toast.showToast();
-          }
-          else{
-            toast.showError(result.metaData);
-          }
+  toast.showToast('آیا از حذف این مقاله مطمئن هستید؟',ToastType.warning,0,true,
+      async () => {
+        const result = await DeleteBlogPreview(templateId,id);
+        if(result.isSuccess){
+          await getData();
+          toast.showToast();
         }
-      })
+        else{
+          toast.showError(result.metaData);
+        }
+      });
 }
 const removeComment = async (id:number) =>{
-  toast.showToast('آیا از حذف این دیدگاه مطمئن هستید؟',ToastType.warning,0)
-      .then(async (res) => {
-        if(res.isConfirmed){
-          const result = await DeleteSpecialComment(templateId,id);
-          if(result.isSuccess){
-            await getData();
-            toast.showToast();
-          }
-          else{
-            toast.showError(result.metaData);
-          }
-        }
-      })
+  toast.showToast('آیا از حذف این دیدگاه مطمئن هستید؟',ToastType.warning,0, true,
+  async()=>{
+    const result = await DeleteSpecialComment(templateId,id);
+    if(result.isSuccess){
+      await getData();
+      toast.showToast();
+    }
+    else{
+      toast.showError(result.metaData);
+    }
+  });
+
 }
 
 </script>

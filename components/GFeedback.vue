@@ -30,7 +30,13 @@ const sendFeedback = async ()=>{
 <template>
   <Transition name="popup">
     <div v-if="modelValue" class="bg-white/70 backdrop-blur-lg flex flex-col gap-5 items-center justify-center rounded-xl px-6 py-5 border border-[#818C92]/10 min-h-[220px] " style="box-shadow: 0 0 12px 0 rgba(0,0,0,0.1)">
-      <div v-if="!feedbackSent" class="flex flex-col gap-5 items-center justify-center">
+      <div v-if="!feedbackSent" class="flex flex-col gap-5 items-center justify-center relative">
+        <button class="absolute w-max h-max grid place-items-center right-0 top-0" @click="emits('update:modelValue',false)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.5 0.5L0.5 13.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.5 0.5L13.5 13.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <span class="text-sm font-light">لطفا به تجربه خود با ما، امتیاز دهید</span>
         <div class="grid grid-cols-4 gap-4">
           <div @click="feedbackValue = EFeedbackType.Unhappy" :class="['border rounded-xl flex flex-col items-center justify-center gap-1 p-4 border-[#818C92]/20 hover:border-[#818C92]/70 transition-colors duration-300 cursor-pointer',{'border-[#FB7511]':feedbackValue == EFeedbackType.Unhappy}]">
@@ -51,7 +57,7 @@ const sendFeedback = async ()=>{
           </div>
         </div>
         <div v-if="feedbackValue == EFeedbackType.Unhappy" class="w-full">
-          <textarea name="" id="" rows="3" class="w-full border rounded-lg bg-transparent py-2 px-3 text-xs font-light focus:outline-none resize-none" placeholder="ما داریم اینجا زحمت میکشیم"></textarea>
+          <textarea name="" id="" rows="3" class="w-full border rounded-lg bg-transparent py-2 px-3 text-xs font-light focus:outline-none resize-none" placeholder="دلیل نارضایتی شما چیست؟"></textarea>
         </div>
         <div class="flex items-center gap-4">
           <BaseGButton button-type="outline" color="secondary" is-icon custom-class="min-w-[100px] !rounded-lg text-xs font-light" @click="emits('update:modelValue',false)">

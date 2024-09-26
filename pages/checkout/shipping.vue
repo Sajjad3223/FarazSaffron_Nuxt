@@ -287,7 +287,7 @@
           <span>2</span>
           <span class="absolute -bottom-full w-max">افزودن آدرس</span>
         </div>
-        <div class="h-px bg-black/10 opacity-40 flex-1"></div>
+        <div class="h-px bg-brandOrange opacity-40 flex-1"></div>
         <div class="relative opacity-40 grid place-items-center w-8 h-8 rounded-full border">
           <span>3</span>
           <span class="absolute -bottom-full w-max">تکمیل پرداخت</span>
@@ -309,7 +309,7 @@
               <span class="font-light text-sm opacity-70">{{ a.receiverPhoneNumber }}</span>
             </div>
 
-            <button class="absolute top-4 left-4 grid place-items-center text-danger">
+            <button type="button" class="absolute top-4 left-4 grid place-items-center text-danger" @click="editAddress(a)">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-125">
                 <path d="M2.76902 9.75978C2.46402 9.75978 2.17902 9.65478 1.97402 9.45978C1.71402 9.21478 1.58902 8.84478 1.63402 8.44478L1.81902 6.82478C1.85402 6.51978 2.03902 6.11478 2.25402 5.89478L6.35902 1.54978C7.38402 0.46478 8.45402 0.43478 9.53902 1.45978C10.624 2.48478 10.654 3.55478 9.62902 4.63978L5.52402 8.98478C5.31402 9.20978 4.92402 9.41978 4.61902 9.46978L3.00902 9.74478C2.92402 9.74978 2.84902 9.75978 2.76902 9.75978ZM7.96402 1.45478C7.57902 1.45478 7.24402 1.69478 6.90402 2.05478L2.79902 6.40478C2.69902 6.50978 2.58402 6.75978 2.56402 6.90478L2.37902 8.52478C2.35902 8.68978 2.39902 8.82478 2.48902 8.90978C2.57902 8.99478 2.71402 9.02478 2.87902 8.99978L4.48902 8.72478C4.63402 8.69978 4.87402 8.56978 4.97402 8.46478L9.07902 4.11978C9.69902 3.45978 9.92402 2.84978 9.01902 1.99978C8.61902 1.61478 8.27402 1.45478 7.96402 1.45478Z" fill="#F04623"/>
                 <path d="M8.66826 5.47541C8.65826 5.47541 8.64326 5.47541 8.63326 5.47541C7.07326 5.32041 5.81826 4.13541 5.57826 2.58541C5.54826 2.38041 5.68826 2.19041 5.89326 2.15541C6.09826 2.12541 6.28826 2.26541 6.32326 2.47041C6.51326 3.68041 7.49326 4.61041 8.71326 4.73041C8.91826 4.75041 9.06826 4.93541 9.04826 5.14041C9.02326 5.33041 8.85826 5.47541 8.66826 5.47541Z" fill="#F04623"/>
@@ -347,13 +347,29 @@
           <profile-user-address class="mt-6" @address-created="showAddressModal = false,accountStore.initData()"/>
         </div>
       </Transition>
+      <Transition enter-active-class="transition-opacity duration-200" leave-active-class="transition-opacity duration-200" enter-from-class="opacity-0" leave-to-class="opacity-0">
+        <div class="fixed p-2 flex flex-col inset-0 bg-white z-30" v-if="showEditAddress">
+          <header class="w-full h-[50px] px-4 flex items-center justify-center relative">
+            <button class="absolute right-7" @click="showEditAddress = false">
+              <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.8" d="M1 13L6 7L1 1" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <span class="font-light">
+          ویرایش آدرس
+        </span>
+          </header>
+          <hr>
+          <profile-edit-user-address :address="addressToEdit" @address-edited="showEditAddress = false,accountStore.initData()" />
+        </div>
+      </Transition>
       <!--  Total Price  -->
       <div class="w-full fixed bottom-[75px] border-b bg-white h-[60px] z-20 px-4 grid grid-cols-2 items-center" style="box-shadow: 0 -4px 10px 0 #E2E2E240;">
         <div class="flex flex-col items-start">
           <small>مجموع سبد خرید</small>
-          <base-g-price :price="(cartStore.PendingOrder.totalPrice / 10)" />
+          <base-g-price :price="cartStore.PendingOrder.totalPrice" />
         </div>
-        <base-g-button @click="payOrder" w-full :disabled="!accountStore.hasActiveAddress || payLoading" :is-loading="payLoading" is-icon custom-class="!rounded-lg">
+        <base-g-button is-link to="/checkout/paymentMethod" w-full is-icon custom-class="!rounded-lg">
           تکمیل سفارش
         </base-g-button>
       </div>
@@ -372,6 +388,7 @@ import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import {PayWithWallet, RemoveDiscount, SetDiscount} from "~/services/cart.service";
 import {EPaymentMethod} from "~/models/ePaymentMethod";
+import type {AddressDto} from "~/models/users/userDto";
 
 
 const discountCode = ref('');
@@ -384,9 +401,11 @@ const paymentMethod = ref(EPaymentMethod.Gateway);
 
 const showDiscount = ref(false);
 const showAddressModal = ref(false);
+const showEditAddress = ref(false);
 
 const toast = useToast();
 
+const addressToEdit:Ref<AddressDto | null> = ref(null);
 const loading = ref(true);
 const discountLoading = ref(false);
 const payLoading = ref(false);
@@ -423,6 +442,11 @@ const applyDiscount = async () => {
   }
 
   discountLoading.value = false;
+}
+
+const editAddress = (address:AddressDto)=>{
+  addressToEdit.value = address;
+  showEditAddress.value = true;
 }
 
 const payOrder = async ()=>{

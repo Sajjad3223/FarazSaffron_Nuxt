@@ -18,6 +18,7 @@
         <slot></slot>
       </main>
       <BaseMobileFooter />
+      <BaseMFooter />
     </div>
   </div>
   <g-loading v-if="isLoading" />

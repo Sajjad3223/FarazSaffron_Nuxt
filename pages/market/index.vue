@@ -97,9 +97,6 @@
                       </NuxtLink>
                       <div class="flex-1 flex flex-col items-start space-y-4">
                         <NuxtLink :to="`/product/${i.slug}`" class="w-4/5 text-right min-h-12">{{ i.title }}</NuxtLink>
-                        <span class="text-[#9E9E9E] text-sm hidden">
-                          1 مثقال- 4/608 گرم
-                        </span>
                         <ul class="flex items-center gap-0.5">
                           <li v-for="i in 5" :key="i">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -113,7 +110,7 @@
                             </svg>
                           </li>
                         </ul>
-                        <base-g-price :price="i.price / 10" />
+                        <base-g-price :price="i.price" />
                       </div>
                     </li>
                   </GPSlide>
