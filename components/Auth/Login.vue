@@ -1,5 +1,5 @@
 <template>
-  <Form :validation-schema="loginSchema" @submit="login" class="flex flex-col space-y-4 mt-6">
+  <Form :validation-schema="loginSchema" @submit="login" @keydown.enter="login" class="flex flex-col space-y-4 mt-6">
     <div class="grid grid-cols-1 gap-4">
       <base-g-input label="شماره تلفن *" place-holder="09*********" required name="phoneNumber" id="phoneNumber" v-model="loginData.phoneNumber"/>
       <base-g-input label="رمز عبور *" place-holder="******" type="password" required name="password" id="password" v-model="loginData.password"/>

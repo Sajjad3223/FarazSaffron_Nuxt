@@ -9,9 +9,9 @@
         }">
         <SwiperSlide v-for="b in banners.sort((a,b)=>a.order - b.order)" :key="b.id">
           <NuxtLink :to="b.url" class="w-full shrink-0 relative">
-            <img :src="`${SITE_URL}/banners/${b.image.src}`"
+            <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/banners/${b.image.src}`"
                  :alt="b.image.alt"
-                 class="w-full  object-cover">
+                 class="w-full object-cover" placeholder-class="w-full object-cover" />
           </NuxtLink>
         </SwiperSlide>
         <SwiperControls class="absolute left-8 bottom-8 z-20" v-if="showArrows"/>

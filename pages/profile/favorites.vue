@@ -15,7 +15,7 @@
       <ul class="grid grid-cols-1 md:grid-cols-3 mt-12" v-if="favorites.length > 0">
         <li class="flex flex-col items-center space-y-4 border p-4" v-for="f in favorites" :key="f.id">
           <NuxtLink :to="`/product/${f.postSlug}`" class="w-1/3 lg:w-auto">
-            <img :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg max-h-[250px]">
+            <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg max-h-[250px]" />
           </NuxtLink>
           <NuxtLink :to="`/product/${f.postSlug}`" class="text-lg lg:text-xl font-bold">
             {{f.postTitle}}
@@ -89,7 +89,7 @@
             </div>
           </div>
           <NuxtLink :to="`/product/${f.postSlug}`" class="max-w-[120px]">
-            <img :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg">
+            <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${f.postImage.src}`" :alt="f.postImage.alt" class="w-full rounded-lg"/>
           </NuxtLink>
         </li>
       </ul>

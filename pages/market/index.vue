@@ -93,7 +93,7 @@
                   <GPSlide v-for="i in popularProducts" :key="i">
                     <li class="py-3.5 px-4 flex mx-8 items-start bg-white min-w-[350px] w-full rounded-xl transition-all duration-300 similar" >
                       <NuxtLink :to="`/product/${i.slug}`" class="w-2/5 grid place-items-center relative">
-                        <img src="../../assets/images/product-image.png" alt="product" class="w-full ">
+                        <img :src="`${SITE_URL}/product/images/${i.mainImage.src}`" :alt="i.mainImage.alt" class="w-full">
                       </NuxtLink>
                       <div class="flex-1 flex flex-col items-start space-y-4">
                         <NuxtLink :to="`/product/${i.slug}`" class="w-4/5 text-right min-h-12">{{ i.title }}</NuxtLink>

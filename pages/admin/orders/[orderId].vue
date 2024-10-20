@@ -91,7 +91,7 @@
       <div class="grid grid-cols-2 gap-6 mt-6">
         <div class="flex items-center gap-4" v-for="i in orderData.orderItems" :key="i.id">
           <div class="relative max-w-[200px]">
-            <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt" class="w-full rounded-xl">
+            <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" :alt="i.itemInfo.productImage.alt" class="w-full rounded-xl"/>
             <span class="absolute top-2 left-2 bg-brandOrange/20 rounded-full px-2 text-brandOrange text-[10px]">{{i.count}} عدد</span>
           </div>
           <div class="flex flex-col items-start">

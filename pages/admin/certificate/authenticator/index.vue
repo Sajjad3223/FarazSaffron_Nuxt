@@ -42,7 +42,7 @@
           </NuxtLink>
         </td>
         <td class="px-4 py-5">
-          <NuxtLink :to="`/inquiry?serial=${a.serialNumber.substring(2)}`" class="uppercase font-[montserrat]">
+          <NuxtLink :to="`/admin/certificate/authenticator/${a.id}`" class="uppercase font-[montserrat]">
             {{ a.serialNumber }}
           </NuxtLink>
         </td>

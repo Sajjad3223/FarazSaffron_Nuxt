@@ -83,13 +83,13 @@
 
       <ul class="flex md:grid grid-cols-3 gap-6 mt-12 px-12 overflow-x-auto">
         <li class="w-full overflow-hidden rounded-xl shrink-0">
-          <img src="~/assets/images/aboutUs1.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
+          <NuxtImg placeholder="/images/placeholder.jpeg" src="/_nuxt/assets/images/aboutUs1.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300" />
         </li>
         <li class="w-full overflow-hidden rounded-xl shrink-0">
-          <img src="~/assets/images/aboutUs2.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
+          <NuxtImg placeholder="/images/placeholder.jpeg" src="/_nuxt/assets/images/aboutUs2.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300" />
         </li>
         <li class="w-full overflow-hidden rounded-xl shrink-0">
-          <img src="~/assets/images/aboutUs3.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300">
+          <NuxtImg placeholder="/images/placeholder.jpeg" src="/_nuxt/assets/images/aboutUs3.png" alt="aboutUs" class="w-full hover:scale-110 transition-transform duration-300" />
         </li>
       </ul>
 

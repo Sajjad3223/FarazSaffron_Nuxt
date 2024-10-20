@@ -36,20 +36,28 @@ export const useAccountStore = defineStore('account',()=> {
         const userData = await GetCurrentUser();
         if (userData.isSuccess) {
             currentUser.value = userData.data!;
-            const notifsResult = await GetUnseenNotificationsCount();
-            if(notifsResult.isSuccess){
-                unseenNotifs.value = notifsResult.data ?? 0;
-            }
-            const favResult = await GetFavorites({take:50,pageId:1});
-            if(favResult.isSuccess){
-                myFavorites.value = favResult.data ?? [];
-            }
-            const favCountResult = await GetFavoritesCount();
-            if(favCountResult.isSuccess){
-                myFavoritesCount.value = favCountResult.data ?? 0;
-            }
+
             if(userData.data?.wallets == null || userData.data.wallets.length <= 0)
                 currentUser.value.wallets = [];
+
+
+            GetUnseenNotificationsCount().then(notifsResult=>{
+                if(notifsResult.isSuccess){
+                    unseenNotifs.value = notifsResult.data ?? 0;
+                }})
+            GetFavorites({take:50,pageId:1})
+                .then(favResult=>
+                    {
+                        if(favResult.isSuccess){
+                            myFavorites.value = favResult.data ?? [];
+                        }
+                    }
+                );
+            GetFavoritesCount().then(favCountResult=> {
+                if (favCountResult.isSuccess) {
+                    myFavoritesCount.value = favCountResult.data ?? 0;
+                }
+            });
 
         } else if ( userData.metaData.appStatusCode == ApiStatusCode.UnAuthorize) {
             const cookie = useCookie("c-access-token");

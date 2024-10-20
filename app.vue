@@ -70,12 +70,6 @@ const cartStore = useCartStore();
 const showFeedbackPanel = ref(false);
 const noFeedback = ref(false);
 
-useHead({
-  link:[
-    {rel:"stylesheet",href:"https://v1.fontapi.ir/css/Estedad"},
-  ]
-});
-
 useSchemaOrg([
     defineWebSite({
       name:'زعفران جی‌پی',

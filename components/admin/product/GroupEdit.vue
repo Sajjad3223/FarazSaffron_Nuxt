@@ -42,7 +42,7 @@
             <input type="checkbox" :name="p.id" :id="p.id" class="w-4 h-4 pointer-events-none" :checked="selectedProducts.includes(p.id)">
             <div class="flex-1 flex items-center gap-4 cursor-pointer">
               <div class="w-1/5 flex items-center justify-center">
-                <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px] mx-auto">
+                <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px] mx-auto" />
               </div>
               <div class="flex-1 flex flex-col gap-2">
                 <span class="text-sm select-none">{{p.title}}</span>
@@ -90,7 +90,7 @@
         <div class="flex flex-col max-h-[50vh] overflow-y-auto">
           <div class="flex flex-col gap-2 py-4" v-for="(p,i) in getSelectedProducts" :key="p.id">
             <div class="flex items-center gap-4">
-              <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]">
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]" />
               <span class="text-sm select-none">{{p.title}}</span>
             </div>
             <BaseInputsPriceInput label="قیمت" unit="ریال" class="px-4" v-model="editProductCommand[i].price"/>
@@ -124,7 +124,7 @@
         <div class="flex flex-col max-h-[50vh] overflow-y-auto">
           <div class="flex flex-col gap-2 py-4" v-for="(p,i) in getSelectedProducts" :key="p.id">
             <div class="flex items-center gap-4">
-              <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]">
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]"/>
               <span class="text-sm select-none">{{p.title}}</span>
             </div>
             <BaseInputsTextInput name="quantity" type="number" label="موجودی" class="px-4" v-model="editProductCommand[i].quantity"/>
@@ -148,7 +148,7 @@
         <div class="flex flex-col max-h-[50vh] overflow-y-auto">
           <div class="flex flex-col gap-2 py-4" v-for="(p,i) in getSelectedProducts" :key="p.id">
             <div class="flex items-center gap-4">
-              <img :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]">
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${p.mainImage.src}`" :alt="p.mainImage.alt" class="max-h-[100px]"/>
               <span class="text-sm select-none">{{p.title}}</span>
             </div>
             <BaseInputsPriceInput label="قیمت دیجیکالا" unit="ریال" class="px-4" v-model="editProductCommand[i].digikalaPrice"/>

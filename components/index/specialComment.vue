@@ -11,7 +11,7 @@ const props = defineProps<{
   <div class="border rounded-3xl py-6 px-10 flex flex-col justify-between" >
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center gap-3">
-        <img :src="`${SITE_URL}/specialComments/${comment.userAvatar}`" :alt="comment.userName" class="max-w-[50px] rounded-full">
+        <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}//specialComments/${comment.userAvatar}`" :alt="comment.userName" class="max-w-[50px] rounded-full" />
         <div class="flex flex-col">
           <span class="text-lg opacity-70">{{ comment.userName }}</span>
           <span class="text-sm opacity-30">{{ comment.userJob }}</span>

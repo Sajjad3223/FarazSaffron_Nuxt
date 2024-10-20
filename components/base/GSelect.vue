@@ -18,7 +18,7 @@
       <input v-model="search" placeholder="جستجو" type="text" class="bg-black/5 rounded px-2 py-1 focus:outline-none w-full mb-2 text-xs font-light">
       <div class=" flex flex-col gap-1 text-sm font-light max-h-[200px] overflow-y-auto">
         <div v-for="(o,i) in filteredOptions" class="cursor-pointer flex gap-3 p-2 w-full rounded-md hover:bg-black/10" @click="select(o.value)">
-          <img :src="o.image" :alt="o.title" class="w-16 rounded-lg" v-if="o.image">
+          <NuxtImg placeholder="/images/placeholder.jpeg" :src="o.image" :alt="o.title" class="w-16 rounded-lg" v-if="o.image" />
           <span>{{ o.title }}</span>
         </div>
       </div>

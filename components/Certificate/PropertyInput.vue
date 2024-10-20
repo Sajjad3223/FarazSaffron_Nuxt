@@ -1,8 +1,8 @@
 <template>
   <div class="relative w-full flex flex-col gap-1">
-    <label class="text-xs opacity-50 " :for="`property-${property.propertyId}`">{{property.title}}</label>
+    <label class="text-xs opacity-50 " :for="`property-${property.id}`">{{property.title}}</label>
     <textarea v-if="property.propertyType == EPropertyType.متن_چند_خطی"
-        :name="`property-${property.propertyId}`" :id="`property-${property.propertyId}`"
+        :name="`property-${property.id}`" :id="`property-${property.id}`"
         v-model="value" @change="updateData" class="px-3 py-2 rounded-md border" :placeholder="property.hintValue"></textarea>
     <div v-else-if="property.propertyType == EPropertyType.موقعیت_مکانی" class="flex flex-col gap-1">
       <input type="text" class="px-3 py-2 rounded-md border font-light" placeholder="Latitude" dir="ltr">
@@ -11,9 +11,9 @@
     <div v-else-if="property.propertyType == EPropertyType.رنج">
       <div class="flex flex-col gap-1 w-full">
         <div class="grid grid-cols-3 gap-1">
-          <input type="number" placeholder="حداقل" class="p-2 rounded border font-light" v-model="rangeValue.min">
-          <input type="number" placeholder="حداکثر" class="p-2 rounded border font-light" v-model="rangeValue.max">
-          <input type="number" placeholder="مقدار" class="p-2 rounded border font-light" v-model="rangeValue.value">
+          <input type="number" placeholder="حداقل" :name="`property-min-${property.id}`" :id="`property-min-${property.id}`" class="p-2 rounded border font-light" v-model="rangeValue.min">
+          <input type="number" placeholder="حداکثر" :name="`property-max-${property.id}`" :id="`property-max-${property.id}`" class="p-2 rounded border font-light" v-model="rangeValue.max">
+          <input type="number" placeholder="مقدار" :name="`property-${property.id}`" :id="`property-${property.id}`" class="p-2 rounded border font-light" v-model="rangeValue.value">
         </div>
         <div class="grid grid-cols-3 gap-1" v-if="false">
           <input type="color" class="w-full" v-model="rangeValue.rightColor">
@@ -23,11 +23,11 @@
       </div>
     </div>
     <div class="grid grid-cols-2 gap-4" v-else-if="property.propertyType == EPropertyType.تاریخ">
-      <base-g-select :options="monthOptions" v-model="dateValue.month"/>
-      <base-inputs-text-input type="number" name="year" v-model="dateValue.year" place-holder="سال"/>
+      <base-g-select :options="monthOptions" name="month" v-model="dateValue.month"/>
+      <base-inputs-text-input type="number" :name="`property-${property.id}`" v-model="dateValue.year" place-holder="سال"/>
     </div>
     <input ref="input" v-else
-        :type="getInputType()" :name="`property-${property.propertyId}`" :id="`property-${property.propertyId}`"
+        :type="getInputType()" :name="`property-${property.id}`" :id="`property-${property.id}`"
            v-model="value" @change="updateData" class="px-3 py-2 rounded-md border" :placeholder="property.hintValue">
   </div>
 </template>
@@ -63,8 +63,8 @@ const dateValue = reactive({
 
 onMounted(()=>{
   if(props.property.propertyType == EPropertyType.رنج){
-    if(!props.modelValue.value) return;
-    const data = JSON.parse(props.modelValue.value);
+    if(!props.modelValue?.value) return;
+    const data = JSON.parse(props.modelValue?.value);
     rangeValue.min = data.min;
     rangeValue.max = data.max;
     rangeValue.value = data.value;

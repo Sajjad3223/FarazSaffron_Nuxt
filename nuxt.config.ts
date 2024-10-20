@@ -16,15 +16,16 @@ export default defineNuxtConfig({
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-KNQMX3TD');`},
-        {src:'https://www.googletagmanager.com/gtag/js?id=G-Y4ZZT8RBNR',},
+        })(window,document,'script','dataLayer','GTM-KNQMX3TD');`,async:true},
+        {src:'https://www.googletagmanager.com/gtag/js?id=G-Y4ZZT8RBNR',async:true},
         {
           innerHTML:`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
         
-          gtag('config', 'G-Y4ZZT8RBNR');`
+          gtag('config', 'G-Y4ZZT8RBNR');`,
+          async:true
         }
       ],
       noscript:[
@@ -69,7 +70,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "nuxt-schema-org",
     "nuxt-vue3-google-signin",
-    "@zadigetvoltaire/nuxt-gtm"
+    "@zadigetvoltaire/nuxt-gtm",
   ],
   pwa:{
     manifest: {

@@ -25,21 +25,22 @@
           <base-g-button color="primary" type="submit" w-full>ثبت و ارسال</base-g-button>
         </Form>
         <div style="height: 40vh; width:100%" class="rounded-2xl border overflow-hidden z-10 mt-5 md:mt-0">
-          <LMap
-              ref="map"
-              :zoom="16"
-              :center="[35.29199744307878, 59.16538418430383]"
-          >
-            <LTileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                layer-type="base"
-                name="OpenStreetMap"
-            />
-            <LMarker :draggable="false" name="GP Saffron" attribution="GP Saffron"  :lat-lng="[35.29199744307878, 59.16538418430383]">
-              <LPopup content="شرکت فراز زعفران تربت"  />
-            </LMarker>
-          </LMap>
+          <ClientOnly>
+            <LMap
+                :zoom="16"
+                :center="[35.29199744307878, 59.16538418430383]"
+            >
+              <LTileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                  layer-type="base"
+                  name="OpenStreetMap"
+              />
+              <LMarker :draggable="false" name="GP Saffron" attribution="GP Saffron"  :lat-lng="[35.29199744307878, 59.16538418430383]">
+                <LPopup content="شرکت فراز زعفران تربت"  />
+              </LMarker>
+            </LMap>
+          </ClientOnly>
         </div>
       </div>
       <div class="my-12 bg-[#F8F8F8] rounded-2xl md:p-8">

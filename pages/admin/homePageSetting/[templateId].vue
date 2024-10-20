@@ -99,9 +99,9 @@
           <div class="flex flex-col gap-2">
             <span class="opacity-50 text-sm">بنر بالای صفحه</span>
             <div class="relative overflow-hidden rounded-xl" v-if="template.topBanner">
-              <img :src="`${SITE_URL}/banners/${template.topBanner.image.src}`"
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/banners/${template.topBanner.image.src}`"
                    :alt="template.topBanner.image.alt"
-                   class="w-full bg-brandOrange">
+                   class="w-full bg-brandOrange"/>
               <button class="bg-opacity-0 opacity-0 hover:bg-opacity-50 hover:opacity-100 transition-all duration-300 bg-black absolute inset-0 grid place-items-center"
               @click="showEditTopBannerModal = true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-150">

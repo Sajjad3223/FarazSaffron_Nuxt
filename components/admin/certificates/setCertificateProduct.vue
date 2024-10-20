@@ -22,7 +22,7 @@ watch(
 <template>
   <div class="flex flex-col items-center gap-2 p-2 rounded-xl">
     <span class="text-xs text-center font-light">{{product.title}}</span>
-    <img :src="`${SITE_URL}/product/images/${product.imageName}`" :alt="product.title" class="max-h-[100px] w-fit my-auto">
+    <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${product.imageName}`" :alt="product.title" class="max-h-[100px] w-fit my-auto" />
     <BaseInputsTextInput label="تعداد" type="number" v-model="count" :name="`product-${product.id}`"/>
   </div>
 </template>

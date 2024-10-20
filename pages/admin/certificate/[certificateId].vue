@@ -76,14 +76,10 @@ onMounted(async ()=>{
     cProperties.value = result.data?.data ?? [];
   }
 
-  console.log(certificate.value?.properties)
-  console.log(setCPropertiesCommand)
-
 });
 
 const updateCertificate = async ()=>{
 
-  console.log(setCPropertiesCommand)
 
   const result = await SetCProperties(setCPropertiesCommand);
   if(result.isSuccess){

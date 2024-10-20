@@ -1,39 +1,6 @@
 <template>
-<!--  <div class="hidden md:flex group max-w-[280px] flex-col relative gap-4">
-    <div class="w-full aspect-square rounded-xl grid place-items-center bg-white border relative overflow-hidden">
-      <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-h-[200px]">
-      <button @click="addToCart(product.id,product.slug)"
-              class="absolute inset-x-3 bottom-3 translate-y-[150%] transition-transform duration-200 group-hover:translate-y-0 bg-brandOrange flex items-center gap-4 text-white justify-center py-2 rounded-lg">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.0625 1.43738L2.6225 1.70738L3.34475 10.3121C3.4025 11.0149 3.98975 11.5541 4.69475 11.5519H12.8765C13.5492 11.5534 14.12 11.0584 14.2153 10.3924L14.927 5.47388C15.0065 4.92413 14.6247 4.41413 14.0757 4.33463C14.0277 4.32788 2.873 4.32413 2.873 4.32413" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9.59375 7.09607H11.6735" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.36503 14.1519C4.59078 14.1519 4.77303 14.3349 4.77303 14.5599C4.77303 14.7856 4.59078 14.9686 4.36503 14.9686C4.13928 14.9686 3.95703 14.7856 3.95703 14.5599C3.95703 14.3349 4.13928 14.1519 4.36503 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.826 14.1519C13.0517 14.1519 13.2347 14.3349 13.2347 14.5599C13.2347 14.7856 13.0517 14.9686 12.826 14.9686C12.6002 14.9686 12.418 14.7856 12.418 14.5599C12.418 14.3349 12.6002 14.1519 12.826 14.1519Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="text-sm font-light">افزودن به سبد خرید</span>
-      </button>
-    </div>
-    <span class="font-light w-10/12 truncate" :title="product.title">{{product.title}}</span>
-    <base-g-price :price="(product.price / 10)"/>
-    <span class="text-sm font-light absolute top-4 right-4 bg-danger rounded-full px-3 py-1 text-white" v-if="product.discount !== 0">
-      {{ product.discount }}%
-    </span>
-    <label class="cursor-pointer grid place-items-center absolute top-4 left-4 hover:-translate-y-1 transition-all duration-200 text-danger">
-      <input type="checkbox" :name="`favorite-${product.id}`" class="appearance-none opacity-0" v-model="isFavorite" @change="changeFavorite">
-      <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" v-if="isFavorite">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.871865 8.59832C-0.201135 5.24832 1.05287 1.41932 4.56987 0.286322C6.41987 -0.310678 8.46187 0.0413219 9.99987 1.19832C11.4549 0.0733218 13.5719 -0.306678 15.4199 0.286322C18.9369 1.41932 20.1989 5.24832 19.1269 8.59832C17.4569 13.9083 9.99987 17.9983 9.99987 17.9983C9.99987 17.9983 2.59787 13.9703 0.871865 8.59832Z" fill="#FE143E"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M14 3.69995C15.07 4.04595 15.826 5.00095 15.917 6.12195L14 3.69995Z" fill="white"/>
-        <path d="M14 3.69995C15.07 4.04595 15.826 5.00095 15.917 6.12195" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" v-else>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.871865 9.59832C-0.201135 6.24832 1.05287 2.41932 4.56987 1.28632C6.41987 0.689322 8.46187 1.04132 9.99987 2.19832C11.4549 1.07332 13.5719 0.693322 15.4199 1.28632C18.9369 2.41932 20.1989 6.24832 19.1269 9.59832C17.4569 14.9083 9.99987 18.9983 9.99987 18.9983C9.99987 18.9983 2.59787 14.9703 0.871865 9.59832Z" stroke="#FE143E" stroke-linecap="round" stroke-linejoin="round"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.7002C15.07 5.0462 15.826 6.0012 15.917 7.1222Z" fill="#FE143E"/>
-        <path d="M14 4.7002C15.07 5.0462 15.826 6.0012 15.917 7.1222" stroke="#FE143E" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </label>
-  </div>-->
   <NuxtLink :to="`/product/${product.slug}`" class="md:hidden flex flex-col items-center bg-white rounded-xl p-5 space-y-4">
-    <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="h-[100px]">
+    <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="h-[100px]"/>
     <span class="text-sm text-center font-light">{{product.title}}</span>
     <div class="flex items-center gap-2">
       <span class="text-brandOrange">{{roundPrice(product.totalPrice).toLocaleString()}}</span>

@@ -178,8 +178,8 @@
                 v-for="i in order.orderItems" :key="i.id">
               <div class="w-1/6 flex flex-col items-center relative">
                 <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="w-full">
-                  <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                       :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg">
+                  <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+                       :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg" />
                 </NuxtLink>
                 <span class="absolute top-4 left-4 grid place-items-center text-sm bg-brandOrange/20 text-brandOrange rounded-full px-3">{{i.count}} عدد</span>
               </div>
@@ -275,8 +275,8 @@
               </div>
               <div class="relative">
                 <NuxtLink :to="`/product/${i.itemInfo.productSlug}`" class="w-full">
-                  <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                       :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg">
+                  <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+                       :alt="i.itemInfo.productImage.alt" class="w-full rounded-lg"/>
                 </NuxtLink>
                 <span class="absolute top-2 right-2 text-xs w-4 h-4 rounded-full bg-brandOrange text-white grid place-items-center">{{i.count}}</span>
               </div>

@@ -12,7 +12,7 @@
           <form @submit.prevent="findCertificate"
                 class="w-full p-8 border bg-white rounded-lg relative flex flex-col space-y-4 items-center" method="GET">
             <div class="flex flex-col w-full space-y-2">
-              <base-inputs-text-input type="number" label="کد استعلام" name="serialNumber" v-model="serial" required side-text=" - ZC" text-align="center" custom-classes="font-[montserrat]" side-text-classes="font-[montserrat]" place-holder="شماره سریال پشت محصول را وارد کنید"/>
+              <base-inputs-text-input label="کد استعلام" name="serialNumber" v-model="serial" required side-text=" - ZC" text-align="center" custom-classes="font-[montserrat]" side-text-classes="font-[montserrat]" place-holder="شماره سریال پشت محصول را وارد کنید"/>
             </div>
             <div class="flex flex-col w-full space-y-2">
               <!--              <base-g-select label="نوع محصول" v-model="productId" :options="productOptions.map(o=>{
@@ -63,8 +63,15 @@
             </div>
           </div>
           <hr class="my-5">
-          <span class="text-lg">مشخصات محصول</span>
+          <span class="text-lg">مشخصات محصول <span class="opacity-60 text-sm">( هنگام بسته بندی)</span></span>
           <div class="flex flex-col w-full space-y-4 mt-5">
+            <div class="flex flex-col md:flex-row items-end md:items-center md:justify-between">
+              <span class="w-max self-start md:self-center text-sm opacity-70 font-light">تاریخ انقضا</span>
+              <div class="flex gap-1 font-light">
+                <span>{{months[dateValue.month - 1]}}</span> ماه
+                <span>{{dateValue.year + 2}}</span>
+              </div>
+            </div>
             <div v-for="p in authenticator.properties.sort((a,b)=>a.propertyType - b.propertyType)" :key="p.id"
                  class="flex flex-col md:flex-row items-end md:items-center md:justify-between">
               <span class="w-max self-start md:self-center text-sm opacity-70 font-light">{{p.title}}</span>
@@ -141,7 +148,7 @@
           <div @click="productSelected(p)"
                class="flex flex-col items-center gap-2 p-2 rounded-xl border border-transparent hover:border-black/10 cursor-pointer"
                v-for="p in productOptions" :key="p.id">
-            <img :src="`${SITE_URL}/product/images/${p.imageName}`" :alt="p.title" class="max-h-[60px] md:max-h-[100px] w-fit">
+            <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${p.imageName}`" :alt="p.title" class="max-h-[60px] md:max-h-[100px] w-fit" />
             <span class="text-[10px] md:text-xs text-center font-light">{{p.title}}</span>
           </div>
         </div>

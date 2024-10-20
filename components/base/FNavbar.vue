@@ -67,7 +67,6 @@
       </div>
       <div>
           <span>“  <span class="text-[#FB7511]">ارسال رایگان</span> برای محصولات بالاتر از 10 گرم        “</span>
-<!--        <img src="~/assets/images/moharram.png" alt="moharram" class="max-w-[500px] absolute -top-1 left-1/2 -translate-x-1/2 z-20">-->
       </div>
       <div class="flex items-center gap-2">
         <span dir="ltr" class="text-[#171717]/60">
@@ -332,8 +331,8 @@
                 <ul class="flex flex-col space-y-4 max-h-[300px] 2xl:max-h-[450px] mb-5 pr-4 overflow-y-auto" dir="ltr">
                   <li class="flex items-start gap-6 pb-4 border-b last:border-none" v-for="i in cartStore.PendingOrder.orderItems" :key="i.id" dir="rtl">
                     <div class="w-1/4 2xl:w-1/3 max-w-[200px] rounded-xl bg-white border grid place-items-center aspect-square">
-                      <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                           :alt="i.itemInfo.productImage.alt" class="w-2/3">
+                      <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+                           :alt="i.itemInfo.productImage.alt" class="w-2/3" />
                     </div>
                     <div class="flex-1 flex flex-col items-start space-y-4">
                       <button class="self-end" @click="cartStore.removeItem(i.id)">
@@ -448,8 +447,8 @@
                   </button>
                   <div class="col-span-2 flex items-center gap-4">
                     <div class="bg-white rounded-xl w-[70px] h-[70px] grid place-items-center border">
-                      <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                           :alt="i.itemInfo.productImage.alt" class="w-2/3">
+                      <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+                           :alt="i.itemInfo.productImage.alt" class="w-2/3"/>
                     </div>
                     <span class="opacity-60 max-w-[170px] truncate" :title="i.itemInfo.productName">{{i.itemInfo.productName}}</span>
                   </div>
@@ -572,8 +571,8 @@
                     <ul class="w-full max-h-[250px] 2xl:max-h-[400px] overflow-y-auto py-4 pr-4" dir="ltr">
                       <li class="w-full flex flex-wrap items-stretch gap-x-8 py-3 first:pt-0" v-for="(i,n) in cartStore.PendingOrder.orderItems" :key="i.id" dir="rtl">
                         <div class="w-1/6 border rounded-md aspect-square bg-white grid place-items-center relative">
-                          <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
-                               :alt="i.itemInfo.productImage.alt" alt="saffron pocket" class="w-2/3">
+                          <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`"
+                               :alt="i.itemInfo.productImage.alt" alt="saffron pocket" class="w-2/3"/>
                           <span class="text-white bg-[#FB7511] rounded-full text-xs leading-5 w-5 h-5 grid place-items-center absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
                           {{ i.count }}
                         </span>

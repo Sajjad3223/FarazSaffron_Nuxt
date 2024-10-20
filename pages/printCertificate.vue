@@ -52,7 +52,7 @@
             </div>
           </div>
           <hr class="my-5">
-          <span class="text-lg">مشخصات محصول</span>
+          <span class="text-lg">مشخصات محصول <span class="opacity-60 text-sm">( هنگام بسته بندی)</span></span>
           <div class="flex flex-col w-full space-y-4 mt-5">
             <div v-for="p in authenticator.properties.sort((a,b)=>a.propertyType - b.propertyType)" :key="p.id"
                  class="flex items-center justify-between">

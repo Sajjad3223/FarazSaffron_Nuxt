@@ -1,7 +1,7 @@
 <template>
   <li class="relative flex flex-col rounded-lg">
     <a :href="preview.url" class="w-full overflow-hidden rounded-2xl">
-      <img :src="`${SITE_URL}/blogPreviews/${preview.banner.src}`" :alt="preview.banner.alt" class="rounded-2xl w-full object-cover hover:scale-110 max-h-[250px] transition-transform duration-200">
+      <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/blogPreviews/${preview.banner.src}`" :alt="preview.banner.alt" class="rounded-2xl w-full object-cover hover:scale-110 max-h-[250px] transition-transform duration-200" />
     </a>
     <div class="w-5/6 mx-auto -mt-5 z-10 bg-white rounded-2xl p-4">
       <a :href="preview.url"  class="text-[#6A6A6A]">
@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import {SITE_URL} from "~/utilities/api.config";
 import type {BlogPreview} from "~/models/mainPage/dataTemplate";
 
 const props = defineProps<{

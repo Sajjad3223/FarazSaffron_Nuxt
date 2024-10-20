@@ -1,5 +1,5 @@
 <template>
-  <Form :validation-schema="registerSchema" @submit="register" class="flex flex-col mt-6">
+  <Form :validation-schema="registerSchema" @submit="register" @keydown.enter="register" class="flex flex-col mt-6">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
       <base-g-input type="text" label="نام" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="firstName" id="firstName" v-model="registerData.firstName"/>
       <base-g-input type="text" label="نام خانوادگی" place-holder="نام و نام خانوادگی خود را وارد کنید" required name="lastName" id="lastName" v-model="registerData.lastName"/>

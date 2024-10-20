@@ -37,7 +37,7 @@
     "loadash": "^1.0.0",
     "nuxt-precompress": "^0.5.9",
     "nuxt-swiper": "^1.2.2",
-    "nuxt-vue3-google-signin": "^0.0.11",
+    "nuxt-vue3-google-signin": "^0.0.6",
     "pinia": "^2.1.7",
     "sass": "^1.71.0",
     "sweetalert2": "^11.6.13",

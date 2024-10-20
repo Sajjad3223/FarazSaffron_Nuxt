@@ -68,7 +68,7 @@
           <template v-for="c in categories">
             <tr class="text-gray-700 ">
               <td class="px-4 py-3" v-if="c.imageName != null">
-                <img :src="`${SITE_URL}/category/${c.imageName}`" :alt="c.title" class="max-w-24 rounded-lg">
+                <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/category/${c.imageName}`" :alt="c.title" class="max-w-24 rounded-lg" />
               </td>
               <td v-else></td>
               <td class="px-4 py-3">

@@ -11,8 +11,6 @@ export default {
   theme: {
     fontFamily:{
       'vazir':['Vazir FD'],
-      'estedad': ['Estedad'],
-      'cinzel': ['"Cinzel"'],
     },
     extend: {
       colors:{

@@ -242,54 +242,6 @@
         </section>
 
         <!-- Comments -->
-<!--        <section class="w-full mt-16">
-          <div class="w-full flex flex-col lg:flex-row">
-            <div class="flex flex-col lg:w-1/5 items-start gap-3">
-              <div class="flex items-center justify-between">
-                <h3 class="text-2xl font-black pr-4 border-r-4 border-brandOrange">
-                  نظرات شما
-                </h3>
-              </div>
-              <div class="flex items-center justify-between mt-4">
-                <div class="text-[#8F8F8F] flex flex-col gap-2">
-            <span class="text-sm text-[#8D8D8D] font-light">
-              بخش کوچکی از نظرات شما در مورد جی پی
-            </span>
-                </div>
-              </div>
-            </div>
-            <div class="flex-1 lg:w-4/5">
-              <client-only>
-                <Swiper :modules="[FreeMode]"
-                        :freeMode="{
-                  enabled: true,
-                  sticky:true,
-                }"
-                        :breakpoints="commentsBreakpoints" class="rounded-xl py-4" dir="rtl">
-                  <SwiperSlide v-for="s in activeTemp.specialComments" :key="s.id">
-                    <li class="bg-white w-max min-w-[400px] rounded-xl border px-8 py-6 flex items-start gap-5" style="box-shadow: 0 3px 15px 0 #A6A6A640;" >
-                      <img :src="`${SITE_URL}/specialComments/${s.userAvatar}`"
-                           :alt="s.userName"
-                           class="rounded-full aspect-square w-[40px] h-[40px] object-cover">
-                      <div class="flex flex-col items-start">
-                        <strong class="text-lg text-[#979797]">{{ s.userName }}</strong>
-                        <small class="text-sm font-light text-[#BFBFBF]">{{ s.userJob }}</small>
-                        <p class="max-w-[280px] font-light text-sm text-[#818181] mt-5">
-                          {{ s.content }}
-                        </p>
-                      </div>
-                    </li>
-                  </SwiperSlide>
-                  <template v-slot:container-start>
-                    <SwiperControls class="m-2" />
-                  </template>
-                </Swiper>
-              </client-only>
-            </div>
-          </div>
-        </section>-->
-
-        <!-- Comments -->
         <div class="pt-[100px]">
           <div class="flex flex-col mb-12 space-y-4">
             <h5 class="text-2xl opacity-70 font-bold">نظرات مشتریان</h5>
@@ -771,7 +723,7 @@ const moveBanner = ()=>{
 
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
 .hover-brand:hover{
   box-shadow: 0 5px 5px 0 #F1482380;

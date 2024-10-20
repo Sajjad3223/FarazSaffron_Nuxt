@@ -1,0 +1,1 @@
+export const SITE_URL:string =  "https://api.gpsaffron.com"

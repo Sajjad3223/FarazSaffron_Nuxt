@@ -25,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-
-const utilsStore = useUtilStore();
 const isLoading = ref(true);
 
 onMounted(async ()=>{

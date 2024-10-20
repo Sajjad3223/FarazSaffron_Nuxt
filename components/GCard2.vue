@@ -1,8 +1,8 @@
 <template>
   <div class="flex group max-w-[280px] flex-col relative gap-4">
-    <div class="w-full relative aspect-square rounded-xl grid place-items-center bg-white border relative overflow-hidden">
+    <div class="w-full aspect-square rounded-xl grid place-items-center bg-white border relative overflow-hidden">
       <NuxtLink :to="`/product/${product.slug}`">
-        <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-h-[200px]">
+        <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="max-h-[200px]" />
       </NuxtLink>
       <Transition name="fade-smooth" duration="1000">
         <div v-if="showDigikalaPrice"

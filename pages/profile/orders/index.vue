@@ -128,13 +128,13 @@
               <base-g-price :price="order.totalPrice" />
             </div>
             <div :class="['grid place-items-center',order.itemsCount > 1 ? 'grid-cols-2' : 'grid-cols-1']" class="max-w-[120px]" dir="ltr">
-              <img :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" v-for="i in [...order.orderItems].slice(0,3)" :key="i.id"
-                   :alt="i.itemInfo.productImage.alt" alt="jar" class="w-full rounded-md ">
-              <img :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`" v-if="order.itemsCount == 4"
-                   :alt="order.orderItems[3].itemInfo.productImage.alt" alt="jar" class="w-full rounded-md ">
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${i.itemInfo.productImage.src}`" v-for="i in [...order.orderItems].slice(0,3)" :key="i.id"
+                   :alt="i.itemInfo.productImage.alt" alt="jar" class="w-full rounded-md "/>
+              <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`" v-if="order.itemsCount == 4"
+                   :alt="order.orderItems[3].itemInfo.productImage.alt" alt="jar" class="w-full rounded-md "/>
               <div class="border rounded-xl grid place-items-center h-full" v-if="order.itemsCount > 4">
-                <img :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`"
-                     :alt="order.orderItems[3].itemInfo.productImage.alt" class="blur-[1px] aspect-square">
+                <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${order.orderItems[3].itemInfo.productImage.src}`"
+                     :alt="order.orderItems[3].itemInfo.productImage.alt" class="blur-[1px] aspect-square"/>
                 <div class="flex items-center gap-1 absolute">
                   <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>
                   <span class="w-1.5 h-1.5 rounded-full bg-black/50"></span>

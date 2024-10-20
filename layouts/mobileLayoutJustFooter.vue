@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!utilsStore.isMobile()">
+    <div class="hidden md:flex flex-col">
       <base-f-navbar />
 
       <!--  Body  -->
@@ -12,7 +12,7 @@
 
       <base-f-footer />
     </div>
-    <div v-else class="overflow-y-auto relative text-sm font-medium">
+    <div class="md:hidden overflow-y-auto relative text-sm font-medium">
       <main class="mx-4 mb-[90px]">
         <slot></slot>
       </main>

@@ -1,8 +1,8 @@
 import type {BaseFilterParams} from "~/models/baseFilterParams";
 import type {BaseDto} from "~/models/baseDto";
 import type {BaseFilterResult} from "~/models/baseFilterResult";
-import type {ProductImageDto} from "~/models/product/productImageDto";
 import type {EItemType} from "~/models/EPostType";
+import type {Img} from "~/models/image";
 import type {EPackingType} from "~/models/product/EPackingType";
 
 export interface OrderFilterParams extends BaseFilterParams {
@@ -88,7 +88,7 @@ export interface ItemInfo {
     productName: string;
     productSlug: string;
     eItemType: EItemType;
-    productImage: ProductImageDto;
+    productImage: Img;
     weight: number;
     healthNumber?: string | null;
     packingType:EPackingType;

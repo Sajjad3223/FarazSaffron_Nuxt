@@ -3,7 +3,10 @@
     <Head>
       <Title>{{authenticator.title}}</Title>
     </Head>
-    <base-f-divider :logo-divider="false" :title="authenticator.title" />
+    <NuxtLink to="/admin/certificate/authenticator" class="font-light opacity-70 flex mt-2">
+      < بازگشت
+    </NuxtLink>
+
 
     <div class="grid grid-cols-2 mt-8">
       <div class="flex items-center gap-4">
@@ -12,7 +15,7 @@
       </div>
       <div class="flex items-center gap-4">
         <span class="opacity-50 text-sm font-light">شماره سریال:</span>
-        <NuxtLink :to="`/inquiry?serial=${authenticator.serialNumber}`">{{authenticator.serialNumber}}</NuxtLink>
+        <NuxtLink :to="`/inquiry?serial=${authenticator.serialNumber.substring(2)}`" class="font-[montserrat]">{{authenticator.serialNumber}}</NuxtLink>
       </div>
     </div>
 
@@ -44,7 +47,7 @@ definePageMeta({
 const route = useRoute();
 const router = useRouter();
 const authenticatorId = parseInt(route.params.authenticatorId.toString());
-const {data,pending} = await useAsyncData(`GetAuthenticator-Id:${authenticatorId}`,()=>GetAuthenticatorById(authenticatorId));
+const {data,pending} = await useAsyncData(`GetAuthenticator-Id:${authenticatorId}`,()=>GetAuthenticatorById(authenticatorId,'1403-07-14'));
 
 const toast = useToast();
 if(!data.value?.isSuccess){
@@ -73,7 +76,6 @@ onMounted(async ()=>{
 });
 
 const updateAuthenticator = async ()=>{
-  console.log(setAPropertiesCommand)
   setAPropertiesCommand.properties = setAPropertiesCommand.properties.filter(p=>p.value != null || p.file != null);
 
   const data = new FormData();

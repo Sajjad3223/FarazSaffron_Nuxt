@@ -25,7 +25,7 @@
       </div>
     </transition>
     <NuxtLink :to="`/product/${product.slug}`" class="relative">
-      <img :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300">
+      <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="mx-auto h-[160px] hover:scale-110 transition-transform duration-300" />
       <Transition name="fade-smooth" duration="1000">
         <div v-if="showDigikalaPrice"
             class="absolute inset-0 bg-black/30 text-white backdrop-blur-sm flex flex-col items-center justify-center gap-2">
@@ -147,7 +147,7 @@ import {EPostType} from "~/models/EPostType";
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import {ToastType} from "~/composables/useSwal";
 import {EPackingType} from "~/models/product/EPackingType";
-import {roundPrice} from "../utilities/priceUtils";
+import {roundPrice} from "~/utilities/priceUtils";
 
 const props = defineProps<{
   product:ProductFilterData
