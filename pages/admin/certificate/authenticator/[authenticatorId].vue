@@ -20,7 +20,7 @@
     </div>
 
     <div class="grid grid-cols-3 gap-4 mt-12">
-      <certificate-property-input v-for="(p,i) in aProperties" v-model="setAPropertiesCommand.properties[i]" :property="p"/>
+      <certificate-property-input v-for="(p,i) in aProperties" v-model="setAPropertiesCommand.properties[i]" :property="p" :value="authenticator.properties.find(pro=>pro.propertyId == p.id)?.value"/>
     </div>
 
     <base-g-button w-full class="mt-5" @click="updateAuthenticator">

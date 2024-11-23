@@ -1,8 +1,9 @@
 import type {BaseMongoDto} from "~/models/baseMongoDto";
 import type {BaseFilterParams} from "~/models/baseFilterParams";
 import type {BaseFilterResult} from "~/models/baseFilterResult";
+import type {BaseDto} from "~/models/baseDto";
 
-export interface FeedbackData extends BaseMongoDto{
+export interface FeedbackData extends BaseDto{
     userId?:number | null;
     ip:string;
     feedbackType:EFeedbackType;

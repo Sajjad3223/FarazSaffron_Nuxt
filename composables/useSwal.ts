@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import type {MetaData} from "~/models/metaData";
 import {useToastStore} from "~/stores/toast.store";
 
@@ -36,70 +35,19 @@ export const useToast = () => {
         });
         return ;
 
-        switch (type) {
-            case ToastType.success: {
-                return Swal.fire({
-                    title:message,
-                    toast:toast,
-                    position:toast ? "top-start" : "center",
-                    icon:'success',
-                    timerProgressBar: duration > 0,
-                    timer:duration,
-                    confirmButtonText:'باشه'
-                })
-            }
-            case ToastType.error: {
-                return Swal.fire({
-                    title:message,
-                    toast:toast,
-                    position:toast ? "top-start" : "center",
-                    icon:'error',
-                    timerProgressBar: duration > 0,
-                    timer:duration,
-                    confirmButtonText:'باشه'
-                })
-            }
-            case ToastType.warning: {
-                return Swal.fire({
-                    title:message,
-                    toast:toast,
-                    position:toast ? "top-start" : "center",
-                    icon:'warning',
-                    timerProgressBar: duration > 0,
-                    timer:duration,
-                    showConfirmButton:true,
-                    confirmButtonText:'بله',
-                    showCancelButton:true,
-                    cancelButtonText:'انصراف',
-                })
-            }
-            case ToastType.info: {
-                return Swal.fire({
-                    title:message,
-                    toast:toast,
-                    position:toast ? "top-start" : "center",
-                    icon:'info',
-                    timerProgressBar: duration > 0,
-                    timer:duration,
-                    confirmButtonText:'باشه'
-                })
-            }
-        }
     };
     const showError = (
         metaData: MetaData,
         toast:boolean = false
     ) => {
-        return Swal.fire({
-            title:'عملیات با شکست مواجه شد',
-            text:metaData.message,
-            toast,
-            position:toast ? "top-start" : "center",
-            icon:'error',
-            timerProgressBar:toast,
-            timer:0,
-            confirmButtonText:'باشه'
-        })
+        useToastStore().addToastMessage({
+            id:0,
+            message:metaData.message,
+            type:ToastType.error,
+            duration:0,
+            func:null
+        });
+        return ;
     };
 
     return { showToast,showError };

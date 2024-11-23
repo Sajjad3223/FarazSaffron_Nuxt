@@ -39,12 +39,13 @@ import {monthOptions} from "~/utilities/dateUtils";
 
 const props = defineProps<{
   property:CAPropertyDto,
-  modelValue:AddPropertyCommand
+  modelValue:AddPropertyCommand,
+  value?:string | null
 }>();
 
 const emits = defineEmits(['update:modelValue','valueUpdated'])
 
-const value = ref(props.modelValue?.value);
+const value = ref(props.value);
 const input = ref();
 let rangeValue = reactive({
   min:null,
@@ -63,8 +64,8 @@ const dateValue = reactive({
 
 onMounted(()=>{
   if(props.property.propertyType == EPropertyType.رنج){
-    if(!props.modelValue?.value) return;
-    const data = JSON.parse(props.modelValue?.value);
+    if(!props.value) return;
+    const data = JSON.parse(props.value);
     rangeValue.min = data.min;
     rangeValue.max = data.max;
     rangeValue.value = data.value;

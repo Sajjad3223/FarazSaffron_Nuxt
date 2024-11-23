@@ -45,7 +45,6 @@
 import {Form} from 'vee-validate';
 import type {RegisterCommand} from "~/models/users/userCommands";
 import {Register} from "~/services/auth.service";
-import Swal from "sweetalert2";
 import * as Yup from 'yup'
 import {toEnglishDigits} from "~/utilities/textUtils";
 
@@ -69,6 +68,7 @@ const registerSchema = Yup.object().shape({
 const isLoading = ref(false);
 const errorMessage = ref('');
 
+const toast = useToast();
 const register = async ()=>{
   isLoading.value = true;
   errorMessage.value = '';
@@ -78,12 +78,7 @@ const register = async ()=>{
   const result = await Register(registerData);
   if(result.isSuccess){
     await authStore.setToken(result.data!);
-    await Swal.fire({
-      title:"حساب شما ساخته شد",
-      text:'در حال انتقال به پنل کاربری',
-      icon:'success',
-      timerProgressBar:true,
-    });
+    toast.showToast('در حال انتقال به پنل کاربری');
     authStore.isAuthModalOpen = false;
     await router.push('/profile');
     await accountStore.initData();

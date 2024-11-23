@@ -6,6 +6,7 @@ import type {EditTemplateCommand, SetOrderBySectionsCommand} from "~/models/main
 export const GetActiveTemplate = ():Promise<ApiResponse<DataTemplateDto>> => {
     return FetchApi(`/MainPage`,{
         method:'GET',
+        cache:'force-cache'
     });
 }
 export const GetAllTemplates = (params:DataTemplateFilterParams):Promise<ApiResponse<DataTemplateFilterResult>> => {

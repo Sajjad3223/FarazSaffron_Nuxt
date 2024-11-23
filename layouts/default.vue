@@ -21,14 +21,19 @@
       <BaseMFooter />
     </div>
   </div>
-  <g-loading v-if="isLoading" />
+  <ClientOnly>
+    <g-loading v-if="loading" />
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
-const isLoading = ref(true);
-
-onMounted(async ()=>{
-  isLoading.value = false;
-})
+const nuxtApp = useNuxtApp();
+const loading = ref(false);
+nuxtApp.hook("page:start", () => {
+  loading.value = true;
+});
+nuxtApp.hook("page:finish", () => {
+  loading.value = false;
+});
 
 </script>

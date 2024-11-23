@@ -26,16 +26,10 @@
 import {GetCategories} from "~/services/category.service";
 import type {CategoryDto} from "~/models/categories/categoryQueries";
 
-const authStore = useAuthStore();
-const cartStore = useCartStore();
-const accountStore = useAccountStore();
-const utilsStore = useUtilStore();
-const isLoading = ref(true);
 const categories:Ref<CategoryDto[]> = ref([]);
 
 onMounted(async ()=>{
   await refreshCategories();
-  isLoading.value = false;
 })
 
 const refreshCategories = async ()=>{

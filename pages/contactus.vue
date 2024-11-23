@@ -70,7 +70,6 @@
             </p>
           </div>
         </div>
-
       </div>
 
       <div class="flex flex-col md:items-center space-y-4 md:space-y-6">

@@ -347,6 +347,7 @@ watch(orderBy, async () => await getData())
 watch(()=>route.query,() => location.reload())
 
 onMounted(async () => {
+  window.scrollTo(0,0);
   await getData();
   await refreshCategories();
   popularProducts.value = await productUtils.GetPopularProducts(5);

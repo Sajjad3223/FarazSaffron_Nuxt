@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {monthOptions} from "~/utilities/dateUtils";
 
-const emits = defineEmits(['dateSelected']);
+const emits = defineEmits(['dateSelected','update:modelValue']);
 
 const dateValue = reactive({
   day:1,
@@ -10,8 +10,9 @@ const dateValue = reactive({
 });
 
 const dateSelected = ()=>{
-  const date = new Date(dateValue.year,dateValue.month,dateValue.day);
+  const date = new Date(dateValue.year,dateValue.month - 1,dateValue.day + 1);
   emits('dateSelected',date);
+  emits('update:modelValue',date);
 }
 
 </script>

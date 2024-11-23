@@ -689,6 +689,8 @@ const mobileBreakpoints = ref({
 });
 
 onMounted(async ()=>{
+  window.scrollTo(0,0)
+
   loading.value = true;
 
   const firstResult = await GetProducts({pageId:1,take:7,minQuantity:5,orderBy:activeTemp.value.firstItemSection,justWithDiscount:true});

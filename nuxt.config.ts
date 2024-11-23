@@ -64,7 +64,6 @@ export default defineNuxtConfig({
     "vue3-carousel-nuxt",
     "nuxt-swiper",
     "nuxt3-leaflet",
-    '@vueuse/motion/nuxt',
     "@nuxtjs/google-fonts",
     "@vite-pwa/nuxt",
     "@nuxtjs/sitemap",

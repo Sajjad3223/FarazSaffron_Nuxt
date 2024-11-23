@@ -18,12 +18,12 @@ export const GetProducts = (params:ProductFilterParams):Promise<ApiResponse<Prod
     return FetchApi("/product",{
         method:'GET',
         params,
-        cache:'default'
+        cache:'force-cache'
     });
 }
 export const GetProduct = (slug:string):Promise<ApiResponse<ProductDto>> => {
     return FetchApi(`/product/${slug}`,{
-        method:'GET'
+        method:'GET',
     });
 }
 export const GetProductById2 = (id:number):Promise<ApiResponse<ProductDto>> => {

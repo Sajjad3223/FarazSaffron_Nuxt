@@ -12,7 +12,7 @@
           <form @submit.prevent="findCertificate"
                 class="w-full p-8 border bg-white rounded-lg relative flex flex-col space-y-4 items-center" method="GET">
             <div class="flex flex-col w-full space-y-2">
-              <base-inputs-text-input label="کد استعلام" name="serialNumber" v-model="serial" required side-text=" - ZC" text-align="center" custom-classes="font-[montserrat]" side-text-classes="font-[montserrat]" place-holder="شماره سریال پشت محصول را وارد کنید"/>
+              <base-inputs-text-input label="کد استعلام" name="serialNumber" v-model="serial" required text-align="center" custom-classes="font-[montserrat]" side-text-classes="font-[montserrat]" place-holder="شماره سریال پشت محصول را وارد کنید"/>
             </div>
             <div class="flex flex-col w-full space-y-2">
               <!--              <base-g-select label="نوع محصول" v-model="productId" :options="productOptions.map(o=>{
@@ -243,7 +243,7 @@ const findCertificate = async ()=>{
     loading.value = true;
 
     const command = {
-      serial:`ZC${serial.value}`,
+      serial:`${serial.value}`,
       year:dateValue.year,
       month:dateValue.month,
       day:dateValue.day,

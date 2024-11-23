@@ -572,12 +572,25 @@ import {CreateFavorite, DeleteFavoriteByPostId} from "~/services/favorite.servic
 import type {CreateFavoriteCommand} from "~/models/favorite/favoriteDto";
 import SwiperSinglePageControls from "~/components/SwiperSinglePageControls.vue";
 import {Mousewheel} from "swiper/modules";
-import {roundPrice} from "../../utilities/priceUtils";
-
+import {roundPrice} from "~/utilities/priceUtils";
+definePageMeta({
+  scrollToTop:true
+})
 
 const route = useRoute();
 const slug:string = route.params.slug.toString() ?? '';
-const { data: result, pending,error,status } = await useAsyncData("GetProduct", () => GetProduct(slug),{lazy:false,server:true});
+const { data: result, pending,error,status } = await useAsyncData(
+    `GetProduct-${slug}`,
+    () => GetProduct(slug),
+    {
+      getCachedData(key,nuxtApp){
+        if(!nuxtApp.payload.data[key]){
+          return undefined;
+        }
+        return nuxtApp.payload.data[key]
+      }
+    }
+);
 const router = useRouter();
 
 const toast = useToast();
@@ -706,6 +719,7 @@ const magnify = (imgID:string, zoom:number) => {
 const isFavorite = ref(false);
 
 onMounted(async ()=>{
+  window.scrollTo(0,0)
 
   isLoading.value = true;
 
