@@ -20,6 +20,7 @@
     "nuxt-schema-org": "^3.3.9",
     "nuxt3-leaflet": "^1.0.12",
     "postcss": "^8.4.33",
+    "sass-embedded": "^1.86.3",
     "tailwindcss": "^3.4.1",
     "vue": "^3.4.14",
     "vue-router": "^4.2.5",

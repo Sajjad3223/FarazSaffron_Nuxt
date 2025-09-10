@@ -421,7 +421,7 @@
         <GCarousel :banners="activeTemp.mainBanners" :show-arrows="false"/>
       </div>
 
-      <div class="w-full grid grid-cols-4 -mt-20 z-[3] relative gap-4">
+      <div class="w-full grid grid-cols-4 mt-5 md:-mt-20 z-[3] relative gap-4">
         <NuxtLink to="/market" class="rounded-xl border hover:border-t-transparent hover:border-x-transparent transition-all duration-200 hover:-translate-y-1 hover:border-b-2 hover:border-[#FB7511] w-full h-full flex flex-col items-center justify-around gap-2 py-4">
           <img src="~/assets/images/categories/saffron.png" alt="saffron" class="max-w-[35px]">
           <span class="text-xs font-light">زعفران</span>

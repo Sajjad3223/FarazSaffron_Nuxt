@@ -11,7 +11,7 @@
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">کل تراکنش ها</span>
           <div class="flex gap-2">
-            <strong>{{(data?.totalTransactions / 10).toLocaleString()}}</strong>
+            <strong>{{((data?.totalTransactions ?? 0) / 10).toLocaleString()}}</strong>
             <span>تومان</span>
           </div>
         </div>
@@ -20,13 +20,13 @@
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">تراکنش های این ماه</span>
           <div class="flex gap-2">
-            <strong>{{(data?.monthTransactions / 10).toLocaleString()}}</strong>
+            <strong>{{((data?.monthTransactions ?? 0) / 10).toLocaleString()}}</strong>
             <span>تومان</span>
           </div>
           <div class="flex items-center gap-4 text-sm font-light">
             <span class="text-xs opacity-50"> تراکنش های ماه قبل</span>:
             <div class="flex gap-2">
-              <strong>{{(data?.lastMonthTransactions / 10).toLocaleString()}}</strong>
+              <strong>{{((data?.lastMonthTransactions ?? 0) / 10).toLocaleString()}}</strong>
               <span>تومان</span>
             </div>
           </div>
@@ -36,7 +36,7 @@
         <div class="flex flex-col space-y-2">
           <span class="text-sm font-light opacity-70">تراکنش های امروز</span>
           <div class="flex gap-2">
-            <strong>{{(data?.todayTransactions / 10).toLocaleString()}}</strong>
+            <strong>{{((data?.todayTransactions ?? 0) / 10).toLocaleString()}}</strong>
             <span>تومان</span>
           </div>
         </div>
@@ -78,7 +78,7 @@
               <div class="flex items-center gap-2 text-xl font-thin">
                 <span v-if="w.walletType == EWalletType.Deposit">+</span>
                 <span v-else>-</span>
-                <base-g-price :price="w.price / 10" />
+                <base-g-price :price="w.price" />
               </div>
             </td>
             <td class="px-4 py-3 text-xs">

@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="w-full overflow-hidden">
     <Head>
       <Title>مدیریت محتوای صفحه اصلی</Title>
@@ -16,8 +16,11 @@
       <admin-main-page-banners-edit-top-banner @banner-updated="showEditTopBannerModal = false,getData()" :top-banner="template.topBanner"/>
     </base-g-modal>
 
-    <base-g-modal title="افزودن بنر" v-model="showAddMainBannerModal">
+    <base-g-modal title="افزودن بنر دسکتاپ" v-model="showAddMainBannerModal">
       <admin-main-page-banners-add-main-banner @banner-added="showAddMainBannerModal = false,getData()" :template-id="templateId"/>
+    </base-g-modal>
+    <base-g-modal title="افزودن بنر موبایل" v-model="showAddMainBannerForMobileModal">
+      <admin-main-page-banners-add-main-banner @banner-added="showAddMainBannerForMobileModal = false,getData()" :template-id="templateId" is-mobile/>
     </base-g-modal>
     <base-g-modal title="ویرایش بنر" v-model="showEditMainBannerModal">
       <admin-main-page-banners-edit-main-banner @banner-edited="showEditMainBannerModal = false,getData()" :banner="selectedBanner"/>
@@ -123,11 +126,11 @@
             </div>
           </div>
         </div>
-        <div class="col-span-full mt-5">
+        <div class="col-span-full mt-5 flex flex-col gap-8">
           <div class="flex flex-col gap-2">
-            <span class="opacity-50 text-sm">بنرهای اسلایدر</span>
-            <div class="grid grid-cols-3 w-full gap-4" v-if="template.mainBanners.length > 0">
-              <div class="relative" v-for="b in template.mainBanners" :key="b.id">
+            <span class="opacity-50 text-sm">بنرهای اسلایدر (دسکتاپ)</span>
+            <div class="grid grid-cols-3 w-full gap-4" v-if="template.mainBanners.filter(b=>!b.isForMobile).length > 0">
+              <div class="relative" v-for="b in template.mainBanners.filter(b=>!b.isForMobile)" :key="b.id">
                 <img :src="`${SITE_URL}/banners/${b.image.src}`"
                      :alt="b.image.alt"
                      class="w-full rounded-2xl h-full object-cover">
@@ -160,6 +163,46 @@
             <div class="w-full flex items-center justify-between rounded-lg p-6 text-lg bg-gray-100/10" v-else>
               <span>بنری اضافه نشده است</span>
               <base-g-button color="info" @click="showAddMainBannerModal = true">
+                افزودن بنر
+              </base-g-button>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="opacity-50 text-sm">بنرهای اسلایدر (موبایل)</span>
+            <div class="grid grid-cols-4 w-full gap-4" v-if="template.mainBanners.filter(b=>b.isForMobile).length > 0">
+              <div class="relative" v-for="b in template.mainBanners.filter(b=>b.isForMobile)" :key="b.id">
+                <img :src="`${SITE_URL}/banners/${b.image.src}`"
+                     :alt="b.image.alt"
+                     class="w-full rounded-2xl h-full object-cover">
+                <div class="absolute top-4 left-4 flex gap-2">
+                  <!--  Edit Banner  -->
+                  <button class="bg-warning/30 text-warning hover:bg-warning transition-colors duration-300 hover:text-white px-2 py-1 rounded-md top-2 left-2" @click="selectedBanner = b,showEditMainBannerModal = true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.492 2.78906H7.753C4.678 2.78906 2.75 4.96606 2.75 8.04806V16.3621C2.75 19.4441 4.669 21.6211 7.753 21.6211H16.577C19.662 21.6211 21.581 19.4441 21.581 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.82666 10.921L16.2997 3.44799C17.2307 2.51799 18.7397 2.51799 19.6707 3.44799L20.8877 4.66499C21.8187 5.59599 21.8187 7.10599 20.8877 8.03599L13.3787 15.545C12.9717 15.952 12.4197 16.181 11.8437 16.181H8.09766L8.19166 12.401C8.20566 11.845 8.43266 11.315 8.82666 10.921Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M15.1641 4.60254L19.7301 9.16854" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <!--  Delete Banner  -->
+                  <button class="bg-danger/30 text-danger hover:bg-danger transition-colors duration-300 hover:text-white px-2 py-1 rounded-md top-2 left-2" @click="removeBanner(b.id)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.3238 9.46777C19.3238 9.46777 18.7808 16.2028 18.4658 19.0398C18.3158 20.3948 17.4788 21.1888 16.1078 21.2138C13.4988 21.2608 10.8868 21.2638 8.27881 21.2088C6.95981 21.1818 6.13681 20.3778 5.98981 19.0468C5.67281 16.1848 5.13281 9.46777 5.13281 9.46777" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20.708 6.23926H3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M17.4406 6.23949C16.6556 6.23949 15.9796 5.68449 15.8256 4.91549L15.5826 3.69949C15.4326 3.13849 14.9246 2.75049 14.3456 2.75049H10.1126C9.53358 2.75049 9.02558 3.13849 8.87558 3.69949L8.63258 4.91549C8.47858 5.68449 7.80258 6.23949 7.01758 6.23949" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <button class="border min-h-40 border-white/20 rounded-2xl grid place-items-center"
+                      @click="showAddMainBannerForMobileModal = true">
+                <span class="text-xl opacity-50">
+                  + افزودن بنر
+                </span>
+              </button>
+            </div>
+            <div class="w-full flex items-center justify-between rounded-lg p-6 text-lg bg-gray-100/10" v-else>
+              <span>بنری اضافه نشده است</span>
+              <base-g-button color="info" @click="showAddMainBannerForMobileModal = true">
                 افزودن بنر
               </base-g-button>
             </div>
@@ -347,6 +390,7 @@ const showSetTopBannerModal = ref(false);
 const showEditTopBannerModal = ref(false);
 
 const showAddMainBannerModal = ref(false);
+const showAddMainBannerForMobileModal = ref(false);
 const showEditMainBannerModal = ref(false);
 const selectedBanner:Ref<Banner | null> = ref(null);
 

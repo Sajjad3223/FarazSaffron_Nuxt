@@ -4,6 +4,7 @@
     <base-g-input v-model="imageAlt" name="imageAlt" label="متن جایگزین" />
     <base-g-input type="number" v-model="order" name="order" label="ترتیب" required />
     <base-g-input v-model="url" name="url" label="لینک" required />
+    <BaseFCheckbox name="isForMobile" label="بنر موبایل" v-model="isForMobile" />
     <base-g-button w-full type="submit" :is-loading="loading">
       ویرایش بنر
     </base-g-button>
@@ -26,6 +27,7 @@ const image = ref(null);
 const imageAlt = ref(props.banner.image.alt);
 const order = ref(props.banner.order);
 const url = ref(props.banner.url);
+const isForMobile = ref(props.banner.isForMobile);
 
 const toast = useToast();
 
@@ -41,6 +43,7 @@ const editBanner = async () =>{
   formData.append('imageAlt',imageAlt.value)
   formData.append('order',order.value.toString())
   formData.append('url',url.value)
+  formData.append('isForMobile',isForMobile.value.toString())
 
   const result = await EditBanner(formData);
   if(result.isSuccess){

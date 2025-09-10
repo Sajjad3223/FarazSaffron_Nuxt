@@ -4,6 +4,7 @@ export interface BaseDto {
     isActive: boolean;
     persianDate: string;
     persianTime: string;
+    isForMobile: boolean;
 }
 
 

@@ -794,7 +794,9 @@ const payOrder = async ()=>{
       return;
     }
 
-    const result = await PayWithWallet();
+    const result = await PayWithWallet({
+      userId:addressResult.data
+    });
     if(result.isSuccess){
       await router.push(`/payment/success?orderId=${result.data?.orderId}&saleRefId=${result.data?.refCode}`);
     }else{

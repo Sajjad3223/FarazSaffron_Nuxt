@@ -55,9 +55,6 @@ export default defineNuxtConfig({
     },
   },
 
-  plugins: [
-    '~/plugins/clickOutsideDirective.ts',
-  ],
 
   modules: [
     "@pinia/nuxt",

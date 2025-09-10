@@ -4,7 +4,8 @@
     <base-g-input v-model="imageAlt" name="imageAlt" label="متن جایگزین" required />
     <base-g-input type="number" v-model="order" name="order" label="ترتیب" required />
     <base-g-input v-model="url" name="url" label="لینک" required />
-    <base-g-button w-full type="submit" :is-loading="loading" :disabled="loading">
+    <BaseFCheckbox name="isForMobile" label="بنر موبایل" v-model="isForMobile" :is-checked="isMobile"/>
+    <base-g-button w-full type="submit" :is-loading="loading" :disabled="loading" class="mt-5">
       ثبت بنر
     </base-g-button>
   </form>
@@ -15,7 +16,8 @@ import {AddToMainBanners} from '~/services/mainPage.service';
 
 const props = defineProps<{
   templateId:number,
-  modelValue:boolean
+  modelValue:boolean,
+  isMobile:boolean
 }>();
 
 const emits = defineEmits(['bannerAdded'])
@@ -25,6 +27,7 @@ const image = ref();
 const imageAlt = ref('');
 const order = ref(0);
 const url = ref('');
+const isForMobile = ref(props.isMobile);
 
 const toast = useToast();
 
@@ -37,6 +40,7 @@ const addBanner = async () =>{
   formData.append('imageAlt',imageAlt.value)
   formData.append('order',order.value.toString())
   formData.append('url',url.value)
+  formData.append('isForMobile',isForMobile.value.toString())
 
   const result = await AddToMainBanners(formData);
   if(result.isSuccess){

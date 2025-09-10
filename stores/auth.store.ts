@@ -30,8 +30,7 @@ export const useAuthStore = defineStore("auth",()=>{
         cookie.value = tokenResult.token;
         setTimeout(() => {
             if (
-                callBackFunctionAfterLogin.value != null &&
-                callBackFunctionAfterLogin.value != undefined
+                callBackFunctionAfterLogin.value != null
             ) {
                 callBackFunctionAfterLogin.value!();
             }
