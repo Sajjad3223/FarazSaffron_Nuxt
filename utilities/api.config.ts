@@ -1,5 +1,5 @@
 //@ts-ignore
-export const isProd = false; // process.env.NODE_ENV === "production";
+export const isProd = true; // process.env.NODE_ENV === "production";
 
 export const apiProductionUrl:string = "https://api.gpsaffron.com/api";
 export const apiDevelopmentUrl:string = "http://localhost:5003/api";

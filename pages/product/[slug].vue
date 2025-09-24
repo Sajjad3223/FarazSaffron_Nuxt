@@ -7,8 +7,8 @@
       <Meta title="product_id" :content="(product?.id).toString()" />
       <Meta title="product_name" :content="product?.title" />
       <Meta title="og:image" :content="`${SITE_URL}/product/images/${product.mainImage.src}`" />
-      <Meta title="product_price" :content="(product?.totalPrice / 10).toString()" />
-      <Meta title="product_old_price" :content="(product?.price / 10).toString()" />
+      <Meta title="product_price" :content="roundPrice(product.totalPrice).toLocaleString()" />
+      <Meta title="product_old_price" :content="roundPrice(product.price).toLocaleString()" />
       <Meta title="availability" :content="product?.quantity > 0 ? 'instock' : 'outofstock'" />
       <Meta title="guarantee" content="تا 1 هفته ضمانت اصالت و تازگی کالا" />
     </Head>

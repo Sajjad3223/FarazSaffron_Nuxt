@@ -2,9 +2,15 @@
   <NuxtLink :to="`/product/${product.slug}`" class="md:hidden flex flex-col items-center bg-white rounded-xl p-5 space-y-4">
     <NuxtImg placeholder="/images/placeholder.jpeg" :src="`${SITE_URL}/product/images/${product.mainImage.src}`" :alt="product.mainImage.alt" class="h-[100px]"/>
     <span class="text-sm text-center font-light">{{product.title}}</span>
-    <div class="flex items-center gap-2">
-      <span class="text-brandOrange">{{roundPrice(product.totalPrice).toLocaleString()}}</span>
-      <span class="text-xs">تومان</span>
+    <div class="w-full flex flex-col gap-1 items-center flex-1 justify-end">
+      <div class="flex items-center gap-1 opacity-50 line-through scale-90" v-if="product.discount !== 0">
+        <span class="text-lg" style="font-family: 'Vazir FD',serif">{{ roundPrice(product.price).toLocaleString() }}</span>
+        <span class="flex flex-col items-center text-[10px] font-light opacity-70 leading-[8px]">تومان</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-brandOrange">{{roundPrice(product.totalPrice).toLocaleString()}}</span>
+        <span class="text-xs">تومان</span>
+      </div>
     </div>
   </NuxtLink>
 </template>

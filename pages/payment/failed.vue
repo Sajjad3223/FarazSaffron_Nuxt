@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>پرداخت ناموفق</Title>
+    </Head>
     <div class="hidden lg:flex items-center w-2/3 mb-12 mx-auto my-12">
       <div class="relative grid place-items-center w-8 h-8 rounded-full bg-brandOrange text-brandOrange">
         <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
