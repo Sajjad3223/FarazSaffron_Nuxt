@@ -81,7 +81,7 @@
       <base-f-modal v-model="editPasswordModal">
         <template #header>تغییر رمز عبور</template>
         <template #default>
-          <Form class="flex flex-col space-y-4" :validation-schema="changePasswordSchema" @submit.prevent="ChangeUserPassword">
+          <Form class="flex flex-col space-y-4" :validation-schema="changePasswordSchema" @submit="ChangeUserPassword">
             <base-f-input type="password" name="oldPassword" id="oldPassword" is-required label="رمز عبور فعلی" :rtl="false" place-holder="••••••••••" v-model="changePasswordCommand.oldPassword">
               <template #inputIcon>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -420,6 +420,8 @@ const ChangeUserPassword = async ()=>{
   if(res.isSuccess){
     editPasswordModal.value = false;
     await toast.showToast();
+    changePasswordCommand.newPassword = '';
+    changePasswordCommand.oldPassword = '';
   }else{
     await toast.showToast(res.metaData.message,ToastType.error,0);
   }

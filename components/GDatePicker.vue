@@ -6,11 +6,11 @@ const emits = defineEmits(['dateSelected','update:modelValue']);
 const dateValue = reactive({
   day:1,
   month:5,
-  year:1403
+  year:1404
 });
 
 const dateSelected = ()=>{
-  const date = new Date(dateValue.year,dateValue.month - 1,dateValue.day + 1);
+  const date = new Date(dateValue.year,dateValue.month,dateValue.day);
   emits('dateSelected',date);
   emits('update:modelValue',date);
 }

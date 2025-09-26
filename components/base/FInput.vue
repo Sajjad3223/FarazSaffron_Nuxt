@@ -5,7 +5,7 @@
       <span>{{label}}</span>
     </label>
     <div v-if="type !== 'file'" class="w-full relative flex items-center ">
-      <input :type="type" v-if="!multiLine" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
+      <input :type="inputType" v-if="!multiLine" :class="['w-full peer border bg-bgWhite rounded-lg focus:outline-none ',{'pr-12 text-[14px]':$slots.inputIcon && rtl},{'pl-12 text-[14px]':$slots.inputIcon && !rtl},`py-${py} px-${px}`]"
              :id="id"
              :name="name"
              :value="inputValue"
@@ -38,13 +38,13 @@
       <span :class="['absolute opacity-50',{'right-3':rtl},{'left-3':!rtl}]">
         <slot name="inputIcon" />
       </span>
-      <button class="absolute right-4 text-black scale-90 opacity-50" v-if="type === 'password' && showEye && !showPassword" @click.prevent="showPassword = true,type = 'text'" tabindex="-1">
+      <button type="button" class="absolute right-4 text-black scale-90 opacity-50" v-if="type === 'password' && showEye && !showPassword" @click="showPass" tabindex="-1">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.41998 12 8.41998C13.98 8.41998 15.58 10.02 15.58 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
-      <button class="absolute right-4 text-black scale-90 opacity-50" v-if="showPassword && showEye" @click.prevent="showPassword = false , type = 'password'">
+      <button type="button" class="absolute right-4 text-black scale-90 opacity-50" v-if="showPassword && showEye" @click="hidePass">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14.53 9.46998L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.41998 12 8.41998C12.99 8.41998 13.88 8.81998 14.53 9.46998Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M17.82 5.76998C16.07 4.44998 14.07 3.72998 12 3.72998C8.46997 3.72998 5.17997 5.80998 2.88997 9.40998C1.98997 10.82 1.98997 13.19 2.88997 14.6C3.67997 15.84 4.59997 16.91 5.59997 17.77" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -154,6 +154,7 @@ const emits = defineEmits(['update:modelValue']);
 const showPassword = ref(false);
 const showEye = ref(false);
 const input = ref();
+const inputType = ref(props.type);
 
 const price = computed(()=>{
   let nStr = props.modelValue + '';
@@ -212,6 +213,15 @@ const previewImage = (e:any)=>{
   handleChange(e);
 }
 
+const showPass = ()=>{
+  showPassword.value = true;
+  inputType.value = 'text';
+}
+const hidePass = ()=>{
+  showPassword.value = false;
+  inputType.value = 'password';
+}
+
 </script>
 
 <style scoped>
@@ -220,5 +230,10 @@ const previewImage = (e:any)=>{
 }
 .l-12{
   @apply left-12;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
 }
 </style>
