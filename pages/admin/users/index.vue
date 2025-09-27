@@ -39,6 +39,9 @@
     <base-f-modal v-model="showAddUserModal" title="افزودن کاربر جدید">
       <admin-users-add @operation-finished="showAddUserModal = false" />
     </base-f-modal>
+    <base-f-modal v-model="showEditUserModal" title="ویرایش کاربر">
+      <admin-users-edit :user="selectedUser" @operation-finished="showEditUserModal = false" />
+    </base-f-modal>
     <base-f-modal v-model="showSetRolesModal" title="ثبت لقب های کاربر">
       <admin-users-user-roles :user-id="selectedUserId" @operation-finished="showSetRolesModal = false" />
     </base-f-modal>
@@ -62,7 +65,7 @@
           <tbody
               class="bg-white divide-y dark:black/20"
           >
-          <tr class="text-gray-700 " v-for="u in users" :key="u">
+          <tr :class="['text-gray-700',{'opacity-60':!u.isActive}]" v-for="u in users" :key="u">
             <td class="px-4 py-3 text-sm text-nowrap">
               {{ u.id }}
             </td>
@@ -90,7 +93,7 @@
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <button
+                <button @click="selectedUser = u,showEditUserModal = true"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit"
                 >
@@ -105,11 +108,11 @@
                     ></path>
                   </svg>
                 </button>
-                <button
+                <button @click="deleteUser(u)"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete"
                 >
-                  <svg
+                  <svg v-if="u.isActive"
                       class="w-5 h-5"
                       aria-hidden="true"
                       fill="currentColor"
@@ -120,6 +123,11 @@
                         d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                         clip-rule="evenodd"
                     ></path>
+                  </svg>
+                  <svg v-else title="بازفعال کردن" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.8901 5.08C14.0201 4.82 13.0601 4.65 12.0001 4.65C7.21008 4.65 3.33008 8.53 3.33008 13.32C3.33008 18.12 7.21008 22 12.0001 22C16.7901 22 20.6701 18.12 20.6701 13.33C20.6701 11.55 20.1301 9.89 19.2101 8.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.13 5.32L13.24 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.13 5.32L12.76 7.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
                 <button title="مدیریت دسترسی ها" @click.prevent="selectedUserId = u.id, showSetRolesModal = true"
@@ -156,21 +164,25 @@
 </template>
 
 <script setup lang="ts">
-import type {UserFilterData,UserFilterParams} from "~/models/users/userQueries";
-import {GetUsers} from "~/services/user.service";
+import type {UserFilterData, UserFilterParams} from "~/models/users/userQueries";
+import {DeleteUserByAdmin, GetUsers} from "~/services/user.service";
 import type {PaginationData} from "~/models/baseFilterResult";
 import {FillPaginationData} from "~/utilities/fillPaginationData";
-import {useToast} from "~/composables/useSwal";
+import {ToastType, useToast} from "~/composables/useSwal";
 
 definePageMeta({
   layout:'admin'
 })
 
+const toast = useToast();
+
 const isLoading = ref(true);
 const showFilters = ref(false);
 const showAddUserModal = ref(false);
+const showEditUserModal = ref(false);
 const showSetRolesModal = ref(false);
 const selectedUserId = ref(0);
+const selectedUser = ref<UserFilterData | null>(null);
 const pageId = ref(1);
 const users:Ref<UserFilterData[] | undefined> = ref([]);
 const paginationData:Ref<PaginationData | null | undefined> = ref(null);
@@ -197,5 +209,15 @@ const getData = async ()=>{
   }
 
   isLoading.value = false;
+}
+
+const deleteUser = async (user:UserFilterData) => {
+  toast.showToast('آیا از حذف این کاربر اطمینان دارید؟',ToastType.warning,0,true,async ()=>{
+    const result = await DeleteUserByAdmin(user.id);
+    if(result.isSuccess){
+      toast.showToast();
+      await getData();
+    }
+  })
 }
 </script>

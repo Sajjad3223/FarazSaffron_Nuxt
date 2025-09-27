@@ -96,6 +96,11 @@ export const EditUserByAdmin = (command:AdminEditUserCommand):Promise<ApiRespons
         body:command
     });
 }
+export const DeleteUserByAdmin = (userId:number):Promise<ApiResponse<undefined>> => {
+    return FetchApi(`/admin/user/${userId}`,{
+        method:'DELETE'
+    });
+}
 export const SetUserRoles = (command:AdminSetUserRolesCommand):Promise<ApiResponse<undefined>> => {
     return FetchApi(`/admin/user/setRoles`,{
         method:'PUT',

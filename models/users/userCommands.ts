@@ -61,9 +61,9 @@ export interface AdminEditUserCommand {
     firstName: string;
     lastName: string;
     nationalId: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
+    newPassword: string;
+    editorId:number;
+    editorFullName:string;
 }
 
 export interface AdminSetUserRolesCommand {
