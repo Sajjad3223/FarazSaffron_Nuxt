@@ -80,8 +80,10 @@ const register = async ()=>{
     await authStore.setToken(result.data!);
     toast.showToast('در حال انتقال به پنل کاربری');
     authStore.isAuthModalOpen = false;
-    await router.push('/profile');
-    await accountStore.initData();
+    setTimeout(async ()=>{
+      await router.push('/profile');
+      await accountStore.initData();
+    },300)
 
   }
   else{

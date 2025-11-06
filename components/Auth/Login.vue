@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-4">
       <base-g-input label="شماره تلفن *" place-holder="09*********" required name="phoneNumber" id="phoneNumber" v-model="loginData.phoneNumber"/>
       <base-g-input label="رمز عبور *" place-holder="******" type="password" required name="password" id="password" v-model="loginData.password"/>
-      <button class="text-brandOrange text-right text-sm" @click="authStore.changeStep('forgotPassword')">
+      <button type="button" class="text-brandOrange text-right text-sm" @click="authStore.changeStep('forgotPassword')">
         رمز عبور را فراموش کرده اید؟
       </button>
     </div>
@@ -101,7 +101,10 @@ const login = async ()=>{
     await authStore.setToken(result.data!);
     await toast.showToast('با موفقیت وارد شدید');
     authStore.isAuthModalOpen = false;
-    setTimeout(async ()=>await accountStore.initData(),300);
+    setTimeout(async ()=>{
+      await router.push('/profile');
+      await accountStore.initData()
+    },300);
   }
   else{
     errorMessage.value = result.metaData.message ?? 'حساب کاربری با این مشخصات یافت نشد';
