@@ -298,11 +298,11 @@
           <span>روش پرداخت</span>
           <div class="w-full grid grid-cols-2 gap-4 p-2 bg-white rounded-full">
             <div class="flex relative">
-              <input type="radio" name="payment" id="gateway" v-model="paymentMethod" :value="EPaymentMethod.Gateway" class="peer appearance-none absolute inset-0 opacity-0">
+              <input type="radio" name="payment" id="gateway" v-model="paymentMethod" :value="EPaymentMethod.Gateway" :checked="paymentMethod === EPaymentMethod.Gateway" class="peer appearance-none absolute inset-0 opacity-0">
               <label for="gateway" class="text-xs font-light peer-checked:bg-[#C8C8C8]/30 cursor-pointer rounded-full w-full py-3 text-center">درگاه بانکی</label>
             </div>
             <div class="flex relative">
-              <input type="radio" name="payment" id="wallet" v-model="paymentMethod" :value="EPaymentMethod.Wallet" class="peer appearance-none absolute inset-0 opacity-0">
+              <input type="radio" name="payment" id="wallet" v-model="paymentMethod" :value="EPaymentMethod.Wallet" :checked="paymentMethod === EPaymentMethod.Wallet" class="peer appearance-none absolute inset-0 opacity-0">
               <label for="wallet" class="text-xs font-light peer-checked:bg-[#C8C8C8]/30 cursor-pointer rounded-full w-full py-3 text-center">کیف پول</label>
             </div>
           </div>
@@ -359,9 +359,11 @@
           <span>مجموع </span>
           <span>{{ roundPrice(cartStore.PendingOrder.finallyPrice).toLocaleString() }} تومان</span>
         </div>
-        <base-g-button @click="payOrder" w-full :disabled="!accountStore.hasActiveAddress || payLoading" :is-loading="payLoading" is-icon custom-class="!rounded-lg">
-          پرداخت
-        </base-g-button>
+        <form @submit.prevent="payOrder" class="w-full">
+          <base-g-button type="submit" w-full :disabled="!accountStore.hasActiveAddress || payLoading" :is-loading="payLoading" is-icon custom-class="!rounded-lg">
+            پرداخت
+          </base-g-button>
+        </form>
       </div>
     </div>
   </div>
@@ -378,13 +380,12 @@ import {GetProducts} from "~/services/product.service";
 import {EOrderBy} from "~/models/product/EOrderBy";
 import {PayWithWallet, RemoveDiscount, SetDiscount} from "~/services/cart.service";
 import {EPaymentMethod} from "~/models/ePaymentMethod";
-import {getDiscountValue, roundPrice} from "../../utilities/priceUtils";
+import {getDiscountValue, roundPrice} from "~/utilities/priceUtils";
 
 
 const discountCode = ref('');
 const cartStore = useCartStore()
 const accountStore = useAccountStore();
-const utilStore = useUtilStore();
 const carousel = ref();
 const router = useRouter();
 const paymentMethod = ref(EPaymentMethod.Gateway);
@@ -437,10 +438,10 @@ const payOrder = async ()=>{
   payLoading.value = true;
 
   if(paymentMethod.value == EPaymentMethod.Gateway){
-    const result = await FetchApi<string>(`/payment/payRequest`,{
+    const result = await FetchApi<string>('/payment/payRequest',{
       method:'POST',
       body:{
-        userId:accountStore.currentUser?.id
+        userId:accountStore.currentUser.id
       }
     });
 
@@ -454,7 +455,7 @@ const payOrder = async ()=>{
       refId.id = 'RefId';
       refId.value = result.data!;
       form.appendChild(refId);
-      document.body.appendChild(form)
+      document.body.appendChild(form);
       form.submit();
     }
   }
@@ -466,7 +467,9 @@ const payOrder = async ()=>{
       return;
     }
 
-    const result = await PayWithWallet();
+    const result = await PayWithWallet({
+      userId:accountStore.currentUser.id
+    });
     if(result.isSuccess){
       await router.push(`/payment/success?orderId=${result.data?.orderId}&saleRefId=${result.data?.refCode}`);
     }else{

@@ -123,7 +123,7 @@
                         </li>
                         <li class="pr-4 border-r-2 border-brandOrange/50">وزن: {{ i.itemInfo.weight }} گرم</li>
                       </ul>
-                      <base-g-price :price="(i.price / 10)"/>
+                      <base-g-price :price="(i.totalPrice / 10)"/>
                     </div>
                   </li>
                 </TransitionGroup>
@@ -306,7 +306,7 @@
               <strong>{{ i.itemInfo.productName }}</strong>
               <small>دارای پروانه بهداشت</small>
               <div class="mt-4 py-3 self-end flex flex-col items-end space-y-2">
-                <base-g-price :price="i.price"/>
+                <base-g-price :price="i.totalPrice"/>
               </div>
             </div>
           </li>
@@ -376,7 +376,7 @@ import type {ProductFilterData} from "~/models/product/productQueries";
 import {EPackingType} from "~/models/product/EPackingType";
 import {GetPendingOrder} from "~/services/cart.service";
 
-const {data,pending} = await useAsyncData("GetPendingCart",()=>GetPendingOrder());
+//const {data,pending} = await useAsyncData("GetPendingCart",()=>GetPendingOrder());
 
 const cartStore = useCartStore();
 const authStore = useAuthStore();

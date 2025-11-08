@@ -42,6 +42,7 @@
 
 <script setup lang="ts">
 import {useField} from "vee-validate";
+import {toEnglishDigits} from "~/utilities/textUtils";
 
 const props = withDefaults(defineProps<{
     modelValue:any,
@@ -83,7 +84,7 @@ watch(
 
 const onChanged = (e: any) => {
   handleChange(e, true);
-  emits('update:modelValue', e.target.value);
+  emits('update:modelValue', toEnglishDigits(e.target.value));
   emits('input');
 }
 

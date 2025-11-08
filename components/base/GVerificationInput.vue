@@ -6,11 +6,20 @@ const props = withDefaults(defineProps<{
 }>(),{
   numberLength:5
 });
+const emits = defineEmits(['filled'])
 
 const inputs = ref([]);
 const form = ref();
 
+const checkPrevInputIsFilled = (input:HTMLInputElement)=>{
+  if(!input) return;
+  if(input.value)
+    return;
+  input.focus();
+}
+
 const handleInput = (e:any) => {
+  checkPrevInputIsFilled(e.target.previousElementSibling);
   const input = e.target
   const nextInput = input.nextElementSibling
   if (nextInput && input.value) {
@@ -19,6 +28,8 @@ const handleInput = (e:any) => {
       nextInput.select()
     }
   }
+  if(!nextInput && input.value)
+    emits('filled');
 }
 
 const handlePaste = (e:any) => {
@@ -67,9 +78,7 @@ onMounted(()=>{
   inputs.value.forEach(input => {
     //@ts-ignore
     input.addEventListener('focus', (e:any) => {
-      setTimeout(() => {
-        e.target.select()
-      }, 0)
+      checkPrevInputIsFilled(e.target.previousElementSibling);
     })
 
     //@ts-ignore
@@ -116,6 +125,6 @@ defineExpose({
 
 <style scoped>
 .form-control {
-  @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border max-w-12 rounded-lg;
+  @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border-2 border-transparent transition-colors duration-300 max-w-12 rounded-lg focus:outline-none focus:border-black/30;
 }
 </style>

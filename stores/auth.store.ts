@@ -6,7 +6,7 @@ export const useAuthStore = defineStore("auth",()=>{
     const isAuthModalOpen = ref(false);
     const callBackFunctionAfterLogin: Ref<Function | null> = ref(null);
     const authModalTitle = ref('ثبت نام');
-    const currentStep = ref('login');
+    const currentStep = ref('loginOrRegister');
 
     const tempPhoneNumber:Ref<string | null> = ref(null);
 
@@ -58,7 +58,7 @@ export const useAuthStore = defineStore("auth",()=>{
         currentStep.value = step;
         switch (step){
             case "register": authModalTitle.value = 'ثبت نام'; break;
-            case "login": authModalTitle.value = 'ورود'; break;
+            case "login": authModalTitle.value = 'ورود به حساب'; break;
             case "forgotPassword": authModalTitle.value = 'فراموشی رمز عبور'; break;
             case "confirmForgetPassword": authModalTitle.value = 'تایید کد ارسال شده'; break;
             case "changePasswordForgetPassword": authModalTitle.value = 'تغییر رمز عبور'; break;

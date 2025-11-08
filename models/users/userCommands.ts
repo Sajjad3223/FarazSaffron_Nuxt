@@ -7,6 +7,11 @@ export interface RegisterCommand {
     password: string;
 }
 
+export interface FillDataCommand {
+    firstName: string;
+    lastName: string;
+}
+
 export interface LoginCommand {
     phoneNumber: string;
     password: string;

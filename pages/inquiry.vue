@@ -159,7 +159,6 @@
 </template>
 
 <script setup lang="ts">
-import {Form} from "vee-validate";
 import type {SelectTagDto} from "~/models/product/productQueries";
 import {GetCertificate} from "~/services/certificate.service";
 import {
@@ -180,7 +179,7 @@ const toast = useToast();
 const dateValue = reactive({
   day:1,
   month:6,
-  year:1403
+  year:1404
 });
 watch(
     dateValue,
