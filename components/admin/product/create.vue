@@ -1,12 +1,12 @@
 <template>
-  <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4" @submit="AddProduct">
+  <Form :validation-schema="addProductSchema" class="grid grid-cols-1 lg:grid-cols-2 gap-4" @submit="AddProduct" v-slot="{meta,errors,errorBag}">
     <div class="flex flex-col gap-4 row-span-2 relative">
-      <base-inputs-text-input label="عنوان محصول" v-model="addProductData.title" @update:modelValue="generateSlug" side-slot>
+      <base-inputs-text-input label="عنوان محصول" v-model="addProductData.title" @update:modelValue="generateSlug" side-slot name="title">
         <button @click="autoGenerateSlug = !autoGenerateSlug,generateSlug()" class="text-sm font-light opacity-20 absolute left-3 border rounded-full border-black w-4 h-4 flex items-center justify-center">
           <span class="w-1 h-1 rounded-full bg-black"></span>
         </button>
       </base-inputs-text-input>
-      <base-inputs-text-input label="عنوان یکتا" v-model="addProductData.slug" side-slot>
+      <base-inputs-text-input label="عنوان یکتا" v-model="addProductData.slug" side-slot name="slug">
         <button @click="autoGenerateSlug = !autoGenerateSlug,generateSlug()" class="text-sm font-light opacity-20 absolute left-3 border rounded-full border-black w-4 h-4 flex items-center justify-center">
           <span class="w-1 h-1 rounded-full bg-black"></span>
         </button>
@@ -15,20 +15,20 @@
         <div v-if="autoGenerateSlug" class="h-[70px] pointer-events-none w-1 border-l border-dashed border-black opacity-20 absolute left-5 top-1/2 -translate-y-1/3 z-10"></div>
       </Transition>
     </div>
-    <base-inputs-file-input class="row-span-3" v-model="addProductData.mainImage" label="تصویر اصلی" />
+    <base-inputs-file-input class="row-span-3" v-model="addProductData.mainImage" label="تصویر اصلی" name="mainImage" />
 
-    <base-inputs-text-input label="کد محصول" v-model="addProductData.productCode" />
-    <base-inputs-text-input label="بارکد محصول" v-model="addProductData.barcodeNumber" />
-    <base-inputs-text-input label="توضیحات تصویر" v-model="addProductData.mainImageAlt" />
+    <base-inputs-text-input label="کد محصول" v-model="addProductData.productCode" name="productCode"/>
+    <base-inputs-text-input label="بارکد محصول" v-model="addProductData.barcodeNumber" name="barcodeNumber"/>
+    <base-inputs-text-input label="توضیحات تصویر" v-model="addProductData.mainImageAlt" name="mainImageAlt"/>
 
     <hr class="col-span-full my-4">
 
-    <base-inputs-price-input v-model="addProductData.price" label="قیمت محصول" unit="ریال" @update:modelValue="calculateFinalPrice"/>
+    <base-inputs-price-input v-model="addProductData.price" label="قیمت محصول" unit="ریال" @update:modelValue="calculateFinalPrice" name="price"/>
 
     <div class="grid grid-cols-3 gap-4">
       <div class="flex items-center gap-4">
         <div class="flex items-center">
-          <base-inputs-text-input label="تخفیف" decimal type="number" v-model="addProductData.discount" @update:modelValue="calculateFinalPrice" side-text="%" />
+          <base-inputs-text-input label="تخفیف" decimal type="number" v-model="addProductData.discount" @update:modelValue="calculateFinalPrice" side-text="%" name="discount"/>
         </div>
         <button class="opacity-50 grid place-items-center text-black/50 translate-y-3" @click="autoCalculateDiscount = !autoCalculateDiscount">
           <svg v-if="autoCalculateDiscount" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,34 +45,35 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <base-inputs-text-input label="موجود در انبار" type="number" v-model="addProductData.quantity" side-text="عدد" />
-      <base-inputs-text-input label="وزن بسته بندی" type="number" v-model="addProductData.weight" side-text="گرم" />
+      <base-inputs-text-input label="موجود در انبار" type="number" v-model="addProductData.quantity" side-text="عدد" name="quantity"/>
+      <base-inputs-text-input label="وزن بسته بندی" type="number" v-model="addProductData.weight" side-text="گرم" name="weight"/>
     </div>
 
     <div class="grid grid-cols-3 gap-4" >
-      <BaseGSelect v-model="addProductData.categoryId" :options="selectCategories" @update:modelValue="categorySelected" label="دسته بندی اصلی"/>
-      <BaseGSelect v-model="addProductData.subCategoryId" :options="selectSubCategories" label="دسته بندی فرعی"/>
-      <BaseGSelect v-model="addProductData.packingType" :options="getEnumValuesForSelect<EPackingType>(EPackingType)" label="نوع بسته بندی"/>
+      <BaseGSelect v-model="addProductData.categoryId" :options="selectCategories" @update:modelValue="categorySelected" label="دسته بندی اصلی" name="categoryId"/>
+      <BaseGSelect v-model="addProductData.subCategoryId" :options="selectSubCategories" label="دسته بندی فرعی" name="subCategoryId"/>
+      <BaseGSelect v-model="addProductData.packingType" :options="getEnumValuesForSelect<EPackingType>(EPackingType)" label="نوع بسته بندی" name="packingType"/>
     </div>
 
     <div class="grid grid-cols-2 gap-4">
 
-      <base-inputs-text-input label="کد بهداشت" v-model="addProductData.healthNumber"/>
-      <BaseGSelect v-model="addProductData.catalogId" :options="selectCatalogs" label="کاتالوگ محصول"/>
+      <base-inputs-text-input label="کد بهداشت" v-model="addProductData.healthNumber" name="healthNumber"/>
+      <BaseGSelect v-model="addProductData.catalogId" :options="selectCatalogs" label="کاتالوگ محصول" name="catalogId"/>
     </div>
     <base-g-dimension v-model="addProductData.dimensions" />
 
     <hr class="col-span-full my-4">
 
-    <base-inputs-text-input label="لینک دیجی کالا" v-model="addProductData.digiKalaData.digikalaLink"/>
-    <base-inputs-price-input v-model="addProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="ریال"/>
+    <base-inputs-text-input label="لینک دیجی کالا" v-model="addProductData.digiKalaData.digikalaLink" name="digikalaLink"/>
+    <base-inputs-price-input v-model="addProductData.digiKalaData.digikalaPrice" label="قیمت در دیجی کالا" unit="ریال" name="digikalaPrice"/>
 
-    <base-inputs-text-input label="لینک باسلام" v-model="addProductData.basalamData.basalamLink"/>
-    <base-inputs-price-input v-model="addProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="ریال"/>
+    <base-inputs-text-input label="لینک باسلام" v-model="addProductData.basalamData.basalamLink" name="basalamLink"/>
+    <base-inputs-price-input v-model="addProductData.basalamData.basalamPrice" label="قیمت در باسلام" unit="ریال" name="basalamPrice"/>
 
-    <base-g-button :is-loading="isLoading" type="submit" color="info" is-icon text-color="white" class="col-span-full w-max mr-auto text-sm font-light" >
+    <base-g-button :is-loading="isLoading" type="submit" color="info" :disabled="!meta.valid" is-icon text-color="white" class="col-span-full w-max mr-auto text-sm font-light" >
       ثبت و ادامه
     </base-g-button>
+
   </Form>
 </template>
 
@@ -135,7 +136,7 @@ const addProductData:CreateProductCommand = reactive({
     schema:''
   },
 })
-const addProductSchema = Yup.object().shape({
+/*const addProductSchema = Yup.object().shape({
   title:Yup.string().required('وارد کردن عنوان ضروری است'),
   slug:Yup.string().required('وارد کردن لینک یکتا ضروری است'),
   price:Yup.number().min(0,'مبلغ وارد شده باید بیشتر از 0 باشد').required('وارد کردن مبلغ ضروری است'),
@@ -144,7 +145,7 @@ const addProductSchema = Yup.object().shape({
   barcodeNumber: Yup.string().required('وارد کردن بارکد ضروری است'),
   quantity: Yup.number().min(0,'تعداد نمی تواند کوچکتر از 0 باشد').required('وارد کردن تعداد ضروری است'),
   weight: Yup.number().min(0,'وزن نمی تواند کوچکتر از 0 باشد').required('وارد کردن وزن ضروری است'),
-})
+})*/
 
 watch(
     addProductData,

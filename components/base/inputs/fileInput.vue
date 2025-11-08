@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-1 row-span-3">
-    <label for="title" class="font-light text-sm">{{ label }}</label>
-    <label for="image" class="relative overflow-hidden w-full flex-1 flex items-center justify-center border border-dashed rounded-lg cursor-pointer">
+    <label :for="name" class="font-light text-sm">{{ label }}</label>
+    <label :for="name" class="relative overflow-hidden w-full flex-1 flex items-center justify-center border border-dashed rounded-lg cursor-pointer">
       <input @change="imageSelected" type="file" :name="name" :id="name" class="opacity-0 hidden" :multiple="multiple" accept="image/*">
       <span v-if="selectedImage == null && selectedImagesPreviews.length <= 0" class="w-full flex flex-col items-center gap-4">
                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">

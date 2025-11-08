@@ -90,7 +90,7 @@
               {{t.weight}} گرم
             </td>
             <td class="px-4 py-3 text-sm text-nowrap">
-              <base-g-price size="sm" mobile-size="xs" :price="(t.price / 10)" />
+              <base-g-price size="sm" mobile-size="xs" :price="t.price" />
             </td>
             <td class="px-4 py-3 text-sm" v-if="t.isActive">
               فعال

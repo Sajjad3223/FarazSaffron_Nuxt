@@ -607,6 +607,7 @@
                       </div>
                       <span class="inset-y-0 -right-5 translate-x-full top-2 font-light text-sm absolute">روش پرداخت</span>
                     </div>
+                    <CartTorobPay :amount="cartStore.PendingOrder.finallyPrice" />
                     <div class="flex gap-3 w-full items-stretch">
                       <input type="text" class="border rounded-lg flex-1 py-2 text-xs px-4" placeholder="کد تخفیف" v-model="discountCode">
                       <base-g-button type="button" button-type="white" is-icon :is-loading="discountLoading" custom-class="rounded-xl text-xs w-max px-7 py-2 text-[#FB7511] bg-[#FB7511]/20" @click="applyDiscount"

@@ -125,6 +125,6 @@ defineExpose({
 
 <style scoped>
 .form-control {
-  @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border-2 border-transparent transition-colors duration-300 max-w-12 rounded-lg focus:outline-none focus:border-black/30;
+  @apply block h-[50px] mr-2 text-center text-lg min-w-0 last:mr-0 border-2 border-black/10 transition-colors duration-300 max-w-12 rounded-lg focus:outline-none focus:border-black/30;
 }
 </style>
